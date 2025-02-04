@@ -168,10 +168,8 @@
       "command-palette:Abrir paleta de comandos": false
     }
   },
-  "active": "68535a4a95c94194",
+  "active": "743c3cbd08005f24",
   "lastOpenFiles": [
-    "GDD.md",
-    "README.md",
     "TheatrumMundiProyect/bin/libxmp.dll",
     "TheatrumMundiProyect/bin/libwebpdemux-2.dll",
     "TheatrumMundiProyect/bin/libwebp-7.dll",
@@ -182,6 +180,7 @@
     "TheatrumMundiProyect/bin/libogg-0.dll",
     "TheatrumMundiProyect/bin/libgme.dll",
     "TheatrumMundiProyect/bin/libavif-16.dll",
+    "TheatrumMundiProyect/bin/SDL2_ttf.dll",
     "ImagenesGDD/socrates.png",
     "ImagenesGDD/tetrisfin.jpg",
     "ImagenesGDD/tetrismov1.jpg",
