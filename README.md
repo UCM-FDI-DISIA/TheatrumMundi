@@ -78,7 +78,8 @@ Como los diálogos tienen tanto pistas como información útil para el jugador e
 Botón de log -> Este botón permite acceder al log de diálogos en el mundo y durante los propios diálogos.
 ![AD_4nXdNduGoQpqgaHOyZF9CkTmZvUb1IcRyJs__41LXeBVZ8IBcxPIpB7WMX-8Bs-1XmJEo3WhjsTmn_fpXVYBeB-KkK453rUL3P_KVJiLGfXgOqCYw98TESqdQfpRVf_J6Gmxw1S-G5Q?key=J7nf_FWWHfuhd8vnjF8jXdc4](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdNduGoQpqgaHOyZF9CkTmZvUb1IcRyJs__41LXeBVZ8IBcxPIpB7WMX-8Bs-1XmJEo3WhjsTmn_fpXVYBeB-KkK453rUL3P_KVJiLGfXgOqCYw98TESqdQfpRVf_J6Gmxw1S-G5Q?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
-Botón de Mochila -> El jugador dispondrá de un menú de inventario siempre que esté en la sala (puzzles no), en el que tendrá guardadas todas las pistas y demás datos sobre la víctima, con tal de ayudarle a razonar su respuesta final
+Botón de Mochila -> El jugador dispondrá de un menú de inventario siempre que esté en la sala (puzzles no), en el que tendrá guardadas todas las pistas y demás datos sobre la víctima, con tal de ayudarle a razonar su respuesta final.
+
 ![AD_4nXcA7V8hEEDfw6NeGKlBVLbDOc0Ax3IAbHxCc-J27Cm_IMjT4NBoQPOVSmEAy1CDsYCj723twgDcoW8P7-U4Aws1JXB40HA8M9HZwrI3eG9_rrvEmMUSHBkjcesjcmYwjAdnt7CxBg?key=J7nf_FWWHfuhd8vnjF8jXdc4](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcA7V8hEEDfw6NeGKlBVLbDOc0Ax3IAbHxCc-J27Cm_IMjT4NBoQPOVSmEAy1CDsYCj723twgDcoW8P7-U4Aws1JXB40HA8M9HZwrI3eG9_rrvEmMUSHBkjcesjcmYwjAdnt7CxBg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
 Botón de pausa -> Accesible en todo momento, permitiendo al jugador activar el menú de pausa. ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfwqycQO0ZI_8RB6lmHbF8CLMkeAA-txl1aKSGHZJ11WvOfSP-YjJJqFNjuBmzoAxObhbhlRZxhg3mr7yznQxD10avPuyBwZHg8dfZsbXzFtTnZCqITBjfkOEo_zbrDgbjHRkmNiA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
@@ -188,7 +189,8 @@ MÁXIMO A IMPLEMENTAR (Dependiendo de la dificultad en testing)
 
   
 
-Botón de información de puzzle -> Al pulsar esté botón se mostrará un texto que contará una breve descripción del puzzle (sin pistas ni insinuaciones, explicado solo a nivel mecánico).![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdsDosgFu0brOxmkt-4hOOzrc2P-9LDbLVNNy9A3HEnSjWhJ41gLSunxwlVHaK4DYhzGC_5-II46JiCKjIK8d3myjKEx6P6N58WUx2ed3jQI5qnR4qKyAGWwYkh99HDCZbh_lGI2g?key=J7nf_FWWHfuhd8vnjF8jXdc4)![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdz6NZhmI7ak0_wIkBnuxBFGaS9C_VMsBT2oES9u_WimL5oJT1YSQ-3SJlw1juOG5ToOTsjijSoLeZeWD6cFfiDUAUV7hOc4_-xChjOSAoMZbaBRBubne0-H6RCQ2bEcRur3mer_A?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+Botón de información de puzzle -> Al pulsar esté botón se mostrará un texto que contará una breve descripción del puzzle (sin pistas ni insinuaciones, explicado solo a nivel mecánico).
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdsDosgFu0brOxmkt-4hOOzrc2P-9LDbLVNNy9A3HEnSjWhJ41gLSunxwlVHaK4DYhzGC_5-II46JiCKjIK8d3myjKEx6P6N58WUx2ed3jQI5qnR4qKyAGWwYkh99HDCZbh_lGI2g?key=J7nf_FWWHfuhd8vnjF8jXdc4)![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdz6NZhmI7ak0_wIkBnuxBFGaS9C_VMsBT2oES9u_WimL5oJT1YSQ-3SJlw1juOG5ToOTsjijSoLeZeWD6cFfiDUAUV7hOc4_-xChjOSAoMZbaBRBubne0-H6RCQ2bEcRur3mer_A?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
 Botón de pista-> Al pulsar este botón se volverá a mostrar la pista dada por el personaje vivo (En caso de que el log no sea suficiente).
 
