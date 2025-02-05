@@ -1,77 +1,9 @@
-# TheatrumMundi
-**
 
-Theatrum Mundi
+
+# Theatrum Mundi
 
   
 
-[Sinopsis/idea principal 2](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.lk2p7maec7x)
-
-[Ficha Técnica 2](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.9qgyi4jcz48)
-
-[Mecánica 2](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.n7r6n95eorha)
-
-[Interacción Jugador/mundo 2](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.7zgxjpl4wrhz)
-
-[Flujo de escenas 3](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.n2osi188kpdl)
-
-[Diálogos 3](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.tb9080cve2h0)
-
-[Interfaces / UI 4](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.xkkhss585gpn)
-
-[Botón de desplazamiento a la otra sala 4](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.6nxiiempxj76)
-
-[Botón de pistas 4](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.b5pf4mwh1gey)
-
-[Botón de salir del puzzle 4](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.pqpg2784acwd)
-
-[Botón de reiniciar puzzle 4](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.2uug2g6nd35u)
-
-[Botón de log 4](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.6y1xrjps1i76)
-
-[Botón de Mochila 4](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.bh7eafc96f01)
-
-[Botón de pausa 4](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.oonpsxlm37o5)
-
-[Botón de información del puzzle 5](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.dd0mzoht6pke)
-
-[Resolución de pantalla 5](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.u2h220mxwwq9)
-
-[Diseño 5](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.nh79n8lp9zfo)
-
-[Salas 5](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.cuns4sg07zmj)
-
-[RESUMEN SALA 3: 10](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.39nf02qusxf3)
-
-[Resolución de un asesinato 11](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.l1fcptxvf0e5)
-
-[Personajes 11](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.gm4u4uqjcmjb)
-
-[Puzzles 11](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.7rvpgykxhf3p)
-
-[Sala 1 11](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.8fhuggeoi2fr)
-
-[Sala 2 15](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.5dejkp4360gs)
-
-[Estética 18](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.qx76b97378m0)
-
-[Salas 18](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.barwc8jcsxlg)
-
-[Personajes 18](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.k4m0loefnrf2)
-
-[Música y SFX 18](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.olvcqz8szii9)
-
-[Narrativa 19](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.49dy68cxvpor)
-
-[General 19](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.bm0ut63tklt2)
-
-[Personajes 19](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.7g0jwe8236ch)
-
-[Referencias e Inspiraciones 19](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.1lc86l3508j7)
-
-[Juegos de referencia 19](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.sw2hxoordlno)
-
-[Mandangas y fumadas 19](https://docs.google.com/document/d/1dzkdWUqgHrplCylTesVJJv8G9M1Tz8WrJxhHUBFiCxY/edit?tab=t.0#heading=h.6nfddbpsf0wn)
 
 # Sinopsis/idea principal
 
@@ -105,7 +37,7 @@ A parte de clickar encima de los objetos en algunos puzzles será necesario arra
 
 ## Flujo de escenas
 
-El flujo de escenas será el siguiente![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdWYsaZAomlb34RAcZkkhqgISC16m3j_H-iXJAveRDCt5-ErPyw6r52ysmqOEehXaKhK6fQ4j8xU0vW1cprZtg_n_T-3MmCrksclzpzODpmr4d6rIQfJ82Hw7CMqfk6EwPRIEuu?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+El flujo de escenas será el siguiente (A MEJORAR, LOG, MENU PAUSA, MENU INVENTARIO)![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdN7yFBbk_YQMzQycVaNH2i3Mbpr1thW493W-OPTgTuk2Wi8o1ELTAkwZNyv-sGufohwAdUfb0RVcjjgNQi57lYuA-ooQBzKbqXglU8dhG8rDiX1G34-Bzc_5Xlc6YEbc0BGQT-?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
   
 
@@ -131,39 +63,219 @@ Como los diálogos tienen tanto pistas como información útil para el jugador e
 
 ## Interfaces / UI
 
-### LEYENDA - Botones
+### Sala del caso con diálogo:
 
-### Botón de desplazamiento a la otra sala (Puerta)
+- Se produce una conversación a la hora de entrar a la sala, explicando que ha ocurrido un asesinato y se dan detalles del cadáver para introducir al jugador en el caso, se mostrará el nombre y rostro del personaje hablando para identificar quién te está hablando.
+    
 
-El jugador podrá pasar de una sala a otra dándole a un botón situado en dirección a la otra sala, haremos que sea una puerta 
+#### ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeB7h6tI2YQbhg2fYozkty2d4Vz2WTS8ERJb5TwSJ1dBN4sv1dl2XueSndE8lWb19LaPlhAWsEuIyNP_7KoRyO_TL9jZ9ksIgiYuRgVW6vBCAIxqgPAwTB2eey5e3sZnKzF1Zz0nA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
-### Botón de pistas
+#### Botones:![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcY0W0TQ8Xb5Z1xmlcQ_5vCPg__nkPY_zfMfxuckvdBeutEB4nWmsRRH3Db2MfbYHQmKkHaSE9so_Cgz5YGb7uYh1DJmNzIaZy6gmGO8AAnovSHNo7BnLz1fqB13QfOgRJyxzvzVg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
-Si al jugador le queda más de un personaje estos podrán aportar pistas al jugador si este lo necesita pulsando un botón en la esquina inferior izquierda.
+Botón de log -> Este botón permite acceder al log de diálogos en el mundo y durante los propios diálogos.
 
-### Botón de salir del puzzle
+Botón de Mochila -> El jugador dispondrá de un menú de inventario siempre que esté en la sala (puzzles no), en el que tendrá guardadas todas las pistas y demás datos sobre la víctima, con tal de ayudarle a razonar su respuesta final.![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdNduGoQpqgaHOyZF9CkTmZvUb1IcRyJs__41LXeBVZ8IBcxPIpB7WMX-8Bs-1XmJEo3WhjsTmn_fpXVYBeB-KkK453rUL3P_KVJiLGfXgOqCYw98TESqdQfpRVf_J6Gmxw1S-G5Q?key=J7nf_FWWHfuhd8vnjF8jXdc4)![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcA7V8hEEDfw6NeGKlBVLbDOc0Ax3IAbHxCc-J27Cm_IMjT4NBoQPOVSmEAy1CDsYCj723twgDcoW8P7-U4Aws1JXB40HA8M9HZwrI3eG9_rrvEmMUSHBkjcesjcmYwjAdnt7CxBg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
-Si el jugador se atasca en un puzzle o no tiene los elementos necesarios para completarlo se le da la opción de salir de este si lo necesita con un botón en la esquina superior izquierda. Antes de salir da una advertencia al jugador por si no estuviera seguro de salir del puzzle.
+Botón de pausa -> Accesible en todo momento, permitiendo al jugador activar el menú de pausa. ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfwqycQO0ZI_8RB6lmHbF8CLMkeAA-txl1aKSGHZJ11WvOfSP-YjJJqFNjuBmzoAxObhbhlRZxhg3mr7yznQxD10avPuyBwZHg8dfZsbXzFtTnZCqITBjfkOEo_zbrDgbjHRkmNiA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
-### Botón de reiniciar puzzle
+Botón de continuar diálogo -> Permite al jugador continuar el diálogo actual, se podrá pulsar en cualquier lado de la pantalla que no sean los otros botones interactuables y tendrá dos sprites:  
+  
 
-Devuelve el puzzle en el que esté el jugador a su estado base. 
+1. Diálogo en proceso (no se puede avanzar hasta que el personaje termine). ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfeKJG5B348KHRRdJapSHy8j3ZTTVNplXobB5oY9WNZXHIsM0K7ezL1lxMxb-sO7CIie4TtxalGIQCetsJWnWXj9NjUMyzdO_6GlqlJ1XuZdcsRWY8_1rjmg3kx7Oe4KlcWC90zZw?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
-### Botón de log
+2. Diálogo terminado (el jugador puede avanzar la conversación). ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdQBqm02M8zeSqo0QcRAYE5l5xFewxPzYcDrZhN5Fb_sCauK6bM-Z5Z1XTYZs3Y58nkKZwzzFMbnUEK56SJ7JZ9BXXnHncZBkmJyB9dVOr0kwjggRqredGW3rg3RQYBh-s9wchNSg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
-Este botón permite acceder al log de diálogos en el mundo y durante los propios diálogos.
+### Sala del caso:
 
-### Botón de Mochila
+  
 
-Permite ver al jugador las pistas hasta ahora durante los diálogos y en el mundo.
+Cuando la conversación haya concluido y desaparezcan los cuadros de diálogo aparecemos en esté caso.
 
-### Botón de pausa
+  
 
-Accesible en todo momento, permitiendo al jugador activar el menú de pausa. 
+Una sala son dos habitaciones, por las cuales el jugador va a ir pasando con el botón de desplazamiento a otra sala siendo también un elemento de entorno interactivo (Puerta).
 
-### Botón de información del puzzle
+  
 
-Solo aparece durante los puzzles indicando el funcionamiento del puzzle correspondiente.
+Puerta a la derecha -> Hay habitación a la derecha
+
+Puerta a la izquierda -> Hay habitación a la izquierda.
+
+  
+
+En estás habitaciones de la sala los elementos se mostrarán sin ningún tipo de contorno, dándole al jugador completa libertad para explorar cada rincón de la habitación.
+
+Si el jugador encuentra un objeto interactivo, tendrá un contorno alrededor de su sprite, indicando que se puede investigar dicho objeto o zona marcada.
+
+  
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXe-szAmHDZUNdukkciY8oaklHq_DCQ2FU0BJ-HAE7vgQE_cgZw723f5wPY2beXW0W02K5sIcoVI3AO4b4ogWsCIhwiPnruecIHjkNpyu_cwjAIPo6QQtYd0cLPGSs3BWM8sGvqJ_A?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
+  
+  
+
+El jugador puede ver la situación del asesinato de cerca en todo momento, para ver como fue su situación e ir viendo posibilidades.![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdLN5ACophQMoQjVXPJdxDOdh3S95WYkmmqjmKAdHlG70JOFx_dq6y3LUe6VJQ28tFZ3kPCfhnvvkFFTbtlRLX_T6L_N8IOAE9h-N0WajNdckzzHCLHdbUDoSnr-o7OkEX4-WpiXQ?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
+  
+
+#### Botones:
+
+El jugador tiene todos los botones de la anterior perspectiva excepto los de diálogo y se añaden los elementos interactuables del entorno.
+
+  
+
+Cuando se hayan completado todos los puzzles, se le preguntará al jugador a través de un personaje en cuanto a diálogo si el asesinato fue producido por un caso lógico o en caso contrario, que no tenga ningún sentido. 
+
+Si hay 2 personajes vivos cualquiera de ellos te podrá hacer la pregunta final.
+
+Si hay 1 personaje vivo esté mismo te hará la pregunta final.
+
+Si no hay ningún personaje vivo en el juego, habrá una pregunta dicha para ti mismo
+
+  
+
+### Puzzle del caso:
+
+  
+
+A la hora de encontrar un objeto con el que interactuar esté se pondrá con contorno y al pulsar con click izquierdo, se podrá entrar a la pantalla del puzzle.
+
+  
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXehcNWq9xbpABppRj5QpNd7wR_DPW__LthvEqnWmnr5TVTnoPeJQUt1DldIgcaSS2i_ZPecyi0ms6ganWCwVE2634r_MeqyHx9u_lxiljGbnAybqvileF8csCEUAntLxpJknqYr?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
+  
+
+Al entrar en el puzzle, pueden pasar dos cosas: 
+
+1. Si el personaje cuya afición tiene que ver con el puzzle está vivo, te dará una pista en forma de diálogo de forma automática al empezar. Se mantiene el botón de interacción para avanzar diálogos, explicado en la interfaz de las salas.
+    
+2. Si el personaje cuya afición tiene que ver con el puzzle fue asesinado, el jugador no tendrá introducción ni pistas y deberás investigar la función del puzzle por tu cuenta. 
+    
+
+(TESTING NECESARIO)
+
+  
+
+#### Botones:
+
+El jugador tiene los siguientes botones (TESTING NECESARIO, CUÁNTO AYUDAMOS AL JUGADOR)
+
+  
+
+MÍNIMO NECESARIO
+
+  
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcY0W0TQ8Xb5Z1xmlcQ_5vCPg__nkPY_zfMfxuckvdBeutEB4nWmsRRH3Db2MfbYHQmKkHaSE9so_Cgz5YGb7uYh1DJmNzIaZy6gmGO8AAnovSHNo7BnLz1fqB13QfOgRJyxzvzVg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
+Botón de log -> Mantenemos esté botón para que tengamos la pista dada a mano por un personaje o queramos ver una insinuación anterior.![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfkmWo7IJ61DhWGQ7LE4_8d0R51fyEe1amlSJEb45cfnScatPiBqf0RqUSKUU5TYqNCKhrzLexmiAT2CuoQeMWoe3E4ZshJHnCG1W9kK4kKGEVE8wGo7j7utqkFZ0BBWp-OSta8cw?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
+Botón de salir del puzzle -> Este botón permite acceder a la sala de nuevo saliendo del puzzle y guardando su progreso del mismo.![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdUMFDIrFKWrHmaP8kydgtEYlppP27WVgcpI7CI7pNiu1KpUabCGWxlBbm_sE_iUzFDgPva8sbWzz_psvwMvkmHE9Q1OknOoq07HmABw-Dot0hPd3sU6YNPBOJ6dHOwdNl8l8TL?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
+Botón de reset del puzzle -> Esté botón hará que el puzzle vuelva a su estado base, perdiendo todo el progreso hecho por si el jugador está atascado.
+
+  
+
+MÁXIMO A IMPLEMENTAR (Dependiendo de la dificultad en testing)
+
+  
+
+Botón de información de puzzle -> Al pulsar esté botón se mostrará un texto que contará una breve descripción del puzzle (sin pistas ni insinuaciones, explicado solo a nivel mecánico).![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdsDosgFu0brOxmkt-4hOOzrc2P-9LDbLVNNy9A3HEnSjWhJ41gLSunxwlVHaK4DYhzGC_5-II46JiCKjIK8d3myjKEx6P6N58WUx2ed3jQI5qnR4qKyAGWwYkh99HDCZbh_lGI2g?key=J7nf_FWWHfuhd8vnjF8jXdc4)![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdz6NZhmI7ak0_wIkBnuxBFGaS9C_VMsBT2oES9u_WimL5oJT1YSQ-3SJlw1juOG5ToOTsjijSoLeZeWD6cFfiDUAUV7hOc4_-xChjOSAoMZbaBRBubne0-H6RCQ2bEcRur3mer_A?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
+Botón de pista-> Al pulsar este botón se volverá a mostrar la pista dada por el personaje vivo (En caso de que el log no sea suficiente).
+
+  
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcUrajtDCn63IQTiB6a1tsvEyeSaD-fWDKqb09m6I4q-oaiZO83IhK9SzlXoQwrQIoGJpvF7ydYIXkI-DaHdw2GpTBosSKYboQ4ijL-u9smOa0b1Opb6bDuHiRKOIxC1RHxrfVwaA?key=J7nf_FWWHfuhd8vnjF8jXdc4)VISTA CON TODOS LOS BOTONES (A TESTEAR) 
+
+  
+
+### Historial de conversaciones (Log):
+
+Cuando el jugador de al botón de log, se abrirá una nueva ventana en la que solo habrá un botón para salir de esté menú.
+
+Solamente tendremos las conversaciones producidas en la sala actual, si pasamos a la siguiente sala, el log se reiniciará porque no tendrá ninguna utilidad entre salas y así puede dar paso a las nuevas conversaciones.
+
+Se mostrará el nombre y lo dicho por esté mismo personaje en la siguiente estructura.
+
+Cada conversación estará separada para dar a entender que se dan en situaciones diferentes, introducción a la sala, puzzle resuelto, pista dada, etc.
+
+(IDEA) Los datos más relevantes que se guardarán en el inventario tendrán un color de tipografía más destacable (serán los mismos datos que van al inventario).
+
+  
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfk8R6qvE3BuOV0GoNRmGjToWIqIu4xzYAprEyRCPTcojuYgYdKZHOc9tO4dAZPncnJyLQNDNpg8DhTJGJ4YqkSwCoiDpdixwPDrRJhhuO1iuA-jF0SA6AO7T1wo1iaRXcrlrZs?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
+#### Botones:![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcFz7oGuMYpcJgx7URAJr-jqc0tuWQSvm8qX12WqUdZPWFj3M0TZVdyf7lS6lwu_ckdBiMy92LoY0i_u7916LVyzn_CngP2zaGd_GwJajFtfFnpPYCa1fgoqaGyysuOJCQ4T8EDdQ?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
+Botón de salir del historial de conversaciones -> Único botón en el menú de historial de conversaciones, con esté mismo saldremos del menú.
+
+  
+  
+  
+
+### Leyenda de botones:
+
+Botón de desplazamiento a la otra sala (Puerta)
+
+- El jugador podrá pasar de una sala a otra dándole a un botón situado en dirección a la otra sala, haremos que sea un sprite de puerta interactivo en el entorno.
+    
+
+  
+
+Botón de pistas
+
+- Si al jugador le queda más de un personaje estos podrán aportar pistas al jugador si este lo necesita pulsando un botón en la esquina inferior izquierda.
+    
+
+  
+
+Botón de salir del puzzle
+
+- Si el jugador se atasca en un puzzle o no tiene los elementos necesarios para completarlo se le da la opción de salir de este si lo necesita con un botón en la esquina superior izquierda. Antes de salir da una advertencia al jugador por si no estuviera seguro de salir del puzzle.
+    
+
+  
+
+Botón de reiniciar puzzle 
+
+- Devuelve el puzzle en el que esté el jugador a su estado base. 
+    
+
+  
+
+Botón de historial de conversaciones (Log)
+
+- Este botón permite acceder al log de diálogos en el mundo y durante los propios diálogos.
+    
+
+  
+
+Botón de salir de historial de conversaciones (Log)
+
+- Este botón permite salir del menú de historial de conversaciones a la sala.
+    
+
+  
+
+Botón de inventario (Cerebro)
+
+- Permite ver al jugador las pistas hasta ahora durante los diálogos y en el mundo.
+    
+
+  
+
+Botón de pausa
+
+- Accesible en todo momento, permitiendo al jugador activar el menú de pausa. 
+    
+
+  
+
+Botón de información del puzzle
+
+- Solo aparece durante los puzzles indicando el funcionamiento del puzzle correspondiente.
+    
 
 ## Resolución de pantalla 
 
@@ -195,7 +307,7 @@ Pruebas a encontrar: Té con cianuro, bote del veneno, guantes, etiqueta del bot
 
   
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfPn7OFwBF2puwdiqGCtII_KHRwBa0uxrFDo6gQK7JdCARmhSIxqbdPx9GGDkGCJcvz8KOdSEaMTuyRpSfxf5qqYvX1mqtUOvw72jb_eM7N5sDuTh6qIIkaXlBE77LHH4_1HP1PIA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdukbIDvbv3F5zRHGHc1EIyhc4kwtE9JFRIhTNjHDQppR9q3BzIK40sBAsOQWtCdzheTGk4pZZBeQIQdO_7izA4apqyu_NWdoXj1b4da1_HfaUuADL9_qqjwSQk5JLa77i71QrvFQ?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
   
 
@@ -212,7 +324,7 @@ En este mismo escritorio habrá un teléfono móvil con una llamada a las 18:50 
 Los siguientes dos puzzles se pueden hacer en cualquier orden:
 
   
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcp7lndl3k23K5WMaNY2008di9hmp-jfgpVWzfQvYgANSvVCoS6TUeeUZ40DVeob0JI7exijt6g2GeIkUQIg2RdFj0XnN16g33hOMpRfemE-QoennuapQ8vSlwq0pNSNgGKFm2LTA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdl9r9Gsgf8tj6Q_mfjxW8SRG-ZsVRtRDNOq3IK3pss_Ud7MT7PrOLsEnClDLVwMkWBEs6-BQggi6XRITsZxkYiVk8HhNOxg_bRmMQP8V8LYr8iA3eUjzGzhTmuXvHPHjNuXuz6lw?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
 Vita Flumen. En el salón habrá tuberías por el techo y las paredes, si se investigan se accederá al puzzle (véase su funcionamiento en la sección puzzles). Cabe destacar que Sol dará pistas sobre cómo resolver este puzzles ya que se asemeja al funcionamiento de puertas lógicas. El recipiente del montaplatos (a donde hay que llevar el agua de las tuberías tendrá inscrito el mensaje: Vita Flumen: Todos los ríos llevan al mar).  Cuando el recipiente dentro del montaplatos del salón se llene de agua, el mecanismo de este se activará y bajará por su peso. Habrá que tirar de la cuerda del montaplatos para volver a subirlo, y en lugar del recipiente, en este se encontrará una de las manecillas del reloj y un par de guantes.
 
@@ -269,7 +381,7 @@ Pruebas a encontrar: Llave para abrir el mausoleo, pala del crimen, cuerda y var
 
   
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeyy4BFkiD-g-H1DvR5cWbmQq2LwdLut4BpllAe0NgkGqydD_RfBmuokGzIrnnffHLPi8SjhSuktJ43IEX63ZLIV8DDYGiNxaP0PO4ilq84Ozlle3gxxKOaNOre7GcXlLNSPFEzqQ?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeVEeLZxG8H84N8L6hG4Ji2FAugVtN2_dfSBANrESoJMKDynrY2aPN9YSjfjxaq2DppvVChHbSFG8OjNKNC_5bLWJPpLVD693R47M4YKLMWkHZ_Qr8mqTjioI9kc-n0kBssb34d1A?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
   
 
@@ -416,7 +528,11 @@ Tras encontrar todas las pistas y resolver todos los puzzles, el jugador deberá
 
   
 
-## Personajes
+## Personajes![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXffPnnaxFwDwmdyeu1KBkHeribGrjAr0SE9O5dU7T3R5dVeCC8IIgFODwKV9DYAos9HzQHTPq_DUM-eIQq7-VYe9nHGDQkN73Pai_N319HqxVwvuMenakZ_OBw8EGc_N8GcfTmWsA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
+  
+
+El juego tiene 3 personajes: Lucy, Keisara y Sol (de izquierda a derecha). A nivel de diseño funcionan como un puente entre el jugador y el juego, ya que el primero no controla a ningún personaje específicamente. Además, los personajes también comentarán sobre las escenas del crimen y los puzzles, lo que funcionará como pistas al jugador. Por ello, mantener a los personajes vivos hará más fácil las siguientes salas (además de ofrecer más interacciones entre los personajes que no existirían de otra manera).
 
   
 
@@ -442,7 +558,7 @@ A nivel mecánico las tuberías tendrán en sus intersecciones una válvula que 
 
   
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcRNkdUj2Rpmi5oVrm52LUUCFvXXdIw7zNAvGdi055GU_WCCIg2GWzci2_SztC8_EgYIeFIhdPS-cpZcHvug82-6MvhDZB9LN9yvOiy00K0Ipvm09uAx5UqXU8SXdd1_StRxZZnYA?key=J7nf_FWWHfuhd8vnjF8jXdc4)![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdVJf_CU-Q_9CvMj0G182Woa87zjhYIUaJtT9ImHmnd8Tpf8X1e654yTBF99aDU4O2Ipmb3ukTFJzfn9Z05FoNChyWaHalf04M8octqellf2BeUAb7M5I4VWFKmSOSMCSQL1Bq4Bg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcJNzpg91HMO6mhIXtNLfH4DVzMnnfsPkdaTSVveqKhU2vR4f036UAtAsT6WrcHuhi7DAuwtOeNaRjX020pqgkyvRphLg12CIwg5p2yLbfKPexbojqwLiaHeFI0-rXPcIejJIdVgg?key=J7nf_FWWHfuhd8vnjF8jXdc4)![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdp44s-IJ9Z_OGt7HR0hA4MWWfZHx4bMnkI-JXTvkEK7FVXWgWdSZeeNF3x7h1UDlnZW1_x2ycJZc9nYpTGeK57Wczk9FADpmTK1mluItSMe5QTdWcoCoEWZk3g-Dejxm00ebMROg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
 (Posición inicial y resolución del puzzle)
 
@@ -479,19 +595,19 @@ Para sacar el valor de dicha posición el jugador deberá encontrar en el texto 
 
 Libro de química: Aparece una tabla periódica o similar y el elemento Carbono de número atómico 6 (primer dígito para el código del puzzle) y el peligro de las estufas de gas y el monóxido de carbono.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXd2oXs8NJwf0GTx_8aerMbCk-Yncu07_5axgh0c4Q80pZT_JMUsSpOtAl3iRajI6MKDJOz_jw9dqJVvWDsr71ssVvbtg12WayNWOZslOq2dbLPjq4JO9EIQ5iKwOfDS17JGVv0DYQ?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfAuA63_YOb92-WKgZ0xzyHC9iKOz3Gv3P8IHHmgmbCHIOtBlBAmCMxN9G0Ags4aaxScLZpNtPzbASmryZ5F2vnxEK9gVCxw6OVrk18R64O_b_sJlkA8CzExyFhe4kl3INeiTFvZg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
   
 
 Libro de historia: Relata los últimos momentos de la vida de Sócrates y la causa de su muerte en el siglo IV (segundo dígito).
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeEwg_YApi5iatM3w_gSGKCklQu1h75bA1ARCbgEugUB4TG5mdc_qLCHGrLXbCKnvz4MDIxR9aqUVosuO4ED36HpHeeTyuGdcLf35Blzpeq00MbQ2kaaVhiUReT_lYGHHpz-CpB_Q?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXf_DKqdbeTS5dRcQ4iW-emSl8F-VR-3ZMkN8Bx6KK_aY-nKhJxEDXHeZ967qypZLcAgICI85dhOFQAA8KqhWgTHXjXNVh7UM6gA-grHTRbrZhIh1uMcCv1NYSB4QwnqZsrMMIBMVw?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
   
 
 Novela: La clave es el número de la página(1) y el resto del texto es solo para distraer al ser todos de más de una cifra y es la primera página del libro el último de los dígitos del código.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXc8JcNxqsnN-_cUkm4fKMmCR4evI8rJwAoMXgzNVt3bVu13C37Eh-JWVKxr50BZaBluJgevXqsllHrM5e8iY74_YrnhegsJSPqOPY1ywRlIz19_Zg6DnxFWJkgiECUtR1YekWGnJg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXciSPeerUDeCE4NKzhnE42hOTdyzIxXBaf20sNLwBiQ7VydUTL6t0RRIVnyvSBnEkhmAq2V564o1XEk4-bYtAbgv3sdDOp6aZRB9nkDQDpgDX2VSue7qlYnsuX-HHuiccay_HPxDA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
   
 
@@ -593,13 +709,13 @@ Las piezas que estorban se podrán mover de izquierda a derecha y de arriba a ab
 
 Posición inicial:
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcM3BgbuuGJaDYNw4wLjEcNvJCNcBem-5HqcpmB3h4h5fH6355VVuIUQ7FkO7uI0siit3gU98GLYpasE7Zc6ULlDRzhN3Sqv4NCI51CZ5cwO1Ssne0jv11DhW3Lb5NcGLbJqv6x?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdvYbzDws7hpyapEymk83qETGnpGbdaIdlTiURVT_eJD6eCIedP3i4fy7YK6trA8oqNGt6fMZKY8x_RVVHmakjxQmLBIEdDTUfIqX3W-ox-2CD7_6xXLfKTkUfmKvKPtsgdPC6n?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
 Solución:
 
 |   |   |   |
 |---|---|---|
-|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXctnP0NmmFJlEZLeqFOqk30dUjWCTXm-rMLgKfxyrl4Wg3NXunbn9XzT4csBXqAjABIL297SijUops_G4uiM--kTRc6XF8okv87rH5Qcka-7bfSoQJOXFpAG5VZ2ef5sPUbRnACmg?key=J7nf_FWWHfuhd8vnjF8jXdc4)|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXc2XjUoAlwCSWZPVn4DaDVx-6iFGBH-NvQMuzH-DOGexZVdyJdfzpjgjmUp1qEhPbzxdSgMZufdLynUWYcPvRvjg0nM7DqQ6cY-ua0TciobVuNEV6gE7PJ0NVlszb0_1_9aKF5Kmw?key=J7nf_FWWHfuhd8vnjF8jXdc4)|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdm0DL101c_q3HG1K3lFBkcV52pNa7m3vradTJeHoqxsaOJ_BqbuUT7AZiyjobk4mhftGxN5tGjFQLPu_ZLpj46MQUBEfI4SnaogMwnF-GukKAfGvpxeHOwXGWj3UtK3YwlFRlvNw?key=J7nf_FWWHfuhd8vnjF8jXdc4)|
+|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcTA104tu-Ru6DB2Z7K4w8R00UWhnjMtE0ncqBRSWF4lrHFONIpnKb80Z2LCMbGZ1F49iyDsi1QnyuOeVgeBFeR0zY3rF6nxWe_ux_Vy7PiMkAYS3EMK7NnGoQEGloRePqJ6SoIXw?key=J7nf_FWWHfuhd8vnjF8jXdc4)|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdk_0aeg_LdOKLNQKmH0sx3HYyqN9vnPW5kro_dEirCEf-Gb3JYk9mXRqHcgwrA5ZxtTwmtFK8PF3k_FTITI8ApSpQ29znQUhPmUgRrWWqSEzwlRjqOn80STtgp3uzxCA2AJxW7WA?key=J7nf_FWWHfuhd8vnjF8jXdc4)|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXegFi04tf9i9lJ4h-r5dmlsjSueOHa4qqDdmz2Z6ykPn5vefrXbnfpyImv0LhsHePtPzedJRYBS8i4JkB49nvwBRmjSvS2X_cPwZAwSAra47YPzpHku-sZf-YHx7Lu3wQfNy7UVbg?key=J7nf_FWWHfuhd8vnjF8jXdc4)|
 
   
 
@@ -643,7 +759,7 @@ Puzzle Órgano:
 
   
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdiFKBFxuWDzTbATd4ilXMUq1DQPIh8nsVj1EXd5kisRDTPQj58MeoI6bXRvFd_9G3YejOu_o8uwqXOfzSTaS_GInZccinTwBSVGKHHC9qMUtvz13mXtWV3yFIcpxjKevLYoPQRVw?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfa1RGzaiGtpXzgBkTRH2U49TyrIRQBZwabHMS2w8MN3bCvs8uqFjFG62bLu4e2nnrWMmC5WGt474QCH8G9pJoPf_zf6lm1S6F9WJ5TXw3s1Mzd2WbmOZzPDmF-UIX_61yXs5mCMg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
 (Estado inicial del puzzle y solución, respectivamente)
 
@@ -652,23 +768,41 @@ Puzzle Órgano:
 Pista y Material para otro puzzle: Cuerda y utensilio.
 
   
-  
+
+### Sala 3
+
   
   
 
 # Estética 
 
-## Salas
+## Salas y Personajes
 
-## Personajes
+  
+
+Cada uno de los tres personajes , así como su sala correspondiente, tendrá un color principal y comparten el rojo como color acento. 
+
+  
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXffPnnaxFwDwmdyeu1KBkHeribGrjAr0SE9O5dU7T3R5dVeCC8IIgFODwKV9DYAos9HzQHTPq_DUM-eIQq7-VYe9nHGDQkN73Pai_N319HqxVwvuMenakZ_OBw8EGc_N8GcfTmWsA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
+Hemos decidido usar sombras de gris en los personajes exceptuando el color principal y los acentos. Esto hará que sea más fácil introducirlos en fondos muy coloridos y saturados sin cargarlos demasiado.
 
   
 
 ## Música y SFX
 
--Música: En total tendremos como mínimo 4 piezas de la banda sonora del juego estarán compuestas por nosotros y serán de música ambiente similar a las de profesor layton
+-Música: En total tendremos como mínimo 4 piezas de la banda sonora del juego estarán compuestas por nosotros y serán de música ambiente similar a las de profesor layton. Cada personaje tendrá asignado un instrumento:
+
+Lucy→ Clarinete/ Flauta
+
+Keisara→ Violín
+
+Sol→ Piano
 
   
+
+º
 
 -SFX: los SFX serán sonidos realistas(lo más parecidos a la realidad) importados desde sitios de assets gratuitos.
 
@@ -676,11 +810,27 @@ Pista y Material para otro puzzle: Cuerda y utensilio.
 
 ## General
 
-  
+Todo lo que ocurre en el transcurso del juego es una obra de teatro de la que todo el mundo es consciente excepto el jugador. En cada acto, el escenario cambiará de aspecto y ocurrirá uno de los asesinatos y la investigación subsecuente.   
+
   
 
 ## Personajes
 
+Nuestro juego, como ya hemos mencionado, tiene 3 personajes. Los tres son amigos de la infancia y se han mantenido unidos hasta el día de hoy (tienen entre 26-28 años actualmente).
+
+  
+
+Lucy → Lleva siendo policía desde los 21 años, pero su vista ha comenzado a fallar en los últimos meses. Los médicos le han avisado de que acabará perdiéndola completamente y que debería empezar a adaptarse a ello, pero Lucy aún no lo ha aceptado. Tiene muchos problemas aceptando grandes cambios en su vida, y más cuando esos cambios están relacionados con el trabajo que siempre había querido hacer. 
+
+  
+
+Keisara → Una escritora a la que le va lo suficientemente bien como para vivir cómodamente con su novia (Lucy). Le encantan las mariposas y las flores (de hecho fue ella quién diseñó el tatuaje de Lucy), y ha llenado su apartamento de todo tipo de libros extraños que se encuentra en diferentes ferias. Suele tener muchas heridas en los dedos por cortarse con páginas de libros y morderlos como hábito nervioso. Siente que nunca tiene suficiente tiempo para hacer todo lo que quiere en su vida, y estar acercándose a los 30 no le ha ayudado.
+
+  
+
+Sol → Ha estado trabajando como programador durante los últimos 3 años (no por elección propia). Sol siempre quiso hacer algo relacionado con la música, pero a sus padres nunca les hizo mucha gracia. Tenía notas suficientemente altas para entrar en una ingeniería y sus padres le presionaron a hacerlo.  Keisara y él han sido mejores amigos desde antes de que Keisara se llamase así, y por lo tanto también es muy cercano a Lucy. Sol admira mucho como su mejor amiga ha hecho lo que quería con su vida independientemente de su familia, pero siente que a él no le iría tan bien si lo hiciera, y que todo el mundo le dejará atrás en el momento en el que deje de ser lo que esperan de él. 
+
+  
   
   
 
