@@ -70,20 +70,21 @@ Como los diálogos tienen tanto pistas como información útil para el jugador e
 
 #### ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeB7h6tI2YQbhg2fYozkty2d4Vz2WTS8ERJb5TwSJ1dBN4sv1dl2XueSndE8lWb19LaPlhAWsEuIyNP_7KoRyO_TL9jZ9ksIgiYuRgVW6vBCAIxqgPAwTB2eey5e3sZnKzF1Zz0nA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
-#### Botones:![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcY0W0TQ8Xb5Z1xmlcQ_5vCPg__nkPY_zfMfxuckvdBeutEB4nWmsRRH3Db2MfbYHQmKkHaSE9so_Cgz5YGb7uYh1DJmNzIaZy6gmGO8AAnovSHNo7BnLz1fqB13QfOgRJyxzvzVg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+#### Botones:
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcY0W0TQ8Xb5Z1xmlcQ_5vCPg__nkPY_zfMfxuckvdBeutEB4nWmsRRH3Db2MfbYHQmKkHaSE9so_Cgz5YGb7uYh1DJmNzIaZy6gmGO8AAnovSHNo7BnLz1fqB13QfOgRJyxzvzVg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
 Botón de log -> Este botón permite acceder al log de diálogos en el mundo y durante los propios diálogos.
-
-Botón de Mochila -> El jugador dispondrá de un menú de inventario siempre que esté en la sala (puzzles no), en el que tendrá guardadas todas las pistas y demás datos sobre la víctima, con tal de ayudarle a razonar su respuesta final.![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdNduGoQpqgaHOyZF9CkTmZvUb1IcRyJs__41LXeBVZ8IBcxPIpB7WMX-8Bs-1XmJEo3WhjsTmn_fpXVYBeB-KkK453rUL3P_KVJiLGfXgOqCYw98TESqdQfpRVf_J6Gmxw1S-G5Q?key=J7nf_FWWHfuhd8vnjF8jXdc4)![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcA7V8hEEDfw6NeGKlBVLbDOc0Ax3IAbHxCc-J27Cm_IMjT4NBoQPOVSmEAy1CDsYCj723twgDcoW8P7-U4Aws1JXB40HA8M9HZwrI3eG9_rrvEmMUSHBkjcesjcmYwjAdnt7CxBg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
-
+![AD_4nXdNduGoQpqgaHOyZF9CkTmZvUb1IcRyJs__41LXeBVZ8IBcxPIpB7WMX-8Bs-1XmJEo3WhjsTmn_fpXVYBeB-KkK453rUL3P_KVJiLGfXgOqCYw98TESqdQfpRVf_J6Gmxw1S-G5Q?key=J7nf_FWWHfuhd8vnjF8jXdc4](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdNduGoQpqgaHOyZF9CkTmZvUb1IcRyJs__41LXeBVZ8IBcxPIpB7WMX-8Bs-1XmJEo3WhjsTmn_fpXVYBeB-KkK453rUL3P_KVJiLGfXgOqCYw98TESqdQfpRVf_J6Gmxw1S-G5Q?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+Botón de Mochila -> El jugador dispondrá de un menú de inventario siempre que esté en la sala (puzzles no), en el que tendrá guardadas todas las pistas y demás datos sobre la víctima, con tal de ayudarle a razonar su respuesta final
+![AD_4nXcA7V8hEEDfw6NeGKlBVLbDOc0Ax3IAbHxCc-J27Cm_IMjT4NBoQPOVSmEAy1CDsYCj723twgDcoW8P7-U4Aws1JXB40HA8M9HZwrI3eG9_rrvEmMUSHBkjcesjcmYwjAdnt7CxBg?key=J7nf_FWWHfuhd8vnjF8jXdc4](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcA7V8hEEDfw6NeGKlBVLbDOc0Ax3IAbHxCc-J27Cm_IMjT4NBoQPOVSmEAy1CDsYCj723twgDcoW8P7-U4Aws1JXB40HA8M9HZwrI3eG9_rrvEmMUSHBkjcesjcmYwjAdnt7CxBg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 Botón de pausa -> Accesible en todo momento, permitiendo al jugador activar el menú de pausa. ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfwqycQO0ZI_8RB6lmHbF8CLMkeAA-txl1aKSGHZJ11WvOfSP-YjJJqFNjuBmzoAxObhbhlRZxhg3mr7yznQxD10avPuyBwZHg8dfZsbXzFtTnZCqITBjfkOEo_zbrDgbjHRkmNiA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
 Botón de continuar diálogo -> Permite al jugador continuar el diálogo actual, se podrá pulsar en cualquier lado de la pantalla que no sean los otros botones interactuables y tendrá dos sprites:  
   
-
-1. Diálogo en proceso (no se puede avanzar hasta que el personaje termine). ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfeKJG5B348KHRRdJapSHy8j3ZTTVNplXobB5oY9WNZXHIsM0K7ezL1lxMxb-sO7CIie4TtxalGIQCetsJWnWXj9NjUMyzdO_6GlqlJ1XuZdcsRWY8_1rjmg3kx7Oe4KlcWC90zZw?key=J7nf_FWWHfuhd8vnjF8jXdc4)
-
-2. Diálogo terminado (el jugador puede avanzar la conversación). ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdQBqm02M8zeSqo0QcRAYE5l5xFewxPzYcDrZhN5Fb_sCauK6bM-Z5Z1XTYZs3Y58nkKZwzzFMbnUEK56SJ7JZ9BXXnHncZBkmJyB9dVOr0kwjggRqredGW3rg3RQYBh-s9wchNSg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+![AD_4nXfeKJG5B348KHRRdJapSHy8j3ZTTVNplXobB5oY9WNZXHIsM0K7ezL1lxMxb-sO7CIie4TtxalGIQCetsJWnWXj9NjUMyzdO_6GlqlJ1XuZdcsRWY8_1rjmg3kx7Oe4KlcWC90zZw?key=J7nf_FWWHfuhd8vnjF8jXdc4](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfeKJG5B348KHRRdJapSHy8j3ZTTVNplXobB5oY9WNZXHIsM0K7ezL1lxMxb-sO7CIie4TtxalGIQCetsJWnWXj9NjUMyzdO_6GlqlJ1XuZdcsRWY8_1rjmg3kx7Oe4KlcWC90zZw?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+1. Diálogo en proceso (no se puede avanzar hasta que el personaje termine).
+![AD_4nXdQBqm02M8zeSqo0QcRAYE5l5xFewxPzYcDrZhN5Fb_sCauK6bM-Z5Z1XTYZs3Y58nkKZwzzFMbnUEK56SJ7JZ9BXXnHncZBkmJyB9dVOr0kwjggRqredGW3rg3RQYBh-s9wchNSg?key=J7nf_FWWHfuhd8vnjF8jXdc4](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdQBqm02M8zeSqo0QcRAYE5l5xFewxPzYcDrZhN5Fb_sCauK6bM-Z5Z1XTYZs3Y58nkKZwzzFMbnUEK56SJ7JZ9BXXnHncZBkmJyB9dVOr0kwjggRqredGW3rg3RQYBh-s9wchNSg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+1. Diálogo terminado (el jugador puede avanzar la conversación). 
 
 ### Sala del caso:
 
@@ -148,9 +149,9 @@ A la hora de encontrar un objeto con el que interactuar esté se pondrá con con
 
 Al entrar en el puzzle, pueden pasar dos cosas: 
 
-1. Si el personaje cuya afición tiene que ver con el puzzle está vivo, te dará una pista en forma de diálogo de forma automática al empezar. Se mantiene el botón de interacción para avanzar diálogos, explicado en la interfaz de las salas.
+2. Si el personaje cuya afición tiene que ver con el puzzle está vivo, te dará una pista en forma de diálogo de forma automática al empezar. Se mantiene el botón de interacción para avanzar diálogos, explicado en la interfaz de las salas.
     
-2. Si el personaje cuya afición tiene que ver con el puzzle fue asesinado, el jugador no tendrá introducción ni pistas y deberás investigar la función del puzzle por tu cuenta. 
+3. Si el personaje cuya afición tiene que ver con el puzzle fue asesinado, el jugador no tendrá introducción ni pistas y deberás investigar la función del puzzle por tu cuenta. 
     
 
 (TESTING NECESARIO)
@@ -168,9 +169,11 @@ MÍNIMO NECESARIO
   
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcY0W0TQ8Xb5Z1xmlcQ_5vCPg__nkPY_zfMfxuckvdBeutEB4nWmsRRH3Db2MfbYHQmKkHaSE9so_Cgz5YGb7uYh1DJmNzIaZy6gmGO8AAnovSHNo7BnLz1fqB13QfOgRJyxzvzVg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
-Botón de log -> Mantenemos esté botón para que tengamos la pista dada a mano por un personaje o queramos ver una insinuación anterior.![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfkmWo7IJ61DhWGQ7LE4_8d0R51fyEe1amlSJEb45cfnScatPiBqf0RqUSKUU5TYqNCKhrzLexmiAT2CuoQeMWoe3E4ZshJHnCG1W9kK4kKGEVE8wGo7j7utqkFZ0BBWp-OSta8cw?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+Botón de log -> Mantenemos esté botón para que tengamos la pista dada a mano por un personaje o queramos ver una insinuación anterior.
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfkmWo7IJ61DhWGQ7LE4_8d0R51fyEe1amlSJEb45cfnScatPiBqf0RqUSKUU5TYqNCKhrzLexmiAT2CuoQeMWoe3E4ZshJHnCG1W9kK4kKGEVE8wGo7j7utqkFZ0BBWp-OSta8cw?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
-Botón de salir del puzzle -> Este botón permite acceder a la sala de nuevo saliendo del puzzle y guardando su progreso del mismo.![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdUMFDIrFKWrHmaP8kydgtEYlppP27WVgcpI7CI7pNiu1KpUabCGWxlBbm_sE_iUzFDgPva8sbWzz_psvwMvkmHE9Q1OknOoq07HmABw-Dot0hPd3sU6YNPBOJ6dHOwdNl8l8TL?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+Botón de salir del puzzle -> Este botón permite acceder a la sala de nuevo saliendo del puzzle y guardando su progreso del mismo.
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdUMFDIrFKWrHmaP8kydgtEYlppP27WVgcpI7CI7pNiu1KpUabCGWxlBbm_sE_iUzFDgPva8sbWzz_psvwMvkmHE9Q1OknOoq07HmABw-Dot0hPd3sU6YNPBOJ6dHOwdNl8l8TL?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
 Botón de reset del puzzle -> Esté botón hará que el puzzle vuelva a su estado base, perdiendo todo el progreso hecho por si el jugador está atascado.
 
@@ -206,7 +209,8 @@ Cada conversación estará separada para dar a entender que se dan en situacione
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfk8R6qvE3BuOV0GoNRmGjToWIqIu4xzYAprEyRCPTcojuYgYdKZHOc9tO4dAZPncnJyLQNDNpg8DhTJGJ4YqkSwCoiDpdixwPDrRJhhuO1iuA-jF0SA6AO7T1wo1iaRXcrlrZs?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
-#### Botones:![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcFz7oGuMYpcJgx7URAJr-jqc0tuWQSvm8qX12WqUdZPWFj3M0TZVdyf7lS6lwu_ckdBiMy92LoY0i_u7916LVyzn_CngP2zaGd_GwJajFtfFnpPYCa1fgoqaGyysuOJCQ4T8EDdQ?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+#### Botones:
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcFz7oGuMYpcJgx7URAJr-jqc0tuWQSvm8qX12WqUdZPWFj3M0TZVdyf7lS6lwu_ckdBiMy92LoY0i_u7916LVyzn_CngP2zaGd_GwJajFtfFnpPYCa1fgoqaGyysuOJCQ4T8EDdQ?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
 Botón de salir del historial de conversaciones -> Único botón en el menú de historial de conversaciones, con esté mismo saldremos del menú.
 
