@@ -71,12 +71,16 @@ Como los diálogos tienen tanto pistas como información útil para el jugador e
 #### ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeB7h6tI2YQbhg2fYozkty2d4Vz2WTS8ERJb5TwSJ1dBN4sv1dl2XueSndE8lWb19LaPlhAWsEuIyNP_7KoRyO_TL9jZ9ksIgiYuRgVW6vBCAIxqgPAwTB2eey5e3sZnKzF1Zz0nA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
 #### Botones:
+
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcY0W0TQ8Xb5Z1xmlcQ_5vCPg__nkPY_zfMfxuckvdBeutEB4nWmsRRH3Db2MfbYHQmKkHaSE9so_Cgz5YGb7uYh1DJmNzIaZy6gmGO8AAnovSHNo7BnLz1fqB13QfOgRJyxzvzVg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
 
 Botón de log -> Este botón permite acceder al log de diálogos en el mundo y durante los propios diálogos.
 ![AD_4nXdNduGoQpqgaHOyZF9CkTmZvUb1IcRyJs__41LXeBVZ8IBcxPIpB7WMX-8Bs-1XmJEo3WhjsTmn_fpXVYBeB-KkK453rUL3P_KVJiLGfXgOqCYw98TESqdQfpRVf_J6Gmxw1S-G5Q?key=J7nf_FWWHfuhd8vnjF8jXdc4](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdNduGoQpqgaHOyZF9CkTmZvUb1IcRyJs__41LXeBVZ8IBcxPIpB7WMX-8Bs-1XmJEo3WhjsTmn_fpXVYBeB-KkK453rUL3P_KVJiLGfXgOqCYw98TESqdQfpRVf_J6Gmxw1S-G5Q?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
 Botón de Mochila -> El jugador dispondrá de un menú de inventario siempre que esté en la sala (puzzles no), en el que tendrá guardadas todas las pistas y demás datos sobre la víctima, con tal de ayudarle a razonar su respuesta final
 ![AD_4nXcA7V8hEEDfw6NeGKlBVLbDOc0Ax3IAbHxCc-J27Cm_IMjT4NBoQPOVSmEAy1CDsYCj723twgDcoW8P7-U4Aws1JXB40HA8M9HZwrI3eG9_rrvEmMUSHBkjcesjcmYwjAdnt7CxBg?key=J7nf_FWWHfuhd8vnjF8jXdc4](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcA7V8hEEDfw6NeGKlBVLbDOc0Ax3IAbHxCc-J27Cm_IMjT4NBoQPOVSmEAy1CDsYCj723twgDcoW8P7-U4Aws1JXB40HA8M9HZwrI3eG9_rrvEmMUSHBkjcesjcmYwjAdnt7CxBg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
 Botón de pausa -> Accesible en todo momento, permitiendo al jugador activar el menú de pausa. ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfwqycQO0ZI_8RB6lmHbF8CLMkeAA-txl1aKSGHZJ11WvOfSP-YjJJqFNjuBmzoAxObhbhlRZxhg3mr7yznQxD10avPuyBwZHg8dfZsbXzFtTnZCqITBjfkOEo_zbrDgbjHRkmNiA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
 Botón de continuar diálogo -> Permite al jugador continuar el diálogo actual, se podrá pulsar en cualquier lado de la pantalla que no sean los otros botones interactuables y tendrá dos sprites:  
@@ -115,7 +119,8 @@ Si el jugador encuentra un objeto interactivo, tendrá un contorno alrededor de 
   
   
 
-El jugador puede ver la situación del asesinato de cerca en todo momento, para ver como fue su situación e ir viendo posibilidades.![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdLN5ACophQMoQjVXPJdxDOdh3S95WYkmmqjmKAdHlG70JOFx_dq6y3LUe6VJQ28tFZ3kPCfhnvvkFFTbtlRLX_T6L_N8IOAE9h-N0WajNdckzzHCLHdbUDoSnr-o7OkEX4-WpiXQ?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+El jugador puede ver la situación del asesinato de cerca en todo momento, para ver como fue su situación e ir viendo posibilidades.
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdLN5ACophQMoQjVXPJdxDOdh3S95WYkmmqjmKAdHlG70JOFx_dq6y3LUe6VJQ28tFZ3kPCfhnvvkFFTbtlRLX_T6L_N8IOAE9h-N0WajNdckzzHCLHdbUDoSnr-o7OkEX4-WpiXQ?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
   
 
