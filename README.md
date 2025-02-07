@@ -130,16 +130,23 @@ El jugador puede ver la situación del asesinato de cerca en todo momento, para 
 El jugador tiene todos los botones de la anterior perspectiva excepto los de diálogo y se añaden los elementos interactuables del entorno.
 
   
+#### Resolución del caso:
 
+(IDEA PRINCIPAL)
 Cuando se hayan completado todos los puzzles, se le preguntará al jugador a través de un personaje en cuanto a diálogo si el asesinato fue producido por un caso lógico o en caso contrario, que no tenga ningún sentido. 
+Si hay 2 personajes vivos cualquiera de ellos te podrá hacer la pregunta final.
+Si hay 1 personaje vivo esté mismo te hará la pregunta final.
+Si no hay ningún personaje vivo en el juego, habrá una pregunta dicha para ti mismo.
+
+(IDEA A DECIDIR)
+Cuando tengamos todos los puzzles completados, en vez de solo poder comprobar el cuerpo, se abrirá un menú para que el jugador decida si quiere ver el cuerpo o si quiere resolver ya el caso.
+En caso de querer ver el cuerpo se mostrará como si aún no hayas completado todos los puzzles.
+
+En caso de querer resolver el caso, se le preguntará al jugador a través de un personaje en cuanto a diálogo si el asesinato fue producido por un caso lógico o en caso contrario, que no tenga ningún sentido.
 
 Si hay 2 personajes vivos cualquiera de ellos te podrá hacer la pregunta final.
-
 Si hay 1 personaje vivo esté mismo te hará la pregunta final.
-
-Si no hay ningún personaje vivo en el juego, habrá una pregunta dicha para ti mismo
-
-  
+Si no hay ningún personaje vivo en el juego, habrá una pregunta dicha para ti mismo.
 
 ### Puzzle del caso:
 

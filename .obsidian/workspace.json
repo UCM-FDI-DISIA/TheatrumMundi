@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Convenciones de código.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Convenciones de código"
+              "title": "README"
             }
           }
         ]
@@ -44,7 +44,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Explorador de archivos"
+              "title": "Files"
             }
           },
           {
@@ -160,19 +160,30 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Abrir selector rápido": false,
-      "graph:Abrir vista gráfica": false,
-      "canvas:Crear nuevo lienzo": false,
-      "daily-notes:Abrir la nota de hoy": false,
-      "templates:Insertar plantilla": false,
-      "command-palette:Abrir paleta de comandos": false
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
     }
   },
   "active": "743c3cbd08005f24",
   "lastOpenFiles": [
-    "test.txt",
+    "TheatrumMundiProyect/src/json/RAEDME.md",
+    "ImagenesGDD/tetrismov1.jpg",
+    "ImagenesGDD/tetrisini.jpg",
+    "ImagenesGDD/tetrisfin.jpg",
+    "ImagenesGDD/tetris3mov.jpg",
+    "ImagenesGDD/socrates.png",
+    "ImagenesGDD/sala2.jpg",
+    "ImagenesGDD/sala1.png",
+    "ImagenesGDD/partitura.png",
+    "ImagenesGDD/novela.png",
+    "ImagenesGDD/aguasolucion.png",
     "README.md",
     "Convenciones de código.md",
+    "test.txt",
     "TheatrumMundiProyect/bin/libxmp.dll",
     "TheatrumMundiProyect/bin/libwebpdemux-2.dll",
     "TheatrumMundiProyect/bin/libwebp-7.dll",
@@ -181,17 +192,6 @@
     "TheatrumMundiProyect/bin/libopusfile-0.dll",
     "TheatrumMundiProyect/bin/libopus-0.dll",
     "TheatrumMundiProyect/bin/libogg-0.dll",
-    "TheatrumMundiProyect/bin/libgme.dll",
-    "TheatrumMundiProyect/bin/libavif-16.dll",
-    "ImagenesGDD/socrates.png",
-    "ImagenesGDD/tetrisfin.jpg",
-    "ImagenesGDD/tetrismov1.jpg",
-    "ImagenesGDD/tetrisini.jpg",
-    "ImagenesGDD/tetris3mov.jpg",
-    "ImagenesGDD/sala2.jpg",
-    "ImagenesGDD/novela.png",
-    "ImagenesGDD/sala1.png",
-    "ImagenesGDD/100cia.jpg",
-    "ImagenesGDD/partitura.png"
+    "TheatrumMundiProyect/bin/libgme.dll"
   ]
 }
