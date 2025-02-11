@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Arquitectura Proyectos II.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "Arquitectura Proyectos II"
             }
           }
         ]
@@ -44,7 +44,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Explorador de archivos"
             }
           },
           {
@@ -160,16 +160,18 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false
     }
   },
   "active": "743c3cbd08005f24",
   "lastOpenFiles": [
+    "README.md",
+    "Arquitectura Proyectos II.md",
     "TheatrumMundiProyect/src/json/RAEDME.md",
     "ImagenesGDD/tetrismov1.jpg",
     "ImagenesGDD/tetrisini.jpg",
@@ -181,7 +183,6 @@
     "ImagenesGDD/partitura.png",
     "ImagenesGDD/novela.png",
     "ImagenesGDD/aguasolucion.png",
-    "README.md",
     "Convenciones de código.md",
     "test.txt",
     "TheatrumMundiProyect/bin/libxmp.dll",
