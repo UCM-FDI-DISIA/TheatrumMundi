@@ -59,7 +59,10 @@ El texto se escribe poco a poco en la caja de diálogo, si el texto no se ha ter
 
 Como los diálogos tienen tanto pistas como información útil para el jugador estos se almacenarán en un log al que el jugador tendrá acceso durante toda la partida. 
 
-  
+Tipos de diálogos:
+Son dos JSON
+1. Diálogos de personajes para las salas.
+2. Diálogos de personajes para las pistas a dar.
 
 ## Interfaces / UI
 
@@ -87,9 +90,9 @@ Botón de pausa -> Accesible en todo momento, permitiendo al jugador activar el 
 Botón de continuar diálogo -> Permite al jugador continuar el diálogo actual, se podrá pulsar en cualquier lado de la pantalla que no sean los otros botones interactuables y tendrá dos sprites:  
   
 ![AD_4nXfeKJG5B348KHRRdJapSHy8j3ZTTVNplXobB5oY9WNZXHIsM0K7ezL1lxMxb-sO7CIie4TtxalGIQCetsJWnWXj9NjUMyzdO_6GlqlJ1XuZdcsRWY8_1rjmg3kx7Oe4KlcWC90zZw?key=J7nf_FWWHfuhd8vnjF8jXdc4](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfeKJG5B348KHRRdJapSHy8j3ZTTVNplXobB5oY9WNZXHIsM0K7ezL1lxMxb-sO7CIie4TtxalGIQCetsJWnWXj9NjUMyzdO_6GlqlJ1XuZdcsRWY8_1rjmg3kx7Oe4KlcWC90zZw?key=J7nf_FWWHfuhd8vnjF8jXdc4)
-1. Diálogo en proceso (no se puede avanzar hasta que el personaje termine).
+3. Diálogo en proceso (no se puede avanzar hasta que el personaje termine).
 ![AD_4nXdQBqm02M8zeSqo0QcRAYE5l5xFewxPzYcDrZhN5Fb_sCauK6bM-Z5Z1XTYZs3Y58nkKZwzzFMbnUEK56SJ7JZ9BXXnHncZBkmJyB9dVOr0kwjggRqredGW3rg3RQYBh-s9wchNSg?key=J7nf_FWWHfuhd8vnjF8jXdc4](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdQBqm02M8zeSqo0QcRAYE5l5xFewxPzYcDrZhN5Fb_sCauK6bM-Z5Z1XTYZs3Y58nkKZwzzFMbnUEK56SJ7JZ9BXXnHncZBkmJyB9dVOr0kwjggRqredGW3rg3RQYBh-s9wchNSg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
-1. Diálogo terminado (el jugador puede avanzar la conversación). 
+4. Diálogo terminado (el jugador puede avanzar la conversación). 
 
 ### Sala del caso:
 
@@ -162,9 +165,9 @@ A la hora de encontrar un objeto con el que interactuar esté se pondrá con con
 
 Al entrar en el puzzle, pueden pasar dos cosas: 
 
-2. Si el personaje cuya afición tiene que ver con el puzzle está vivo, te dará una pista en forma de diálogo de forma automática al empezar. Se mantiene el botón de interacción para avanzar diálogos, explicado en la interfaz de las salas.
+5. Si el personaje cuya afición tiene que ver con el puzzle está vivo, te dará una pista en forma de diálogo de forma automática al empezar. Se mantiene el botón de interacción para avanzar diálogos, explicado en la interfaz de las salas.
     
-3. Si el personaje cuya afición tiene que ver con el puzzle fue asesinado, el jugador no tendrá introducción ni pistas y deberás investigar la función del puzzle por tu cuenta. 
+6. Si el personaje cuya afición tiene que ver con el puzzle fue asesinado, el jugador no tendrá introducción ni pistas y deberás investigar la función del puzzle por tu cuenta. 
     
 
 (TESTING NECESARIO)
