@@ -792,7 +792,92 @@ Pista y Material para otro puzzle: Cuerda y utensilio.
 
 ### Sala 3
 
+  Puzzle Luces:
+
   
+
+-Concepto: 
+
+Conectar los cables a los diferentes puertos en el orden correcto ,para poder encender todas las bombillas a la vez .  Consiguiendo encender las luces del juzgado y obtener el cable.
+
+  
+
+-Funcionamiento del puzzle:
+
+Nos encontramos un cuadro de luz. A la izquierda observamos cinco bombillas colocadas verticalmente. En medio cinco cables inicialmente conectados a puertos y debajo de estos un botón rojo con el símbolo de corriente de electricidad. A la derecha  se encontrará un compartimento cerrado.
+
+El numero de luces encendidas indica el numero de cables correctamente conectados. La posición de las luces no es igual a la posición de los cables.
+Las luces solo se encenderán cuando estén los cinco cables conectados a puertos diferentes y se haya pulsado el botón de la corriente eléctrica. Si no están los cinco cables conectados el botón de la electricidad estará menos saturado y no se podrá pulsarlo, por lo tanto, no se podrá comprobar si los cables están en la posición adecuada.
+
+Inicialmente todos los cables estarán conectados, con una o dos luces encendidas indicando que 1 o 2 cables están bien conectados.  
+Para desconectar un cable se deberá de hacer clic en él y para conectarlo a un puerto se deberá de clicar y arrastrar hasta el puerto deseado. No se puede conectar dos cables a un puerto a la vez.
+
+Solución: 
+Contando de izquierda a derecha la solución seria la siguiente: 31524
+El cable 1 le corresponde la posición 3
+El cable 2 le corresponde la posición 1
+El cable 3 le corresponde la posición 5
+El cable 4 le corresponde la posición 2
+El cable 4 le corresponde la posición 4
+
+-Recompensa:
+Cable en el compartimento derecho de la caja de luz.
+
+
+
+
+|   |   |   |
+|---|---|---|
+|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcTA104tu-Ru6DB2Z7K4w8R00UWhnjMtE0ncqBRSWF4lrHFONIpnKb80Z2LCMbGZ1F49iyDsi1QnyuOeVgeBFeR0zY3rF6nxWe_ux_Vy7PiMkAYS3EMK7NnGoQEGloRePqJ6SoIXw?key=J7nf_FWWHfuhd8vnjF8jXdc4)|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdk_0aeg_LdOKLNQKmH0sx3HYyqN9vnPW5kro_dEirCEf-Gb3JYk9mXRqHcgwrA5ZxtTwmtFK8PF3k_FTITI8ApSpQ29znQUhPmUgRrWWqSEzwlRjqOn80STtgp3uzxCA2AJxW7WA?key=J7nf_FWWHfuhd8vnjF8jXdc4)|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXegFi04tf9i9lJ4h-r5dmlsjSueOHa4qqDdmz2Z6ykPn5vefrXbnfpyImv0LhsHePtPzedJRYBS8i4JkB49nvwBRmjSvS2X_cPwZAwSAra47YPzpHku-sZf-YHx7Lu3wQfNy7UVbg?key=J7nf_FWWHfuhd8vnjF8jXdc4)|
+
+
+  
+  
+
+Puzzle Mosaico:
+
+  
+
+-Concepto: Colocar los trozos de imágenes de un mosaico (cuadrícula) en el orden correcto para formar una imagen, contando con un hueco vacío donde se podrá hacer el cambio de trozo. Solo se puede mover un trozo a un espacio vacío. Al completar el puzzle se fragmentará el mosaico revelando la recompensa y un órgano.
+
+  
+
+-Funcionamiento del puzzle: Tenemos una cuadrícula 4x4 con trozos de una imagen desordenada, además tendremos un espacio vacío donde se podrá mover la pieza que esté al lado en horizontal o vertical, no en diagonal.
+
+  
+
+-Recompensa: 
+
+Pista: Pala
+
+Nuevo puzzle desbloqueado: Órgano.
+
+  
+  
+
+Puzzle Órgano:
+
+  
+
+-Concepto: Tocar las notas correctas en el órgano, teniendo en cuenta la  partitura y el espejo. Al completar el puzzle se abrirá un compartimento dentro del órgano donde estarán las recompensas.
+
+  
+
+-Funcionamiento del puzzle: Por un lado tenemos el teclado con las teclas del órgano, la partitura incompleta, un espejo que muestra una partitura invertida , completa y muestra el patrón con un tono arriba (cada nota está una posición más arriba). Encima del espejo se encuentra un recordatorio de las notas musicales (de DO a SÍ) explicando la traducción entre las notas y su posición en el pentagrama. El jugador deberá encontrar el patrón entre la primera parte de la partitura y la primera parte del reflejo en el espejo (teniendo en cuenta que la partitura está invertida). Después, el jugador tendrá que tocar en el teclado la continuación del resto de la partitura invertida siguiendo el patrón establecido. Una vez que el jugador haya tocado las dos partes faltantes correctamente el puzzle estará resuelto. Hasta que una parte de la partitura no esté resuelta no se pasará a la siguiente.
+
+  
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfa1RGzaiGtpXzgBkTRH2U49TyrIRQBZwabHMS2w8MN3bCvs8uqFjFG62bLu4e2nnrWMmC5WGt474QCH8G9pJoPf_zf6lm1S6F9WJ5TXw3s1Mzd2WbmOZzPDmF-UIX_61yXs5mCMg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+
+(Estado inicial del puzzle y solución, respectivamente)
+
+-Recompensa:
+
+Pista y Material para otro puzzle: Cuerda y utensilio.
+
+  
+  
+
   
 
 # Estética 
