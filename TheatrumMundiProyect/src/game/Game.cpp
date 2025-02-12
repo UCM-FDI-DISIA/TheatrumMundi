@@ -2,13 +2,7 @@
 
 #include "Game.h"
 
-#include "../components/Deceleration.h"
-#include "../components/GameInfoMsgs.h"
-#include "../components/GameState.h"
 #include "../components/Image.h"
-#include "../components/FighterCtrl.h"
-#include "../components/RectangleViewer.h"
-#include "../components/ShowAtOppositeSide.h"
 #include "../components/Transform.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
@@ -54,12 +48,7 @@ void Game::init() {
 	_mngr = new Manager();
 
 	// create SpaceShip entity
-	auto _fighter = _mngr->addEntity();
-	auto _fighterTransform = _mngr->addComponent<Transform>(_fighter, Vector2D(sdlutils().width() / 2, sdlutils().width() / 2), Vector2D(0, 0), 50, 50, 0);
-	_mngr->addComponent<Image>(_fighter, &sdlutils().images().at("fighter"));
-	_mngr->addComponent<Deceleration>(_fighter,_fighterTransform);
-	_mngr->addComponent<FighterCtrl>(_fighter,5.0,_fighterTransform);
-	_mngr->addComponent <ShowAtOppositeSide> (_fighter, _fighterTransform);
+
 	// create the Asteroid 
 	
 	// create game control entity
