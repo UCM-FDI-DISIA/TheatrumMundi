@@ -9,11 +9,14 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../utils/Vector2D.h"
 #include "../utils/Collisions.h"
+
 #include <Windows.h>
 
-using ecs::Manager;
 
-Game::Game() : _mngr(nullptr), _gameState(nullptr) {}
+
+Game::Game() {
+	
+}
 Game::~Game() {
 	delete _mngr;
 
@@ -46,8 +49,7 @@ void Game::init() {
 	sdlutils().hideCursor();
 
 	// Create the manager
-	_mngr = new Manager();
-
+	_mngr = new SceneManager();
 	
 	
 }
@@ -79,7 +81,6 @@ void Game::start() {
 		}
 
 		_mngr->update();
-		_mngr->refresh();
 
 		checkCollisions();
 
@@ -96,34 +97,5 @@ void Game::start() {
 }
 
 void Game::checkCollisions() {
-	/*if (_gameState->getState() != GameState::RUNNING)
-		return;
-
-	bool ballCollidesWithPaddle = false;
-
-	for (auto e : _mngr->getEntities(ecs::grp::PADDLES)) {
-		auto paddleTr_ = _mngr->getComponent<Transform>(e);
-		ballCollidesWithPaddle = Collisions::collides(paddleTr_->getPos(),
-				paddleTr_->getWidth(), paddleTr_->getHeight(), ballPos,
-				ballWidth, ballHeight);
-
-		if (ballCollidesWithPaddle)
-			break;
-	}
-
-	if (ballCollidesWithPaddle) {
-
-		// change the direction of the ball, and increment the speed
-		auto &vel = _ballTr->getVel(); // the use of & is important, so the changes goes directly to the ball
-		vel.setX(-vel.getX());
-		vel = vel * 1.2f;
-
-		// play some sound
-		sdlutils().soundEffects().at("paddle_hit").play();
-	} else if (_ballTr->getPos().getX() < 0)
-		_gameState->onBallExit(GameState::LEFT);
-	else if (_ballTr->getPos().getX() + _ballTr->getWidth()
-			> sdlutils().width())
-		_gameState->onBallExit(GameState::RIGHT);*/
-
+	
 }

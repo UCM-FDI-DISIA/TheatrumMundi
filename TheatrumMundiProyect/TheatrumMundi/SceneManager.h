@@ -1,12 +1,11 @@
 #pragma once
 #include <list>
 #include<vector>
-//#include "../../TheatrumMundiProyect/src/ecs/Entity.h"
 #include "../../TheatrumMundiProyect/src/ecs/ecs.h"
-class SceneTemplate;
-//class Entity;
 
-using namespace std;
+class SceneTemplate;
+
+using namespace ecs;
 class SceneManager
 {
 private:
@@ -16,12 +15,15 @@ protected:
 public:
 	SceneManager();
 	 void popScene();
-	 void loadScene(int index, const ecs::entity_t& extradata);
+	 void loadScene(int index, entity_t& extradata);
 	 //pushback
 	 void loadScene(int index);
-	 //pop of act scene
+	 //unload of the ram de currentscene and pop it
 	 void unloadScene();
-
+	 void render();
+	 //refrest the currect scene 
+	 void refrest();
+	 //update of the currentscene
 	 void update();
 	 //delete of enitities
 	~SceneManager();

@@ -3,10 +3,7 @@
 #pragma once
 
 #include <vector>
-
-namespace ecs {
-class Manager;
-}
+#include "../../TheatrumMundi/SceneManager.h"
 
 class Transform;
 class GameState;
@@ -18,7 +15,7 @@ public:
 	void start();
 private:
 	void checkCollisions();
-	ecs::Manager *_mngr;
-	GameState *_gameState;
+	 SceneManager* _mngr;
+	
 };
 

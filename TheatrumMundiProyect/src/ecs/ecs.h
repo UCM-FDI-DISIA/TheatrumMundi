@@ -20,7 +20,7 @@ namespace ecs {
 
 // forward declaration of some classes, to be used when we
 // just need to know that they exist
-class Manager;
+class EntityManager;
 struct Entity;
 class Component;
 

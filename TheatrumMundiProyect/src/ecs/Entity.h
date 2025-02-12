@@ -18,7 +18,7 @@ namespace ecs {
 
 struct Entity {
 public:
-	Entity(grpId_t gId, Manager *mngr) :
+	Entity(grpId_t gId, EntityManager *mngr) :
 			_mngr(mngr), //
 			_cmps(), //
 			_currCmps(), //
@@ -50,7 +50,7 @@ public:
 	}
 
 	// Returns the manager to which this entity belongs
-	inline Manager* getMngr() {
+	inline EntityManager* getMngr() {
 		return _mngr;
 	}
 
@@ -59,9 +59,9 @@ private:
 	// We could make the constructors private as well, so only
 	// the manager can create instances (because it is a friend)
 
-	friend Manager; // so we can update these fields directly from the manager
+	friend EntityManager; // so we can update these fields directly from the manager
 
-	Manager *_mngr;
+	EntityManager *_mngr;
 	std::array<Component*, maxComponentId> _cmps;
 	std::vector<Component*> _currCmps;
 	bool _alive;

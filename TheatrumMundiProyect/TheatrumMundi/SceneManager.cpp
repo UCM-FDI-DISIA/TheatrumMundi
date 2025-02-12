@@ -1,9 +1,11 @@
 #include "SceneManager.h"
 #include <assert.h>
 #include "SceneTemplate.h"
+
+//#include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 SceneManager::SceneManager()
 {
-
+	
 }
 
 void SceneManager::popScene()
@@ -12,7 +14,7 @@ void SceneManager::popScene()
 		currentscenes.pop_back();
 }
 
-void SceneManager::loadScene(int index, const ecs::entity_t& extradata)
+void SceneManager::loadScene(int index, ecs::entity_t& extradata)
 {
 	scenes[index]->init(extradata);
 	currentscenes.push_back(scenes[index]);
@@ -30,6 +32,14 @@ void SceneManager::unloadScene()
 {
 	currentscenes.back()->unload();
 	currentscenes.pop_back();
+	refrest();
+}
+void SceneManager::render() {
+	currentscenes.back()->render();
+}
+void SceneManager::refrest()
+{
+	currentscenes.back()->refresh();
 }
 
 void SceneManager::update()

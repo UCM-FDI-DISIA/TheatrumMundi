@@ -1,22 +1,23 @@
 #pragma once
 #include <list>
-#include "../../TheatrumMundiProyect/src/ecs/ecs.h"
-class EntityManager {
 
-};
-class DialogueManager {};
+#include "../../TheatrumMundiProyect/src/ecs/Manager.h"
+
+
+
 
 class SceneTemplate
 {
 private:
-	 EntityManager* entityManager;
-	 DialogueManager* dialogueManager;
+	 ecs::EntityManager* entityManager;
+	// DialogueManager* dialogueManager;
 public:
 	SceneTemplate();
 	void virtual init() {};
-	void virtual init(const ecs::entity_t& ent) {};
+	void virtual init(ecs::entity_t& ent) {};
 	void virtual update() {
 	};
+	void render() const;
 	void virtual refresh() {};
 	void virtual unload() {};
 	~SceneTemplate();
