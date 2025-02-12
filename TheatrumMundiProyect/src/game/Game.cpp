@@ -28,7 +28,7 @@ Game::~Game() {
 void Game::init() {
 
 	// initialize the SDL singleton
-	if (!SDLUtils::Init("Asteroids", 800, 600,"resources/config/pingpong.resources.json")) {
+	if (!SDLUtils::Init("TheatrumMundi", 800, 600,"../resources/config/TheatrumMundi.resources.json")) {
 
 		std::cerr << "Something went wrong while initializing SDLUtils"
 				<< std::endl;
@@ -52,6 +52,7 @@ void Game::init() {
 	// create the Asteroid 
 	
 	// create game control entity
+	std:: cout << "meinicio";
 }
 
 void Game::start() {
