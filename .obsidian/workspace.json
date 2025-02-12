@@ -44,7 +44,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Explorador de archivos"
             }
           },
           {
@@ -160,16 +160,28 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false
     }
   },
   "active": "743c3cbd08005f24",
   "lastOpenFiles": [
+    "TheatrumMundiProyect/src/game/Game.h",
+    "TheatrumMundiProyect/src/game/Game.cpp",
+    "TheatrumMundiProyect/src/game/ecs_defs.h",
+    "TheatrumMundiProyect/src/game",
+    "TheatrumMundiProyect/src/Components/Transform.h",
+    "TheatrumMundiProyect/src/Components/Image.h",
+    "TheatrumMundiProyect/src/Components/Image.cpp",
+    "TheatrumMundiProyect/src/Components",
+    "TheatrumMundiProyect/src/Nueva carpeta",
+    "TheatrumMundiProyect/TheatrumMundi/TheatrumMundi.vcxproj.user",
+    "TheatrumMundiProyect/src/ecs/RAEDME.md",
+    "TheatrumMundiProyect/src/ecs/Manager.h",
     "Arquitectura Proyectos II.md",
     "README.md",
     "TheatrumMundiProyect/src/json/RAEDME.md",
@@ -183,16 +195,6 @@
     "ImagenesGDD/partitura.png",
     "ImagenesGDD/novela.png",
     "ImagenesGDD/aguasolucion.png",
-    "Convenciones de código.md",
-    "test.txt",
-    "TheatrumMundiProyect/bin/libxmp.dll",
-    "TheatrumMundiProyect/bin/libwebpdemux-2.dll",
-    "TheatrumMundiProyect/bin/libwebp-7.dll",
-    "TheatrumMundiProyect/bin/libwavpack-1.dll",
-    "TheatrumMundiProyect/bin/libtiff-5.dll",
-    "TheatrumMundiProyect/bin/libopusfile-0.dll",
-    "TheatrumMundiProyect/bin/libopus-0.dll",
-    "TheatrumMundiProyect/bin/libogg-0.dll",
-    "TheatrumMundiProyect/bin/libgme.dll"
+    "Convenciones de código.md"
   ]
 }
