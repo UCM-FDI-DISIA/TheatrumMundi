@@ -40,8 +40,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical",
-                "autoReveal": false
+                "sortOrder": "alphabetical"
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -170,29 +169,29 @@
   },
   "active": "743c3cbd08005f24",
   "lastOpenFiles": [
+    "image.jpg",
+    "TheatrumMundiProyect/src/game/Game.h",
+    "TheatrumMundiProyect/src/game/Game.cpp",
+    "TheatrumMundiProyect/src/game/ecs_defs.h",
+    "TheatrumMundiProyect/src/game",
+    "TheatrumMundiProyect/src/ecs/RAEDME.md",
+    "TheatrumMundiProyect/src/ecs/Manager.h",
+    "TheatrumMundiProyect/src/ecs/Manager.cpp",
+    "TheatrumMundiProyect/src/ecs/Entity.h",
+    "TheatrumMundiProyect/src/ecs/ecs_defs_example.h",
+    "TheatrumMundiProyect/src/ecs/ecs.h",
+    "TheatrumMundiProyect/src/ecs/Component.h",
     "Arquitectura Proyectos II.md",
+    "Convenciones de código.md",
     "README.md",
-    "TheatrumMundiProyect/src/json/RAEDME.md",
+    "ImagenesGDD/socrates.png",
+    "ImagenesGDD/tetrisfin.jpg",
     "ImagenesGDD/tetrismov1.jpg",
     "ImagenesGDD/tetrisini.jpg",
-    "ImagenesGDD/tetrisfin.jpg",
     "ImagenesGDD/tetris3mov.jpg",
-    "ImagenesGDD/socrates.png",
     "ImagenesGDD/sala2.jpg",
-    "ImagenesGDD/sala1.png",
-    "ImagenesGDD/partitura.png",
     "ImagenesGDD/novela.png",
-    "ImagenesGDD/aguasolucion.png",
-    "Convenciones de código.md",
-    "test.txt",
-    "TheatrumMundiProyect/bin/libxmp.dll",
-    "TheatrumMundiProyect/bin/libwebpdemux-2.dll",
-    "TheatrumMundiProyect/bin/libwebp-7.dll",
-    "TheatrumMundiProyect/bin/libwavpack-1.dll",
-    "TheatrumMundiProyect/bin/libtiff-5.dll",
-    "TheatrumMundiProyect/bin/libopusfile-0.dll",
-    "TheatrumMundiProyect/bin/libopus-0.dll",
-    "TheatrumMundiProyect/bin/libogg-0.dll",
-    "TheatrumMundiProyect/bin/libgme.dll"
+    "ImagenesGDD/sala1.png",
+    "ImagenesGDD/100cia.jpg"
   ]
 }
