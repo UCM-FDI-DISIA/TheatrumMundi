@@ -9,6 +9,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../utils/Vector2D.h"
 #include "../utils/Collisions.h"
+#include <Windows.h>
 
 using ecs::Manager;
 
@@ -28,7 +29,7 @@ Game::~Game() {
 void Game::init() {
 
 	// initialize the SDL singleton
-	if (!SDLUtils::Init("TheatrumMundi", 800, 600,"../resources/config/TheatrumMundi.resources.json")) {
+	if (!SDLUtils::Init("TheatrumMundi",GetSystemMetrics(SM_CXSCREEN) ,GetSystemMetrics(SM_CYSCREEN), "../resources/config/TheatrumMundi.resources.json")) {
 
 		std::cerr << "Something went wrong while initializing SDLUtils"
 				<< std::endl;
