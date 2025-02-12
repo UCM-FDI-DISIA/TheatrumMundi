@@ -11,7 +11,7 @@
 #include "../utils/Collisions.h"
 #include <Windows.h>
 
-using ecs::Manager;
+using ecs::EntityManager;
 
 Game::Game() : _mngr(nullptr), _gameState(nullptr) {}
 Game::~Game() {
@@ -46,14 +46,10 @@ void Game::init() {
 	sdlutils().hideCursor();
 
 	// Create the manager
-	_mngr = new Manager();
+	_mngr = new EntityManager();
 
-	// create SpaceShip entity
-
-	// create the Asteroid 
 	
-	// create game control entity
-	std:: cout << "meinicio";
+	
 }
 
 void Game::start() {

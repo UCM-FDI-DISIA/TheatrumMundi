@@ -4,7 +4,7 @@
 
 namespace ecs {
 
-Manager::Manager() :
+EntityManager::EntityManager() :
 		_hdlrs(), //
 		_entsByGroup() //
 {
@@ -17,7 +17,7 @@ Manager::Manager() :
 	}
 }
 
-Manager::~Manager() {
+EntityManager::~EntityManager() {
 
 	// delete all entities
 	//
@@ -27,7 +27,7 @@ Manager::~Manager() {
 	}
 }
 
-void Manager::refresh() {
+void EntityManager::refresh() {
 
 	// remove dead entities from the groups lists, and also those
 	// do not belong to the group anymore
