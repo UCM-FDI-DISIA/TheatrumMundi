@@ -9,6 +9,6 @@ Esto es una breve guía de estilo para perder el menor tiempo posible descifrand
 -Métodos la primera palabra en minúscula y la primera letra del resto en mayúscula. ej render() o
 getSpeed().
 Y recordar que aunque no se ponga que algo es público o privado, por defecto esta en privado así que ponerlo para evitar errores y hacer el código mas legible.
-Comentarios: los comentarios en el código se agradecen siempre que no sean paja(no comentéis un geter o un seter por ejemplo).
+Comentarios: los comentarios en el código se agradecen siempre que no sean paja(no comentéis un geter o un seter por ejemplo). Todo comentario en código debe estar en INGLÉS.
 -Consolelogs: cuando acabéis de depurar o probar eliminarlos o borradlos para evitar que la consola se llene de basura innecesaria.
 Por ultimo recordad liberar memoria dinámica <3

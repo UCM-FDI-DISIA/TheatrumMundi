@@ -81,7 +81,7 @@ Son dos JSON
 Botón de log -> Este botón permite acceder al log de diálogos en el mundo y durante los propios diálogos.
 ![AD_4nXdNduGoQpqgaHOyZF9CkTmZvUb1IcRyJs__41LXeBVZ8IBcxPIpB7WMX-8Bs-1XmJEo3WhjsTmn_fpXVYBeB-KkK453rUL3P_KVJiLGfXgOqCYw98TESqdQfpRVf_J6Gmxw1S-G5Q?key=J7nf_FWWHfuhd8vnjF8jXdc4](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdNduGoQpqgaHOyZF9CkTmZvUb1IcRyJs__41LXeBVZ8IBcxPIpB7WMX-8Bs-1XmJEo3WhjsTmn_fpXVYBeB-KkK453rUL3P_KVJiLGfXgOqCYw98TESqdQfpRVf_J6Gmxw1S-G5Q?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
-Botón de Mochila -> El jugador dispondrá de un menú de inventario siempre que esté en la sala (puzzles no), en el que tendrá guardadas todas las pistas y demás datos sobre la víctima, con tal de ayudarle a razonar su respuesta final.
+Botón de Mochila -> El jugador dispondrá de un menú de inventario siempre que esté en la sala (puzzles no), en el que tendrá guardadas todas las pistas y demás datos sobre la víctima, con tal de ayudarle a razonar su respuesta final. Tiene el diseño de una carpeta.
 
 ![AD_4nXcA7V8hEEDfw6NeGKlBVLbDOc0Ax3IAbHxCc-J27Cm_IMjT4NBoQPOVSmEAy1CDsYCj723twgDcoW8P7-U4Aws1JXB40HA8M9HZwrI3eG9_rrvEmMUSHBkjcesjcmYwjAdnt7CxBg?key=J7nf_FWWHfuhd8vnjF8jXdc4](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcA7V8hEEDfw6NeGKlBVLbDOc0Ax3IAbHxCc-J27Cm_IMjT4NBoQPOVSmEAy1CDsYCj723twgDcoW8P7-U4Aws1JXB40HA8M9HZwrI3eG9_rrvEmMUSHBkjcesjcmYwjAdnt7CxBg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 

@@ -122,7 +122,7 @@ public:
 
 	// hide the cursor when mouse is over the window
 	inline void hideCursor() {
-		SDL_ShowCursor(0);
+		SDL_ShowCursor(1);
 	}
 
 	// All resource maps can be modified from outside, this way you can store
