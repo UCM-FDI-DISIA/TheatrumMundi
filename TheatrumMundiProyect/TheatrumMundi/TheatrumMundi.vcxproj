@@ -34,6 +34,8 @@
     <ClCompile Include="..\SRC\sdlutils\Texture.cpp" />
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneTemplate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\SDL2-2.30.11\include\begin_code.h" />
@@ -162,6 +164,8 @@
     <ClInclude Include="..\SRC\utils\ptr_iterator.h" />
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneTemplate.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />

@@ -16,11 +16,11 @@ namespace ecs {
  * A class for managing the list of entities, groups, etc.
  *
  */
-class EntityManager {
+class Manager {
 
 public:
-	EntityManager();
-	virtual ~EntityManager();
+	Manager();
+	virtual ~Manager();
 
 	// Adding an entity simply creates an instance of Entity, adds
 	// it to the list of entities and returns it to the caller.

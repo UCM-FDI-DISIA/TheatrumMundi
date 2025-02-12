@@ -11,7 +11,7 @@
 #include "../utils/Collisions.h"
 #include <Windows.h>
 
-using ecs::EntityManager;
+using ecs::Manager;
 
 Game::Game() : _mngr(nullptr), _gameState(nullptr) {}
 Game::~Game() {
@@ -46,7 +46,7 @@ void Game::init() {
 	sdlutils().hideCursor();
 
 	// Create the manager
-	_mngr = new EntityManager();
+	_mngr = new Manager();
 
 	
 	
