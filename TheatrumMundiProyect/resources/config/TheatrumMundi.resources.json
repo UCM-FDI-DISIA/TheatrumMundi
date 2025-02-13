@@ -5,7 +5,8 @@
   ],
   
   "images" : [
-  
+    { "id" : "prueba", "file" : "../resources/images/socrates.png" }
+
   ],
   
   "messages" : [

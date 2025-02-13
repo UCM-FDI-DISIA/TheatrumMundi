@@ -1,11 +1,13 @@
 #include "SceneManager.h"
 #include <assert.h>
 #include "SceneTemplate.h"
+#include "SceneRoomTemplate.h"
 
 //#include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 SceneManager::SceneManager()
 {
-	
+	scenes.push_back(new SceneRoomTemplate());
+	loadScene(0);
 }
 
 void SceneManager::popScene()
@@ -52,5 +54,5 @@ void SceneManager::update()
 SceneManager::~SceneManager()
 {
 	for (auto a : scenes) delete a;
-	for (auto a : currentscenes) delete a;
+	
 }

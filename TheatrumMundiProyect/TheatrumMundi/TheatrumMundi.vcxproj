@@ -35,6 +35,7 @@
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SceneRoomTemplate.cpp" />
     <ClCompile Include="SceneTemplate.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +166,7 @@
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SceneRoomTemplate.h" />
     <ClInclude Include="SceneTemplate.h" />
   </ItemGroup>
   <ItemGroup>

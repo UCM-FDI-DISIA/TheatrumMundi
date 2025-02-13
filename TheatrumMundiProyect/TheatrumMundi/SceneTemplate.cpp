@@ -9,6 +9,11 @@ SceneTemplate::SceneTemplate()
 
 }
 
+void SceneTemplate::update()
+{
+	entityManager->update();
+}
+
 void SceneTemplate::render() const
 {
 	entityManager->render();
@@ -17,6 +22,6 @@ void SceneTemplate::render() const
 SceneTemplate::~SceneTemplate()
 {
 	unload();
-	delete entityManager;
+	//delete entityManager;
 //	delete dialogueManager;
 }

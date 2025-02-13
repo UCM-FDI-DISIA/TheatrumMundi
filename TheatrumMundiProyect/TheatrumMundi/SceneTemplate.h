@@ -8,15 +8,14 @@
 
 class SceneTemplate
 {
-private:
+protected:
 	 ecs::EntityManager* entityManager;
 	// DialogueManager* dialogueManager;
 public:
 	SceneTemplate();
 	void virtual init() {};
 	void virtual init(ecs::entity_t& ent) {};
-	void virtual update() {
-	};
+	void update();
 	void render() const;
 	void virtual refresh() {};
 	void virtual unload() {};
