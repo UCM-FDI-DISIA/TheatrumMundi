@@ -4,6 +4,8 @@
 #include "../src/components/Image.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
 
+#include "../src/components/ClickComponent.h"
+#include <iostream>
 
 SceneRoomTemplate::SceneRoomTemplate(): SceneTemplate()
 {
@@ -19,6 +21,9 @@ void SceneRoomTemplate::init()
 	auto _fighter = entityManager->addEntity();
 	auto _fighterTransform = entityManager->addComponent<Transform>(_fighter, Vector2D(10,10), Vector2D(0, 0), 500, 500, 0);
 	entityManager->addComponent<Image>(_fighter, &sdlutils().images().at("prueba"));
+
+	ClickComponent* clk = entityManager->addComponent<ClickComponent>(_fighter);
+	clk->connect(ClickComponent::JUST_CLICKED, []() { std::cout << "CLICKED\n"; });
 }
 
 void SceneRoomTemplate::unload()

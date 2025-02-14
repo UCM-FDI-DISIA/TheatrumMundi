@@ -9,7 +9,12 @@ MouseIntaractionComponent::~MouseIntaractionComponent()
 {
 }
 
-void MouseIntaractionComponent::connect(EVENT_TYPE eventType, CALLBACK action)
+bool MouseIntaractionComponent::connect(EVENT_TYPE eventType, CALLBACK action)
 {
-	_eventConnections.at(eventType).push_back(action);
+	auto eventHashIt = _eventConnections.find(eventType);
+	if (eventHashIt == _eventConnections.end()) return false;
+
+	eventHashIt->second.push_back(action);
+
+	return true;
 }

@@ -17,7 +17,7 @@ public:
 	MouseIntaractionComponent();
 	virtual ~MouseIntaractionComponent();
 
-	void connect(EVENT_TYPE, CALLBACK);
+	bool connect(EVENT_TYPE, CALLBACK);
 
 protected:
 

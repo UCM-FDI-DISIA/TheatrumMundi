@@ -44,6 +44,7 @@ namespace cmp {
 // first number is 0 in C/C++ standard
 enum cmpId : cmpId_t {
 	_CMPS_LIST_, /* taken from ../game/ecs_defs */
+	CLICK_COMPONENT,
 
 	// do not remove this
 	_LAST_CMP_ID
