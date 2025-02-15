@@ -90,6 +90,12 @@
     <ClCompile Include="..\src\Components\MouseIntaractionComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Components\RectArea2D.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\CircleArea2D.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SRC\json\JSON.h">
@@ -483,6 +489,15 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Components\MouseIntaractionComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\Area2D.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\RectArea2D.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\CircleArea2D.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

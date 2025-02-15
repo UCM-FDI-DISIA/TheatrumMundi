@@ -16,7 +16,7 @@ public:
 
 protected:
 
-	void handleMouseInput();
+	void handleMouseInput() override;
 
 	bool areaIsClicked(std::pair<Sint32, Sint32> mousePos);
 

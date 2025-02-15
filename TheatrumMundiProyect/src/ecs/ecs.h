@@ -45,6 +45,9 @@ namespace cmp {
 enum cmpId : cmpId_t {
 	_CMPS_LIST_, /* taken from ../game/ecs_defs */
 	CLICK_COMPONENT,
+	AREA2D,
+	RECT_AREA2D,
+	CIRCLE_AREA2D,
 
 	// do not remove this
 	_LAST_CMP_ID
