@@ -5,6 +5,7 @@
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
 
 #include "../src/components/ClickComponent.h"
+#include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
 #include <iostream>
 

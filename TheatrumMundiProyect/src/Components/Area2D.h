@@ -8,7 +8,8 @@ class Area2D : public ecs::Component
 public:
 	__CMPID_DECL__(ecs::cmp::AREA2D)
 
-	Area2D() : _localPosition(0, 0){}
+	Area2D() : Area2D(Vector2D(0,0)) {}
+	Area2D(Vector2D localPosition) : _localPosition(localPosition) {}
 
 	virtual bool containsPoint(Vector2D point) = 0;
 

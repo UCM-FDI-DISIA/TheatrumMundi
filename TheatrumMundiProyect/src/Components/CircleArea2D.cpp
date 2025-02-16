@@ -4,23 +4,31 @@
 #include "../ecs/Manager.h"
 #include "Transform.h"
 
-CircleArea2D::CircleArea2D(int radius) : _radius(radius)
+CircleArea2D::CircleArea2D(Vector2D localPos, int radius)
+	: Area2D(localPos), _radius(radius)
 {
 
 }
 
-CircleArea2D::CircleArea2D() : CircleArea2D(0)
+CircleArea2D::CircleArea2D(int radius) : CircleArea2D(Vector2D(), radius)
+{
+
+}
+
+CircleArea2D::CircleArea2D() : CircleArea2D(Vector2D(), -1)
 {
 
 }
 
 void CircleArea2D::initComponent()
 {
+	if (_radius != -1) return;
+
 	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
 
 	if (transform == nullptr) return;
 
-	_radius = transform->getWidth() / 2;
+	_radius = transform->getWidth() / 2; // Automatic scaling
 }
 
 bool CircleArea2D::containsPoint(Vector2D point)

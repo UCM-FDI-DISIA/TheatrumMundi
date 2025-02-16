@@ -6,10 +6,11 @@
 class RectArea2D : public Area2D
 {
 public:
-	__CMPID_DECL__(ecs::cmp::RECT_AREA2D)
+	//__CMPID_DECL__(ecs::cmp::AREA2D) Has same ID as parent
 
 	RectArea2D();
 	RectArea2D(int width, int height);
+	RectArea2D(Vector2D localPos, int width, int height);
 
 	void initComponent() override;
 
