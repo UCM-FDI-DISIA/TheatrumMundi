@@ -13,9 +13,9 @@
 #include <Windows.h>
 
 
-
+Game* Game::_instance = nullptr;
 Game::Game() {
-	
+
 }
 Game* Game::Instance()
 {

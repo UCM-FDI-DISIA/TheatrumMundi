@@ -7,12 +7,15 @@
 
 class Transform;
 class GameState;
+
 class Game {
+	
 private:
 	
 	 SceneManager* _mngr;
-	 static Game* _instance;
+	
 	 Game();
+	
 	 void checkCollisions();
 public:
 	static Game* Instance();
@@ -20,7 +23,9 @@ public:
 	void init();
 	void start();
 	SceneManager* getSceneManager();
-
-	
+	Game& operator=(const Game& o) = delete;
+	Game(const Game& o) = delete;
+private:
+	static Game* _instance;
 };
 
