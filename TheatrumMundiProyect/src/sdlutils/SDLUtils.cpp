@@ -8,7 +8,7 @@
 #include "../json/JSON.h"
 
 SDLUtils::SDLUtils() :
-		_windowTitle("SDL2 Demo"), //
+		_windowTitle("TheatrumMundi"), //
 		_width(600), //
 		_height(480), //
 		_window(nullptr), //
@@ -83,8 +83,7 @@ void SDLUtils::initWindow() {
 			SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	assert(_renderer != nullptr);
 
-	// hide cursor by default
-	hideCursor();
+	
 
 }
 

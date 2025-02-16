@@ -1,0 +1,24 @@
+{
+
+  "fonts" : [
+  
+  ],
+  
+  "images" : [
+    { "id" : "prueba", "file" : "../resources/images/socrates.png" }
+
+  ],
+  
+  "messages" : [
+   
+  ],
+  
+  "sounds" : [
+   
+  ],
+
+  "musics" : [
+    
+  ]
+
+}

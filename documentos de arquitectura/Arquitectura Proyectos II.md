@@ -1,3 +1,4 @@
+
 CLASE VECTOR2D:
  Clase que almacena las posiciones en X e Y de un objeto
  
@@ -31,12 +32,24 @@ CLASE TRANSFORM:
 	- void SetRot()
 	- void SetScale()
 	- void SetSpeed()
-		
+
+CLASE CLICKABLE:
+ Clase que almacena y gestiona la posición, la rotación , velocidad y escala.
+
+ - Propiedades:
+	-  Función Lamda action; está función se pasará en la constructora para indicar lo que hace.
+	
+ - Métodos:
+	- Constructor(Función Lambda en cuestión)
+	- OnClick() Ejecuta la función lamda y aplica la lógica
+
 CLAE GAMEOBJECT:
  Clase abstracta de la que heredan todas las entidades del juego.
 
  - Propiedades:
 	- Transform: (Funcionamiento como el de Unity).
+	- Image: (Permite tener la mente)
+	- Clickable Component: (hace al objeto Clickable)
 	
  - Métodos:
 	- virtual void render() = 0  Se encarga del renderizado de objetos
@@ -91,7 +104,7 @@ TEMPLATES:
 ESCENAS SALA 1
  - VITA FLUMEN: public ScenePuzzle
 	-  GameObjects Específicos:
-	    - Tube 
+	    - Tube : 
 		    -  Propiedades:
 		        - ClickComponent permite que sea objeto clickable
 		    - Métodos:
@@ -106,7 +119,25 @@ ESCENAS SALA 1
 	    - bool Check override 
 	    - bool Win override
 	    - void reset override
- -  TEMPUS FUGIT: public ScenePuzzle
+ - MEMENTO MORI: public ScenePuzzle
+	 -  GameObjects Específicos:
+		 - BooksClass 
+			 - Propiedades:
+				 -  Los componentes del GameObject + su función Lamda
+			 - Métodos:
+		- ChainClass:
+			-  Propiedades:
+				- Los componentes del GameObject + su función lamda
+				- Text que muestre el número cambiado
+			-  Métodos: 
+	-  Propiedades:
+		- vector de bookClass  cuyo tamaño es el número de libros
+		- ChainClass
+	-  Métodos:
+		- bool Check override 
+	    - bool Win override
+	    - void reset override 
+ - TEMPUS FUGIT: public ScenePuzzle
 	-   GameObjects Específicos:
 	    - CloackHands 
 		    -  Propiedades:
