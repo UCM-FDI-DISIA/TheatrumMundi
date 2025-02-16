@@ -19,7 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Components\CircleArea2D.cpp" />
+    <ClCompile Include="..\src\Components\ClickComponent.cpp" />
+    <ClCompile Include="..\src\Components\DragComponent.cpp" />
     <ClCompile Include="..\src\Components\Image.cpp" />
+    <ClCompile Include="..\src\Components\MouseIntaractionComponent.cpp" />
+    <ClCompile Include="..\src\Components\RectArea2D.cpp" />
+    <ClCompile Include="..\src\Components\TriggerComponent.cpp" />
     <ClCompile Include="..\src\ecs\Manager.cpp" />
     <ClCompile Include="..\src\game\Game.cpp" />
     <ClCompile Include="..\SRC\json\JSON.cpp" />
@@ -134,8 +140,15 @@
     <ClInclude Include="..\lib\SDL2_mixer-2.8.0\include\SDL_mixer.h" />
     <ClInclude Include="..\lib\SDL2_net-2.2.0\include\SDL_net.h" />
     <ClInclude Include="..\lib\SDL2_ttf-2.24.0\include\SDL_ttf.h" />
+    <ClInclude Include="..\src\Components\Area2D.h" />
+    <ClInclude Include="..\src\Components\CircleArea2D.h" />
+    <ClInclude Include="..\src\Components\ClickComponent.h" />
+    <ClInclude Include="..\src\Components\DragComponent.h" />
     <ClInclude Include="..\src\Components\Image.h" />
+    <ClInclude Include="..\src\Components\MouseIntaractionComponent.h" />
+    <ClInclude Include="..\src\Components\RectArea2D.h" />
     <ClInclude Include="..\src\Components\Transform.h" />
+    <ClInclude Include="..\src\Components\TriggerComponent.h" />
     <ClInclude Include="..\src\ecs\Component.h" />
     <ClInclude Include="..\src\ecs\ecs.h" />
     <ClInclude Include="..\src\ecs\ecs_defs_example.h" />
