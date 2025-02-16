@@ -6,7 +6,7 @@
 SceneTemplate::SceneTemplate()
 {
 	entityManager = new ecs::EntityManager();
-
+	isStarted = false;
 }
 
 void SceneTemplate::update()

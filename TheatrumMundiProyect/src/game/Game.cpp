@@ -17,6 +17,12 @@
 Game::Game() {
 	
 }
+Game* Game::Instance()
+{
+		if (_instance == nullptr)
+			_instance = new Game();
+		return _instance;
+}
 Game::~Game() {
 	delete _mngr;
 
@@ -94,6 +100,11 @@ void Game::start() {
 			SDL_Delay(10 - frameTime);
 	}
 
+}
+
+SceneManager* Game::getSceneManager()
+{
+	return _mngr;
 }
 
 void Game::checkCollisions() {

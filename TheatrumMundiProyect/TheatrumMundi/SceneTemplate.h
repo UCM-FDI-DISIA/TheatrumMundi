@@ -11,6 +11,7 @@ class SceneTemplate
 protected:
 	 ecs::EntityManager* entityManager;
 	// DialogueManager* dialogueManager;
+	 bool isStarted;
 public:
 	SceneTemplate();
 	void virtual init() {};

@@ -1,13 +1,15 @@
 #include "SceneManager.h"
 #include <assert.h>
 #include "SceneTemplate.h"
-#include "SceneRoomTemplate.h"
+#include "Room1.h"
+#include "../../TheatrumMundiProyect/src/game/Game.h"
 
 //#include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 SceneManager::SceneManager()
 {
-	scenes.push_back(new SceneRoomTemplate());
+	scenes.push_back(new Room1());
 	loadScene(0);
+	
 }
 
 void SceneManager::popScene()

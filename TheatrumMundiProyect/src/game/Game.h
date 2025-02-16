@@ -8,14 +8,19 @@
 class Transform;
 class GameState;
 class Game {
+private:
+	
+	 SceneManager* _mngr;
+	 static Game* _instance;
+	 Game();
+	 void checkCollisions();
 public:
-	Game();
+	static Game* Instance();
 	virtual ~Game();
 	void init();
 	void start();
-private:
-	void checkCollisions();
-	 SceneManager* _mngr;
+	SceneManager* getSceneManager();
+
 	
 };
 
