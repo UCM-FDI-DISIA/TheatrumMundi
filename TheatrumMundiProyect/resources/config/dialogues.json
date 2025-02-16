@@ -1,12 +1,16 @@
 {
     "Sala1":{
         "Dialogs":{
-            "Sala":[
+            "SalaIntermedia1.1":[
                 {"Characther":"Personaje1","Text":"Esto es una prueba"},
                 {"Characther":"Personaje2","Text":"Yo se supone que estoy muerto"},
-                {"Characther":"Personaje3","Text":"uiiiai uiiiai"},
-                {"Characther": "/","Text": "/"},
+                {"Characther":"Personaje3","Text":"uiiiai uiiiai"}
+            ],
+            "SalaIntermedia1.2":[
                 {"Characther":"Personaje3","Text":"Why we still here... Just to suffer"}
+            ],
+            "PistaGuantes":[
+                {"Characther":"Personaje2","Text":"Encontre esto"}
             ],
             "Puzzle1":[
                 {"Characther":"Personaje1","Text":"Pista nº 1"},
@@ -26,31 +30,13 @@
                     {"Question": "¿Es posible el asesinato?"}
                 ],
                 "Options":[
-                    {"answer": "Yes", "function":"true"},
-                    {"answer": "No","function":"false"}
+                    {"answer": "true"},
+                    {"answer": "false"}
                 ]
             }
         },
     "Sala2":{
-        "Personaje1":{
-            "":"(Sónido dramático de muerte)",
-            "Personaje2": "Rayos Murio",
-            "Personaje3": "Eso es que no estubo espabilao"
-            
-        },
-        "Personaje2":{
-            "":"(Sónido dramático de muerte)",
-            "Personaje1": "¿Se ha muerto no puede ser",
-            "":"(Con acento de doblador de discovery max",
-            "Personaje1":"¿Myke que hacemos?",
-            "Personaje3": "Y yo que se, que espabile"         
-        },
-        "Personaje3":{
-            "":"(Sónido dramático de muerte)",
-            "Personaje2": "Ahora quien tiene que espabilar",
-            "Personjae1": "(Ansiedad)",
-            "": "(Se pone a bailar épicamente)"
-        }
+
     },
     "Sala3":{
 
