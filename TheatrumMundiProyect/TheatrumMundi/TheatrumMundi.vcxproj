@@ -25,6 +25,7 @@
     <ClCompile Include="..\src\Components\Image.cpp" />
     <ClCompile Include="..\src\Components\MouseIntaractionComponent.cpp" />
     <ClCompile Include="..\src\Components\RectArea2D.cpp" />
+    <ClCompile Include="..\src\Components\ScrollComponent.cpp" />
     <ClCompile Include="..\src\Components\TriggerComponent.cpp" />
     <ClCompile Include="..\src\ecs\Manager.cpp" />
     <ClCompile Include="..\src\game\Game.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="..\src\Components\Image.h" />
     <ClInclude Include="..\src\Components\MouseIntaractionComponent.h" />
     <ClInclude Include="..\src\Components\RectArea2D.h" />
+    <ClInclude Include="..\src\Components\ScrollComponent.h" />
     <ClInclude Include="..\src\Components\Transform.h" />
     <ClInclude Include="..\src\Components\TriggerComponent.h" />
     <ClInclude Include="..\src\ecs\Component.h" />

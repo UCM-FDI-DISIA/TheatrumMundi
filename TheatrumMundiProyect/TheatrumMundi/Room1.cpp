@@ -9,6 +9,9 @@
 #include "../src/components/DragComponent.h"
 #include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
+
+#include "../src/Components/ScrollComponent.h"
+
 Room1::Room1(): SceneRoomTemplate()
 {
 }
@@ -35,6 +38,19 @@ void Room1::init()
 
 		DragComponent* drg = entityManager->addComponent<DragComponent>(_fighter);
 		drg->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
+
+		//ScrolledComponent
+
+		//BOTON
+		auto _button = entityManager->addEntity();
+		auto _buttonTransform = entityManager->addComponent<Transform>(_button, Vector2D(10, 10), Vector2D(1, 0), 500, 500, 0);
+		entityManager->addComponent<Image>(_button, &sdlutils().images().at("prueba"));
+
+		//ScrollComponent
+		ScrollComponent* _buttonScroll = entityManager->addComponent<ScrollComponent>(_button);
+
+		ClickComponent* clkb = entityManager->addComponent<ClickComponent>(_button);
+		clkb->connect(ClickComponent::JUST_CLICKED, []() { });
 	}
 }
 
