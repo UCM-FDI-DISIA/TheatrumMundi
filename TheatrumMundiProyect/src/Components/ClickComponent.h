@@ -12,8 +12,6 @@ public:
 
 	ClickComponent();
 
-	void update() override;
-
 protected:
 
 	void handleMouseInput() override;

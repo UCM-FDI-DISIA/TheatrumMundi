@@ -12,8 +12,6 @@ public:
 
 	TriggerComponent();
 
-	void update() override;
-
 	bool mouseIsIn();
 
 protected:

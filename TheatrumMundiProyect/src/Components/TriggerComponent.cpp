@@ -52,8 +52,3 @@ bool TriggerComponent::areaIsHovered(std::pair<Sint32, Sint32> mousePos)
 
 	return area->containsPoint(Vector2D(mousePos.first, mousePos.second));
 }
-
-void TriggerComponent::update()
-{
-	handleMouseInput();
-}

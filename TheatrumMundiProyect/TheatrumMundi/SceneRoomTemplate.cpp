@@ -6,6 +6,7 @@
 
 #include "../src/components/ClickComponent.h"
 #include "../src/components/TriggerComponent.h"
+#include "../src/components/DragComponent.h"
 #include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
 #include <iostream>
@@ -33,6 +34,9 @@ void SceneRoomTemplate::init()
 	TriggerComponent* trg = entityManager->addComponent<TriggerComponent>(_fighter);
 	trg->connect(TriggerComponent::JUST_ENTERED, []() { std::cout << "ENTERED\n";  });
 	trg->connect(TriggerComponent::JUST_LEFT, []() { std::cout << "LEFT\n";  });
+
+	DragComponent* drg = entityManager->addComponent<DragComponent>(_fighter);
+	drg->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
 }
 
 void SceneRoomTemplate::unload()

@@ -23,7 +23,7 @@ protected:
 
 	std::unordered_map<EVENT_TYPE, std::vector<CALLBACK>> _eventConnections;
 
-	//Shape2D _interactionArea;   <-- TODO
+	void update() override;
 
 	virtual void handleMouseInput() = 0;
 };

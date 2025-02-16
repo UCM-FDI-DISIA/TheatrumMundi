@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\src\Components\CircleArea2D.cpp" />
     <ClCompile Include="..\src\Components\ClickComponent.cpp" />
+    <ClCompile Include="..\src\Components\DragComponent.cpp" />
     <ClCompile Include="..\src\Components\Image.cpp" />
     <ClCompile Include="..\src\Components\MouseIntaractionComponent.cpp" />
     <ClCompile Include="..\src\Components\RectArea2D.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="..\src\Components\Area2D.h" />
     <ClInclude Include="..\src\Components\CircleArea2D.h" />
     <ClInclude Include="..\src\Components\ClickComponent.h" />
+    <ClInclude Include="..\src\Components\DragComponent.h" />
     <ClInclude Include="..\src\Components\Image.h" />
     <ClInclude Include="..\src\Components\MouseIntaractionComponent.h" />
     <ClInclude Include="..\src\Components\RectArea2D.h" />

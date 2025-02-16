@@ -48,8 +48,3 @@ bool ClickComponent::areaIsClicked(std::pair<Sint32, Sint32> mousePos)
 
 	return area->containsPoint(Vector2D(mousePos.first, mousePos.second));
 }
-
-void ClickComponent::update()
-{
-	handleMouseInput();
-}

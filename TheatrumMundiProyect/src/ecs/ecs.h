@@ -46,6 +46,7 @@ enum cmpId : cmpId_t {
 	_CMPS_LIST_, /* taken from ../game/ecs_defs */
 	CLICK_COMPONENT,
 	TRIGGER_COMPONENT,
+	DRAG_COMPONENT,
 	AREA2D,
 
 	// do not remove this

@@ -99,6 +99,9 @@
     <ClCompile Include="..\src\Components\TriggerComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Components\DragComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SRC\json\JSON.h">
@@ -504,6 +507,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Components\TriggerComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Components\DragComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

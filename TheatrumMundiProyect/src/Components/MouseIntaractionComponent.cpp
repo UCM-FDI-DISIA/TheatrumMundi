@@ -18,3 +18,8 @@ bool MouseIntaractionComponent::connect(EVENT_TYPE eventType, CALLBACK action)
 
 	return true;
 }
+
+void MouseIntaractionComponent::update()
+{
+	handleMouseInput();
+}
