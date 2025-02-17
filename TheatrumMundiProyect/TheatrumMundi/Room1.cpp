@@ -26,15 +26,23 @@ void Room1::init()
 
 		entityManager->addComponent<RectArea2D>(_fighter);
 
-		ClickComponent* clk = entityManager->addComponent<ClickComponent>(_fighter);
-		clk->connect(ClickComponent::JUST_CLICKED, []() { std::cout << "CLICKED\n"; });
+		//ClickComponent* clk = entityManager->addComponent<ClickComponent>(_fighter);
+		//clk->connect(ClickComponent::JUST_CLICKED, []() { std::cout << "CLICKED\n"; });
 
 		TriggerComponent* trg = entityManager->addComponent<TriggerComponent>(_fighter);
-		trg->connect(TriggerComponent::JUST_ENTERED, []() { std::cout << "ENTERED\n";  });
-		trg->connect(TriggerComponent::JUST_LEFT, []() { std::cout << "LEFT\n";  });
+		/*trg->connect(TriggerComponent::CURSOR_ENTERED, []() { std::cout << "ENTERED\n";  });
+		trg->connect(TriggerComponent::CURSOR_LEFT, []() { std::cout << "LEFT\n";  });*/
+		trg->connect(TriggerComponent::AREA_ENTERED, []() { std::cout << "AREA2D IN\n";  });
+		trg->connect(TriggerComponent::AREA_LEFT, []() { std::cout << "AREA2D OUT\n";  });
 
 		DragComponent* drg = entityManager->addComponent<DragComponent>(_fighter);
-		drg->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
+		//drg->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
+
+		auto _fighter2 = entityManager->addEntity();
+		entityManager->addComponent<Transform>(_fighter2, Vector2D(600, 0), Vector2D(0, 0), 500, 500, 0);
+		entityManager->addComponent<Image>(_fighter2, &sdlutils().images().at("prueba"));
+		entityManager->addComponent<RectArea2D>(_fighter2);
+		DragComponent* drg2 = entityManager->addComponent<DragComponent>(_fighter2);
 	}
 }
 

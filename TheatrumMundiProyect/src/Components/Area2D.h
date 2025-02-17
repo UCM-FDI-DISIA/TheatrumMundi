@@ -13,6 +13,8 @@ public:
 
 	virtual bool containsPoint(Vector2D point) = 0;
 
+	virtual bool overlapsWithArea(Area2D* area) = 0;
+
 	void setLocalPos(Vector2D pos) {
 		_localPosition = pos;
 	}

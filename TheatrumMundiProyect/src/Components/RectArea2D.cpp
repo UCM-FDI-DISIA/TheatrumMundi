@@ -54,3 +54,22 @@ bool RectArea2D::containsPoint(Vector2D point)
 
 	return SDL_PointInRect(&pnt, &rect);
 }
+
+bool RectArea2D::overlapsWithArea(Area2D* area)
+{
+	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
+
+	if (transform == nullptr) return false;
+
+	Transform* extrentTr = area->getContext()->getMngr()->getComponent<Transform>(area->getContext());
+
+	int wordX = transform->getPos().getX() - extrentTr->getPos().getX();
+	int wordY = transform->getPos().getY() - extrentTr->getPos().getY();
+
+	int centerDist = sqrt(
+		pow(abs(wordX), 2)
+		+ pow(abs(wordY), 2)
+	);
+
+	return centerDist <= transform->getWidth()/2;
+}
