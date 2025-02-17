@@ -5,20 +5,20 @@
 // Librería que permitre leer los json a partir de cierto punto #include <nlohmann/json.hpp>
 //A struct with all the dialogue information
 struct TextInfo {
-	std::string Characther;
+	std::string Character;
 	std::string Text;
 };
-using RoomDialogues = std::unordered_map<std::string,std::list<TextInfo>>; 
-using AnswerDialogues = std::unordered_map<std::string, std::string>;
+using RoomDialogues = std::unordered_map<std::string,std::list<TextInfo>>; //manage the events and the dialogues
+using RoomsMap = std::unordered_map<std::string, RoomDialogues>; //manage the rooms and there dialogues
 //A manager which function is to manage all the dialogues of the specific room
 class DialogueManager
 {
 private:
-	RoomDialogues mRoomDialogues; //Map with all the RoomDialogues
-	AnswerDialogues  mAnswerDialogues; //Map with all the possible answers 
+	const int numRooms = 3;
+	RoomsMap mRoom; //Map with all the RoomDialogues
 	void ReadJson();
 public:
-	DialogueManager(); 
+	DialogueManager();
 	void ReadDialogue(); 
 };
 

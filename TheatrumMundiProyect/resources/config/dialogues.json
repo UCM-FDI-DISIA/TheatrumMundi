@@ -1,39 +1,28 @@
 {
     "Sala1":{
-        "Dialogs":{
             "SalaIntermedia1.1":[
-                {"Characther":"Personaje1","Text":"Esto es una prueba"},
-                {"Characther":"Personaje2","Text":"Yo se supone que estoy muerto"},
-                {"Characther":"Personaje3","Text":"uiiiai uiiiai"}
+                {"Character":"Personaje1","Text":"Esto es una prueba"},
+                {"Character":"Personaje2","Text":"Yo se supone que estoy muerto"},
+                {"Character":"Personaje3","Text":"uiiiai uiiiai"}
             ],
             "SalaIntermedia1.2":[
-                {"Characther":"Personaje3","Text":"Why we still here... Just to suffer"}
+                {"Character":"Personaje3","Text":"Why we still here... Just to suffer"}
             ],
             "PistaGuantes":[
-                {"Characther":"Personaje2","Text":"Encontre esto"}
+                {"Character":"Personaje2","Text":"Encontre esto"}
             ],
             "Puzzle1":[
-                {"Characther":"Personaje1","Text":"Pista nº 1"},
-                {"Characther":"Personaje1","Text":"Pista nº 2"}
+                {"Character":"Personaje1","Text":"Pista nº 1"},
+                {"Character":"Personaje1","Text":"Pista nº 2"}
             ],
             "Puzzle2":[
-                {"Characther":"Personaje2","Text":"Pista nº 1"},
-                {"Characther":"Personaje2","Text":"Pista nº 2"}
+                {"Character":"Personaje2","Text":"Pista nº 1"},
+                {"Character":"Personaje2","Text":"Pista nº 2"}
             ],
             "Puzzle3":[
-                {"Characther":"Personaje3","Text":"Pista nº 1"},
-                {"Characther":"Personaje3","Text":"Pista nº 2"}
+                {"Character":"Personaje3","Text":"Pista nº 1"},
+                {"Character":"Personaje3","Text":"Pista nº 2"}
             ]
-        },
-        "Answer":{ 
-                "Text":[
-                    {"Question": "¿Es posible el asesinato?"}
-                ],
-                "Options":[
-                    {"answer": "true"},
-                    {"answer": "false"}
-                ]
-            }
         },
     "Sala2":{
 

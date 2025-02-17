@@ -56,7 +56,7 @@ void Game::init() {
 
 	// Create the manager
 	_mngr = new SceneManager();
-	
+	_Dmngr = new DialogueManager();
 	
 }
 

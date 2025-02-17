@@ -160,6 +160,7 @@
     <ClInclude Include="..\src\game\ecs_defs.h" />
     <ClInclude Include="..\src\game\Game.h" />
     <ClInclude Include="..\SRC\json\JSON.h" />
+    <ClInclude Include="..\src\json\json.hpp" />
     <ClInclude Include="..\SRC\json\JSONValue.h" />
     <ClInclude Include="..\SRC\json\json_demo.h" />
     <ClInclude Include="..\SRC\sdlutils\Font.h" />
