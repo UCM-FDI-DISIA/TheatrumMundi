@@ -108,7 +108,7 @@
     <ClCompile Include="ScenePuzzleTemplate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PipePuzzle.cpp">
+    <ClCompile Include="PipePuzzleScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AnimatorComponent.cpp">
@@ -530,7 +530,7 @@
     <ClInclude Include="ScenePuzzleTemplate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PipePuzzle.h">
+    <ClInclude Include="PipePuzzleScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AnimatorComponent.h">

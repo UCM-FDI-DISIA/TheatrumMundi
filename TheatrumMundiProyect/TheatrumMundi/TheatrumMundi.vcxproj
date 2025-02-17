@@ -41,7 +41,7 @@
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
     <ClCompile Include="AnimatorComponent.cpp" />
-    <ClCompile Include="PipePuzzle.cpp" />
+    <ClCompile Include="PipePuzzleScene.cpp" />
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScenePuzzleTemplate.cpp" />
@@ -183,7 +183,7 @@
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
     <ClInclude Include="AnimatorComponent.h" />
-    <ClInclude Include="PipePuzzle.h" />
+    <ClInclude Include="PipePuzzleScene.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScenePuzzleTemplate.h" />
