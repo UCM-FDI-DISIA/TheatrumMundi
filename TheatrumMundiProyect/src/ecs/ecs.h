@@ -47,6 +47,7 @@ enum cmpId : cmpId_t {
 	CLICK_COMPONENT,
 	TRIGGER_COMPONENT,
 	DRAG_COMPONENT,
+	SCROLL_COMPONENT,
 	AREA2D,
 
 	// do not remove this

@@ -7,14 +7,15 @@ class ScrollComponent : public ecs::Component {
 private:
 	Vector2D _dir;
 	float _timeScroll;
-	float _initialTimeScroll;
-	bool _scrolling;
+	float _initialTimeScroll; //Activates if this time > 0
 	bool _isRight;
+	bool _isScrolling = false;
 public:
-	ScrollComponent();
-	void setScrollingTrue() { _scrolling = true; }
-	void setScrollingFalse() { _scrolling = false; }
+
+	__CMPID_DECL__(ecs::cmp::SCROLL_COMPONENT)
+
+	ScrollComponent(Vector2D dir, float time);
 	void Scroll();
 	void update() override; //ATTENTION
-	bool isScrolling();
+	void setScrolling(bool value);
 };

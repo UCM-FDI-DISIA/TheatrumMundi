@@ -43,14 +43,21 @@ void Room1::init()
 
 		//BOTON
 		auto _button = entityManager->addEntity();
-		auto _buttonTransform = entityManager->addComponent<Transform>(_button, Vector2D(10, 10), Vector2D(1, 0), 500, 500, 0);
+		auto _buttonTransform = entityManager->addComponent<Transform>(_button, Vector2D(500, 500), Vector2D(0, 0), 500, 500, 0);
 		entityManager->addComponent<Image>(_button, &sdlutils().images().at("prueba"));
 
+		entityManager->addComponent<RectArea2D>(_button);
+
 		//ScrollComponent
-		ScrollComponent* _buttonScroll = entityManager->addComponent<ScrollComponent>(_button);
+		ScrollComponent* _buttonScroll = entityManager->addComponent<ScrollComponent>(_button,Vector2D(1,0),100.0f);
 
 		ClickComponent* clkb = entityManager->addComponent<ClickComponent>(_button);
-		clkb->connect(ClickComponent::JUST_CLICKED, []() { });
+		clkb->connect(ClickComponent::JUST_CLICKED, [_buttonScroll]() { /*_buttonScroll->setScrolling(true);*/
+			_buttonScroll->Scroll(); /*entityManager->getComponent<ScrollComponent>(_button)->Scroll(); */});
+
+		TriggerComponent* trgb = entityManager->addComponent<TriggerComponent>(_button);
+		trgb->connect(TriggerComponent::JUST_ENTERED, []() { std::cout << "ENTERED IN MOVING\n";  });
+		trgb->connect(TriggerComponent::JUST_LEFT, []() { std::cout << "LEFT IN MOVING\n";  });
 	}
 }
 

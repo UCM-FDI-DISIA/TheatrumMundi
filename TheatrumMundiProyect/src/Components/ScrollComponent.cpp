@@ -3,34 +3,34 @@
 
 using namespace std;
 
-ScrollComponent::ScrollComponent() : ecs::Component() {
-	_dir = Vector2D(0, 0);
+ScrollComponent::ScrollComponent(Vector2D dir, float time) : ecs::Component() {
+	_dir = dir;
 	_timeScroll = 0;
-	_initialTimeScroll = 100.0f;
-	_scrolling = false;
+	_initialTimeScroll = time;
+	cout << _initialTimeScroll << endl;
 	_isRight = false;
+	_isScrolling = false;
 }
 
 void ScrollComponent::Scroll() {
-	cout << "SCROLLING" << endl;
+	cout << "CLICKKKKK" << endl;
+	_timeScroll = _initialTimeScroll;
+	cout << _timeScroll << endl;
 }
 
 void ScrollComponent::update()
 {
-	if (_scrolling) {
-		_timeScroll = _initialTimeScroll;
-	}
-
 	if (_timeScroll > 0) {
 		_timeScroll--;
 		cout << "SCROLLING" << endl;
-	}
-	else {
-		_timeScroll == 0;
-		_scrolling = false;
+		if (_timeScroll == 0) {
+			_isRight = !_isRight;
+			cout << "AL OTRO LAO" << endl;
+		}
 	}
 }
 
-bool ScrollComponent::isScrolling() {
-	return _scrolling;
+void ScrollComponent::setScrolling(bool value) {
+	_isScrolling = value;
+	cout << "SCROLLING: " << _isScrolling << endl;
 }
