@@ -1,31 +1,31 @@
-#include "Log.h"
+#include "LogComponent.h"
 
-#include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
+#include "../sdlutils/SDLUtils.h"
 
 using namespace std;
 
-Log::Log()
+LogComponent::LogComponent()
 {
-	//addDialogueLineLog("/", "/");
 }
 
-/*
+
 //add one dialogueLine (with its author) on log registry
-void Log::addDialogueLineLog(string author, string dialogueLine)
+void LogComponent::addDialogueLineLog(string author, string dialogueLine)
 {
 	pair<string, string> newLine;
 	newLine.first = author;
 	newLine.second = dialogueLine;
-	_log.push_back(newLine);
-}*/
+	_log.push_front(newLine);
+}
 
+/*
 /// <summary>
 /// Adds new dialogueLine to log. It needs to be called right after a dialogueLine is displayed.
 /// </summary>
 /// <param name="dialogueEv">Name of the dialogue event</param>
 /// <param name="dialogueLine">Pair (later TextInfo) to insert on log</param>
 
-void Log::addDialogueLineLog(std::string dialogueEv, const pair<string, string>& dialogueLine)
+void LogComponent::addDialogueLineLog(std::string dialogueEv, const pair<string, string>& dialogueLine)
 {
 	//first: insert if dialogueEv has not been displayed before
 	// if dialogueEv is already registered add new dialogueLines to its list
@@ -49,29 +49,23 @@ void Log::addDialogueLineLog(std::string dialogueEv, const pair<string, string>&
 		_dialogueOrder.push_back(dialogueEv);
 	}
 
-}
+}*/
 
 
 /// <summary>
 /// Shows the already displayed dialogue. If called in mid dialogue it will show up until the last line the player has seen.
 /// </summary>
-void Log::showLog()
+void LogComponent::showLog()
 {
-	/*
-	for (auto a : _log)
+	if (!_log.empty())
 	{
-		if (a.first == "/" && a.second == "/") // show separation of dialogues
-		{
-			cout << "/....../....../......./" << endl;
-		}
-		else
+		for (auto a : _log)
 		{
 			cout << a.first << " " << a.second << " " << endl;
-		}
-		
-	};
-	*/
-
+		};
+	}
+	
+	/*
 	cout << "/....../....../......./" << endl;
 
 	for (auto a : _dialogueOrder)
@@ -89,8 +83,9 @@ void Log::showLog()
 
 		cout << "/....../....../......./" << endl;
 	};
+	*/
 }
 
-Log::~Log()
+LogComponent::~LogComponent()
 {
 }

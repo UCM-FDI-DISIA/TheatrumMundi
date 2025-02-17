@@ -4,7 +4,7 @@
 #include "../src/components/Image.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
 
-#include "Log.h"
+#include "../src/components/LogComponent.h"
 
 #include "../src/components/ClickComponent.h"
 #include "../src/components/TriggerComponent.h"
@@ -14,7 +14,7 @@
 
 DebugLogRoom::DebugLogRoom() : SceneRoomTemplate()
 {
-	_sceneLog = new Log();
+	
 }
 
 DebugLogRoom::~DebugLogRoom()
@@ -34,7 +34,6 @@ void DebugLogRoom::init()
 		clk->connect(ClickComponent::JUST_CLICKED, [this]()
 			{ 
 				std::cout << "CLICKED\n"; 
-				_sceneLog->showLog();
 			});
 
 		TriggerComponent* trg = entityManager->addComponent<TriggerComponent>(_fighter);
@@ -44,21 +43,16 @@ void DebugLogRoom::init()
 		DragComponent* drg = entityManager->addComponent<DragComponent>(_fighter);
 		drg->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
 
+		
+		//iniciar log
+		auto _log = entityManager->addEntity();
+		LogComponent* logComp = entityManager->addComponent<LogComponent>(_log);
 
 		//add debug lines to log
-		_sceneLog->addDialogueLineLog("ev1", { "authorX", "hola que tal" });
-		_sceneLog->addDialogueLineLog("ev1", { "authorY", "aaaa" });
-		_sceneLog->addDialogueLineLog("ev1", { "authorY", "/" });
-
-		_sceneLog->addDialogueLineLog("ev2", { "authorX", "KOKOKO" });
-		_sceneLog->addDialogueLineLog("ev2", { "authorX", "YHYHY" });
-		_sceneLog->addDialogueLineLog("ev1", { "authorY", "/" });
-
-		_sceneLog->addDialogueLineLog("ev1", { "authorX", "hola que tal" });
-		_sceneLog->addDialogueLineLog("ev1", { "authorY", "aaaa" });
-		_sceneLog->addDialogueLineLog("ev1", { "authorY", "/" });
-
+		logComp->addDialogueLineLog("author1", "hola que tal");
+		logComp->addDialogueLineLog("author2", "ahahaha me mato");
 		
+		logComp->showLog();
 	}
 }
 
@@ -68,5 +62,5 @@ void DebugLogRoom::refresh()
 
 void DebugLogRoom::unload()
 {
-	delete _sceneLog;
+	
 }

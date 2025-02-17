@@ -2,12 +2,11 @@
 
 #include "SceneRoomTemplate.h"
 
-class Log;
+
 
 class DebugLogRoom : public SceneRoomTemplate
 {
 private:
-	Log* _sceneLog;
 protected:
 public:
 	DebugLogRoom();
