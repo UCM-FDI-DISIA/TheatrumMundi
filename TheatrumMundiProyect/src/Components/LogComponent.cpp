@@ -9,13 +9,10 @@ LogComponent::LogComponent()
 }
 
 
-//add one dialogueLine (with its author) on log registry
+//adds one dialogueLine (with its author) on log registry
 void LogComponent::addDialogueLineLog(string author, string dialogueLine)
 {
-	pair<string, string> newLine;
-	newLine.first = author;
-	newLine.second = dialogueLine;
-	_log.push_front(newLine);
+	_log.push_front({author, dialogueLine});
 }
 
 /*
@@ -61,7 +58,8 @@ void LogComponent::showLog()
 	{
 		for (auto a : _log)
 		{
-			cout << a.first << " " << a.second << " " << endl;
+			cout << a.first << endl << a.second << endl;
+			cout << endl;
 		};
 	}
 	

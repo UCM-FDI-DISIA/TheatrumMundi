@@ -24,6 +24,11 @@ DebugLogRoom::~DebugLogRoom()
 void DebugLogRoom::init()
 {
 	if (!isStarted) {
+		
+		//initialize log
+		auto _log = entityManager->addEntity();
+		LogComponent* logComp = entityManager->addComponent<LogComponent>(_log);
+		
 		auto _fighter = entityManager->addEntity();
 		auto _fighterTransform = entityManager->addComponent<Transform>(_fighter, Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0);
 		entityManager->addComponent<Image>(_fighter, &sdlutils().images().at("prueba"));
@@ -31,9 +36,10 @@ void DebugLogRoom::init()
 		entityManager->addComponent<RectArea2D>(_fighter);
 
 		ClickComponent* clk = entityManager->addComponent<ClickComponent>(_fighter);
-		clk->connect(ClickComponent::JUST_CLICKED, [this]()
+		clk->connect(ClickComponent::JUST_CLICKED, [logComp]()
 			{ 
-				std::cout << "CLICKED\n"; 
+				std::cout << "CLICKED\n";
+				logComp->showLog();
 			});
 
 		TriggerComponent* trg = entityManager->addComponent<TriggerComponent>(_fighter);
@@ -44,15 +50,11 @@ void DebugLogRoom::init()
 		drg->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
 
 		
-		//iniciar log
-		auto _log = entityManager->addEntity();
-		LogComponent* logComp = entityManager->addComponent<LogComponent>(_log);
-
 		//add debug lines to log
 		logComp->addDialogueLineLog("author1", "hola que tal");
 		logComp->addDialogueLineLog("author2", "ahahaha me mato");
 		
-		logComp->showLog();
+		
 	}
 }
 
@@ -62,5 +64,4 @@ void DebugLogRoom::refresh()
 
 void DebugLogRoom::unload()
 {
-	
 }
