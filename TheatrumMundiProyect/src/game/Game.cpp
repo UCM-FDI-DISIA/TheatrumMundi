@@ -39,7 +39,7 @@ void Game::init() {
 
 	// initialize the SDL singleton
 	//if (!SDLUtils::Init("TheatrumMundi",GetSystemMetrics(SM_CXSCREEN) ,GetSystemMetrics(SM_CYSCREEN), "../resources/config/TheatrumMundi.resources.json")) {
-	if (!SDLUtils::Init("TheatrumMundi", 1366, 768, "../resources/config/TheatrumMundi.resources.json")) {
+	if (!SDLUtils::Init("TheatrumMundi", 1346, 748, "../resources/config/TheatrumMundi.resources.json")) {
 		std::cerr << "Something went wrong while initializing SDLUtils"
 				<< std::endl;
 		return;
