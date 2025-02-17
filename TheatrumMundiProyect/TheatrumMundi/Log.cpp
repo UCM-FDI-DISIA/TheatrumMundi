@@ -19,7 +19,11 @@ void Log::addDialogueLineLog(string author, string dialogueLine)
 	_log.push_back(newLine);
 }*/
 
-
+/// <summary>
+/// Adds new dialogueLine to log. It needs to be called right after a dialogueLine is displayed.
+/// </summary>
+/// <param name="dialogueEv">Name of the dialogue event</param>
+/// <param name="dialogueLine">Pair (later TextInfo) to insert on log</param>
 
 void Log::addDialogueLineLog(std::string dialogueEv, const pair<string, string>& dialogueLine)
 {
@@ -47,8 +51,10 @@ void Log::addDialogueLineLog(std::string dialogueEv, const pair<string, string>&
 
 }
 
-// show ingame registry log
-// temporarly cout
+
+/// <summary>
+/// Shows the already displayed dialogue. If called in mid dialogue it will show up until the last line the player has seen.
+/// </summary>
 void Log::showLog()
 {
 	/*

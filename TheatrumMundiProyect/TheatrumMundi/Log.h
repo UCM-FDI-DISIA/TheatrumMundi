@@ -6,7 +6,6 @@
 #include <string>
 #include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 
-class SceneTemplate;
 
 using namespace ecs;
 class Log
