@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "documentos de arquitectura/Cómo crear un nuevo componente.md",
+                "file": "README.md",
                 "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "Cómo crear un nuevo componente"
+              "title": "README"
             }
           },
           {
@@ -72,7 +72,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Explorador de archivos"
+              "title": "Files"
             }
           },
           {
@@ -188,32 +188,32 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Abrir selector rápido": false,
-      "graph:Abrir vista gráfica": false,
-      "canvas:Crear nuevo lienzo": false,
-      "daily-notes:Abrir la nota de hoy": false,
-      "templates:Insertar plantilla": false,
-      "command-palette:Abrir paleta de comandos": false
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
     }
   },
   "active": "743c3cbd08005f24",
   "lastOpenFiles": [
-    "TheatrumMundiProyect/bin/TheatrumMundiDebug.exe",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundiDebug.ilk",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/Game.obj",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.read.6.tlog",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link-cvtres.write.1.tlog",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link-cvtres.read.1.tlog",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link-rc.write.1.tlog",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link-rc.read.1.tlog",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.read.4.tlog",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.read.3.tlog",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.read.5.tlog",
-    "documentos de arquitectura/Cómo funcionan los Mouse Interaction Components.md",
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.read.2.tlog",
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/unsuccessfulbuild",
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/Log.obj",
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/DebugLogRoom.obj",
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.31804.write.1.tlog",
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.31804.read.1.tlog",
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.31804.read.4.tlog",
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.31804-cvtres.write.1.tlog",
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.31804-cvtres.read.1.tlog",
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.31804-rc.write.1.tlog",
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.31804-rc.read.1.tlog",
+    "documentos de arquitectura/Arquitectura Proyectos II.md",
     "documentos de arquitectura/Cómo crear un nuevo componente.md",
     "documentos de arquitectura/Como funcionan las escenas.md",
+    "documentos de arquitectura/Cómo funcionan los Mouse Interaction Components.md",
     "documentos de arquitectura/Convenciones de código.md",
-    "documentos de arquitectura/Arquitectura Proyectos II.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "2025-02-12.md",

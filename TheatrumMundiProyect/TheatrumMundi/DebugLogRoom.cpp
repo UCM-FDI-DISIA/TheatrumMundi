@@ -23,9 +23,17 @@ void DebugLogRoom::init()
 		entityManager->addComponent<Image>(_fighter, &sdlutils().images().at("prueba"));
 
 		//add debug lines to log
-		_sceneLog->addDialogueLineLog("autorX", "hola que tal");
-		_sceneLog->addDialogueLineLog("autorY", "segunda linea");
-		_sceneLog->addDialogueLineLog("/", "/");
+		_sceneLog->addDialogueLineLog("ev1", { "authorX", "hola que tal" });
+		_sceneLog->addDialogueLineLog("ev1", { "authorY", "aaaa" });
+		_sceneLog->addDialogueLineLog("ev1", { "authorY", "/" });
+
+		_sceneLog->addDialogueLineLog("ev2", { "authorX", "KOKOKO" });
+		_sceneLog->addDialogueLineLog("ev2", { "authorX", "YHYHY" });
+		_sceneLog->addDialogueLineLog("ev1", { "authorY", "/" });
+
+		_sceneLog->addDialogueLineLog("ev1", { "authorX", "hola que tal" });
+		_sceneLog->addDialogueLineLog("ev1", { "authorY", "aaaa" });
+		_sceneLog->addDialogueLineLog("ev1", { "authorY", "/" });
 
 		_sceneLog->showLog();
 	}
