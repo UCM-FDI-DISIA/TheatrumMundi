@@ -2,12 +2,14 @@
 #include <assert.h>
 #include "SceneTemplate.h"
 #include "Room1.h"
+#include "DebugLogRoom.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 
 //#include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 SceneManager::SceneManager()
 {
-	scenes.push_back(new Room1());
+	//scenes.push_back(new Room1());
+	scenes.push_back(new DebugLogRoom());
 	loadScene(0);
 	
 }
