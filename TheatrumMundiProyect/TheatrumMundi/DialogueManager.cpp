@@ -21,10 +21,11 @@ void DialogueManager::ReadJson(){
 		assert(dialogues.contains(room));
 		RoomDialogues r;
 		for (auto& elem : dialogues[room].items()) {
-			cout << elem.value()[0];
-			//string character = to_string(elem.value()[0]);
-			//string text = elem["Text"].get<string>();
-			r[elem.key()].emplace_back(TextInfo{ "character","text" });
+			for (auto& elem2 : elem.value()) {
+				string character = to_string(elem2["Character"]);
+				string text = to_string(elem2["Text"]);
+				r[elem.key()].push_back(TextInfo{ character,text });
+			}
 		}
 		mRoom[room] = r;
 	}
