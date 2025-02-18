@@ -1,15 +1,21 @@
 {
     "Sala1":{
-            "SalaIntermedia1.1":[
+            "SalaIntermediaEvento1":[
                 {"Character":"Personaje1","Text":"Esto es una prueba"},
                 {"Character":"Personaje2","Text":"Yo se supone que estoy muerto"},
                 {"Character":"Personaje3","Text":"uiiiai uiiiai"}
             ],
-            "SalaIntermedia1.2":[
+            "SalaIntermediaEvento2":[
                 {"Character":"Personaje3","Text":"Why we still here... Just to suffer"}
             ],
-            "PistaGuantes":[
+            "Pista1":[
                 {"Character":"Personaje2","Text":"Encontre esto"}
+            ],
+            "Pista2":[
+                {"Character":"Personaje3","Text":"Que mal huele"}
+            ],
+            "Pista3":[
+                {"Character":"Personaje1","Text":"Quien coño guarda esto en un reloj wtf"}
             ],
             "Puzzle1":[
                 {"Character":"Personaje1","Text":"Pista nº 1"},
@@ -25,8 +31,10 @@
             ]
         },
     "Sala2":{
-
-    },
+            "SalaIntermediaEvento1":[
+                {"Character":"Personaje1","Text":"Aqui pa ver si se actualiza el valor"}
+            ]
+        },
     "Sala3":{
 
     }
