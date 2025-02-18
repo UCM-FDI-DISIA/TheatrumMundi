@@ -39,4 +39,11 @@ public:
 	//delete of enitities
 	~LogComponent();
 
+	std::list<std::pair<std::string, std::string>> getLogList()
+	{
+		return _log;
+	}
+
+	
+
 };

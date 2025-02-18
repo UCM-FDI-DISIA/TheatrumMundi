@@ -48,6 +48,7 @@
     <ClCompile Include="ScenePuzzleTemplate.cpp" />
     <ClCompile Include="SceneRoomTemplate.cpp" />
     <ClCompile Include="SceneTemplate.cpp" />
+    <ClCompile Include="WriteTextComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\SDL2-2.30.11\include\begin_code.h" />
@@ -192,6 +193,7 @@
     <ClInclude Include="ScenePuzzleTemplate.h" />
     <ClInclude Include="SceneRoomTemplate.h" />
     <ClInclude Include="SceneTemplate.h" />
+    <ClInclude Include="WriteTextComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />

@@ -4,6 +4,8 @@
 #include "../src/components/Image.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
 
+#include "WriteTextComponent.h"
+
 #include "../src/components/LogComponent.h"
 
 #include "../src/components/ClickComponent.h"
@@ -37,6 +39,11 @@ void DebugLogRoom::init()
 		//add debug lines to log
 		logComp->addDialogueLineLog("author1", "hola que tal");
 		logComp->addDialogueLineLog("author2", "ahahaha me mato");
+
+		SDL_Color colorText = { 255, 255, 255, 255 };
+
+		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog = entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("ARIAL24"), colorText, logComp->getLogList());
+
 
 
 		//Open log button
