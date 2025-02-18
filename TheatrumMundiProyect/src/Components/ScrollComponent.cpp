@@ -22,10 +22,19 @@ void ScrollComponent::update()
 {
 	if (_timeScroll > 0) {
 		_timeScroll--;
-		cout << "SCROLLING" << endl;
-		if (_timeScroll == 0) {
-			_isRight = !_isRight;
-			cout << "AL OTRO LAO" << endl;
+		if (!_isRight) { //SI LOS ELEMENTOS ESTAN SITUADOS A LA IZQUIERDA
+			cout << _timeScroll << endl;
+			if (_timeScroll == 0) {
+				_isRight = !_isRight;
+				cout << "LLEGAMOS A LA DERECHA" << endl;
+			}
+		}
+		else { //SI LOS ELEMENTOS ESTAN SITUADOS A LA DERECHA
+			cout << _timeScroll << endl;
+			if (_timeScroll == 0) {
+				_isRight = !_isRight;
+				cout << "LLEGAMOS A LA IZQUIERDA" << endl;
+			}
 		}
 	}
 }
