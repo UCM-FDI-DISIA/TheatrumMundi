@@ -3,6 +3,8 @@
 #include "../utils/Vector2D.h"
 #include <cassert>
 
+class Transform;
+
 class ScrollComponent : public ecs::Component {
 private:
 	Vector2D _dir;
@@ -15,7 +17,10 @@ public:
 	__CMPID_DECL__(ecs::cmp::SCROLL_COMPONENT)
 
 	ScrollComponent(Vector2D dir, float time);
+	void initComponent() override;
 	void Scroll();
 	void update() override; //ATTENTION
-	void setScrolling(bool value);
+	//void setScrolling(bool value);
+private:
+	Transform *_myTransform;
 };
