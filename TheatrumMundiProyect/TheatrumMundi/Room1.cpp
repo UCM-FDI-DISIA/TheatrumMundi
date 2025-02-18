@@ -1,5 +1,5 @@
 #include "Room1.h"
-#include "../src/utils/Vector2D.h";
+#include "../src/utils/Vector2D.h"
 #include "../src/components/Transform.h"
 #include "../src/components/Image.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
@@ -11,6 +11,8 @@
 #include "../src/components/RectArea2D.h"
 
 #include "../src/Components/ScrollComponent.h"
+#include "../src/ecs/Manager.h"
+#include "../src/game/Game.h"
 
 Room1::Room1(): SceneRoomTemplate()
 {
@@ -27,14 +29,24 @@ void Room1::init()
 		auto _fighterTransform = entityManager->addComponent<Transform>(_fighter, Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0);
 		entityManager->addComponent<Image>(_fighter, &sdlutils().images().at("prueba"));
 
-		entityManager->addComponent<RectArea2D>(_fighter);
+		entityManager->addComponent<CircleArea2D>(_fighter)->setLocalPos(Vector2D(250,250));
 
-		ClickComponent* clk = entityManager->addComponent<ClickComponent>(_fighter);
-		clk->connect(ClickComponent::JUST_CLICKED, []() { std::cout << "CLICKED\n"; });
+
+		//ClickComponent* clk = entityManager->addComponent<ClickComponent>(_fighter);
+		//clk->connect(ClickComponent::JUST_CLICKED, []() { std::cout << "CLICKED\n"; });
 
 		TriggerComponent* trg = entityManager->addComponent<TriggerComponent>(_fighter);
-		trg->connect(TriggerComponent::JUST_ENTERED, []() { std::cout << "ENTERED\n";  });
-		trg->connect(TriggerComponent::JUST_LEFT, []() { std::cout << "LEFT\n";  });
+		/*trg->connect(TriggerComponent::CURSOR_ENTERED, []() { std::cout << "ENTERED\n";  });
+		trg->connect(TriggerComponent::CURSOR_LEFT, []() { std::cout << "LEFT\n";  });*/
+		trg->connect(TriggerComponent::AREA_ENTERED, [trg]() {
+			std::cout << "AREA2D IN\n";  
+			std::list<ecs::entity_t> ents = trg->triggerContextEntities();
+			for (ecs::entity_t e : ents) {
+				if (e->getMngr()->getComponent<ClickComponent>(e) != nullptr)
+					std::cout << "Has click\n";
+			}
+		});
+		trg->connect(TriggerComponent::AREA_LEFT, []() { std::cout << "AREA2D OUT\n";  });
 
 		DragComponent* drg = entityManager->addComponent<DragComponent>(_fighter);
 		drg->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
@@ -68,4 +80,5 @@ void Room1::refresh()
 
 void Room1::unload()
 {
+	entityManager->~EntityManager();
 }

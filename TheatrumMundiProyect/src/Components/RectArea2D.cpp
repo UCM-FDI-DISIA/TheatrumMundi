@@ -4,6 +4,8 @@
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "Transform.h"
+#include "CircleArea2D.h"
+#include "../utils/Collisions.h"
 
 RectArea2D::RectArea2D(Vector2D localPos, int width, int height)
 	: Area2D(localPos), _width(width), _height(height)
@@ -53,4 +55,42 @@ bool RectArea2D::containsPoint(Vector2D point)
 	SDL_Point pnt = { point.getX(), point.getY() };
 
 	return SDL_PointInRect(&pnt, &rect);
+}
+
+bool RectArea2D::overlapsWith(RectArea2D* rectArea)
+{
+	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
+	Transform* extrentTr = rectArea->getContext()->getMngr()->getComponent<Transform>(rectArea->getContext());
+
+	if (transform == nullptr || extrentTr == nullptr) return false;
+
+	SDL_Rect thisRect = {
+		transform->getPos().getX() + _localPosition.getX(),
+		transform->getPos().getY() + _localPosition.getY(),
+		_width,
+		_height
+	};
+
+	SDL_Rect otherRect = {
+		extrentTr->getPos().getX() + rectArea->getLocalPos().getX(),
+		extrentTr->getPos().getY() + rectArea->getLocalPos().getY(),
+		rectArea->getWidth(),
+		rectArea->getHeight()
+	};
+
+	SDL_Rect rs;
+	return SDL_IntersectRect(&thisRect, &otherRect, &rs);
+}
+
+bool RectArea2D::overlapsWith(CircleArea2D* circleArea)
+{
+	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
+	Transform* extrentTr = circleArea->getContext()->getMngr()->getComponent<Transform>(circleArea->getContext());
+	
+	if (transform == nullptr || extrentTr == nullptr) return false;
+
+	return Collisions::rectCollidesWithCircle(
+		transform->getPos() + _localPosition, _width, _height,
+		extrentTr->getPos() + circleArea->getLocalPos(), circleArea->getRadius()
+	);
 }

@@ -1,0 +1,41 @@
+{
+    "Sala1":{
+            "SalaIntermediaEvento1":[
+                {"Character":"Personaje1","Text":"Esto es una prueba"},
+                {"Character":"Personaje2","Text":"Yo se supone que estoy muerto"},
+                {"Character":"Personaje3","Text":"uiiiai uiiiai"}
+            ],
+            "SalaIntermediaEvento2":[
+                {"Character":"Personaje3","Text":"Why we still here... Just to suffer"}
+            ],
+            "Pista1":[
+                {"Character":"Personaje2","Text":"Encontre esto"}
+            ],
+            "Pista2":[
+                {"Character":"Personaje3","Text":"Que mal huele"}
+            ],
+            "Pista3":[
+                {"Character":"Personaje1","Text":"Quien coño guarda esto en un reloj wtf"}
+            ],
+            "Puzzle1":[
+                {"Character":"Personaje1","Text":"Pista nº 1"},
+                {"Character":"Personaje1","Text":"Pista nº 2"}
+            ],
+            "Puzzle2":[
+                {"Character":"Personaje2","Text":"Pista nº 1"},
+                {"Character":"Personaje2","Text":"Pista nº 2"}
+            ],
+            "Puzzle3":[
+                {"Character":"Personaje3","Text":"Pista nº 1"},
+                {"Character":"Personaje3","Text":"Pista nº 2"}
+            ]
+        },
+    "Sala2":{
+            "SalaIntermediaEvento1":[
+                {"Character":"Personaje1","Text":"Aqui pa ver si se actualiza el valor"}
+            ]
+        },
+    "Sala3":{
+
+    }
+}

@@ -24,8 +24,9 @@ Game* Game::Instance()
 		return _instance;
 }
 Game::~Game() {
-	delete _mngr;
 
+	delete _mngr;
+	delete _Dmngr;
 	// release InputHandler if the instance was created correctly.
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
@@ -39,7 +40,7 @@ void Game::init() {
 
 	// initialize the SDL singleton
 	//if (!SDLUtils::Init("TheatrumMundi",GetSystemMetrics(SM_CXSCREEN) ,GetSystemMetrics(SM_CYSCREEN), "../resources/config/TheatrumMundi.resources.json")) {
-	if (!SDLUtils::Init("TheatrumMundi", 1920, 1080, "../resources/config/TheatrumMundi.resources.json")) {
+	if (!SDLUtils::Init("TheatrumMundi", 1346, 748, "../resources/config/TheatrumMundi.resources.json")) {
 		std::cerr << "Something went wrong while initializing SDLUtils"
 				<< std::endl;
 		return;
@@ -55,8 +56,8 @@ void Game::init() {
 	sdlutils().hideCursor();
 
 	// Create the manager
+	_Dmngr = new DialogueManager();
 	_mngr = new SceneManager();
-	
 	
 }
 
@@ -104,7 +105,14 @@ void Game::start() {
 
 SceneManager* Game::getSceneManager()
 {
+	assert(_mngr != nullptr);
 	return _mngr;
+}
+
+DialogueManager* Game::getDialogueManager()
+{
+	assert(_Dmngr != nullptr);
+	return _Dmngr;
 }
 
 void Game::checkCollisions() {

@@ -49,6 +49,7 @@ enum cmpId : cmpId_t {
 	DRAG_COMPONENT,
 	SCROLL_COMPONENT,
 	AREA2D,
+	WRITE_TEXT_COMPONENT,
 
 	// do not remove this
 	_LAST_CMP_ID
