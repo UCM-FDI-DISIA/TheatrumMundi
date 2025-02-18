@@ -12,17 +12,12 @@ class NuevoComponent: public ecs::Component
 	...
 };
 ```
-Es importante añadir `__CMPID_DECL__(ecs::cmp::NUEVO_COMPONENTE)` para darle un ID al nuevo tipo de componente, pero para esto es necesario definir el ID en el `enum cmpId` del `namespace cmp`, en "ecs.h".
+Es importante añadir `__CMPID_DECL__(ecs::cmp::NUEVO_COMPONENTE)` para darle un ID al nuevo tipo de componente, pero para esto es necesario definir el ID en el `enum cmpId` del `namespace cmp`, pero esto hay que hacerlo a través del macro "_CMPS_LIST_" en "ecs_defs.h".
 ```
-namespace cmp {
-// list of component identifiers - note that we rely on that the
-// first number is 0 in C/C++ standard
-enum cmpId : cmpId_t {
-	_CMPS_LIST_, /* taken from ../game/ecs_defs */
-	NUEVO_COMPONENTE,
-
-	// do not remove this
-	_LAST_CMP_ID
-};
-}
+// Components list - must have at least one element
+//
+#define _CMPS_LIST_ \
+	TRANSFORM, \
+	IMAGE, \
+	NUEVO_COMPONENTE
 ```
