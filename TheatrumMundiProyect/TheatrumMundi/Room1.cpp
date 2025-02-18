@@ -25,7 +25,7 @@ void Room1::init()
 		auto _fighterTransform = entityManager->addComponent<Transform>(_fighter, Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0);
 		entityManager->addComponent<Image>(_fighter, &sdlutils().images().at("prueba"));
 
-		entityManager->addComponent<RectArea2D>(_fighter);
+		entityManager->addComponent<CircleArea2D>(_fighter)->setLocalPos(Vector2D(250,250));
 
 		//ClickComponent* clk = entityManager->addComponent<ClickComponent>(_fighter);
 		//clk->connect(ClickComponent::JUST_CLICKED, []() { std::cout << "CLICKED\n"; });

@@ -5,6 +5,7 @@
 #include "../ecs/Manager.h"
 #include "Transform.h"
 #include "CircleArea2D.h"
+#include "../utils/Collisions.h"
 
 RectArea2D::RectArea2D(Vector2D localPos, int width, int height)
 	: Area2D(localPos), _width(width), _height(height)
@@ -59,10 +60,9 @@ bool RectArea2D::containsPoint(Vector2D point)
 bool RectArea2D::overlapsWith(RectArea2D* rectArea)
 {
 	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
-
-	if (transform == nullptr) return false;
-
 	Transform* extrentTr = rectArea->getContext()->getMngr()->getComponent<Transform>(rectArea->getContext());
+
+	if (transform == nullptr || extrentTr == nullptr) return false;
 
 	SDL_Rect thisRect = {
 		transform->getPos().getX() + _localPosition.getX(),
@@ -84,5 +84,13 @@ bool RectArea2D::overlapsWith(RectArea2D* rectArea)
 
 bool RectArea2D::overlapsWith(CircleArea2D* circleArea)
 {
-	return true;
+	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
+	Transform* extrentTr = circleArea->getContext()->getMngr()->getComponent<Transform>(circleArea->getContext());
+	
+	if (transform == nullptr || extrentTr == nullptr) return false;
+
+	return Collisions::rectCollidesWithCircle(
+		transform->getPos() + _localPosition, _width, _height,
+		extrentTr->getPos() + circleArea->getLocalPos(), circleArea->getRadius()
+	);
 }
