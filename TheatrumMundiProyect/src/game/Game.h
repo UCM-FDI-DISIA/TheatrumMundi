@@ -24,6 +24,7 @@ public:
 	void init();
 	void start();
 	SceneManager* getSceneManager();
+	DialogueManager* getDialogueManager();
 	Game& operator=(const Game& o) = delete;
 	Game(const Game& o) = delete;
 private:
