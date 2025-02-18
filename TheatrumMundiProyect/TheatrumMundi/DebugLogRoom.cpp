@@ -34,7 +34,7 @@ void DebugLogRoom::init()
 		entityManager->addComponent<Transform>(_log, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0);
 
 		Image* imLog = entityManager->addComponent<Image>(_log, &sdlutils().images().at("fondoPruebaLog"));
-		imLog->setShow(false);
+		
 
 		//add debug lines to log
 		logComp->addDialogueLineLog("author1", "hola que tal");

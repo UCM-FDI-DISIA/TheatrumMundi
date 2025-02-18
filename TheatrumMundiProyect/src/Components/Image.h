@@ -22,19 +22,8 @@ public:
 	void initComponent() override;
 	void render() override;
 
-	bool getShow()
-	{
-		return _show;
-	}
-
-	void setShow(bool show)
-	{
-		_show = show;
-	}
-
 private:
 	Transform* _tr;
 	Texture* _tex;
-	bool _show;
 };
 
