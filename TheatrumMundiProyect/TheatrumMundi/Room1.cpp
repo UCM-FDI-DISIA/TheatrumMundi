@@ -34,7 +34,7 @@ void Room1::init()
 		trg->connect(TriggerComponent::JUST_LEFT, []() {  });
 
 		DragComponent* drg = entityManager->addComponent<DragComponent>(_fighter);
-		drg->connect(DragComponent::DRAG, [this, _fighter]() { entityManager->setAlive(_fighter, false);});
+		drg->connect(DragComponent::DRAG, [this, _fighter]() { entityManager->setActive(_fighter, false);});
 	}
 }
 

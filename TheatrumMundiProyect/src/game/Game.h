@@ -25,7 +25,9 @@ public:
 	SceneManager* getSceneManager();
 	Game& operator=(const Game& o) = delete;
 	Game(const Game& o) = delete;
+	void exit();
 private:
 	static Game* _instance;
+	bool _exitGame;
 };
 

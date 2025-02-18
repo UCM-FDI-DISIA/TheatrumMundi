@@ -102,6 +102,15 @@
     <ClCompile Include="..\src\Components\DragComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="Room1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScenePuzzleTemplate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InitialScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SRC\json\JSON.h">
@@ -511,6 +520,15 @@
     </ClInclude>
     <ClInclude Include="..\src\Components\DragComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Room1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScenePuzzleTemplate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InitialScene.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
