@@ -69,8 +69,8 @@ void Room1::init()
 			if (!_buttonScroll->isScrolling()) _buttonScroll->Scroll(); /*entityManager->getComponent<ScrollComponent>(_button)->Scroll(); */});
 
 		TriggerComponent* trgb = entityManager->addComponent<TriggerComponent>(_button);
-		trgb->connect(TriggerComponent::JUST_ENTERED, []() { std::cout << "ENTERED IN MOVING\n";  });
-		trgb->connect(TriggerComponent::JUST_LEFT, []() { std::cout << "LEFT IN MOVING\n";  });
+		trgb->connect(TriggerComponent::CURSOR_ENTERED, []() { std::cout << "ENTERED IN MOVING\n";  });
+		trgb->connect(TriggerComponent::CURSOR_LEFT, []() { std::cout << "LEFT IN MOVING\n";  });
 	}
 }
 
