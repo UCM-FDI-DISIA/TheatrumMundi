@@ -183,6 +183,8 @@
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
     <ClInclude Include="HintTemplate.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="checkML.h" />
+    <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScenePuzzleTemplate.h" />
