@@ -40,6 +40,7 @@
     <ClCompile Include="..\SRC\sdlutils\Texture.cpp" />
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
+    <ClCompile Include="DialogueManager.cpp" />
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScenePuzzleTemplate.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="..\src\game\ecs_defs.h" />
     <ClInclude Include="..\src\game\Game.h" />
     <ClInclude Include="..\SRC\json\JSON.h" />
+    <ClInclude Include="..\src\json\json.hpp" />
     <ClInclude Include="..\SRC\json\JSONValue.h" />
     <ClInclude Include="..\SRC\json\json_demo.h" />
     <ClInclude Include="..\SRC\sdlutils\Font.h" />
@@ -180,6 +182,7 @@
     <ClInclude Include="..\SRC\utils\ptr_iterator.h" />
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
+    <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScenePuzzleTemplate.h" />
