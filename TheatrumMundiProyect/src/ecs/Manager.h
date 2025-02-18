@@ -29,7 +29,7 @@ public:
 
 		// create and initialise the entity
 		auto e = new Entity(gId, this);
-		e->_alive = true;
+		e->_active = true;
 
 		// add the entity 'e' to list of entities of the given group
 		//
@@ -58,13 +58,13 @@ public:
 	// Setting the state of the entity (alive or dead)
 	//
 	inline void setAlive(entity_t e, bool alive) {
-		e->_alive = alive;
+		e->_active = alive;
 	}
 
 	// Returns the state of the entity (alive o dead)
 	//
 	inline bool isAlive(entity_t e) {
-		return e->_alive;
+		return e->_active;
 	}
 
 	// Adds a component to an entity. It receives the type T (to be created),
@@ -199,8 +199,9 @@ public:
 	void update() {
 		for (auto &ents : _entsByGroup) {
 			auto n = ents.size();
+			
 			for (auto i = 0u; i < n; i++)
-				update(ents[i]);
+				if(ents[i]->_active) update(ents[i]);
 		}
 	}
 
@@ -210,7 +211,7 @@ public:
 		for (auto &ents : _entsByGroup) {
 			auto n = ents.size();
 			for (auto i = 0u; i < n; i++)
-				render(ents[i]);
+				if (ents[i]->_active) render(ents[i]);
 		}
 	}
 

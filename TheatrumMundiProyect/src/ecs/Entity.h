@@ -22,12 +22,13 @@ public:
 			_mngr(mngr), //
 			_cmps(), //
 			_currCmps(), //
-			_alive(),  //
+			_active(),  //
 			_gId(gId) //
 	{
 		// We reserve the a space for the maximum number of
 		// components. This way we avoid resizing the vector.
 		//
+		_active = true;
 		_currCmps.reserve(ecs::maxComponentId);
 	}
 
@@ -64,7 +65,7 @@ private:
 	EntityManager *_mngr;
 	std::array<Component*, maxComponentId> _cmps;
 	std::vector<Component*> _currCmps;
-	bool _alive;
+	bool _active;
 	grpId_t _gId;
 };
 

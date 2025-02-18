@@ -10,6 +10,8 @@
 #include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
 #include "../src/ecs/Manager.h"
+#include "../src/game/Game.h"
+
 Room1::Room1(): SceneRoomTemplate()
 {
 }
@@ -26,6 +28,7 @@ void Room1::init()
 		entityManager->addComponent<Image>(_fighter, &sdlutils().images().at("prueba"));
 
 		entityManager->addComponent<CircleArea2D>(_fighter)->setLocalPos(Vector2D(250,250));
+
 
 		//ClickComponent* clk = entityManager->addComponent<ClickComponent>(_fighter);
 		//clk->connect(ClickComponent::JUST_CLICKED, []() { std::cout << "CLICKED\n"; });
@@ -52,6 +55,7 @@ void Room1::init()
 		entityManager->addComponent<RectArea2D>(_fighter2);
 		DragComponent* drg2 = entityManager->addComponent<DragComponent>(_fighter2);
 		ClickComponent* clk2 = entityManager->addComponent<ClickComponent>(_fighter2);
+
 	}
 }
 
