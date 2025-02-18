@@ -21,6 +21,7 @@ public:
 	void Scroll();
 	void update() override; //ATTENTION
 	//void setScrolling(bool value);
+	bool isScrolling();
 private:
 	Transform *_myTransform;
 };

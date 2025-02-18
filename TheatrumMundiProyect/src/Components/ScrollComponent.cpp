@@ -40,7 +40,10 @@ void ScrollComponent::update()
 
 		if (!_isRight) { //The elements are in the left
 
-			if (_dir.getX() < 0) _dir.setX(_dir.getX() * -1);
+			if (_dir.getX() < 0) { 
+				_dir.setX(_dir.getX() * -1);
+				_myTransform->getVel().set(_dir);
+			}
 
 			cout << _timeScroll << endl;
 			if (_timeScroll == 0) {
@@ -51,7 +54,10 @@ void ScrollComponent::update()
 		}
 		else { //the elements are in the right
 
-			if (_dir.getX() > 0) _dir.setX(_dir.getX() * -1);
+			if (_dir.getX() > 0) {
+				_dir.setX(_dir.getX() * -1);
+				_myTransform->getVel().set(_dir);
+			}
 
 			cout << _timeScroll << endl;
 			if (_timeScroll == 0) {
@@ -67,3 +73,7 @@ void ScrollComponent::update()
 //	_isScrolling = value;
 //	cout << "SCROLLING: " << _isScrolling << endl;
 //}
+
+bool ScrollComponent::isScrolling() {
+	return _myTransform->getVel().magnitude() > 0;
+}
