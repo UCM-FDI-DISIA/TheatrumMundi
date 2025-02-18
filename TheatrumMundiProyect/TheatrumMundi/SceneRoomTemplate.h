@@ -12,7 +12,7 @@ protected:
 	public:
 
 	SceneRoomTemplate();
-	~SceneRoomTemplate();
+	virtual ~SceneRoomTemplate();
 	
 	
 
