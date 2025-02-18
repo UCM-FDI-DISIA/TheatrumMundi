@@ -95,3 +95,21 @@ bool Collisions::collides(const Vector2D &o1Pos, float o1Width, float o1Height,
 
 	return true;
 }
+
+bool Collisions::rectCollidesWithCircle(const Vector2D& rectPos, float rectWidth, float rectHeight,
+	const Vector2D& circlPos, float circlRadius)
+{
+	float rectRightSide = rectPos.getX() + rectWidth;  // Axis where the right side is
+	float rectLeftSide = rectPos.getX();		       // Axis where the left side is
+	float rectTopSize = rectPos.getY();				   // Axis where the top side is
+	float rectBottomSize = rectPos.getY() + rectHeight;// Axis where the bottom side is
+
+	// Get the closest point in the rectangle perimeter
+	float closestX = std::max(rectLeftSide, std::min(circlPos.getX(), rectRightSide));
+	float closestY = std::max(rectTopSize, std::min(circlPos.getY(), rectBottomSize));
+	
+	Vector2D closestRectPoint(closestX, closestY);
+
+	// Get distance from the calculated point to the circle center
+	return (closestRectPoint - circlPos).magnitude() <= circlRadius;
+}

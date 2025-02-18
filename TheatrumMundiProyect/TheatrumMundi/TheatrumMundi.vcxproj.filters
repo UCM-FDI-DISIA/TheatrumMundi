@@ -108,12 +108,6 @@
     <ClCompile Include="ScenePuzzleTemplate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PipePuzzleScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimatorComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SRC\json\JSON.h">
@@ -528,12 +522,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ScenePuzzleTemplate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PipePuzzleScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimatorComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

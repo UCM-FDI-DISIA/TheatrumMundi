@@ -39,6 +39,10 @@ public:
 		_ent = ent;
 	}
 
+	inline Entity* getContext() {
+		return _ent;
+	}
+
 	// We assume that initComponent will be called when adding a
 	// component to an entity, immediately after setContext.
 	//

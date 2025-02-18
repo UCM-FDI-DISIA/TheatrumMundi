@@ -1,7 +1,8 @@
 {
 
   "fonts" : [
-  
+  { "id" : "TITLE", "file" : "../resources/fonts/PirataOne-Regular.ttf", "size": 20 },
+{ "id" : "BASE", "file" : "../resources/fonts/FeDPit2.ttf", "size": 16}
   ],
   
   "images" : [
