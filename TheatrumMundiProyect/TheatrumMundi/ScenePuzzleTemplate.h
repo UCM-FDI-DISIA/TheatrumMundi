@@ -8,8 +8,8 @@ class ScenePuzzleTemplate: public SceneTemplate
 	public:
 
 	void Exit();
-	virtual bool Check() {};
-	virtual void Win();
+	virtual bool Check() { return true; };
+	virtual void Win() {};
 	ScenePuzzleTemplate();
 	~ScenePuzzleTemplate();
 
