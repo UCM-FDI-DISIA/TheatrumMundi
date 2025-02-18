@@ -15,11 +15,11 @@ protected:
 	Image* image;
 
 public:
-
+	HintTemplate();
 	//void init();
 	virtual void render() = 0;
 	HintTemplate(const string& _desc, Image* _im);
-	virtual ~HintTemplate();
+	~HintTemplate();
 	
 private:
 
