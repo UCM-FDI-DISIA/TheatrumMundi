@@ -43,6 +43,7 @@
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
     <ClCompile Include="DialogTestScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
+    <ClCompile Include="InitialScene.cpp" />
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScenePuzzleTemplate.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
     <ClInclude Include="DialogTestScene.h" />
     <ClInclude Include="DialogueManager.h" />
+    <ClInclude Include="InitialScene.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScenePuzzleTemplate.h" />
