@@ -5,7 +5,14 @@
   ],
   
   "images" : [
-    { "id" : "prueba", "file" : "../resources/images/socrates.png" }
+    {
+      "id": "prueba",
+      "file": "../resources/images/socrates.png"
+    },
+    {
+      "id": "fondoPruebaLog",
+      "file": "../resources/images/fondoLogPrueba.jpg"
+    }
 
   ],
   

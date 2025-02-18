@@ -10,11 +10,13 @@
 #include "Transform.h"
 
 Image::Image() :
-		_tr(), _tex() {
+	_tr(), _tex() {
+	_show = true;
 }
 
-Image::Image(Texture *tex) :
-		_tr(), _tex(tex) {
+Image::Image(Texture* tex) :
+	_tr(), _tex(tex) {
+	_show = true;
 }
 
 Image::~Image() {
@@ -27,11 +29,14 @@ void Image::initComponent() {
 }
 
 void Image::render() {
-
-	SDL_Rect dest = build_sdlrect(_tr->getPos(), _tr->getWidth(),
+	if (_show)
+	{
+		SDL_Rect dest = build_sdlrect(_tr->getPos(), _tr->getWidth(),
 			_tr->getHeight());
 
-	assert(_tex != nullptr);
-	_tex->render(dest, _tr->getRot());
+		assert(_tex != nullptr);
+		_tex->render(dest, _tr->getRot());
+	}
+
 
 }
