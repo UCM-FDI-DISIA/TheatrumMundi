@@ -786,7 +786,7 @@ Puzzle Órgano:
 
 -Recompensa:
 
-Pista y Material para otro puzzle: Cuerda y utensilio.
+Pista y Material para otro puzzle: Cuerda y gancho.
 
   
 
