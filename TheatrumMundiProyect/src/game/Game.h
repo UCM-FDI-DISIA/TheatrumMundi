@@ -20,7 +20,7 @@ private:
 	 void checkCollisions();
 public:
 	static Game* Instance();
-	virtual ~Game();
+	~Game();
 	void init();
 	void start();
 	SceneManager* getSceneManager();
