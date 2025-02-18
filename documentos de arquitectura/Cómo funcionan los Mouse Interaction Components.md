@@ -8,7 +8,7 @@ Los componentes del tipo `MouseIntaractionComponent` permiten suscribir una enti
 ### ClickComponent
 ClickComponent ofrece los eventos `JUST_CLICKED` y `JUST_RELEASED`, a los que es posible vincular el número de funciones que se deseen.
 
-Ejemplo de uso:
+##### Ejemplo de uso:
 ```
 entityManager->addComponent<RectArea2D>(entity); // Debe haber un Area2D
 ClickComponent* clk = entityManager->addComponent<ClickComponent>(entity);
@@ -17,23 +17,54 @@ ClickComponent* clk = entityManager->addComponent<ClickComponent>(entity);
 clk->connect(ClickComponent::JUST_CLICKED, []() { std::cout << "CLICKED\n"; });
 ```
 
-### TriggerComponent
-TriggerComponent ofrece los eventos `JUST_ENTERED` y `JUST_LEFT`, para cuando se entra y se sale del Area2D de la entidad.
+##### Métodos públicos:
 
-Ejemplo de uso:
+`bool isBeingClicked()`: 
+Devuelve true si el objeto no ha sido soltado después hacer click sobre él y false en el caso contrario.
+
+### TriggerComponent
+TriggerComponent ofrece los eventos `CURSOR_ENTERED`, `CURSOR_LEFT`, `AREA_ENTERED` y `AREA_LEFT`, para cuando se entra y se sale del Area2D de la entidad ya sea con el cursor o con otra entidad con Area2D.
+
+##### Ejemplo de uso:
 ```
 entityManager->addComponent<RectArea2D>(entity); // Debe haber un Area2D
 TriggerComponent* trg = entityManager->addComponent<TriggerComponent>(entity);
 
-// Al entrar en el area del objeto se muestra "ENTERED" y al salir "LEFT"
-trg->connect(TriggerComponent::JUST_ENTERED, []() { std::cout << "ENTERED\n";  });
-trg->connect(TriggerComponent::JUST_LEFT, []() { std::cout << "LEFT\n";  });
+// Al entrar el cursor en el area del objeto se muestra "MOUSE" y al salir "NO MOUSE"
+trg->connect(TriggerComponent::CURSOR_ENTERED, []() { std::cout << "MOUSE\n";  });
+trg->connect(TriggerComponent::CURSOR_LEFT, []() { std::cout << "NO MOUSE\n";  });
+
+// Al entrar una entidad en el area del objeto se musetra "HELLO" y "BYE"
+tgr->connect(TriggerComponent::AREA_ENTERED, []() { std::cout << "HELLO\n"; });
+tgr->connect(TriggerComponent::AREA_LEFT, []() { std::cout << "BYE\n"; });
+```
+
+##### Métodos públicos:
+
+`bool mouseIsIn()`:
+Devuelve true si el cursor está dentro del Area2D y false en caso contrario.
+
+`const std::list<ecs::entity_t>& getOverlappingEntities()`:
+Devuelve la lista de elementos que se estén solapando con la entidad.
+
+`std::list<ecs::entity_t> const& triggerContextEntities()`:
+Se llama desde la función de callback, devuelve la lista de entidades que han provocado el evento de trigger para dar contexto de qué entidades han entrado o salido.
+```
+tgr->connect(TriggerComponent::AREA_ENTERED, []() { 
+	
+	auto colliders = trg->triggerContextEntities(); // Entities that triggered
+	
+	for (ecs::entity_t e : colliders) {
+		if (e->getMngr()->getComponent<ClickComponent>(e) != nullptr)
+			std::cout << "It is a clickable object!!!\n";
+	}
+});
 ```
 
 ### DragComponent
 DragComponent ofrece los eventos `DRAG_START`, `DRAG` y `DRAG_END`, para cuando se hace pincha en el Area2D, cuando se mueve el objeto, y para cuando se suelta el objeto.
 
-Ejemplo de uso:
+##### Ejemplo de uso:
 ```
 entityManager->addComponent<RectArea2D>(entity); // Debe haber un Area2D
 DragComponent* drg = entityManager->addComponent<DragComponent>(entity);
