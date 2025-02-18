@@ -19,13 +19,12 @@ public:
 
 	ScrollComponent(Vector2D dir, float time);
 	~ScrollComponent();
-	void initComponent() override;
+	//void initComponent() override;
 	void Scroll();
-	void update() override; //ATTENTION
-	//void setScrolling(bool value);
+	void update() override;
 	bool isScrolling();
-	void addElementToScroll(Transform* _object);
+	void addElementToScroll(Transform* _objectT);
 private:
-	Transform *_myTransform;
+	//Transform *_myTransform;
 	std::vector<Transform*> _objectsTransform;
 };

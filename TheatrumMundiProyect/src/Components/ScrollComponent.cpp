@@ -13,7 +13,7 @@ ScrollComponent::ScrollComponent(Vector2D dir, float time) : ecs::Component() {
 	cout << _initialTimeScroll << endl;
 	_isRight = false;
 	_isScrolling = false;
-	_myTransform = nullptr;
+	//_myTransform = nullptr;
 }
 
 ScrollComponent::~ScrollComponent()
@@ -21,72 +21,70 @@ ScrollComponent::~ScrollComponent()
 
 }
 
-void ScrollComponent::initComponent() {
-	auto mngr = _ent->getMngr();
-	_myTransform = mngr->getComponent<Transform>(_ent);
-	assert(_myTransform != nullptr);
-}
+//If we want to move the button itself use this
+//void ScrollComponent::initComponent() {
+//	auto mngr = _ent->getMngr();
+//	_myTransform = mngr->getComponent<Transform>(_ent);
+//	assert(_myTransform != nullptr);
+//}
 
 void ScrollComponent::Scroll() {
-	cout << "CLICKKKKK" << endl;
-	_timeScroll = _initialTimeScroll;
-	//cout << _timeScroll << endl;
 
-	_myTransform->getVel().set(_dir); //APLICAMOS LA VELOCIDAD
+	cout << "Scroll Activated" << endl;
 
-	for (Transform* e : _objectsTransform) { //APLICAMOS LA VELOCIDAD A TODOS LOS OBJETOS
+	_timeScroll = _initialTimeScroll; //Initialize scrolling because time needs to be > 0
+
+	for (Transform* e : _objectsTransform) { //Apply direction to all objects
 		e->getVel().set(_dir); 
 	}
 }
 
 void ScrollComponent::update()
 {
-	//auto& vel = _myTransform->getVel();
 
-	if (_timeScroll > 0) {
+	if (_timeScroll > 0) { //Scroll() activates this
 
+		cout << _timeScroll << endl;
 		_timeScroll--;
 
 		if (!_isRight) { //The elements are in the left
 
-			if (_dir.getX() < 0) { 
+			//See if the direction is inverted to set it correctly and apply correct direction
+			if (_dir.getX() < 0) {
 				_dir.setX(_dir.getX() * -1);
-				_myTransform->getVel().set(_dir);
 
-				for (Transform* e : _objectsTransform) { //APLICAMOS LA VELOCIDAD A TODOS LOS OBJETOS
+				for (Transform* e : _objectsTransform) {
 					e->getVel().set(_dir);
 				}
 			}
 
-			//cout << _timeScroll << endl;
+			//put the elements to the right at the end
 			if (_timeScroll == 0) {
-				_isRight = !_isRight; //put the elements to the right at the end
-				cout << "LLEGAMOS A LA DERECHA" << endl;
-				_myTransform->getVel().set(0, 0);
+				cout << "RIGHT" << endl;
+				_isRight = !_isRight; 
 
-				for (Transform* e : _objectsTransform) { //APLICAMOS LA VELOCIDAD A TODOS LOS OBJETOS
+				for (Transform* e : _objectsTransform) { 
 					e->getVel().set(0, 0);
 				}
 			}
 		}
 		else { //the elements are in the right
 
+			//See if the direction is inverted to set it correctly and apply correct direction
 			if (_dir.getX() > 0) {
 				_dir.setX(_dir.getX() * -1);
-				_myTransform->getVel().set(_dir);
 
-				for (Transform* e : _objectsTransform) { //APLICAMOS LA VELOCIDAD A TODOS LOS OBJETOS
+				for (Transform* e : _objectsTransform) {
 					e->getVel().set(_dir);
 				}
 			}
 
-			cout << _timeScroll << endl;
+			//put the elements to the left at the end
 			if (_timeScroll == 0) {
-				_isRight = !_isRight; //put the elements to the left at the end
-				cout << "LLEGAMOS A LA IZQUIERDA" << endl;
-				_myTransform->getVel().set(0, 0);
+				cout << "LEFT" << endl;
+				_isRight = !_isRight; 
 
-				for (Transform* e : _objectsTransform) { //APLICAMOS LA VELOCIDAD A TODOS LOS OBJETOS
+				for (Transform* e : _objectsTransform) {
 					e->getVel().set(0, 0);
 				}
 			}
@@ -94,17 +92,14 @@ void ScrollComponent::update()
 	}
 }
 
-//void ScrollComponent::setScrolling(bool value) {
-//	_isScrolling = value;
-//	cout << "SCROLLING: " << _isScrolling << endl;
-//}
-
 bool ScrollComponent::isScrolling() {
-	return _myTransform->getVel().magnitude() > 0;
+	if (_objectsTransform.empty()) return false;
+	return _objectsTransform[0]->getVel().magnitude() > 0; //Check if the first element is moving
 }
 
-void ScrollComponent::addElementToScroll(Transform* _object)
+void ScrollComponent::addElementToScroll(Transform* _objectT)
 {
-	_objectsTransform.push_back(_object);
+	assert(_objectT != nullptr);
+	_objectsTransform.push_back(_objectT);
 }
 
