@@ -65,4 +65,5 @@ void Room1::refresh()
 
 void Room1::unload()
 {
+	entityManager->~EntityManager();
 }
