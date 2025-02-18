@@ -3,6 +3,8 @@
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "Transform.h"
+#include "RectArea2D.h"
+#include "../utils/Collisions.h"
 
 CircleArea2D::CircleArea2D(Vector2D localPos, int radius)
 	: Area2D(localPos), _radius(radius)
@@ -46,4 +48,29 @@ bool CircleArea2D::containsPoint(Vector2D point)
 	);
 
 	return centerDist <= _radius;
+}
+
+bool CircleArea2D::overlapsWith(CircleArea2D* circleArea)
+{
+	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
+	Transform* extrentTr = circleArea->getContext()->getMngr()->getComponent<Transform>(circleArea->getContext());
+
+	if (transform == nullptr || extrentTr == nullptr) return false;
+
+	Vector2D vDistance = (transform->getPos() + _localPosition) - (extrentTr->getPos() + circleArea->getLocalPos());
+
+	return vDistance.magnitude() <= _radius + circleArea->getRadius();
+}
+
+bool CircleArea2D::overlapsWith(RectArea2D* rectArea)
+{
+	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
+	Transform* extrentTr = rectArea->getContext()->getMngr()->getComponent<Transform>(rectArea->getContext());
+
+	if (transform == nullptr || extrentTr == nullptr) return false;
+
+	return Collisions::rectCollidesWithCircle(
+		extrentTr->getPos() + rectArea->getLocalPos(), rectArea->getWidth(), rectArea->getHeight(),
+		transform->getPos() + _localPosition, _radius
+	);
 }
