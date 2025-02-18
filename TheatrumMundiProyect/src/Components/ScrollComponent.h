@@ -2,6 +2,7 @@
 #include "../ecs/Component.h"
 #include "../utils/Vector2D.h"
 #include <cassert>
+#include <vector>
 
 class Transform;
 
@@ -17,11 +18,14 @@ public:
 	__CMPID_DECL__(ecs::cmp::SCROLL_COMPONENT)
 
 	ScrollComponent(Vector2D dir, float time);
+	~ScrollComponent();
 	void initComponent() override;
 	void Scroll();
 	void update() override; //ATTENTION
 	//void setScrolling(bool value);
 	bool isScrolling();
+	void addElementToScroll(Transform* _object);
 private:
 	Transform *_myTransform;
+	std::vector<Transform*> _objectsTransform;
 };

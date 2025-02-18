@@ -1,8 +1,8 @@
 #include "ScrollComponent.h"
 #include <iostream>
 #include "Transform.h"
-
 #include "../ecs/Manager.h"
+#include <vector>
 
 using namespace std;
 
@@ -16,6 +16,11 @@ ScrollComponent::ScrollComponent(Vector2D dir, float time) : ecs::Component() {
 	_myTransform = nullptr;
 }
 
+ScrollComponent::~ScrollComponent()
+{
+
+}
+
 void ScrollComponent::initComponent() {
 	auto mngr = _ent->getMngr();
 	_myTransform = mngr->getComponent<Transform>(_ent);
@@ -25,9 +30,13 @@ void ScrollComponent::initComponent() {
 void ScrollComponent::Scroll() {
 	cout << "CLICKKKKK" << endl;
 	_timeScroll = _initialTimeScroll;
-	cout << _timeScroll << endl;
+	//cout << _timeScroll << endl;
 
 	_myTransform->getVel().set(_dir); //APLICAMOS LA VELOCIDAD
+
+	for (Transform* e : _objectsTransform) { //APLICAMOS LA VELOCIDAD A TODOS LOS OBJETOS
+		e->getVel().set(_dir); 
+	}
 }
 
 void ScrollComponent::update()
@@ -43,13 +52,21 @@ void ScrollComponent::update()
 			if (_dir.getX() < 0) { 
 				_dir.setX(_dir.getX() * -1);
 				_myTransform->getVel().set(_dir);
+
+				for (Transform* e : _objectsTransform) { //APLICAMOS LA VELOCIDAD A TODOS LOS OBJETOS
+					e->getVel().set(_dir);
+				}
 			}
 
-			cout << _timeScroll << endl;
+			//cout << _timeScroll << endl;
 			if (_timeScroll == 0) {
 				_isRight = !_isRight; //put the elements to the right at the end
 				cout << "LLEGAMOS A LA DERECHA" << endl;
 				_myTransform->getVel().set(0, 0);
+
+				for (Transform* e : _objectsTransform) { //APLICAMOS LA VELOCIDAD A TODOS LOS OBJETOS
+					e->getVel().set(0, 0);
+				}
 			}
 		}
 		else { //the elements are in the right
@@ -57,6 +74,10 @@ void ScrollComponent::update()
 			if (_dir.getX() > 0) {
 				_dir.setX(_dir.getX() * -1);
 				_myTransform->getVel().set(_dir);
+
+				for (Transform* e : _objectsTransform) { //APLICAMOS LA VELOCIDAD A TODOS LOS OBJETOS
+					e->getVel().set(_dir);
+				}
 			}
 
 			cout << _timeScroll << endl;
@@ -64,6 +85,10 @@ void ScrollComponent::update()
 				_isRight = !_isRight; //put the elements to the left at the end
 				cout << "LLEGAMOS A LA IZQUIERDA" << endl;
 				_myTransform->getVel().set(0, 0);
+
+				for (Transform* e : _objectsTransform) { //APLICAMOS LA VELOCIDAD A TODOS LOS OBJETOS
+					e->getVel().set(0, 0);
+				}
 			}
 		}
 	}
@@ -77,3 +102,9 @@ void ScrollComponent::update()
 bool ScrollComponent::isScrolling() {
 	return _myTransform->getVel().magnitude() > 0;
 }
+
+void ScrollComponent::addElementToScroll(Transform* _object)
+{
+	_objectsTransform.push_back(_object);
+}
+

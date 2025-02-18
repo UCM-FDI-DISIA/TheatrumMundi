@@ -39,8 +39,6 @@ void Room1::init()
 		DragComponent* drg = entityManager->addComponent<DragComponent>(_fighter);
 		drg->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
 
-		//ScrolledComponent
-
 		//BOTON
 		auto _button = entityManager->addEntity();
 		auto _buttonTransform = entityManager->addComponent<Transform>(_button, Vector2D(500, 500), Vector2D(0, 0), 500, 500, 0);
@@ -50,6 +48,7 @@ void Room1::init()
 
 		//ScrollComponent
 		ScrollComponent* _buttonScroll = entityManager->addComponent<ScrollComponent>(_button,Vector2D(1,0),100.0f);
+		_buttonScroll->addElementToScroll(_fighterTransform);
 
 		ClickComponent* clkb = entityManager->addComponent<ClickComponent>(_button);
 		clkb->connect(ClickComponent::JUST_CLICKED, [_buttonScroll]() { /*_buttonScroll->setScrolling(true);*/
