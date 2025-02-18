@@ -47,8 +47,8 @@ void Room1::init()
 		entityManager->addComponent<RectArea2D>(_button);
 
 		//ScrollComponent
-		//Velocity, time scrolling
-		ScrollComponent* _buttonScroll = entityManager->addComponent<ScrollComponent>(_button,Vector2D(5,0),500.0f);
+		//Velocity only X or Y (needs to be positive), time scrolling
+		ScrollComponent* _buttonScroll = entityManager->addComponent<ScrollComponent>(_button,Vector2D(0,5),100.0f);
 		//Add element to scroll, needs to be a transform
 		_buttonScroll->addElementToScroll(_fighterTransform);
 
