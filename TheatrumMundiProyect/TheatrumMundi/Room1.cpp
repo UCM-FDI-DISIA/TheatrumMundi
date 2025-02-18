@@ -28,14 +28,14 @@ void Room1::init()
 		entityManager->addComponent<RectArea2D>(_fighter);
 
 		ClickComponent* clk = entityManager->addComponent<ClickComponent>(_fighter);
-		clk->connect(ClickComponent::JUST_CLICKED, []() { std::cout << "CLICKED\n"; });
+		clk->connect(ClickComponent::JUST_CLICKED, []() {   });
 
 		TriggerComponent* trg = entityManager->addComponent<TriggerComponent>(_fighter);
-		trg->connect(TriggerComponent::JUST_ENTERED, []() { std::cout << "ENTERED\n";  });
-		trg->connect(TriggerComponent::JUST_LEFT, []() { std::cout << "LEFT\n";  });
+		trg->connect(TriggerComponent::JUST_ENTERED, []() {  });
+		trg->connect(TriggerComponent::JUST_LEFT, []() {  });
 
 		DragComponent* drg = entityManager->addComponent<DragComponent>(_fighter);
-		drg->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
+		drg->connect(DragComponent::DRAG, [this, _fighter]() { entityManager->setAlive(_fighter, false);});
 	}
 }
 
