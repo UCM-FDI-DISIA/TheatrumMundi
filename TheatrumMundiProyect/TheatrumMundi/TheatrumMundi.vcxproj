@@ -40,6 +40,8 @@
     <ClCompile Include="..\SRC\sdlutils\Texture.cpp" />
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
+    <ClCompile Include="InitialScene.cpp" />
+    <ClCompile Include="DialogueManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -181,6 +183,7 @@
     <ClInclude Include="..\SRC\utils\ptr_iterator.h" />
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
+    <ClInclude Include="InitialScene.h" />
     <ClInclude Include="HintTemplate.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="checkML.h" />

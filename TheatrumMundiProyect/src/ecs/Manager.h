@@ -57,13 +57,13 @@ public:
 
 	// Setting the state of the entity (alive or dead)
 	//
-	inline void setAlive(entity_t e, bool alive) {
+	inline void setActive(entity_t e, bool alive) {
 		e->_active = alive;
 	}
 
 	// Returns the state of the entity (alive o dead)
 	//
-	inline bool isAlive(entity_t e) {
+	inline bool isActive(entity_t e) {
 		return e->_active;
 	}
 
