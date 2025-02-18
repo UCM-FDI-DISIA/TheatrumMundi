@@ -2,6 +2,7 @@
 #include "WriteTextComponent.h"
 #include "../src/sdlutils/Font.h"
 #include "DialogueManager.h"
+#include "../src/sdlutils/SDLUtils.h"
 
 WriteTextComponent::WriteTextComponent() : Component()
 {
@@ -9,7 +10,8 @@ WriteTextComponent::WriteTextComponent() : Component()
 
 void WriteTextComponent::ShowDialogue(TextInfo dialog)
 {	
-	Font fuente("BASE",12);
+
+	Font& fuente = sdlutils().fonts().at("BASE");
 
 	SDL_Color rojo = { 255, 0, 0, 255 };
 
@@ -19,6 +21,7 @@ void WriteTextComponent::ShowDialogue(TextInfo dialog)
 
 void WriteTextComponent::update()
 {
+	
 }
 
 void WriteTextComponent::render()
