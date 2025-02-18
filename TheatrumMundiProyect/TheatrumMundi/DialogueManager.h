@@ -2,12 +2,10 @@
 #include <unordered_map>
 #include <iostream>
 #include <list>
-// Librería que permitre leer los json a partir de cierto punto #include <nlohmann/json.hpp>
+#include "TextoInfo.h"
+class WriteTextComponent;
+
 //A struct with all the dialogue information
-struct TextInfo {
-	std::string Character;
-	std::string Text;
-};
 enum eventToRead {
 	SalaIntermediaEvento1,
 	SalaIntermediaEvento2,
@@ -31,9 +29,11 @@ private:
 	RoomsMap mRoom; //Map with all the RoomDialogues
 	void ReadJson();
 	void ParseEnum(std::string& event, const eventToRead& _eventToRead);
+	WriteTextComponent* WriteText;
 public:
 	DialogueManager();
 	void ReadDialogue(const eventToRead& _eventToRead); 
 	void ReadAnswer();
+	~DialogueManager();
 };
 
