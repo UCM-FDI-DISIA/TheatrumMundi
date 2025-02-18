@@ -44,6 +44,7 @@ void DebugLogRoom::init()
 
 		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog = entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("ARIAL24"), colorText, logComp->getLogList());
 
+		_log->getMngr()->setAlive(_log, false);
 
 
 		//Open log button
@@ -54,11 +55,10 @@ void DebugLogRoom::init()
 		entityManager->addComponent<RectArea2D>(_openLogButton);
 
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_openLogButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [logComp, imLog]()
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [_log]()
 			{
 				std::cout << "CLICKED\n";
-				logComp->showLog();
-				imLog->setShow(true);
+				_log->getMngr()->setAlive(_log, true);
 			});
 
 		//Close log button
@@ -69,10 +69,10 @@ void DebugLogRoom::init()
 		entityManager->addComponent<RectArea2D>(_closeLogButton);
 
 		ClickComponent* clkClose = entityManager->addComponent<ClickComponent>(_closeLogButton);
-		clkClose->connect(ClickComponent::JUST_CLICKED, [logComp, imLog]()
+		clkClose->connect(ClickComponent::JUST_CLICKED, [_log]()
 			{
 				std::cout << "CLICKED\n";
-				imLog->setShow(false);
+				_log->getMngr()->setAlive(_log, false);
 			});
 		
 

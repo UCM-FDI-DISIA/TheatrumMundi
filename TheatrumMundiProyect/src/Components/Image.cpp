@@ -31,25 +31,11 @@ void Image::initComponent() {
 }
 
 void Image::render() {
-	if (_show)
-	{
+	
 		SDL_Rect dest = build_sdlrect(_tr->getPos(), _tr->getWidth(),
 			_tr->getHeight());
 
 		assert(_tex != nullptr);
 		_tex->render(dest, _tr->getRot());
-
-		/*
-		Font& myFont = sdlutils().fonts().at("ARIAL24");
-		SDL_Color color = { 255, 255, 255, 255 }; // White
-		std::string text = "author1";
-
-		Texture* textTexture = new Texture(sdlutils().renderer(), text, myFont, color); //convert text to texture
-		SDL_Rect dstRect = { 500, 500, textTexture->width(), textTexture->height()}; //destiny rect
-		textTexture->render(dstRect, 0.0); //render
-		*/
-
-	}
-
 
 }
