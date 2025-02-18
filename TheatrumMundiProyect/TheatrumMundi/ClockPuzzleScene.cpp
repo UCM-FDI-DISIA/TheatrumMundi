@@ -33,43 +33,58 @@ void ClockPuzzleScene::init()
 
 		entityManager->addComponent<RectArea2D>(_clockShape);
 
-		ClickComponent* clockClick = entityManager->addComponent<ClickComponent>(_clockShape);
+		/*ClickComponent* clockClick = entityManager->addComponent<ClickComponent>(_clockShape);
 		clockClick->connect(ClickComponent::JUST_CLICKED, []() { std::cout << "CLICKED\n"; });
 
 		TriggerComponent* clockTrigger = entityManager->addComponent<TriggerComponent>(_clockShape);
 		clockTrigger->connect(TriggerComponent::JUST_ENTERED, []() { std::cout << "ENTERED\n";  });
 		clockTrigger->connect(TriggerComponent::JUST_LEFT, []() { std::cout << "LEFT\n";  });
-
+		*/
 
 		//create the clock hands : minute
 		auto _clockMin = entityManager->addEntity();
-		auto _clockMinTransform = entityManager->addComponent<Transform>(_clockMin, Vector2D(100, 150), Vector2D(0, 0), 50, 170, 0);
+		auto _clockMinTransform = entityManager->addComponent<Transform>(_clockMin, Vector2D(680, 360), Vector2D(0, 0), 20, 70, 0);
 		entityManager->addComponent<Image>(_clockMin, &sdlutils().images().at("clockMinArrow"));
 
 		entityManager->addComponent<RectArea2D>(_clockMin);
 
 		ClickComponent* clockMinClick = entityManager->addComponent<ClickComponent>(_clockMin);
-		clockMinClick->connect(ClickComponent::JUST_CLICKED, []() { std::cout << "CLICKED\n"; });
+		clockMinClick->connect(ClickComponent::JUST_CLICKED, [_clockMinTransform]() 
+			{ 
+			std::cout << "CLICKED\n"; 
+			_clockMinTransform->setRot(_clockMinTransform->getRot() + 10);
+			});
 
+		/*
 		TriggerComponent* clockMinTrigger = entityManager->addComponent<TriggerComponent>(_clockMin);
 		clockMinTrigger->connect(TriggerComponent::JUST_ENTERED, []() { std::cout << "ENTERED\n";  });
 		clockMinTrigger->connect(TriggerComponent::JUST_LEFT, []() { std::cout << "LEFT\n";  });
 
 		DragComponent* drgMin = entityManager->addComponent<DragComponent>(_clockMin);
-		drgMin->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
-
+		drgMin->connect(DragComponent::DRAG, [_clockShapeTransform, _clockMinTransform]() {
+			std::cout << "DRAGGING\n";
+			if (_clockShapeTransform->getPos().magnitude() == _clockMinTransform->getPos().magnitude()) {
+				std::cout << "wawawa" << std::endl;
+			}
+			});
+*/
 
 		//create the clock hands : hour
 		auto _clockHor = entityManager->addEntity();
-		auto _clockHorTransform = entityManager->addComponent<Transform>(_clockHor, Vector2D(160, 170), Vector2D(0, 0), 50, 130, 0);
-		entityManager->addComponent<Image>(_clockHor, &sdlutils().images().at("clockMinArrow"));
+		auto _clockHorTransform = entityManager->addComponent<Transform>(_clockHor, Vector2D(695, 360), Vector2D(0, 0), 20, 60, 0);
+		//auto _clockHorTransform = entityManager->addComponent<Transform>(_clockHor, Vector2D(200, 350), Vector2D(0, 0), 20, 60, 0);
+		entityManager->addComponent<Image>(_clockHor, &sdlutils().images().at("clockHorArrow"));
 
 		entityManager->addComponent<RectArea2D>(_clockHor);
 
 		ClickComponent* clockHorClick = entityManager->addComponent<ClickComponent>(_clockHor);
-		clockHorClick->connect(ClickComponent::JUST_CLICKED, []() { std::cout << "CLICKED\n"; });
+		clockHorClick->connect(ClickComponent::JUST_CLICKED, [_clockHorTransform]()
+			{ 
+				std::cout << "CLICKED\n";
+				_clockHorTransform->setRot(_clockHorTransform->getRot() + 30);
+			});
 
-		TriggerComponent* clockHorTrigger = entityManager->addComponent<TriggerComponent>(_clockHor);
+	/*	TriggerComponent* clockHorTrigger = entityManager->addComponent<TriggerComponent>(_clockHor);
 		clockHorTrigger->connect(TriggerComponent::JUST_ENTERED, []() { std::cout << "ENTERED\n";  });
 		clockHorTrigger->connect(TriggerComponent::JUST_LEFT, []() { std::cout << "LEFT\n";  });
 		
@@ -77,6 +92,7 @@ void ClockPuzzleScene::init()
 		DragComponent* drgHor = entityManager->addComponent<DragComponent>(_clockHor);
 		drgHor->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
 
+		*/
 	}
 
 }

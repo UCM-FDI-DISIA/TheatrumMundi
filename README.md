@@ -651,17 +651,13 @@ Puzzle Tempus fugit: 
 
 - Concepto: 
     
+Inicialmente el reloj vendrá sin manecillas. Tras resolver los puzzles anteriores, el jugador obtendrá ambas manecillas. 
 
-Inicialmente el reloj vendrá sin manecillas y el jugador tras resolver los puzzles anteriores y obtener así ambas manecillas. 
-
-Con estás manecillas el jugador deberá colocarlas en el reloj y moverlas hasta la hora de la muerte la cual se encontrará en el escenario.
-
-  
+El jugador deberá colocarlas en el reloj y moverlas hasta la hora de la muerte, la cual se encontrará en el escenario.
 
 - Funcionamiento del puzzle:
     
-
-Este puzzle requiere que se acaben los otros dos anteriores para poder resolverlo. La hora que hay que introducir será las 18:30 y se podrá saber por la hora a la que la víctima toma el té por la tarde (lo cual se sacará de un horario en su pared, 18:00) y el tiempo que tarda el cianuro en matar a alguien que te lo brindará Lucy. 
+Este puzzle requiere que se acaben los otros dos anteriores para poder resolverlo. La hora que hay que introducir será las 18:30 y se podrá saber por la hora a la que la víctima toma el té por la tarde (lo cual se sacará de un horario en su pared, 18:00) y el tiempo que tarda el cianuro en matar a alguien (que te lo brindará Lucy).
 
   
 
