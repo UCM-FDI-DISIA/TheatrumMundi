@@ -2,6 +2,8 @@
 #include <fstream>
 #include <cassert>
 #include "../src/json/json.hpp";
+#include "../src/Components/WriteTextComponent.h";
+
 
 using json = nlohmann::json;
 
@@ -49,7 +51,6 @@ DialogueManager::DialogueManager(){
 
 	actualroom = 1;
 	room = "Sala" + to_string(actualroom);
-
 	//Load Json in the dialogue map
 	ReadJson();
 }
@@ -99,7 +100,8 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 	string event;
 	ParseEnum(event, _eventToRead);
 	for (auto& elem : mRoom[room][event]) {
-		//Show Dialogue in Game
+
+		WriteText->ShowDialogue(elem);
 		cout << elem.Character << ": " << elem.Text << endl;
 	}
 }
@@ -116,4 +118,9 @@ void DialogueManager::ReadAnswer(){
 	if (actualroom <= numRooms) {
 		room = "Sala" + to_string(actualroom);
 	}
+}
+
+DialogueManager::~DialogueManager()
+{
+	delete WriteText;
 }

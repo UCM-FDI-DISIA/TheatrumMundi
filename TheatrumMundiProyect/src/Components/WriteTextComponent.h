@@ -11,7 +11,7 @@ public:
 
 	WriteTextComponent();
 
-	void ShowDialogue(TextInfo dialog);
+	void ShowDialogue(TextInfo dialogue);
 
 	void update() override;
 	void render() override;
