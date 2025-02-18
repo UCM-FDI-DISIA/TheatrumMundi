@@ -68,6 +68,10 @@ void DebugLogRoom::init()
 				imLog->setShow(false);
 			});
 		
+
+		
+		
+		
 		
 	}
 }

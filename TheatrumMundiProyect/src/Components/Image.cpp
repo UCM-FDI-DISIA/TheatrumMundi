@@ -9,6 +9,8 @@
 #include "../sdlutils/Texture.h"
 #include "Transform.h"
 
+#include "../sdlutils/SDLUtils.h"
+
 Image::Image() :
 	_tr(), _tex() {
 	_show = true;
@@ -36,6 +38,17 @@ void Image::render() {
 
 		assert(_tex != nullptr);
 		_tex->render(dest, _tr->getRot());
+
+
+		Font& myFont = sdlutils().fonts().at("ARIAL24");
+		SDL_Color color = { 255, 255, 255, 255 }; // White
+		std::string text = "author1";
+
+		Texture* textTexture = new Texture(sdlutils().renderer(), text, myFont, color); //convert text to texture
+		SDL_Rect dstRect = { 500, 500, textTexture->width(), textTexture->height()}; //destiny rect
+		textTexture->render(dstRect, 0.0); //render
+
+
 	}
 
 

@@ -11,7 +11,7 @@ public:
 
 	__CMPID_DECL__(ecs::cmp::IMAGE)
 
-		Image();
+	Image();
 	Image(Texture* tex);
 	virtual ~Image();
 

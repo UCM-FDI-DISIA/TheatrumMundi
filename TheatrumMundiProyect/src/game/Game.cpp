@@ -92,6 +92,7 @@ void Game::start() {
 
 		sdlutils().clearRenderer();
 		_mngr->render();
+
 		sdlutils().presentRenderer();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
