@@ -21,6 +21,18 @@
     {
         "id": "clockHorArrow",
         "file": "../resources/images/clock_horario.png"
+    },
+    {
+        "id": "clockMinButton",
+        "file": "../resources/images/boton_minutero.png"
+    },
+    {
+        "id": "clockHorButton",
+        "file": "../resources/images/boton_horario.png"
+    },
+    {
+        "id": "clockCheckButton",
+        "file": "../resources/images/boton_check.png"
     }
 
   ],
