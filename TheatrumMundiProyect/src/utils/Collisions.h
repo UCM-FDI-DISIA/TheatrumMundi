@@ -21,6 +21,11 @@ public:
 			const Vector2D &o1Pos, float o1Width, float o1Height, float o1Rot, //
 			const Vector2D &o2Pos, float o2Width, float o2Height, float o2Rot);
 
+	// checks if a box is colliding with a circle
+	static bool rectCollidesWithCircle(
+			const Vector2D &rectPos, float rectWidth, float rectHeight,
+			const Vector2D & circlPos, float circlRadius);
+
 private:
 	Collisions() = delete;
 
