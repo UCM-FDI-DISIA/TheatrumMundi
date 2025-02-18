@@ -182,6 +182,7 @@
     <ClInclude Include="..\SRC\utils\ptr_iterator.h" />
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
+    <ClInclude Include="checkML.h" />
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="SceneManager.h" />
