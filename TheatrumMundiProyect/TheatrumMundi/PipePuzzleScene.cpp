@@ -11,8 +11,8 @@
 PipePuzzleScene::PipePuzzleScene(int modules, int pipes)
 	:ScenePuzzleTemplate()
 {
-
-	_waterPipes.reserve(pipes);
+	//PASARLO TODO A INIT
+	/*_waterPipes.reserve(pipes);
 	_waterPipes.push_back (1);
 	_waterPipes.push_back(1);
 	_waterPipes.push_back(0);
@@ -21,7 +21,7 @@ PipePuzzleScene::PipePuzzleScene(int modules, int pipes)
 	_waterPipes.push_back(2);
 	_waterPipes.push_back(1);
 	_waterPipes.push_back(0);
-	_waterPipes.push_back(0);
+	_waterPipes.push_back(0);*/
 
 	_modules.reserve(modules);
 	_modules.push_back(RIGHT );
@@ -98,6 +98,7 @@ void PipePuzzleScene::changeDirection(int module)
 
 void PipePuzzleScene::init()
 {
+	//cambiar a metodo de creacion de modulos
 	cout << _modules[5] << endl;
 	if (!isStarted) {
 		auto _module5 = entityManager->addEntity();
@@ -111,4 +112,16 @@ void PipePuzzleScene::init()
 		
 
 	}
+}
+
+void PipePuzzleScene::waterFlow()
+{
+}
+
+void PipePuzzleScene::waterArrives()
+{
+}
+
+void PipePuzzleScene::waterLeaves()
+{
 }
