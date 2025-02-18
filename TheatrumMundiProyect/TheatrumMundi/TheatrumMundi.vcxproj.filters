@@ -524,9 +524,6 @@
     <ClInclude Include="ScenePuzzleTemplate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InventoryScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md">
