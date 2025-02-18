@@ -3,6 +3,9 @@
 #include "../utils/Vector2D.h"
 #include "../ecs/ecs.h"
 
+class RectArea2D;
+class CircleArea2D;
+
 class Area2D : public ecs::Component
 {
 public:
@@ -14,6 +17,9 @@ public:
 	virtual bool containsPoint(Vector2D point) = 0;
 
 	virtual bool overlapsWithArea(Area2D* area) = 0;
+
+	virtual bool overlapsWith(RectArea2D* rectArea) = 0;
+	virtual bool overlapsWith(CircleArea2D* rectArea) = 0;
 
 	void setLocalPos(Vector2D pos) {
 		_localPosition = pos;

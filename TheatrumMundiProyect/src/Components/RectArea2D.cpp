@@ -4,6 +4,7 @@
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "Transform.h"
+#include "CircleArea2D.h"
 
 RectArea2D::RectArea2D(Vector2D localPos, int width, int height)
 	: Area2D(localPos), _width(width), _height(height)
@@ -55,21 +56,33 @@ bool RectArea2D::containsPoint(Vector2D point)
 	return SDL_PointInRect(&pnt, &rect);
 }
 
-bool RectArea2D::overlapsWithArea(Area2D* area)
+bool RectArea2D::overlapsWith(RectArea2D* rectArea)
 {
 	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
 
 	if (transform == nullptr) return false;
 
-	Transform* extrentTr = area->getContext()->getMngr()->getComponent<Transform>(area->getContext());
+	Transform* extrentTr = rectArea->getContext()->getMngr()->getComponent<Transform>(rectArea->getContext());
 
-	int wordX = (transform->getPos().getX() - extrentTr->getPos().getX()) + transform->getWidth() / 2;
-	int wordY = transform->getPos().getY() - extrentTr->getPos().getY() + transform->getHeight() / 2;
+	SDL_Rect thisRect = {
+		transform->getPos().getX() + _localPosition.getX(),
+		transform->getPos().getY() + _localPosition.getY(),
+		_width,
+		_height
+	};
 
-	int centerDist = sqrt(
-		pow(abs(wordX), 2)
-		+ pow(abs(wordY), 2)
-	);
+	SDL_Rect otherRect = {
+		extrentTr->getPos().getX() + rectArea->getLocalPos().getX(),
+		extrentTr->getPos().getY() + rectArea->getLocalPos().getY(),
+		rectArea->getWidth(),
+		rectArea->getHeight()
+	};
 
-	return centerDist <= transform->getWidth()/2;
+	SDL_Rect rs;
+	return SDL_IntersectRect(&thisRect, &otherRect, &rs);
+}
+
+bool RectArea2D::overlapsWith(CircleArea2D* circleArea)
+{
+	return true;
 }

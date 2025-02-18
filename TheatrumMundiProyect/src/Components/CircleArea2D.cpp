@@ -3,6 +3,7 @@
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "Transform.h"
+#include "RectArea2D.h"
 
 CircleArea2D::CircleArea2D(Vector2D localPos, int radius)
 	: Area2D(localPos), _radius(radius)
@@ -46,4 +47,22 @@ bool CircleArea2D::containsPoint(Vector2D point)
 	);
 
 	return centerDist <= _radius;
+}
+
+bool CircleArea2D::overlapsWith(CircleArea2D* circleArea)
+{
+	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
+
+	if (transform == nullptr) return false;
+
+	Transform* extrentTr = circleArea->getContext()->getMngr()->getComponent<Transform>(circleArea->getContext());
+
+	Vector2D vDistance = (transform->getPos() + _localPosition) - (extrentTr->getPos() + circleArea->getLocalPos());
+
+	return vDistance.magnitude() <= _radius + circleArea->getRadius();
+}
+
+bool CircleArea2D::overlapsWith(RectArea2D* rectArea)
+{
+	return true;
 }

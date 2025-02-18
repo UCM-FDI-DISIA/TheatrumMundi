@@ -16,7 +16,12 @@ public:
 
 	bool containsPoint(Vector2D point) override;
 
-	bool overlapsWithArea(Area2D* area) override { return true; }
+	bool overlapsWithArea(Area2D* area) override {
+		return area->overlapsWith(this);
+	}
+
+	bool overlapsWith(RectArea2D* rectArea) override;
+	bool overlapsWith(CircleArea2D* rectArea) override;
 
 	void setRadius(int value) {
 		_radius = value;
