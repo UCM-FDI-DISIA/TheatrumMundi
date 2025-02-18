@@ -33,7 +33,7 @@ public:
 		_font = TTF_OpenFont(fileName.c_str(), size);
 		assert(_font != nullptr);
 	}
-
+	
 	virtual ~Font() {
 		if (_font != nullptr)
 			TTF_CloseFont(_font);
