@@ -1,7 +1,7 @@
 #pragma once
-#include "../../TheatrumMundiProyect/src/ecs/Component.h"
+#include "../ecs/Component.h"
 #include <SDL.h>
-#include "TextoInfo.h"
+#include "../../TheatrumMundi/TextoInfo.h"
 
 class WriteTextComponent : public ecs::Component
 {
@@ -18,5 +18,9 @@ public:
 
 
 	~WriteTextComponent();
+private:
+
+	TextInfo actualLine = { " ", " " };
+	
 };
 

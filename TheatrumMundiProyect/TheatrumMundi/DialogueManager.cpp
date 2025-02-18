@@ -53,6 +53,8 @@ DialogueManager::DialogueManager(){
 	room = "Sala" + to_string(actualroom);
 	//Load Json in the dialogue map
 	ReadJson();
+	WriteText = new WriteTextComponent();
+	WriteText->initComponent();
 }
 
 /// <summary>

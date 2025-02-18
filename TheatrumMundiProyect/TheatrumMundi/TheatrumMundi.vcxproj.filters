@@ -111,10 +111,10 @@
     <ClCompile Include="ScenePuzzleTemplate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="writetextcomponent.cpp">
+    <ClCompile Include="DialogTestScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DialogTestScene.cpp">
+    <ClCompile Include="..\src\Components\WriteTextComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -542,10 +542,10 @@
     <ClInclude Include="TextoInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WriteTextComponent.h">
+    <ClInclude Include="DialogTestScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DialogTestScene.h">
+    <ClInclude Include="..\src\Components\WriteTextComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

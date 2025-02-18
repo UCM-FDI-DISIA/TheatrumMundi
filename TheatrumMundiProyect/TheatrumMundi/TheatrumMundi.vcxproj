@@ -26,6 +26,7 @@
     <ClCompile Include="..\src\Components\MouseIntaractionComponent.cpp" />
     <ClCompile Include="..\src\Components\RectArea2D.cpp" />
     <ClCompile Include="..\src\Components\TriggerComponent.cpp" />
+    <ClCompile Include="..\src\Components\WriteTextComponent.cpp" />
     <ClCompile Include="..\src\ecs\Manager.cpp" />
     <ClCompile Include="..\src\game\Game.cpp" />
     <ClCompile Include="..\SRC\json\JSON.cpp" />
@@ -47,7 +48,6 @@
     <ClCompile Include="ScenePuzzleTemplate.cpp" />
     <ClCompile Include="SceneRoomTemplate.cpp" />
     <ClCompile Include="SceneTemplate.cpp" />
-    <ClCompile Include="writetextcomponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\SDL2-2.30.11\include\begin_code.h" />
@@ -154,6 +154,7 @@
     <ClInclude Include="..\src\Components\RectArea2D.h" />
     <ClInclude Include="..\src\Components\Transform.h" />
     <ClInclude Include="..\src\Components\TriggerComponent.h" />
+    <ClInclude Include="..\src\Components\WriteTextComponent.h" />
     <ClInclude Include="..\src\ecs\Component.h" />
     <ClInclude Include="..\src\ecs\ecs.h" />
     <ClInclude Include="..\src\ecs\ecs_defs_example.h" />
@@ -192,7 +193,6 @@
     <ClInclude Include="SceneRoomTemplate.h" />
     <ClInclude Include="SceneTemplate.h" />
     <ClInclude Include="TextoInfo.h" />
-    <ClInclude Include="WriteTextComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />
