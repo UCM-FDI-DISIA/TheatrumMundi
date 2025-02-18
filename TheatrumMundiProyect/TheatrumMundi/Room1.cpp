@@ -9,6 +9,7 @@
 #include "../src/components/DragComponent.h"
 #include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
+#include "../src/ecs/Manager.h"
 Room1::Room1(): SceneRoomTemplate()
 {
 }
@@ -32,7 +33,14 @@ void Room1::init()
 		TriggerComponent* trg = entityManager->addComponent<TriggerComponent>(_fighter);
 		/*trg->connect(TriggerComponent::CURSOR_ENTERED, []() { std::cout << "ENTERED\n";  });
 		trg->connect(TriggerComponent::CURSOR_LEFT, []() { std::cout << "LEFT\n";  });*/
-		trg->connect(TriggerComponent::AREA_ENTERED, []() { std::cout << "AREA2D IN\n";  });
+		trg->connect(TriggerComponent::AREA_ENTERED, [trg]() {
+			std::cout << "AREA2D IN\n";  
+			std::list<ecs::entity_t> ents = trg->triggerContextEntities();
+			for (ecs::entity_t e : ents) {
+				if (e->getMngr()->getComponent<ClickComponent>(e) != nullptr)
+					std::cout << "Has click\n";
+			}
+		});
 		trg->connect(TriggerComponent::AREA_LEFT, []() { std::cout << "AREA2D OUT\n";  });
 
 		DragComponent* drg = entityManager->addComponent<DragComponent>(_fighter);
@@ -43,6 +51,7 @@ void Room1::init()
 		entityManager->addComponent<Image>(_fighter2, &sdlutils().images().at("prueba"));
 		entityManager->addComponent<RectArea2D>(_fighter2);
 		DragComponent* drg2 = entityManager->addComponent<DragComponent>(_fighter2);
+		ClickComponent* clk2 = entityManager->addComponent<ClickComponent>(_fighter2);
 	}
 }
 

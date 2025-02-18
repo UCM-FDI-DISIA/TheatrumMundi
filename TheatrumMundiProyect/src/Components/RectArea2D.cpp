@@ -63,8 +63,8 @@ bool RectArea2D::overlapsWithArea(Area2D* area)
 
 	Transform* extrentTr = area->getContext()->getMngr()->getComponent<Transform>(area->getContext());
 
-	int wordX = transform->getPos().getX() - extrentTr->getPos().getX();
-	int wordY = transform->getPos().getY() - extrentTr->getPos().getY();
+	int wordX = (transform->getPos().getX() - extrentTr->getPos().getX()) + transform->getWidth() / 2;
+	int wordY = transform->getPos().getY() - extrentTr->getPos().getY() + transform->getHeight() / 2;
 
 	int centerDist = sqrt(
 		pow(abs(wordX), 2)
