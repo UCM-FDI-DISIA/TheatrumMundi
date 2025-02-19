@@ -47,5 +47,6 @@ public:
 	~DialogueManager();
 
 	void setSceneLog(LogComponent* sceneLog);
+	void setWriteText(WriteTextComponent<TextInfo>* textoToWrite);
 };
 

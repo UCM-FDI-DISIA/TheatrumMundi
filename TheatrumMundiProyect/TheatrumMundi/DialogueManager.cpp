@@ -57,6 +57,7 @@ DialogueManager::DialogueManager() : WriteText(nullptr), _sceneLog(nullptr){
 	//Load Json in the dialogue map
 	ReadJson();
 
+	/*
 	// Inicializar el puntero a WriteTextComponent con una instancia nueva
 	Font& font = sdlutils().fonts().at("BASE"); // Obtener la fuente
 	SDL_Color color = { 255, 0, 0, 255 }; // Establecer el color (rojo)
@@ -64,7 +65,7 @@ DialogueManager::DialogueManager() : WriteText(nullptr), _sceneLog(nullptr){
 
 	// Crear una instancia de WriteTextComponent con new
 	//WriteText = new WriteTextComponent<TextInfo>(font, color, textInfo);
-
+	*/
 }
 
 /// <summary>
@@ -148,4 +149,9 @@ DialogueManager::~DialogueManager()
 void DialogueManager::setSceneLog(LogComponent* sceneLog)
 {
 	_sceneLog = sceneLog;
+}
+
+void DialogueManager::setWriteText(WriteTextComponent<TextInfo>* texToToWrite)
+{
+	//WriteText = texToToWrite;
 }

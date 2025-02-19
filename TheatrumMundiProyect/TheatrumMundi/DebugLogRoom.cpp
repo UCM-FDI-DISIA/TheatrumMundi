@@ -38,6 +38,9 @@ void DebugLogRoom::init()
 
 		Image* imLog = entityManager->addComponent<Image>(_log, &sdlutils().images().at("fondoPruebaLog"));
 		
+		_log->getMngr()->setActive(_log, false);
+
+		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
 
 		//add debug lines to log
 		/*
@@ -45,23 +48,29 @@ void DebugLogRoom::init()
 		logComp->addDialogueLineLog("author2", "ahahaha me mato");
 		*/
 
+		// Inicializar el puntero a WriteTextComponent con una instancia nueva
+		Font& font = sdlutils().fonts().at("BASE"); // Obtener la fuente
+		SDL_Color color = { 255, 0, 0, 255 }; // Establecer el color (rojo)
+		TextInfo textInfo = { "John", "Hello, world!" }; // Crear una estructura de TextInfo
+
+
+		auto _textTest = entityManager->addEntity();
+		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
+		//WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, font, color, textInfo);
+
 		
 
-		_log->getMngr()->setActive(_log, false);
+		//Game::Instance()->getDialogueManager()->setWriteText(writeLogentityManager);
 
-		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
-
-		Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
+		
 
 		SDL_Color colorText = { 255, 255, 255, 255 };
 
 		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog = entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("ARIAL24"), colorText, logComp->getLogList());
 
 		
-
-
-
-
+		
+		Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
 
 
 
