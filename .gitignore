@@ -19,7 +19,7 @@
 mono_crash.*
 
 # Build results
-.obsidian
+.obsidian/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/

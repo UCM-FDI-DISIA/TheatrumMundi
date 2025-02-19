@@ -33,7 +33,7 @@
     {
         "id": "clockCheckButton",
         "file": "../resources/images/boton_check.png"
-    }
+    },
     { "id" : "prueba", "file" : "../resources/images/socrates.png" },
     { "id" : "init", "file" : "../resources/images/start.jpg" },
     { "id" : "exit", "file" : "../resources/images/exit.png" }
