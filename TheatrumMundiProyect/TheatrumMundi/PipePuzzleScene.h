@@ -1,8 +1,12 @@
 #pragma once
 #include <vector>
 #include "ScenePuzzleTemplate.h"
+#include "Pipe.h"
+#include "Module.h"
 using namespace std;
-class PipePuzzleScene: public ScenePuzzleTemplate
+class Module;
+class Pipe;
+class PipePuzzleScene : public ScenePuzzleTemplate, public Module, public Pipe
 {
 
 private:
@@ -11,18 +15,6 @@ private:
 	pipes with even index need 2 water sources, uneven only 1.
 	pipes can only have 0,1,2 water connected.
 	*/
-	
-	enum Type { // diections a module can have
-
-		AND,//2 entries need to be true
-		OR// 1 entrie needs to be true
-	};
-	struct Pipe
-	{
-		Type type;
-		int _waterAmount;
-		bool result;
-	};
 
 	//vector de bools para tramos de agua
 	//modules hacve 2 directions, posible 4 and actual 1
@@ -33,21 +25,16 @@ private:
 	//los mudulos tienen 4 padres y los pipes tienen 2 
 	//si hay un cambio en los results de hechar agua o no en los pipes o modulos toca cambiaar los que esten al lado
 	vector<Pipe> _waterPipes; //vector that contains the amount of water each pipe has
-	enum Directions { // diections a module can have
-
-		DOWN,
-		UP,
-		RIGHT,
-		LEFT
-	};
-
-	vector<Directions> _modules; //modules that change the direction of the water flow
+	vector<Module> _modules; //modules that change the direction of the water flow
+	bool solved;
 
 protected:
 
 
 public: 
-	 PipePuzzleScene(int modules, int pipes);
+	 PipePuzzleScene();
+	 void pipeCreation();
+	 void moduleCreation();
 	 void checkSolution();
 	 Directions getDirec(int module); 
 	 void waterManagement(int beg, int end,int pipe, int operation); // add or decrease the amount of water connected to a certain pipe, (operation means +1 or -1)
