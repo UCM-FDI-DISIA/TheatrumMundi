@@ -43,7 +43,6 @@
     <ClCompile Include="..\SRC\sdlutils\Texture.cpp" />
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
-    <ClCompile Include="a.cpp" />
     <ClCompile Include="DebugLogRoom.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
     <ClCompile Include="DialogTestScene.cpp" />

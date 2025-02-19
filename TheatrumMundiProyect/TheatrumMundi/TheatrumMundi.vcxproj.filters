@@ -103,7 +103,6 @@
     <ClCompile Include="..\src\Components\RectArea2D.cpp">
       <Filter>Component</Filter>
     </ClCompile>
-    <ClCompile Include="a.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\SDL2-2.30.11\include\SDL.h">
