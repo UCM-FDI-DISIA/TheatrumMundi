@@ -1,52 +1,24 @@
 {
   "main": {
-    "id": "245c0ce9c29031c7",
+    "id": "2ff7e18c6496f547",
     "type": "split",
     "children": [
       {
-        "id": "76509780e5fe59ea",
+        "id": "c1d08026b3345e46",
         "type": "tabs",
         "children": [
           {
-            "id": "743c3cbd08005f24",
+            "id": "4bec781a6e2e7c5a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "documentos de arquitectura/Como funcionan las escenas.md",
-                "mode": "preview",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "Como funcionan las escenas"
-            }
-          },
-          {
-            "id": "466c126361d1831e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "documentos de arquitectura/Convenciones de código.md",
+                "file": "documentos de arquitectura/Cómo funcionan los Mouse Interaction Components.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Convenciones de código"
-            }
-          },
-          {
-            "id": "341066af34b49b28",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "documentos de arquitectura/Como funcionan las escenas.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Como funcionan las escenas"
+              "title": "Cómo funcionan los Mouse Interaction Components"
             }
           }
         ]
@@ -55,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "e42a9b91185ced1b",
+    "id": "db115fe40102c48a",
     "type": "split",
     "children": [
       {
-        "id": "561fff0101081dd9",
+        "id": "f430ec081bbc9be3",
         "type": "tabs",
         "children": [
           {
-            "id": "68535a4a95c94194",
+            "id": "6577ff44d8e9cd87",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -72,11 +44,11 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Explorador de archivos"
+              "title": "Files"
             }
           },
           {
-            "id": "184f71c53691ab3f",
+            "id": "6eaf13f7bdb55753",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -89,17 +61,17 @@
                 "sortOrder": "alphabetical"
               },
               "icon": "lucide-search",
-              "title": "Buscar"
+              "title": "Search"
             }
           },
           {
-            "id": "14bb8055adb43bde",
+            "id": "84ccad457495eb13",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
               "state": {},
               "icon": "lucide-bookmark",
-              "title": "Marcadores"
+              "title": "Bookmarks"
             }
           }
         ]
@@ -109,20 +81,20 @@
     "width": 300
   },
   "right": {
-    "id": "bbd957f4485502e1",
+    "id": "cd2f68cf04cf775b",
     "type": "split",
     "children": [
       {
-        "id": "fca3480b082fe323",
+        "id": "790b607d8263b6d9",
         "type": "tabs",
         "children": [
           {
-            "id": "5d89af0c27f1f0a3",
+            "id": "1b4fcca906fd895e",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "documentos de arquitectura/Cómo funcionan los Mouse Interaction Components.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -132,25 +104,25 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Enlaces entrantes de README"
+              "title": "Backlinks for Cómo funcionan los Mouse Interaction Components"
             }
           },
           {
-            "id": "8a6866b3de1b6deb",
+            "id": "2888afa3413433c1",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "documentos de arquitectura/Cómo funcionan los Mouse Interaction Components.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Enlaces salientes de README"
+              "title": "Outgoing links from Cómo funcionan los Mouse Interaction Components"
             }
           },
           {
-            "id": "633cb4b0e2e41772",
+            "id": "24dbf9f2ddb47fa5",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -161,22 +133,22 @@
                 "searchQuery": ""
               },
               "icon": "lucide-tags",
-              "title": "Etiquetas"
+              "title": "Tags"
             }
           },
           {
-            "id": "55156e8c37cb4eaf",
+            "id": "e91d29ccf4c6c10e",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md",
+                "file": "documentos de arquitectura/Cómo funcionan los Mouse Interaction Components.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Esquema de README"
+              "title": "Outline of Cómo funcionan los Mouse Interaction Components"
             }
           }
         ]
@@ -188,63 +160,28 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Abrir selector rápido": false,
-      "graph:Abrir vista gráfica": false,
-      "canvas:Crear nuevo lienzo": false,
-      "daily-notes:Abrir la nota de hoy": false,
-      "templates:Insertar plantilla": false,
-      "command-palette:Abrir paleta de comandos": false
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
     }
   },
-  "active": "743c3cbd08005f24",
+  "active": "4bec781a6e2e7c5a",
   "lastOpenFiles": [
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/unsuccessfulbuild",
     "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.read.2.tlog",
     "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/Game.obj",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/unsuccessfulbuild",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.18680.read.4.tlog",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.18680-cvtres.write.1.tlog",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.18680-cvtres.read.1.tlog",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.18680-rc.write.1.tlog",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.18680-rc.read.1.tlog",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.18680.read.2.tlog",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/TheatrumMundi.tlog/link.18680.read.3.tlog",
-    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/CircleArea2D.obj",
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/encClResponseFile.rsp",
+    "TheatrumMundiProyect/enc_temp_folder/1b8d4537631327ff80e6a94e471fdaae/SceneManager.cpp",
+    "TheatrumMundiProyect/enc_temp_folder/1b8d4537631327ff80e6a94e471fdaae",
+    "TheatrumMundiProyect/enc_temp_folder",
+    "TheatrumMundiProyect/enc_temp_folder/b63d52c38ea82854b2b2e8c846baaa46/SceneManager.cpp",
+    "TheatrumMundiProyect/enc_temp_folder/b63d52c38ea82854b2b2e8c846baaa46",
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/scenetemplate.new.obj.enc",
+    "TheatrumMundiProyect/tmp/TheatrumMundi/x64/Debug/SceneTemplate.obj",
     "documentos de arquitectura/Cómo crear un nuevo componente.md",
-    "documentos de arquitectura/Cómo funcionan los Mouse Interaction Components.md",
-    "documentos de arquitectura/Como funcionan las escenas.md",
-    "documentos de arquitectura/Convenciones de código.md",
-    "documentos de arquitectura/Arquitectura Proyectos II.md",
-    "Untitled.canvas",
-    "Untitled 1.canvas",
-    "2025-02-12.md",
-    "TheatrumMundiProyect/resources/images/socrates.png",
-    "README.md",
-    "image.jpg",
-    "TheatrumMundiProyect/src/ecs/RAEDME.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/release_checklist.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-winrt.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-windows.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-wince.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-vita.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-visualc.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-n3ds.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-macos.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-linux.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-kmsbsd.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-ios.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-hg.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-git.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-gesture.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-gdk.md",
-    "TheatrumMundiProyect/lib/SDL2-2.30.11/docs/README-dynapi.md",
-    "ImagenesGDD/tetrismov1.jpg",
-    "ImagenesGDD/tetrisini.jpg",
-    "ImagenesGDD/tetrisfin.jpg",
-    "ImagenesGDD/tetris3mov.jpg",
-    "ImagenesGDD/socrates.png",
-    "ImagenesGDD/sala2.jpg",
-    "ImagenesGDD/sala1.png",
-    "ImagenesGDD/partitura.png"
+    "documentos de arquitectura/Arquitectura Proyectos II.md"
   ]
 }

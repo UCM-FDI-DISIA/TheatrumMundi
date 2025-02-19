@@ -2,11 +2,14 @@
 #include <assert.h>
 #include "SceneTemplate.h"
 #include "Room1.h"
+#include "InitialScene.h"
+#include "checkML.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 
 //#include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 SceneManager::SceneManager()
 {
+	scenes.push_back(new InitialScene());
 	scenes.push_back(new Room1());
 	loadScene(0);
 	
@@ -56,5 +59,8 @@ void SceneManager::update()
 SceneManager::~SceneManager()
 {
 	for (auto a : scenes) delete a;
-	
+
+	currentscenes.clear();
 }
+
+

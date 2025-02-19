@@ -1,6 +1,7 @@
 #pragma once
-#include "../../TheatrumMundiProyect/src/ecs/Component.h"
+#include "../ecs/Component.h"
 #include <SDL.h>
+#include "../../TheatrumMundi/TextoInfo.h"
 
 class WriteTextComponent : public ecs::Component
 {
@@ -10,9 +11,16 @@ public:
 
 	WriteTextComponent();
 
+	void ShowDialogue(TextInfo dialogue);
+
 	void update() override;
 	void render() override;
 
+
 	~WriteTextComponent();
+private:
+
+	TextInfo actualLine = { " ", " " };
+	
 };
 

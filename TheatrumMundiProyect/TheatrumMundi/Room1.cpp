@@ -47,6 +47,7 @@ void Room1::init()
 		trg->connect(TriggerComponent::AREA_LEFT, []() { std::cout << "AREA2D OUT\n";  });
 
 		DragComponent* drg = entityManager->addComponent<DragComponent>(_fighter);
+
 		//drg->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
 
 		auto _fighter2 = entityManager->addEntity();
@@ -65,4 +66,5 @@ void Room1::refresh()
 
 void Room1::unload()
 {
+	entityManager->~EntityManager();
 }
