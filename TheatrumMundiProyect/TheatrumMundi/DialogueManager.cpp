@@ -57,17 +57,8 @@ DialogueManager::DialogueManager() : _sceneLog(nullptr){
 	//Load Json in the dialogue map
 	ReadJson();
 
-	_showText = new TextInfo{ " " , " " };
+	_showText = new TextInfo{ " " , " " }; //initialize showing text
 
-	/*
-	// Inicializar el puntero a WriteTextComponent con una instancia nueva
-	Font& font = sdlutils().fonts().at("BASE"); // Obtener la fuente
-	SDL_Color color = { 255, 0, 0, 255 }; // Establecer el color (rojo)
-	TextInfo textInfo = { "John", "Hello, world!" }; // Crear una estructura de TextInfo
-
-	// Crear una instancia de WriteTextComponent con new
-	//WriteText = new WriteTextComponent<TextInfo>(font, color, textInfo);
-	*/
 }
 
 /// <summary>

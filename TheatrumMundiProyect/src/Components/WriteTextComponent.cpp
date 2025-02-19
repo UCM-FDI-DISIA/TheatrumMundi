@@ -50,8 +50,6 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 template <>
 void WriteTextComponent<TextInfo>::render()
 {
-	//actualLine = { "hola","me cago en mi puta vida" };
-	//std::cout << actualLine.Character << " " << actualLine.Text << std::endl;
 	Font& fuente = sdlutils().fonts().at("BASE");
 	SDL_Color rojo = { 255, 0, 0, 255 };
 
@@ -72,7 +70,7 @@ WriteTextComponent<T>::~WriteTextComponent()
 {
 }
 
-// Declaración de instanciación explícita
+// Explicit instantiation declaration
 template class WriteTextComponent<TextInfo>;
 
 template class WriteTextComponent<std::list<std::pair<std::string,std::string>>>;
