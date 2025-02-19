@@ -14,7 +14,7 @@
 
 ClockPuzzleScene::ClockPuzzleScene() : ScenePuzzleTemplate()
 {
-	_actualHour = 0;
+	_actualHour = 90;
 	_actualMinute = 0;
 }
 
@@ -45,7 +45,7 @@ void ClockPuzzleScene::init()
 
 		//create the clock hands : hour
 		auto _clockHor = entityManager->addEntity();
-		auto _clockHorTransform = entityManager->addComponent<Transform>(_clockHor, Vector2D(695, 360), Vector2D(0, 0), 20, 60, 0);
+		auto _clockHorTransform = entityManager->addComponent<Transform>(_clockHor, Vector2D(695, 360), Vector2D(0, 0), 20, 60, 90);
 		//auto _clockHorTransform = entityManager->addComponent<Transform>(_clockHor, Vector2D(200, 350), Vector2D(0, 0), 20, 60, 0);
 		entityManager->addComponent<Image>(_clockHor, &sdlutils().images().at("clockHorArrow"));
 
@@ -85,7 +85,6 @@ void ClockPuzzleScene::init()
 		ClickComponent* clockHorClick = entityManager->addComponent<ClickComponent>(_buttonHor);
 		clockHorClick->connect(ClickComponent::JUST_CLICKED, [_clockHorTransform, this]()
 			{
-				std::cout << "CLICKED\n";
 				_clockHorTransform->setRot(_clockHorTransform->getRot() + 30);
 				_actualHour += 30;
 				if (_actualHour == 360) _actualHour = 0;
@@ -104,8 +103,29 @@ void ClockPuzzleScene::init()
 		ClickComponent* clockCheckClick = entityManager->addComponent<ClickComponent>(_buttonCheck);
 		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [_buttonCheckTransform, this]()
 			{
-				std::cout << "CLICKED\n";
 				if (Check()) std::cout << "wii";
+			});
+
+
+		//create the buttons: reset button
+		auto _buttonResetPuzzle = entityManager->addEntity();
+		auto _buttonRessetPuzzleTransform = 
+		entityManager->addComponent<Transform>(_buttonResetPuzzle, Vector2D(1200, 150), Vector2D(0, 0), 70, 70, 0);
+
+		entityManager->addComponent<Image>(_buttonResetPuzzle, &sdlutils().images().at("clockHorButton"));
+
+		entityManager->addComponent<RectArea2D>(_buttonResetPuzzle);
+
+
+		ClickComponent* clockResetClick = entityManager->addComponent<ClickComponent>(_buttonResetPuzzle);
+		clockResetClick->connect(ClickComponent::JUST_CLICKED, [_clockHorTransform,_clockMinTransform, this]()
+			{
+				std::cout << "WAAAAAAAAAA\n";
+
+				_clockHorTransform->setRot(90);
+				_actualHour = 90;
+				_clockMinTransform->setRot(0);
+				_actualMinute = 0;
 			});
 
 	}
