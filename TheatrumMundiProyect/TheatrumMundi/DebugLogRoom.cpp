@@ -27,6 +27,20 @@ DebugLogRoom::~DebugLogRoom()
 void DebugLogRoom::init()
 {
 	if (!isStarted) {
+
+		//All Screen
+		auto _screenDetect = entityManager->addEntity();
+		auto _screenDetectTr = entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
+
+		entityManager->addComponent<RectArea2D>(_screenDetect);
+		ClickComponent* passDialog = entityManager->addComponent<ClickComponent>(_screenDetect);
+		passDialog->connect(ClickComponent::JUST_CLICKED, []() 
+			{
+				//read dialogue
+			Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
+
+			});
+		
 		//Create dialogue text entity
 		auto _textTest = entityManager->addEntity();
 		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
@@ -45,8 +59,7 @@ void DebugLogRoom::init()
 		//register log in dialogue manager
 		Game::Instance()->getDialogueManager()->setSceneLog(logComp); 
 
-		//read dialogue
-		Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
+		
 		
 		//add writeText to dialogueManager
 		SDL_Color colorDialog = { 255, 0, 0, 255 }; // Establecer el color (rojo)
@@ -55,6 +68,8 @@ void DebugLogRoom::init()
 		
 
 		//BUTTONS
+
+		
 
 		//Open log button
 		auto _openLogButton = entityManager->addEntity();
@@ -85,7 +100,7 @@ void DebugLogRoom::init()
 			});
 		
 		//Open dialogue button
-		auto _openDialogButton = entityManager->addEntity();
+		/*auto _openDialogButton = entityManager->addEntity();
 		auto _openDialogButtonTr = entityManager->addComponent<Transform>(_openDialogButton, Vector2D(0, 500), Vector2D(0, 0), 200, 175, 0);
 		entityManager->addComponent<Image>(_openDialogButton, &sdlutils().images().at("prueba"));
 
@@ -113,7 +128,7 @@ void DebugLogRoom::init()
 			});
 		
 		
-		
+		*/
 		
 	}
 }

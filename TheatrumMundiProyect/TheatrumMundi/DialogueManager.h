@@ -40,6 +40,9 @@ private:
 	TextInfo* _showText; // points to current displayed textLine
 
 	LogComponent* _sceneLog; //points to log list
+
+	
+
 public:
 	DialogueManager();
 	void ReadDialogue(const eventToRead& _eventToRead);

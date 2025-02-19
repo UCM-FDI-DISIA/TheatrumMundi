@@ -105,9 +105,12 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 	
 	
-	string event;
-	ParseEnum(event, _eventToRead);
-	for (auto& elem : mRoom[room][event]) {
+		string event;
+		ParseEnum(event, _eventToRead);
+	
+		TextInfo elem = *mRoom[room][event].begin();
+
+		
 		delete _showText; //delete last text line
 		_showText = new TextInfo{ elem.Character , elem.Text}; //add new text line
 		cout << elem.Character << ": " << elem.Text << endl;
@@ -116,7 +119,10 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 		{
 			_sceneLog->addDialogueLineLog(elem.Character, elem.Text);
 		}
-	}
+
+		mRoom[room][event].pop_front();
+		
+	
 }
 
 /// <summary>
@@ -132,6 +138,7 @@ void DialogueManager::ReadAnswer(){
 		room = "Sala" + to_string(actualroom);
 	}
 }
+
 
 DialogueManager::~DialogueManager()
 {

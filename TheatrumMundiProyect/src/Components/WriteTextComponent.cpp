@@ -8,9 +8,10 @@
 
 
 template <typename T>
-WriteTextComponent<T>::WriteTextComponent(Font& desiredFont, SDL_Color desiredColor, T* text)
+WriteTextComponent<T>::WriteTextComponent(Font& desiredFont, const SDL_Color& desiredColor, T* text)
 	:_myFont(desiredFont), _color(desiredColor), textStructure(text)
 {
+
 }
 
 
@@ -32,6 +33,7 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 
 	int y = 0;
 	for (auto it = textStructure->begin(); it != textStructure->end(); ++it)
+		// for (auto it: *textStructure)
 	{
 		//author
 		Texture* authorTexture = new Texture(sdlutils().renderer(), it->first, _myFont, _color); //convert text to texture

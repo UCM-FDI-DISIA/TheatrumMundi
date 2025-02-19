@@ -21,7 +21,7 @@ public:
 	//ID
 	__CMPID_DECL__(ecs::cmp::WRITE_TEXT_COMPONENT);
 
-	WriteTextComponent(Font& desiredFont, SDL_Color desiredColor, T* text);
+	WriteTextComponent(Font& desiredFont, const SDL_Color& desiredColor, T* text);
 
 	void ShowDialogue(T* dialogue);
 
