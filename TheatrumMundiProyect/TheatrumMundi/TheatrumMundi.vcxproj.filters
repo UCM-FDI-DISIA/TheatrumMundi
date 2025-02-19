@@ -123,6 +123,8 @@
     <ClCompile Include="..\src\Components\WriteTextComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ClockPuzzleScene.cpp">
+      <Filter>Source Files</Filter>
     <ClCompile Include="InitialScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
@@ -561,6 +563,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InitialScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClockPuzzleScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
