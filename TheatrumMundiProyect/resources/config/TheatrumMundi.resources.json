@@ -11,15 +11,10 @@
   ],
   
   "images" : [
-    {
-      "id": "prueba",
-      "file": "../resources/images/socrates.png"
-    },
-    {
-      "id": "fondoPruebaLog",
-      "file": "../resources/images/fondoLogPrueba.jpg"
-    }
-
+    {"id": "prueba","file" : "../resources/images/socrates.png"},
+    {"id": "fondoPruebaLog","file": "../resources/images/fondoLogPrueba.jpg"},
+    { "id" : "init", "file" : "../resources/images/start.jpg" },
+    { "id" : "exit", "file" : "../resources/images/exit.png" }
   ],
 
   "messages": [

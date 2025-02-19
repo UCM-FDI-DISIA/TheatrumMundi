@@ -20,7 +20,7 @@ public:
 	void render() const;
 	void virtual refresh() {};
 	void virtual unload() {};
-	~SceneTemplate();
+	virtual ~SceneTemplate();
 
 };
 

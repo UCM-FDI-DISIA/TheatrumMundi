@@ -27,6 +27,7 @@
     <ClCompile Include="..\src\Components\MouseIntaractionComponent.cpp" />
     <ClCompile Include="..\src\Components\RectArea2D.cpp" />
     <ClCompile Include="..\src\Components\TriggerComponent.cpp" />
+    <ClCompile Include="..\src\Components\WriteTextComponent.cpp" />
     <ClCompile Include="..\src\ecs\Manager.cpp" />
     <ClCompile Include="..\src\game\Game.cpp" />
     <ClCompile Include="..\SRC\json\JSON.cpp" />
@@ -42,7 +43,9 @@
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
     <ClCompile Include="DebugLogRoom.cpp" />
+    <ClCompile Include="DialogTestScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
+    <ClCompile Include="InitialScene.cpp" />
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScenePuzzleTemplate.cpp" />
@@ -156,6 +159,7 @@
     <ClInclude Include="..\src\Components\RectArea2D.h" />
     <ClInclude Include="..\src\Components\Transform.h" />
     <ClInclude Include="..\src\Components\TriggerComponent.h" />
+    <ClInclude Include="..\src\Components\WriteTextComponent.h" />
     <ClInclude Include="..\src\ecs\Component.h" />
     <ClInclude Include="..\src\ecs\ecs.h" />
     <ClInclude Include="..\src\ecs\ecs_defs_example.h" />
@@ -188,13 +192,16 @@
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
     <ClInclude Include="DebugLogRoom.h" />
     <ClInclude Include="checkML.h" />
+    <ClInclude Include="DialogTestScene.h" />
     <ClInclude Include="DialogueManager.h" />
+    <ClInclude Include="InitialScene.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScenePuzzleTemplate.h" />
     <ClInclude Include="SceneRoomTemplate.h" />
     <ClInclude Include="SceneTemplate.h" />
     <ClInclude Include="WriteTextComponent.h" />
+    <ClInclude Include="TextoInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />
@@ -306,6 +313,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AssemblerOutput>NoListing</AssemblerOutput>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

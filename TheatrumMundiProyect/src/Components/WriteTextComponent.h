@@ -1,5 +1,4 @@
 #pragma once
-#include "../../TheatrumMundiProyect/src/ecs/Component.h"
 
 #include <list>
 #include <string>
@@ -7,6 +6,9 @@
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
 
 template <typename T>
+#include "../ecs/Component.h"
+#include <SDL.h>
+#include "../../TheatrumMundi/TextoInfo.h"
 
 class WriteTextComponent : public ecs::Component
 {
@@ -21,9 +23,16 @@ public:
 
 	WriteTextComponent(Font& desiredFont, SDL_Color desiredColor, T text);
 
+	void ShowDialogue(TextInfo dialogue);
+
 	void update() override;
 	void render() override;
 
+
 	~WriteTextComponent();
+private:
+
+	TextInfo actualLine = { " ", " " };
+	
 };
 
