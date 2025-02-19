@@ -3,6 +3,9 @@
 #include <cassert>
 #include "../src/json/json.hpp";
 #include "../src/Components/WriteTextComponent.h";
+#include "TextInfo.h"
+
+#include "../src/components/LogComponent.h"
 
 
 using json = nlohmann::json;
@@ -47,14 +50,15 @@ void DialogueManager::ReadJson(){
 }
 
 
-DialogueManager::DialogueManager(){
+DialogueManager::DialogueManager() : _sceneLog(nullptr){
 
 	actualroom = 1;
 	room = "Sala" + to_string(actualroom);
 	//Load Json in the dialogue map
 	ReadJson();
-	WriteText = new WriteTextComponent();
-	WriteText->initComponent();
+
+	_showText = new TextInfo{ " " , " " }; //initialize showing text
+
 }
 
 /// <summary>
@@ -99,12 +103,19 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 /// </summary>
 /// <param name="_eventToRead"></param>
 void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
+	
+	
 	string event;
 	ParseEnum(event, _eventToRead);
 	for (auto& elem : mRoom[room][event]) {
-
-		WriteText->ShowDialogue(elem);
+		delete _showText; //delete last text line
+		_showText = new TextInfo{ elem.Character , elem.Text}; //add new text line
 		cout << elem.Character << ": " << elem.Text << endl;
+
+		if (_sceneLog)
+		{
+			_sceneLog->addDialogueLineLog(elem.Character, elem.Text);
+		}
 	}
 }
 
@@ -124,5 +135,16 @@ void DialogueManager::ReadAnswer(){
 
 DialogueManager::~DialogueManager()
 {
-	delete WriteText;
+	delete _showText;
 }
+
+void DialogueManager::setSceneLog(LogComponent* sceneLog)
+{
+	_sceneLog = sceneLog;
+}
+
+TextInfo* DialogueManager::getShowText()
+{
+	return _showText;
+}
+
