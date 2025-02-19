@@ -52,6 +52,7 @@ void DebugLogRoom::init()
 		Font& font = sdlutils().fonts().at("BASE"); // Obtener la fuente
 		SDL_Color color = { 255, 0, 0, 255 }; // Establecer el color (rojo)
 
+		Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
 
 		auto _textTest = entityManager->addEntity();
 		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
@@ -67,7 +68,7 @@ void DebugLogRoom::init()
 
 		
 		
-		Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
+		
 
 
 
