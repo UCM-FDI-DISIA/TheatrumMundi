@@ -2,9 +2,8 @@
 #include "../src/utils/Vector2D.h";
 #include "../src/components/Transform.h"
 #include "../src/components/Image.h"
-#include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
 
-#include "WriteTextComponent.h"
+#include "../src/components/WriteTextComponent.h"
 
 #include "../src/components/LogComponent.h"
 
@@ -44,7 +43,7 @@ void DebugLogRoom::init()
 
 		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog = entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("ARIAL24"), colorText, logComp->getLogList());
 
-		_log->getMngr()->setAlive(_log, false);
+		_log->getMngr()->setActive(_log, false);
 
 
 		//Open log button
@@ -58,7 +57,7 @@ void DebugLogRoom::init()
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [_log]()
 			{
 				std::cout << "CLICKED\n";
-				_log->getMngr()->setAlive(_log, true);
+				_log->getMngr()->setActive(_log, true);
 			});
 
 		//Close log button
@@ -72,7 +71,7 @@ void DebugLogRoom::init()
 		clkClose->connect(ClickComponent::JUST_CLICKED, [_log]()
 			{
 				std::cout << "CLICKED\n";
-				_log->getMngr()->setAlive(_log, false);
+				_log->getMngr()->setActive(_log, false);
 			});
 		
 

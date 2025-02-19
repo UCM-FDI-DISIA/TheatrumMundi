@@ -1,21 +1,19 @@
 #pragma once
 
-#include <list>
 #include <string>
 
-#include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
+#include "../sdlutils/SDLUtils.h"
+
+#include "../ecs/Component.h"
+
+#include "../../TheatrumMundi/TextInfo.h"
 
 template <typename T>
-#include "../ecs/Component.h"
-#include <SDL.h>
-#include "../../TheatrumMundi/TextoInfo.h"
-
 class WriteTextComponent : public ecs::Component
 {
 private:
 	Font& _myFont;
 	SDL_Color _color; // White
-	//std::list<std::pair<std::string, std::string>> text;
 	T textStructure;
 public:
 	//ID
@@ -23,16 +21,13 @@ public:
 
 	WriteTextComponent(Font& desiredFont, SDL_Color desiredColor, T text);
 
-	void ShowDialogue(TextInfo dialogue);
+	void ShowDialogue(T dialogue);
 
 	void update() override;
 	void render() override;
 
 
 	~WriteTextComponent();
-private:
-
-	TextInfo actualLine = { " ", " " };
 	
 };
 

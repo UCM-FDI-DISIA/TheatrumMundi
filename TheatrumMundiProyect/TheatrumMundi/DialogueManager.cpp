@@ -3,6 +3,7 @@
 #include <cassert>
 #include "../src/json/json.hpp";
 #include "../src/Components/WriteTextComponent.h";
+#include "TextInfo.h"
 
 
 using json = nlohmann::json;
@@ -47,14 +48,20 @@ void DialogueManager::ReadJson(){
 }
 
 
-DialogueManager::DialogueManager(){
+DialogueManager::DialogueManager() : WriteText(nullptr) {
 
 	actualroom = 1;
 	room = "Sala" + to_string(actualroom);
 	//Load Json in the dialogue map
 	ReadJson();
-	WriteText = new WriteTextComponent();
-	WriteText->initComponent();
+
+	// Inicializar el puntero a WriteTextComponent con una instancia nueva
+	Font& font = sdlutils().fonts().at("BASE"); // Obtener la fuente
+	SDL_Color color = { 255, 0, 0, 255 }; // Establecer el color (rojo)
+	TextInfo textInfo = { "John", "Hello, world!" }; // Crear una estructura de TextInfo
+
+	// Crear una instancia de WriteTextComponent con new
+	WriteText = new WriteTextComponent<TextInfo>(font, color, textInfo);
 }
 
 /// <summary>
@@ -103,7 +110,7 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 	ParseEnum(event, _eventToRead);
 	for (auto& elem : mRoom[room][event]) {
 
-		WriteText->ShowDialogue(elem);
+		//WriteText->ShowDialogue(elem);
 		cout << elem.Character << ": " << elem.Text << endl;
 	}
 }
