@@ -16,13 +16,6 @@ private:
 	// second: dialogueLine
 	std::list<std::pair<std::string, std::string>> _log;
 
-	// Stores all spoken dialogue with the same structure as DialogueManager
-	//std::unordered_map<std::string, std::list<std::pair<std::string, std::string>>> _log;
-	
-	//registry of the order in which the dialogue has been displayed
-	//std::vector<std::string> _dialogueOrder;
-
-
 protected:
 public:
 	__CMPID_DECL__(ecs::cmp::LOG_COMPONENT)

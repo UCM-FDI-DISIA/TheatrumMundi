@@ -14,7 +14,7 @@ class WriteTextComponent : public ecs::Component
 private:
 	Font& _myFont;
 	SDL_Color _color; // White
-	T* textStructure;
+	T* textStructure; //points to text structure. Log list or TextInfo.
 public:
 	//ID
 	__CMPID_DECL__(ecs::cmp::WRITE_TEXT_COMPONENT);
