@@ -110,17 +110,20 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 	
 		TextInfo elem = *mRoom[room][event].begin();
 
-		
-		delete _showText; //delete last text line
-		_showText = new TextInfo{ elem.Character , elem.Text}; //add new text line
-		cout << elem.Character << ": " << elem.Text << endl;
+		if (!elem.Character.empty()) {
 
-		if (_sceneLog)
-		{
-			_sceneLog->addDialogueLineLog(elem.Character, elem.Text);
+			delete _showText; //delete last text line
+			_showText = new TextInfo{ elem.Character , elem.Text }; //add new text line
+			cout << elem.Character << ": " << elem.Text << endl;
+
+			if (_sceneLog)
+			{
+				_sceneLog->addDialogueLineLog(elem.Character, elem.Text);
+			}
+
+			mRoom[room][event].pop_front();
 		}
-
-		mRoom[room][event].pop_front();
+		
 		
 	
 }
