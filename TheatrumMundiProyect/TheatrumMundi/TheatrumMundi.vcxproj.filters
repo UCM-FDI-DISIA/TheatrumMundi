@@ -104,6 +104,9 @@
       <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="a.cpp" />
+    <ClCompile Include="EntityFactory.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\SDL2-2.30.11\include\SDL.h">
@@ -552,6 +555,9 @@
     </ClInclude>
     <ClInclude Include="..\SRC\utils\GenID.h">
       <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityFactory.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

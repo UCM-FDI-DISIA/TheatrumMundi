@@ -48,6 +48,7 @@
     <ClCompile Include="ClockPuzzleScene.cpp" />
     <ClCompile Include="DialogTestScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
+    <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="InitialScene.cpp" />
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="ClockPuzzleScene.h" />
     <ClInclude Include="DialogTestScene.h" />
     <ClInclude Include="DialogueManager.h" />
+    <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="InitialScene.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="SceneManager.h" />
