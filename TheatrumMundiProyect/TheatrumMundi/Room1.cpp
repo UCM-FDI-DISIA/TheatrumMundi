@@ -64,6 +64,7 @@ void Room1::init()
 		//Add element to scroll, needs to be a transform
 		_buttonScroll->addElementToScroll(_fighterTransform);
 
+		//drg->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
 		ClickComponent* clkb = entityManager->addComponent<ClickComponent>(_button);
 		clkb->connect(ClickComponent::JUST_CLICKED, [_buttonScroll]() { /*_buttonScroll->setScrolling(true);*/
 			if (!_buttonScroll->isScrolling()) _buttonScroll->Scroll(); /*entityManager->getComponent<ScrollComponent>(_button)->Scroll(); */});
