@@ -29,7 +29,7 @@ void InitialScene::init()
 		entityManager->addComponent<RectArea2D>(_startbtn);
 
 		ClickComponent* clk = entityManager->addComponent<ClickComponent>(_startbtn);
-		clk->connect(ClickComponent::JUST_CLICKED, []() {Game::Instance()->getSceneManager()->loadScene(1);});
+		clk->connect(ClickComponent::JUST_CLICKED, []() {Game::Instance()->getSceneManager()->loadScene(2);});
 		//Exit 
 		auto _exitbtn = entityManager->addEntity();
 		entityManager->addComponent<Transform>(_exitbtn, Vector2D(300, 400), Vector2D(0, 0), 200, 200, 0);

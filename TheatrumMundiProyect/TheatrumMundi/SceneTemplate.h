@@ -3,7 +3,7 @@
 
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
 
-
+#include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 
 
 class SceneTemplate
