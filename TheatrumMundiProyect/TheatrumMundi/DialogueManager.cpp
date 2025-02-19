@@ -50,12 +50,14 @@ void DialogueManager::ReadJson(){
 }
 
 
-DialogueManager::DialogueManager() : WriteText(nullptr), _sceneLog(nullptr){
+DialogueManager::DialogueManager() : _sceneLog(nullptr){
 
 	actualroom = 1;
 	room = "Sala" + to_string(actualroom);
 	//Load Json in the dialogue map
 	ReadJson();
+
+	_showText = new TextInfo{ " " , " " };
 
 	/*
 	// Inicializar el puntero a WriteTextComponent con una instancia nueva
@@ -111,13 +113,12 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 /// <param name="_eventToRead"></param>
 void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 	
-	list<TextInfo> dialogRead;
-
+	
 	string event;
 	ParseEnum(event, _eventToRead);
 	for (auto& elem : mRoom[room][event]) {
-
-		//WriteText->ShowDialogue(elem);
+		delete _showText; //delete last text line
+		_showText = new TextInfo{ elem.Character , elem.Text}; //add new text line
 		cout << elem.Character << ": " << elem.Text << endl;
 
 		if (_sceneLog)
@@ -143,7 +144,7 @@ void DialogueManager::ReadAnswer(){
 
 DialogueManager::~DialogueManager()
 {
-	delete WriteText;
+	delete _showText;
 }
 
 void DialogueManager::setSceneLog(LogComponent* sceneLog)
@@ -151,7 +152,8 @@ void DialogueManager::setSceneLog(LogComponent* sceneLog)
 	_sceneLog = sceneLog;
 }
 
-void DialogueManager::setWriteText(WriteTextComponent<TextInfo>* texToToWrite)
+TextInfo* DialogueManager::getShowText()
 {
-	//WriteText = texToToWrite;
+	return _showText;
 }
+

@@ -37,7 +37,7 @@ private:
 	void ReadJson();
 	void ParseEnum(std::string& event, const eventToRead& _eventToRead);
 	
-	WriteTextComponent<TextInfo>* WriteText;
+	TextInfo* _showText;
 
 	LogComponent* _sceneLog;
 public:
@@ -47,6 +47,6 @@ public:
 	~DialogueManager();
 
 	void setSceneLog(LogComponent* sceneLog);
-	void setWriteText(WriteTextComponent<TextInfo>* textoToWrite);
+	TextInfo* getShowText();
 };
 
