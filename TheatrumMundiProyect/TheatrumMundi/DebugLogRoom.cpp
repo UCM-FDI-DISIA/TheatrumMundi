@@ -27,9 +27,6 @@ DebugLogRoom::~DebugLogRoom()
 void DebugLogRoom::init()
 {
 	if (!isStarted) {
-
-			
-
 			//All Screen
 			auto _screenDetect = entityManager->addEntity();
 			auto _screenDetectTr = entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
@@ -63,10 +60,12 @@ void DebugLogRoom::init()
 
 			entityManager->addComponent<RectArea2D>(_screenDetect);
 			ClickComponent* passDialog = entityManager->addComponent<ClickComponent>(_screenDetect);
-			passDialog->connect(ClickComponent::JUST_CLICKED, []()
+			passDialog->connect(ClickComponent::JUST_CLICKED, [this]()
 				{
-					//read dialogue
-					Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
+					if (!logActive&&!isClickingButton) {
+						//read dialogue
+						Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
+						 }
 
 				});
 
@@ -135,6 +134,7 @@ void DebugLogRoom::init()
 				});
 				*/
 
+
 		
 		
 		
@@ -182,10 +182,11 @@ void DebugLogRoom::init()
 		entityManager->addComponent<RectArea2D>(_openLogButton);
 
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_openLogButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [_log]()
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [_log,this]()
 			{
 				std::cout << "CLICKED\n";
 				_log->getMngr()->setActive(_log, true);
+				logActive = true;
 			});
 
 		//Close log button
@@ -196,10 +197,11 @@ void DebugLogRoom::init()
 		entityManager->addComponent<RectArea2D>(_closeLogButton);
 
 		ClickComponent* clkClose = entityManager->addComponent<ClickComponent>(_closeLogButton);
-		clkClose->connect(ClickComponent::JUST_CLICKED, [_log]()
+		clkClose->connect(ClickComponent::JUST_CLICKED, [_log,this]()
 			{
 				std::cout << "CLICKED\n";
 				_log->getMngr()->setActive(_log, false);
+				logActive = false;
 			});
 		
 		//Open dialogue button
