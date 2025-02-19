@@ -38,7 +38,7 @@ void DebugLogRoom::init()
 		passDialog->connect(ClickComponent::JUST_CLICKED, [this]() 
 			{
 				
-				if (!logActive&&!isClickingButton) {
+				if (!logActive) {
 					//read dialogue
 					Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
 			}
