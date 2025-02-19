@@ -23,8 +23,10 @@
     <ClCompile Include="..\src\Components\ClickComponent.cpp" />
     <ClCompile Include="..\src\Components\DragComponent.cpp" />
     <ClCompile Include="..\src\Components\Image.cpp" />
+    <ClCompile Include="..\src\Components\LogComponent.cpp" />
     <ClCompile Include="..\src\Components\MouseIntaractionComponent.cpp" />
     <ClCompile Include="..\src\Components\RectArea2D.cpp" />
+    <ClCompile Include="..\src\Components\ScrollComponent.cpp" />
     <ClCompile Include="..\src\Components\TriggerComponent.cpp" />
     <ClCompile Include="..\src\Components\WriteTextComponent.cpp" />
     <ClCompile Include="..\src\ecs\Manager.cpp" />
@@ -41,6 +43,7 @@
     <ClCompile Include="..\SRC\sdlutils\Texture.cpp" />
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
+    <ClCompile Include="DebugLogRoom.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
     <ClCompile Include="DialogTestScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
@@ -152,8 +155,10 @@
     <ClInclude Include="..\src\Components\ClickComponent.h" />
     <ClInclude Include="..\src\Components\DragComponent.h" />
     <ClInclude Include="..\src\Components\Image.h" />
+    <ClInclude Include="..\src\Components\LogComponent.h" />
     <ClInclude Include="..\src\Components\MouseIntaractionComponent.h" />
     <ClInclude Include="..\src\Components\RectArea2D.h" />
+    <ClInclude Include="..\src\Components\ScrollComponent.h" />
     <ClInclude Include="..\src\Components\Transform.h" />
     <ClInclude Include="..\src\Components\TriggerComponent.h" />
     <ClInclude Include="..\src\Components\WriteTextComponent.h" />
@@ -187,6 +192,8 @@
     <ClInclude Include="..\SRC\utils\ptr_iterator.h" />
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
+    <ClInclude Include="DebugLogRoom.h" />
+    <ClInclude Include="checkML.h" />
     <ClInclude Include="ClockPuzzleScene.h" />
     <ClInclude Include="DialogTestScene.h" />
     <ClInclude Include="DialogueManager.h" />
@@ -196,7 +203,7 @@
     <ClInclude Include="ScenePuzzleTemplate.h" />
     <ClInclude Include="SceneRoomTemplate.h" />
     <ClInclude Include="SceneTemplate.h" />
-    <ClInclude Include="TextoInfo.h" />
+    <ClInclude Include="TextInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />
