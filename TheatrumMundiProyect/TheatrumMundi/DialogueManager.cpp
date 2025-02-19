@@ -107,22 +107,23 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 	
 		string event;
 		ParseEnum(event, _eventToRead);
-	
-		TextInfo elem = *mRoom[room][event].begin();
+		if (mRoom[room].find(event) != mRoom[room].end() && !mRoom[room][event].empty()) {
 
-		if (!elem.Character.empty()) {
+			TextInfo elem = mRoom[room][event].front(); // Obtener el primer elemento
 
-			delete _showText; //delete last text line
-			_showText = new TextInfo{ elem.Character , elem.Text }; //add new text line
+			delete _showText; // Eliminar el texto anterior
+			_showText = new TextInfo{ elem.Character , elem.Text }; // Guardar el nuevo texto
 			cout << elem.Character << ": " << elem.Text << endl;
 
-			if (_sceneLog)
-			{
+			if (_sceneLog) {
 				_sceneLog->addDialogueLineLog(elem.Character, elem.Text);
 			}
 
-			mRoom[room][event].pop_front();
+			mRoom[room][event].pop_front(); // Eliminar el diálogo leído
+
 		}
+		
+		
 		
 		
 	
