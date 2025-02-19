@@ -8,6 +8,7 @@ class DebugLogRoom : public SceneRoomTemplate
 {
 private:
 	bool logActive = false;
+	bool isClickingButton = false;
 protected:
 public:
 	DebugLogRoom();
