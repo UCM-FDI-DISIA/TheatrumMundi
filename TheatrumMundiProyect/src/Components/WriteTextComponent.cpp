@@ -52,14 +52,12 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 template <>
 void WriteTextComponent<TextInfo>::render()
 {
-	Font& fuente = sdlutils().fonts().at("BASE");
-	SDL_Color rojo = { 255, 0, 0, 255 };
 
-	Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, fuente, rojo);
+	Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
 	SDL_Rect nameRect = { 500, 0,nameText->width(),nameText->height()};
 	nameText->render(nameRect, 0);
 
-	Texture* dialogText = new Texture(sdlutils().renderer(), textStructure->Text, fuente, rojo);
+	Texture* dialogText = new Texture(sdlutils().renderer(), textStructure->Text, _myFont, _color);
 	SDL_Rect dialogRect = { 500, 100,dialogText->width(),dialogText->height() };
 	dialogText->render(dialogRect, 0);
 	
