@@ -5,6 +5,8 @@
 #include "../src/Components/WriteTextComponent.h";
 #include "TextInfo.h"
 
+#include "../src/components/LogComponent.h"
+
 
 using json = nlohmann::json;
 
@@ -48,7 +50,7 @@ void DialogueManager::ReadJson(){
 }
 
 
-DialogueManager::DialogueManager() : WriteText(nullptr) {
+DialogueManager::DialogueManager() : WriteText(nullptr), _sceneLog(nullptr){
 
 	actualroom = 1;
 	room = "Sala" + to_string(actualroom);
@@ -61,7 +63,8 @@ DialogueManager::DialogueManager() : WriteText(nullptr) {
 	TextInfo textInfo = { "John", "Hello, world!" }; // Crear una estructura de TextInfo
 
 	// Crear una instancia de WriteTextComponent con new
-	WriteText = new WriteTextComponent<TextInfo>(font, color, textInfo);
+	//WriteText = new WriteTextComponent<TextInfo>(font, color, textInfo);
+
 }
 
 /// <summary>
@@ -106,12 +109,20 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 /// </summary>
 /// <param name="_eventToRead"></param>
 void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
+	
+	list<TextInfo> dialogRead;
+
 	string event;
 	ParseEnum(event, _eventToRead);
 	for (auto& elem : mRoom[room][event]) {
 
 		//WriteText->ShowDialogue(elem);
 		cout << elem.Character << ": " << elem.Text << endl;
+
+		if (_sceneLog)
+		{
+			_sceneLog->addDialogueLineLog(elem.Character, elem.Text);
+		}
 	}
 }
 
@@ -132,4 +143,9 @@ void DialogueManager::ReadAnswer(){
 DialogueManager::~DialogueManager()
 {
 	delete WriteText;
+}
+
+void DialogueManager::setSceneLog(LogComponent* sceneLog)
+{
+	_sceneLog = sceneLog;
 }

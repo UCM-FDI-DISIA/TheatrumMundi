@@ -13,6 +13,8 @@
 #include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
 
+#include "../src/game/Game.h"
+
 DebugLogRoom::DebugLogRoom() : SceneRoomTemplate()
 {
 	
@@ -26,6 +28,8 @@ void DebugLogRoom::init()
 {
 	if (!isStarted) {
 		
+		
+
 		//initialize log
 		auto _log = entityManager->addEntity();
 		LogComponent* logComp = entityManager->addComponent<LogComponent>(_log);
@@ -36,14 +40,33 @@ void DebugLogRoom::init()
 		
 
 		//add debug lines to log
+		/*
 		logComp->addDialogueLineLog("author1", "hola que tal");
 		logComp->addDialogueLineLog("author2", "ahahaha me mato");
+		*/
+
+		
+
+		_log->getMngr()->setActive(_log, false);
+
+		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
+
+		Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
 
 		SDL_Color colorText = { 255, 255, 255, 255 };
 
 		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog = entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("ARIAL24"), colorText, logComp->getLogList());
 
-		_log->getMngr()->setActive(_log, false);
+		
+
+
+
+
+
+
+
+
+
 
 
 		//Open log button

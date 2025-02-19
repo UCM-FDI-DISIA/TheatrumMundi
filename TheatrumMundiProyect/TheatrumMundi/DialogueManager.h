@@ -9,6 +9,8 @@ class WriteTextComponent;
 
 class TextInfo;
 
+class LogComponent;
+
 //A struct with all the dialogue information
 enum eventToRead {
 	SalaIntermediaEvento1,
@@ -36,10 +38,14 @@ private:
 	void ParseEnum(std::string& event, const eventToRead& _eventToRead);
 	
 	WriteTextComponent<TextInfo>* WriteText;
+
+	LogComponent* _sceneLog;
 public:
 	DialogueManager();
-	void ReadDialogue(const eventToRead& _eventToRead); 
+	void ReadDialogue(const eventToRead& _eventToRead);
 	void ReadAnswer();
 	~DialogueManager();
+
+	void setSceneLog(LogComponent* sceneLog);
 };
 
