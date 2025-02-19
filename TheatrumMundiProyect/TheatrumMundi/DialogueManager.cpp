@@ -111,8 +111,8 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 
 			TextInfo elem = mRoom[room][event].front(); // Obtener el primer elemento
 
-			delete _showText; // Eliminar el texto anterior
-			_showText = new TextInfo{ elem.Character , elem.Text }; // Guardar el nuevo texto
+			_showText->Character = elem.Character; // Guardar el nuevo texto
+			_showText->Text = elem.Text;
 			cout << elem.Character << ": " << elem.Text << endl;
 
 			if (_sceneLog) {
