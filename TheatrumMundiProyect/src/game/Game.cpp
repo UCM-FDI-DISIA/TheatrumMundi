@@ -15,7 +15,7 @@
 
 Game* Game::_instance = nullptr;
 Game::Game() {
-
+	_exitGame = false;
 }
 Game* Game::Instance()
 {
@@ -24,8 +24,9 @@ Game* Game::Instance()
 		return _instance;
 }
 Game::~Game() {
-	delete _mngr;
 
+	delete _mngr;
+	delete _Dmngr;
 	// release InputHandler if the instance was created correctly.
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
@@ -63,7 +64,7 @@ void Game::init() {
 void Game::start() {
 
 	// a boolean to exit the loop
-	bool exit = false;
+	bool _exit = false;
 
 	auto &ihdlr = ih();
 
@@ -72,7 +73,7 @@ void Game::start() {
 	//
 	sdlutils().resetTime();
 
-	while (!exit) {
+	while (!_exitGame) {
 		// store the current time -- all game objects should use this time when
 		// then need to the current time. They also have accessed to the time elapsed
 		// between the last two calls to regCurrTime().
@@ -81,10 +82,10 @@ void Game::start() {
 		// refresh the input handler
 		ihdlr.refresh();
 
-		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
+		/*if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
 			exit = true;
 			continue;
-		}
+		}*/
 
 		_mngr->update();
 
@@ -92,6 +93,7 @@ void Game::start() {
 
 		sdlutils().clearRenderer();
 		_mngr->render();
+
 		sdlutils().presentRenderer();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
@@ -108,6 +110,11 @@ SceneManager* Game::getSceneManager()
 	return _mngr;
 }
 
+
+void Game::exit()
+{
+	_exitGame = true;
+}
 DialogueManager* Game::getDialogueManager()
 {
 	assert(_Dmngr != nullptr);

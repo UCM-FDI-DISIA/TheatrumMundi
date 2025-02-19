@@ -1,18 +1,58 @@
 {
 
   "fonts" : [
-  { "id" : "TITLE", "file" : "../resources/fonts/PirataOne-Regular.ttf", "size": 20 },
-{ "id" : "BASE", "file" : "../resources/fonts/FeDPit2.ttf", "size": 16}
+    {
+      "id": "ARIAL24",
+      "file": "../resources/fonts/ARIAL.ttf",
+      "size": 24
+    },
+    { "id" : "TITLE", "file" : "../resources/fonts/PirataOne-Regular.ttf", "size": 20 },
+    { "id" : "BASE", "file" : "../resources/fonts/FeDPit2.ttf", "size": 16}
   ],
   
   "images" : [
+    {"id": "prueba","file" : "../resources/images/socrates.png"},
+    {"id": "fondoPruebaLog","file": "../resources/images/fondoLogPrueba.jpg"},
+    {
+        "id": "prueba",
+        "file": "../resources/images/socrates.png"
+    },
+    {
+        "id": "clockShape",
+        "file": "../resources/images/clock_shape.png"
+    },
+    {
+        "id": "clockMinArrow",
+        "file": "../resources/images/clock_minutero.png"
+    },
+    {
+        "id": "clockHorArrow",
+        "file": "../resources/images/clock_horario.png"
+    },
+    {
+        "id": "clockMinButton",
+        "file": "../resources/images/boton_minutero.png"
+    },
+    {
+        "id": "clockHorButton",
+        "file": "../resources/images/boton_horario.png"
+    },
+    {
+        "id": "clockCheckButton",
+        "file": "../resources/images/boton_check.png"
+    },
     { "id" : "prueba", "file" : "../resources/images/socrates.png" },
-    { "id" : "module", "file" : "../resources/images/module.png" }
-
+    { "id" : "init", "file" : "../resources/images/start.jpg" },
+    { "id" : "exit", "file" : "../resources/images/exit.png" }
   ],
-  
-  "messages" : [
-   
+
+  "messages": [
+    {
+      "id": "start",
+      "text": "Press space to start",
+      "font": "ARIAL24",
+      "color": "0x441155ff"
+    }
   ],
   
   "sounds" : [

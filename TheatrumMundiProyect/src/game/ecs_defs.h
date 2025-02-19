@@ -19,6 +19,7 @@
 	DECELERATION, \
 	SHOWATOPPOSITESIDE, \
 	FIGHTERCTRL
+	
 
 // Groups list - must have at least one element
 //

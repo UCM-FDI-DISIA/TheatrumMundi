@@ -27,6 +27,6 @@ public:
 	 void update();
 	 //delete of enitities
 	~SceneManager();
-
+	
 };
 

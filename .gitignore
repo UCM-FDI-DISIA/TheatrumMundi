@@ -19,7 +19,7 @@
 mono_crash.*
 
 # Build results
-.obsidian
+.obsidian/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
@@ -398,3 +398,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/.obsidian
