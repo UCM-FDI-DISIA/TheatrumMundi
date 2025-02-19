@@ -13,6 +13,35 @@
   "images" : [
     {"id": "prueba","file" : "../resources/images/socrates.png"},
     {"id": "fondoPruebaLog","file": "../resources/images/fondoLogPrueba.jpg"},
+    {
+        "id": "prueba",
+        "file": "../resources/images/socrates.png"
+    },
+    {
+        "id": "clockShape",
+        "file": "../resources/images/clock_shape.png"
+    },
+    {
+        "id": "clockMinArrow",
+        "file": "../resources/images/clock_minutero.png"
+    },
+    {
+        "id": "clockHorArrow",
+        "file": "../resources/images/clock_horario.png"
+    },
+    {
+        "id": "clockMinButton",
+        "file": "../resources/images/boton_minutero.png"
+    },
+    {
+        "id": "clockHorButton",
+        "file": "../resources/images/boton_horario.png"
+    },
+    {
+        "id": "clockCheckButton",
+        "file": "../resources/images/boton_check.png"
+    }
+    { "id" : "prueba", "file" : "../resources/images/socrates.png" },
     { "id" : "init", "file" : "../resources/images/start.jpg" },
     { "id" : "exit", "file" : "../resources/images/exit.png" }
   ],
