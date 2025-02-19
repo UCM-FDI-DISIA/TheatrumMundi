@@ -18,7 +18,7 @@ public:
 	HintTemplate();
 	//void init();
 	virtual void render() = 0;
-	HintTemplate(const string& _desc, Image* _im);
+	HintTemplate(const string& _desc, Texture* _tex);
 	~HintTemplate();
 	
 private:
