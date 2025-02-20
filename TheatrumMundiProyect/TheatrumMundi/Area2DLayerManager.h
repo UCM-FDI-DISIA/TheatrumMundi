@@ -10,6 +10,9 @@ public:
 	using iterator = std::list<Area2D*>::iterator;
 
 	Area2DLayerManager();
+
+	// Reference to the Area2D list
+	std::list<Area2D*> const& list();
 	
 	// Inserts the Area2D at the last collision layer
 	void pushBack(Area2D* area); 

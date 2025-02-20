@@ -2,16 +2,16 @@
 #include <list>
 
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
-
-
-
+class Area2DLayerManager;
 
 class SceneTemplate
 {
 protected:
 	 ecs::EntityManager* entityManager;
 	// DialogueManager* dialogueManager;
-	 bool isStarted;
+	 Area2DLayerManager* areaLayerManager;
+	 
+	bool isStarted;
 public:
 	SceneTemplate();
 	void virtual init() {};

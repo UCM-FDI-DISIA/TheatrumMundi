@@ -1,10 +1,16 @@
 #include "Area2DLayerManager.h"
 
+#include "../src/Components/Area2D.h"
 #include <iterator>
 
 Area2DLayerManager::Area2DLayerManager()
 {
 
+}
+
+std::list<Area2D*> const& Area2DLayerManager::list()
+{
+	return _areaLayerOrderList;
 }
 
 void Area2DLayerManager::pushBack(Area2D* area)
