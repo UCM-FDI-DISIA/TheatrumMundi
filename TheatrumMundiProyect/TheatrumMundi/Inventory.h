@@ -1,22 +1,24 @@
 #pragma once
 
-#include "HintTemplate.h"
+#include <string>
 #include <vector>
 
-using namespace std;
-
+class Hint;
 class Inventory
 {
 	//InventoryScene class
 	//This class is used to store the hints that the player has collected
 	//It is used to render the hints in the inventory screen
 	//It is used to add hints to the inventory
+protected:
+	std::vector<Hint*> items; //Vector of hints
 public:
 	Inventory();
-	~Inventory();
-	void addItem(HintTemplate* item);
+	virtual ~Inventory();
+	void addItem(Hint* item);
+	bool hasItem(const std::string& _id) const; //Check if the hint is in the inventory
 	void init();
 private:
 
-	vector<HintTemplate*> inventory; //Vector of hints
+	
 };

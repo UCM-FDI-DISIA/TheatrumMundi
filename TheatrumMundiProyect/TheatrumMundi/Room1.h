@@ -6,9 +6,12 @@ enum Room1Event
 	event_size,
 
 };
+
+class Inventory;
 class Room1 : public SceneRoomTemplate
 {
 private:
+	Inventory* inv1;
 protected:
 public:
 	Room1();

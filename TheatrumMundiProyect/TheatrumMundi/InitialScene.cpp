@@ -9,13 +9,14 @@
 #include "../src/components/DragComponent.h"
 #include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
+
 InitialScene::InitialScene()
 {
 }
 
 InitialScene::~InitialScene()
 {
-
+	
 }
 
 void InitialScene::init()
