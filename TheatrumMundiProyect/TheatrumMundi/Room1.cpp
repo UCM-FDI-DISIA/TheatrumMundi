@@ -13,6 +13,8 @@
 #include "../src/ecs/Manager.h"
 #include "../src/game/Game.h"
 
+#include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
+
 
 Room1::Room1(): SceneRoomTemplate()
 {
@@ -80,7 +82,8 @@ void Room1::init()
 		////NEEDS GETTER OF CLICKCOMPONENT, TRIGGERCOMPONENT, DRAGGINGCOMPONENT FOR EVENTS
 
 		//CREACION DE BOTON
-		auto prueba = 
+		auto button = entityFactory->CreateButton(entityManager, "prueba", Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0);
+
 	}
 }
 

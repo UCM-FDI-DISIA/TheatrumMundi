@@ -10,6 +10,7 @@ class SceneTemplate
 {
 protected:
 	 ecs::EntityManager* entityManager;
+	 EntityFactory* entityFactory;
 	// DialogueManager* dialogueManager;
 	 bool isStarted;
 public:

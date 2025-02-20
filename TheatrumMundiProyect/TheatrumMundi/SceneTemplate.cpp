@@ -6,6 +6,7 @@
 SceneTemplate::SceneTemplate()
 {
 	entityManager = new ecs::EntityManager();
+	entityFactory = new EntityFactory();
 	isStarted = false;
 }
 
