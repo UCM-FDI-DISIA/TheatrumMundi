@@ -20,30 +20,32 @@ EntityFactory::EntityFactory(){}
 EntityFactory::~EntityFactory(){}
 
 //CREAMOS BOTON COMÚN
-ecs::entity_t EntityFactory::CreateButton(ecs::EntityManager* entityManager, std::string idImage,
-	Vector2D pos, Vector2D dir, int width, int height, int rot)
+ecs::entity_t EntityFactory::CreateInteractableEntity(ecs::EntityManager* entityManager, std::string idImage,
+	Vector2D pos, Vector2D dir, int width, int height, int rot, bool _dragging)
 {
-	ecs::entity_t newButton = entityManager->addEntity();
-	entityManager->addComponent<Transform>(newButton, pos, dir, width, height, rot);
-	entityManager->addComponent<Image>(newButton, &sdlutils().images().at(idImage));
-	entityManager->addComponent<RectArea2D>(newButton);
-	entityManager->addComponent<ClickComponent>(newButton);
-	entityManager->addComponent<TriggerComponent>(newButton);
-	return newButton;
+	ecs::entity_t newElement = entityManager->addEntity();
+	entityManager->addComponent<Transform>(newElement, pos, dir, width, height, rot);
+	entityManager->addComponent<Image>(newElement, &sdlutils().images().at(idImage));
+	entityManager->addComponent<RectArea2D>(newElement);
+	entityManager->addComponent<ClickComponent>(newElement);
+	entityManager->addComponent<TriggerComponent>(newElement);
+	if (_dragging) entityManager->addComponent<DragComponent>(newElement);
+	return newElement;
 }
 
 //CREAMOS BOTON DE SCROLL
-ecs::entity_t EntityFactory::CreateScrollButton(ecs::EntityManager* entityManager, std::string idImage,
+ecs::entity_t EntityFactory::CreateInteractableEntityScroll(ecs::EntityManager* entityManager, std::string idImage,
 	Vector2D pos, Vector2D dir, int width, int height, int rot,
-	Vector2D _dirScroll,float _time)
+	Vector2D _dirScroll,float _time, bool _dragging)
 {
-	ecs::entity_t newScrollButton = entityManager->addEntity();
-	entityManager->addComponent<Transform>(newScrollButton, pos, dir, width, height, rot);
-	entityManager->addComponent<Image>(newScrollButton, &sdlutils().images().at(idImage));
-	entityManager->addComponent<RectArea2D>(newScrollButton);
-	entityManager->addComponent<ScrollComponent>(newScrollButton, _dirScroll, _time);
-	entityManager->addComponent<ClickComponent>(newScrollButton);
-	entityManager->addComponent<TriggerComponent>(newScrollButton);
-	return newScrollButton;
+	ecs::entity_t newElement = entityManager->addEntity();
+	entityManager->addComponent<Transform>(newElement, pos, dir, width, height, rot);
+	entityManager->addComponent<Image>(newElement, &sdlutils().images().at(idImage));
+	entityManager->addComponent<RectArea2D>(newElement);
+	entityManager->addComponent<ScrollComponent>(newElement, _dirScroll, _time);
+	entityManager->addComponent<ClickComponent>(newElement);
+	entityManager->addComponent<TriggerComponent>(newElement);
+	if (_dragging) entityManager->addComponent<DragComponent>(newElement);
+	return newElement;
 }
 

@@ -12,14 +12,16 @@ public:
 	EntityFactory();
 	~EntityFactory();
 
-	//Creates a common button
-	ecs::entity_t CreateButton(ecs::EntityManager* entityManager, std::string idImage,
-	Vector2D pos, Vector2D dir, int width, int height, int rot);
+	//Creates an interactable entity (BUTTON) or drag interactable entity (OBJECT TO MOVE IN PUZZLES)
+	ecs::entity_t CreateInteractableEntity(ecs::EntityManager* _entityManager, std::string _idImage,
+	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot,
+	bool _dragging); //DRAG ENTITY
 
-	//Creates a scroll button
-	ecs::entity_t CreateScrollButton(ecs::EntityManager* entityManager, std::string idImage,
-	Vector2D pos, Vector2D dir, int width, int height, int rot,
-	Vector2D _dirScroll, float _time);
+	//Creates a scroll interactable entity (MOVES FROM ONE ROOM TO ANOTHER) or scroll dragging interactable entity (SCROLL BUTTON TO LOG OR INVENTORY)
+	ecs::entity_t CreateInteractableEntityScroll(ecs::EntityManager* _entityManager, std::string _idImage,
+	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot,
+	Vector2D _dirScroll, float _time,
+	bool _dragging); //DRAG SCROLL ENTITY
 
 private:
 
