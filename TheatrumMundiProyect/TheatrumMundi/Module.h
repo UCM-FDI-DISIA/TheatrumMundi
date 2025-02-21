@@ -1,19 +1,12 @@
 #pragma once
 #include <vector>
+#include "Direction.h"
 using namespace std;
-class Module 
+class Module :public Direction
 {
 
-
-	
 protected:
-	enum Directions { // diections a module can have
-		DOWN,
-		UP,
-		RIGHT,
-		LEFT
-	};
-
+	
 	struct moduleInfo
 	{
 		Directions dir;

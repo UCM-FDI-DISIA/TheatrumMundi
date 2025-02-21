@@ -1,7 +1,8 @@
 #pragma once
 #include <vector>
+#include "Direction.h"
 using namespace std;
-class Pipe
+class Pipe :public Direction
 {
 protected:
 	enum Type {
@@ -10,12 +11,17 @@ protected:
 		ONE// 1 entrie needs to be true
 	};
 
+	struct Entry {
+		char id;
+		int value;
+		Direction direction;
+	};
+
 	struct pipeInfo
 	{
 		Type type;
-		pair<char, int> entry1;
-		pair<char, int> entry2;
-		int waterAmount;
+		Entry entry1;
+		Entry entry2;
 		bool result;
 	};
 
