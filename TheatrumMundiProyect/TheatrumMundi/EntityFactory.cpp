@@ -13,39 +13,50 @@
 #include "../src/Components/ScrollComponent.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
 
-
-
 EntityFactory::EntityFactory(){}
 
 EntityFactory::~EntityFactory(){}
 
-//CREAMOS BOTON COMÚN
-ecs::entity_t EntityFactory::CreateInteractableEntity(ecs::EntityManager* entityManager, std::string idImage,
-	Vector2D pos, Vector2D dir, int width, int height, int rot, bool _dragging)
+//CREATES IMAGE ENTITY
+ecs::entity_t EntityFactory::CreateImageEntity(ecs::EntityManager* _entityManager, std::string _idImage, 
+	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot)
 {
-	ecs::entity_t newElement = entityManager->addEntity();
-	entityManager->addComponent<Transform>(newElement, pos, dir, width, height, rot);
-	entityManager->addComponent<Image>(newElement, &sdlutils().images().at(idImage));
-	entityManager->addComponent<RectArea2D>(newElement);
-	entityManager->addComponent<ClickComponent>(newElement);
-	entityManager->addComponent<TriggerComponent>(newElement);
-	if (_dragging) entityManager->addComponent<DragComponent>(newElement);
+	ecs::entity_t newElement = _entityManager->addEntity();
+	_entityManager->addComponent<Transform>(newElement, _pos, _dir, _width, _height, _rot);
+	_entityManager->addComponent<Image>(newElement, &sdlutils().images().at(_idImage));
+	_entityManager->addComponent<RectArea2D>(newElement);
 	return newElement;
 }
 
-//CREAMOS BOTON DE SCROLL
-ecs::entity_t EntityFactory::CreateInteractableEntityScroll(ecs::EntityManager* entityManager, std::string idImage,
-	Vector2D pos, Vector2D dir, int width, int height, int rot,
-	Vector2D _dirScroll,float _time, bool _dragging)
+//CREATES COMMON BUTTON (WITH DRAG IS AN OBJECT TO MOVE IN PUZZLES)
+ecs::entity_t EntityFactory::CreateInteractableEntity(ecs::EntityManager* _entityManager, std::string _idImage,
+	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, 
+	bool _dragging)
 {
-	ecs::entity_t newElement = entityManager->addEntity();
-	entityManager->addComponent<Transform>(newElement, pos, dir, width, height, rot);
-	entityManager->addComponent<Image>(newElement, &sdlutils().images().at(idImage));
-	entityManager->addComponent<RectArea2D>(newElement);
-	entityManager->addComponent<ScrollComponent>(newElement, _dirScroll, _time);
-	entityManager->addComponent<ClickComponent>(newElement);
-	entityManager->addComponent<TriggerComponent>(newElement);
-	if (_dragging) entityManager->addComponent<DragComponent>(newElement);
+	ecs::entity_t newElement = _entityManager->addEntity();
+	_entityManager->addComponent<Transform>(newElement, _pos, _dir, _width, _height, _rot);
+	_entityManager->addComponent<Image>(newElement, &sdlutils().images().at(_idImage));
+	_entityManager->addComponent<RectArea2D>(newElement);
+	_entityManager->addComponent<ClickComponent>(newElement);
+	_entityManager->addComponent<TriggerComponent>(newElement);
+	if (_dragging) _entityManager->addComponent<DragComponent>(newElement);
+	return newElement;
+}
+
+//CREATES SCROLL BUTTON (WITH DRAG IS AN SCROLLBAR TO LOG OR INVENTORY)
+ecs::entity_t EntityFactory::CreateInteractableEntityScroll(ecs::EntityManager* _entityManager, std::string _idImage,
+	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot,
+	Vector2D _dirScroll,float _time, 
+	bool _dragging)
+{
+	ecs::entity_t newElement = _entityManager->addEntity();
+	_entityManager->addComponent<Transform>(newElement, _pos, _dir, _width, _height, _rot);
+	_entityManager->addComponent<Image>(newElement, &sdlutils().images().at(_idImage));
+	_entityManager->addComponent<RectArea2D>(newElement);
+	_entityManager->addComponent<ScrollComponent>(newElement, _dirScroll, _time);
+	_entityManager->addComponent<ClickComponent>(newElement);
+	_entityManager->addComponent<TriggerComponent>(newElement);
+	if (_dragging) _entityManager->addComponent<DragComponent>(newElement);
 	return newElement;
 }
 
