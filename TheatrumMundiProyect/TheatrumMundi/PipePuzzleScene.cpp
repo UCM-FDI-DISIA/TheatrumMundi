@@ -32,6 +32,7 @@ void PipePuzzleScene::pipeCreation()
 	_waterPipes.push_back(new Pipe({ 0, ONE, {'P', 6, NONE}, {'M', 2, RIGHT}, false }));
 	_waterPipes.push_back(new Pipe({ 0, TWO, {'P', 4, NONE}, {'P', 7, NONE}, false }));
 
+
 }
 
 void PipePuzzleScene::moduleCreation()
@@ -49,15 +50,21 @@ void PipePuzzleScene::moduleCreation()
 	_modules.push_back(new Module({ RIGHT, {'P', 5}, {'N', 0}, {'P', 3}, {'N', 1}, true }));
 	_modules.push_back(new Module({ RIGHT, {'P', 4}, {'N', 0}, {'P', 5}, {'N', 1}, true }));
 
+	
 }
 
-void PipePuzzleScene::checkSolution()
+void PipePuzzleScene::Check()
 {
-	if (_waterPipes[8].getPipeInfo().waterAmount==2) //the last pipe has the solution
+	if (_waterPipes[8].getPipeInfo().waterAmount == 2) //the last pipe has the solution
 	{
 		solved = true;
 	}
+	else
+	{
+		solved= false;
+	}
 }
+
 
 void PipePuzzleScene::changeDirection(int module)
 {
@@ -91,25 +98,71 @@ void PipePuzzleScene::init()
 
 	if (!isStarted) {
 
-		//adding components to all modules
 
-		//PIPES
-		auto _module = entityManager->addEntity();
-		auto _moduleTransform = entityManager->addComponent<Transform>(_module, Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0);
-		entityManager->addComponent<Image>(_module, &sdlutils().images().at("exit"));
-		entityManager->addComponent<RectArea2D>(_module);
-		
+		//creamos vector con pos para pipes
+		vector<Vector2D> pipePositions = {
+			Vector2D(100, 100), // pos pipe 0
+			Vector2D(200, 100), // pos pipe 1
+			Vector2D(300, 100), // pos pipe 2
+			Vector2D(400, 100), // pos pipe 3
+			Vector2D(100, 200), // pos pipe 4
+			Vector2D(200, 200), // pos pipe 5
+			Vector2D(300, 200), // pos pipe 6
+			Vector2D(400, 200), // pos pipe 7
+			Vector2D(500, 200)  // pos pipe 8
+		};
 
-		//MODULES
-		auto _module5 = entityManager->addEntity();
-		auto _moduleTransform5 = entityManager->addComponent<Transform>(_module5, Vector2D(100, 100), Vector2D(0, 0), 500, 500, 0);
-		entityManager->addComponent<Image>(_module5, &sdlutils().images().at("module"));
+		// Creamos los componentes de las pipes
+		for (int i = 0; i < pipePositions.size(); ++i) {
 
-		entityManager->addComponent<RectArea2D>(_module5);
+			// creamos entidad
+			auto pipeEntity = entityManager->addEntity();
 
-		ClickComponent* clk = entityManager->addComponent<ClickComponent>(_module5);
-		clk->connect(ClickComponent::JUST_CLICKED, [this]() {changeDirection(_module5); });
-		
+			// añadimos el transfomr
+			auto pipeTransform = entityManager->addComponent<Transform>(
+				pipeEntity, pipePositions[i], Vector2D(0, 0), 500, 500, 0
+			);
+
+			// añadimos imagen
+			entityManager->addComponent<Image>(pipeEntity, &sdlutils().images().at(""));
+
+			// añadimos el área de visuallizado de la imagen
+			entityManager->addComponent<RectArea2D>(pipeEntity);
+		}
+
+
+		//creamos vector con pos para modulos
+		vector<Vector2D> modulePositions = {
+			Vector2D(100, 0), // pos modulo 0
+			Vector2D(200,0), // pos modulo 1
+			Vector2D(300, 0), // pos modulo 2
+			Vector2D(400, 0), // pos modulo 3
+			Vector2D(0, 200), // pos modulo 4
+			Vector2D(0, 200), // pos modulo 5
+			Vector2D(0, 200), // pos modulo 6
+			Vector2D(0, 200), // pos modulo 7
+			Vector2D(0, 200)  // pos modulo 8
+		};
+
+		// Creamos los componentes de las pipes
+		for (int i = 0; i < modulePositions.size(); ++i) {
+
+			// creamos entidad
+			auto moduleEntity = entityManager->addEntity();
+
+			// añadimos el transfomr
+			auto moduleTransform = entityManager->addComponent<Transform>(
+				moduleEntity, modulePositions[i], Vector2D(0, 0), 500, 500, 0
+			);
+
+			// añadimos imagen
+			entityManager->addComponent<Image>(moduleEntity, &sdlutils().images().at(""));
+
+			// añadimos el área de visuallizado de la imagen
+			entityManager->addComponent<RectArea2D>(moduleEntity);
+		}
+
+
 
 	}
 }
@@ -152,7 +205,6 @@ void PipePuzzleScene::waterPassPipe(int pipe) {
 
 
 void PipePuzzleScene::waterPassModule(int module) {
-
 
 	moduleInfo modInfo = _modules[module].changeModuleInfo(); 
 

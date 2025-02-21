@@ -35,11 +35,11 @@ public:
 	 PipePuzzleScene();
 	 void pipeCreation();
 	 void moduleCreation();
-	 void checkSolution();
+	 void Check() override;
 	 void changeDirection(int module); //changes direction of the module
 	 void init() override;
 	 void waterPassPipe(int pipe); //if water can pass through a pipe 
 	 void waterPassModule(int module); //if water has arrived to a certain module
-
+	 void update();
 };
 
