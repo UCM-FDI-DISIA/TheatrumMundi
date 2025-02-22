@@ -82,10 +82,10 @@ void Room1::init()
 		////NEEDS GETTER OF CLICKCOMPONENT, TRIGGERCOMPONENT, DRAGGINGCOMPONENT FOR EVENTS
 
 		//CREATION OF DRAG ENTITY
-		auto dragEntity = entityFactory->CreateInteractableEntity(entityManager, "prueba", Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0, true);
+		auto dragEntity = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0, EntityFactory::DRAG);
 
 		//CREATION OF SCROLL ENTITY
-		auto scrollingButton = entityFactory->CreateInteractableEntityScroll(entityManager, "prueba", Vector2D(400, 400), Vector2D(0, 0), 200, 200, 0, Vector2D(5,0), 100.f ,false);
+		auto scrollingButton = entityFactory->CreateInteractableEntityScroll(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(400, 400), Vector2D(0, 0), 200, 200, 0, Vector2D(5,0), 100.f , EntityFactory::NODRAG);
 		
 		ScrollComponent* scrollingButtonComponent = entityManager->getComponent<ScrollComponent>(scrollingButton);
 		scrollingButtonComponent->addElementToScroll(entityManager->getComponent<Transform>(dragEntity));
