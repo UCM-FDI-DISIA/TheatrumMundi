@@ -1,6 +1,8 @@
 #pragma once
 #include "ScenePuzzleTemplate.h"
 
+class array;
+
 class BooksPuzzleScene : public ScenePuzzleTemplate
 {
 public:
@@ -12,7 +14,12 @@ public:
 	bool Check() override;
 
 private:
-	int _actualHour;
-	int _actualMinute;
+	std::array<int, 10> comb1;
+	std::array<int, 10> comb2;
+	std::array<int, 10> comb3;
+
+	int num1;
+	int num2;
+	int num3;
 };
 

@@ -93,7 +93,7 @@ void Room1::init()
 		//SE PUEDE CON TRIGGER COMPONENT A LA HORA DE ENTRAR Y SALIR DEL AREA
 		
 		ClickComponent* scrollingButtonClickComponent = entityManager->getComponent<ClickComponent>(scrollingButton);
-		scrollingButtonClickComponent->connect(ClickComponent::JUST_CLICKED, [scrollingButtonComponent]() {
+		scrollingButtonClickComponent->connect(ClickComponent::JUST_CLICKED, [scrollingButtonComponent,this]() {
 			if(!scrollingButtonComponent->isScrolling()) 
 				scrollingButtonComponent->Scroll();
 			});
