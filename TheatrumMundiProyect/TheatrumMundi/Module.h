@@ -9,6 +9,7 @@ protected:
 	
 	struct moduleInfo
 	{
+		int id;
 		Directions dir;
 		pair<char, int> right;
 		pair<char, int> left;

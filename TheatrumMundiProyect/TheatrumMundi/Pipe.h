@@ -19,6 +19,7 @@ protected:
 
 	struct pipeInfo
 	{
+		int id;
 		Type type;
 		Entry entry1;
 		Entry entry2;
