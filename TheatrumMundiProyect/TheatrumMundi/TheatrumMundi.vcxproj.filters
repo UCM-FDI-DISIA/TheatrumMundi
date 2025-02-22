@@ -103,6 +103,10 @@
     <ClCompile Include="..\src\Components\RectArea2D.cpp">
       <Filter>Component</Filter>
     </ClCompile>
+    <ClCompile Include="DialogueManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Module.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\SDL2-2.30.11\include\SDL.h">
@@ -552,6 +556,13 @@
     <ClInclude Include="..\SRC\utils\GenID.h">
       <Filter>SDL</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\json\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogueManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Direction.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="SDL">
