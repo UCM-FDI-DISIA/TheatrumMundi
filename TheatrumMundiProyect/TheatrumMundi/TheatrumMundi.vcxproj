@@ -44,6 +44,7 @@
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
     <ClCompile Include="a.cpp" />
+    <ClCompile Include="BooksPuzzleScene.cpp" />
     <ClCompile Include="DebugLogRoom.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
     <ClCompile Include="DialogTestScene.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="..\SRC\utils\ptr_iterator.h" />
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
+    <ClInclude Include="BooksPuzzleScene.h" />
     <ClInclude Include="DebugLogRoom.h" />
     <ClInclude Include="checkML.h" />
     <ClInclude Include="ClockPuzzleScene.h" />
