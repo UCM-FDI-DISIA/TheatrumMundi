@@ -103,6 +103,7 @@
     <ClCompile Include="..\src\Components\RectArea2D.cpp">
       <Filter>Component</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsBodyComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\SDL2-2.30.11\include\SDL.h">
@@ -552,6 +553,13 @@
     <ClInclude Include="..\SRC\utils\GenID.h">
       <Filter>SDL</Filter>
     </ClInclude>
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\alc.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx-creative.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\EFX-Util.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\xram.h" />
+    <ClInclude Include="PhysicsBodyComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="SDL">
