@@ -8,6 +8,7 @@ class Area2DLayerManager
 public:
 
 	using iterator = std::list<Area2D*>::iterator;
+	using reverse_iterator = std::list<Area2D*>::reverse_iterator;
 
 	Area2DLayerManager();
 
@@ -43,6 +44,22 @@ public:
 
 	// Erases the Area2D from the collision list
 	void erase(Area2DLayerManager::iterator layerIt);
+
+	Area2DLayerManager::iterator begin() {
+		return _areaLayerOrderList.begin();
+	}
+
+	Area2DLayerManager::iterator end() {
+		return _areaLayerOrderList.end();
+	}
+
+	Area2DLayerManager::reverse_iterator rbegin() {
+		return _areaLayerOrderList.rbegin();
+	}
+
+	Area2DLayerManager::reverse_iterator rend() {
+		return _areaLayerOrderList.rend();
+	}
 
 protected:
 

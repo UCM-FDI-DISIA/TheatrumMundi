@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Components\Area2D.cpp" />
     <ClCompile Include="..\src\Components\CircleArea2D.cpp" />
     <ClCompile Include="..\src\Components\ClickComponent.cpp" />
     <ClCompile Include="..\src\Components\DragComponent.cpp" />
