@@ -13,6 +13,8 @@ Area2D::~Area2D() {
 #include <iostream>
 bool Area2D::pointIsOverlayered(Vector2D point)
 {
+	if (_areaLayerMngr == nullptr) return false;
+
 	if (_areaLayerPos == _areaLayerMngr->begin()) return false;
 
 	bool overlayered = false;

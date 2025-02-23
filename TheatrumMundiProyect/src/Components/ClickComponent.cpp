@@ -47,5 +47,5 @@ bool ClickComponent::areaIsClicked(std::pair<Sint32, Sint32> mousePos)
 	if (area == nullptr) return false;
 
 	return area->containsPoint(Vector2D(mousePos.first, mousePos.second))
-		&& !area->pointIsOverlayered(Vector2D(mousePos.first, mousePos.second));
+		&& !(_hasLayerOpposition && area->pointIsOverlayered(Vector2D(mousePos.first, mousePos.second)));
 }
