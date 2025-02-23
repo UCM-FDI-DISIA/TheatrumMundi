@@ -13,3 +13,7 @@ Module::moduleInfo& Module::changeModuleInfo()
 {
 	return _info;
 }
+
+Module::~Module()
+{
+}

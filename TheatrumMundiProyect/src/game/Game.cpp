@@ -82,10 +82,10 @@ void Game::start() {
 		// refresh the input handler
 		ihdlr.refresh();
 
-		/*if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
-			exit = true;
+		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
+			_exitGame = true;
 			continue;
-		}*/
+		}
 
 		_mngr->update();
 

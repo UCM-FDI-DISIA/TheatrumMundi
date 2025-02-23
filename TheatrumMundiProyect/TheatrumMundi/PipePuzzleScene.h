@@ -6,7 +6,7 @@
 using namespace std;
 class Module;
 class Pipe;
-class PipePuzzleScene : public ScenePuzzleTemplate, public Module, public Pipe
+class PipePuzzleScene : public ScenePuzzleTemplate
 {
 
 private:
@@ -32,7 +32,7 @@ private:
 
 	vector<waterPath>_waterPath;
 	vector<Pipe*> _waterPipes; //vector that contains the amount of water each pipe has
-	vector<Module*> _modules; //modules that change the direction of the water flow
+	vector<Module*> _modules;//modules that change the direction of the water flow
 	bool solved;
 
 protected:
@@ -43,12 +43,13 @@ public:
 	 void pipeCreation();
 	 void moduleCreation();
 	 void pathCreation();
-	 void Check() override;
+	 bool Check() override;
 	 void changeDirection(int module); //changes direction of the module
 	 void init() override;
 	 void waterPassPipe(int pipe); //if water can pass through a pipe 
 	 void waterPassModule(int module); //if water has arrived to a certain module
 	 void waterPassPath();// series of conditions to check if paths have water
-	 
+	 void unload() override;
+	 ~PipePuzzleScene();
 };
 

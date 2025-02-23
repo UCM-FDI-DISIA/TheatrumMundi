@@ -1,8 +1,11 @@
 #include "Pipe.h"
 
-Pipe::Pipe(pipeInfo info, Type type): _type(type), _info(info)
+Pipe::Pipe(pipeInfo info): _type(info.type), _info(info)
 {
 
+}
+Pipe::~Pipe()
+{
 }
 Pipe::pipeInfo Pipe::getPipeInfo() const
 { 

@@ -22,7 +22,8 @@ void SceneTemplate::render() const
 SceneTemplate::~SceneTemplate()
 {
 	unload();
-	entityManager->~EntityManager();
+	
+	delete entityManager;
 	//delete entityManager;
 //	delete dialogueManager;
 }
