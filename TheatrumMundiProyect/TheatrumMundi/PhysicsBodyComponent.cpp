@@ -5,6 +5,11 @@
 
 using namespace std;
 
+PhysicsBodyComponent::PhysicsBodyComponent()
+{
+
+}
+
 /// <summary>
 /// Assigns the list of objects
 /// </summary>

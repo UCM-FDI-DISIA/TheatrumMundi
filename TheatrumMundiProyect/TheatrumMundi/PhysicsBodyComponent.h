@@ -13,6 +13,8 @@ private:
 public:
 	__CMPID_DECL__(ecs::cmp::PhysicsBodyComponent);
 
+	PhysicsBodyComponent();
+
 	PhysicsBodyComponent(const std::list<Area2D*>& _colisionableObjects); //Assigns the list of objects
 
 	~PhysicsBodyComponent();

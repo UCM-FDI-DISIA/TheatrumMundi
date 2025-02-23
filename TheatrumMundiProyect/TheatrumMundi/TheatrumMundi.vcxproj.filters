@@ -103,7 +103,12 @@
     <ClCompile Include="..\src\Components\RectArea2D.cpp">
       <Filter>Component</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsBodyComponent.cpp" />
+    <ClCompile Include="PhysicsBodyComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysycsTestRoom.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\SDL2-2.30.11\include\SDL.h">
@@ -559,7 +564,12 @@
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\EFX-Util.h" />
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx.h" />
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\xram.h" />
-    <ClInclude Include="PhysicsBodyComponent.h" />
+    <ClInclude Include="PhysicsBodyComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysycsTestRoom.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="SDL">
