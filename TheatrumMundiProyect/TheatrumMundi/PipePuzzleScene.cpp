@@ -99,27 +99,27 @@ bool PipePuzzleScene::Check()
 
 void PipePuzzleScene::changeDirection(int module)
 {
-	if (_modules[module]->getModuleInfo().dir == Direction:: RIGHT)
+	if (_modules[module]->getModuleInfo().dir == Direction::RIGHT)
 	{
-		_modules[module]->changeModuleInfo().dir = Direction:: DOWN;
+		_modules[module]->changeModuleInfo().dir = Direction::DOWN;
 	}
-	else if (_modules[module]->getModuleInfo().dir == Direction:: DOWN &&( module==5|| module==4))
+	else if (_modules[module]->getModuleInfo().dir == Direction::DOWN && (module == 5 || module == 4))
 	{
-		_modules[module]->changeModuleInfo().dir = Direction:: UP;
+		_modules[module]->changeModuleInfo().dir = Direction::UP;
 	}
-	else if (_modules[module]->getModuleInfo().dir == Direction:: DOWN && (module != 5 && module != 4))
+	else if (_modules[module]->getModuleInfo().dir == Direction::DOWN && (module != 5 && module != 4))
 	{
-		_modules[module]->changeModuleInfo().dir = Direction:: LEFT;
+		_modules[module]->changeModuleInfo().dir = Direction::LEFT;
 	}
-	else if (_modules[module]->getModuleInfo().dir == Direction:: UP && (module == 5 || module == 4))
+	else if (_modules[module]->getModuleInfo().dir == Direction::UP && (module == 5 || module == 4))
 	{
-		_modules[module]->changeModuleInfo().dir = Direction:: RIGHT;
+		_modules[module]->changeModuleInfo().dir = Direction::RIGHT;
 	}
-	else if (_modules[module]->getModuleInfo().dir == Direction:: LEFT && (module != 5 && module != 4))
+	else if (_modules[module]->getModuleInfo().dir == Direction::LEFT && (module != 5 && module != 4))
 	{
-		_modules[module]->changeModuleInfo().dir = Direction:: UP;
+		_modules[module]->changeModuleInfo().dir = Direction::UP;
 	}
-
+	
 	//
 }
 
@@ -151,14 +151,13 @@ void PipePuzzleScene::init()
 
 			// añadimos el transfomr
 			auto pipeTransform = entityManager->addComponent<Transform>(
-				pipeEntity, pipePositions[i], Vector2D(0, 0), 500, 500, 0
+				pipeEntity, pipePositions[i], Vector2D(0, 0), 40, 40, 0
 			);
 
 			// añadimos imagen
-			entityManager->addComponent<Image>(pipeEntity, &sdlutils().images().at("prueba"));
+			entityManager->addComponent<Image>(pipeEntity, &sdlutils().images().at("exit"));
 
-			// añadimos el área de visuallizado de la imagen
-			entityManager->addComponent<RectArea2D>(pipeEntity);
+			
 		}
 
 
@@ -169,10 +168,11 @@ void PipePuzzleScene::init()
 			Vector2D(300, 0), // pos modulo 2
 			Vector2D(400, 0), // pos modulo 3
 			Vector2D(0, 200), // pos modulo 4
-			Vector2D(0, 200), // pos modulo 5
+			//para que tantas si solo hay 5 modules
+			/*Vector2D(0, 200), // pos modulo 5
 			Vector2D(0, 200), // pos modulo 6
 			Vector2D(0, 200), // pos modulo 7
-			Vector2D(0, 200)  // pos modulo 8
+			Vector2D(0, 200) */ // pos modulo 8
 		};
 
 		// Creamos los componentes de las pipes
@@ -183,7 +183,7 @@ void PipePuzzleScene::init()
 
 			// añadimos el transfomr
 			auto moduleTransform = entityManager->addComponent<Transform>(
-				moduleEntity, modulePositions[i], Vector2D(0, 0), 50, 50, 0
+				moduleEntity, modulePositions[i], Vector2D(0, 0), 100, 100, 0
 			);
 
 			// añadimos imagen
@@ -193,8 +193,8 @@ void PipePuzzleScene::init()
 			entityManager->addComponent<RectArea2D>(moduleEntity);
 			entityManager->addComponent<RectArea2D>(moduleEntity);
 			ClickComponent* clk = entityManager->addComponent<ClickComponent>(moduleEntity);
-			clk->connect(ClickComponent::JUST_CLICKED, [this,i]() {
-			changeDirection(_modules[i]->getModuleInfo().id);});
+			clk->connect(ClickComponent::JUST_CLICKED, [this, i]() {std::cout << "id"<<i;
+				changeDirection(_modules[i]->getModuleInfo().id);});
 		}
 
 
@@ -236,10 +236,9 @@ void PipePuzzleScene::init()
 			);
 
 			// añadimos imagen
-			entityManager->addComponent<Image>(pathEntity, &sdlutils().images().at("prueba"));
+			entityManager->addComponent<Image>(pathEntity, &sdlutils().images().at("init"));
 
-			// añadimos el área de visuallizado de la imagen
-			entityManager->addComponent<RectArea2D>(pathEntity);
+			
 
 		}
 
@@ -385,4 +384,15 @@ void PipePuzzleScene::waterPassPath()
 	}
 
 	
+}
+
+void PipePuzzleScene::unload()
+{
+	for (auto a : _waterPipes) delete a;
+	for (auto a : _modules) delete a;
+}
+
+PipePuzzleScene::~PipePuzzleScene()
+{
+	unload();
 }

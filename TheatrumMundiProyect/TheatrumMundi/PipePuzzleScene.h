@@ -49,6 +49,7 @@ public:
 	 void waterPassPipe(int pipe); //if water can pass through a pipe 
 	 void waterPassModule(int module); //if water has arrived to a certain module
 	 void waterPassPath();// series of conditions to check if paths have water
-	 
+	 void unload() override;
+	 ~PipePuzzleScene();
 };
 

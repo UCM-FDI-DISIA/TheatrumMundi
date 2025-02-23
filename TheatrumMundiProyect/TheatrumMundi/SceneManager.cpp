@@ -15,7 +15,7 @@ SceneManager::SceneManager()
 	scenes.push_back(new PipePuzzleScene());
 	scenes.push_back(new InitialScene());
 	scenes.push_back(new DebugLogRoom());
-	scenes.push_back(new Room1());
+   	scenes.push_back(new Room1());
 	loadScene(0);
 	
 }

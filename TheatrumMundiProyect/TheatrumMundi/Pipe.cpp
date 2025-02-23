@@ -4,6 +4,9 @@ Pipe::Pipe(pipeInfo info): _type(info.type), _info(info)
 {
 
 }
+Pipe::~Pipe()
+{
+}
 Pipe::pipeInfo Pipe::getPipeInfo() const
 { 
 	return _info; 
