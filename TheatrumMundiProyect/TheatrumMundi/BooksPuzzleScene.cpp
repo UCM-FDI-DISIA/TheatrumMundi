@@ -39,8 +39,12 @@ void BooksPuzzleScene::init()
 	if (!isStarted) 
 	{
 
-		auto ButtonBookFirst = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 1 / 7, sdlutils().height() / 2), Vector2D(0, 0), 50, 300, 0, EntityFactory::NODRAG);
-		auto ButtonBookSecond = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(0,0), Vector2D(0, 0), 50, 300, 0, EntityFactory::NODRAG);
+		auto backButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(0,0), Vector2D(0, 0), 50, 50, 0, EntityFactory::NODRAG);
+		backButton->getMngr()->setActive(backButton, false);
+
+		auto ButtonBookFirst = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(274, sdlutils().height() / 2), Vector2D(0, 0), 50, 300, 0, EntityFactory::NODRAG);
+		auto ButtonBookSecond = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(822, sdlutils().height() / 2), Vector2D(0, 0), 50, 300, 0, EntityFactory::NODRAG);
+		auto ButtonBookThird = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(900,sdlutils().height() / 2), Vector2D(0, 0), 50, 300, 0, EntityFactory::NODRAG);
 		auto ImageBook = entityFactory->CreateImageEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(100,100), Vector2D(0, 0), 1200, 600, 0);
 		ImageBook->getMngr()->setActive(ImageBook, false);
 
@@ -49,31 +53,35 @@ void BooksPuzzleScene::init()
 			ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookA"));
 			ImageBook->getMngr()->setActive(ImageBook,true);
 			});
-		//auto ButtonBook3 = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 5 / 7, sdlutils().height() / 2), Vector2D(0, 0), 50, 300, 0, EntityFactory::NODRAG);
-		//auto ImageBook3 = entityFactory->CreateImageEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(100,100), Vector2D(0, 0), 1200, 600, 0);
-		//
-		//auto ButtonBack = entityFactory->CreateImageEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(300,300), Vector2D(0, 0), 100, 100, 0);
-		//
-		//ClickComponent* ButtonBook1Click = entityManager->getComponent<ClickComponent>(ButtonBook1);
-		//ButtonBook1Click->connect(ClickComponent::JUST_CLICKED, [ImageBook1, this]() {
-		//	ImageBook1->getMngr()->setActive(ImageBook1,false);
-		//	});
-		//ClickComponent* ButtonBook2Click = entityManager->getComponent<ClickComponent>(ButtonBook2);
-		//ButtonBook2Click->connect(ClickComponent::JUST_CLICKED, [ImageBook2, this]() {
-		//	ImageBook2->getMngr()->setActive(ImageBook2,false);
-		//	});
-		//
-		//ClickComponent* ButtonBook3Click = entityManager->getComponent<ClickComponent>(ButtonBook3);
-		//ButtonBook3Click->connect(ClickComponent::JUST_CLICKED, [ImageBook3, this]() {
-		//	ImageBook3->getMngr()->setActive(ImageBook3,false);
-		//	});
+		ButtonBook1Click->connect(ClickComponent::JUST_CLICKED, [backButton, this]() {
+			backButton->getMngr()->setActive(backButton, true);
+			});
 
+		ClickComponent* ButtonBook2Click = entityManager->getComponent<ClickComponent>(ButtonBookSecond);
+		ButtonBook2Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, this]() {
+			ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookB"));
+			ImageBook->getMngr()->setActive(ImageBook, true);
+			});
+		ButtonBook2Click->connect(ClickComponent::JUST_CLICKED, [backButton, this]() {
+			backButton->getMngr()->setActive(backButton, true);
+			});
 
+		ClickComponent* ButtonBook3Click = entityManager->getComponent<ClickComponent>(ButtonBookThird);
+		ButtonBook3Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, this]() {
+			ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookC"));
+			ImageBook->getMngr()->setActive(ImageBook, true);
+			});
+		ButtonBook3Click->connect(ClickComponent::JUST_CLICKED, [backButton, this]() {
+			backButton->getMngr()->setActive(backButton, true);
+			});
 
-
-
-
-
+		ClickComponent* clickbackButton = entityManager->getComponent<ClickComponent>(backButton);
+		clickbackButton->connect(ClickComponent::JUST_CLICKED, [backButton, this]() {
+			backButton->getMngr()->setActive(backButton, false);
+		});
+		clickbackButton->connect(ClickComponent::JUST_CLICKED, [ImageBook, this]() {
+			ImageBook->getMngr()->setActive(ImageBook, false);
+		});
 
 
 
@@ -127,7 +135,7 @@ void BooksPuzzleScene::init()
 		});
 
 		//CHECK COMBINATION
-		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(0,0), Vector2D(0, 0), 100, 100, 0, EntityFactory::NODRAG);
+		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 8 / 21, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0, EntityFactory::NODRAG);
 		ClickComponent* clickcheckButton = entityManager->getComponent<ClickComponent>(checkButton);
 		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, this]() {
 			if (Check()) std::cout << "WIN" << std::endl;
@@ -146,5 +154,5 @@ void BooksPuzzleScene::unload()
 
 bool BooksPuzzleScene::Check()
 {
-	return comb1[5] == num1 && comb2[4] == num2 && comb3[9] == num3;
+	return comb1[2] == num1 && comb2[7] == num2 && comb3[3] == num3;
 }
