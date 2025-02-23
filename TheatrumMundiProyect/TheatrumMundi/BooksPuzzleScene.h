@@ -11,12 +11,10 @@ public:
 	void init() override;
 	void refresh() override;
 	void unload() override;
-	bool Check() override;
+	bool Check() override; //HERE WE PUT THE CORRECT COMBINATION
 
 private:
-	std::array<int, 10> comb1;
-	std::array<int, 10> comb2;
-	std::array<int, 10> comb3;
+	std::array<int, 10> comb;
 
 	int num1;
 	int num2;

@@ -19,10 +19,8 @@ using namespace std;
 
 BooksPuzzleScene::BooksPuzzleScene()
 {
-	for (int i = 0; i < comb1.size(); ++i) {
-		comb1[i] = i;
-		comb2[i] = i;
-		comb3[i] = i;
+	for (int i = 0; i < comb.size(); ++i) {
+		comb[i] = i;
 	}
 
 	num1 = 0;
@@ -138,8 +136,8 @@ void BooksPuzzleScene::init()
 		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 8 / 21, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0, EntityFactory::NODRAG);
 		ClickComponent* clickcheckButton = entityManager->getComponent<ClickComponent>(checkButton);
 		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, this]() {
-			if (Check()) std::cout << "WIN" << std::endl;
 			std::cout << "CLICK" << std::endl;
+			if (Check()) std::cout << "WIN" << std::endl;
 		});
 	}
 }
@@ -153,6 +151,6 @@ void BooksPuzzleScene::unload()
 }
 
 bool BooksPuzzleScene::Check()
-{
-	return comb1[2] == num1 && comb2[7] == num2 && comb3[3] == num3;
+{ //HERE WE PUT THE CORRECT COMBINATION
+	return comb[2] == num1 && comb[7] == num2 && comb[3] == num3;
 }
