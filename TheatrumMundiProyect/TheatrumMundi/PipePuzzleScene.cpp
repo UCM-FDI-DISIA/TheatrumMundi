@@ -16,41 +16,38 @@ PipePuzzleScene::PipePuzzleScene()
 	:ScenePuzzleTemplate()
 {
 	
-	
 }
 
 void PipePuzzleScene::pipeCreation()
 {
 	int nextPipeId = 0;
 
-	_waterPipes.push_back(new Pipe(Pipe::pipeInfo({ nextPipeId, Pipe::TWO, {'M', 0, Direction:: DOWN}, {'M', 1, Direction::RIGHT}, false })));
-	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::ONE, {'M', 0,  Direction:: RIGHT}, {'P', 0, Direction:: NONE}, true }));
-	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::TWO, {'P', 5,  Direction:: NONE}, {'P', 3, Direction:: NONE}, false }));
-	_waterPipes.push_back(new Pipe({ nextPipeId++,Pipe::ONE, {'M', 1, Direction:: DOWN}, {'M', 4, Direction:: UP}, false }));
-	_waterPipes.push_back(new Pipe({ nextPipeId++,Pipe::TWO, {'M', 3, Direction:: DOWN}, {'M', 5, Direction:: RIGHT}, false }));
-	_waterPipes.push_back(new Pipe({ nextPipeId++,Pipe::ONE, {'M', 4,  Direction:: RIGHT}, {'M', 5, Direction:: UP}, true }));
-	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::TWO, {'M', 3, Direction:: RIGHT}, {'M', 2, Direction:: DOWN}, false }));
-	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::ONE, {'P', 6,  Direction:: NONE}, {'M', 2, Direction:: RIGHT}, false }));
-	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::TWO, {'P', 4, Direction:: NONE}, {'P', 7, Direction:: NONE}, false }));
+	_waterPipes.push_back(new Pipe({ nextPipeId, Pipe::TWO, {'M', 0, DOWN}, {'M', 1, RIGHT}, false }));
+	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::ONE, {'M', 0,   RIGHT}, {'P', 0,  NONE}, true }));
+	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::TWO, {'P', 5,  NONE}, {'P', 3,  NONE}, false }));
+	_waterPipes.push_back(new Pipe({ nextPipeId++,Pipe::ONE, {'M', 1,  DOWN}, {'M', 4,  UP}, false }));
+	_waterPipes.push_back(new Pipe({ nextPipeId++,Pipe::TWO, {'M', 3,  DOWN}, {'M', 5,  RIGHT}, false }));
+	_waterPipes.push_back(new Pipe({ nextPipeId++,Pipe::ONE, {'M', 4,   RIGHT}, {'M', 5,  UP}, true }));
+	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::TWO, {'M', 3,  RIGHT}, {'M', 2,  DOWN}, false }));
+	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::ONE, {'P', 6,  NONE}, {'M', 2,  RIGHT}, false }));
+	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::TWO, {'P', 4,  NONE}, {'P', 7,  NONE}, false }));
 
 
 }
 
 void PipePuzzleScene::moduleCreation()
 {
-	//result means if it carries water
-	//dir means actual direction
-	//down,right,left, up means what the module/pipe is closest to in that direction
 	// P is pipe, M is module and N is null, the number means which one it is
-
+	//if N 1 means it is always going to have water
+	//if N 0 never going to have water(null direction)
 	 int nextId = 0;
 	
-	_modules.push_back(new Module({ nextId, Direction:: RIGHT, {'P', 1}, {'N', 1}, {'N', 0}, {'P', 0}, true }));
-	_modules.push_back(new Module({ nextId++, Direction:: RIGHT, {'P', 0}, {'N', 1}, {'N', 0}, {'P', 3}, true }));
-	_modules.push_back(new Module({ nextId++, Direction:: DOWN,  {'P', 0}, {'P', 1}, {'N', 0}, {'P', 3}, true }));
-	_modules.push_back(new Module({ nextId++, Direction:: DOWN,  {'P', 6}, {'P', 2}, {'N', 0}, {'P', 4}, false }));
-	_modules.push_back(new Module({ nextId++, Direction:: RIGHT, {'P', 5}, {'N', 0}, {'P', 3}, {'N', 1}, true }));
-	_modules.push_back(new Module({ nextId++, Direction:: RIGHT, {'P', 4}, {'N', 0}, {'P', 5}, {'N', 1}, true }));
+	_modules.push_back(new Module({ nextId, RIGHT, {'P', 1}, {'N', 1}, {'N', 0}, {'P', 0}, true }));
+	_modules.push_back(new Module({ nextId++,  RIGHT, {'P', 0}, {'N', 1}, {'N', 0}, {'P', 3}, true }));
+	_modules.push_back(new Module({ nextId++,  DOWN,  {'P', 0}, {'P', 1}, {'N', 0}, {'P', 3}, true }));
+	_modules.push_back(new Module({ nextId++,  DOWN,  {'P', 6}, {'P', 2}, {'N', 0}, {'P', 4}, false }));
+	_modules.push_back(new Module({ nextId++,  RIGHT, {'P', 5}, {'N', 0}, {'P', 3}, {'N', 1}, true }));
+	_modules.push_back(new Module({ nextId++,  RIGHT, {'P', 4}, {'N', 0}, {'P', 5}, {'N', 1}, true }));
 }
 
 void PipePuzzleScene::pathCreation()
@@ -132,7 +129,8 @@ void PipePuzzleScene::init()
 		moduleCreation();
 		pipeCreation();
 		pathCreation();
-		//creamos vector con pos para pipes
+
+		//vector with pipe positions
 		vector<Vector2D> pipePositions = {
 			Vector2D(100, 100), // pos pipe 0
 			Vector2D(200, 100), // pos pipe 1
@@ -145,58 +143,59 @@ void PipePuzzleScene::init()
 			Vector2D(500, 200)  // pos pipe 8
 		};
 
-		// Creamos los componentes de las pipes
+		// creates the components of the pipe
 		for (int i = 0; i < pipePositions.size(); ++i) {
 
-			// creamos entidad
+			// create entity
 			auto pipeEntity = entityManager->addEntity();
 
-			// añadimos el transfomr
+			// add transfomr
 			auto pipeTransform = entityManager->addComponent<Transform>(
 				pipeEntity, pipePositions[i], Vector2D(0, 0), 40, 40, 0
 			);
 
-			// añadimos imagen
+			// add image
 			entityManager->addComponent<Image>(pipeEntity, &sdlutils().images().at("exit"));
 
-			
 		}
 
 
-		//creamos vector con pos para modulos
+		//vector with positions of modules
 		vector<Vector2D> modulePositions = {
-			Vector2D(100, 0), // pos modulo 0
-			Vector2D(200,0), // pos modulo 1
-			Vector2D(300, 0), // pos modulo 2
-			Vector2D(400, 0), // pos modulo 3
-			Vector2D(0, 200), // pos modulo 4
-			
+			Vector2D(100, 0), // pos module 0
+			Vector2D(200,0), // pos module 1
+			Vector2D(300, 0), // pos module 2
+			Vector2D(400, 0), // pos module 3
+			Vector2D(0, 200), // pos module 4
+			Vector2D(0, 100), // pos module 5
 		};
 
-		// Creamos los componentes de las pipes
+
+		// creates the components of the module
 		for (int i = 0; i < modulePositions.size(); ++i) {
 
-			// creamos entidad
+			// create entity
 			auto moduleEntity = entityManager->addEntity();
 
-			// añadimos el transfomr
+			// add transfomr
 			auto moduleTransform = entityManager->addComponent<Transform>(
 				moduleEntity, modulePositions[i], Vector2D(0, 0), 100, 100, 0
 			);
 
-			// añadimos imagen
+			// add image
 			entityManager->addComponent<Image>(moduleEntity, &sdlutils().images().at("prueba"));
 
-			// añadimos el área de visuallizado de la imagen
+			// add area of visualization of the image
 			entityManager->addComponent<RectArea2D>(moduleEntity);
-			entityManager->addComponent<RectArea2D>(moduleEntity);
+
+			//add click component
 			ClickComponent* clk = entityManager->addComponent<ClickComponent>(moduleEntity);
-			clk->connect(ClickComponent::JUST_CLICKED, [this, i]() {std::cout << "id"<<i;
-				changeDirection(_modules[i]->getModuleInfo().id);});
+			clk->connect(ClickComponent::JUST_CLICKED, [this, i]() {std::cout << "name"<<i;
+				changeDirection(_modules[i]->getModuleInfo().name);});
 		}
 
 
-		//creamos vector con pos para path
+		//vector with path position
 		vector<Vector2D> pathPositions = {
 			Vector2D(100, 0), // pos modulo 0
 			Vector2D(200,0), // pos modulo 1
@@ -225,61 +224,55 @@ void PipePuzzleScene::init()
 
 		for (int i = 0; i < pathPositions.size(); ++i) {
 
-			// creamos entidad
+			// create entity
 			auto pathEntity = entityManager->addEntity();
 
-			// añadimos el transfomr
+			// add transform
 			auto pathTransform = entityManager->addComponent<Transform>(
 				pathEntity, pathPositions[i], Vector2D(0, 0), 60, 60, 0
 			);
 
-			// añadimos imagen
+			// add image
 			entityManager->addComponent<Image>(pathEntity, &sdlutils().images().at("init"));
-
-			
 
 		}
 
 	}
 }
 
-
-
-
-
-void 
-PipePuzzleScene::waterPassPipe(int pipe) {
+void PipePuzzleScene::waterPassPipe(int pipe) {
 	
 	Pipe:: pipeInfo pipeData = _waterPipes[pipe]->changePipeInfo();
 
-	// verificar si el tipo del tubo es ONE (1 entrada)
 	if (pipeData.type ==Pipe:: ONE) {
-		// verificar si la entrada 1 tiene agua y cumple con la dirección
-		if ((pipeData.entry1.id == 'P' && _waterPipes[pipeData.entry1.value]->getPipeInfo().result == true) ||
-			(pipeData.entry1.id == 'M' && _modules[pipeData.entry1.value]->getModuleInfo().result == true &&
-				(_modules[pipeData.entry1.value]->getModuleInfo().dir == pipeData.entry1.direction))) // comprobar dir que tiene modulo es la misma que necesita la entrada
+		//checks if at least one entry (which can be a module or pipe) have water
+		//if its a module it needs to check if the module's dir is the one the pipe needs for it to hace water
+		if ((pipeData.entry1.name == 'P' && _waterPipes[pipeData.entry1.num]->getPipeInfo().result == true) ||
+			(pipeData.entry1.name == 'M' && _modules[pipeData.entry1.num]->getModuleInfo().result == true &&
+				(_modules[pipeData.entry1.num]->getModuleInfo().dir == pipeData.entry1.direction))) 
 		{
-			pipeData.result = true; // el tubo lleva agua
+			pipeData.result = true; 
 		}
 		else {
-			pipeData.result = false; // el tubo no lleva agua
+			pipeData.result = false;
 		}
 	}
 
-	// verificar si el tipo del tubo es TWO (2 entradas)
+	
 	if (pipeData.type == Pipe:: TWO) {
-		// comprobar si ambas entradas (entry1 y entry2) tienen agua y cumplen con las direcciones
-		if ((pipeData.entry1.id == 'P' && _waterPipes[pipeData.entry1.value]->getPipeInfo().result == true) &&
-			(pipeData.entry2.id == 'P' && _waterPipes[pipeData.entry2.value]->getPipeInfo().result == true) ||
-			(pipeData.entry1.id == 'M' && _modules[pipeData.entry1.value]->getModuleInfo().result == true &&
-				_modules[pipeData.entry1.value]->getModuleInfo().dir == pipeData.entry1.direction) &&
-			(pipeData.entry2.id == 'M' && _modules[pipeData.entry2.value]->getModuleInfo().result == true &&
-				_modules[pipeData.entry2.value]->getModuleInfo().dir == pipeData.entry2.direction)) // comprobar dir que tiene modulo es la misma que necesita la entrada
+		//checks if both entries (which can be a module or pipe) have water
+		//if its a module it needs to check if the module's dir is the one the pipe needs for it to hace water
+		if ((pipeData.entry1.name == 'P' && _waterPipes[pipeData.entry1.num]->getPipeInfo().result == true) &&
+			(pipeData.entry2.name == 'P' && _waterPipes[pipeData.entry2.num]->getPipeInfo().result == true) ||
+			(pipeData.entry1.name == 'M' && _modules[pipeData.entry1.num]->getModuleInfo().result == true &&
+				_modules[pipeData.entry1.num]->getModuleInfo().dir == pipeData.entry1.direction) &&
+			(pipeData.entry2.name == 'M' && _modules[pipeData.entry2.num]->getModuleInfo().result == true &&
+				_modules[pipeData.entry2.num]->getModuleInfo().dir == pipeData.entry2.direction)) 
 		{
-			pipeData.result = true; // El tubo lleva agua
+			pipeData.result = true; 
 		}
 		else {
-			pipeData.result = false; // El tubo no lleva agua
+			pipeData.result = false; 
 		}
 	}
 }
@@ -330,13 +323,13 @@ void PipePuzzleScene::waterPassModule(int module) {
 		receivesWater = true;
 	}
 
-	// nuevo estado actualizado de agua
+	
 	modInfo.result = receivesWater;
 }
 
 void PipePuzzleScene::waterPassPath(int path)
 {
-	if (_waterPath[path]._whoTocheck.elem == 'M')
+	if (_waterPath[path]._whoTocheck.name == 'M')
 	{
 		if (_modules[_waterPath[path]._whoTocheck.num]->getModuleInfo().result && _modules[_waterPath[path]._whoTocheck.num]->getModuleInfo().dir == _waterPath[path]._whoTocheck.dir)
 		{
@@ -347,7 +340,7 @@ void PipePuzzleScene::waterPassPath(int path)
 			_waterPath[path]._withWater = false;
 		}
 	}
-	else if (_waterPath[path]._whoTocheck.elem == 'P')
+	else if (_waterPath[path]._whoTocheck.name == 'P')
 	{
 		if (_waterPipes[_waterPath[path]._whoTocheck.num]->getPipeInfo().result == true)
 		{
