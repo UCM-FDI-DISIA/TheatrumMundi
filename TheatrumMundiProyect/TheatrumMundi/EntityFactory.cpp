@@ -18,7 +18,7 @@ EntityFactory::EntityFactory(){}
 EntityFactory::~EntityFactory(){}
 
 //CREATES IMAGE ENTITY
-ecs::entity_t EntityFactory::CreateImageEntity(ecs::EntityManager* _entityManager, std::string _idImage, AreaType _typeRect,
+ecs::entity_t EntityFactory::CreateImageEntity(ecs::EntityManager* _entityManager, const std::string& _idImage, AreaType _typeRect,
 	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot)
 {
 	ecs::entity_t newElement = _entityManager->addEntity();
@@ -30,7 +30,7 @@ ecs::entity_t EntityFactory::CreateImageEntity(ecs::EntityManager* _entityManage
 }
 
 //CREATES COMMON BUTTON (WITH DRAG IS AN OBJECT TO MOVE IN PUZZLES)
-ecs::entity_t EntityFactory::CreateInteractableEntity(ecs::EntityManager* _entityManager, std::string _idImage, AreaType _typeRect,
+ecs::entity_t EntityFactory::CreateInteractableEntity(ecs::EntityManager* _entityManager, const std::string& _idImage, AreaType _typeRect,
 	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, 
 	Dragging _drag)
 {
@@ -46,7 +46,7 @@ ecs::entity_t EntityFactory::CreateInteractableEntity(ecs::EntityManager* _entit
 }
 
 //CREATES SCROLL BUTTON (WITH DRAG IS AN SCROLLBAR TO LOG OR INVENTORY)
-ecs::entity_t EntityFactory::CreateInteractableEntityScroll(ecs::EntityManager* _entityManager, std::string _idImage, AreaType _typeRect,
+ecs::entity_t EntityFactory::CreateInteractableEntityScroll(ecs::EntityManager* _entityManager, const std::string& _idImage, AreaType _typeRect,
 	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot,
 	Vector2D _dirScroll,float _time, 
 	Dragging _drag)

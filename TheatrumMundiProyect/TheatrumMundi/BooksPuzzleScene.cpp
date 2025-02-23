@@ -10,6 +10,11 @@
 
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
 
+#include "../src/ecs/Manager.h"
+
+#include "../src/components/Image.h"
+
+
 using namespace std;
 
 BooksPuzzleScene::BooksPuzzleScene()
@@ -34,11 +39,34 @@ void BooksPuzzleScene::init()
 	if (!isStarted) 
 	{
 
-		auto ButtonBook1 = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 1 / 7, sdlutils().height() / 2), Vector2D(0, 0), 100, 100, 0, EntityFactory::NODRAG);
-		auto ButtonBook2 = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 3 / 7, sdlutils().height() / 2), Vector2D(0, 0), 100, 100, 0, EntityFactory::NODRAG);
-		auto ButtonBook3 = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 5 / 7, sdlutils().height() / 2), Vector2D(0, 0), 100, 100, 0, EntityFactory::NODRAG);
-	
+		auto ButtonBookFirst = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 1 / 7, sdlutils().height() / 2), Vector2D(0, 0), 50, 300, 0, EntityFactory::NODRAG);
+		auto ButtonBookSecond = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(0,0), Vector2D(0, 0), 50, 300, 0, EntityFactory::NODRAG);
+		auto ImageBook = entityFactory->CreateImageEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(100,100), Vector2D(0, 0), 1200, 600, 0);
+		ImageBook->getMngr()->setActive(ImageBook, false);
 
+		ClickComponent* ButtonBook1Click = entityManager->getComponent<ClickComponent>(ButtonBookFirst);
+		ButtonBook1Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, this]() {
+			ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookA"));
+			ImageBook->getMngr()->setActive(ImageBook,true);
+			});
+		//auto ButtonBook3 = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 5 / 7, sdlutils().height() / 2), Vector2D(0, 0), 50, 300, 0, EntityFactory::NODRAG);
+		//auto ImageBook3 = entityFactory->CreateImageEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(100,100), Vector2D(0, 0), 1200, 600, 0);
+		//
+		//auto ButtonBack = entityFactory->CreateImageEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(300,300), Vector2D(0, 0), 100, 100, 0);
+		//
+		//ClickComponent* ButtonBook1Click = entityManager->getComponent<ClickComponent>(ButtonBook1);
+		//ButtonBook1Click->connect(ClickComponent::JUST_CLICKED, [ImageBook1, this]() {
+		//	ImageBook1->getMngr()->setActive(ImageBook1,false);
+		//	});
+		//ClickComponent* ButtonBook2Click = entityManager->getComponent<ClickComponent>(ButtonBook2);
+		//ButtonBook2Click->connect(ClickComponent::JUST_CLICKED, [ImageBook2, this]() {
+		//	ImageBook2->getMngr()->setActive(ImageBook2,false);
+		//	});
+		//
+		//ClickComponent* ButtonBook3Click = entityManager->getComponent<ClickComponent>(ButtonBook3);
+		//ButtonBook3Click->connect(ClickComponent::JUST_CLICKED, [ImageBook3, this]() {
+		//	ImageBook3->getMngr()->setActive(ImageBook3,false);
+		//	});
 
 
 
@@ -54,8 +82,8 @@ void BooksPuzzleScene::init()
 
 
 		//COMBINATION NUMBER 1
-		auto number1 = entityFactory->CreateImageEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 9 / 21, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0);
-		auto increaseNumber1 = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 9 / 21, sdlutils().height() - 180), Vector2D(0, 0), 50, 50, 0, EntityFactory::NODRAG);
+		auto number1 = entityFactory->CreateImageEntity(entityManager, "numberButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 9 / 21, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0);
+		auto increaseNumber1 = entityFactory->CreateInteractableEntity(entityManager, "incrementButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 9 / 21, sdlutils().height() - 180), Vector2D(0, 0), 50, 50, 0, EntityFactory::NODRAG);
 		ClickComponent* clickIncreaseNumber1 = entityManager->getComponent<ClickComponent>(increaseNumber1);
 		clickIncreaseNumber1->connect(ClickComponent::JUST_CLICKED, [clickIncreaseNumber1,this]() {
 			if (num1 < 9) {
@@ -69,8 +97,8 @@ void BooksPuzzleScene::init()
 		});
 
 		//COMBINATION NUMBER 2
-		auto number2 = entityFactory->CreateImageEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 10 / 21, 50), Vector2D(0, 0), 50, 50, 0);
-		auto increaseNumber2 = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 10 / 21, 10), Vector2D(0, 0), 50, 50, 0, EntityFactory::NODRAG);
+		auto number2 = entityFactory->CreateImageEntity(entityManager, "numberButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 10 / 21, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0);
+		auto increaseNumber2 = entityFactory->CreateInteractableEntity(entityManager, "incrementButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 10 / 21, sdlutils().height() - 180), Vector2D(0, 0), 50, 50, 0, EntityFactory::NODRAG);
 		ClickComponent* clickIncreaseNumber2 = entityManager->getComponent<ClickComponent>(increaseNumber2);
 		clickIncreaseNumber2->connect(ClickComponent::JUST_CLICKED, [clickIncreaseNumber2, this]() {
 			if (num2 < 9) {
@@ -84,8 +112,8 @@ void BooksPuzzleScene::init()
 		});
 
 		//COMBINATION NUMBER 3
-		auto number3 = entityFactory->CreateImageEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 11 / 21, 50), Vector2D(0, 0), 50, 50, 0);
-		auto increaseNumber3 = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 11 / 21, 10), Vector2D(0, 0), 50, 50, 0, EntityFactory::NODRAG);
+		auto number3 = entityFactory->CreateImageEntity(entityManager, "numberButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 11 / 21, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0);
+		auto increaseNumber3 = entityFactory->CreateInteractableEntity(entityManager, "incrementButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 11 / 21, sdlutils().height() - 180), Vector2D(0, 0), 50, 50, 0, EntityFactory::NODRAG);
 		ClickComponent* clickIncreaseNumber3 = entityManager->getComponent<ClickComponent>(increaseNumber3);
 		clickIncreaseNumber3->connect(ClickComponent::JUST_CLICKED, [clickIncreaseNumber3, this]() {
 			if (num3 < 9) {
@@ -99,7 +127,7 @@ void BooksPuzzleScene::init()
 		});
 
 		//CHECK COMBINATION
-		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0, EntityFactory::NODRAG);
+		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(0,0), Vector2D(0, 0), 100, 100, 0, EntityFactory::NODRAG);
 		ClickComponent* clickcheckButton = entityManager->getComponent<ClickComponent>(checkButton);
 		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, this]() {
 			if (Check()) std::cout << "WIN" << std::endl;
