@@ -1,13 +1,15 @@
 #pragma once
-class Direction
+namespace Direction
 {
-protected:
-	enum Directions { // diections a module can have
-		DOWN,
+ enum Directions { // diections a module can have
+		DOWN = 0,
 		UP,
 		RIGHT,
 		LEFT,
 		NONE
 	};
+	/*bool operator==(const Direction& other) const {
+		return di == other.value;
+	}*/
 };
 

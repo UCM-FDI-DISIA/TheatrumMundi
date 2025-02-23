@@ -2,7 +2,8 @@
 #include <vector>
 #include "Direction.h"
 using namespace std;
-class Module :public Direction
+using namespace Direction;
+class Module 
 {
 
 protected:
@@ -26,6 +27,7 @@ public:
 	moduleInfo getModuleInfo() const;
 	moduleInfo& changeModuleInfo() ;
 	~Module();
+	friend class PipePuzzleScene;
 };
 
 

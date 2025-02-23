@@ -2,7 +2,8 @@
 #include <vector>
 #include "Direction.h"
 using namespace std;
-class Pipe :public Direction
+using namespace Direction;
+class Pipe 
 {
 protected:
 	enum Type {
@@ -14,7 +15,7 @@ protected:
 	struct Entry {
 		char id;
 		int value;
-		Direction direction;
+		Directions direction;
 	};
 
 	struct pipeInfo
@@ -31,10 +32,11 @@ private:
 	Type _type;
 	pipeInfo _info;
 public:
-	Pipe(pipeInfo info, Type type);
+	Pipe(pipeInfo info);
 	~Pipe();
 	pipeInfo getPipeInfo() const;
 	pipeInfo& changePipeInfo();
+	friend class PipePuzzleScene;
 };
 
 

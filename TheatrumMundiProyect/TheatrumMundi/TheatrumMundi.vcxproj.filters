@@ -107,6 +107,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Module.cpp" />
+    <ClCompile Include="PipePuzzleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Pipe.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\SDL2-2.30.11\include\SDL.h">
@@ -563,6 +569,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Direction.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\alc.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx-creative.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\EFX-Util.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\xram.h" />
+    <ClInclude Include="PipePuzzleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Pipe.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="SDL">
