@@ -57,29 +57,31 @@ void PipePuzzleScene::pathCreation()
 {
     int nextId = 0;
 
-	_waterPath.push_back({ nextId, true });  
-	_waterPath.push_back({ nextId++, false }); 
-	_waterPath.push_back({ nextId++, true });  
-	_waterPath.push_back({ nextId++, true });  
-	_waterPath.push_back({ nextId++, false }); 
-	_waterPath.push_back({ nextId++, true });  
-	_waterPath.push_back({ nextId++, false });
-	_waterPath.push_back({ nextId++, false }); 
-	_waterPath.push_back({ nextId++, true });  
-	_waterPath.push_back({ nextId++, false }); 
-	_waterPath.push_back({ nextId++, false }); 
-	_waterPath.push_back({ nextId++, true });  
-	_waterPath.push_back({ nextId++, false }); 
-	_waterPath.push_back({ nextId++, false }); 
-	_waterPath.push_back({ nextId++, false }); 
-	_waterPath.push_back({ nextId++, false }); 
-	_waterPath.push_back({ nextId++, true });  
-	_waterPath.push_back({ nextId++, false }); 
-	_waterPath.push_back({ nextId++, false }); 
-	_waterPath.push_back({ nextId++, true });  
-	_waterPath.push_back({ nextId++, false }); 
-	_waterPath.push_back({ nextId++, false }); 
-	_waterPath.push_back({ nextId++, true });  
+	_waterPath.push_back({ nextId, true, {'N',0,NONE}});//0
+	_waterPath.push_back({ nextId++, false,{'M',0,RIGHT} });//1
+	_waterPath.push_back({ nextId++, true,{'N',0,NONE} }); //2
+	_waterPath.push_back({ nextId++, true ,{'M',1,RIGHT} });//3
+	_waterPath.push_back({ nextId++, false,{'P',0,NONE} });//4
+	_waterPath.push_back({ nextId++, true,{'P',1,NONE} });//5
+	_waterPath.push_back({ nextId++, false,{'M',2,RIGHT} });//6
+	_waterPath.push_back({ nextId++, false,{'M',1,DOWN} });//7
+	_waterPath.push_back({ nextId++, true ,{'M',4,UP} });//8
+	_waterPath.push_back({ nextId++, false,{'P',3,NONE} });//9
+	_waterPath.push_back({ nextId++, false,{'P',2,NONE} });//10
+	_waterPath.push_back({ nextId++, true ,{'P',5,NONE} });//11
+	_waterPath.push_back({ nextId++, false,{'M',3,RIGHT} });//12
+	_waterPath.push_back({ nextId++, false,{'P',6,NONE} });//13
+	_waterPath.push_back({ nextId++, false,{'P',7,NONE} });//14
+	_waterPath.push_back({ nextId++, false ,{'P',4,NONE} });//15
+	_waterPath.push_back({ nextId++, true ,{'M',5,RIGHT} });//16
+	_waterPath.push_back({ nextId++, false,{'M',4,RIGHT} });//17
+	_waterPath.push_back({ nextId++, false,{'N',0,NONE} });//18
+	_waterPath.push_back({ nextId++, false,{'N',0,NONE} });//19
+	_waterPath.push_back({ nextId++, true,{'M',5,UP} });//20
+	_waterPath.push_back({ nextId++, false,{'P',8,NONE} });//21
+	_waterPath.push_back({ nextId++, false,{'M',2,DOWN} });//22
+	_waterPath.push_back({ nextId++, true,{'M',0,DOWN} });//23
+	_waterPath.push_back({ nextId++, true ,{'M',3,DOWN} });//24
 	
 }
 
@@ -168,11 +170,7 @@ void PipePuzzleScene::init()
 			Vector2D(300, 0), // pos modulo 2
 			Vector2D(400, 0), // pos modulo 3
 			Vector2D(0, 200), // pos modulo 4
-			//para que tantas si solo hay 5 modules
-			/*Vector2D(0, 200), // pos modulo 5
-			Vector2D(0, 200), // pos modulo 6
-			Vector2D(0, 200), // pos modulo 7
-			Vector2D(0, 200) */ // pos modulo 8
+			
 		};
 
 		// Creamos los componentes de las pipes
@@ -198,7 +196,7 @@ void PipePuzzleScene::init()
 		}
 
 
-		//creamos vector con pos para modulos
+		//creamos vector con pos para path
 		vector<Vector2D> pathPositions = {
 			Vector2D(100, 0), // pos modulo 0
 			Vector2D(200,0), // pos modulo 1
@@ -336,54 +334,35 @@ void PipePuzzleScene::waterPassModule(int module) {
 	modInfo.result = receivesWater;
 }
 
-void PipePuzzleScene::waterPassPath()
+void PipePuzzleScene::waterPassPath(int path)
 {
-	if (_modules[0]->getModuleInfo().result && _modules[0]->getModuleInfo().dir == Direction:: RIGHT)
+	if (_waterPath[path]._whoTocheck.elem == 'M')
 	{
-		_waterPath[1]._withWater = true;
+		if (_modules[_waterPath[path]._whoTocheck.num]->getModuleInfo().result && _modules[_waterPath[path]._whoTocheck.num]->getModuleInfo().dir == _waterPath[path]._whoTocheck.dir)
+		{
+			_waterPath[path]._withWater = true;
+		}
+		else
+		{
+			_waterPath[path]._withWater = false;
+		}
+	}
+	else if (_waterPath[path]._whoTocheck.elem == 'P')
+	{
+		if (_waterPipes[_waterPath[path]._whoTocheck.num]->getPipeInfo().result == true)
+		{
+			_waterPath[path]._withWater = true;
+		}
+		else
+		{
+			_waterPath[path]._withWater = false;
+		}
 	}
 	else
 	{
-		_waterPath[1]._withWater = false;
+		_waterPath[path]._withWater = true;
 	}
 
-	if (_modules[1]->getModuleInfo().result && _modules[1]->getModuleInfo().dir == Direction:: RIGHT)
-	{
-		_waterPath[3]._withWater = true;
-	}
-	else
-	{
-		_waterPath[3]._withWater = false;
-	}
-
-	if (_waterPipes[0]->getPipeInfo().result==true)
-	{
-		_waterPath[4]._withWater = true;
-	}
-	else
-	{
-		_waterPath[4]._withWater = false;
-	}
-
-	if (_waterPipes[1]->getPipeInfo().result == true)
-	{
-		_waterPath[5]._withWater = true;
-	}
-	else
-	{
-		_waterPath[5]._withWater = false;
-	}
-
-	if (_modules[2]->getModuleInfo().result && _modules[2]->getModuleInfo().dir == Direction:: RIGHT)
-	{
-		_waterPath[6]._withWater = true;
-	}
-	else
-	{
-		_waterPath[6]._withWater = false;
-	}
-
-	
 }
 
 void PipePuzzleScene::unload()

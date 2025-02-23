@@ -24,10 +24,17 @@ private:
 	//para que un modulo heche agua necesita que el result de que le llege agua sea true y que la direccion sea correcta
 	//los mudulos tienen 4 padres y los pipes tienen 2 
 	//si hay un cambio en los results de hechar agua o no en los pipes o modulos toca cambiaar los que esten al lado
+	struct Type {
+		char elem;
+		int num;
+		Directions dir;
+		
+	};
 	struct waterPath {
 
 		int id;
 		bool _withWater;
+		Type _whoTocheck;
 	};
 
 	vector<waterPath>_waterPath;
@@ -48,7 +55,7 @@ public:
 	 void init() override;
 	 void waterPassPipe(int pipe); //if water can pass through a pipe 
 	 void waterPassModule(int module); //if water has arrived to a certain module
-	 void waterPassPath();// series of conditions to check if paths have water
+	 void waterPassPath(int path);// series of conditions to check if paths have water
 	 void unload() override;
 	 ~PipePuzzleScene();
 };
