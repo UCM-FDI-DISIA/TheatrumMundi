@@ -2,8 +2,8 @@
 #include <fstream>
 #include <cassert>
 #include "../src/json/json.hpp";
-#include "../src/Components/WriteTextComponent.h";
-#include "TextInfo.h"
+//#include "../src/Components/WriteTextComponent.h";
+//#include "TextInfo.h"
 
 #include "../src/components/LogComponent.h"
 
@@ -104,24 +104,35 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 /// <param name="_eventToRead"></param>
 void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 	
-	
-	string event;
-	ParseEnum(event, _eventToRead);
-	if (mRoom[room].find(event) != mRoom[room].end() && !mRoom[room][event].empty()) {
+	std::cout << _writeTextComp->isFinished() << std::endl;
 
-		TextInfo elem = mRoom[room][event].front(); // Obtener el primer elemento
+	if (_writeTextComp->isFinished())
+	{
+		_writeTextComp->startTextLine();
 
-		_showText->Character = elem.Character; // Guardar el nuevo texto
-		_showText->Text = elem.Text;
-		cout << elem.Character << ": " << elem.Text << endl;
+		string event;
+		ParseEnum(event, _eventToRead);
+		if (mRoom[room].find(event) != mRoom[room].end() && !mRoom[room][event].empty()) {
 
-		if (_sceneLog) {
-			_sceneLog->addDialogueLineLog(elem.Character, elem.Text);
+			TextInfo elem = mRoom[room][event].front(); // Obtener el primer elemento
+
+			_showText->Character = elem.Character; // Guardar el nuevo texto
+			_showText->Text = elem.Text;
+			cout << elem.Character << ": " << elem.Text << endl;
+
+			if (_sceneLog) {
+				_sceneLog->addDialogueLineLog(elem.Character, elem.Text);
+			}
+
+			mRoom[room][event].pop_front(); // Eliminar el diálogo leído
+
 		}
-
-		mRoom[room][event].pop_front(); // Eliminar el diálogo leído
-
 	}
+	else
+	{
+		_writeTextComp->finishTextLine();
+	}
+	
 		
 		
 		

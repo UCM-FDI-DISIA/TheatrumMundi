@@ -37,6 +37,7 @@ public:
 
 	bool isFinished();
 	void finishTextLine();
+	void startTextLine();
 
 	~WriteTextComponent();
 	

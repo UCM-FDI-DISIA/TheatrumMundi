@@ -3,6 +3,8 @@
 #include <iostream>
 #include <list>
 
+#include "TextInfo.h"
+#include "../src/Components/WriteTextComponent.h";
 
 template <typename T>
 class WriteTextComponent;
@@ -53,7 +55,9 @@ public:
 	void setWriteTextComp(WriteTextComponent<TextInfo>* writeTextComp)
 	{
 		_writeTextComp = writeTextComp;
+		std::cout << "Prueba puntero a write direccion " << _writeTextComp->isFinished() << std::endl;
 	}
+	
 	TextInfo* getShowText();
 };
 

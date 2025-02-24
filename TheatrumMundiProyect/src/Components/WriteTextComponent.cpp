@@ -51,9 +51,6 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 	}
 }
 
-
-
-
 template <>
 void WriteTextComponent<TextInfo>::update()
 {
@@ -92,21 +89,31 @@ bool WriteTextComponent<std::list<std::pair<std::string, std::string>>>::isFinis
 }
 
 template<>
-void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::finishTextLine()
-{
-	
-}
-
-template<>
 bool WriteTextComponent<TextInfo>::isFinished()
 {
 	return charsToShow >= textStructure->Text.size();
 }
 
 template<>
+void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::finishTextLine()
+{
+}
+
+template<>
 void WriteTextComponent<TextInfo>::finishTextLine()
 {
 	charsToShow = textStructure->Text.size();
+}
+
+template<>
+void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::startTextLine()
+{
+}
+
+template<>
+void WriteTextComponent<TextInfo>::startTextLine()
+{
+	charsToShow = 0;
 }
 
 template <typename T>
