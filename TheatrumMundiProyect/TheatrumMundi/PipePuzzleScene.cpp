@@ -98,28 +98,31 @@ bool PipePuzzleScene::Check()
 
 void PipePuzzleScene::changeDirection(int module)
 {
+
+	
+
 	if (_modules[module]->getModuleInfo().dir == Direction::RIGHT)
 	{
 		_modules[module]->changeModuleInfo().dir = Direction::DOWN;
 	}
-	else if (_modules[module]->getModuleInfo().dir == Direction::DOWN && (module == 5 || module == 4))
-	{
-		_modules[module]->changeModuleInfo().dir = Direction::UP;
-	}
-	else if (_modules[module]->getModuleInfo().dir == Direction::DOWN && (module != 5 && module != 4))
+	else if (_modules[module]->getModuleInfo().dir == Direction::DOWN )
 	{
 		_modules[module]->changeModuleInfo().dir = Direction::LEFT;
 	}
-	else if (_modules[module]->getModuleInfo().dir == Direction::UP && (module == 5 || module == 4))
+	else if (_modules[module]->getModuleInfo().dir == Direction::UP )
 	{
 		_modules[module]->changeModuleInfo().dir = Direction::RIGHT;
 	}
-	else if (_modules[module]->getModuleInfo().dir == Direction::LEFT && (module != 5 && module != 4))
+	else if (_modules[module]->getModuleInfo().dir == Direction::LEFT )
 	{
 		_modules[module]->changeModuleInfo().dir = Direction::UP;
 	}
+
+	Transform* transformComponent = moduleEntity->getMngr()->getComponent<Transform>(moduleEntity);
 	
-	//
+	transformComponent->setRot(transformComponent->getRot() + 90.0f);
+	cout << "ACTUAL DIR" << _modules[module]->changeModuleInfo().dir << endl;
+	
 }
 
 void PipePuzzleScene::init()
@@ -157,6 +160,9 @@ void PipePuzzleScene::init()
 			// add image
 			entityManager->addComponent<Image>(pipeEntity, &sdlutils().images().at("exit"));
 
+			// add area of visualization of the image
+			entityManager->addComponent<RectArea2D>(pipeEntity);
+
 			Image* imageComponent = pipeEntity->getMngr()->getComponent<Image>(pipeEntity);
 
 			if (_waterPipes[i]->getPipeInfo().type==Pipe::ONE)
@@ -188,7 +194,7 @@ void PipePuzzleScene::init()
 		for (int i = 0; i < modulePositions.size(); ++i) {
 
 			// create entity
-			auto moduleEntity = entityManager->addEntity();
+			 moduleEntity = entityManager->addEntity();
 
 			// add transfomr
 			auto moduleTransform = entityManager->addComponent<Transform>(
@@ -224,28 +230,31 @@ void PipePuzzleScene::init()
 
 		//vector with path position
 		vector<Vector2D> pathPositions = {
-			Vector2D(100, 0), // pos modulo 0
-			Vector2D(200,0), // pos modulo 1
-			Vector2D(300, 0), // pos modulo 2
-			Vector2D(400, 0), // pos modulo 3
-			Vector2D(0, 200), // pos modulo 4
-			Vector2D(0, 200), // pos modulo 5
-			Vector2D(0, 200), // pos modulo 6
-			Vector2D(0, 200), // pos modulo 7
-			Vector2D(0, 200),  // pos modulo 8
-			Vector2D(100, 0), // pos modulo 0
-			Vector2D(200,0), // pos modulo 1
-			Vector2D(300, 0), // pos modulo 2
-			Vector2D(400, 0), // pos modulo 3
-			Vector2D(0, 200), // pos modulo 4
-			Vector2D(0, 200), // pos modulo 5
-			Vector2D(0, 200), // pos modulo 6
-			Vector2D(0, 200), // pos modulo 7
-			Vector2D(0, 200) , // pos modulo 8
-			Vector2D(100, 0), // pos modulo 0
-			Vector2D(200,0), // pos modulo 1
-			Vector2D(300, 0), // pos modulo 2
-			Vector2D(400, 0), // pos modulo 3
+			Vector2D(100, 0), 
+			Vector2D(200,0), 
+			Vector2D(300, 0), 
+			Vector2D(400, 0), 
+			Vector2D(0, 200), 
+			Vector2D(0, 200), 
+			Vector2D(0, 200), 
+			Vector2D(0, 200), 
+			Vector2D(0, 200),  
+			Vector2D(100, 0), 
+			Vector2D(200,0), 
+			Vector2D(300, 0), 
+			Vector2D(400, 0), 
+			Vector2D(0, 200), 
+			Vector2D(0, 200), 
+			Vector2D(0, 200), 
+			Vector2D(0, 200), 
+			Vector2D(0, 200) ,
+			Vector2D(100, 0), 
+			Vector2D(200,0),
+			Vector2D(300, 0), 
+			Vector2D(400, 0), 
+			Vector2D(200,0),
+			Vector2D(300, 0),
+			Vector2D(400, 0)
 		};
 
 
@@ -259,8 +268,11 @@ void PipePuzzleScene::init()
 				pathEntity, pathPositions[i], Vector2D(0, 0), 60, 60, 0
 			);
 
+			cout << "CARGADO" << i << endl;
 			// add image
 			entityManager->addComponent<Image>(pathEntity, &sdlutils().images().at("init"));
+			// add area of visualization of the image
+			entityManager->addComponent<RectArea2D>(pathEntity);
 			Image* imageComponent = pathEntity->getMngr()->getComponent<Image>(pathEntity);
 
 			if (_waterPath[i]._withWater)
@@ -277,6 +289,20 @@ void PipePuzzleScene::init()
 			
 
 		}
+
+		// create entity
+		auto cubeEntity = entityManager->addEntity();
+
+		// add transfomr
+		auto cubeTransform = entityManager->addComponent<Transform>(
+			cubeEntity, Vector2D(50, 50), Vector2D(0, 0), 40, 40, 0
+		);
+		// add image
+		entityManager->addComponent<Image>(cubeEntity, &sdlutils().images().at("cube"));
+
+		// add area of visualization of the image
+		entityManager->addComponent<RectArea2D>(cubeEntity);
+
 
 	}
 }

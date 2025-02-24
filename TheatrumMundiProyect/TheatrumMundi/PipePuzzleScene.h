@@ -37,6 +37,7 @@ private:
 	vector<Module*> _modules;//modules that change the direction of the water flow
 	bool solved;
 	ecs::Entity* pathEntity;
+	ecs::Entity* moduleEntity;
 
 protected:
 

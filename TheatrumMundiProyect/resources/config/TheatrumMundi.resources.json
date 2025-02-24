@@ -48,6 +48,7 @@
     { "id" : "1", "file" : "../resources/images/1.jpg" },
     { "id" : "module", "file" : "../resources/images/module.png" },
     { "id" : "module2", "file" : "../resources/images/module2.jpg" },
+    { "id" : "cube", "file" : "../resources/images/cube.jpg" },
     { "id" : "init", "file" : "../resources/images/start.jpg" },
     { "id" : "exit", "file" : "../resources/images/exit.png" }
   ],
