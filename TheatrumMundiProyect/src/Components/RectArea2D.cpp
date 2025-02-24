@@ -7,8 +7,20 @@
 #include "CircleArea2D.h"
 #include "../utils/Collisions.h"
 
+RectArea2D::RectArea2D(Area2DLayerManager* areaLayerMngr, Vector2D localPos, int width, int height)
+	: Area2D(areaLayerMngr, localPos), _width(width), _height(height)
+{
+
+}
+
 RectArea2D::RectArea2D(Vector2D localPos, int width, int height)
 	: Area2D(localPos), _width(width), _height(height)
+{
+
+}
+
+RectArea2D::RectArea2D(Area2DLayerManager* areaLayerMngr) 
+	: RectArea2D(areaLayerMngr, Vector2D(), -1, -1)
 {
 
 }

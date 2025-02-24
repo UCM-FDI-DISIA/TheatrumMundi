@@ -109,6 +109,11 @@
     </ClCompile>
     <ClCompile Include="BooksPuzzleScene.cpp">
       <Filter>Scene</Filter>
+    <ClCompile Include="Area2DLayerManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Area2D.cpp">
+      <Filter>Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -564,6 +569,15 @@
     </ClInclude>
     <ClInclude Include="BooksPuzzleScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\alc.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx-creative.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\EFX-Util.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\xram.h" />
+    <ClInclude Include="Area2DLayerManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

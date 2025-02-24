@@ -19,6 +19,9 @@ public:
 
 	bool connect(EVENT_TYPE, CALLBACK);
 
+	void setLayerOpposition(bool value) { _hasLayerOpposition = value; }
+	bool hasLayerOpposition() { return _hasLayerOpposition; }
+
 protected:
 
 	std::unordered_map<EVENT_TYPE, std::vector<CALLBACK>> _eventConnections;
@@ -26,4 +29,6 @@ protected:
 	void update() override;
 
 	virtual void handleMouseInput() = 0;
+
+	bool _hasLayerOpposition = true;
 };

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Components\Area2D.cpp" />
     <ClCompile Include="..\src\Components\CircleArea2D.cpp" />
     <ClCompile Include="..\src\Components\ClickComponent.cpp" />
     <ClCompile Include="..\src\Components\DragComponent.cpp" />
@@ -45,6 +46,7 @@
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
     <ClCompile Include="a.cpp" />
     <ClCompile Include="BooksPuzzleScene.cpp" />
+    <ClCompile Include="Area2DLayerManager.cpp" />
     <ClCompile Include="DebugLogRoom.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
     <ClCompile Include="DialogTestScene.cpp" />
@@ -58,6 +60,12 @@
     <ClCompile Include="SceneTemplate.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\alc.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx-creative.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\EFX-Util.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\xram.h" />
     <ClInclude Include="..\lib\SDL2-2.30.11\include\begin_code.h" />
     <ClInclude Include="..\lib\SDL2-2.30.11\include\close_code.h" />
     <ClInclude Include="..\lib\SDL2-2.30.11\include\SDL.h" />
@@ -196,6 +204,7 @@
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
     <ClInclude Include="BooksPuzzleScene.h" />
+    <ClInclude Include="Area2DLayerManager.h" />
     <ClInclude Include="DebugLogRoom.h" />
     <ClInclude Include="checkML.h" />
     <ClInclude Include="ClockPuzzleScene.h" />
