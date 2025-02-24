@@ -23,10 +23,6 @@ public:
 	bool overlapsWith(RectArea2D* rectArea) override;
 	bool overlapsWith(CircleArea2D* rectArea) override;
 
-	RectArea2D* GetRectArea() override;
-
-	CircleArea2D* GetCircleArea() override;
-
 	void setWidth(int value) {
 		_width = value;
 	}

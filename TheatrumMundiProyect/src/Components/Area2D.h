@@ -24,9 +24,6 @@ public:
 	virtual bool overlapsWith(RectArea2D* rectArea) = 0;
 	virtual bool overlapsWith(CircleArea2D* rectArea) = 0;
 
-	virtual RectArea2D* GetRectArea() = 0;
-
-	virtual CircleArea2D* GetCircleArea() = 0;
 
 	void setLocalPos(Vector2D pos) {
 		_localPosition = pos;

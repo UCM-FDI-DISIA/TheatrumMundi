@@ -24,8 +24,6 @@ public:
 
 	void AddObjectToList(CircleArea2D* newArea); //Add a Circle Colision to the list
 
-	bool CheckAreaColision(RectArea2D* entityArea); //Checks if there is a colision with one of the objects
-
-	bool CheckAreaColision(CircleArea2D* entityArea); //Checks if there is a colision with one of the objects 
+	bool CheckAreaColision(Area2D* entityArea); //Checks if there is a colision with one of the objects 
 };
 

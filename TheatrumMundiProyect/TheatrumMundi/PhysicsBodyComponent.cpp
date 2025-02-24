@@ -46,30 +46,15 @@ void PhysicsBodyComponent::AddObjectToList(CircleArea2D* newArea)
 	colisionableObjects.push_back(newArea);
 }
 
-
-
-/// <summary>
-/// Compares if the RectArea of the entity collides with some objet of the list
-/// </summary>
-/// <param name="entityArea"></param>
-/// <returns></returns>
-bool PhysicsBodyComponent::CheckAreaColision(RectArea2D* entityArea)
-{
-	for (auto& elem : colisionableObjects) {
-		if (elem->overlapsWith(entityArea)) return false;
-	}
-	return true;
-}
-
 /// <summary>
 /// Compares if the CircleArea of the entity collides with some objet of the list
 /// </summary>
 /// <param name="entityArea"></param>
 /// <returns></returns>
-bool PhysicsBodyComponent::CheckAreaColision(CircleArea2D* entityArea)
+bool PhysicsBodyComponent::CheckAreaColision(Area2D* entityArea)
 {
 	for (auto& elem : colisionableObjects) {
-		if (elem->overlapsWith(entityArea)) return false;
+		if (elem->overlapsWithArea(entityArea)) return false;
 	}
 	return true;
 }
