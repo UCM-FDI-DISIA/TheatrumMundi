@@ -2,8 +2,8 @@
 #include <fstream>
 #include <cassert>
 #include "../src/json/json.hpp";
-#include "../src/Components/WriteTextComponent.h";
-#include "TextInfo.h"
+//#include "../src/Components/WriteTextComponent.h";
+//#include "TextInfo.h"
 
 #include "../src/components/LogComponent.h"
 
@@ -37,8 +37,8 @@ void DialogueManager::ReadJson(){
 			//Fill r with all the evenet dialogues 
 			for (auto& elem2 : elem.value()) {
 
-				string character = to_string(elem2["Character"]);
-				string text = to_string(elem2["Text"]);
+				string character = elem2["Character"];
+				string text = elem2["Text"];
 				r[elem.key()].push_back(TextInfo{ character,text });
 			}
 		}
@@ -50,7 +50,7 @@ void DialogueManager::ReadJson(){
 }
 
 
-DialogueManager::DialogueManager() : _sceneLog(nullptr){
+DialogueManager::DialogueManager() : _sceneLog(nullptr), _writeTextComp(nullptr){
 
 	actualroom = 1;
 	room = "Sala" + to_string(actualroom);
@@ -104,19 +104,40 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 /// <param name="_eventToRead"></param>
 void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 	
-	
-	string event;
-	ParseEnum(event, _eventToRead);
-	for (auto& elem : mRoom[room][event]) {
-		delete _showText; //delete last text line
-		_showText = new TextInfo{ elem.Character , elem.Text}; //add new text line
-		cout << elem.Character << ": " << elem.Text << endl;
+	if (_writeTextComp->isFinished())
+	{
+		
+		string event;
+		ParseEnum(event, _eventToRead);
+		if (mRoom[room].find(event) != mRoom[room].end() && !mRoom[room][event].empty()) {
 
-		if (_sceneLog)
-		{
-			_sceneLog->addDialogueLineLog(elem.Character, elem.Text);
+			TextInfo elem = mRoom[room][event].front(); // Gets first element
+
+			_showText->Character = elem.Character; // Saves new text
+			_showText->Text = elem.Text;
+			cout << elem.Character << ": " << elem.Text << endl;
+
+			_writeTextComp->startTextLine();
+
+
+			if (_sceneLog) {
+				_sceneLog->addDialogueLineLog(elem.Character, elem.Text);
+			}
+
+			mRoom[room][event].pop_front(); // Delete read textLine
+
 		}
 	}
+	else
+	{
+		_writeTextComp->finishTextLine();
+	}
+	
+		
+		
+		
+		
+	
 }
 
 /// <summary>
@@ -133,6 +154,7 @@ void DialogueManager::ReadAnswer(){
 	}
 }
 
+
 DialogueManager::~DialogueManager()
 {
 	delete _showText;
@@ -142,6 +164,7 @@ void DialogueManager::setSceneLog(LogComponent* sceneLog)
 {
 	_sceneLog = sceneLog;
 }
+
 
 TextInfo* DialogueManager::getShowText()
 {

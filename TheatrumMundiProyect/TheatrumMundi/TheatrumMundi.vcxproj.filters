@@ -112,6 +112,11 @@
     </ClCompile>
     <ClCompile Include="Pipe.cpp">
       <Filter>Misc</Filter>
+    <ClCompile Include="Area2DLayerManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Area2D.cpp">
+      <Filter>Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -583,6 +588,8 @@
     </ClInclude>
     <ClInclude Include="Pipe.h">
       <Filter>Misc</Filter>
+    <ClInclude Include="Area2DLayerManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

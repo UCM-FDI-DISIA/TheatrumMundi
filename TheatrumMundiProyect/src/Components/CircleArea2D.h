@@ -11,6 +11,8 @@ public:
 	CircleArea2D();
 	CircleArea2D(int radius);
 	CircleArea2D(Vector2D localPos, int radius);
+	CircleArea2D(Area2DLayerManager* areaLayerMngr);
+	CircleArea2D(Area2DLayerManager* areaLayerMngr, Vector2D localPos, int radius);
 
 	void initComponent() override;
 
