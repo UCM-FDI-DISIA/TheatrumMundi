@@ -99,7 +99,7 @@ bool PipePuzzleScene::Check()
 
 void PipePuzzleScene::changeDirection(int module)
 {
-	cout << "tuberia " << module << "cambiada de " << _modules[module]->changeModuleInfo().dir<< " a ";
+	cout << "tuberia " << module << "cambiada de" << _modules[module]->changeModuleInfo().dir<< " a ";
 	if (_modules[module]->getModuleInfo().dir == Direction::RIGHT)
 	{
 		_modules[module]->changeModuleInfo().dir = Direction::DOWN;
