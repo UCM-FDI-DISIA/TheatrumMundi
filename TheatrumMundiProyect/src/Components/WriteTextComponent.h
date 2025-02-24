@@ -18,7 +18,7 @@ private:
 	// If it is log list, there is no Dynamic memory to destroy
 	// If it is TextInfo, DialogueManager already destroys that memory.
 
-	const int TEXT_SPEED = 250; //25 ms
+	const int TEXT_SPEED = 200; //20 ms
 	int lastUpdate;
 	std::string _currentText;
 	int charsToShow;
@@ -29,15 +29,14 @@ public:
 
 	WriteTextComponent(Font& desiredFont, const SDL_Color& desiredColor, T* text);
 
-	void ShowDialogue(T* dialogue);
 
 	void update() override;
 	void render() override;
 
 
-	bool isFinished();
-	void finishTextLine();
-	void startTextLine();
+	bool isFinished(); //checks if current TextLine has been displayed entirely on screen
+	void finishTextLine(); //finishes display of current TextLine
+	void startTextLine(); //resets values to start displaying new TextLine
 
 	~WriteTextComponent();
 	

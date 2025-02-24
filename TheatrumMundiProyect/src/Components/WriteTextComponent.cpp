@@ -7,7 +7,7 @@
 
 #include <list>
 
-
+//CONSTRUCTOR
 template <typename T>
 WriteTextComponent<T>::WriteTextComponent(Font& desiredFont, const SDL_Color& desiredColor, T* text)
 	:_myFont(desiredFont), _color(desiredColor), textStructure(text), _currentText(" "), charsToShow(0)
@@ -15,20 +15,30 @@ WriteTextComponent<T>::WriteTextComponent(Font& desiredFont, const SDL_Color& de
 
 }
 
-
-template <typename T>
-void WriteTextComponent<T>::ShowDialogue(T* dialog)
-{
-	textStructure = dialog;
-
-}
-
+//UPDATE
 template <>
 void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::update()
 {
 
 }
 
+template <>
+void WriteTextComponent<TextInfo>::update()
+{
+	int currentTime = sdlutils().virtualTimer().currRealTime(); //get real time
+	if (currentTime - lastUpdate >= TEXT_SPEED) //update currentText
+	{
+		if (charsToShow < textStructure->Text.size()) //there is more textLine to animate
+		{
+			charsToShow++;
+			lastUpdate = currentTime;
+		}
+	}
+	_currentText = textStructure->Text.substr(0, charsToShow); //substr = returns a minor string with initial pos in 0 and end in charsToShow
+}
+
+
+//RENDER
 template <>
 void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render()
 {
@@ -52,22 +62,6 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 }
 
 template <>
-void WriteTextComponent<TextInfo>::update()
-{
-	int currentTime = sdlutils().virtualTimer().currRealTime(); //get real time
-	if (currentTime - lastUpdate >= TEXT_SPEED) //update currentText
-	{
-		if (charsToShow < textStructure->Text.size()) //there is more textLine to animate
-		{
-			charsToShow++;
-			lastUpdate = currentTime;
-		}
-	}
-	_currentText = textStructure->Text.substr(0, charsToShow); //substr = returns a minor string with initial pos in 0 and end in charsToShow
-}
-
-
-template <>
 void WriteTextComponent<TextInfo>::render()
 {
 
@@ -75,13 +69,14 @@ void WriteTextComponent<TextInfo>::render()
 	SDL_Rect nameRect = { 500, 0,nameText->width(),nameText->height()};
 	nameText->render(nameRect, 0);
 
-	Texture* dialogText = new Texture(sdlutils().renderer(), _currentText.c_str(), _myFont, _color);
+	Texture* dialogText = new Texture(sdlutils().renderer(), _currentText, _myFont, _color);
 	SDL_Rect dialogRect = { 500, 100,dialogText->width(),dialogText->height() };
 	dialogText->render(dialogRect, 0);
 	
 }
 
 
+//IS FINISHED
 template<>
 bool WriteTextComponent<std::list<std::pair<std::string, std::string>>>::isFinished()
 {
@@ -94,6 +89,8 @@ bool WriteTextComponent<TextInfo>::isFinished()
 	return charsToShow >= textStructure->Text.size();
 }
 
+
+//FINISH TEXTLINE
 template<>
 void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::finishTextLine()
 {
@@ -105,6 +102,8 @@ void WriteTextComponent<TextInfo>::finishTextLine()
 	charsToShow = textStructure->Text.size();
 }
 
+
+//START TEXTLINE
 template<>
 void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::startTextLine()
 {
@@ -116,10 +115,13 @@ void WriteTextComponent<TextInfo>::startTextLine()
 	charsToShow = 0;
 }
 
+
+//DESTROYER
 template <typename T>
 WriteTextComponent<T>::~WriteTextComponent()
 {
 }
+
 
 // Explicit instantiation declaration
 template class WriteTextComponent<TextInfo>;

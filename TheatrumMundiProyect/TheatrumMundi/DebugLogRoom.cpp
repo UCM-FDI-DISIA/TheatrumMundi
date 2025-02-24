@@ -74,8 +74,6 @@ void DebugLogRoom::init()
 
 			Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
 
-			std::cout << "Prueba puntero a write" << writeLogentityManager->isFinished() << std::endl;
-
 			/*
 
 			//BUTTONS

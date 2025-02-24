@@ -37,8 +37,8 @@ void DialogueManager::ReadJson(){
 			//Fill r with all the evenet dialogues 
 			for (auto& elem2 : elem.value()) {
 
-				string character = to_string(elem2["Character"]);
-				string text = to_string(elem2["Text"]);
+				string character = elem2["Character"];
+				string text = elem2["Text"];
 				r[elem.key()].push_back(TextInfo{ character,text });
 			}
 		}
@@ -104,27 +104,27 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 /// <param name="_eventToRead"></param>
 void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 	
-	std::cout << _writeTextComp->isFinished() << std::endl;
-
 	if (_writeTextComp->isFinished())
 	{
-		_writeTextComp->startTextLine();
-
+		
 		string event;
 		ParseEnum(event, _eventToRead);
 		if (mRoom[room].find(event) != mRoom[room].end() && !mRoom[room][event].empty()) {
 
-			TextInfo elem = mRoom[room][event].front(); // Obtener el primer elemento
+			TextInfo elem = mRoom[room][event].front(); // Gets first element
 
-			_showText->Character = elem.Character; // Guardar el nuevo texto
+			_showText->Character = elem.Character; // Saves new text
 			_showText->Text = elem.Text;
 			cout << elem.Character << ": " << elem.Text << endl;
+
+			_writeTextComp->startTextLine();
+
 
 			if (_sceneLog) {
 				_sceneLog->addDialogueLineLog(elem.Character, elem.Text);
 			}
 
-			mRoom[room][event].pop_front(); // Eliminar el diálogo leído
+			mRoom[room][event].pop_front(); // Delete read textLine
 
 		}
 	}
