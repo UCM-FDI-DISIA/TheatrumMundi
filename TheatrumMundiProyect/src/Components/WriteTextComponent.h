@@ -17,6 +17,12 @@ private:
 	T* textStructure; //points to text structure. Log list or TextInfo.
 	// If it is log list, there is no Dynamic memory to destroy
 	// If it is TextInfo, DialogueManager already destroys that memory.
+
+	const int TEXT_SPEED = 250; //25 ms
+	int lastUpdate;
+	std::string _currentText;
+	int charsToShow;
+
 public:
 	//ID
 	__CMPID_DECL__(ecs::cmp::WRITE_TEXT_COMPONENT);
