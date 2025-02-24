@@ -40,7 +40,7 @@ ecs::entity_t EntityFactory::CreateInteractableEntity(ecs::EntityManager* _entit
 	if (_typeRect == RECTAREA)_entityManager->addComponent<RectArea2D>(newElement);
 	else if (_typeRect == CIRCLEAREA) _entityManager->addComponent<CircleArea2D>(newElement)->setLocalPos(Vector2D(_width/2,_height/2));
 	_entityManager->addComponent<ClickComponent>(newElement);
-	_entityManager->addComponent<TriggerComponent>(newElement);
+	//_entityManager->addComponent<TriggerComponent>(newElement);
 	if (_drag == DRAG) _entityManager->addComponent<DragComponent>(newElement);
 	return newElement;
 }

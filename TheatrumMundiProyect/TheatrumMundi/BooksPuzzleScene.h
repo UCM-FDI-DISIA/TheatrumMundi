@@ -2,6 +2,7 @@
 #include "ScenePuzzleTemplate.h"
 
 class array;
+class vector;
 
 class BooksPuzzleScene : public ScenePuzzleTemplate
 {
@@ -14,10 +15,10 @@ public:
 	bool Check() override; //HERE WE PUT THE CORRECT COMBINATION
 
 private:
-	std::array<int, 10> comb;
+	//std::array<int, 10> comb;
+	//std::array<int, 3> myComb;
 
-	int num1;
-	int num2;
-	int num3;
+	std::vector<int> comb;
+	std::vector<int> myComb;
 };
 

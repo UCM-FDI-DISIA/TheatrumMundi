@@ -14,18 +14,30 @@
 
 #include "../src/components/Image.h"
 
+#include <vector>
+
+#include "iostream"
+
+#include "../src/components/RectArea2D.h"
+
+#include "../src/components/TriggerComponent.h"
+
+#include "../src/Components/Transform.h"
+
 
 using namespace std;
 
 BooksPuzzleScene::BooksPuzzleScene()
 {
+	comb.resize(10);
+	myComb.resize(3);
+
 	for (int i = 0; i < comb.size(); ++i) {
 		comb[i] = i;
 	}
-
-	num1 = 0;
-	num2 = 0;
-	num3 = 0;
+	for (int i = 0; i < myComb.size(); ++i) {
+		myComb[i] = 0;
+	}
 }
 
 BooksPuzzleScene::~BooksPuzzleScene()
@@ -40,9 +52,19 @@ void BooksPuzzleScene::init()
 		auto backButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(0,0), Vector2D(0, 0), 50, 50, 0, EntityFactory::NODRAG);
 		backButton->getMngr()->setActive(backButton, false);
 
-		auto ButtonBookFirst = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(274, sdlutils().height() / 2), Vector2D(0, 0), 50, 300, 0, EntityFactory::NODRAG);
-		auto ButtonBookSecond = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(822, sdlutils().height() / 2), Vector2D(0, 0), 50, 300, 0, EntityFactory::NODRAG);
-		auto ButtonBookThird = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(900,sdlutils().height() / 2), Vector2D(0, 0), 50, 300, 0, EntityFactory::NODRAG);
+		//auto ButtonBookFirst = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() / 2, sdlutils().height() / 2), Vector2D(0, 0), 50, 300, 0, EntityFactory::NODRAG);
+		
+		auto ButtonBookFirst = entityManager->addEntity();
+		entityManager->addComponent<Transform>(ButtonBookFirst, Vector2D(sdlutils().width()/2, sdlutils().height() / 2), Vector2D(1, 0), 50, 300, 0);
+		entityManager->addComponent<Image>(ButtonBookFirst, &sdlutils().images().at("bookButton"));
+		entityManager->addComponent<RectArea2D>(ButtonBookFirst);
+		//else if (_typeRect == CIRCLEAREA) _entityManager->addComponent<CircleArea2D>(newElement)->setLocalPos(Vector2D(_width / 2, _height / 2));
+		entityManager->addComponent<ClickComponent>(ButtonBookFirst);
+		//entityManager->addComponent<TriggerComponent>(ButtonBookFirst);
+		//if (_drag == DRAG) _entityManager->addComponent<DragComponent>(newElement);
+		
+		auto ButtonBookSecond = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(822, sdlutils().height() / 2), Vector2D(1, 0), 50, 300, 0, EntityFactory::NODRAG);
+		auto ButtonBookThird = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(900,sdlutils().height() / 2), Vector2D(1, 0), 50, 300, 0, EntityFactory::NODRAG);
 		auto ImageBook = entityFactory->CreateImageEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(100,100), Vector2D(0, 0), 1200, 600, 0);
 		ImageBook->getMngr()->setActive(ImageBook, false);
 
@@ -88,17 +110,17 @@ void BooksPuzzleScene::init()
 
 
 		//COMBINATION NUMBER 1
-		auto number1 = entityFactory->CreateImageEntity(entityManager, "numberButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 9 / 21, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0);
-		auto increaseNumber1 = entityFactory->CreateInteractableEntity(entityManager, "incrementButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 9 / 21, sdlutils().height() - 180), Vector2D(0, 0), 50, 50, 0, EntityFactory::NODRAG);
+		auto number1 = entityFactory->CreateImageEntity(entityManager, "numberButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 9 / 21, sdlutils().height() - 100), Vector2D(1, 0), 50, 50, 0);
+		auto increaseNumber1 = entityFactory->CreateInteractableEntity(entityManager, "incrementButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 9 / 21, sdlutils().height() - 180), Vector2D(1, 0), 50, 50, 0, EntityFactory::NODRAG);
 		ClickComponent* clickIncreaseNumber1 = entityManager->getComponent<ClickComponent>(increaseNumber1);
 		clickIncreaseNumber1->connect(ClickComponent::JUST_CLICKED, [clickIncreaseNumber1,this]() {
-			if (num1 < 9) {
-				num1++;
-				cout << "NUM1: " << num1 << endl;
+			if (myComb[0] < 9) {
+				myComb[0]++;
+				cout << "NUM1: " << myComb[0] << endl;
 			}
-			else if (num1 == 9) {
-				num1 = 0;
-				cout << "NUM1: " << num1 << endl;
+			else if (myComb[0] == 9) {
+				myComb[0] = 0;
+				cout << "NUM1: " << myComb[0] << endl;
 			}
 		});
 
@@ -107,13 +129,13 @@ void BooksPuzzleScene::init()
 		auto increaseNumber2 = entityFactory->CreateInteractableEntity(entityManager, "incrementButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 10 / 21, sdlutils().height() - 180), Vector2D(0, 0), 50, 50, 0, EntityFactory::NODRAG);
 		ClickComponent* clickIncreaseNumber2 = entityManager->getComponent<ClickComponent>(increaseNumber2);
 		clickIncreaseNumber2->connect(ClickComponent::JUST_CLICKED, [clickIncreaseNumber2, this]() {
-			if (num2 < 9) {
-				num2++;
-				cout << "NUM2: " << num2 << endl;
+			if (myComb[1] < 9) {
+				myComb[1]++;
+				cout << "NUM2: " << myComb[1] << endl;
 			}
-			else if (num2 == 9) {
-				num2 = 0;
-				cout << "NUM2: " << num2 << endl;
+			else if (myComb[1] == 9) {
+				myComb[1] = 0;
+				cout << "NUM2: " << myComb[1] << endl;
 			}
 		});
 
@@ -122,13 +144,13 @@ void BooksPuzzleScene::init()
 		auto increaseNumber3 = entityFactory->CreateInteractableEntity(entityManager, "incrementButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 11 / 21, sdlutils().height() - 180), Vector2D(0, 0), 50, 50, 0, EntityFactory::NODRAG);
 		ClickComponent* clickIncreaseNumber3 = entityManager->getComponent<ClickComponent>(increaseNumber3);
 		clickIncreaseNumber3->connect(ClickComponent::JUST_CLICKED, [clickIncreaseNumber3, this]() {
-			if (num3 < 9) {
-				num3++;
-				cout << "NUM3: " << num3 << endl;
+			if (myComb[2] < 9) {
+				myComb[2]++;
+				cout << "NUM3: " << myComb[2] << endl;
 			}
-			else if (num3 == 9) {
-				num3 = 0;
-				cout << "NUM3: " << num3 << endl;
+			else if (myComb[2] == 9) {
+				myComb[2] = 0;
+				cout << "NUM3: " << myComb[2] << endl;
 			}
 		});
 
@@ -151,6 +173,8 @@ void BooksPuzzleScene::unload()
 }
 
 bool BooksPuzzleScene::Check()
-{ //HERE WE PUT THE CORRECT COMBINATION
-	return comb[2] == num1 && comb[7] == num2 && comb[3] == num3;
+{ //HERE WE PUT THE CORRECT COMBINATION : 6 - 4 - 1
+	return	myComb[0] == comb[6] && 
+			myComb[1] == comb[4] && 
+			myComb[2] == comb[1];
 }
