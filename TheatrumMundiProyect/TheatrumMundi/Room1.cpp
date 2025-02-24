@@ -1,9 +1,11 @@
 #include "Room1.h"
+#include <list>
 #include "../src/utils/Vector2D.h"
 #include "../src/components/Transform.h"
 #include "../src/components/Image.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
 
+#include "../TheatrumMundi/PhysicsBodyComponent.h"
 #include "../src/components/ClickComponent.h"
 #include "../src/components/TriggerComponent.h"
 #include "../src/components/DragComponent.h"
@@ -26,10 +28,10 @@ void Room1::init()
 {
 	if (!isStarted) {
 		auto _fighter = entityManager->addEntity();
-		auto _fighterTransform = entityManager->addComponent<Transform>(_fighter, Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0);
+		auto _fighterTransform = entityManager->addComponent<Transform>(_fighter, Vector2D(0, 0), Vector2D(0, 0), 200, 200, 0);
 		entityManager->addComponent<Image>(_fighter, &sdlutils().images().at("prueba"));
 
-		entityManager->addComponent<CircleArea2D>(_fighter)->setLocalPos(Vector2D(250,250));
+		entityManager->addComponent<CircleArea2D>(_fighter)->setLocalPos(Vector2D(100,100));
 
 
 		//ClickComponent* clk = entityManager->addComponent<ClickComponent>(_fighter);
@@ -51,12 +53,14 @@ void Room1::init()
 		DragComponent* drg = entityManager->addComponent<DragComponent>(_fighter);
 		drg->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
 
+		PhysicsBodyComponent* phy = entityManager->addComponent<PhysicsBodyComponent>(_fighter);
 		//BOTON
 		auto _button = entityManager->addEntity();
 		auto _buttonTransform = entityManager->addComponent<Transform>(_button, Vector2D(500, 500), Vector2D(0, 0), 500, 500, 0);
 		entityManager->addComponent<Image>(_button, &sdlutils().images().at("prueba"));
 
-		entityManager->addComponent<RectArea2D>(_button);
+		RectArea2D* rect = entityManager->addComponent<RectArea2D>(_button);
+		phy->AddObjectToList(rect);
 
 		//ScrollComponent
 		//Velocity only X or Y (needs to be positive), time scrolling

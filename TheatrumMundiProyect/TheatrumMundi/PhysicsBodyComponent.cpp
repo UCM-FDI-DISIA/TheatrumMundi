@@ -29,22 +29,24 @@ PhysicsBodyComponent::~PhysicsBodyComponent()
 }
 
 /// <summary>
-/// Adds new RectArea to the list
+/// Add RectArea to list
 /// </summary>
-/// <param name="newRectArea"></param>
-void PhysicsBodyComponent::AddRectObjectToList(RectArea2D* newRectArea)
+/// <param name="newArea"></param>
+void PhysicsBodyComponent::AddObjectToList(RectArea2D* newArea)
 {
-	colisionableObjects.push_back(newRectArea);
+	colisionableObjects.push_back(newArea);
 }
 
 /// <summary>
-/// Adds new CircleArea to the list
+/// Add CircleArea to list
 /// </summary>
-/// <param name="newCircleArea"></param>
-void PhysicsBodyComponent::AddCircleObjectToList(CircleArea2D* newCircleArea)
+/// <param name="newArea"></param>
+void PhysicsBodyComponent::AddObjectToList(CircleArea2D* newArea)
 {
-	colisionableObjects.push_back(newCircleArea);
+	colisionableObjects.push_back(newArea);
 }
+
+
 
 /// <summary>
 /// Compares if the RectArea of the entity collides with some objet of the list
