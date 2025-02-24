@@ -6,7 +6,7 @@
 #include "Direction.h"
 #include "../src/components/Image.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
-
+#include "../src/ecs/Entity.h"
 #include "../src/components/ClickComponent.h"
 #include "../src/components/RectArea2D.h"
 #include "../src/components/RectArea2D.h"
@@ -157,6 +157,19 @@ void PipePuzzleScene::init()
 			// add image
 			entityManager->addComponent<Image>(pipeEntity, &sdlutils().images().at("exit"));
 
+			Image* imageComponent = pipeEntity->getMngr()->getComponent<Image>(pipeEntity);
+
+			if (_waterPipes[i]->getPipeInfo().type==Pipe::ONE)
+			{
+				//one entry
+				imageComponent->setTexture(&sdlutils().images().at("1"));
+
+			}
+			else
+			{
+				//two entries
+				imageComponent->setTexture(&sdlutils().images().at("2"));
+			}
 		}
 
 
@@ -192,6 +205,20 @@ void PipePuzzleScene::init()
 			ClickComponent* clk = entityManager->addComponent<ClickComponent>(moduleEntity);
 			clk->connect(ClickComponent::JUST_CLICKED, [this, i]() {std::cout << "name"<<i;
 				changeDirection(_modules[i]->getModuleInfo().name);});
+
+			Image* imageComponent = moduleEntity->getMngr()->getComponent<Image>(moduleEntity);
+
+			if (_modules[i]->getModuleInfo().up.first=='N')
+			{
+				//module
+				imageComponent->setTexture(&sdlutils().images().at("module"));
+
+			}
+			else
+			{
+				//module2
+				imageComponent->setTexture(&sdlutils().images().at("module2"));
+			}
 		}
 
 
@@ -225,7 +252,7 @@ void PipePuzzleScene::init()
 		for (int i = 0; i < pathPositions.size(); ++i) {
 
 			// create entity
-			auto pathEntity = entityManager->addEntity();
+			 pathEntity = entityManager->addEntity();
 
 			// add transform
 			auto pathTransform = entityManager->addComponent<Transform>(
@@ -234,6 +261,20 @@ void PipePuzzleScene::init()
 
 			// add image
 			entityManager->addComponent<Image>(pathEntity, &sdlutils().images().at("init"));
+			Image* imageComponent = pathEntity->getMngr()->getComponent<Image>(pathEntity);
+
+			if (_waterPath[i]._withWater)
+			{
+				//texture with water
+				imageComponent->setTexture(&sdlutils().images().at("pathWith"));
+
+			}
+			else
+			{
+				imageComponent->setTexture(&sdlutils().images().at("pathWithout"));
+			}
+			
+			
 
 		}
 
@@ -356,6 +397,18 @@ void PipePuzzleScene::waterPassPath(int path)
 		_waterPath[path]._withWater = true;
 	}
 
+	Image* imageComponent = pathEntity->getMngr()->getComponent<Image>(pathEntity);
+
+	if (_waterPath[path]._withWater)
+	{
+		//texture with water
+		imageComponent->setTexture(&sdlutils().images().at("pathWith"));
+
+	}
+	else
+	{
+		imageComponent->setTexture(&sdlutils().images().at("pathWithout"));
+	}
 }
 
 void PipePuzzleScene::unload()

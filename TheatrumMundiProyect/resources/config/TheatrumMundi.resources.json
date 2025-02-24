@@ -42,6 +42,12 @@
         "file": "../resources/images/boton_check.png"
     },
     { "id" : "prueba", "file" : "../resources/images/socrates.png" },
+    { "id" : "pathWith", "file" : "../resources/images/pathWith.jpg" },
+    { "id" : "pathWithout", "file" : "../resources/images/pathWithout.jpg" },
+    { "id" : "2", "file" : "../resources/images/2.jpg" },
+    { "id" : "1", "file" : "../resources/images/1.jpg" },
+    { "id" : "module", "file" : "../resources/images/module.png" },
+    { "id" : "module2", "file" : "../resources/images/module2.jpg" },
     { "id" : "init", "file" : "../resources/images/start.jpg" },
     { "id" : "exit", "file" : "../resources/images/exit.png" }
   ],
