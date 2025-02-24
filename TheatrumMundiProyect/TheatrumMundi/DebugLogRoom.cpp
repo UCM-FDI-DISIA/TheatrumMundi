@@ -12,6 +12,7 @@
 #include "../src/components/DragComponent.h"
 #include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
+#include "TextInfo.h"
 
 #include "../src/game/Game.h"
 
@@ -49,14 +50,12 @@ void DebugLogRoom::init()
 
 			//register log in dialogue manager
 			Game::Instance()->getDialogueManager()->setSceneLog(logComp);
-
-			//read dialogue
-			//Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
 			
+			/*
 			std::cout << "Primera instancia showText" <<
 				Game::Instance()->getDialogueManager() <<
 				Game::Instance()->getDialogueManager()->getShowText()->Character << 
-				Game::Instance()->getDialogueManager()->getShowText()->Text << std::endl;
+				Game::Instance()->getDialogueManager()->getShowText()->Text << std::endl;*/
 
 			entityManager->addComponent<RectArea2D>(_screenDetect);
 			ClickComponent* passDialog = entityManager->addComponent<ClickComponent>(_screenDetect);
@@ -72,6 +71,8 @@ void DebugLogRoom::init()
 			//add writeText to dialogueManager
 			SDL_Color colorDialog = { 255, 0, 0, 255 }; // Establecer el color (rojo)
 			WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
+
+			Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
 
 			/*
 

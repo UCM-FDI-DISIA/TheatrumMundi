@@ -50,7 +50,7 @@ void DialogueManager::ReadJson(){
 }
 
 
-DialogueManager::DialogueManager() : _sceneLog(nullptr){
+DialogueManager::DialogueManager() : _sceneLog(nullptr), _writeTextComp(nullptr){
 
 	actualroom = 1;
 	room = "Sala" + to_string(actualroom);
@@ -105,23 +105,23 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 	
 	
-		string event;
-		ParseEnum(event, _eventToRead);
-		if (mRoom[room].find(event) != mRoom[room].end() && !mRoom[room][event].empty()) {
+	string event;
+	ParseEnum(event, _eventToRead);
+	if (mRoom[room].find(event) != mRoom[room].end() && !mRoom[room][event].empty()) {
 
-			TextInfo elem = mRoom[room][event].front(); // Obtener el primer elemento
+		TextInfo elem = mRoom[room][event].front(); // Obtener el primer elemento
 
-			_showText->Character = elem.Character; // Guardar el nuevo texto
-			_showText->Text = elem.Text;
-			cout << elem.Character << ": " << elem.Text << endl;
+		_showText->Character = elem.Character; // Guardar el nuevo texto
+		_showText->Text = elem.Text;
+		cout << elem.Character << ": " << elem.Text << endl;
 
-			if (_sceneLog) {
-				_sceneLog->addDialogueLineLog(elem.Character, elem.Text);
-			}
-
-			mRoom[room][event].pop_front(); // Eliminar el diálogo leído
-
+		if (_sceneLog) {
+			_sceneLog->addDialogueLineLog(elem.Character, elem.Text);
 		}
+
+		mRoom[room][event].pop_front(); // Eliminar el diálogo leído
+
+	}
 		
 		
 		
@@ -153,6 +153,7 @@ void DialogueManager::setSceneLog(LogComponent* sceneLog)
 {
 	_sceneLog = sceneLog;
 }
+
 
 TextInfo* DialogueManager::getShowText()
 {

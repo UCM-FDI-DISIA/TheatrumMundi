@@ -6,7 +6,7 @@
 
 #include "../ecs/Component.h"
 
-#include "../../TheatrumMundi/TextInfo.h"
+class TextInfo;
 
 template <typename T>
 class WriteTextComponent : public ecs::Component
@@ -35,7 +35,11 @@ public:
 	void render() override;
 
 
+	bool isFinished();
+	void finishTextLine();
+
 	~WriteTextComponent();
 	
 };
+
 

@@ -41,7 +41,7 @@ private:
 
 	LogComponent* _sceneLog; //points to log list
 
-	
+	WriteTextComponent<TextInfo>* _writeTextComp;
 
 public:
 	DialogueManager();
@@ -50,6 +50,10 @@ public:
 	~DialogueManager();
 
 	void setSceneLog(LogComponent* sceneLog);
+	void setWriteTextComp(WriteTextComponent<TextInfo>* writeTextComp)
+	{
+		_writeTextComp = writeTextComp;
+	}
 	TextInfo* getShowText();
 };
 

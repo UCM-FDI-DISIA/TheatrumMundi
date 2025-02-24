@@ -3,6 +3,7 @@
 #include "../../src/sdlutils/Font.h"
 #include "../../src/sdlutils/Texture.h"
 
+#include "../../TheatrumMundi/TextInfo.h"
 
 #include <list>
 
@@ -51,6 +52,8 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 }
 
 
+
+
 template <>
 void WriteTextComponent<TextInfo>::update()
 {
@@ -82,6 +85,29 @@ void WriteTextComponent<TextInfo>::render()
 }
 
 
+template<>
+bool WriteTextComponent<std::list<std::pair<std::string, std::string>>>::isFinished()
+{
+	return false;
+}
+
+template<>
+void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::finishTextLine()
+{
+	
+}
+
+template<>
+bool WriteTextComponent<TextInfo>::isFinished()
+{
+	return charsToShow >= textStructure->Text.size();
+}
+
+template<>
+void WriteTextComponent<TextInfo>::finishTextLine()
+{
+	charsToShow = textStructure->Text.size();
+}
 
 template <typename T>
 WriteTextComponent<T>::~WriteTextComponent()
