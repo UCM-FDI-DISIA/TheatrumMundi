@@ -4,6 +4,7 @@
 #include "../src/ecs/ecs.h"
 
 class Vector2D;
+class Area2DLayerManager;
 
 class EntityFactory {
 public:
@@ -20,12 +21,12 @@ public:
 
 	//Creates an interactable entity (BUTTON) or drag interactable entity (OBJECT TO MOVE IN PUZZLES)
 	ecs::entity_t CreateInteractableEntity(ecs::EntityManager* _entityManager,const std::string& _idImage, AreaType _typeRect,
-	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot,
+	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer,
 	Dragging _drag); //DRAG ENTITY
 
 	//Creates a scroll interactable entity (MOVES FROM ONE ROOM TO ANOTHER) or scroll dragging interactable entity (SCROLL BUTTON TO LOG OR INVENTORY)
 	ecs::entity_t CreateInteractableEntityScroll(ecs::EntityManager* _entityManager,const std::string& _idImage, AreaType _typeRect,
-	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot,
+	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer,
 	Vector2D _dirScroll, float _time,
 	Dragging _drag); //DRAG SCROLL ENTITY
 };
