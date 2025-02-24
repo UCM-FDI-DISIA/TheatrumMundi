@@ -12,7 +12,7 @@ private:
 
 public:
 	
-	__CMPID_DECL__(ecs::cmp::PhysicsBodyComponent);
+	__CMPID_DECL__(ecs::cmp::PHYSICSBODYCOMPONENT);
 
 	PhysicsBodyComponent();
 

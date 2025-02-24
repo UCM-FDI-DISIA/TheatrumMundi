@@ -6,7 +6,7 @@
 class RectArea2D : public Area2D
 {
 public:
-	//__CMPID_DECL__(ecs::cmp::AREA2D) Has same ID as parent
+	//__CMPID_DECL__(ecs::cmp::RECTAREA2D) 
 
 	RectArea2D();
 	RectArea2D(int width, int height);
@@ -22,6 +22,10 @@ public:
 
 	bool overlapsWith(RectArea2D* rectArea) override;
 	bool overlapsWith(CircleArea2D* rectArea) override;
+
+	RectArea2D* GetRectArea() override;
+
+	CircleArea2D* GetCircleArea() override;
 
 	void setWidth(int value) {
 		_width = value;

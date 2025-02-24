@@ -59,7 +59,8 @@ void Room1::init()
 		auto _buttonTransform = entityManager->addComponent<Transform>(_button, Vector2D(500, 500), Vector2D(0, 0), 500, 500, 0);
 		entityManager->addComponent<Image>(_button, &sdlutils().images().at("prueba"));
 
-		RectArea2D* rect = entityManager->addComponent<RectArea2D>(_button);
+		CircleArea2D* rect = entityManager->addComponent<CircleArea2D>(_button);
+		rect->setLocalPos(Vector2D(250, 250));
 		phy->AddObjectToList(rect);
 
 		//ScrollComponent

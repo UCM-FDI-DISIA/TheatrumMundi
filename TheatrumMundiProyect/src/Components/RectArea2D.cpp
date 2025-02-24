@@ -95,3 +95,13 @@ bool RectArea2D::overlapsWith(CircleArea2D* circleArea)
 		extrentTr->getPos() + circleArea->getLocalPos(), circleArea->getRadius()
 	);
 }
+
+RectArea2D* RectArea2D::GetRectArea()
+{
+	return this;
+}
+
+CircleArea2D* RectArea2D::GetCircleArea()
+{
+	return nullptr;
+}

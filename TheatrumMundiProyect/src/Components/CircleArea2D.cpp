@@ -62,6 +62,16 @@ bool CircleArea2D::overlapsWith(CircleArea2D* circleArea)
 	return vDistance.magnitude() <= _radius + circleArea->getRadius();
 }
 
+RectArea2D* CircleArea2D::GetRectArea()
+{
+	return nullptr;
+}
+
+CircleArea2D* CircleArea2D::GetCircleArea()
+{
+	return this;
+}
+
 bool CircleArea2D::overlapsWith(RectArea2D* rectArea)
 {
 	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
