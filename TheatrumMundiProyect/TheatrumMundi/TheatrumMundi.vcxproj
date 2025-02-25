@@ -271,7 +271,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)lib\SDL2_net-2.2.0\include;$(SolutionDir)lib\SDL2_mixer-2.8.0\include;$(SolutionDir)lib\SDL2_ttf-2.24.0\include;$(SolutionDir)lib\SDL2_image-2.8.4\include;$(SolutionDir)lib\SDL2-2.30.11\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)src\json;$(SolutionDir)src\utils;$(SolutionDir)src\game;$(SolutionDir)src\sdlutils;$(SolutionDir)src\Components;$(SolutionDir)src\ecs;$(SolutionDir)lib\SDL2_net-2.2.0\include;$(SolutionDir)lib\SDL2_mixer-2.8.0\include;$(SolutionDir)lib\SDL2_ttf-2.24.0\include;$(SolutionDir)lib\SDL2_image-2.8.4\include;$(SolutionDir)lib\SDL2-2.30.11\include;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir)\SRC</SourcePath>
     <LibraryPath>$(SolutionDir)lib\SDL2_net-2.2.0\lib\$(Platform);$(SolutionDir)lib\SDL2_mixer-2.8.0\lib\$(Platform);$(SolutionDir)lib\SDL2_ttf-2.24.0\lib\$(Platform);$(SolutionDir)lib\SDL2_image-2.8.4\lib\$(Platform);$(SolutionDir)lib\SDL2-2.30.11\lib\$(Platform);$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\</OutDir>

@@ -1,7 +1,7 @@
 #pragma once
 #include <list>
 
-#include "../../TheatrumMundiProyect/src/ecs/Manager.h"
+#include "Manager.h"
 class Area2DLayerManager;
 
 class SceneTemplate
