@@ -6,7 +6,7 @@
 #include "Direction.h"
 #include "../src/components/Image.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
-#include "Entity.h"
+#include "../src/ecs/Entity.h"
 #include "../src/components/ClickComponent.h"
 #include "../src/components/RectArea2D.h"
 
@@ -43,10 +43,10 @@ void PipePuzzleScene::moduleCreation()
 	
 	_modules.push_back(new Module({ nextId, RIGHT, {'P', 1}, {'N', 1}, {'N', 0}, {'P', 0}, true }));
 	_modules.push_back(new Module({ nextId++,  RIGHT, {'P', 0}, {'N', 1}, {'N', 0}, {'P', 3}, true }));
-	_modules.push_back(new Module({ nextId++,  DOWN,  {'P', 0}, {'P', 1}, {'N', 0}, {'P', 3}, true }));
-	_modules.push_back(new Module({ nextId++,  DOWN,  {'P', 6}, {'P', 2}, {'N', 0}, {'P', 4}, false }));
+	_modules.push_back(new Module({ nextId++,  DOWN,  {'P', 7}, {'P', 1}, {'N', 0}, {'P', 6}, true }));
+	_modules.push_back(new Module({ nextId++,  RIGHT,  {'P', 6}, {'P', 2}, {'N', 0}, {'P', 4}, false }));
 	_modules.push_back(new Module({ nextId++,  RIGHT, {'P', 5}, {'N', 0}, {'P', 3}, {'N', 1}, true }));
-	_modules.push_back(new Module({ nextId++,  RIGHT, {'P', 4}, {'N', 0}, {'P', 5}, {'N', 1}, true }));
+	_modules.push_back(new Module({ nextId++,  UP, {'P', 4}, {'N', 0}, {'P', 5}, {'N', 1}, true }));
 }
 
 void PipePuzzleScene::pathCreation()
@@ -64,7 +64,7 @@ void PipePuzzleScene::pathCreation()
 	_waterPath.push_back({ nextId++, false ,{'M',4,UP} });//8
 	_waterPath.push_back({ nextId++, false,{'P',3,NONE} });//9
 	_waterPath.push_back({ nextId++, false,{'P',2,NONE} });//10
-	_waterPath.push_back({ nextId++, true ,{'P',5,NONE} });//11
+	_waterPath.push_back({ nextId++, false ,{'P',5,NONE} });//11
 	_waterPath.push_back({ nextId++, false,{'M',3,RIGHT} });//12
 	_waterPath.push_back({ nextId++, false,{'P',6,NONE} });//13
 	_waterPath.push_back({ nextId++, false,{'P',7,NONE} });//14
@@ -336,9 +336,17 @@ void PipePuzzleScene::waterPassPipe(int pipe) {
 
 	if (pipeData.type == Pipe::ONE) {
 		
-		if ((pipeData.entry1.name == 'P' && _waterPipes[pipeData.entry1.num]->getPipeInfo().result == true) ||
+		bool ent1 = (pipeData.entry1.name == 'P' && _waterPipes[pipeData.entry1.num]->getPipeInfo().result == true) ||
 			(pipeData.entry1.name == 'M' && _modules[pipeData.entry1.num]->getModuleInfo().result == true &&
-				(_modules[pipeData.entry1.num]->getModuleInfo().dir == pipeData.entry1.direction))) {
+				(_modules[pipeData.entry1.num]->getModuleInfo().dir == pipeData.entry1.direction));
+
+		bool ent2 = (pipeData.entry2.name == 'P' && _waterPipes[pipeData.entry2.num]->getPipeInfo().result == true) ||
+			(pipeData.entry2.name == 'M' && _modules[pipeData.entry2.num]->getModuleInfo().result == true &&
+				(_modules[pipeData.entry2.num]->getModuleInfo().dir == pipeData.entry2.direction));
+
+		if ((ent1 && !ent2)|| (!ent1 &&ent2))
+		
+		{
 			if (!pipeData.result) {  
 				pipeData.result = true;
 				waterChanged = true;
@@ -377,58 +385,59 @@ void PipePuzzleScene::waterPassPipe(int pipe) {
 	
 	std::cout << "Pipe " << pipe << " tiene resultado: " << pipeData.result << std::endl;
 
-	
-	if (waterChanged) {
-		_waterPipes[pipe]->changePipeInfo() = pipeData;  
-	}
 }
 
 void PipePuzzleScene::waterPassModule(int module) {
-	Module::moduleInfo modInfo = _modules[module]->changeModuleInfo();  
+	Module::moduleInfo modInfo = _modules[module]->changeModuleInfo();
 
-	bool receivesWater = false;  
+	bool receivesWater = false;
 
-	
-	if ((modInfo.right.first == 'P' && _waterPipes[modInfo.right.second]->getPipeInfo().result) ||
-		(modInfo.right.first == 'M' && _modules[modInfo.right.second]->getModuleInfo().result) ||
-		(modInfo.right.first == 'N' && modInfo.right.second == 1)) {
+	if (modInfo.right.first == 'P' && _waterPipes[modInfo.right.second]->getPipeInfo().result) {
 		receivesWater = true;
 	}
-	if ((modInfo.left.first == 'P' && _waterPipes[modInfo.left.second]->getPipeInfo().result) ||
-		(modInfo.left.first == 'M' && _modules[modInfo.left.second]->getModuleInfo().result) ||
-		(modInfo.left.first == 'N' && modInfo.left.second == 1)) {
+	else if (modInfo.right.first == 'M' && _modules[modInfo.right.second]->getModuleInfo().result) {
 		receivesWater = true;
 	}
-	if ((modInfo.up.first == 'P' && _waterPipes[modInfo.up.second]->getPipeInfo().result) ||
-		(modInfo.up.first == 'M' && _modules[modInfo.up.second]->getModuleInfo().result) ||
-		(modInfo.up.first == 'N' && modInfo.up.second == 1)) {
-		receivesWater = true;
-	}
-	if ((modInfo.down.first == 'P' && _waterPipes[modInfo.down.second]->getPipeInfo().result) ||
-		(modInfo.down.first == 'M' && _modules[modInfo.down.second]->getModuleInfo().result) ||
-		(modInfo.down.first == 'N' && modInfo.down.second == 1)) {
+	else if (modInfo.right.first == 'N' && modInfo.right.second == 1) {
 		receivesWater = true;
 	}
 
-	
+	if (modInfo.left.first == 'P' && _waterPipes[modInfo.left.second]->getPipeInfo().result) {
+		receivesWater = true;
+	}
+	else if (modInfo.left.first == 'M' && _modules[modInfo.left.second]->getModuleInfo().result) {
+		receivesWater = true;
+	}
+	else if (modInfo.left.first == 'N' && modInfo.left.second == 1) {
+		receivesWater = true;
+	}
+
+	if (modInfo.up.first == 'P' && _waterPipes[modInfo.up.second]->getPipeInfo().result) {
+		receivesWater = true;
+	}
+	else if (modInfo.up.first == 'M' && _modules[modInfo.up.second]->getModuleInfo().result) {
+		receivesWater = true;
+	}
+	else if (modInfo.up.first == 'N' && modInfo.up.second == 1) {
+		receivesWater = true;
+	}
+
+	if (modInfo.down.first == 'P' && _waterPipes[modInfo.down.second]->getPipeInfo().result) {
+		receivesWater = true;
+	}
+	else if (modInfo.down.first == 'M' && _modules[modInfo.down.second]->getModuleInfo().result) {
+		receivesWater = true;
+	}
+	else if (modInfo.down.first == 'N' && modInfo.down.second == 1) {
+		receivesWater = true;
+	}
+
+
+	modInfo.result = receivesWater;
 	std::cout << "Module " << module << " checking if it receives water: " << receivesWater << std::endl;
 
-	
-	if (modInfo.result != receivesWater) {
-		modInfo.result = receivesWater;
-		_modules[module]->changeModuleInfo() = modInfo;  
 
-		
-		if (modInfo.result) {
-			
-			for (size_t i = 0; i < _waterPath.size(); ++i) {
-				if (_waterPath[i]._whoTocheck.name == 'M' && _waterPath[i]._whoTocheck.num == module && _waterPath[i]._whoTocheck.dir == modInfo.dir) {
-					_waterPath[i]._withWater = true;  
-					std::cout << "Path " << i << " is now receiving water from module " << module << std::endl;
-				}
-			}
-		}
-	}
+	
 }
 
 
@@ -478,26 +487,24 @@ void PipePuzzleScene::updatePuzzle() {
 
 	// Encolar los módulos que ya tienen agua
 	for (size_t i = 0; i < _modules.size(); ++i) {
-		if (_modules[i]->getModuleInfo().result) {
+	
 			modulesToUpdate.push(i);
 			std::cout << "Module " << i << " has water." << std::endl;  // Log para depuración
-		}
+		
 	}
 
 	// Encolar las tuberías que ya tienen agua
 	for (size_t i = 0; i < _waterPipes.size(); ++i) {
-		if (_waterPipes[i]->getPipeInfo().result) {
+		
 			pipesToUpdate.push(i);
 			std::cout << "Pipe " << i << " has water." << std::endl;  // Log para depuración
-		}
+		
 	}
 
 	// Encolar los caminos que ya tienen agua
 	for (size_t i = 0; i < _waterPath.size(); ++i) {
-		if (_waterPath[i]._withWater) {
 			pathsToUpdate.push(i);
 			std::cout << "Path " << i << " has water." << std::endl;  // Log para depuración
-		}
 	}
 
 	// Procesar las actualizaciones mientras haya cambios
@@ -564,30 +571,8 @@ void PipePuzzleScene::updatePuzzle() {
 			// Obtener la entidad asociada al índice del camino
 			ecs::Entity* pathEntity = _pathEnt[pathIndex];
 
-			// Verificar si la entidad es válida antes de intentar acceder a su componente
-			if (pathEntity) {
-				// Obtener el componente Image de la entidad
-				Image* imageComponent = pathEntity->getMngr()->getComponent<Image>(pathEntity);
-
-				// Verificar si el componente de imagen es válido
-				if (waterChanged) {
-					// Solo actualizamos el sprite si el estado del agua ha cambiado
-					if (_waterPath[pathIndex]._withWater) {
-						imageComponent->setTexture(&sdlutils().images().at("pathWith"));
-					}
-					else {
-						imageComponent->setTexture(&sdlutils().images().at("pathWithout"));
-					}
-
-					// Log para verificar el cambio de textura
-					std::cout << "Path " << pathIndex << " texture updated based on water status." << std::endl;
-				}
-				
-			}
-			else {
-				std::cerr << "Error: Entity for Path " << pathIndex << " is null!" << std::endl;
-			}
-
+			
+			
 			// Solo agregamos el camino a la cola si su estado de agua ha cambiado
 			if (_waterPath[pathIndex]._withWater && !updatedPaths[pathIndex] && waterChanged) {
 				pathsToUpdate.push(pathIndex);  // Lo agregamos nuevamente a la cola si tiene agua
