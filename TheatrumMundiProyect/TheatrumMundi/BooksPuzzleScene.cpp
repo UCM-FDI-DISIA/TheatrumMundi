@@ -60,7 +60,7 @@ void BooksPuzzleScene::init()
 		entityManager->addComponent<RectArea2D>(ButtonBookFirst,areaLayerManager);
 		//else if (_typeRect == CIRCLEAREA) _entityManager->addComponent<CircleArea2D>(newElement)->setLocalPos(Vector2D(_width / 2, _height / 2));
 		entityManager->addComponent<ClickComponent>(ButtonBookFirst);
-		//entityManager->addComponent<TriggerComponent>(ButtonBookFirst);
+		entityManager->addComponent<TriggerComponent>(ButtonBookFirst);
 		//if (_drag == DRAG) _entityManager->addComponent<DragComponent>(newElement);
 		
 		auto ButtonBookSecond = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(822, sdlutils().height() / 2), Vector2D(1, 0), 50, 300, 0, areaLayerManager, EntityFactory::NODRAG);
