@@ -15,8 +15,9 @@ Image::Image() :
 	_tr(), _tex() {
 }
 
-Image::Image(Texture* tex) :
+Image::Image(Texture* tex, int alpha) :
 	_tr(), _tex(tex) {
+	_tex->setTextureOpacity(alpha);
 }
 
 Image::~Image() {

@@ -104,6 +104,10 @@
       <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsBodyComponent.cpp">
+    <ClCompile Include="Area2DLayerManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Area2D.cpp">
       <Filter>Component</Filter>
     </ClCompile>
   </ItemGroup>
@@ -563,6 +567,8 @@
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\xram.h" />
     <ClInclude Include="PhysicsBodyComponent.h">
       <Filter>Component</Filter>
+    <ClInclude Include="Area2DLayerManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

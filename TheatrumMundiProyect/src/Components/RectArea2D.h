@@ -11,6 +11,9 @@ public:
 	RectArea2D();
 	RectArea2D(int width, int height);
 	RectArea2D(Vector2D localPos, int width, int height);
+	RectArea2D(Area2DLayerManager* areaLayerMngr);
+	RectArea2D(Area2DLayerManager* areaLayerMngr, Vector2D localPos, int width, int height);
+
 
 	void initComponent() override;
 
