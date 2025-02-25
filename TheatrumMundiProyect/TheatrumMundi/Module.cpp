@@ -17,3 +17,10 @@ Module::moduleInfo& Module::changeModuleInfo()
 Module::~Module()
 {
 }
+
+void Module::resetModule()
+{
+	
+	_info.result = false;  
+	
+}

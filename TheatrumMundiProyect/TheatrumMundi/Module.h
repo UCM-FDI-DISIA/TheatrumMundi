@@ -8,9 +8,13 @@ class Module
 
 protected:
 	
+	//result means if it carries water
+	//dir means actual direction
+	//down,right,left, up means what the module/pipe is closest to in that direction(neighbour element)
+
 	struct moduleInfo
 	{
-		int id;
+		int name;
 		Directions dir;
 		pair<char, int> right;
 		pair<char, int> left;
@@ -27,6 +31,7 @@ public:
 	moduleInfo getModuleInfo() const;
 	moduleInfo& changeModuleInfo() ;
 	~Module();
+	void resetModule();
 	friend class PipePuzzleScene;
 };
 

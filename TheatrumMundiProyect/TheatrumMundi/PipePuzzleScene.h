@@ -1,39 +1,47 @@
 #pragma once
 #include <vector>
+#include <queue>
+#include <unordered_set>
 #include "ScenePuzzleTemplate.h"
 #include "Pipe.h"
 #include "Module.h"
+
 using namespace std;
 class Module;
 class Pipe;
+class Image;
 class PipePuzzleScene : public ScenePuzzleTemplate
 {
 
 private:
-	//INFO//
-	/*
-	pipes with even index need 2 water sources, uneven only 1.
-	pipes can only have 0,1,2 water connected.
-	*/
+	
+	//name of the neightbour elem
+	// num is the id of the element
+	//direction: dir neightbour has (for modules it will be a dir, for pipes will be none )
+	struct Type {
+		char name;
+		int num;
+		Directions dir;
+		
+	};
 
-	//vector de bools para tramos de agua
-	//modules hacve 2 directions, posible 4 and actual 1
-	// ref con pair a los  4 bjetos que tenga al lado y luego cada lado si tiene agua o no
-	//con el pair te sacas el tipo por ejemplo mudulo 5 o pipe 4
-	//el modulo tambien necesita un result para saber si lleva agua o no
-	//para que un modulo heche agua necesita que el result de que le llege agua sea true y que la direccion sea correcta
-	//los mudulos tienen 4 padres y los pipes tienen 2 
-	//si hay un cambio en los results de hechar agua o no en los pipes o modulos toca cambiaar los que esten al lado
+	//id: where in the array it is
+	//_withWater: if it has water
+	//_whoTocheck: which neighbour needs to have water in order for the path to have water
 	struct waterPath {
 
 		int id;
 		bool _withWater;
+		Type _whoTocheck;
 	};
 
-	vector<waterPath>_waterPath;
+	vector<waterPath>_waterPath; //vector that contains the amount of paths 
 	vector<Pipe*> _waterPipes; //vector that contains the amount of water each pipe has
 	vector<Module*> _modules;//modules that change the direction of the water flow
 	bool solved;
+	vector<ecs::Entity*>_modulesEnt;
+	vector<ecs::Entity*>_pipesEnt;
+	vector<ecs::Entity*>_pathEnt;
 
 protected:
 
@@ -43,13 +51,14 @@ public:
 	 void pipeCreation();
 	 void moduleCreation();
 	 void pathCreation();
-	 bool Check() override;
+	 bool Check() override; 
 	 void changeDirection(int module); //changes direction of the module
 	 void init() override;
-	 void waterPassPipe(int pipe); //if water can pass through a pipe 
-	 void waterPassModule(int module); //if water has arrived to a certain module
-	 void waterPassPath();// series of conditions to check if paths have water
+	 void waterPassPipe(int pipe); //if water can pass through a pipe (if it recives water from its neightbours)
+	 void waterPassModule(int module); //if water can pass through a module (if it recives water from its neightbours)
+	 void waterPassPath(int path);// series of conditions to check if a path has water
 	 void unload() override;
+	 void updatePuzzle() ;
 	 ~PipePuzzleScene();
 };
 

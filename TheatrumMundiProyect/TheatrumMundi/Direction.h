@@ -1,8 +1,8 @@
 #pragma once
 namespace Direction
 {
- enum Directions { // diections a module can have
-		DOWN = 0,
+ enum Directions { // directions 
+		DOWN,
 		UP,
 		RIGHT,
 		LEFT,
