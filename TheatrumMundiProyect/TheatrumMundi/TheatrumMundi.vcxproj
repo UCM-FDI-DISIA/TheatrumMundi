@@ -55,6 +55,7 @@
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PipePuzzleScene.cpp" />
+    <ClCompile Include="PhysicsBodyComponent.cpp" />
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScenePuzzleTemplate.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="Module.h" />
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="PipePuzzleScene.h" />
+    <ClInclude Include="PhysicsBodyComponent.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScenePuzzleTemplate.h" />
