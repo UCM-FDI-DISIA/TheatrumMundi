@@ -22,6 +22,7 @@ void InitialScene::init()
 {
 	if (!isStarted) {
 		//Start room1
+	
 		auto _startbtn = entityManager->addEntity();
 		entityManager->addComponent<Transform>(_startbtn, Vector2D(200, 200), Vector2D(0, 0), 200, 200, 0);
 		entityManager->addComponent<Image>(_startbtn, &sdlutils().images().at("init"));

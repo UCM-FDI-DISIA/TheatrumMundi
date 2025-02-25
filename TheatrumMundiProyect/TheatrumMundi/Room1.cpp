@@ -16,6 +16,7 @@
 
 Room1::Room1(): SceneRoomTemplate()
 {
+	
 }
 
 Room1::~Room1()
@@ -24,6 +25,10 @@ Room1::~Room1()
 
 void Room1::init()
 {
+	auto _loadimg = entityManager->addEntity();
+	entityManager->addComponent<Transform>(_loadimg, Vector2D(0, 0), Vector2D(0, 0), 1000, 1000, 0);
+	entityManager->addComponent<Image>(_loadimg, &sdlutils().images().at("loading"));
+	Game::Instance()->render();
 	if (!isStarted) {
 		auto _fighter = entityManager->addEntity();
 		auto _fighterTransform = entityManager->addComponent<Transform>(_fighter, Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0);
@@ -72,7 +77,12 @@ void Room1::init()
 		TriggerComponent* trgb = entityManager->addComponent<TriggerComponent>(_button);
 		trgb->connect(TriggerComponent::CURSOR_ENTERED, []() { std::cout << "ENTERED IN MOVING\n";  });
 		trgb->connect(TriggerComponent::CURSOR_LEFT, []() { std::cout << "LEFT IN MOVING\n";  });
+		for(int i = 0; i< 1000000000;i++){}
+		
 	}
+	SDL_Delay(1000);
+	_loadimg->getMngr()->setActive(_loadimg,false);
+	
 }
 
 void Room1::refresh()
