@@ -109,7 +109,7 @@ void TriggerComponent::updateTriggerState()
 
 	std::list<ecs::entity_t> enteredEnts; // Obtain entered entities
 	
-	_currentOverlappingEntities.sort([](ecs::Entity* a, ecs::Entity* b) {return (int)a < (int)b; });
+	_currentOverlappingEntities.sort([](ecs::Entity* a, ecs::Entity* b) { return (int)a < (int)b; });
 
 	std::set_difference(
 		_currentOverlappingEntities.begin(), _currentOverlappingEntities.end(), unchangedEnts.begin(), unchangedEnts.end(),
