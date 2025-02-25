@@ -6,7 +6,7 @@
 #include "Direction.h"
 #include "../src/components/Image.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
-#include "../src/ecs/Entity.h"
+#include "Entity.h"
 #include "../src/components/ClickComponent.h"
 #include "../src/components/RectArea2D.h"
 
@@ -570,7 +570,7 @@ void PipePuzzleScene::updatePuzzle() {
 				Image* imageComponent = pathEntity->getMngr()->getComponent<Image>(pathEntity);
 
 				// Verificar si el componente de imagen es válido
-				if (imageComponent && waterChanged) {
+				if (waterChanged) {
 					// Solo actualizamos el sprite si el estado del agua ha cambiado
 					if (_waterPath[pathIndex]._withWater) {
 						imageComponent->setTexture(&sdlutils().images().at("pathWith"));
@@ -582,9 +582,7 @@ void PipePuzzleScene::updatePuzzle() {
 					// Log para verificar el cambio de textura
 					std::cout << "Path " << pathIndex << " texture updated based on water status." << std::endl;
 				}
-				else {
-					std::cerr << "Error: No Image component found for Path " << pathIndex << std::endl;
-				}
+				
 			}
 			else {
 				std::cerr << "Error: Entity for Path " << pathIndex << " is null!" << std::endl;
