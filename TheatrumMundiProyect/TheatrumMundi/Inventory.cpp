@@ -33,8 +33,3 @@ bool Inventory::hasItem(const std::string& _id) const
 
 	return false;
 }
-
-void Inventory::init()
-{
-	
-}

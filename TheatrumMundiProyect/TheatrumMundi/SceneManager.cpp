@@ -2,10 +2,11 @@
 #include <assert.h>
 #include "SceneTemplate.h"
 #include "Room1.h"
-#include "DebugLogRoom.h"
+#include "DebugLogRoom.h" //quitar
 #include "InitialScene.h"
 #include "PipePuzzleScene.h"
 #include "BooksPuzzleScene.h"
+#include "DebugInventoryScene.h"
 #include "checkML.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 
@@ -14,6 +15,8 @@ SceneManager::SceneManager()
 {
 	//scenes.push_back(new Room1());
 	//scenes.push_back(new PipePuzzleScene());
+	
+	scenes.push_back(new DebugInventoryScene); //quitar
 	scenes.push_back(new InitialScene());
 	scenes.push_back(new Room1());
 	scenes.push_back(new DebugLogRoom());

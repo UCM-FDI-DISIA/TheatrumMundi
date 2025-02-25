@@ -46,6 +46,7 @@
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
     <ClCompile Include="BooksPuzzleScene.cpp" />
     <ClCompile Include="Area2DLayerManager.cpp" />
+    <ClCompile Include="DebugInventoryScene.cpp" />
     <ClCompile Include="DebugLogRoom.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
     <ClCompile Include="DialogTestScene.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
     <ClInclude Include="BooksPuzzleScene.h" />
     <ClInclude Include="Area2DLayerManager.h" />
+    <ClInclude Include="DebugInventoryScene.h" />
     <ClInclude Include="DebugLogRoom.h" />
     <ClInclude Include="checkML.h" />
     <ClInclude Include="ClockPuzzleScene.h" />

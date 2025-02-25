@@ -115,6 +115,13 @@
     {
       "id": "backButton",
       "file": "../resources/images/BackButton.png"
+    {
+        "id": "exit",
+        "file": "../resources/images/exit.png"
+    },
+    {
+        "id": "gloves",
+        "file": "../resources/images/gloves.png"
     }
   ],
 

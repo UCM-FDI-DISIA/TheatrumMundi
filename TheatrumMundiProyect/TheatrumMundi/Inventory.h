@@ -17,7 +17,6 @@ public:
 	virtual ~Inventory();
 	void addItem(Hint* item);
 	bool hasItem(const std::string& _id) const; //Check if the hint is in the inventory
-	void init();
 private:
 
 	

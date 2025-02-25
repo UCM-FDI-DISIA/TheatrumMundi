@@ -313,6 +313,15 @@
     </ClCompile>
     <ClCompile Include="Hint.cpp" />
     <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Area2DLayerManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Area2D.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugInventoryScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\SDL2-2.30.11\include\SDL.h">
@@ -764,6 +773,18 @@
     </ClInclude>
     <ClInclude Include="Hint.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\alc.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx-creative.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\EFX-Util.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\xram.h" />
+    <ClInclude Include="Area2DLayerManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugInventoryScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />
