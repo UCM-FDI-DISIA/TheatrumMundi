@@ -26,6 +26,6 @@ SceneTemplate::~SceneTemplate()
 	unload();
 	
 	delete entityManager;
-	//delete entityManager;
-//	delete dialogueManager;
+	delete areaLayerManager;
+	delete entityFactory;
 }

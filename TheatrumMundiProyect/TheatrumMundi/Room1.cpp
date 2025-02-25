@@ -27,9 +27,7 @@ Room1::~Room1()
 
 void Room1::init()
 {
-	auto _loadimg = entityManager->addEntity();
-	entityManager->addComponent<Transform>(_loadimg, Vector2D(0, 0), Vector2D(0, 0), 1000, 1000, 0);
-	entityManager->addComponent<Image>(_loadimg, &sdlutils().images().at("loading"));
+	
 	Game::Instance()->render();
 	if (!isStarted) {
 		//auto _fighter = entityManager->addEntity();
@@ -104,7 +102,7 @@ void Room1::init()
 		//	});
 	}
 	SDL_Delay(1000);
-	_loadimg->getMngr()->setActive(_loadimg,false);
+	//_loadimg->getMngr()->setActive(_loadimg,false);
 	
 }
 
