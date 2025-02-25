@@ -31,6 +31,7 @@ public:
 	moduleInfo getModuleInfo() const;
 	moduleInfo& changeModuleInfo() ;
 	~Module();
+	void resetModule();
 	friend class PipePuzzleScene;
 };
 

@@ -41,6 +41,11 @@ public:
 	~Pipe();
 	pipeInfo getPipeInfo() const;
 	pipeInfo& changePipeInfo();
+	void resetPipe();
+	bool isConnectedToModule(int moduleIndex);
+		
+
+
 	friend class PipePuzzleScene;
 };
 

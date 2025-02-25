@@ -1,8 +1,11 @@
 #pragma once
 #include <vector>
+#include <queue>
+#include <unordered_set>
 #include "ScenePuzzleTemplate.h"
 #include "Pipe.h"
 #include "Module.h"
+
 using namespace std;
 class Module;
 class Pipe;
@@ -36,8 +39,9 @@ private:
 	vector<Pipe*> _waterPipes; //vector that contains the amount of water each pipe has
 	vector<Module*> _modules;//modules that change the direction of the water flow
 	bool solved;
-	ecs::Entity* pathEntity;
-	ecs::Entity* moduleEntity;
+	vector<ecs::Entity*>_modulesEnt;
+	vector<ecs::Entity*>_pipesEnt;
+	vector<ecs::Entity*>_pathEnt;
 
 protected:
 
@@ -54,6 +58,7 @@ public:
 	 void waterPassModule(int module); //if water can pass through a module (if it recives water from its neightbours)
 	 void waterPassPath(int path);// series of conditions to check if a path has water
 	 void unload() override;
+	 void updatePuzzle() ;
 	 ~PipePuzzleScene();
 };
 
