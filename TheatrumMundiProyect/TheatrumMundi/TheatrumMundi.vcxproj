@@ -44,11 +44,13 @@
     <ClCompile Include="..\SRC\sdlutils\Texture.cpp" />
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
+    <ClCompile Include="BooksPuzzleScene.cpp" />
     <ClCompile Include="Area2DLayerManager.cpp" />
     <ClCompile Include="DebugLogRoom.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
     <ClCompile Include="DialogTestScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
+    <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="InitialScene.cpp" />
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="Pipe.cpp" />
@@ -203,6 +205,7 @@
     <ClInclude Include="..\SRC\utils\ptr_iterator.h" />
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
+    <ClInclude Include="BooksPuzzleScene.h" />
     <ClInclude Include="Area2DLayerManager.h" />
     <ClInclude Include="DebugLogRoom.h" />
     <ClInclude Include="checkML.h" />
@@ -210,6 +213,7 @@
     <ClInclude Include="DialogTestScene.h" />
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="Direction.h" />
+    <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="InitialScene.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="Pipe.h" />
@@ -278,7 +282,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)lib\SDL2_net-2.2.0\include;$(SolutionDir)lib\SDL2_mixer-2.8.0\include;$(SolutionDir)lib\SDL2_ttf-2.24.0\include;$(SolutionDir)lib\SDL2_image-2.8.4\include;$(SolutionDir)lib\SDL2-2.30.11\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)src\json;$(SolutionDir)src\utils;$(SolutionDir)src\game;$(SolutionDir)src\sdlutils;$(SolutionDir)src\Components;$(SolutionDir)src\ecs;$(SolutionDir)lib\SDL2_net-2.2.0\include;$(SolutionDir)lib\SDL2_mixer-2.8.0\include;$(SolutionDir)lib\SDL2_ttf-2.24.0\include;$(SolutionDir)lib\SDL2_image-2.8.4\include;$(SolutionDir)lib\SDL2-2.30.11\include;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir)\SRC</SourcePath>
     <LibraryPath>$(SolutionDir)lib\SDL2_net-2.2.0\lib\$(Platform);$(SolutionDir)lib\SDL2_mixer-2.8.0\lib\$(Platform);$(SolutionDir)lib\SDL2_ttf-2.24.0\lib\$(Platform);$(SolutionDir)lib\SDL2_image-2.8.4\lib\$(Platform);$(SolutionDir)lib\SDL2-2.30.11\lib\$(Platform);$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\</OutDir>

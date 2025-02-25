@@ -62,7 +62,7 @@ bool CircleArea2D::containsPoint(Vector2D point)
 	return centerDist <= _radius;
 }
 
-bool CircleArea2D::overlapsWith(CircleArea2D* circleArea)
+bool CircleArea2D::_overlapsWith(CircleArea2D* circleArea)
 {
 	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
 	Transform* extrentTr = circleArea->getContext()->getMngr()->getComponent<Transform>(circleArea->getContext());
@@ -74,7 +74,7 @@ bool CircleArea2D::overlapsWith(CircleArea2D* circleArea)
 	return vDistance.magnitude() <= _radius + circleArea->getRadius();
 }
 
-bool CircleArea2D::overlapsWith(RectArea2D* rectArea)
+bool CircleArea2D::_overlapsWith(RectArea2D* rectArea)
 {
 	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
 	Transform* extrentTr = rectArea->getContext()->getMngr()->getComponent<Transform>(rectArea->getContext());
