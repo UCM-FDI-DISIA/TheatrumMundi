@@ -82,21 +82,31 @@ void Room1::init()
 		////NEEDS GETTER OF CLICKCOMPONENT, TRIGGERCOMPONENT, DRAGGINGCOMPONENT FOR EVENTS
 
 		//CREATION OF DRAG ENTITY
-		//auto dragEntity = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0, EntityFactory::DRAG);
-		//
-		////CREATION OF SCROLL ENTITY
-		//auto scrollingButton = entityFactory->CreateInteractableEntityScroll(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(400, 400), Vector2D(0, 0), 200, 200, 0, Vector2D(5,0), 100.f , EntityFactory::NODRAG);
-		//
-		//ScrollComponent* scrollingButtonComponent = entityManager->getComponent<ScrollComponent>(scrollingButton);
-		//scrollingButtonComponent->addElementToScroll(entityManager->getComponent<Transform>(dragEntity));
-		//
-		////SE PUEDE CON TRIGGER COMPONENT A LA HORA DE ENTRAR Y SALIR DEL AREA
-		//
-		//ClickComponent* scrollingButtonClickComponent = entityManager->getComponent<ClickComponent>(scrollingButton);
-		//scrollingButtonClickComponent->connect(ClickComponent::JUST_CLICKED, [scrollingButtonComponent,this]() {
-		//	if(!scrollingButtonComponent->isScrolling()) 
-		//		scrollingButtonComponent->Scroll();
-		//	});
+		auto dragEntity = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0, areaLayerManager,EntityFactory::DRAG);
+		
+		//CREATION OF SCROLL ENTITY
+		auto scrollingButton = entityFactory->CreateInteractableEntityScroll(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(400, 400), Vector2D(0, 0), 200, 200, 0, areaLayerManager , 1 , 100.f, EntityFactory::SCROLLNORMAL, 3 , EntityFactory::NODRAG);
+		
+		//TENEMOS QUE ACCEDER A ESTE SCROLL GLOBAL
+		ScrollComponent* scrollingButtonComponent = entityManager->getComponent<ScrollComponent>(scrollingButton);
+		scrollingButtonComponent->addElementToScroll(entityManager->getComponent<Transform>(dragEntity));
+		
+		//SE PUEDE CON TRIGGER COMPONENT A LA HORA DE ENTRAR Y SALIR DEL AREA
+		
+		ClickComponent* scrollingButtonClickComponentDown = entityManager->getComponent<ClickComponent>(scrollingButton);
+		scrollingButtonClickComponentDown->connect(ClickComponent::JUST_CLICKED, [scrollingButtonComponent,this]() {
+			if(!scrollingButtonComponent->isScrolling()) 
+				scrollingButtonComponent->Scroll(ScrollComponent::DOWN);
+			});
+
+		auto scrollingButtonUp = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA, Vector2D(400, 700), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG);
+
+		ClickComponent* scrollingButtonClickComponentUp = entityManager->getComponent<ClickComponent>(scrollingButtonUp);
+		scrollingButtonClickComponentUp->connect(ClickComponent::JUST_CLICKED, [scrollingButtonComponent, this]() {
+			if (!scrollingButtonComponent->isScrolling())
+				scrollingButtonComponent->Scroll(ScrollComponent::UP);
+			});
+
 	}
 }
 

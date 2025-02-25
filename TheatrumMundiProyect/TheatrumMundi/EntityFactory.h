@@ -14,6 +14,7 @@ public:
 
 	enum AreaType { RECTAREA, CIRCLEAREA }; //DECIDE IF THE AREA IS RECT OR CIRCLE
 	enum Dragging { DRAG, NODRAG }; //DECIDE IF THE ELEMENT IS DRAGGED OR NOT
+	enum ScrollType { SCROLLNORMAL, SCROLLINVERSE };
 
 	//Creates an Image Entity (BACKGROUND, VISUAL ITEM FROM INVENTORY, ETC)
 	ecs::entity_t CreateImageEntity(ecs::EntityManager* _entityManager,const std::string& _idImage, AreaType _typeRect,
@@ -26,7 +27,7 @@ public:
 
 	//Creates a scroll interactable entity (MOVES FROM ONE ROOM TO ANOTHER) or scroll dragging interactable entity (SCROLL BUTTON TO LOG OR INVENTORY)
 	ecs::entity_t CreateInteractableEntityScroll(ecs::EntityManager* _entityManager,const std::string& _idImage, AreaType _typeRect,
-	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer,
-	Vector2D _dirScroll, float _time,
+	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer, 
+	int _velocityScroll, float _time, ScrollType _isInverted, int _numPhasesScrolling,
 	Dragging _drag); //DRAG SCROLL ENTITY
 };
