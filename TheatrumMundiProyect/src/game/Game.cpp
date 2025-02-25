@@ -61,6 +61,14 @@ void Game::init() {
 	
 }
 
+void Game::render() const
+{
+	sdlutils().clearRenderer();
+	_mngr->render();
+
+	sdlutils().presentRenderer();
+}
+
 void Game::start() {
 
 	// a boolean to exit the loop
@@ -82,19 +90,15 @@ void Game::start() {
 		// refresh the input handler
 		ihdlr.refresh();
 
-		/*if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
-			exit = true;
+		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
+			_exitGame = true;
 			continue;
-		}*/
+		}
 
 		_mngr->update();
 
 		checkCollisions();
-
-		sdlutils().clearRenderer();
-		_mngr->render();
-
-		sdlutils().presentRenderer();
+		render();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
 

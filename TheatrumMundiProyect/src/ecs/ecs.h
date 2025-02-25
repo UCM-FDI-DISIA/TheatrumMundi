@@ -51,6 +51,7 @@ enum cmpId : cmpId_t {
 	AREA2D,
 	LOG_COMPONENT,
 	WRITE_TEXT_COMPONENT,
+	PHYSICSBODYCOMPONENT,
 
 	// do not remove this
 	_LAST_CMP_ID

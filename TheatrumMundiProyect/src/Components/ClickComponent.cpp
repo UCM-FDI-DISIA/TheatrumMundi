@@ -1,8 +1,8 @@
 #include "ClickComponent.h"
 
-#include "../sdlutils/InputHandler.h"
+#include "InputHandler.h"
 #include "Transform.h"
-#include "../ecs/Manager.h"
+#include "Manager.h"
 #include "RectArea2D.h"
 
 ClickComponent::ClickComponent()

@@ -1,6 +1,8 @@
 #pragma once
 #include <list>
 
+#include "Manager.h"
+
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
 
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"

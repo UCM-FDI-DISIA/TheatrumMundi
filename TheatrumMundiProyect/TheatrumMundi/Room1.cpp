@@ -1,9 +1,11 @@
 #include "Room1.h"
+#include <list>
 #include "../src/utils/Vector2D.h"
 #include "../src/components/Transform.h"
 #include "../src/components/Image.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
 
+#include "../TheatrumMundi/PhysicsBodyComponent.h"
 #include "../src/components/ClickComponent.h"
 #include "../src/components/TriggerComponent.h"
 #include "../src/components/DragComponent.h"
@@ -18,6 +20,7 @@
 
 Room1::Room1(): SceneRoomTemplate()
 {
+	
 }
 
 Room1::~Room1()
@@ -26,6 +29,8 @@ Room1::~Room1()
 
 void Room1::init()
 {
+	
+	Game::Instance()->render();
 	if (!isStarted) {
 		//auto _fighter = entityManager->addEntity();
 		//auto _fighterTransform = entityManager->addComponent<Transform>(_fighter, Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0);
@@ -66,7 +71,7 @@ void Room1::init()
 		////Add element to scroll, needs to be a transform
 		//
 		////ScrollComponent* _buttonScrolling = entityManager->getComponent
-		////HACEMOS GETTER AQUI PARA AÑADIR LOS ELEMENTOS
+		////HACEMOS GETTER AQUI PARA Aï¿½ADIR LOS ELEMENTOS
 		//_buttonScroll->addElementToScroll(_fighterTransform);
 		//
 		//ClickComponent* clkb = entityManager->addComponent<ClickComponent>(_button);
@@ -117,6 +122,9 @@ void Room1::init()
 			});
 	
 	}
+	SDL_Delay(1000);
+	//_loadimg->getMngr()->setActive(_loadimg,false);
+	
 }
 
 void Room1::refresh()
