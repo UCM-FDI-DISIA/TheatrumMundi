@@ -330,33 +330,31 @@ void PipePuzzleScene::init()
 }
 
 void PipePuzzleScene::waterPassPipe(int pipe) {
-	Pipe::pipeInfo pipeData = _waterPipes[pipe]->changePipeInfo();  
+	Pipe::pipeInfo pipeData = _waterPipes[pipe]->getPipeInfo();  
 
-	bool waterChanged = false;  
 
 	if (pipeData.type == Pipe::ONE) {
 		
 		bool ent1 = (pipeData.entry1.name == 'P' && _waterPipes[pipeData.entry1.num]->getPipeInfo().result == true) ||
 			(pipeData.entry1.name == 'M' && _modules[pipeData.entry1.num]->getModuleInfo().result == true &&
-				(_modules[pipeData.entry1.num]->getModuleInfo().dir == pipeData.entry1.direction));
+				_modules[pipeData.entry1.num]->getModuleInfo().dir == pipeData.entry1.direction);
 
 		bool ent2 = (pipeData.entry2.name == 'P' && _waterPipes[pipeData.entry2.num]->getPipeInfo().result == true) ||
 			(pipeData.entry2.name == 'M' && _modules[pipeData.entry2.num]->getModuleInfo().result == true &&
-				(_modules[pipeData.entry2.num]->getModuleInfo().dir == pipeData.entry2.direction));
+				_modules[pipeData.entry2.num]->getModuleInfo().dir == pipeData.entry2.direction);
 
 		if ((ent1 && !ent2)|| (!ent1 &&ent2))
 		
-		{
-			if (!pipeData.result) {  
-				pipeData.result = true;
-				waterChanged = true;
-			}
+		{  
+			_waterPipes[pipe]->changePipeInfo().result = true;
+				
+			
 		}
 		else {
-			if (pipeData.result) { 
-				pipeData.result = false;
-				waterChanged = true;
-			}
+			
+			_waterPipes[pipe]->changePipeInfo().result = true;
+			
+			
 		}
 	}
 
@@ -364,21 +362,20 @@ void PipePuzzleScene::waterPassPipe(int pipe) {
 		bool entry1HasWater = (pipeData.entry1.name == 'P' && _waterPipes[pipeData.entry1.num]->getPipeInfo().result) ||
 			(pipeData.entry1.name == 'M' && _modules[pipeData.entry1.num]->getModuleInfo().result &&
 				_modules[pipeData.entry1.num]->getModuleInfo().dir == pipeData.entry1.direction);
+
 		bool entry2HasWater = (pipeData.entry2.name == 'P' && _waterPipes[pipeData.entry2.num]->getPipeInfo().result) ||
 			(pipeData.entry2.name == 'M' && _modules[pipeData.entry2.num]->getModuleInfo().result &&
 				_modules[pipeData.entry2.num]->getModuleInfo().dir == pipeData.entry2.direction);
 
 		if (entry1HasWater && entry2HasWater) {
-			if (!pipeData.result) {  
-				pipeData.result = true;
-				waterChanged = true;
-			}
+			 
+			_waterPipes[pipe]->changePipeInfo().result = true;
+				
 		}
 		else {
-			if (pipeData.result) { 
-				pipeData.result = false;
-				waterChanged = true;
-			}
+			 
+			_waterPipes[pipe]->changePipeInfo().result = false;
+			
 		}
 	}
 
@@ -388,7 +385,7 @@ void PipePuzzleScene::waterPassPipe(int pipe) {
 }
 
 void PipePuzzleScene::waterPassModule(int module) {
-	Module::moduleInfo modInfo = _modules[module]->changeModuleInfo();
+	Module::moduleInfo modInfo = _modules[module]->getModuleInfo();
 
 	bool receivesWater = false;
 
@@ -433,7 +430,7 @@ void PipePuzzleScene::waterPassModule(int module) {
 	}
 
 
-	modInfo.result = receivesWater;
+	_modules[module]->changeModuleInfo().result = receivesWater;
 	std::cout << "Module " << module << " checking if it receives water: " << receivesWater << std::endl;
 
 
@@ -442,6 +439,7 @@ void PipePuzzleScene::waterPassModule(int module) {
 
 
 void PipePuzzleScene::waterPassPath(int path) {
+
 	if (_waterPath[path]._whoTocheck.name == 'M') {
 		auto moduleInfo = _modules[_waterPath[path]._whoTocheck.num]->getModuleInfo();
 		if (moduleInfo.result && moduleInfo.dir == _waterPath[path]._whoTocheck.dir) {
@@ -451,11 +449,9 @@ void PipePuzzleScene::waterPassPath(int path) {
 			_waterPath[path]._withWater = false;
 		}
 	}
-	else if (_waterPath[path]._whoTocheck.name == 'P') {
+	else if (_waterPath[path]._whoTocheck.name == 'P') 
+	{
 		_waterPath[path]._withWater = _waterPipes[_waterPath[path]._whoTocheck.num]->getPipeInfo().result;
-	}
-	else {
-		_waterPath[path]._withWater = true;  
 	}
 
 	
@@ -590,9 +586,6 @@ void PipePuzzleScene::updatePuzzle() {
 	// Verificar si el puzzle está resuelto
 	Check();
 }
-
-
-
 
 
 PipePuzzleScene::~PipePuzzleScene()
