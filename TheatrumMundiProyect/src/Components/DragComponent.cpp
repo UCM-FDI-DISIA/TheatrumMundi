@@ -2,6 +2,7 @@
 
 #include "../sdlutils/InputHandler.h"
 #include "Transform.h"
+#include "ClickComponent.h"
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include "../Components/RectArea2D.h"
@@ -82,5 +83,6 @@ void DragComponent::moveEntity(std::pair<Sint32, Sint32> mousePos) // TODO Use p
 	assert(area != nullptr);
 	if (phy != nullptr && !phy->CheckAreaColision(area)) {
 		tr->getPos().set(oldPosition);
+		updateEntityDragPoint(ih().getMousePos());
 	}
 }
