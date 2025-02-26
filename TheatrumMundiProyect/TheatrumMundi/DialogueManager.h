@@ -16,8 +16,6 @@ class LogComponent;
 class DebugLogRoom;
 
 //A struct with all the dialogue information
-//A enum with all the dialogue information
-
 enum eventToRead {
 	SalaIntermediaEvento1,
 	SalaIntermediaEvento2,

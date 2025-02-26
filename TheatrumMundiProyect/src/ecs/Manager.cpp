@@ -27,12 +27,6 @@ EntityManager::~EntityManager() {
 	}
 }
 
-void EntityManager::setActiveGroup(grpId_t gId , bool active){
-	auto& ent = getEntities(gId);
-	for (auto a : ent) a->_active = active;
-
-}
-
 void EntityManager::refresh() {
 
 	// remove dead entities from the groups lists, and also those
@@ -50,6 +44,13 @@ void EntityManager::refresh() {
 							}
 						}), groupEntities.end());
 	}
+
+}
+void
+EntityManager::
+  setActiveGroup(grpId_t gId, bool active) {
+	std::vector<entity_t> ent = getEntities(gId);
+	for (auto a : ent) a->_active = active;
 
 }
 
