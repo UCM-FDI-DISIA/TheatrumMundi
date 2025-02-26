@@ -46,5 +46,12 @@ void EntityManager::refresh() {
 	}
 
 }
+void
+EntityManager::
+  setActiveGroup(grpId_t gId, bool active) {
+	std::vector<entity_t> ent = getEntities(gId);
+	for (auto a : ent) a->_active = active;
+
+}
 
 } // end of namespace
