@@ -1,5 +1,5 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
-
+#define _DEBUG
 #pragma once
 
 #include <vector>
@@ -30,6 +30,8 @@ public:
 	Game& operator=(const Game& o) = delete;
 	Game(const Game& o) = delete;
 	void exit();
+	 float wscreenScale;
+	 float hscreenScale;
 private:
 	static Game* _instance;
 	bool _exitGame;

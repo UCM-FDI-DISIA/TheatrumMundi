@@ -24,8 +24,8 @@ void InitialScene::init()
 		//Start room1
 		
 		auto _startbtn = entityManager->addEntity();
-		entityManager->addComponent<Transform>(_startbtn, Vector2D(200, 200), Vector2D(0, 0), 200, 200, 0);
-		entityManager->addComponent<Image>(_startbtn, &sdlutils().images().at("init"));
+		entityManager->addComponent<Transform>(_startbtn, Vector2D(0, 0), Vector2D(0, 0), 674*2, 374*2, 0);
+		entityManager->addComponent<Image>(_startbtn, &sdlutils().images().at("kei"));
 
 		entityManager->addComponent<RectArea2D>(_startbtn);
 
@@ -37,7 +37,7 @@ void InitialScene::init()
 		//Exit 
 		auto _exitbtn = entityManager->addEntity();
 		entityManager->addComponent<Transform>(_exitbtn, Vector2D(300, 400), Vector2D(0, 0), 200, 200, 0);
-		entityManager->addComponent<Image>(_exitbtn, &sdlutils().images().at("exit"));
+	//	entityManager->addComponent<Image>(_exitbtn, &sdlutils().images().at("exit"));
 
 		entityManager->addComponent<RectArea2D>(_exitbtn);
 

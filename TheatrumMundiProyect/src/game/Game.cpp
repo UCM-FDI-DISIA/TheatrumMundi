@@ -1,9 +1,6 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #include "Game.h"
-
-#include "../components/Image.h"
-#include "../components/Transform.h"
 #include "../ecs/Manager.h"
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/SDLUtils.h"
@@ -37,10 +34,11 @@ Game::~Game() {
 }
 
 void Game::init() {
-
+	wscreenScale = GetSystemMetrics(SM_CXSCREEN) / 1346.0;
+	hscreenScale = GetSystemMetrics(SM_CYSCREEN) / 748.0;
 	// initialize the SDL singleton
-	//if (!SDLUtils::Init("TheatrumMundi",GetSystemMetrics(SM_CXSCREEN) ,GetSystemMetrics(SM_CYSCREEN), "../resources/config/TheatrumMundi.resources.json")) {
-	if (!SDLUtils::Init("TheatrumMundi", 1346, 748, "../resources/config/TheatrumMundi.resources.json")) {
+	if (!SDLUtils::Init("TheatrumMundi",GetSystemMetrics(SM_CXSCREEN) ,GetSystemMetrics(SM_CYSCREEN), "../resources/config/TheatrumMundi.resources.json")) {
+//	if (!SDLUtils::Init("TheatrumMundi", wscreen, hscreen, "../resources/config/TheatrumMundi.resources.json")) {
 		std::cerr << "Something went wrong while initializing SDLUtils"
 				<< std::endl;
 		return;
