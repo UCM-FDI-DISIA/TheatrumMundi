@@ -87,10 +87,10 @@ void Room1::init()
 		////NEEDS GETTER OF CLICKCOMPONENT, TRIGGERCOMPONENT, DRAGGINGCOMPONENT FOR EVENTS
 
 		//CREATION OF DRAG ENTITY
-		auto dragEntity = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0, areaLayerManager,EntityFactory::DRAG);
+		auto dragEntity = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0, areaLayerManager,EntityFactory::DRAG, ecs::grp::DEFAULT);
 		
 		//CREATION OF SCROLL ENTITY - Necesitamos solo un entity con scroll para que haga el cambio con dos botones, este se conectara a otro boton interactable para hacer el duo de botones
-		auto scrollingButton = entityFactory->CreateInteractableEntityScroll(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(700, 400), Vector2D(0, 0), 200, 200, 0, areaLayerManager , 1 , 100.f, EntityFactory::SCROLLNORMAL, 3 , EntityFactory::NODRAG);
+		auto scrollingButton = entityFactory->CreateInteractableEntityScroll(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(700, 400), Vector2D(0, 0), 200, 200, 0, areaLayerManager , 1 , 100.f, EntityFactory::SCROLLNORMAL, 3 , EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		
 		//TENEMOS QUE ACCEDER A ESTE SCROLL GLOBAL
 		ScrollComponent* scrollingButtonComponent = entityManager->getComponent<ScrollComponent>(scrollingButton);
@@ -104,7 +104,7 @@ void Room1::init()
 				scrollingButtonComponent->Scroll(ScrollComponent::DOWN);
 			});
 
-		auto scrollingButtonUp = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA, Vector2D(400, 400), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG);
+		auto scrollingButtonUp = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA, Vector2D(400, 400), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 		ClickComponent* scrollingButtonClickComponentUp = entityManager->getComponent<ClickComponent>(scrollingButtonUp);
 		scrollingButtonClickComponentUp->connect(ClickComponent::JUST_CLICKED, [scrollingButtonComponent, this]() {
@@ -113,7 +113,7 @@ void Room1::init()
 			});
 
 
-		auto scrollingButtonAddPhase = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA, Vector2D(1000, 400), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG);
+		auto scrollingButtonAddPhase = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA, Vector2D(1000, 400), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		
 		ClickComponent* scrollingButtonClickComponentAddPhase = entityManager->getComponent<ClickComponent>(scrollingButtonAddPhase);
 		scrollingButtonClickComponentAddPhase->connect(ClickComponent::JUST_CLICKED, [scrollingButtonComponent, this]() {
