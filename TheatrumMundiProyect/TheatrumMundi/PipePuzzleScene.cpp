@@ -98,6 +98,7 @@ bool PipePuzzleScene::Check()
 
 void PipePuzzleScene::changeDirection(int module)
 {
+	//changes the direction +90º
 
 	if (_modules[module]->getModuleInfo().dir == Direction::RIGHT)
 	{
@@ -116,7 +117,8 @@ void PipePuzzleScene::changeDirection(int module)
 		_modules[module]->changeModuleInfo().dir = Direction::UP;
 	}
 
-	cout<<"DIR"<<module<<" "<< _modules[module]->getModuleInfo().dir<<endl;
+	//cout<<"DIR"<<module<<" "<< _modules[module]->getModuleInfo().dir<<endl;
+	//rotates the module
 	Transform* transformComponent = _modulesEnt[module]->getMngr()->getComponent<Transform>(_modulesEnt[module]);
 	
 	float newRot = transformComponent->getRot() + 90.0f;
@@ -227,7 +229,7 @@ void PipePuzzleScene::init()
 
 			//add click component
 			ClickComponent* clk = entityManager->addComponent<ClickComponent>(_modulesEnt[i]);
-			clk->connect(ClickComponent::JUST_CLICKED, [this, i]() {std::cout << "name"<<i;
+			clk->connect(ClickComponent::JUST_CLICKED, [this, i]() {
 				changeDirection(i); 
 				});
 
@@ -311,7 +313,7 @@ void PipePuzzleScene::init()
 			
 
 		}
-		//1346, 748,
+	
 		// create entity
 		auto cubeEntity = entityManager->addEntity();
 
@@ -330,11 +332,14 @@ void PipePuzzleScene::init()
 }
 
 void PipePuzzleScene::waterPassPipe(int pipe) {
+
+	
 	Pipe::pipeInfo pipeData = _waterPipes[pipe]->getPipeInfo();  
 
-
+	//checks if its type 1 pipe only 1 entry has to have water not 2
 	if (pipeData.type == Pipe::ONE) {
 		
+		//the entry(neightbourd) can be a module or a pipe so if its a module it needs to have the direction the entry needs
 		bool ent1 = (pipeData.entry1.name == 'P' && _waterPipes[pipeData.entry1.num]->getPipeInfo().result == true) ||
 			(pipeData.entry1.name == 'M' && _modules[pipeData.entry1.num]->getModuleInfo().result == true &&
 				_modules[pipeData.entry1.num]->getModuleInfo().dir == pipeData.entry1.direction);
@@ -343,6 +348,7 @@ void PipePuzzleScene::waterPassPipe(int pipe) {
 			(pipeData.entry2.name == 'M' && _modules[pipeData.entry2.num]->getModuleInfo().result == true &&
 				_modules[pipeData.entry2.num]->getModuleInfo().dir == pipeData.entry2.direction);
 
+		//if the condition is correct change the result(if it carries water) to true
 		if ((ent1 && !ent2)|| (!ent1 &&ent2))
 		
 		{  
@@ -358,7 +364,9 @@ void PipePuzzleScene::waterPassPipe(int pipe) {
 		}
 	}
 
+	//this type of pipe needs to entries with water
 	if (pipeData.type == Pipe::TWO) {
+		//the entry(neightbourd) can be a module or a pipe so if its a module it needs to have the direction the entry needs
 		bool entry1HasWater = (pipeData.entry1.name == 'P' && _waterPipes[pipeData.entry1.num]->getPipeInfo().result) ||
 			(pipeData.entry1.name == 'M' && _modules[pipeData.entry1.num]->getModuleInfo().result &&
 				_modules[pipeData.entry1.num]->getModuleInfo().dir == pipeData.entry1.direction);
@@ -367,6 +375,7 @@ void PipePuzzleScene::waterPassPipe(int pipe) {
 			(pipeData.entry2.name == 'M' && _modules[pipeData.entry2.num]->getModuleInfo().result &&
 				_modules[pipeData.entry2.num]->getModuleInfo().dir == pipeData.entry2.direction);
 
+		//if the condition is correct change the result(if it carries water) to true
 		if (entry1HasWater && entry2HasWater) {
 			 
 			_waterPipes[pipe]->changePipeInfo().result = true;
@@ -380,13 +389,14 @@ void PipePuzzleScene::waterPassPipe(int pipe) {
 	}
 
 	
-	std::cout << "Pipe " << pipe << " tiene resultado: " << pipeData.result << std::endl;
+	//std::cout << "Pipe " << pipe << " tiene resultado: " << pipeData.result << std::endl;
 
 }
 
 void PipePuzzleScene::waterPassModule(int module) {
 	Module::moduleInfo modInfo = _modules[module]->getModuleInfo();
 
+	//checks if the four neightbourds the module has, carries water
 	bool receivesWater = false;
 
 	if (modInfo.right.first == 'P' && _waterPipes[modInfo.right.second]->getPipeInfo().result) {
@@ -431,7 +441,7 @@ void PipePuzzleScene::waterPassModule(int module) {
 
 
 	_modules[module]->changeModuleInfo().result = receivesWater;
-	std::cout << "Module " << module << " checking if it receives water: " << receivesWater << std::endl;
+	//std::cout << "Module " << module << " checking if it receives water: " << receivesWater << std::endl;
 
 
 	
@@ -440,6 +450,8 @@ void PipePuzzleScene::waterPassModule(int module) {
 
 void PipePuzzleScene::waterPassPath(int path) {
 
+	//checks if the condition needed for a path to have water is correct
+	//it checks that the element is conected to carries water and if its s module, is in the right direction
 	if (_waterPath[path]._whoTocheck.name == 'M') {
 		auto moduleInfo = _modules[_waterPath[path]._whoTocheck.num]->getModuleInfo();
 		if (moduleInfo.result && moduleInfo.dir == _waterPath[path]._whoTocheck.dir) {
@@ -455,7 +467,7 @@ void PipePuzzleScene::waterPassPath(int path) {
 	}
 
 	
-	std::cout << "Path " << path << " tiene agua: " << _waterPath[path]._withWater << std::endl;
+	//std::cout << "Path " << path << " tiene agua: " << _waterPath[path]._withWater << std::endl;
 
 	Image* imageComponent = _pathEnt[path]->getMngr()->getComponent<Image>(_pathEnt[path]);
 
@@ -475,112 +487,109 @@ void PipePuzzleScene::unload()
 	for (auto a : _modules) delete a;
 }
 void PipePuzzleScene::updatePuzzle() {
-	std::queue<int> pipesToUpdate, modulesToUpdate, pathsToUpdate;
-	bool updated = false;  // Flag para verificar si hubo algún cambio
 
-	// Crear el vector de actualización para los caminos fuera del bucle
-	std::vector<bool> updatedPaths(_waterPath.size(), false);  // Inicialmente todos los caminos no están actualizados
+	//create queue for 3 types of elements that have to be updated 
+	std::queue<int> pipesToUpdate, modulesToUpdate, pathsToUpdate; 
 
-	// Encolar los módulos que ya tienen agua
-	for (size_t i = 0; i < _modules.size(); ++i) {
-	
-			modulesToUpdate.push(i);
-			std::cout << "Module " << i << " has water." << std::endl;  // Log para depuración
+	// add modules 
+	for (int i = 0; i < _modules.size(); ++i) {
+		modulesToUpdate.push(i);
+		//std::cout << "Module " << i << " has water." << std::endl;  
 		
 	}
 
-	// Encolar las tuberías que ya tienen agua
-	for (size_t i = 0; i < _waterPipes.size(); ++i) {
-		
-			pipesToUpdate.push(i);
-			std::cout << "Pipe " << i << " has water." << std::endl;  // Log para depuración
+	// add pipes
+	for (int i = 0; i < _waterPipes.size(); ++i) {
+		pipesToUpdate.push(i);
+		//std::cout << "Pipe " << i << " has water." << std::endl;  
 		
 	}
 
-	// Encolar los caminos que ya tienen agua
-	for (size_t i = 0; i < _waterPath.size(); ++i) {
-			pathsToUpdate.push(i);
-			std::cout << "Path " << i << " has water." << std::endl;  // Log para depuración
+	// add paths
+	for (int i = 0; i < _waterPath.size(); ++i) {
+		pathsToUpdate.push(i);
+		//std::cout << "Path " << i << " has water." << std::endl;  
 	}
 
-	// Procesar las actualizaciones mientras haya cambios
+	//while there is something to update we process
 	while (!pipesToUpdate.empty() || !modulesToUpdate.empty() || !pathsToUpdate.empty()) {
-		updated = false;
 
-		// Procesar los módulos
+		//Update modules
 		while (!modulesToUpdate.empty()) {
-			int moduleIndex = modulesToUpdate.front();
-			modulesToUpdate.pop();
-			std::cout << "Updating Module " << moduleIndex << std::endl;  // Log para depuración
 
-			// Actualizar el agua en el módulo
+			//get the index of the fist one
+			int moduleIndex = modulesToUpdate.front();
+
+			//pop to have the next one ready
+			modulesToUpdate.pop();
+			//std::cout << "Updating Module " << moduleIndex << std::endl;  
+
+			// update x module
 			waterPassModule(moduleIndex);
 
-			// Si el módulo tiene agua, debemos revisar las tuberías conectadas
+			// if module has water, neightbour pipes need to be checked
 			if (_modules[moduleIndex]->getModuleInfo().result) {
-				for (size_t i = 0; i < _waterPipes.size(); ++i) {
+				for (int i = 0; i < _waterPipes.size(); ++i) {
 					if (_waterPipes[i]->isConnectedToModule(moduleIndex) && !_waterPipes[i]->getPipeInfo().result) {
-						pipesToUpdate.push(i);  // Si la tubería no tiene agua, la agregamos a la cola
-						updated = true;
-						std::cout << "Pipe " << i << " is now receiving water." << std::endl;  // Log para depuración
+
+						pipesToUpdate.push(i);  // x pipe needs to be checkeds
+						//std::cout << "Pipe " << i << " is now receiving water." << std::endl;
 					}
 				}
 			}
 		}
 
-		// Procesar las tuberías
+		//Update pipes
 		while (!pipesToUpdate.empty()) {
-			int pipeIndex = pipesToUpdate.front();
-			pipesToUpdate.pop();
-			std::cout << "Updating Pipe " << pipeIndex << std::endl;  // Log para depuración
 
-			// Actualizar el agua en la tubería
+			//get the index of the fist one
+			int pipeIndex = pipesToUpdate.front();
+
+			//pop to have the next one ready
+			pipesToUpdate.pop();
+			//std::cout << "Updating Pipe " << pipeIndex << std::endl; 
+
+			// update x pipe
 			waterPassPipe(pipeIndex);
 
-			// Si la tubería tiene agua, debemos actualizar los caminos conectados
+			// if pipe has water, we need to check the paths
 			if (_waterPipes[pipeIndex]->getPipeInfo().result) {
-				for (size_t i = 0; i < _waterPath.size(); ++i) {
-					// Verificar que el camino esté conectado a esta tubería y no tenga agua aún
+				for (int i = 0; i < _waterPath.size(); ++i) {
+					// check that pipe and path are conected anf path doesnt have water for it to be updated
 					if (_waterPath[i]._whoTocheck.num == pipeIndex && !_waterPath[i]._withWater) {
-						pathsToUpdate.push(i);  // Si el camino no tiene agua, lo agregamos a la cola
-						updated = true;
-						std::cout << "Path " << i << " is now receiving water." << std::endl;  // Log para depuración
+						pathsToUpdate.push(i);  // x path needs to be checked
+						//std::cout << "Path " << i << " is now receiving water." << std::endl;  
 					}
 				}
 			}
 		}
 
+		//Update paths
 		while (!pathsToUpdate.empty()) {
-			int pathIndex = pathsToUpdate.front();
-			pathsToUpdate.pop();
-			std::cout << "Updating Path " << pathIndex << std::endl;
 
-			// Guardamos el estado anterior del agua antes de actualizarlo
+			//get the index of the fist one
+			int pathIndex = pathsToUpdate.front();
+
+			//pop to have the next one ready
+			pathsToUpdate.pop();
+			//std::cout << "Updating Path " << pathIndex << std::endl;
+
+			// safe the previous water state
 			bool previousWaterState = _waterPath[pathIndex]._withWater;
 
-			// Actualizamos el agua en el camino
-			waterPassPath(pathIndex);  // Este método cambia el estado de agua, sin necesidad de devolver nada
+			// update x path
+			waterPassPath(pathIndex); 
 
-			// Verificamos si el estado del agua ha cambiado
+			// ckeck if path has change water state
 			bool waterChanged = (_waterPath[pathIndex]._withWater != previousWaterState);
 
-			// Obtener la entidad asociada al índice del camino
-			ecs::Entity* pathEntity = _pathEnt[pathIndex];
-
-			
-			
-			// Solo agregamos el camino a la cola si su estado de agua ha cambiado
-			if (_waterPath[pathIndex]._withWater && !updatedPaths[pathIndex] && waterChanged) {
-				pathsToUpdate.push(pathIndex);  // Lo agregamos nuevamente a la cola si tiene agua
-				updatedPaths[pathIndex] = true;  // Marcamos el camino como actualizado
+			// we only readd it if state of water has changed
+			if (_waterPath[pathIndex]._withWater && waterChanged) {
+				pathsToUpdate.push(pathIndex);  // if now the path has water we added again for it to be checked
+				
 			}
 		}
 
-
-		// Si hubo algún cambio, volvemos a procesar todo
-		if (updated) {
-			continue;
-		}
 	}
 
 	// Verificar si el puzzle está resuelto
