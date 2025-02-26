@@ -42,23 +42,43 @@ void WriteTextComponent<TextInfo>::update()
 template <>
 void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render()
 {
+	//TITLE
+	Texture* titleText = new Texture(sdlutils().renderer(), "LOG",
+		sdlutils().fonts().at("TITLE"), _color); //convert text to texture
+	SDL_Rect dstTRect = { 500, 10, titleText->width(), titleText->height() }; //destiny rect
+	titleText->render(dstTRect, 0.0); //render
 
-	int y = 0;
-	for (auto it = textStructure->begin(); it != textStructure->end(); ++it)
-		// for (auto it: *textStructure)
+
+	//RENDER LOG LIST
+	int y = 100;
+	for (const auto& it : *textStructure)
 	{
-		//author
-		Texture* authorTexture = new Texture(sdlutils().renderer(), it->first, _myFont, _color); //convert text to texture
-		SDL_Rect dstARect = { 500, y, authorTexture->width(), authorTexture->height() }; //destiny rect
-		authorTexture->render(dstARect, 0.0); //render
+		if (it.first == "/") //end of dialogue event
+		{
+			//Insert divide line (temporarly a string)
+			Texture* divideLine = new Texture(sdlutils().renderer(), "...--.-.-.-.-.--.-.-.-.-.-..-.--.-.-.-.---......-----...-----.....----....---...---..-.-.-.-.-.-.-.-.-.-.",
+				_myFont, _color); //convert text to texture
+			SDL_Rect dstVRect = { 10, y, divideLine->width(), divideLine->height() }; //destiny rect
+			divideLine->render(dstVRect, 0.0); //render
+			y += 100;
+		}
+		else
+		{
+			//author
+			Texture* authorTexture = new Texture(sdlutils().renderer(), it.first, _myFont, _color); //convert text to texture
+			SDL_Rect dstAuthorRect = { 500, y, authorTexture->width(), authorTexture->height() }; //destiny rect
+			authorTexture->render(dstAuthorRect, 0.0); //render
 
-		//text
-		Texture* textTexture = new Texture(sdlutils().renderer(), it->second, _myFont, _color); //convert text to texture
-		SDL_Rect dstRect = { 500, y + 100, textTexture->width(), textTexture->height() }; //destiny rect
-		textTexture->render(dstRect, 0.0); //render
+			//text
+			Texture* textTexture = new Texture(sdlutils().renderer(), it.second, _myFont, _color); //convert text to texture
+			SDL_Rect dstRect = { 500, y + 100, textTexture->width(), textTexture->height() }; //destiny rect
+			textTexture->render(dstRect, 0.0); //render
+			y += 200;
+		}
 
-		y += 200;
 	}
+
+	
 }
 
 template <>
@@ -66,11 +86,11 @@ void WriteTextComponent<TextInfo>::render()
 {
 
 	Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
-	SDL_Rect nameRect = { 500, 0,nameText->width(),nameText->height()};
+	SDL_Rect nameRect = { 100, 500,nameText->width(),nameText->height()};
 	nameText->render(nameRect, 0);
 
 	Texture* dialogText = new Texture(sdlutils().renderer(), _currentText, _myFont, _color);
-	SDL_Rect dialogRect = { 500, 100,dialogText->width(),dialogText->height() };
+	SDL_Rect dialogRect = { 100, 600,dialogText->width(),dialogText->height() };
 	dialogText->render(dialogRect, 0);
 	
 }
@@ -86,7 +106,7 @@ bool WriteTextComponent<std::list<std::pair<std::string, std::string>>>::isFinis
 template<>
 bool WriteTextComponent<TextInfo>::isFinished()
 {
-	return charsToShow >= textStructure->Text.size();
+	return charsToShow >= textStructure->Text.size() || textStructure->Text == " ";
 }
 
 

@@ -20,7 +20,8 @@
 
 Room1::Room1(): SceneRoomTemplate()
 {
-	
+	roomEvent.push_back([] {std::cout << "funco";});
+	roomEvent[initialDialogue]();
 }
 
 Room1::~Room1()
@@ -30,7 +31,7 @@ Room1::~Room1()
 void Room1::init()
 {
 	
-	Game::Instance()->render();
+
 	if (!isStarted) {
 		//auto _fighter = entityManager->addEntity();
 		//auto _fighterTransform = entityManager->addComponent<Transform>(_fighter, Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0);

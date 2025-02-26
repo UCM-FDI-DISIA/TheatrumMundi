@@ -1,5 +1,11 @@
 #pragma once
 #include "SceneRoomTemplate.h"
+enum Room1Event
+{
+	initialDialogue = 0,
+	event_size,
+
+};
 class Room1 : public SceneRoomTemplate
 {
 private:
