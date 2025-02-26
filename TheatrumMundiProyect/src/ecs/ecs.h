@@ -63,6 +63,8 @@ namespace grp {
 // first number is 0 in C/C++ standard
 enum grpId : cmpId_t {
 	DEFAULT,
+	BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, // ALL THE ELEMENTS
+	BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, //BOOK AND COME BACK
 	_GRPS_LIST_, /* taken from ../game/ecs_defs */
 
 	// do not remove this
