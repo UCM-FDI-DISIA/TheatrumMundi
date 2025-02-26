@@ -20,7 +20,8 @@
 
 Room1::Room1(): SceneRoomTemplate()
 {
-	
+	roomEvent.push_back([] {std::cout << "funco";});
+	roomEvent[initialDialogue]();
 }
 
 Room1::~Room1()
@@ -30,7 +31,7 @@ Room1::~Room1()
 void Room1::init()
 {
 	
-	Game::Instance()->render();
+
 	if (!isStarted) {
 		
 	}
