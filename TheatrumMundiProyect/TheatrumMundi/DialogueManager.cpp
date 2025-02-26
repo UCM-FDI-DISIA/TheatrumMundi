@@ -2,6 +2,7 @@
 #include <fstream>
 #include <cassert>
 #include "../src/json/json.hpp";
+#include "../src/Components/Image.h"
 //#include "../src/Components/WriteTextComponent.h";
 //#include "TextInfo.h"
 
@@ -125,6 +126,8 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 			_showText->Character = elem.Character; // Saves new text
 			_showText->Text = elem.Text;
 
+			setCharachterImage(elem.Character);
+
 			_writeTextComp->startTextLine(); //starts animating line
 
 			if (_sceneLog) {
@@ -158,6 +161,8 @@ void DialogueManager::ReadAnswer(){
 	//First read the answer, after that upload the value of the room because this means that we finish with the actual room
 	//Read and show the answer
 	cout << "Ask if a mage do it" << endl;
+
+	//UNTOCHABLE
 	++actualroom;
 	if (actualroom <= numRooms) {
 		room = "Sala" + to_string(actualroom);
@@ -178,6 +183,23 @@ void DialogueManager::setSceneLog(LogComponent* sceneLog)
 void DialogueManager::setScene(DebugLogRoom* scene)
 {
 	_scene = scene;
+}
+
+/// <summary>
+/// Modify the Texture from the scene
+/// </summary>
+/// <param name="Character"></param>
+void DialogueManager::setCharachterImage(const string& Character)
+{
+	if (Character == "Keisara") {
+		characterimg->setTexture(&sdlutils().images().at("Keisara"));
+	}
+	else if (Character == "Lucy") {
+		characterimg->setTexture(&sdlutils().images().at("Lucy"));
+	}
+	else if (Character == "Sol") {
+		characterimg->setTexture(&sdlutils().images().at("Sol"));
+	}
 }
 
 TextInfo* DialogueManager::getShowText()
