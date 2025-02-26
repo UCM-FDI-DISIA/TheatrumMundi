@@ -28,44 +28,19 @@ DebugLogRoom::~DebugLogRoom()
 void DebugLogRoom::init()
 {
 	if (!isStarted) {
-			//set scene to dialogue
-			Game::Instance()->getDialogueManager()->setScene(this);
+		//Register scene in dialogue manager
+		Game::Instance()->getDialogueManager()->setScene(this);
 
-			//All Screen
-			auto _screenDetect = entityManager->addEntity();
-			auto _screenDetectTr = entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
+		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
+		auto _screenDetect = entityManager->addEntity();
+		auto _screenDetectTr = entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
 			
-			
-			//Create dialogue text entity
-			auto _textTest = entityManager->addEntity();
-			auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
-			_dialogueObj = _textTest;
-			if (!Game::Instance()->getDialogueManager()->getDisplayOnProcess())
+		entityManager->addComponent<RectArea2D>(_screenDetect);
+		ClickComponent* passDialog = entityManager->addComponent<ClickComponent>(_screenDetect);
+		passDialog->connect(ClickComponent::JUST_CLICKED, [this, _screenDetect]()
 			{
-				_textTest->getMngr()->setActive(_textTest, false);
-			}
-
-			//Create log
-			auto _log = entityManager->addEntity();
-			entityManager->addComponent<Transform>(_log, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
-			LogComponent* logComp = entityManager->addComponent<LogComponent>(_log); //logComponent
-			Image* imLog = entityManager->addComponent<Image>(_log, &sdlutils().images().at("fondoPruebaLog"), 200); //background log
-			SDL_Color colorText = { 255, 255, 255, 255 };
-			WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog =
-				entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
-			_log->getMngr()->setActive(_log, false); //hide log at the beggining
-
-			//register log in dialogue manager
-			Game::Instance()->getDialogueManager()->setSceneLog(logComp);
-			
-			
-
-			entityManager->addComponent<RectArea2D>(_screenDetect);
-			ClickComponent* passDialog = entityManager->addComponent<ClickComponent>(_screenDetect);
-			passDialog->connect(ClickComponent::JUST_CLICKED, [this, _screenDetect]()
-			{
-				if (!logActive&&!isClickingButton) {
-					//read dialogue
+				if (!logActive && !isClickingButton) {
+					//read dialogue only if it has to
 					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
 					{
 						Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
@@ -73,20 +48,40 @@ void DebugLogRoom::init()
 					else
 					{
 						_screenDetect->getMngr()->setActive(_screenDetect, false);
-						//_dialogueObj->getMngr()->setActive(_dialogueObj, false);
 					}
 				}
 
 			});
 
-			//add writeText to dialogueManager
-			SDL_Color colorDialog = { 255, 0, 0, 255 }; // Establecer el color (rojo)
-			WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
+		//Create dialogue text entity. Object that renders dialogue Text on Screen
+		auto _textTest = entityManager->addEntity();
+		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
+		_dialogueObj = _textTest;
 
-			Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
+		//Create log
+		auto _log = entityManager->addEntity();
+		entityManager->addComponent<Transform>(_log, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
+		Image* imLog = entityManager->addComponent<Image>(_log, &sdlutils().images().at("fondoPruebaLog"), 200); //background log
+		
+		LogComponent* logComp = entityManager->addComponent<LogComponent>(_log); //logComponent
+		
+		SDL_Color colorText = { 255, 255, 255, 255 };
+		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog =
+			entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
+		
+		_log->getMngr()->setActive(_log, false); //hide log at the beggining
+
+		//Register log in dialogue manager
+		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
+			
+
+		//Add writeText to dialogueManager
+		SDL_Color colorDialog = { 255, 0, 0, 255 }; // Color = red
+		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
+
+		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
 			
 			
-
 		//BUTTONS
 
 		//Open log button
@@ -104,31 +99,38 @@ void DebugLogRoom::init()
 		entityManager->addComponent<RectArea2D>(_closeLogButton);
 		_closeLogButton->getMngr()->setActive(_closeLogButton, false);
 
-		//Click component clkOpen
+		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_openLogButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [_log, this, _openLogButton, _closeLogButton]()
 			{
-				std::cout << "CLICKED\n";
+				//activate log
 				_log->getMngr()->setActive(_log, true);
 				logActive = true;
-				_openLogButton->getMngr()->setActive(_openLogButton, false);
+
+				//activate close log button
 				_closeLogButton->getMngr()->setActive(_closeLogButton, true);
+
+				//disable open log button
+				_openLogButton->getMngr()->setActive(_openLogButton, false);
 			});
 
-		//Click component clkClose
+		//Click component Close log button
 		ClickComponent* clkClose = entityManager->addComponent<ClickComponent>(_closeLogButton);
 		clkClose->connect(ClickComponent::JUST_CLICKED, [_log,this, _openLogButton, _closeLogButton]()
 			{
-				std::cout << "CLICKED\n";
+				//disable log
 				_log->getMngr()->setActive(_log, false);
 				logActive = false;
+
+				//activate open log button
 				_openLogButton->getMngr()->setActive(_openLogButton, true);
+
+				//disable close log button
 				_closeLogButton->getMngr()->setActive(_closeLogButton, false);
 			});
 		
 
-
-		//Start reading dialogue
+		//In this scene, in it's init, dialogue must start displaying on screen.
 		Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
 		
 		
