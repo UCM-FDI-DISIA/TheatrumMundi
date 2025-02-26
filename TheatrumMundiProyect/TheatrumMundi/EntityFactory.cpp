@@ -46,7 +46,7 @@ ecs::entity_t EntityFactory::CreateInteractableEntity(ecs::EntityManager* _entit
 	else if (_typeRect == CIRCLEAREA) _entityManager->addComponent<CircleArea2D>(newElement)->setLocalPos(Vector2D(_width/2,_height/2));
 	_entityManager->addComponent<ClickComponent>(newElement);
 	_entityManager->addComponent<TriggerComponent>(newElement);
-	_entityManager->addComponent<ClickableSpriteComponent>(newElement);
+	_entityManager->addComponent<ClickableSpriteComponent>(newElement,_idImage);
 	if (_drag == DRAG) _entityManager->addComponent<DragComponent>(newElement);
 	return newElement;
 }
@@ -67,7 +67,7 @@ ecs::entity_t EntityFactory::CreateInteractableEntityScroll(ecs::EntityManager* 
 	else if (_isInverted == SCROLLINVERSE) _entityManager->addComponent<ScrollComponent>(newElement, _velocityScroll, _time, ScrollComponent::INVERSE, _numPhasesScrolling);
 	_entityManager->addComponent<ClickComponent>(newElement);
 	_entityManager->addComponent<TriggerComponent>(newElement);
-	_entityManager->addComponent<ClickableSpriteComponent>(newElement);
+	_entityManager->addComponent<ClickableSpriteComponent>(newElement,_idImage);
 	if (_drag == DRAG) _entityManager->addComponent<DragComponent>(newElement);
 	return newElement;
 }

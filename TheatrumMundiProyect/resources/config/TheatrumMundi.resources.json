@@ -143,6 +143,10 @@
     {
       "id": "bookComb9",
       "file": "../resources/images/BookComb9.png"
+    },
+    {
+      "id": "incrementButtonSelected",
+      "file": "../resources/images/incrementButtonSelected.png"
     }
   ],
 
