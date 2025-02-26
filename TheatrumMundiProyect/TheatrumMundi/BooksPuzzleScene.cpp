@@ -100,8 +100,8 @@ void BooksPuzzleScene::init()
 			});
 
 		//REWARD ENTITY
-		auto Reward = entityFactory->CreateImageEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(sdlutils().width() - 100, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		Reward->getMngr()->setActive(Reward, false);
+		auto Reward = entityFactory->CreateImageEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(sdlutils().width() - 100, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0, ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+		Reward->getMngr()->setActive(Reward, false);																																					
 
 		//CHECK COMBINATION
 		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 8 / 21, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
@@ -110,7 +110,8 @@ void BooksPuzzleScene::init()
 			std::cout << "CLICK" << std::endl;
 			if (Check()) {
 				std::cout << "WIN" << std::endl;
-				Reward->getMngr()->setActive(Reward, true);
+				//Reward->getMngr()->setActive(Reward, true);
+				Reward->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, true);
 			}
 			});
 
@@ -127,57 +128,30 @@ void BooksPuzzleScene::init()
 
 		ClickComponent* ButtonBook1Click = entityManager->getComponent<ClickComponent>(ButtonBookFirst);
 		ButtonBook1Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, increaseNumber1, increaseNumber2, increaseNumber3, backButton, checkButton, this]() {
-			//ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookA"));
-			//ImageBook->getMngr()->setActive(ImageBook,true);
-			//ButtonBookFirst->getMngr()->setActive(ButtonBookFirst, false);
-			//ButtonBookSecond->getMngr()->setActive(ButtonBookSecond, false);
-			//ButtonBookThird->getMngr()->setActive(ButtonBookThird, false);
-			//increaseNumber1->getMngr()->setActive(increaseNumber1, false);
-			//increaseNumber2->getMngr()->setActive(increaseNumber2, false);
-			//increaseNumber3->getMngr()->setActive(increaseNumber3, false);
-			//checkButton->getMngr()->setActive(checkButton, false);
-			//backButton->getMngr()->setActive(backButton, true);
+			ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookA"));
+			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, true);
+			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, false);
 			});
 
 		ClickComponent* ButtonBook2Click = entityManager->getComponent<ClickComponent>(ButtonBookSecond);
 		ButtonBook2Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, increaseNumber1, increaseNumber2, increaseNumber3, backButton, checkButton, this]() {
 			ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookB"));
-			ImageBook->getMngr()->setActive(ImageBook, true);
-			ButtonBookFirst->getMngr()->setActive(ButtonBookFirst, false);
-			ButtonBookSecond->getMngr()->setActive(ButtonBookSecond, false);
-			ButtonBookThird->getMngr()->setActive(ButtonBookThird, false);
-			increaseNumber1->getMngr()->setActive(increaseNumber1, false);
-			increaseNumber2->getMngr()->setActive(increaseNumber2, false);
-			increaseNumber3->getMngr()->setActive(increaseNumber3, false);
-			checkButton->getMngr()->setActive(checkButton, false);
-			backButton->getMngr()->setActive(backButton, true);
+			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, true);
+			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, false);
 			});
 
 		ClickComponent* ButtonBook3Click = entityManager->getComponent<ClickComponent>(ButtonBookThird);
 		ButtonBook3Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, increaseNumber1, increaseNumber2, increaseNumber3, backButton, checkButton,this]() {
 			ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookC"));
-			ImageBook->getMngr()->setActive(ImageBook, true);
-			ButtonBookFirst->getMngr()->setActive(ButtonBookFirst, false);
-			ButtonBookSecond->getMngr()->setActive(ButtonBookSecond, false);
-			ButtonBookThird->getMngr()->setActive(ButtonBookThird, false);
-			increaseNumber1->getMngr()->setActive(increaseNumber1, false);
-			increaseNumber2->getMngr()->setActive(increaseNumber2, false);
-			increaseNumber3->getMngr()->setActive(increaseNumber3, false);
-			checkButton->getMngr()->setActive(checkButton, false);
-			backButton->getMngr()->setActive(backButton, true);
+			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, true);
+			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, false);
 			});
 
 		ClickComponent* clickbackButton = entityManager->getComponent<ClickComponent>(backButton);
 		clickbackButton->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, increaseNumber1, increaseNumber2, increaseNumber3, backButton, checkButton,this]() {
 			ImageBook->getMngr()->setActive(ImageBook, false);
-			ButtonBookFirst->getMngr()->setActive(ButtonBookFirst, true);
-			ButtonBookSecond->getMngr()->setActive(ButtonBookSecond, true);
-			ButtonBookThird->getMngr()->setActive(ButtonBookThird, true);
-			increaseNumber1->getMngr()->setActive(increaseNumber1, true);
-			increaseNumber2->getMngr()->setActive(increaseNumber2, true);
-			increaseNumber3->getMngr()->setActive(increaseNumber3, true);
-			checkButton->getMngr()->setActive(checkButton, true);
-			backButton->getMngr()->setActive(backButton, false);
+			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, false);
+			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, true);
 		});
 	}
 }
