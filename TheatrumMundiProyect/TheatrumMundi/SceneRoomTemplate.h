@@ -12,7 +12,7 @@ protected:
 	std::vector< std::function<void()>> roomEvent;
 	DialogueManager* dm;
 	//inventory
-	
+
 
 	public:
 		//void startDialogue(const eventToRead& _eventToRead);

@@ -7,10 +7,7 @@ Area2D::Area2D(Area2DLayerManager* areaLayerMngr, Vector2D localPosition)
 	_areaLayerPos = areaLayerMngr->begin();
 }
 
-Area2D::~Area2D() 
-{
-	if (_areaLayerMngr == nullptr) return;
-
+Area2D::~Area2D() {
 	_areaLayerMngr->erase(_areaLayerPos);
 }
 #include <iostream>

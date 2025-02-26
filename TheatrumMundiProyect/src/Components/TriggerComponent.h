@@ -18,7 +18,7 @@ public:
 		return _currentOverlappingEntities;
 	}
 
-	// Gets the entities that triggered the current callback
+	// Gets the entity that triggered the current callback
 	std::list<ecs::entity_t> const& triggerContextEntities() { 
 		return _callbackContextEntities;
 	}
