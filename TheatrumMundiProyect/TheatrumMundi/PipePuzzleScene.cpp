@@ -85,8 +85,8 @@ bool PipePuzzleScene::Check()
 {
 	if (_waterPipes[8]->getPipeInfo().result ==true) //the last pipe has the solution
 	{
-		cout << "GANADO";
 		solved = true;
+		//Win();
 		return true;
 	}
 	else
@@ -283,7 +283,7 @@ void PipePuzzleScene::init()
 
 		for (int i = 0; i < pathPositions.size(); i++) {
 
-			// create entity
+			// create path
 			_pathEnt.push_back(entityManager->addEntity());
 			
 
@@ -314,7 +314,7 @@ void PipePuzzleScene::init()
 
 		}
 	
-		// create entity
+		// create cube
 		auto cubeEntity = entityManager->addEntity();
 
 		// add transfomr
@@ -326,6 +326,7 @@ void PipePuzzleScene::init()
 
 		// add area of visualization of the image
 		entityManager->addComponent<RectArea2D>(cubeEntity);
+
 
 
 	}
@@ -595,6 +596,35 @@ void PipePuzzleScene::updatePuzzle() {
 	// Verificar si el puzzle está resuelto
 	Check();
 }
+
+/*void PipePuzzleScene::Win()
+{
+	//puts the gloves in scene
+	// create entity
+	auto gloveEntity = entityManager->addEntity();
+
+	// add transfomr
+	auto cubeTransform = entityManager->addComponent<Transform>(
+		gloveEntity, Vector2D(900, 580), Vector2D(0, 0), 150, 150, 0
+	);
+	// add image
+	entityManager->addComponent<Image>(gloveEntity, &sdlutils().images().at("gloves"));
+
+	// add area of visualization of the image
+	entityManager->addComponent<RectArea2D>(gloveEntity);
+
+	//add click component
+	ClickComponent* clk = entityManager->addComponent<ClickComponent>(gloveEntity);
+	clk->connect(ClickComponent::JUST_CLICKED, [this]() {
+		//add object to inventory and deeactivates visibility of the image;
+		});
+
+	gloveEntity->getMngr()->setActive(gloveEntity, false);
+
+	
+	
+
+}*/
 
 
 PipePuzzleScene::~PipePuzzleScene()

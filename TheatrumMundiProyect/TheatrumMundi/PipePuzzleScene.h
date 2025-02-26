@@ -59,6 +59,7 @@ public:
 	 void waterPassPath(int path);// series of conditions to check if a path has water
 	 void unload() override;
 	 void updatePuzzle() ;
+	// void Win() override;
 	 ~PipePuzzleScene();
 };
 
