@@ -30,7 +30,7 @@ Room1::~Room1()
 void Room1::init()
 {
 	
-	Game::Instance()->render();
+	//Game::Instance()->render();
 	if (!isStarted) {
 		//auto _fighter = entityManager->addEntity();
 		//auto _fighterTransform = entityManager->addComponent<Transform>(_fighter, Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0);
@@ -87,23 +87,43 @@ void Room1::init()
 		////NEEDS GETTER OF CLICKCOMPONENT, TRIGGERCOMPONENT, DRAGGINGCOMPONENT FOR EVENTS
 
 		//CREATION OF DRAG ENTITY
-		//auto dragEntity = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0, EntityFactory::DRAG);
-		//
-		////CREATION OF SCROLL ENTITY
-		//auto scrollingButton = entityFactory->CreateInteractableEntityScroll(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(400, 400), Vector2D(0, 0), 200, 200, 0, Vector2D(5,0), 100.f , EntityFactory::NODRAG);
-		//
-		//ScrollComponent* scrollingButtonComponent = entityManager->getComponent<ScrollComponent>(scrollingButton);
-		//scrollingButtonComponent->addElementToScroll(entityManager->getComponent<Transform>(dragEntity));
-		//
-		////SE PUEDE CON TRIGGER COMPONENT A LA HORA DE ENTRAR Y SALIR DEL AREA
-		//
-		//ClickComponent* scrollingButtonClickComponent = entityManager->getComponent<ClickComponent>(scrollingButton);
-		//scrollingButtonClickComponent->connect(ClickComponent::JUST_CLICKED, [scrollingButtonComponent,this]() {
-		//	if(!scrollingButtonComponent->isScrolling()) 
-		//		scrollingButtonComponent->Scroll();
-		//	});
+		auto dragEntity = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0, areaLayerManager,EntityFactory::DRAG, ecs::grp::DEFAULT);
+		
+		//CREATION OF SCROLL ENTITY - Necesitamos solo un entity con scroll para que haga el cambio con dos botones, este se conectara a otro boton interactable para hacer el duo de botones
+		auto scrollingButton = entityFactory->CreateInteractableEntityScroll(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(700, 400), Vector2D(0, 0), 200, 200, 0, areaLayerManager , 1 , 100.f, EntityFactory::SCROLLNORMAL, 3 , EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		
+		//TENEMOS QUE ACCEDER A ESTE SCROLL GLOBAL
+		ScrollComponent* scrollingButtonComponent = entityManager->getComponent<ScrollComponent>(scrollingButton);
+		scrollingButtonComponent->addElementToScroll(entityManager->getComponent<Transform>(dragEntity));
+		
+		//SE PUEDE CON TRIGGER COMPONENT A LA HORA DE ENTRAR Y SALIR DEL AREA
+		
+		ClickComponent* scrollingButtonClickComponentDown = entityManager->getComponent<ClickComponent>(scrollingButton);
+		scrollingButtonClickComponentDown->connect(ClickComponent::JUST_CLICKED, [scrollingButtonComponent,this]() {
+			if(!scrollingButtonComponent->isScrolling()) 
+				scrollingButtonComponent->Scroll(ScrollComponent::DOWN);
+			});
+
+		auto scrollingButtonUp = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA, Vector2D(400, 400), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+
+		ClickComponent* scrollingButtonClickComponentUp = entityManager->getComponent<ClickComponent>(scrollingButtonUp);
+		scrollingButtonClickComponentUp->connect(ClickComponent::JUST_CLICKED, [scrollingButtonComponent, this]() {
+			if (!scrollingButtonComponent->isScrolling())
+				scrollingButtonComponent->Scroll(ScrollComponent::UP);
+			});
+
+
+		auto scrollingButtonAddPhase = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA, Vector2D(1000, 400), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		
+		ClickComponent* scrollingButtonClickComponentAddPhase = entityManager->getComponent<ClickComponent>(scrollingButtonAddPhase);
+		scrollingButtonClickComponentAddPhase->connect(ClickComponent::JUST_CLICKED, [scrollingButtonComponent, this]() {
+			if (!scrollingButtonComponent->isScrolling())
+				scrollingButtonComponent->addPhaseAndFollow();
+			});
+	
 	}
-	SDL_Delay(1000);
+	//SDL_Delay(1000);
+
 	//_loadimg->getMngr()->setActive(_loadimg,false);
 	
 }

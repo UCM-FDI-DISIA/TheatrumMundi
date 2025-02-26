@@ -14,19 +14,23 @@ public:
 
 	enum AreaType { RECTAREA, CIRCLEAREA }; //DECIDE IF THE AREA IS RECT OR CIRCLE
 	enum Dragging { DRAG, NODRAG }; //DECIDE IF THE ELEMENT IS DRAGGED OR NOT
+	enum ScrollType { SCROLLNORMAL, SCROLLINVERSE };
 
 	//Creates an Image Entity (BACKGROUND, VISUAL ITEM FROM INVENTORY, ETC)
 	ecs::entity_t CreateImageEntity(ecs::EntityManager* _entityManager,const std::string& _idImage, AreaType _typeRect,
-	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot);
+	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot,
+	ecs::grpId_t gId); //GROUP OF ENTITIES
 
 	//Creates an interactable entity (BUTTON) or drag interactable entity (OBJECT TO MOVE IN PUZZLES)
 	ecs::entity_t CreateInteractableEntity(ecs::EntityManager* _entityManager,const std::string& _idImage, AreaType _typeRect,
 	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer,
-	Dragging _drag); //DRAG ENTITY
+	Dragging _drag, //DRAG ENTITY
+	ecs::grpId_t gId); //GROUP OF ENTITIES
 
 	//Creates a scroll interactable entity (MOVES FROM ONE ROOM TO ANOTHER) or scroll dragging interactable entity (SCROLL BUTTON TO LOG OR INVENTORY)
 	ecs::entity_t CreateInteractableEntityScroll(ecs::EntityManager* _entityManager,const std::string& _idImage, AreaType _typeRect,
-	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer,
-	Vector2D _dirScroll, float _time,
-	Dragging _drag); //DRAG SCROLL ENTITY
+	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer, 
+	int _velocityScroll, float _time, ScrollType _isInverted, int _numPhasesScrolling,
+	Dragging _drag,	//DRAG SCROLL ENTITY
+	ecs::grpId_t gId); //GROUP OF ENTITIES
 };
