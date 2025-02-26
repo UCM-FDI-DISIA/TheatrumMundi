@@ -103,6 +103,13 @@
     <ClCompile Include="..\src\Components\RectArea2D.cpp">
       <Filter>Component</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsBodyComponent.cpp">
+    <ClCompile Include="Area2DLayerManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Components\Area2D.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\SDL2-2.30.11\include\SDL.h">
@@ -551,6 +558,38 @@
     </ClInclude>
     <ClInclude Include="..\SRC\utils\GenID.h">
       <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\json\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogueManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Direction.h" />
+    <ClInclude Include="EntityFactory.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="BooksPuzzleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\alc.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx-creative.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\EFX-Util.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx.h" />
+    <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\xram.h" />
+    <ClInclude Include="PipePuzzleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Pipe.h">
+      <Filter>Misc</Filter>
+    <ClInclude Include="PhysicsBodyComponent.h">
+      <Filter>Component</Filter>
+    <ClInclude Include="Area2DLayerManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

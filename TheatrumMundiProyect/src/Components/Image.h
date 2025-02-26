@@ -12,7 +12,7 @@ public:
 	__CMPID_DECL__(ecs::cmp::IMAGE)
 
 	Image();
-	Image(Texture* tex);
+	Image(Texture* tex, int alpha = 255);
 	virtual ~Image();
 
 	void setTexture(Texture* tex) {
@@ -21,6 +21,7 @@ public:
 
 	void initComponent() override;
 	void render() override;
+
 
 private:
 	Transform* _tr;

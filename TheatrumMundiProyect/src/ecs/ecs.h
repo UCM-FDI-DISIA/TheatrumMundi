@@ -51,6 +51,7 @@ enum cmpId : cmpId_t {
 	AREA2D,
 	LOG_COMPONENT,
 	WRITE_TEXT_COMPONENT,
+	PHYSICSBODYCOMPONENT,
 
 	// do not remove this
 	_LAST_CMP_ID
@@ -62,6 +63,10 @@ namespace grp {
 // first number is 0 in C/C++ standard
 enum grpId : cmpId_t {
 	DEFAULT,
+	INTERACTOBJ,
+	DIALOGUE,
+	UI,
+
 	_GRPS_LIST_, /* taken from ../game/ecs_defs */
 
 	// do not remove this

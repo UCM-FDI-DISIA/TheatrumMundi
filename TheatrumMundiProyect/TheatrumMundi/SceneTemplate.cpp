@@ -1,11 +1,13 @@
 #include "SceneTemplate.h"
 #include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
-
+#include "../TheatrumMundi/Area2DLayerManager.h"
 
 SceneTemplate::SceneTemplate()
 {
 	entityManager = new ecs::EntityManager();
+	entityFactory = new EntityFactory();
+	areaLayerManager = new Area2DLayerManager();
 	isStarted = false;
 }
 
@@ -22,7 +24,8 @@ void SceneTemplate::render() const
 SceneTemplate::~SceneTemplate()
 {
 	unload();
-	entityManager->~EntityManager();
-	//delete entityManager;
-//	delete dialogueManager;
+	
+	delete entityManager;
+	delete areaLayerManager;
+	delete entityFactory;
 }

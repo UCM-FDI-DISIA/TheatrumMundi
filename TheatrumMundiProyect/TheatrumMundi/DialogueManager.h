@@ -3,6 +3,8 @@
 #include <iostream>
 #include <list>
 
+#include "TextInfo.h"
+#include "../src/Components/WriteTextComponent.h";
 
 template <typename T>
 class WriteTextComponent;
@@ -10,6 +12,8 @@ class WriteTextComponent;
 class TextInfo;
 
 class LogComponent;
+
+class DebugLogRoom;
 
 //A struct with all the dialogue information
 enum eventToRead {
@@ -41,7 +45,11 @@ private:
 
 	LogComponent* _sceneLog; //points to log list
 
-	
+	WriteTextComponent<TextInfo>* _writeTextComp;
+
+	DebugLogRoom* _scene;
+
+	bool displayOnProcess;
 
 public:
 	DialogueManager();
@@ -50,6 +58,14 @@ public:
 	~DialogueManager();
 
 	void setSceneLog(LogComponent* sceneLog);
+	void setScene(DebugLogRoom* scene);
+	void setWriteTextComp(WriteTextComponent<TextInfo>* writeTextComp)
+	{
+		_writeTextComp = writeTextComp;
+	}
+	
 	TextInfo* getShowText();
+
+	bool getDisplayOnProcess();
 };
 

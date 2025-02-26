@@ -7,8 +7,20 @@
 #include "CircleArea2D.h"
 #include "../utils/Collisions.h"
 
+RectArea2D::RectArea2D(Area2DLayerManager* areaLayerMngr, Vector2D localPos, int width, int height)
+	: Area2D(areaLayerMngr, localPos), _width(width), _height(height)
+{
+
+}
+
 RectArea2D::RectArea2D(Vector2D localPos, int width, int height)
 	: Area2D(localPos), _width(width), _height(height)
+{
+
+}
+
+RectArea2D::RectArea2D(Area2DLayerManager* areaLayerMngr) 
+	: RectArea2D(areaLayerMngr, Vector2D(), -1, -1)
 {
 
 }
@@ -57,7 +69,7 @@ bool RectArea2D::containsPoint(Vector2D point)
 	return SDL_PointInRect(&pnt, &rect);
 }
 
-bool RectArea2D::overlapsWith(RectArea2D* rectArea)
+bool RectArea2D::_overlapsWith(RectArea2D* rectArea)
 {
 	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
 	Transform* extrentTr = rectArea->getContext()->getMngr()->getComponent<Transform>(rectArea->getContext());
@@ -66,6 +78,7 @@ bool RectArea2D::overlapsWith(RectArea2D* rectArea)
 
 	SDL_Rect thisRect = {
 		transform->getPos().getX() + _localPosition.getX(),
+
 		transform->getPos().getY() + _localPosition.getY(),
 		_width,
 		_height
@@ -82,7 +95,7 @@ bool RectArea2D::overlapsWith(RectArea2D* rectArea)
 	return SDL_IntersectRect(&thisRect, &otherRect, &rs);
 }
 
-bool RectArea2D::overlapsWith(CircleArea2D* circleArea)
+bool RectArea2D::_overlapsWith(CircleArea2D* circleArea)
 {
 	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
 	Transform* extrentTr = circleArea->getContext()->getMngr()->getComponent<Transform>(circleArea->getContext());
