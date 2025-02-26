@@ -18,7 +18,7 @@ public:
 
 	Area2D(Area2DLayerManager* areaLayerMngr, Vector2D localPosition);
 
-	~Area2D();
+	~Area2D() override;
 
 	bool pointIsOverlayered(Vector2D point);
 
@@ -29,8 +29,8 @@ public:
 	// the overlap with the correct combination (Rect v Circl | Rect v Rect ...)
 	virtual bool overlapsWithArea(Area2D* area) = 0; 
 
-	virtual bool _overlapsWith(RectArea2D* rectArea) = 0;
-	virtual bool _overlapsWith(CircleArea2D* rectArea) = 0;
+	virtual bool _overlapsWith(RectArea2D* rectArea) = 0; // Do not call this method, use overlapsWithArea()
+	virtual bool _overlapsWith(CircleArea2D* rectArea) = 0; // Do not call this method, use overlapsWithArea()
 
 
 	void setLocalPos(Vector2D pos) {
