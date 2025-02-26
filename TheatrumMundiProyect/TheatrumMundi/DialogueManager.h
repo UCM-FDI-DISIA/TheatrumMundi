@@ -13,6 +13,8 @@ class TextInfo;
 
 class LogComponent;
 
+class DebugLogRoom;
+
 //A struct with all the dialogue information
 enum eventToRead {
 	SalaIntermediaEvento1,
@@ -45,6 +47,10 @@ private:
 
 	WriteTextComponent<TextInfo>* _writeTextComp;
 
+	DebugLogRoom* _scene;
+
+	bool displayOnProcess;
+
 public:
 	DialogueManager();
 	void ReadDialogue(const eventToRead& _eventToRead);
@@ -52,11 +58,14 @@ public:
 	~DialogueManager();
 
 	void setSceneLog(LogComponent* sceneLog);
+	void setScene(DebugLogRoom* scene);
 	void setWriteTextComp(WriteTextComponent<TextInfo>* writeTextComp)
 	{
 		_writeTextComp = writeTextComp;
 	}
 	
 	TextInfo* getShowText();
+
+	bool getDisplayOnProcess();
 };
 

@@ -23,7 +23,7 @@ SceneManager::SceneManager()
 	scenes.push_back(new BooksPuzzleScene());
 	//scenes.push_back(new DebugLogRoom());
 	//scenes.push_back(new Room1());
-	loadScene(0);
+	loadScene(2);
 	
 }
 
