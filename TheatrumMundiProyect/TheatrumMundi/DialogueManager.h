@@ -45,6 +45,8 @@ private:
 
 	WriteTextComponent<TextInfo>* _writeTextComp;
 
+
+
 public:
 	DialogueManager();
 	void ReadDialogue(const eventToRead& _eventToRead);

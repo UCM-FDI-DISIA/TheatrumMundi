@@ -125,7 +125,15 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 			}
 
 			mRoom[room][event].pop_front(); // Delete read textLine
+			
+			if (mRoom[room][event].empty())
+			{
+				//No more dialogue to show
+				std::cout << "no more dialogue on event to show" << std::endl;
+				_sceneLog->addDialogueLineLog("/", "/");
+				//call scene method to dissable dialogue objects on scene
 
+			}
 		}
 	}
 	else
