@@ -13,6 +13,7 @@ class TextInfo;
 
 class LogComponent;
 
+class DebugLogRoom;
 
 using RoomDialogues = std::unordered_map<std::string,std::list<TextInfo>>; //manage the events and the dialogues
 using RoomsMap = std::unordered_map<std::string, RoomDialogues>; //manage the rooms and there dialogues
@@ -34,6 +35,10 @@ private:
 
 	WriteTextComponent<TextInfo>* _writeTextComp;
 
+	DebugLogRoom* _scene;
+
+	bool displayOnProcess;
+
 public:
 	DialogueManager();
 	void ReadDialogue(const eventToRead& _eventToRead);
@@ -41,11 +46,14 @@ public:
 	~DialogueManager();
 
 	void setSceneLog(LogComponent* sceneLog);
+	void setScene(DebugLogRoom* scene);
 	void setWriteTextComp(WriteTextComponent<TextInfo>* writeTextComp)
 	{
 		_writeTextComp = writeTextComp;
 	}
 	
 	TextInfo* getShowText();
+
+	bool getDisplayOnProcess();
 };
 
