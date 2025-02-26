@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include <iostream>
 #include <list>
-
+#include "EventsInfo.h"
 #include "TextInfo.h"
 #include "../src/Components/WriteTextComponent.h";
 
@@ -13,19 +13,7 @@ class TextInfo;
 
 class LogComponent;
 
-//A enum with all the dialogue information
 
-enum eventToRead {
-	SalaIntermediaEvento1,
-	SalaIntermediaEvento2,
-	SalaIntermediaEvento3,
-	Pista1,
-	Pista2,
-	Pista3,
-	Puzzle1,
-	Puzzle2,
-	Puzzle3
-};
 using RoomDialogues = std::unordered_map<std::string,std::list<TextInfo>>; //manage the events and the dialogues
 using RoomsMap = std::unordered_map<std::string, RoomDialogues>; //manage the rooms and there dialogues
 

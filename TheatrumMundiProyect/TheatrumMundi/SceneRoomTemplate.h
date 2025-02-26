@@ -1,14 +1,13 @@
 #pragma once
 #include "SceneTemplate.h"
 #include <vector>
-class DialogueManager;
+#include "EventsInfo.h"
 class SceneRoomTemplate: public SceneTemplate
 {
 protected:
 
 	std::vector<bool> puzzlesol;
 	std :: vector<ecs::entity_t> puzzleptr;
-	DialogueManager* dm;
 	//inventory
 	
 

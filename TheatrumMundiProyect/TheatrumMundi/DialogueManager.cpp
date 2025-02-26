@@ -99,7 +99,7 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 	}
 }
 /// <summary>
-/// Read the full event and showed on screen
+/// Read the first dialogue from the event and showed on screen
 /// </summary>
 /// <param name="_eventToRead"></param>
 void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {

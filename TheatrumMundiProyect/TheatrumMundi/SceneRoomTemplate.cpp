@@ -3,14 +3,16 @@
 #include "Manager.h"
 #include "DialogueManager.h"
 #include "ClickComponent.h"
+#include "../src/game/Game.h"
 #include <iostream>
 using namespace ecs;
-/*void SceneRoomTemplate::startDialogue(const DialogueManager)
+
+void SceneRoomTemplate::startDialogue(const eventToRead& _eventToRead)
 {
-	entityManager->setActiveGroup(grp::DIALOGUE,true);
-	dm->ReadDialogue(_eventToRead);
-	
-}*/
+	entityManager->setActiveGroup(grp::DIALOGUE, true);
+	Game::Instance()->getDialogueManager()->ReadDialogue(_eventToRead);
+
+}
 
 void SceneRoomTemplate::endDialogue()
 {
@@ -42,7 +44,6 @@ SceneRoomTemplate::SceneRoomTemplate(): SceneTemplate()
 
 SceneRoomTemplate::~SceneRoomTemplate()
 {
-	delete dm;
 	unload();
 }
 
