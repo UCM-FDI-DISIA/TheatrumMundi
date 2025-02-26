@@ -27,6 +27,12 @@ EntityManager::~EntityManager() {
 	}
 }
 
+void EntityManager::setActiveGroup(grpId_t gId , bool active){
+	auto& ent = getEntities(gId);
+	for (auto a : ent) a->_active = active;
+
+}
+
 void EntityManager::refresh() {
 
 	// remove dead entities from the groups lists, and also those
