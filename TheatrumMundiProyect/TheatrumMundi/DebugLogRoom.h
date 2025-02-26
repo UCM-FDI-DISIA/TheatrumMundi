@@ -9,6 +9,7 @@ class DebugLogRoom : public SceneRoomTemplate
 private:
 	bool logActive = false;
 	bool isClickingButton = false;
+	ecs::entity_t _dialogueObj;
 protected:
 public:
 	DebugLogRoom();
@@ -17,5 +18,5 @@ public:
 	void virtual refresh() override;
 	void virtual unload() override;
 	
-
+	void showDialogue(bool show);
 };

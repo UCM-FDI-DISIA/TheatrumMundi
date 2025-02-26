@@ -16,7 +16,7 @@
 
 #include "../src/game/Game.h"
 
-DebugLogRoom::DebugLogRoom() : SceneRoomTemplate()
+DebugLogRoom::DebugLogRoom() : SceneRoomTemplate(), _dialogueObj(nullptr)
 {
 	
 }
@@ -28,16 +28,22 @@ DebugLogRoom::~DebugLogRoom()
 void DebugLogRoom::init()
 {
 	if (!isStarted) {
+			//set scene to dialogue
+			Game::Instance()->getDialogueManager()->setScene(this);
+
 			//All Screen
 			auto _screenDetect = entityManager->addEntity();
 			auto _screenDetectTr = entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
-
 			
-
+			
 			//Create dialogue text entity
 			auto _textTest = entityManager->addEntity();
 			auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
-			//_textTest->getMngr()->setActive(_textTest, false);
+			_dialogueObj = _textTest;
+			if (!Game::Instance()->getDialogueManager()->getDisplayOnProcess())
+			{
+				_textTest->getMngr()->setActive(_textTest, false);
+			}
 
 			//Create log
 			auto _log = entityManager->addEntity();
@@ -56,14 +62,22 @@ void DebugLogRoom::init()
 
 			entityManager->addComponent<RectArea2D>(_screenDetect);
 			ClickComponent* passDialog = entityManager->addComponent<ClickComponent>(_screenDetect);
-			passDialog->connect(ClickComponent::JUST_CLICKED, [this]()
-				{
-					if (!logActive&&!isClickingButton) {
-						//read dialogue
+			passDialog->connect(ClickComponent::JUST_CLICKED, [this, _screenDetect]()
+			{
+				if (!logActive&&!isClickingButton) {
+					//read dialogue
+					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
+					{
 						Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
-						 }
+					}
+					else
+					{
+						_screenDetect->getMngr()->setActive(_screenDetect, false);
+						//_dialogueObj->getMngr()->setActive(_dialogueObj, false);
+					}
+				}
 
-				});
+			});
 
 			//add writeText to dialogueManager
 			SDL_Color colorDialog = { 255, 0, 0, 255 }; // Establecer el color (rojo)
@@ -72,7 +86,6 @@ void DebugLogRoom::init()
 			Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
 			
 			
-
 
 		//BUTTONS
 
@@ -124,9 +137,16 @@ void DebugLogRoom::init()
 
 void DebugLogRoom::refresh()
 {
+	
 }
 
 void DebugLogRoom::unload()
 {
 	entityManager->~EntityManager();
+}
+
+void DebugLogRoom::showDialogue(bool show)
+{
+	if(show) _dialogueObj->getMngr()->setActive(_dialogueObj, true);
+	else _dialogueObj->getMngr()->setActive(_dialogueObj, false);
 }

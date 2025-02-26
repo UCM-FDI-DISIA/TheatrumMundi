@@ -6,6 +6,7 @@
 //#include "TextInfo.h"
 
 #include "../src/components/LogComponent.h"
+#include "../TheatrumMundi/DebugLogRoom.h"
 
 
 using json = nlohmann::json;
@@ -50,7 +51,7 @@ void DialogueManager::ReadJson(){
 }
 
 
-DialogueManager::DialogueManager() : _sceneLog(nullptr), _writeTextComp(nullptr){
+DialogueManager::DialogueManager() : _sceneLog(nullptr), _writeTextComp(nullptr), _scene(nullptr), displayOnProcess(false){
 
 	actualroom = 1;
 	room = "Sala" + to_string(actualroom);
@@ -106,7 +107,8 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 	
 	if (_writeTextComp->isFinished())
 	{
-		
+		displayOnProcess = true;
+		_scene->showDialogue(true);
 		string event;
 		ParseEnum(event, _eventToRead);
 		if (mRoom[room].find(event) != mRoom[room].end() && !mRoom[room][event].empty()) {
@@ -131,9 +133,14 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 				//No more dialogue to show
 				std::cout << "no more dialogue on event to show" << std::endl;
 				_sceneLog->addDialogueLineLog("/", "/");
-				//call scene method to dissable dialogue objects on scene
-
+				
 			}
+		}
+		else
+		{
+			//call scene method to dissable dialogue objects on scene
+			_scene->showDialogue(false);
+			displayOnProcess = false;
 		}
 	}
 	else
@@ -173,9 +180,19 @@ void DialogueManager::setSceneLog(LogComponent* sceneLog)
 	_sceneLog = sceneLog;
 }
 
+void DialogueManager::setScene(DebugLogRoom* scene)
+{
+	_scene = scene;
+}
+
 
 TextInfo* DialogueManager::getShowText()
 {
 	return _showText;
+}
+
+bool DialogueManager::getDisplayOnProcess()
+{
+	return displayOnProcess;
 }
 
