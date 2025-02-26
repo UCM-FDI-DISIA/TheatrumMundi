@@ -15,9 +15,12 @@
 #include "../src/ecs/Manager.h"
 #include "../src/game/Game.h"
 
+#include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
+
 
 Room1::Room1(): SceneRoomTemplate()
 {
+	
 }
 
 Room1::~Room1()
@@ -26,58 +29,83 @@ Room1::~Room1()
 
 void Room1::init()
 {
+	
+	Game::Instance()->render();
 	if (!isStarted) {
-		auto _fighter = entityManager->addEntity();
-		auto _fighterTransform = entityManager->addComponent<Transform>(_fighter, Vector2D(0, 0), Vector2D(0, 0), 200, 200, 0);
-		entityManager->addComponent<Image>(_fighter, &sdlutils().images().at("prueba"));
-
-		entityManager->addComponent<CircleArea2D>(_fighter)->setLocalPos(Vector2D(100,100));
-
-
-		//ClickComponent* clk = entityManager->addComponent<ClickComponent>(_fighter);
-		//clk->connect(ClickComponent::JUST_CLICKED, []() { std::cout << "CLICKED\n"; });
-
-		TriggerComponent* trg = entityManager->addComponent<TriggerComponent>(_fighter);
-		/*trg->connect(TriggerComponent::CURSOR_ENTERED, []() { std::cout << "ENTERED\n";  });
-		trg->connect(TriggerComponent::CURSOR_LEFT, []() { std::cout << "LEFT\n";  });*/
-		trg->connect(TriggerComponent::AREA_ENTERED, [trg]() {
-			std::cout << "AREA2D IN\n";  
-			std::list<ecs::entity_t> ents = trg->triggerContextEntities();
-			for (ecs::entity_t e : ents) {
-				if (e->getMngr()->getComponent<ClickComponent>(e) != nullptr)
-					std::cout << "Has click\n";
-			}
-		});
-		trg->connect(TriggerComponent::AREA_LEFT, []() { std::cout << "AREA2D OUT\n";  });
-
-		DragComponent* drg = entityManager->addComponent<DragComponent>(_fighter);
-		drg->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
-
-		PhysicsBodyComponent* phy = entityManager->addComponent<PhysicsBodyComponent>(_fighter);
-		//BOTON
-		auto _button = entityManager->addEntity();
-		auto _buttonTransform = entityManager->addComponent<Transform>(_button, Vector2D(500, 500), Vector2D(0, 0), 500, 500, 0);
-		entityManager->addComponent<Image>(_button, &sdlutils().images().at("prueba"));
-
-		CircleArea2D* rect = entityManager->addComponent<CircleArea2D>(_button);
-		rect->setLocalPos(Vector2D(250, 250));
-		phy->AddObjectToList(rect);
-
-		//ScrollComponent
-		//Velocity only X or Y (needs to be positive), time scrolling
-		ScrollComponent* _buttonScroll = entityManager->addComponent<ScrollComponent>(_button,Vector2D(0,5),100.0f);
-		//Add element to scroll, needs to be a transform
-		_buttonScroll->addElementToScroll(_fighterTransform);
-
+		//auto _fighter = entityManager->addEntity();
+		//auto _fighterTransform = entityManager->addComponent<Transform>(_fighter, Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0);
+		//entityManager->addComponent<Image>(_fighter, &sdlutils().images().at("prueba"));
+		//
+		//entityManager->addComponent<CircleArea2D>(_fighter)->setLocalPos(Vector2D(250,250));
+		//
+		//
+		////ClickComponent* clk = entityManager->addComponent<ClickComponent>(_fighter);
+		////clk->connect(ClickComponent::JUST_CLICKED, []() { std::cout << "CLICKED\n"; });
+		//
+		//TriggerComponent* trg = entityManager->addComponent<TriggerComponent>(_fighter);
+		///*trg->connect(TriggerComponent::CURSOR_ENTERED, []() { std::cout << "ENTERED\n";  });
+		//trg->connect(TriggerComponent::CURSOR_LEFT, []() { std::cout << "LEFT\n";  });*/
+		//trg->connect(TriggerComponent::AREA_ENTERED, [trg]() {
+		//	std::cout << "AREA2D IN\n";  
+		//	std::list<ecs::entity_t> ents = trg->triggerContextEntities();
+		//	for (ecs::entity_t e : ents) {
+		//		if (e->getMngr()->getComponent<ClickComponent>(e) != nullptr)
+		//			std::cout << "Has click\n";
+		//	}
+		//});
+		//trg->connect(TriggerComponent::AREA_LEFT, []() { std::cout << "AREA2D OUT\n";  });
+		//
+		//DragComponent* drg = entityManager->addComponent<DragComponent>(_fighter);
 		//drg->connect(DragComponent::DRAG, []() { std::cout << "DRAGGING\n"; });
-		ClickComponent* clkb = entityManager->addComponent<ClickComponent>(_button);
-		clkb->connect(ClickComponent::JUST_CLICKED, [_buttonScroll]() { /*_buttonScroll->setScrolling(true);*/
-			if (!_buttonScroll->isScrolling()) _buttonScroll->Scroll(); /*entityManager->getComponent<ScrollComponent>(_button)->Scroll(); */});
+		//
+		////BOTON
+		//auto _button = entityManager->addEntity();
+		//auto _buttonTransform = entityManager->addComponent<Transform>(_button, Vector2D(500, 500), Vector2D(0, 0), 500, 500, 0);
+		//entityManager->addComponent<Image>(_button, &sdlutils().images().at("prueba"));
+		//
+		//entityManager->addComponent<RectArea2D>(_button);
+		//
+		////ScrollComponent
+		////Velocity only X or Y (needs to be positive), time scrolling
+		//ScrollComponent* _buttonScroll = entityManager->addComponent<ScrollComponent>(_button,Vector2D(0,5),100.0f);
+		////Add element to scroll, needs to be a transform
+		//
+		////ScrollComponent* _buttonScrolling = entityManager->getComponent
+		////HACEMOS GETTER AQUI PARA A�ADIR LOS ELEMENTOS
+		//_buttonScroll->addElementToScroll(_fighterTransform);
+		//
+		//ClickComponent* clkb = entityManager->addComponent<ClickComponent>(_button);
+		//clkb->connect(ClickComponent::JUST_CLICKED, [_buttonScroll]() { /*_buttonScroll->setScrolling(true);*/
+		//	if (!_buttonScroll->isScrolling()) _buttonScroll->Scroll(); /*entityManager->getComponent<ScrollComponent>(_button)->Scroll(); */});
+		//
+		//TriggerComponent* trgb = entityManager->addComponent<TriggerComponent>(_button);
+		//trgb->connect(TriggerComponent::CURSOR_ENTERED, []() { std::cout << "ENTERED IN MOVING\n";  });
+		//trgb->connect(TriggerComponent::CURSOR_LEFT, []() { std::cout << "LEFT IN MOVING\n";  });
+		//
+		////NEEDS GETTER OF SCROLLCOMPONENT TO ADD ELEMENTS IF IT HAS
+		//
+		////NEEDS GETTER OF CLICKCOMPONENT, TRIGGERCOMPONENT, DRAGGINGCOMPONENT FOR EVENTS
 
-		TriggerComponent* trgb = entityManager->addComponent<TriggerComponent>(_button);
-		trgb->connect(TriggerComponent::CURSOR_ENTERED, []() { std::cout << "ENTERED IN MOVING\n";  });
-		trgb->connect(TriggerComponent::CURSOR_LEFT, []() { std::cout << "LEFT IN MOVING\n";  });
+		//CREATION OF DRAG ENTITY
+		//auto dragEntity = entityFactory->CreateInteractableEntity(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0, EntityFactory::DRAG);
+		//
+		////CREATION OF SCROLL ENTITY
+		//auto scrollingButton = entityFactory->CreateInteractableEntityScroll(entityManager, "prueba", EntityFactory::CIRCLEAREA ,Vector2D(400, 400), Vector2D(0, 0), 200, 200, 0, Vector2D(5,0), 100.f , EntityFactory::NODRAG);
+		//
+		//ScrollComponent* scrollingButtonComponent = entityManager->getComponent<ScrollComponent>(scrollingButton);
+		//scrollingButtonComponent->addElementToScroll(entityManager->getComponent<Transform>(dragEntity));
+		//
+		////SE PUEDE CON TRIGGER COMPONENT A LA HORA DE ENTRAR Y SALIR DEL AREA
+		//
+		//ClickComponent* scrollingButtonClickComponent = entityManager->getComponent<ClickComponent>(scrollingButton);
+		//scrollingButtonClickComponent->connect(ClickComponent::JUST_CLICKED, [scrollingButtonComponent,this]() {
+		//	if(!scrollingButtonComponent->isScrolling()) 
+		//		scrollingButtonComponent->Scroll();
+		//	});
 	}
+	SDL_Delay(1000);
+	//_loadimg->getMngr()->setActive(_loadimg,false);
+	
 }
 
 void Room1::refresh()

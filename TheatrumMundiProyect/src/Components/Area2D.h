@@ -29,8 +29,8 @@ public:
 	// the overlap with the correct combination (Rect v Circl | Rect v Rect ...)
 	virtual bool overlapsWithArea(Area2D* area) = 0; 
 
-	virtual bool overlapsWith(RectArea2D* rectArea) = 0;
-	virtual bool overlapsWith(CircleArea2D* rectArea) = 0;
+	virtual bool _overlapsWith(RectArea2D* rectArea) = 0;
+	virtual bool _overlapsWith(CircleArea2D* rectArea) = 0;
 
 
 	void setLocalPos(Vector2D pos) {

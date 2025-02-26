@@ -4,17 +4,24 @@
 #include "Room1.h"
 #include "DebugLogRoom.h"
 #include "InitialScene.h"
+#include "PipePuzzleScene.h"
+#include "BooksPuzzleScene.h"
 #include "checkML.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 
 //#include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 SceneManager::SceneManager()
 {
-	scenes.push_back(new Room1());
-	
+	//scenes.push_back(new Room1());
+	//scenes.push_back(new PipePuzzleScene());
 	scenes.push_back(new InitialScene());
-	scenes.push_back(new DebugLogRoom());
 	scenes.push_back(new Room1());
+	scenes.push_back(new DebugLogRoom());
+  
+	
+	scenes.push_back(new BooksPuzzleScene());
+	//scenes.push_back(new DebugLogRoom());
+	//scenes.push_back(new Room1());
 	loadScene(0);
 	
 }

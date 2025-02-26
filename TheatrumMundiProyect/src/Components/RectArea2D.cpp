@@ -69,7 +69,7 @@ bool RectArea2D::containsPoint(Vector2D point)
 	return SDL_PointInRect(&pnt, &rect);
 }
 
-bool RectArea2D::overlapsWith(RectArea2D* rectArea)
+bool RectArea2D::_overlapsWith(RectArea2D* rectArea)
 {
 	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
 	Transform* extrentTr = rectArea->getContext()->getMngr()->getComponent<Transform>(rectArea->getContext());
@@ -95,7 +95,7 @@ bool RectArea2D::overlapsWith(RectArea2D* rectArea)
 	return SDL_IntersectRect(&thisRect, &otherRect, &rs);
 }
 
-bool RectArea2D::overlapsWith(CircleArea2D* circleArea)
+bool RectArea2D::_overlapsWith(CircleArea2D* circleArea)
 {
 	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
 	Transform* extrentTr = circleArea->getContext()->getMngr()->getComponent<Transform>(circleArea->getContext());

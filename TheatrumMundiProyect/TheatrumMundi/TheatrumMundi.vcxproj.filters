@@ -559,12 +559,33 @@
     <ClInclude Include="..\SRC\utils\GenID.h">
       <Filter>SDL</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\json\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogueManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Direction.h" />
+    <ClInclude Include="EntityFactory.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="BooksPuzzleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\alc.h" />
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx-creative.h" />
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\EFX-Util.h" />
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\efx.h" />
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\xram.h" />
+    <ClInclude Include="PipePuzzleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Pipe.h">
+      <Filter>Misc</Filter>
     <ClInclude Include="PhysicsBodyComponent.h">
       <Filter>Component</Filter>
     <ClInclude Include="Area2DLayerManager.h">
