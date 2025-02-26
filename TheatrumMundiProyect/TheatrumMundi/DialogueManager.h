@@ -3,6 +3,8 @@
 #include <iostream>
 #include <list>
 
+#include "TextInfo.h"
+#include "../src/Components/WriteTextComponent.h";
 
 template <typename T>
 class WriteTextComponent;
@@ -40,6 +42,9 @@ private:
 	TextInfo* _showText; // points to current displayed textLine
 
 	LogComponent* _sceneLog; //points to log list
+
+	WriteTextComponent<TextInfo>* _writeTextComp;
+
 public:
 	DialogueManager();
 	void ReadDialogue(const eventToRead& _eventToRead);
@@ -47,6 +52,11 @@ public:
 	~DialogueManager();
 
 	void setSceneLog(LogComponent* sceneLog);
+	void setWriteTextComp(WriteTextComponent<TextInfo>* writeTextComp)
+	{
+		_writeTextComp = writeTextComp;
+	}
+	
 	TextInfo* getShowText();
 };
 

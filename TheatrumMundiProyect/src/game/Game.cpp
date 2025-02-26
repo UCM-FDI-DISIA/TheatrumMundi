@@ -61,6 +61,14 @@ void Game::init() {
 	
 }
 
+void Game::render() const
+{
+	sdlutils().clearRenderer();
+	_mngr->render();
+
+	sdlutils().presentRenderer();
+}
+
 void Game::start() {
 
 	// a boolean to exit the loop
@@ -90,11 +98,7 @@ void Game::start() {
 		_mngr->update();
 
 		checkCollisions();
-
-		sdlutils().clearRenderer();
-		_mngr->render();
-
-		sdlutils().presentRenderer();
+		render();
 
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
 

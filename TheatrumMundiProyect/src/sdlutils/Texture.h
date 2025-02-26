@@ -46,6 +46,12 @@ public:
 		return _height;
 	}
 
+	void setTextureOpacity(int alpha)
+	{
+		SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
+		SDL_SetTextureAlphaMod(_texture, alpha);
+	}
+
 	// This rendering method corresponds to method SDL_RenderCopyEx.
 	//
 	// Renders part of the texture (src) to a destination rectangle (dest)

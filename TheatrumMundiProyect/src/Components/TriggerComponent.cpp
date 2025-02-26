@@ -54,7 +54,8 @@ bool TriggerComponent::areaIsHovered(std::pair<Sint32, Sint32> mousePos)
 	Area2D* area = _ent->getMngr()->getComponent<Area2D>(_ent);
 	if (area == nullptr) return false;
 
-	return area->containsPoint(Vector2D(mousePos.first, mousePos.second));
+	return area->containsPoint(Vector2D(mousePos.first, mousePos.second))
+		&& !(_hasLayerOpposition && area->pointIsOverlayered(Vector2D(mousePos.first, mousePos.second)));
 }
 
 void TriggerComponent::updateOverlappingEntities()
@@ -107,6 +108,8 @@ void TriggerComponent::updateTriggerState()
 	updateOverlappingEntities(); // Update overlapping entity list
 
 	std::list<ecs::entity_t> enteredEnts; // Obtain entered entities
+	
+	_currentOverlappingEntities.sort([](ecs::Entity* a, ecs::Entity* b) { return (int)a < (int)b; });
 
 	std::set_difference(
 		_currentOverlappingEntities.begin(), _currentOverlappingEntities.end(), unchangedEnts.begin(), unchangedEnts.end(),

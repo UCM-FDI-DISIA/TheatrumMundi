@@ -19,9 +19,11 @@ private:
 	
 	 void checkCollisions();
 public:
+	
 	static Game* Instance();
 	~Game();
 	void init();
+	void render()const;
 	void start();
 	SceneManager* getSceneManager();
 	DialogueManager* getDialogueManager();
@@ -31,5 +33,7 @@ public:
 private:
 	static Game* _instance;
 	bool _exitGame;
+protected:
+	
 };
 

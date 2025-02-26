@@ -7,6 +7,8 @@
 class DebugLogRoom : public SceneRoomTemplate
 {
 private:
+	bool logActive = false;
+	bool isClickingButton = false;
 protected:
 public:
 	DebugLogRoom();
@@ -14,5 +16,6 @@ public:
 	void init() override;
 	void virtual refresh() override;
 	void virtual unload() override;
+	
 
 };
