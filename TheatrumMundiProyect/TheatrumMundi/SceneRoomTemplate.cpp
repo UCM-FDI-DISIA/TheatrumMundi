@@ -1,3 +1,4 @@
+
 #include "SceneRoomTemplate.h"
 #include "ecs.h"
 #include "Manager.h"
@@ -36,7 +37,30 @@ void SceneRoomTemplate::setActiveInteractObj(bool active)
 	entityManager->setActiveGroup(grp::INTERACTOBJ, active);
 }
 
-SceneRoomTemplate::SceneRoomTemplate(): SceneTemplate()
+void SceneRoomTemplate::endDialogue()
+{
+	entityManager->setActiveGroup(grp::DIALOGUE, false);
+}
+
+void SceneRoomTemplate::resolvedPuzzle(int i)
+{
+	puzzlesol[i] = true;
+	entityManager->setActive(puzzleptr[i], false);
+	entityManager->removeComponent<ClickComponent>(puzzleptr[i]);
+	//si todos los puzzles estan resueltos se llama el evento correspondienteo
+}
+
+void SceneRoomTemplate::setActiveBottons(bool active)
+{
+	entityManager->setActiveGroup(grp::UI, active);
+}
+
+void SceneRoomTemplate::setActiveInteractObj(bool active)
+{
+	entityManager->setActiveGroup(grp::INTERACTOBJ, active);
+}
+
+SceneRoomTemplate::SceneRoomTemplate() : SceneTemplate()
 {
 	for (int i = 0; i < 3;i++)puzzlesol.push_back(false);
 	//init inventory
@@ -44,10 +68,8 @@ SceneRoomTemplate::SceneRoomTemplate(): SceneTemplate()
 
 SceneRoomTemplate::~SceneRoomTemplate()
 {
+	delete dm;
 	unload();
 }
-
-
-
 
 
