@@ -13,7 +13,8 @@ class TextInfo;
 
 class LogComponent;
 
-//A struct with all the dialogue information
+//A enum with all the dialogue information
+
 enum eventToRead {
 	SalaIntermediaEvento1,
 	SalaIntermediaEvento2,

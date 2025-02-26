@@ -2,15 +2,15 @@
 #include "ecs.h"
 #include "Manager.h"
 #include "DialogueManager.h"
+#include "ClickComponent.h"
 #include <iostream>
 using namespace ecs;
-void SceneRoomTemplate::startDialogue(const std::string& event)
+/*void SceneRoomTemplate::startDialogue(const DialogueManager)
 {
 	entityManager->setActiveGroup(grp::DIALOGUE,true);
-	//que coño se hace aqui
-//m->ReadDialogue(event);
+	dm->ReadDialogue(_eventToRead);
 	
-}
+}*/
 
 void SceneRoomTemplate::endDialogue()
 {
@@ -20,7 +20,7 @@ void SceneRoomTemplate::endDialogue()
 void SceneRoomTemplate::resolvedPuzzle(int i)
 {
 	puzzlesol[i] = true;
-	entityManager->setActive(puzzleptr[i], false);
+	entityManager->removeComponent<ClickComponent>(puzzleptr[i]);
 	//si todos los puzzles estan resueltos se llama el evento correspondienteo
 }
 
