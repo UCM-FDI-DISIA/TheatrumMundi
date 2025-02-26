@@ -37,28 +37,6 @@ void SceneRoomTemplate::setActiveInteractObj(bool active)
 	entityManager->setActiveGroup(grp::INTERACTOBJ, active);
 }
 
-void SceneRoomTemplate::endDialogue()
-{
-	entityManager->setActiveGroup(grp::DIALOGUE, false);
-}
-
-void SceneRoomTemplate::resolvedPuzzle(int i)
-{
-	puzzlesol[i] = true;
-	entityManager->setActive(puzzleptr[i], false);
-	entityManager->removeComponent<ClickComponent>(puzzleptr[i]);
-	//si todos los puzzles estan resueltos se llama el evento correspondienteo
-}
-
-void SceneRoomTemplate::setActiveBottons(bool active)
-{
-	entityManager->setActiveGroup(grp::UI, active);
-}
-
-void SceneRoomTemplate::setActiveInteractObj(bool active)
-{
-	entityManager->setActiveGroup(grp::INTERACTOBJ, active);
-}
 
 SceneRoomTemplate::SceneRoomTemplate() : SceneTemplate()
 {
@@ -68,7 +46,6 @@ SceneRoomTemplate::SceneRoomTemplate() : SceneTemplate()
 
 SceneRoomTemplate::~SceneRoomTemplate()
 {
-	delete dm;
 	unload();
 }
 
