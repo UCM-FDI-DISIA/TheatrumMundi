@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\src\Components\Area2D.cpp" />
     <ClCompile Include="..\src\Components\CircleArea2D.cpp" />
+    <ClCompile Include="..\src\Components\ClickableSpriteComponent.cpp" />
     <ClCompile Include="..\src\Components\ClickComponent.cpp" />
     <ClCompile Include="..\src\Components\DragComponent.cpp" />
     <ClCompile Include="..\src\Components\Image.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="..\lib\SDL2_ttf-2.24.0\include\SDL_ttf.h" />
     <ClInclude Include="..\src\Components\Area2D.h" />
     <ClInclude Include="..\src\Components\CircleArea2D.h" />
+    <ClInclude Include="..\src\Components\ClickableSpriteComponent.h" />
     <ClInclude Include="..\src\Components\ClickComponent.h" />
     <ClInclude Include="..\src\Components\DragComponent.h" />
     <ClInclude Include="..\src\Components\Image.h" />

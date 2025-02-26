@@ -52,6 +52,7 @@ enum cmpId : cmpId_t {
 	LOG_COMPONENT,
 	WRITE_TEXT_COMPONENT,
 	PHYSICSBODYCOMPONENT,
+	CLICKABLE_SPRITE_COMPONENT,
 
 	// do not remove this
 	_LAST_CMP_ID
@@ -70,8 +71,6 @@ enum grpId : cmpId_t {
 	BACKGROUND,
 	UI,
 	INTERACTOBJ,
-	DIALOGUE,
-	UI,
 
 	_GRPS_LIST_, /* taken from ../game/ecs_defs */
 

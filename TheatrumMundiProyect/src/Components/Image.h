@@ -19,6 +19,8 @@ public:
 		_tex = tex;
 	}
 
+	void setAlpha(int alpha);
+
 	void initComponent() override;
 	void render() override;
 

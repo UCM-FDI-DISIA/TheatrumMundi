@@ -11,6 +11,7 @@
 #include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
 #include "../src/Components/ScrollComponent.h"
+#include "../src/Components/ClickableSpriteComponent.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
 
 #include "Area2DLayerManager.h"
@@ -44,7 +45,8 @@ ecs::entity_t EntityFactory::CreateInteractableEntity(ecs::EntityManager* _entit
 	if (_typeRect == RECTAREA)_entityManager->addComponent<RectArea2D>(newElement, _myLayer);
 	else if (_typeRect == CIRCLEAREA) _entityManager->addComponent<CircleArea2D>(newElement)->setLocalPos(Vector2D(_width/2,_height/2));
 	_entityManager->addComponent<ClickComponent>(newElement);
-	//_entityManager->addComponent<TriggerComponent>(newElement);
+	_entityManager->addComponent<TriggerComponent>(newElement);
+	_entityManager->addComponent<ClickableSpriteComponent>(newElement);
 	if (_drag == DRAG) _entityManager->addComponent<DragComponent>(newElement);
 	return newElement;
 }
@@ -65,6 +67,7 @@ ecs::entity_t EntityFactory::CreateInteractableEntityScroll(ecs::EntityManager* 
 	else if (_isInverted == SCROLLINVERSE) _entityManager->addComponent<ScrollComponent>(newElement, _velocityScroll, _time, ScrollComponent::INVERSE, _numPhasesScrolling);
 	_entityManager->addComponent<ClickComponent>(newElement);
 	_entityManager->addComponent<TriggerComponent>(newElement);
+	_entityManager->addComponent<ClickableSpriteComponent>(newElement);
 	if (_drag == DRAG) _entityManager->addComponent<DragComponent>(newElement);
 	return newElement;
 }

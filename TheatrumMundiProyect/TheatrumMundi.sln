@@ -5,8 +5,6 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TheatrumMundi", "TheatrumMundi\TheatrumMundi.vcxproj", "{1382E633-E980-46AE-9FF9-D44E253761C3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{8685B3CD-B911-42B6-8A36-D31A329FD872}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
