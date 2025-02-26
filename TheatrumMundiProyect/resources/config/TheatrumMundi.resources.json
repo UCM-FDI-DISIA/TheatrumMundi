@@ -103,6 +103,46 @@
     {
       "id": "backButton",
       "file": "../resources/images/BackButton.png"
+    },
+    {
+      "id": "bookComb0",
+      "file": "../resources/images/BookComb0.png"
+    },
+    {
+      "id": "bookComb1",
+      "file": "../resources/images/BookComb1.png"
+    },
+    {
+      "id": "bookComb2",
+      "file": "../resources/images/BookComb2.png"
+    },
+    {
+      "id": "bookComb3",
+      "file": "../resources/images/BookComb3.png"
+    },
+    {
+      "id": "bookComb4",
+      "file": "../resources/images/BookComb4.png"
+    },
+    {
+      "id": "bookComb5",
+      "file": "../resources/images/BookComb5.png"
+    },
+    {
+      "id": "bookComb6",
+      "file": "../resources/images/BookComb6.png"
+    },
+    {
+      "id": "bookComb7",
+      "file": "../resources/images/BookComb7.png"
+    },
+    {
+      "id": "bookComb8",
+      "file": "../resources/images/BookComb8.png"
+    },
+    {
+      "id": "bookComb9",
+      "file": "../resources/images/BookComb9.png"
     }
   ],
 

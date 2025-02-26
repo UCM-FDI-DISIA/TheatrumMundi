@@ -30,7 +30,7 @@ Room1::~Room1()
 void Room1::init()
 {
 	
-	Game::Instance()->render();
+	//Game::Instance()->render();
 	if (!isStarted) {
 		//auto _fighter = entityManager->addEntity();
 		//auto _fighterTransform = entityManager->addComponent<Transform>(_fighter, Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0);
@@ -122,7 +122,7 @@ void Room1::init()
 			});
 	
 	}
-	SDL_Delay(1000);
+	//SDL_Delay(1000);
 	//_loadimg->getMngr()->setActive(_loadimg,false);
 	
 }
