@@ -13,7 +13,7 @@ protected:
 	
 
 	public:
-		void startDialogue(const std::string& event);
+		void startDialogue(const eventToRead& _eventToRead);
 		void endDialogue();
 		virtual void resolvedPuzzle(int i);
 		void setActiveBottons(bool active);
