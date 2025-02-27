@@ -86,7 +86,7 @@ bool PipePuzzleScene::Check()
 	if (_waterPipes[8]->getPipeInfo().result ==true) //the last pipe has the solution
 	{
 		solved = true;
-		//Win();
+		Win();
 		return true;
 	}
 	else
@@ -240,7 +240,6 @@ void PipePuzzleScene::init()
 
 				//module
 				imageComponent->setTexture(&sdlutils().images().at("module"));
-				cout << "CARGO IMAGEN" << endl;
 
 			}
 			else
@@ -599,7 +598,7 @@ void PipePuzzleScene::updatePuzzle() {
 	Check();
 }
 
-/*void PipePuzzleScene::Win()
+void PipePuzzleScene::Win()
 {
 	//puts the gloves in scene
 	// create entity
@@ -621,12 +620,15 @@ void PipePuzzleScene::updatePuzzle() {
 		//add object to inventory and deeactivates visibility of the image;
 		});
 
-	gloveEntity->getMngr()->setActive(gloveEntity, false);
+	//gloveEntity->getMngr()->setActive(gloveEntity, false);
 
-	
-	
+}
 
-}*/
+void PipePuzzleScene::addToInventory()
+{
+
+}
+
 
 
 PipePuzzleScene::~PipePuzzleScene()
