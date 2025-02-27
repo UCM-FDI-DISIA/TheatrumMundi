@@ -328,6 +328,20 @@ void PipePuzzleScene::init()
 		// add area of visualization of the image
 		entityManager->addComponent<RectArea2D>(cubeEntity);
 
+		//create exit botton
+		auto exitEntity = entityManager->addEntity();
+
+		// add transfomr
+		auto exitTransform = entityManager->addComponent<Transform>(
+			exitEntity, Vector2D(50, 580), Vector2D(0, 0), 150, 150, 0
+		);
+		// add image
+		entityManager->addComponent<Image>(exitEntity, &sdlutils().images().at("exit"));
+
+		// add area of visualization of the image
+		entityManager->addComponent<RectArea2D>(exitEntity);
+
+
 
 
 	}
@@ -625,6 +639,11 @@ void PipePuzzleScene::Win()
 }
 
 void PipePuzzleScene::addToInventory()
+{
+
+}
+
+void PipePuzzleScene::Exit()
 {
 
 }

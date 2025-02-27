@@ -61,6 +61,7 @@ public:
 	 void updatePuzzle() ;
 	 void Win() override;
 	 void addToInventory();
+	 void Exit() override;
 	 ~PipePuzzleScene();
 };
 

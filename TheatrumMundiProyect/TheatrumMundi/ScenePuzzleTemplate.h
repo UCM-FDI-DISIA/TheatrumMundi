@@ -7,7 +7,7 @@ class ScenePuzzleTemplate: public SceneTemplate
 		bool solved = false;
 	public:
 
-	void Exit();
+	virtual void Exit();
 	virtual bool Check() { return true; };
 	virtual void Win() {};
 	ScenePuzzleTemplate();
