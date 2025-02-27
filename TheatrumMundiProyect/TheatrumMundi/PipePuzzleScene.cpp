@@ -237,8 +237,10 @@ void PipePuzzleScene::init()
 
 			if (_modules[i]->getModuleInfo().up.first=='N')
 			{
+
 				//module
 				imageComponent->setTexture(&sdlutils().images().at("module"));
+				cout << "CARGO IMAGEN" << endl;
 
 			}
 			else
