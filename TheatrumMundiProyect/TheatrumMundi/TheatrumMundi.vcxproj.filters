@@ -43,6 +43,7 @@
     <ClCompile Include="ScenePuzzleTemplate.cpp" />
     <ClCompile Include="SceneRoomTemplate.cpp" />
     <ClCompile Include="SceneTemplate.cpp" />
+    <ClCompile Include="AudioManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -209,6 +210,7 @@
     <ClInclude Include="SceneTemplate.h" />
     <ClInclude Include="TextInfo.h" />
     <ClInclude Include="EventsInfo.h" />
+    <ClInclude Include="AudioManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />
