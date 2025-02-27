@@ -47,6 +47,18 @@
       "id": "loading",
       "file": "../resources/images/loading.png"
   },
+  {
+      "id": "Keisara",
+      "file": "../resources/images/clock_horario.png"
+  },
+  {
+    "id": "Lucy",
+    "file": "../resources/images/boton_check.png"
+  },
+  {
+    "id": "Sol",
+    "file": "../resources/images/clock_minutero.png"
+  },
     { "id" : "prueba", "file" : "../resources/images/socrates.png" },
     { "id" : "pathWith", "file" : "../resources/images/pathWith.jpg" },
     { "id" : "pathWithout", "file" : "../resources/images/pathWithout.jpg" },
