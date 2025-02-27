@@ -217,6 +217,7 @@
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="EntityFactory.h" />
+    <ClInclude Include="EventsInfo.h" />
     <ClInclude Include="InitialScene.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="Pipe.h" />
