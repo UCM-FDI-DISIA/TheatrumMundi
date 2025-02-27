@@ -70,6 +70,8 @@ enum grpId : cmpId_t {
 	BACKGROUND,
 	UI,
 	INTERACTOBJ,
+	DIALOGUE_LAYER1,
+	DIALOGUE_LAYER2,
 	_GRPS_LIST_, /* taken from ../game/ecs_defs */
 
 	// do not remove this
