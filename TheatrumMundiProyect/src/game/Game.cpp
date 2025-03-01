@@ -34,11 +34,20 @@ Game::~Game() {
 }
 
 void Game::init() {
+	float w = GetSystemMetrics(SM_CXSCREEN);
+	float h = GetSystemMetrics(SM_CYSCREEN);
 	wscreenScale = GetSystemMetrics(SM_CXSCREEN) / 1346.0;
 	hscreenScale = GetSystemMetrics(SM_CYSCREEN) / 748.0;
+//In debug the resolution is const
+#ifdef _DEBUG
+		w = 1349.0;
+		h = 748.0;
+		wscreenScale = 1;
+		hscreenScale = 1;	
+#endif
+
 	// initialize the SDL singleton
-	if (!SDLUtils::Init("TheatrumMundi",GetSystemMetrics(SM_CXSCREEN) ,GetSystemMetrics(SM_CYSCREEN), "../resources/config/TheatrumMundi.resources.json")) {
-//	if (!SDLUtils::Init("TheatrumMundi", wscreen, hscreen, "../resources/config/TheatrumMundi.resources.json")) {
+	if (!SDLUtils::Init("TheatrumMundi",w ,h, "../resources/config/TheatrumMundi.resources.json")) {
 		std::cerr << "Something went wrong while initializing SDLUtils"
 				<< std::endl;
 		return;
