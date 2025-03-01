@@ -16,6 +16,10 @@
       "file": "../resources/images/socrates.png"
     },
     {
+      "id": "gloves",
+      "file": "../resources/images/gloves.png"
+    },
+    {
       "id": "fondoPruebaLog",
       "file": "../resources/images/fondoLogPrueba.jpg"
     },

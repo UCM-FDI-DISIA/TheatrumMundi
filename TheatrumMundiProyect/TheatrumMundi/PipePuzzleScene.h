@@ -35,13 +35,13 @@ private:
 		Type _whoTocheck;
 	};
 
-	vector<waterPath>_waterPath; //vector that contains the amount of paths 
-	vector<Pipe*> _waterPipes; //vector that contains the amount of water each pipe has
-	vector<Module*> _modules;//modules that change the direction of the water flow
+	std::vector<waterPath>_waterPath; //vector that contains the amount of paths 
+	std::vector<Pipe*> _waterPipes; //vector that contains the amount of water each pipe has
+	std::vector<Module*> _modules;//modules that change the direction of the water flow
 	bool solved;
-	vector<ecs::Entity*>_modulesEnt;
-	vector<ecs::Entity*>_pipesEnt;
-	vector<ecs::Entity*>_pathEnt;
+	std::vector<ecs::Entity*>_modulesEnt;
+	std::vector<ecs::Entity*>_pipesEnt;
+	std::vector<ecs::Entity*>_pathEnt;
 
 protected:
 
@@ -59,6 +59,9 @@ public:
 	 void waterPassPath(int path);// series of conditions to check if a path has water
 	 void unload() override;
 	 void updatePuzzle() ;
+	 void Win() override;
+	 void addToInventory();
+	 void Exit() override;
 	 ~PipePuzzleScene();
 };
 
