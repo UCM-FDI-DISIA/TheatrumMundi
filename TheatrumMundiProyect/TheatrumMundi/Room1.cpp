@@ -18,17 +18,72 @@
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 
 
-Room1::Room1(): SceneRoomTemplate()
+Room1Scene::Room1Scene(): SceneRoomTemplate()
 {
-	roomEvent.push_back([] {std::cout << "funco";});
-	roomEvent[initialDialogue]();
+	roomEvent.resize(event_size);
+	roomEvent[InitialDialogue] = [this] 
+	{
+		startDialogue(SalaIntermediaEvento1);
+	};
+	roomEvent[CorpseDialogue] = [this]
+		{
+			startDialogue(SalaIntermediaEvento1);
+		};
+	roomEvent[PipePuzzleSnc] = [this]
+		{
+			Game::Instance()->getSceneManager()->loadScene(PipePuzzle,this);
+		};
+	roomEvent[PipePuzzleRsv] = [this] {
+		// InventoryLogic
+		resolvedPuzzle(0);
+		};
+	roomEvent[BooksPuzzleScn] = [this]
+		{
+			Game::Instance()->getSceneManager()->loadScene(BooksPuzzleScn, this);
+		};
+	roomEvent[BooksPuzzleRsv] = [this] {
+		// InventoryLogic
+		resolvedPuzzle(1);
+		};
+	roomEvent[ClockPuzzleSnc] = [this]
+		{
+			Game::Instance()->getSceneManager()->loadScene(ClockPuzzleSnc, this);
+		};
+	roomEvent[ClockPuzzleRsv] = [this] {
+		// InventoryLogic
+		resolvedPuzzle(2);
+		};
+	roomEvent[TeaCupPuzzleSnc] = [this]
+		{
+			Game::Instance()->getSceneManager()->loadScene(TeaCupPuzzleSnc, this);
+		};
+	roomEvent[TeaCupPuzzleRsv] = [this] {
+		// InventoryLogic
+		entityManager->removeComponent<ClickComponent>(puzzleptr[4]);
+		};
+	roomEvent[Spoon] = [this] {
+		// InventoryLogic
+		};
+	roomEvent[ResolveCase] = [this] {
+		//Poner el dialogo correspondiente
+		startDialogue(SalaIntermediaEvento1);
+		};
+	roomEvent[GoodEnd] = [this] {
+		// WIP
+		};
+	roomEvent[BadEnd] = [this] {
+		// WIP
+		};
+	roomEvent[Log] = [this] {
+
+		};
 }
 
-Room1::~Room1()
+Room1Scene::~Room1Scene()
 {
 }
 
-void Room1::init()
+void Room1Scene::init()
 {
 
 	if (!isStarted) {
@@ -37,11 +92,26 @@ void Room1::init()
 	SDL_Delay(1000);
 }
 
-void Room1::refresh()
+void Room1Scene::resolvedPuzzle(int i)
+{
+	if (i == ClockPuzzleRsv || i == PipePuzzleRsv || i == BooksPuzzleRsv || i == TeaCupPuzzleRsv) {
+		roomEvent[i]();
+		bool aux = true;
+		for (bool a : puzzlesol) if (!a) aux = false;
+		if (aux) entityManager->setActive(body, true);
+	}
+else {
+#ifdef _DEBUG
+	std::cout << i << " invalid index" << std::endl;
+#endif
+}
+}
+
+void Room1Scene::refresh()
 {
 }
 
-void Room1::unload()
+void Room1Scene::unload()
 {
 	entityManager->~EntityManager();
 }

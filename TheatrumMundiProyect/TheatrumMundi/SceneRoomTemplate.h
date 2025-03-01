@@ -10,6 +10,7 @@ protected:
 	std::vector<bool> puzzlesol;
 	std :: vector<ecs::entity_t> puzzleptr;
 	std::vector< std::function<void()>> roomEvent;
+	ecs::entity_t body;
 
 	//inventory
 
@@ -17,9 +18,10 @@ protected:
 	public:
 		void startDialogue(const eventToRead& _eventToRead);
 		void endDialogue();
+		//use the room enum for de index
 		virtual void resolvedPuzzle(int i);
 		void setActiveBottons(bool active);
-		void setActiveInteractObj(bool active);
+		void setActiveZoomObj(bool active);
 	SceneRoomTemplate();
 	virtual ~SceneRoomTemplate();
 	
