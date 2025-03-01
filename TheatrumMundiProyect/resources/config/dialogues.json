@@ -28,6 +28,14 @@
             "Puzzle3":[
                 {"Character":"Personaje3","Text":"Pista nº 1"},
                 {"Character":"Personaje3","Text":"Pista nº 2"}
+            ],
+            "Calendario":[
+                {"Character":"Personaje1","Text":"Yo solo estoy para comprobar que se lee"},
+                {"Character":"Personaje3","Text":"Patatoide patatil pasta"}
+            ],
+            "Movil":[
+                {"Character":"Personaje3","Text":"Variante 1"},
+                {"Character":"Personaje3","Text":"Variante 2  (se que no funciona así) jijiijji"}
             ]
         },
     "Sala2":{
