@@ -78,6 +78,7 @@ bool RectArea2D::_overlapsWith(RectArea2D* rectArea)
 
 	SDL_Rect thisRect = {
 		transform->getPos().getX() + _localPosition.getX(),
+
 		transform->getPos().getY() + _localPosition.getY(),
 		_width,
 		_height

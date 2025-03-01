@@ -6,7 +6,7 @@
 class RectArea2D : public Area2D
 {
 public:
-	//__CMPID_DECL__(ecs::cmp::AREA2D) Has same ID as parent
+	//__CMPID_DECL__(ecs::cmp::RECTAREA2D) 
 
 	RectArea2D();
 	RectArea2D(int width, int height);

@@ -32,6 +32,7 @@ public:
 	virtual bool _overlapsWith(RectArea2D* rectArea) = 0;
 	virtual bool _overlapsWith(CircleArea2D* rectArea) = 0;
 
+
 	void setLocalPos(Vector2D pos) {
 		_localPosition = pos;
 	}
