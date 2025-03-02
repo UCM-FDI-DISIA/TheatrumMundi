@@ -17,10 +17,11 @@ public:
 	virtual ~Inventory();
 	void addItem(Hint* item);
 	bool hasItem(const std::string& _id) const; //Check if the hint is in the inventory
-	void render() const; //Render the the inventory
+	void render(); //Render the the inventory
 
 	void setActive(bool _active) { active = _active; }
 	bool getActive() const { return active; }
+	std::vector<Hint*>& getItems() { return items; };
 
 private:
 	bool active;

@@ -20,10 +20,7 @@ Hint::~Hint()
 void Hint::render(int x, int y) const
 {
 	std::cout << "AAAAA" << std::endl;
-	if (active && img)
-	{
-		SDL_Rect dest = { x, y, img->width(), img->height() };
-		img->render(dest);
-		std::cout << "Rendering hint. Active: " << active << std::endl;
-	}
+	SDL_Rect dest = { x, y, 200, 200 };
+	img->render(dest);
+	std::cout << "CONSEGUIDO" << std::endl;
 }

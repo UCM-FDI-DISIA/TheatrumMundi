@@ -48,9 +48,12 @@ void DebugInventoryScene::init()
 		ClickComponent* clkInv = entityManager->addComponent<ClickComponent>(_gloves);
 		clkInv->connect(ClickComponent::JUST_CLICKED, [this, _gloves]() {
 
-			Hint* gloves = new Hint("gloves", "A pair of gloves", &sdlutils().images().at("gloves"));
-			inv2->addItem(gloves);
-			gloves->setActive(false);
+			_gloves->getMngr()->setActive(_gloves, false);  // Desactivate the gloves entity
+
+			// Create a hint and add it to the inventory
+			Hint* glovesHint = new Hint("gloves", "A pair of gloves", &sdlutils().images().at("gloves"));
+			inv2->addItem(glovesHint);
+			glovesHint->setActive(false);  // Desactivated inicially for the inventory
 			//std::cout << "Added to inventory. Active state: " << gloves->getActive() << std::endl;
 		});
 
@@ -61,13 +64,35 @@ void DebugInventoryScene::init()
 
 		entityManager->addComponent<RectArea2D>(_button);
 
-		ClickComponent* clkButton = entityManager->addComponent<ClickComponent>(_button);
-		clkButton->connect(ClickComponent::JUST_CLICKED, [this, _button]() {
-			inv2->setActive(!inv2->getActive());
+		ClickComponent* toggleInventoryClick = entityManager->addComponent<ClickComponent>(_button);
+		toggleInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, _gloves]() {
+
+			inv2->setActive(!inv2->getActive());  // Toggle the inventory
+
+			// If the inventory is active, activate the items
 			if (inv2->getActive()) {
-				inv2->render(); // Renderiza los elementos del inventario si está activo
+				for (auto& item : inv2->getItems()) {
+					item->setActive(true);
+					_gloves->getMngr()->setActive(_gloves, true);  // Activate the gloves entity
+				}
 			}
+			else {
+				for (auto& item : inv2->getItems()) {
+					item->setActive(false);
+					_gloves->getMngr()->setActive(_gloves, false);  // Desactivate the gloves entity
+				}
+			}
+
+			inv2->render();
+
 			std::cout << "Inventory active state: " << inv2->getActive() << std::endl;
+			/*inv2->setActive(!inv2->getActive());
+			inv2->render();
+			auto glovesHint = inv2->getItem("gloves"); // Obtain the hint from the inventory
+			if (glovesHint) {
+				glovesHint->setActive(!glovesHint->getActive()); // Activate or deactivate the hint
+			}
+			std::cout << "Inventory active state: " << inv2->getActive() << std::endl;*/
 		});
 
 	}
