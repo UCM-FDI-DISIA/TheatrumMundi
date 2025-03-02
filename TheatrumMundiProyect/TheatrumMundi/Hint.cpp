@@ -8,5 +8,5 @@ Hint::Hint(const std::string& _id, const std::string& _desc, Texture* _img)
 
 Hint::~Hint()
 {
-	delete img;
+
 }

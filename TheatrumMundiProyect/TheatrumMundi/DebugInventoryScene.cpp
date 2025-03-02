@@ -9,9 +9,7 @@
 #include "Hint.h"
 
 #include "../src/components/ClickComponent.h"
-#include "../src/components/TriggerComponent.h"
 #include "../src/components/DragComponent.h"
-#include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
 
 #include "../src/game/Game.h"
@@ -30,7 +28,7 @@ DebugInventoryScene::~DebugInventoryScene()
 	act = _act;
 }*/
 
-void DebugInventoryScene::init()
+/**/void DebugInventoryScene::init()
 {
 	inv2 = new Inventory();
 
@@ -53,7 +51,7 @@ void DebugInventoryScene::init()
 			Hint* gloves = new Hint("gloves", "A pair of gloves", &sdlutils().images().at("gloves"));
 			inv2->addItem(gloves);
 			gloves->setActive(false);
-			std::cout << "Added to inventory " << entityManager->getComponent<Hint>(_gloves)->getDescription() << std::endl;
+			//std::cout << "Added to inventory " << entityManager->getComponent<Hint>(_gloves)->getDescription() << std::endl;
 		});
 
 		//inv button
