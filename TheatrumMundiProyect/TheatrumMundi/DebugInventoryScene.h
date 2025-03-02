@@ -14,6 +14,6 @@ public:
 	DebugInventoryScene();
 	~DebugInventoryScene();
 	void init() override;
-
+	//void render();
 
 };

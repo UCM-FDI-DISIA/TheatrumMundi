@@ -28,7 +28,7 @@ DebugInventoryScene::~DebugInventoryScene()
 	act = _act;
 }*/
 
-/**/void DebugInventoryScene::init()
+void DebugInventoryScene::init()
 {
 	inv2 = new Inventory();
 
@@ -40,7 +40,7 @@ DebugInventoryScene::~DebugInventoryScene()
 
 		//Create hint entity
 		auto _gloves = entityManager->addEntity();
-		entityManager->addComponent<Transform>(_gloves, Vector2D(200, 200), Vector2D(0, 0), 200, 200, 0);
+		entityManager->addComponent<Transform>(_gloves, Vector2D(500, 500), Vector2D(0, 0), 200, 200, 0);
 		entityManager->addComponent<Image>(_gloves, &sdlutils().images().at("gloves"));
 
 		entityManager->addComponent<RectArea2D>(_gloves);
@@ -51,19 +51,23 @@ DebugInventoryScene::~DebugInventoryScene()
 			Hint* gloves = new Hint("gloves", "A pair of gloves", &sdlutils().images().at("gloves"));
 			inv2->addItem(gloves);
 			gloves->setActive(false);
-			//std::cout << "Added to inventory " << entityManager->getComponent<Hint>(_gloves)->getDescription() << std::endl;
+			//std::cout << "Added to inventory. Active state: " << gloves->getActive() << std::endl;
 		});
 
 		//inv button
 		auto _button = entityManager->addEntity();
-		entityManager->addComponent<Transform>(_button, Vector2D(200, 200), Vector2D(0, 0), 500, 500, 0);
-		entityManager->addComponent<Image>(_gloves, &sdlutils().images().at("exit"));
+		entityManager->addComponent<Transform>(_button, Vector2D(800, 200), Vector2D(0, 0), 200, 200, 0);
+		entityManager->addComponent<Image>(_button, &sdlutils().images().at("exit"));
 
 		entityManager->addComponent<RectArea2D>(_button);
 
 		ClickComponent* clkButton = entityManager->addComponent<ClickComponent>(_button);
 		clkButton->connect(ClickComponent::JUST_CLICKED, [this, _button]() {
 			inv2->setActive(!inv2->getActive());
+			if (inv2->getActive()) {
+				inv2->render(); // Renderiza los elementos del inventario si está activo
+			}
+			std::cout << "Inventory active state: " << inv2->getActive() << std::endl;
 		});
 
 	}
