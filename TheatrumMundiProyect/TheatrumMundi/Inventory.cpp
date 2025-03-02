@@ -3,6 +3,7 @@
 #include "iostream"
 
 Inventory::Inventory()
+	: active(false)
 {
 
 }
@@ -14,6 +15,24 @@ Inventory::~Inventory()
 		delete item;
 	}
 }
+
+void Inventory::render() const
+{
+	//std::cout << "Rendering inventory" << std::endl;
+	if (active) {
+		for (auto& item : items)
+		{
+			//std::cout << "Rendering item " << item->getDescription() << std::endl;
+			if (item->getActive())
+			{
+				//std::cout << "Rendering item " << item->getDescription() << std::endl;
+			
+			}
+		}
+	}
+	
+}
+
 
 void Inventory::addItem(Hint* item)
 {

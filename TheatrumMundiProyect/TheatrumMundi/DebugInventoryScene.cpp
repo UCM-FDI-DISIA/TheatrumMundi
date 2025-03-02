@@ -18,7 +18,6 @@
 
 DebugInventoryScene::DebugInventoryScene()
 {
-
 }
 
 DebugInventoryScene::~DebugInventoryScene()
@@ -51,9 +50,23 @@ void DebugInventoryScene::init()
 		ClickComponent* clkInv = entityManager->addComponent<ClickComponent>(_gloves);
 		clkInv->connect(ClickComponent::JUST_CLICKED, [this, _gloves]() {
 
-			Hint* gloves = new Hint("gloves", "A pair of gloves", new Image(sdlutils().images().at("gloves")));
+			Hint* gloves = new Hint("gloves", "A pair of gloves", &sdlutils().images().at("gloves"));
 			inv2->addItem(gloves);
+			gloves->setActive(false);
 			std::cout << "Added to inventory " << entityManager->getComponent<Hint>(_gloves)->getDescription() << std::endl;
 		});
+
+		//inv button
+		auto _button = entityManager->addEntity();
+		entityManager->addComponent<Transform>(_button, Vector2D(200, 200), Vector2D(0, 0), 500, 500, 0);
+		entityManager->addComponent<Image>(_gloves, &sdlutils().images().at("exit"));
+
+		entityManager->addComponent<RectArea2D>(_button);
+
+		ClickComponent* clkButton = entityManager->addComponent<ClickComponent>(_button);
+		clkButton->connect(ClickComponent::JUST_CLICKED, [this, _button]() {
+			inv2->setActive(!inv2->getActive());
+		});
+
 	}
 }
