@@ -165,7 +165,7 @@ void BooksPuzzleScene::init()
 		auto ButtonBookFirst = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() / 2, sdlutils().height() / 4), Vector2D(0, 0), 50, 300, 0,areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		auto ButtonBookSecond = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(822, sdlutils().height() / 4), Vector2D(0, 0), 50, 300, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		auto ButtonBookThird = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(900,sdlutils().height() / 4), Vector2D(0, 0), 50, 300, 0, areaLayerManager,EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		auto ImageBook = entityFactory->CreateImageEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(100,100), Vector2D(0, 0), 1200/3, 600/3, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK);
+		auto ImageBook = entityFactory->CreateImageEntity(entityManager, "prueba", EntityFactory::RECTAREA, Vector2D(100,100), Vector2D(0, 0), 1200, 600, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK);
 		ImageBook->getMngr()->setActive(ImageBook, false);
 
 		//ClickComponent* ButtonBook1Click = entityManager->getComponent<ClickComponent>(ButtonBookFirst);
