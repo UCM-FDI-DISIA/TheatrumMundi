@@ -24,6 +24,9 @@
 
 #include "../src/Components/Transform.h"
 
+#include "Room1.h"
+
+
 
 using namespace std;
 
@@ -239,4 +242,9 @@ bool BooksPuzzleScene::Check()
 	return	myComb[0] == comb[6] && 
 			myComb[1] == comb[4] && 
 			myComb[2] == comb[1];
+}
+
+void BooksPuzzleScene::Win()
+{
+	//Room1Scene::resolvedPuzzle(Room1Scene::BooksPuzzleRsv);
 }

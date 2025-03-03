@@ -22,6 +22,7 @@ public:
 	SceneTemplate();
 	void virtual init() {};
 	void virtual init(SceneTemplate* s) {};
+	void virtual init(SceneRoomTemplate* sr) {};
 	void update();
 	void render() const;
 	void virtual refresh() {};
