@@ -5,30 +5,23 @@
 #include "DebugLogRoom.h"
 #include "InitialScene.h"
 #include "PipePuzzleScene.h"
+#include "ClockPuzzleScene.h"
 #include "BooksPuzzleScene.h"
 #include "checkML.h"
+#include "SceneRoomTemplate.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 
 //#include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 SceneManager::SceneManager()
 {
-	scenes.push_back(new PipePuzzleScene());
-	//scenes.push_back(new Room1());
-	//scenes.push_back(new Room1());
-	//scenes.push_back(new PipePuzzleScene());
-	//scenes.push_back(new InitialScene());
-	//scenes.push_back(new Room1());
-	//scenes.push_back(new DebugLogRoom());
-	
-	scenes.push_back(new InitialScene());
-	scenes.push_back(new Room1());
-	scenes.push_back(new DebugLogRoom());
-  
-	
-	scenes.push_back(new BooksPuzzleScene());
-	//scenes.push_back(new DebugLogRoom());
-	//scenes.push_back(new Room1());
-	loadScene(0);
+	scenes.resize(sceneName::Scene_Size);
+	scenes[initialMenu] = new InitialScene();
+	scenes[Room1] = new Room1Scene();
+	scenes[PipePuzzle] = new PipePuzzleScene();
+	scenes[ClockPuzzle] = new ClockPuzzleScene();
+	scenes[BooksPuzzle] = new BooksPuzzleScene();
+
+	loadScene(initialMenu);
 	
 }
 
@@ -38,9 +31,11 @@ void SceneManager::popScene()
 		currentscenes.pop_back();
 }
 
-void SceneManager::loadScene(int index, ecs::entity_t& extradata)
+
+
+void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 {
-	scenes[index]->init(extradata);
+	scenes[index]->init(room);
 	currentscenes.push_back(scenes[index]);
 	
 	

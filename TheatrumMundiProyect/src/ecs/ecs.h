@@ -69,9 +69,9 @@ enum grpId : cmpId_t {
 	BOOKS_PUZZLE_SCENE_REWARD,
 	DIALOGUE,
 	BACKGROUND,
-	UI,
 	INTERACTOBJ,
-
+	ZOOMOBJ,
+	UI,
 	_GRPS_LIST_, /* taken from ../game/ecs_defs */
 
 	// do not remove this

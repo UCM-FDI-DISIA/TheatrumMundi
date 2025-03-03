@@ -21,7 +21,7 @@ protected:
 public:
 	SceneTemplate();
 	void virtual init() {};
-	void virtual init(ecs::entity_t& ent) {};
+	void virtual init(SceneTemplate* s) {};
 	void update();
 	void render() const;
 	void virtual refresh() {};

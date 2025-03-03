@@ -1,5 +1,5 @@
 #include "Area2DLayerManager.h"
-
+#define _ITERATOR_DEBUG_LEVEL 2
 #include "../src/Components/Area2D.h"
 #include <iterator>
 
