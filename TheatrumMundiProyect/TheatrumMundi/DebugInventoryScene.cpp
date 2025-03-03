@@ -85,21 +85,17 @@ void DebugInventoryScene::init()
 		entityManager->addComponent<RectArea2D>(_button);
 
 		ClickComponent* toggleInventoryClick = entityManager->addComponent<ClickComponent>(_button);
-		toggleInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, _gloves]() {
+		toggleInventoryClick->connect(ClickComponent::JUST_CLICKED, [this]() {
 
 			inv2->setActive(!inv2->getActive());  // Toggle the inventory
 
 			// If the inventory is active, activate the items
 			if (inv2->getActive()) {
-				for (auto& item : inv2->getItems()) {
-					item->setActive(true);
-					//_gloves->getMngr()->setActive(_gloves, true);  // Activate the gloves entity
-				}
-			}
-			else {
-				for (auto& item : inv2->getItems()) {
-					item->setActive(false);
-					//_gloves->getMngr()->setActive(_gloves, false);  // Desactivate the gloves entity
+
+				int i = 0;
+				for (auto& item : inv2->getItems(0)) {
+					auto ButtonBookSecond = entityFactory->CreateInteractableEntity(entityManager, item->getID(), EntityFactory::RECTAREA, Vector2D(100, 100 + i * 150), Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::DRAG);
+					i++;
 				}
 			}
 

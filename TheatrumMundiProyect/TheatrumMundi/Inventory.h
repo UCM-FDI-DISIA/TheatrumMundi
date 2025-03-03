@@ -2,7 +2,9 @@
 
 #include <string>
 #include <vector>
+#include "Entity.h"
 
+class SceneTemplate;
 class Hint;
 class Inventory
 {
@@ -21,7 +23,8 @@ public:
 
 	void setActive(bool _active) { active = _active; }
 	bool getActive() const { return active; }
-	std::vector<Hint*>& getItems() { return items; };
+	std::vector<Hint*>& getItems(int firstItem);
+	//void setItem(ecs::Entity* _ent, const std::string& _id, SceneTemplate* _myScene);
 
 private:
 	bool active;

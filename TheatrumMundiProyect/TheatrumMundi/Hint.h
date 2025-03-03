@@ -17,7 +17,7 @@ public:
 	Hint(const std::string& _id, const std::string& _desc, Texture* _img);
 	Hint();
 	~Hint();
-	void render(int x, int y) const;
+	//void render() const;
 
 	std::string getDescription() { return description; }
 	std::string getID() { return id; }
@@ -27,5 +27,4 @@ public:
 	
 private:
 	bool active;
-	int x, y;
 };
