@@ -1,5 +1,4 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
-#define _DEBUG
 #pragma once
 
 #include <vector>

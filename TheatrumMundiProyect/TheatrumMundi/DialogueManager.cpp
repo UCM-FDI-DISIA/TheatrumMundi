@@ -179,6 +179,7 @@ void DialogueManager::ReadAnswer(){
 DialogueManager::~DialogueManager()
 {
 	delete _showText;
+
 }
 
 void DialogueManager::setSceneLog(LogComponent* sceneLog)

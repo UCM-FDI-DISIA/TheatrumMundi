@@ -87,7 +87,7 @@ void Room1Scene::init()
 {
 
 	if (!isStarted) {
-		
+		entityFactory->CreateImageEntity(entityManager, "kei", EntityFactory::RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0);
 	}
 	SDL_Delay(1000);
 }

@@ -192,7 +192,6 @@
     <ClInclude Include="BooksPuzzleScene.h" />
     <ClInclude Include="Area2DLayerManager.h" />
     <ClInclude Include="DebugLogRoom.h" />
-    <ClInclude Include="checkML.h" />
     <ClInclude Include="ClockPuzzleScene.h" />
     <ClInclude Include="DialogTestScene.h" />
     <ClInclude Include="DialogueManager.h" />
