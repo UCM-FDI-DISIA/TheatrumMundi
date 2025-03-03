@@ -102,7 +102,12 @@ void DebugInventoryScene::init()
 					inv2->hints[i]->getMngr()->setActive(inv2->hints[i], true);  // Activate the hints
 				}
 			}
+			else {
 
+				for (int i = 0; i < 2; ++i) {
+					inv2->hints[i]->getMngr()->setActive(inv2->hints[i], false);  // Activate the hints
+				}
+			}
 			inv2->render();
 
 			std::cout << "Inventory active state: " << inv2->getActive() << std::endl;
