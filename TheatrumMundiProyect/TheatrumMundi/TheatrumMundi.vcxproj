@@ -229,6 +229,7 @@
     <ClInclude Include="ScenePuzzleTemplate.h" />
     <ClInclude Include="SceneRoomTemplate.h" />
     <ClInclude Include="SceneTemplate.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="TextInfo.h" />
   </ItemGroup>
   <ItemGroup>

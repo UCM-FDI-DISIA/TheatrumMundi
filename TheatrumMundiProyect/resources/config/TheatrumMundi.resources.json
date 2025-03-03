@@ -147,11 +147,17 @@
   ],
   
   "sounds" : [
-   
+    {
+        "id": "explosion",
+        "file":  "../resources/sound/explosion.wav"
+    }
   ],
 
   "musics" : [
-    
+    {
+        "id": "imperial_march",
+        "file":  "../resources/sound/imperial_march.wav"
+    }
   ]
 
 }

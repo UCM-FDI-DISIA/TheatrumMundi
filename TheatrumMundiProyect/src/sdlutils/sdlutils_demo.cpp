@@ -61,7 +61,7 @@ void sdlutils_basic_demo() {
 	auto y2 = y0 + 2 * pressAnyKey.height();
 
 	// start the music in a loop
-	sdl.musics().at("beat").play();
+	//sdl.musics().at("beat").play();
 
 	// reference to the input handler (we could use a pointer, I just . rather than ->).
 	// you can also use the inline method ih() that is defined in InputHandler.h
