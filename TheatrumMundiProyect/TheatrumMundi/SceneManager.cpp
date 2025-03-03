@@ -24,7 +24,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
 	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
 
-	loadScene(SceneName::INITIAL_MENU);
+	loadScene(SceneName::ROOM_1);
 }
 
 void SceneManager::popScene()
