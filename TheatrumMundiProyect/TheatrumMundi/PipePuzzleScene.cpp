@@ -513,13 +513,13 @@ void PipePuzzleScene::init()
 			if (_waterPipes[i]->getPipeInfo().type==Pipe::ONE)
 			{
 				//one entry
-				imageComponent->setTexture(&sdlutils().images().at("1"));
+				imageComponent->setTexture(&sdlutils().images().at("pipe1"));
 
 			}
 			else
 			{
 				//two entries
-				imageComponent->setTexture(&sdlutils().images().at("2"));
+				imageComponent->setTexture(&sdlutils().images().at("pipe2"));
 			}
 		}
 
@@ -548,7 +548,7 @@ void PipePuzzleScene::init()
 			);
 
 			// add image
-			entityManager->addComponent<Image>(_modulesEnt[i], &sdlutils().images().at("prueba"));
+			entityManager->addComponent<Image>(_modulesEnt[i], &sdlutils().images().at("module"));
 
 			Transform* transformComponent = _modulesEnt[i]->getMngr()->getComponent<Transform>(_modulesEnt[i]);
 
@@ -561,8 +561,6 @@ void PipePuzzleScene::init()
 				transformComponent->setRot(transformComponent->getRot() + 270.0f);
 			}
 			
-			
-
 			// add area of visualization of the image
 			entityManager->addComponent<RectArea2D>(_modulesEnt[i]);
 
@@ -571,21 +569,6 @@ void PipePuzzleScene::init()
 			clk->connect(ClickComponent::JUST_CLICKED, [this, i]() {
 				changeDirection(i); 
 				});
-
-			Image* imageComponent = _modulesEnt[i]->getMngr()->getComponent<Image>(_modulesEnt[i]);
-
-			if (_modules[i]->getModuleInfo().up.first=='N')
-			{
-
-				//module
-				imageComponent->setTexture(&sdlutils().images().at("module"));
-
-			}
-			else
-			{
-				//module2
-				imageComponent->setTexture(&sdlutils().images().at("module2"));
-			}
 		}
 
 
