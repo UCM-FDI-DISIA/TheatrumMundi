@@ -4,7 +4,7 @@
 #include "../src/components/Transform.h"
 #include "../src/components/Image.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
-
+#include "LogComponent.h"
 #include "../TheatrumMundi/PhysicsBodyComponent.h"
 #include "../src/components/ClickComponent.h"
 #include "../src/components/TriggerComponent.h"
@@ -74,9 +74,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 	roomEvent[BadEnd] = [this] {
 		// WIP
 		};
-	roomEvent[Log] = [this] {
-
-		};
+	
 }
 
 Room1Scene::~Room1Scene()
@@ -88,6 +86,49 @@ void Room1Scene::init()
 
 	if (!isStarted) {
 		entityFactory->CreateImageEntity(entityManager, "kei", EntityFactory::RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0);
+	
+
+
+		//Create log
+		auto _log = entityManager->addEntity();
+		entityManager->addComponent<Transform>(_log, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
+		Image* imLog = entityManager->addComponent<Image>(_log, &sdlutils().images().at("fondoPruebaLog"), 200); //background log
+
+		LogComponent* logComp = entityManager->addComponent<LogComponent>(_log); //logComponent
+
+		SDL_Color colorText = { 255, 255, 255, 255 };
+		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog =
+			entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
+
+		_log->getMngr()->setActive(_log, false); //hide log at the beggining
+
+		//Register log in dialogue manager
+		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
+
+
+		roomEvent[LOGENABLE] = [this] {
+			//activate log
+			/*_log->getMngr()->setActive(_log, true);
+			logActive = true;
+
+			//activate close log button
+			_closeLogButton->getMngr()->setActive(_closeLogButton, true);
+
+			//disable open log button
+			_openLogButton->getMngr()->setActive(_openLogButton, false);
+			*/
+			};
+		roomEvent[LOGDESABLE] = [this,_log] {
+			//disable log
+			_log->getMngr()->setActive(_log, false);
+			logActive = false;
+
+			//activate open log button
+			//_openLogButton->getMngr()->setActive(_openLogButton, true);
+
+			//disable close log button
+			//_closeLogButton->getMngr()->setActive(_closeLogButton, false);
+			};
 	}
 	SDL_Delay(1000);
 }

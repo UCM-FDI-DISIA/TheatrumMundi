@@ -11,7 +11,7 @@ protected:
 	std :: vector<ecs::entity_t> puzzleptr;
 	std::vector< std::function<void()>> roomEvent;
 	ecs::entity_t body;
-
+	bool logActive = false;
 	//inventory
 
 
