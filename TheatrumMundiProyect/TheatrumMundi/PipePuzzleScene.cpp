@@ -1,5 +1,5 @@
 ﻿#include "PipePuzzleScene.h"
-
+#include "EntityFactory.h"
 
 #include "../src/utils/Vector2D.h";
 #include "../src/components/Transform.h"
@@ -53,7 +53,49 @@ void PipePuzzleScene::pathCreation()
 {
     int nextId = 0;
 
+	
 	_waterPath.push_back({ nextId, true, {'N',0,NONE}});//0
+	auto pathp1 = entityFactory->CreateImageEntity(entityManager, "exit", EntityFactory::RECTAREA, Vector2D(100, 100),
+	Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[0]._pathPieces.push_back({ pathp1, 1 });
+
+	_waterPath.push_back({ nextId, true, {'N',0,NONE} });//0
+	auto pathp1 = entityFactory->CreateImageEntity(entityManager, "exit", EntityFactory::RECTAREA, Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[0]._pathPieces.push_back({ pathp1, 1 });
+
+
+	_waterPath.push_back({ nextId, true, {'N',0,NONE} });//0
+	auto pathp1 = entityFactory->CreateImageEntity(entityManager, "exit", EntityFactory::RECTAREA, Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[0]._pathPieces.push_back({ pathp1, 1 });
+
+	_waterPath.push_back({ nextId, true, {'N',0,NONE} });//0
+	auto pathp1 = entityFactory->CreateImageEntity(entityManager, "exit", EntityFactory::RECTAREA, Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[0]._pathPieces.push_back({ pathp1, 1 });
+
+	_waterPath.push_back({ nextId, true, {'N',0,NONE} });//0
+	auto pathp1 = entityFactory->CreateImageEntity(entityManager, "exit", EntityFactory::RECTAREA, Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[0]._pathPieces.push_back({ pathp1, 2 });  
+
+
+	_waterPath.push_back({ nextId, true, {'N',0,NONE} });//0
+	auto pathp1 = entityFactory->CreateImageEntity(entityManager, "exit", EntityFactory::RECTAREA, Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[0]._pathPieces.push_back({ pathp1, 1 });
+
+
+
+
+
+
+
+
+
+
+
 	_waterPath.push_back({ nextId++, true,{'M',0,RIGHT} });//1
 	_waterPath.push_back({ nextId++, true,{'N',0,NONE} }); //2
 	_waterPath.push_back({ nextId++, true ,{'M',1,RIGHT} });//3
@@ -78,6 +120,7 @@ void PipePuzzleScene::pathCreation()
 	_waterPath.push_back({ nextId++, true,{'M',2,DOWN} });//22
 	_waterPath.push_back({ nextId++, false,{'M',0,DOWN} });//23
 	_waterPath.push_back({ nextId++, false ,{'M',3,DOWN} });//24
+	
 	
 }
 
@@ -250,7 +293,7 @@ void PipePuzzleScene::init()
 		}
 
 
-		vector<Vector2D> pathPositions = {
+/*		vector<Vector2D> pathPositions = {
 	Vector2D(50, 50),
 	Vector2D(150, 50),
 	Vector2D(250, 50),
@@ -314,7 +357,7 @@ void PipePuzzleScene::init()
 			
 
 		}
-	
+	*/
 		// create cube
 		auto cubeEntity = entityManager->addEntity();
 
@@ -483,16 +526,37 @@ void PipePuzzleScene::waterPassPath(int path) {
 	}
 
 	
-	//std::cout << "Path " << path << " tiene agua: " << _waterPath[path]._withWater << std::endl;
-
-	Image* imageComponent = _pathEnt[path]->getMngr()->getComponent<Image>(_pathEnt[path]);
-
 	if (_waterPath[path]._withWater) {
 		// texture with water
-		imageComponent->setTexture(&sdlutils().images().at("pathWith"));
+
+		for (int i=0;i<_waterPath[path]._pathPieces.size();i++)
+		{
+			Image* img = _waterPath[path]._pathPieces[i].first->getMngr()->getComponent<Image>(_waterPath[path]._pathPieces[i].first);
+			if (_waterPath[path]._pathPieces[i].second == 1)//L pipe 
+			{
+				img->setTexture(&sdlutils().images().at("pathWith1"));
+			}
+			else //straight
+			{
+				img->setTexture(&sdlutils().images().at("pathWith2"));
+			}
+		}
+	
 	}
 	else {
-		imageComponent->setTexture(&sdlutils().images().at("pathWithout"));
+		for (int i = 0; i < _waterPath[path]._pathPieces.size(); i++)
+		{
+			Image* img = _waterPath[path]._pathPieces[i].first->getMngr()->getComponent<Image>(_waterPath[path]._pathPieces[i].first);
+			if (_waterPath[path]._pathPieces[i].second == 1)//L pipe 
+			{
+				img->setTexture(&sdlutils().images().at("pathWithout1"));
+			}
+			else //straight
+			{
+				img->setTexture(&sdlutils().images().at("pathWithout2"));
+			}
+		}
+		
 	}
 }
 
@@ -645,7 +709,7 @@ void PipePuzzleScene::addToInventory()
 
 void PipePuzzleScene::Exit()
 {
-
+	//geme.scenemanager
 }
 
 
