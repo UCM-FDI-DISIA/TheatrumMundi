@@ -2,11 +2,15 @@
 #include "EntityFactory.h"
 
 #include "../src/utils/Vector2D.h";
+
+#include "../src/game/Game.h";
 #include "../src/components/Transform.h"
 #include "Direction.h"
 #include "../src/components/Image.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
 #include "../src/ecs/Entity.h"
+#include "../TheatrumMundi/SceneManager.h"
+
 #include "../src/components/ClickComponent.h"
 #include "../src/components/RectArea2D.h"
 
@@ -709,7 +713,7 @@ void PipePuzzleScene::addToInventory()
 
 void PipePuzzleScene::Exit()
 {
-	//geme.scenemanager
+	Game::Instance()->getSceneManager()->popScene();
 }
 
 

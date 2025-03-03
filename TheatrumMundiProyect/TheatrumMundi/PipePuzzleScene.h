@@ -7,6 +7,7 @@
 #include "Module.h"
 
 using namespace std;
+class SceneManager;
 class Module;
 class Pipe;
 class Image;
