@@ -3,8 +3,7 @@
 #include <queue>
 #include <unordered_set>
 #include "ScenePuzzleTemplate.h"
-#include "Pipe.h"
-#include "Module.h"
+
 
 using namespace std;
 class SceneManager;

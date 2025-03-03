@@ -115,15 +115,17 @@
     "file": "../resources/images/boton_check.png"
   },
     { "id" : "prueba", "file" : "../resources/images/socrates.png" },
-    { "id" : "pathWith", "file" : "../resources/images/pathWith.jpg" },
-    { "id" : "pathWithout", "file" : "../resources/images/pathWithout.jpg" },
-    { "id" : "2", "file" : "../resources/images/2.jpg" },
-    { "id" : "1", "file" : "../resources/images/1.jpg" },
-    { "id" : "module", "file" : "../resources/images/module.png" },
-    { "id" : "module2", "file" : "../resources/images/module2.jpg" },
     { "id" : "cube", "file" : "../resources/images/cube.jpg" },
     { "id" : "init", "file" : "../resources/images/start.jpg" },
     { "id" : "exit", "file" : "../resources/images/exit.png" },
+
+    { "id" : "module", "file" : "../resources/images/module.png" },
+    { "id" : "pipe1", "file" : "../resources/images/pipe1.png" },
+    { "id" : "pipe2", "file" : "../resources/images/pipe2.png" },
+    { "id" : "pathLNoWater", "file" : "../resources/images/pathLNoWater.png" },
+    { "id" : "pathLWater", "file" : "../resources/images/pathLWater.png" },
+    { "id" : "pathNoWater", "file" : "../resources/images/pathNoWater.png" },
+    { "id" : "pathWater", "file" : "../resources/images/pathWater.png" },
      { "id": "clockMinButton",
       "file": "../resources/images/boton_minutero.png"
     },

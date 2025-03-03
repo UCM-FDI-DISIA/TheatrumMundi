@@ -13,7 +13,9 @@
 
 #include "../src/components/ClickComponent.h"
 #include "../src/components/RectArea2D.h"
-
+#include "Pipe.h"
+#include "Module.h"
+#include "Room1.h"
 
 PipePuzzleScene::PipePuzzleScene()
 	:ScenePuzzleTemplate()
@@ -57,75 +59,365 @@ void PipePuzzleScene::pathCreation()
 {
     int nextId = 0;
 
-	
+	//PATH 0 
 	_waterPath.push_back({ nextId, true, {'N',0,NONE}});//0
-	auto pathp1 = entityFactory->CreateImageEntity(entityManager, "exit", EntityFactory::RECTAREA, Vector2D(100, 100),
+	auto path0 = entityFactory->CreateImageEntity(entityManager, "pathWater",  Vector2D(100, 100),
 	Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
-	_waterPath[0]._pathPieces.push_back({ pathp1, 1 });
+	_waterPath[0]._pathPieces.push_back({ path0, 2 });
 
 	_waterPath.push_back({ nextId, true, {'N',0,NONE} });//0
-	auto pathp1 = entityFactory->CreateImageEntity(entityManager, "exit", EntityFactory::RECTAREA, Vector2D(100, 100),
+	auto path0 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
-	_waterPath[0]._pathPieces.push_back({ pathp1, 1 });
-
+	_waterPath[0]._pathPieces.push_back({ path0, 1 });
 
 	_waterPath.push_back({ nextId, true, {'N',0,NONE} });//0
-	auto pathp1 = entityFactory->CreateImageEntity(entityManager, "exit", EntityFactory::RECTAREA, Vector2D(100, 100),
+	auto path0 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
-	_waterPath[0]._pathPieces.push_back({ pathp1, 1 });
-
-	_waterPath.push_back({ nextId, true, {'N',0,NONE} });//0
-	auto pathp1 = entityFactory->CreateImageEntity(entityManager, "exit", EntityFactory::RECTAREA, Vector2D(100, 100),
-		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
-	_waterPath[0]._pathPieces.push_back({ pathp1, 1 });
-
-	_waterPath.push_back({ nextId, true, {'N',0,NONE} });//0
-	auto pathp1 = entityFactory->CreateImageEntity(entityManager, "exit", EntityFactory::RECTAREA, Vector2D(100, 100),
-		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
-	_waterPath[0]._pathPieces.push_back({ pathp1, 2 });  
+	_waterPath[0]._pathPieces.push_back({ path0, 2 });
 
 
-	_waterPath.push_back({ nextId, true, {'N',0,NONE} });//0
-	auto pathp1 = entityFactory->CreateImageEntity(entityManager, "exit", EntityFactory::RECTAREA, Vector2D(100, 100),
-		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
-	_waterPath[0]._pathPieces.push_back({ pathp1, 1 });
-
-
-
-
-
-
-
-
-
-
-
+	//PATH 1
 	_waterPath.push_back({ nextId++, true,{'M',0,RIGHT} });//1
+	auto pathp1 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[1]._pathPieces.push_back({ pathp1, 2 });
+
+	auto path1 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[1]._pathPieces.push_back({ path1, 2 });
+
+	auto path1 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[1]._pathPieces.push_back({ path1, 1 });
+
+	auto path1 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[1]._pathPieces.push_back({ path1, 2 });
+
+
+	//PATH 2 
 	_waterPath.push_back({ nextId++, true,{'N',0,NONE} }); //2
+	auto path2 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[2]._pathPieces.push_back({ path2, 2 });
+
+	auto path2 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[2]._pathPieces.push_back({ path2, 2 });
+
+	auto path2 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[2]._pathPieces.push_back({ path2, 2 });
+
+	auto path2 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[2]._pathPieces.push_back({ path2, 1 });
+
+	
+
+	//PATH 3 
 	_waterPath.push_back({ nextId++, true ,{'M',1,RIGHT} });//3
+	auto path3 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[3]._pathPieces.push_back({ path3, 2 });
+
+	auto path3 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[3]._pathPieces.push_back({ path3, 2 });
+
+
+	//PATH 4  
 	_waterPath.push_back({ nextId++, false,{'P',0,NONE} });//4
+	auto path4 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[4]._pathPieces.push_back({ path4, 2 });
+
+	auto path4 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[4]._pathPieces.push_back({ path4, 2 });
+
+	
+	//PATH 5 
 	_waterPath.push_back({ nextId++, true,{'P',1,NONE} });//5
+	auto path5 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[5]._pathPieces.push_back({ path4, 1 });
+
+	auto path5 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[5]._pathPieces.push_back({ path5, 1 });
+
+
+	//PATH 6 
 	_waterPath.push_back({ nextId++, false,{'M',2,RIGHT} });//6
+	auto path6 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[6]._pathPieces.push_back({ path6, 1 });
+
+	auto path6 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[6]._pathPieces.push_back({ path6, 1 });
+
+	auto path6 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[6]._pathPieces.push_back({ path6, 2 });
+	
+	auto path6 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[6]._pathPieces.push_back({ path6, 2 });
+
+	auto path6 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[6]._pathPieces.push_back({ path6, 2 });
+
+	auto path6 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[6]._pathPieces.push_back({ path6, 1 });
+
+
+	//PATH 7
 	_waterPath.push_back({ nextId++, false,{'M',1,DOWN} });//7
+	auto path7 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[7]._pathPieces.push_back({ path7, 2 });
+
+	//PATH 8
 	_waterPath.push_back({ nextId++, false ,{'M',4,UP} });//8
+	auto path8 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[8]._pathPieces.push_back({ path8, 1 });
+
+	auto path8 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[8]._pathPieces.push_back({ path8, 2 });
+
+	//PATH 9
 	_waterPath.push_back({ nextId++, false,{'P',3,NONE} });//9
+	auto path9 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[9]._pathPieces.push_back({ path9, 2 });
+
+	auto path9 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[9]._pathPieces.push_back({ path9, 2 });
+
+	//PATH 10
 	_waterPath.push_back({ nextId++, false,{'P',2,NONE} });//10
+	auto path10 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[10]._pathPieces.push_back({ path10, 2 });
+
+	auto path10 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[10]._pathPieces.push_back({ path10, 2 });
+
+	//PATH 11
 	_waterPath.push_back({ nextId++, false ,{'P',5,NONE} });//11
+	auto path11 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[11]._pathPieces.push_back({ path11, 2 });
+
+	//PATH 12
 	_waterPath.push_back({ nextId++, false,{'M',3,RIGHT} });//12
+	auto path12 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[12]._pathPieces.push_back({ path12, 2 });
+
+	//PATH 13
 	_waterPath.push_back({ nextId++, false,{'P',6,NONE} });//13
+	auto path13 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[13]._pathPieces.push_back({ path13, 1 });
+
+	auto path13 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[13]._pathPieces.push_back({ path13, 1 });
+	
+	auto path13 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[13]._pathPieces.push_back({ path13, 2 });
+
+	auto path13 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[13]._pathPieces.push_back({ path13, 1 });
+
+	auto path13 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[13]._pathPieces.push_back({ path13, 2 });
+
+	auto path13 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[13]._pathPieces.push_back({ path13, 2 });
+
+	//PATH 14
 	_waterPath.push_back({ nextId++, false,{'P',7,NONE} });//14
+	auto path14 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[14]._pathPieces.push_back({ path14, 2 });
+
+	auto path14 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[14]._pathPieces.push_back({ path14, 1 });
+
+	//PATH 15
 	_waterPath.push_back({ nextId++, false ,{'P',4,NONE} });//15
+	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[15]._pathPieces.push_back({ path15, 2 });
+
+	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[15]._pathPieces.push_back({ path15, 1 });
+
+	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[15]._pathPieces.push_back({ path15, 1 });
+
+	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[15]._pathPieces.push_back({ path15, 2 });
+
+	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[15]._pathPieces.push_back({ path15, 2 });
+
+	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[15]._pathPieces.push_back({ path15, 2 });
+
+	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[15]._pathPieces.push_back({ path15, 1 });
+
+	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[15]._pathPieces.push_back({ path15, 2 });
+
+	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[15]._pathPieces.push_back({ path15, 2 });
+
+
+	//PATH 16
 	_waterPath.push_back({ nextId++, false ,{'M',5,RIGHT} });//16
+	auto path16 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[16]._pathPieces.push_back({ path16, 2 });
+
+	auto path16 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[16]._pathPieces.push_back({ path16, 1 });
+
+	auto path16 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[16]._pathPieces.push_back({ path16, 1 });
+
+	auto path16 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[16]._pathPieces.push_back({ path16, 2 });
+
+	//PATH 17
 	_waterPath.push_back({ nextId++, true,{'M',4,RIGHT} });//17
+
+	auto path17 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[17]._pathPieces.push_back({ path17, 2 });
+
+	auto path17 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[17]._pathPieces.push_back({ path17, 2 });
+
+	auto path17 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[17]._pathPieces.push_back({ path17, 2 });
+
+
+	//PATH 18
 	_waterPath.push_back({ nextId++, true,{'N',0,NONE} });//18
+
+	auto path18 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[18]._pathPieces.push_back({ path18, 2 });
+
+	auto path18 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[18]._pathPieces.push_back({ path18, 2 });
+
+	auto path18 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[18]._pathPieces.push_back({ path18, 2 });
+
+	//PATH 19
 	_waterPath.push_back({ nextId++, true,{'N',0,NONE} });//19
+	auto path19 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[19]._pathPieces.push_back({ path19, 2 });
+
+	auto path19 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[19]._pathPieces.push_back({ path19, 2 });
+
+	auto path19 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[19]._pathPieces.push_back({ path19, 2 });
+	
+	auto path19 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[19]._pathPieces.push_back({ path19, 2 });
+
+	auto path19 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[19]._pathPieces.push_back({ path19, 2 });
+
+	auto path19 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[19]._pathPieces.push_back({ path19, 1 });
+
+	//PATH 20
 	_waterPath.push_back({ nextId++, true,{'M',5,UP} });//20
+	auto path20 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[20]._pathPieces.push_back({ path20, 2 });
+
+	auto path20 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[20]._pathPieces.push_back({ path20, 2 });
+
+	//PATH 21
 	_waterPath.push_back({ nextId++, false,{'P',8,NONE} });//21
+	auto path21 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[21]._pathPieces.push_back({ path21, 2 });
+
+	//PATH 22
 	_waterPath.push_back({ nextId++, true,{'M',2,DOWN} });//22
+	auto path22 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[22]._pathPieces.push_back({ path22, 2 });
+	
+	auto path22 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[22]._pathPieces.push_back({ path22, 2 });
+
+	//PATH 23
 	_waterPath.push_back({ nextId++, false,{'M',0,DOWN} });//23
+	auto path23 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[23]._pathPieces.push_back({ path23, 2 });
+
+	//PATH 24
 	_waterPath.push_back({ nextId++, false ,{'M',3,DOWN} });//24
+	auto path24 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[24]._pathPieces.push_back({ path24, 1 });
 	
+	auto path24 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[24]._pathPieces.push_back({ path24, 2 });
 	
+	auto path24 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[24]._pathPieces.push_back({ path24, 1 });
 }
 
 bool PipePuzzleScene::Check()
@@ -682,6 +974,9 @@ void PipePuzzleScene::updatePuzzle() {
 
 void PipePuzzleScene::Win()
 {
+	
+	//resolvedPuzzle(3);
+	
 	//puts the gloves in scene
 	// create entity
 	auto gloveEntity = entityManager->addEntity();
