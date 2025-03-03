@@ -47,18 +47,19 @@ void Inventory::render()
 	
 }
 
-std::vector<Hint*>& Inventory::getItems(int firstItem)
+std::vector<Hint*>* Inventory::getItems(int firstItem)
 {
 	if (firstItem < 0) {
-		std::vector<Hint*> renderItems;
+		std::vector<Hint*>* renderItems = new std::vector<Hint*>;
 		if (firstItem + 3 >= items.size()) {
 			for (int i = 0; i < items.size();++i) {
-				renderItems.push_back(items[i]);
+				renderItems->push_back(items[i]);
 			}
 		}
 		else {
+
 			for (int i = 0; i < 3;++i) {
-				renderItems.push_back(items[i]);
+				renderItems->push_back(items[i]);
 			}
 		}
 		return renderItems;
@@ -66,24 +67,23 @@ std::vector<Hint*>& Inventory::getItems(int firstItem)
 
 	else if(firstItem + 2 >= items.size())
 	{
-		std::vector<Hint*> renderItems;
-		for (int i = 0; i < items.size();++i) {
-			renderItems.push_back(items[firstItem]);
-			++firstItem;
+		std::vector<Hint*>* renderItems = new std::vector<Hint*>;
+		for (int i = firstItem; i < items.size();++i) {
+			renderItems->push_back(items[i]);
 		}
 		return renderItems;
 	}
 	else
 	{
-		std::vector<Hint*> renderItems;
+		std::vector<Hint*>* renderItems = new std::vector<Hint*>;
 		if (firstItem + 2 >= items.size()) {
 			for (int i = firstItem; i < items.size();++i) {
-				renderItems.push_back(items[i]);
+				renderItems->push_back(items[i]);
 			}
 		}
 		else {
 			for (int i = 0; i < 3;++i) {
-				renderItems.push_back(items[i]);
+				renderItems->push_back(items[i]);
 			}
 		}
 	}

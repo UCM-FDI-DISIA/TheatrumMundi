@@ -84,6 +84,7 @@ void DebugInventoryScene::init()
 
 		entityManager->addComponent<RectArea2D>(_button);
 
+
 		ClickComponent* toggleInventoryClick = entityManager->addComponent<ClickComponent>(_button);
 		toggleInventoryClick->connect(ClickComponent::JUST_CLICKED, [this]() {
 
@@ -91,12 +92,22 @@ void DebugInventoryScene::init()
 
 			// If the inventory is active, activate the items
 			if (inv2->getActive()) {
-
 				int i = 0;
-				for (auto& item : inv2->getItems(0)) {
-					auto ButtonBookSecond = entityFactory->CreateInteractableEntity(entityManager, item->getID(), EntityFactory::RECTAREA, Vector2D(100, 100 + i * 150), Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::DRAG);
+				std::vector<Hint*> a = inv2->getItems();
+				std::vector<Entity*> hints;
+				for (auto& item : a) {
+					
+					hints.push_back(entityFactory->CreateInteractableEntity(entityManager, item->getID(), EntityFactory::RECTAREA, Vector2D(100, 100 + i * 150), Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::DRAG));
+					hints[i]->getMngr()->setActive(hints[i], false);  // Desactivate the hints
 					i++;
 				}
+				int i = 0;
+				std::vector<Hint*>* items = inv2->getItems(0);
+				for (auto& item : *items) {
+					hints[i]->getMngr()->setActive(hints[i], true);  // Activate the hints
+					i++;
+				}
+				delete items;
 			}
 
 			inv2->render();
