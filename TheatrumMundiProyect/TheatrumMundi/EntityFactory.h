@@ -16,7 +16,7 @@ public:
 	enum Dragging { DRAG, NODRAG }; //DECIDE IF THE ELEMENT IS DRAGGED OR NOT
 
 	//Creates an Image Entity (BACKGROUND, VISUAL ITEM FROM INVENTORY, ETC)
-	ecs::entity_t CreateImageEntity(ecs::EntityManager* _entityManager,const std::string& _idImage, AreaType _typeRect,
+	ecs::entity_t CreateImageEntity(ecs::EntityManager* _entityManager,const std::string& _idImage,
 	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot);
 
 	//Creates an interactable entity (BUTTON) or drag interactable entity (OBJECT TO MOVE IN PUZZLES)
@@ -29,4 +29,6 @@ public:
 	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer,
 	Vector2D _dirScroll, float _time,
 	Dragging _drag); //DRAG SCROLL ENTITY
+	ecs::entity_t CreateImageEntityScroll(ecs::EntityManager* _entityManager, const std::string& _idImage, Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Vector2D _dirScroll, float _time );
+
 };

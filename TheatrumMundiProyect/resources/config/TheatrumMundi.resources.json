@@ -13,39 +13,39 @@
   "images": [
     {
       "id": "LucySprite",
-      "file": "../resources/images/Final/Lucy.PNG"
+      "file": "../resources/images/Finales/Lucy.PNG"
     },
     {
       "id": "KeisaraSprite",
-      "file": "../resources/images/Final/Keisara.PNG"
+      "file": "../resources/images/Finales/Keisara.PNG"
     },
     {
       "id": "SolSprite",
-      "file": "../resources/images/Final/Sol.PNG"
+      "file": "../resources/images/Finales/Sol.PNG"
     },
     {
       "id": "Dialog",
-      "file": "../resources/images/Final/Dialogo.PNG"
+      "file": "../resources/images/Finales/Dialogo.PNG"
     },
     {
       "id": "StudyBackground",
-      "file": "../resources/images/Final/EstudioFondo.PNG"
+      "file": "../resources/images/Finales/EstudioFondo.PNG"
     },
     {
       "id": "LivingroomBackground",
-      "file": "../resources/images/Final/SalonFondo.PNG"
+      "file": "../resources/images/Finales/SalonFondo.PNG"
     },
     {
       "id": "Book1",
-      "file": "../resources/images/Final/Libro1.PNG"
+      "file": "../resources/images/Finales/Libro1.PNG"
     },
     {
       "id": "Book2",
-      "file": "../resources/images/Final/Libro2.PNG"
+      "file": "../resources/images/Finales/Libro2.PNG"
     },
     {
       "id": "Book3",
-      "file": "../resources/images/Final/Libro3.PNG"
+      "file": "../resources/images/Finales/Libro3.PNG"
     },
     {
       "id": "prueba",
