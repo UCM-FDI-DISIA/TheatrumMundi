@@ -22,6 +22,9 @@
     {
       "id": "prueba",
       "file": "../resources/images/socrates.png"
+    },{
+      "id": "kei",
+      "file": "../resources/images/kei.png"
     },
     {
       "id": "clockShape",
@@ -42,6 +45,18 @@
   {
       "id": "loading",
       "file": "../resources/images/loading.png"
+  },
+  {
+      "id": "Keisara",
+      "file": "../resources/images/clock_horario.png"
+  },
+  {
+    "id": "Lucy",
+    "file": "../resources/images/boton_check.png"
+  },
+  {
+    "id": "Sol",
+    "file": "../resources/images/clock_minutero.png"
   },
     { "id" : "prueba", "file" : "../resources/images/socrates.png" },
     { "id" : "pathWith", "file" : "../resources/images/pathWith.jpg" },
