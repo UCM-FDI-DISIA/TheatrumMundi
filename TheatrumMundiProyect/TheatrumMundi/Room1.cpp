@@ -88,7 +88,7 @@ void Room1Scene::init()
 	
 	if (!isStarted) {
 
-		entityFactory->CreateImageEntity(entityManager, "StudyBackground", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
+		entityFactory->CreateImageEntity(entityManager, "StudyBackground", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 	}
 	//SDL_Delay(1000);
 	//_loadimg->getMngr()->setActive(_loadimg,false);

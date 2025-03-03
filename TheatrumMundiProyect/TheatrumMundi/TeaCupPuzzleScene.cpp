@@ -26,12 +26,12 @@ void TeaCupPuzzleScene::init()
 	ecs::entity_t teaCupSpoon = entityFactory->CreateInteractableEntity( // Spoon entity
 		entityManager, "clockMinArrow", EntityFactory::RECTAREA, 
 		Vector2D(100, 400), Vector2D(), 100, 40, 0, 
-		areaLayerManager, EntityFactory::DRAG);
+		areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);
 
 	ecs::entity_t teaCup = entityFactory->CreateInteractableEntity( // Cup entity
 		entityManager, "clockShape", EntityFactory::RECTAREA,
 		Vector2D(400, 400), Vector2D(), 200, 100, 0,
-		areaLayerManager, EntityFactory::NODRAG);
+		areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 
 	entityManager->getComponent<ClickComponent>(teaCup) // The cup is clicked after introducing the spoon

@@ -22,7 +22,8 @@ EntityFactory::~EntityFactory(){}
 
 //CREATES IMAGE ENTITY
 ecs::entity_t EntityFactory::CreateImageEntity(ecs::EntityManager* _entityManager, const std::string& _idImage,
-	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot)
+	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot,
+	ecs::grpId_t _gId)
 {
 	ecs::entity_t newElement = _entityManager->addEntity(_gId);
 	_entityManager->addComponent<Transform>(newElement, _pos, _dir, _width, _height, _rot);
@@ -69,13 +70,13 @@ ecs::entity_t EntityFactory::CreateInteractableEntityScroll(ecs::EntityManager* 
 	return newElement;
 }
 
-ecs::entity_t EntityFactory::CreateImageEntityScroll(ecs::EntityManager* _entityManager, const std::string& _idImage,
-	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot,Vector2D _dirScroll, float _time)
-{
-	ecs::entity_t newElement = _entityManager->addEntity();
-	_entityManager->addComponent<Transform>(newElement, _pos, _dir, _width, _height, _rot);
-	_entityManager->addComponent<Image>(newElement, &sdlutils().images().at(_idImage));
-	_entityManager->addComponent<ScrollComponent>(newElement, _dirScroll, _time);
-	return newElement;
-}
+//ecs::entity_t EntityFactory::CreateImageEntityScroll(ecs::EntityManager* _entityManager, const std::string& _idImage,
+//	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot,Vector2D _dirScroll, float _time)
+//{
+//	ecs::entity_t newElement = _entityManager->addEntity();
+//	_entityManager->addComponent<Transform>(newElement, _pos, _dir, _width, _height, _rot);
+//	_entityManager->addComponent<Image>(newElement, &sdlutils().images().at(_idImage));
+//	_entityManager->addComponent<ScrollComponent>(newElement, _dirScroll, _time);
+//	return newElement;
+//}
 
