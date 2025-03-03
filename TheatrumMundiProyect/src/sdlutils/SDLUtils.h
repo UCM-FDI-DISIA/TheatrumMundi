@@ -14,6 +14,8 @@
 #include "Texture.h"
 #include "VirtualTimer.h"
 
+#include "../../TheatrumMundi/AudioManager.h"
+
 class SDLUtils: public Singleton<SDLUtils> {
 
 	friend Singleton<SDLUtils> ; // needed to give access to private constructors
@@ -225,14 +227,14 @@ private:
 	sdl_resource_table<Font> _fonts; // fonts map (string -> font)
 	sdl_resource_table<Texture> _images; // textures map (string -> texture)
 	sdl_resource_table<Texture> _msgs; // textures map (string -> texture)
-	sdl_resource_table<SoundEffect> _sounds; // sounds map (string -> sound)
-	sdl_resource_table<Music> _musics; // musics map (string -> music)
+	sdl_resource_table<Sound> _sounds; // sounds map (string -> sound)
+	sdl_resource_table<Sound> _musics; // musics map (string -> music)
 
 	map_access_wrapper<Font> _fontsAccessWrapper;
 	map_access_wrapper<Texture> _imagesAccessWrapper;
 	map_access_wrapper<Texture> _msgsAccessWrapper;
-	map_access_wrapper<SoundEffect> _soundsAccessWrapper;
-	map_access_wrapper<Music> _musicsAccessWrapper;
+	map_access_wrapper<Sound> _soundsAccessWrapper;
+	map_access_wrapper<Sound> _musicsAccessWrapper;
 
 	RandomNumberGenerator _random; // (pseudo) random numbers generator
 	VirtualTimer _timer; // virtual timer
