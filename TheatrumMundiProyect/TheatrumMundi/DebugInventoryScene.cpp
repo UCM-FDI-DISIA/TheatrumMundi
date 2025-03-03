@@ -53,6 +53,8 @@ void DebugInventoryScene::init()
 			// Create a hint and add it to the inventory
 			Hint* glovesHint = new Hint("gloves", "A pair of gloves", &sdlutils().images().at("gloves"));
 			inv2->addItem(glovesHint);
+			inv2->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, glovesHint->getID(), EntityFactory::RECTAREA, Vector2D(100, 100), Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::DRAG));
+			inv2->hints.back()->getMngr()->setActive(inv2->hints.back(),false);
 			glovesHint->setActive(false);  // Desactivated inicially for the inventory
 			//std::cout << "Added to inventory. Active state: " << gloves->getActive() << std::endl;
 		});
@@ -71,6 +73,8 @@ void DebugInventoryScene::init()
 			// Create a hint and add it to the inventory
 			Hint* spoonHint = new Hint("spoon", "Una cuchara de metal", &sdlutils().images().at("spoon"));
 			inv2->addItem(spoonHint);
+			inv2->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, spoonHint->getID(), EntityFactory::RECTAREA, Vector2D(100, 100), Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::DRAG));
+			inv2->hints.back()->getMngr()->setActive(inv2->hints.back(), false);
 			spoonHint->setActive(false);  // Desactivated inicially for the inventory
 			//std::cout << "Added to inventory. Active state: " << gloves->getActive() << std::endl;
 		});
@@ -92,22 +96,11 @@ void DebugInventoryScene::init()
 
 			// If the inventory is active, activate the items
 			if (inv2->getActive()) {
-				int i = 0;
-				std::vector<Hint*> a = inv2->getItems();
-				std::vector<Entity*> hints;
-				for (auto& item : a) {
-					
-					hints.push_back(entityFactory->CreateInteractableEntity(entityManager, item->getID(), EntityFactory::RECTAREA, Vector2D(100, 100 + i * 150), Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::DRAG));
-					hints[i]->getMngr()->setActive(hints[i], false);  // Desactivate the hints
-					i++;
+
+				
+				for (int i = 0; i < 2; ++i) {
+					inv2->hints[i]->getMngr()->setActive(inv2->hints[i], true);  // Activate the hints
 				}
-				int i = 0;
-				std::vector<Hint*>* items = inv2->getItems(0);
-				for (auto& item : *items) {
-					hints[i]->getMngr()->setActive(hints[i], true);  // Activate the hints
-					i++;
-				}
-				delete items;
 			}
 
 			inv2->render();

@@ -15,6 +15,7 @@ class Inventory
 protected:
 	std::vector<Hint*> items; //Vector of hints
 public:
+	std::vector<ecs::Entity*> hints;
 	Inventory();
 	virtual ~Inventory();
 	void addItem(Hint* item);
