@@ -38,9 +38,9 @@ void DebugInventoryScene::init()
 		auto _screenDetect = entityManager->addEntity();
 		auto _screenDetectTr = entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
 
-		//Create hint entity
+		//Create hints entitys
 		auto _gloves = entityManager->addEntity();
-		entityManager->addComponent<Transform>(_gloves, Vector2D(500, 500), Vector2D(0, 0), 200, 200, 0);
+		entityManager->addComponent<Transform>(_gloves, Vector2D(500, 500), Vector2D(0, 0), 100, 100, 0);
 		entityManager->addComponent<Image>(_gloves, &sdlutils().images().at("gloves"));
 
 		entityManager->addComponent<RectArea2D>(_gloves);
@@ -56,6 +56,26 @@ void DebugInventoryScene::init()
 			glovesHint->setActive(false);  // Desactivated inicially for the inventory
 			//std::cout << "Added to inventory. Active state: " << gloves->getActive() << std::endl;
 		});
+
+		auto _spoon = entityManager->addEntity();
+		entityManager->addComponent<Transform>(_spoon, Vector2D(500, 600), Vector2D(0, 0), 100, 100, 0);
+		entityManager->addComponent<Image>(_spoon, &sdlutils().images().at("spoon"));
+
+		entityManager->addComponent<RectArea2D>(_spoon);
+
+		ClickComponent* clkInv2 = entityManager->addComponent<ClickComponent>(_spoon);
+		clkInv2->connect(ClickComponent::JUST_CLICKED, [this, _spoon]() {
+
+			_spoon->getMngr()->setActive(_spoon, false);  // Desactivate the gloves entity
+
+			// Create a hint and add it to the inventory
+			Hint* spoonHint = new Hint("spoon", "Una cuchara de metal", &sdlutils().images().at("spoon"));
+			inv2->addItem(spoonHint);
+			spoonHint->setActive(false);  // Desactivated inicially for the inventory
+			//std::cout << "Added to inventory. Active state: " << gloves->getActive() << std::endl;
+		});
+
+
 
 		//inv button
 		auto _button = entityManager->addEntity();
@@ -73,13 +93,13 @@ void DebugInventoryScene::init()
 			if (inv2->getActive()) {
 				for (auto& item : inv2->getItems()) {
 					item->setActive(true);
-					_gloves->getMngr()->setActive(_gloves, true);  // Activate the gloves entity
+					//_gloves->getMngr()->setActive(_gloves, true);  // Activate the gloves entity
 				}
 			}
 			else {
 				for (auto& item : inv2->getItems()) {
 					item->setActive(false);
-					_gloves->getMngr()->setActive(_gloves, false);  // Desactivate the gloves entity
+					//_gloves->getMngr()->setActive(_gloves, false);  // Desactivate the gloves entity
 				}
 			}
 
