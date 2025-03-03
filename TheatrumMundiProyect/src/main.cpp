@@ -1,8 +1,8 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
 
 #include <iostream>
-#include "../../TheatrumMundiProyect/src/game/Game.h"
 
+#include "../../TheatrumMundiProyect/src/game/Game.h"
 
 int main(int ac, char **av) {
 	try {

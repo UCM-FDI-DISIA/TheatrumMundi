@@ -1,7 +1,7 @@
 #include "AudioManager.h"
 #include <iostream>
 #include <fstream>
-
+#include "Game.h"
 
 // Sound class methods
 Sound::Sound(const std::string& filePath) {
@@ -34,12 +34,13 @@ AudioManager::AudioManager() {
     // Get the list of available devices (for debug purposes)
    const ALCchar* deviceList = alcGetString(nullptr, ALC_DEVICE_SPECIFIER);
     if (deviceList) {
-        if (_DEBUG)
+#ifdef _DEBUG
         std::cout << "Dispositivos de audio disponibles:" << std::endl;
         while (*deviceList != '\0') {
             std::cout << " - " << deviceList << std::endl;
             deviceList += strlen(deviceList) + 1;
         }
+#endif
     }
 
 
@@ -47,37 +48,43 @@ AudioManager::AudioManager() {
     const ALCchar* defaultDevice = alcGetString(nullptr, ALC_DEFAULT_DEVICE_SPECIFIER);
     device = alcOpenDevice(defaultDevice);
     if (!device) {
-        if (_DEBUG)
+    #ifdef _DEBUG
         std::cerr << "Error: No se pudo abrir el dispositivo de audio: " << defaultDevice << std::endl;
         const ALCchar* error = alcGetString(nullptr, alcGetError(nullptr));
-        if (_DEBUG)
+    #endif
+    #ifdef _DEBUG
         std::cerr << "Razón: " << (error ? error : "Desconocido") << std::endl;
-
+    #endif
     }
 
     context = alcCreateContext(device, nullptr); // Create a context
     if (!context) {
-        if (_DEBUG)
+    #ifdef _DEBUG
         std::cerr << "Error: No se pudo crear el contexto de audio. Razón: ";
         const ALCchar* error = alcGetString(device, alcGetError(device));
-        if (_DEBUG)
+    #endif
+    #ifdef _DEBUG
         std::cerr << (error ? error : "Desconocido") << std::endl;
         alcCloseDevice(device);
+    #endif
 
     }
 
     if (!alcMakeContextCurrent(context)) { // Make the current context
-        if (_DEBUG)
+        #ifdef _DEBUG
         std::cerr << "Error: No se pudo hacer el contexto actual. Razón: ";
         const ALCchar* error = alcGetString(device, alcGetError(device));
-        if (_DEBUG)
+        #endif
+        #ifdef _DEBUG
         std::cerr << (error ? error : "Desconocido") << std::endl;
         alcDestroyContext(context);
         alcCloseDevice(device);
+        #endif
 
     }
-    if (_DEBUG)
+    #ifdef _DEBUG
     std::cout << "OpenAL inicializado correctamente con el dispositivo: " << defaultDevice << std::endl;
+    #endif
 }
 
 

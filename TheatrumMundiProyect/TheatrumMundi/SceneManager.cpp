@@ -21,7 +21,7 @@ SceneManager::SceneManager()
 	scenes[ClockPuzzle] = new ClockPuzzleScene();
 	scenes[BooksPuzzle] = new BooksPuzzleScene();
 
-	loadScene(initialMenu);
+	loadScene(Room1);
 	
 }
 
