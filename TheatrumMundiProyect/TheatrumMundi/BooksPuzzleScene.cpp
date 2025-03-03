@@ -49,6 +49,8 @@ BooksPuzzleScene::~BooksPuzzleScene()
 
 void BooksPuzzleScene::init()
 {
+
+
 	if (!isStarted) 
 	{
 		auto number1 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 9 / 21, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
@@ -246,5 +248,5 @@ bool BooksPuzzleScene::Check()
 
 void BooksPuzzleScene::Win()
 {
-	//Room1Scene::resolvedPuzzle(Room1Scene::BooksPuzzleRsv);
+	Room1Scene::resolvedPuzzle(Room1Scene::BooksPuzzleRsv);
 }

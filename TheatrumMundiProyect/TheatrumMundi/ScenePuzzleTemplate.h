@@ -10,7 +10,7 @@ class ScenePuzzleTemplate: public SceneTemplate
 	virtual void Exit();
 	virtual bool Check() { return true; };
 	virtual void Win() {};
-	ScenePuzzleTemplate();
+	ScenePuzzleTemplate(SceneRoomTemplate *r);
 	~ScenePuzzleTemplate();
 
 
