@@ -7,6 +7,7 @@
 #include "PipePuzzleScene.h"
 #include "ClockPuzzleScene.h"
 #include "BooksPuzzleScene.h"
+#include "TeaCupPuzzleScene.h"
 #include "checkML.h"
 #include "SceneRoomTemplate.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
@@ -14,15 +15,16 @@
 //#include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 SceneManager::SceneManager()
 {
-	scenes.resize(sceneName::Scene_Size);
-	scenes[initialMenu] = new InitialScene();
-	scenes[Room1] = new Room1Scene();
-	scenes[PipePuzzle] = new PipePuzzleScene();
-	scenes[ClockPuzzle] = new ClockPuzzleScene();
-	scenes[BooksPuzzle] = new BooksPuzzleScene();
+	scenes.resize(SceneName::SCENE_SIZE);
 
-	loadScene(Room1);
-	
+	scenes[SceneName::INITIAL_MENU] = new InitialScene();
+	scenes[SceneName::ROOM_1] = new Room1Scene();
+	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
+	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
+	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
+	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
+
+	loadScene(SceneName::INITIAL_MENU);
 }
 
 void SceneManager::popScene()

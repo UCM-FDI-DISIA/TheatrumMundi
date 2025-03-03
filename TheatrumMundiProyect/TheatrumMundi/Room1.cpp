@@ -31,7 +31,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 		};
 	roomEvent[PipePuzzleSnc] = [this]
 		{
-			Game::Instance()->getSceneManager()->loadScene(PipePuzzle,this);
+			Game::Instance()->getSceneManager()->loadScene(PipePuzzleSnc,this);
 		};
 	roomEvent[PipePuzzleRsv] = [this] {
 		// InventoryLogic
