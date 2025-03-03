@@ -1,8 +1,34 @@
 #include "AudioManager.h"
 #include <iostream>
 #include <fstream>
-#include <cstdint>
 
+
+// Sound class methods
+Sound::Sound(const std::string& filePath) {
+    source = AudioManager::Instance().createSource();
+    buffer = AudioManager::Instance().loadWAV(filePath);
+}
+
+Sound::~Sound()
+{
+}
+
+ALuint Sound::getSource() const
+{
+    return source;
+}
+
+ALuint Sound::getBuffer() const
+{
+    return buffer;
+}
+
+
+// AudioManager class methods
+AudioManager& AudioManager::Instance() {
+    static AudioManager instance; 
+    return instance;
+}
 
 AudioManager::AudioManager() {
     // Get the list of available devices (for debug purposes)
@@ -67,3 +93,88 @@ AudioManager::~AudioManager() {
     alcCloseDevice(device);     // Close the device
 }
 
+
+// Load a WAV file into a buffer
+ALuint 
+AudioManager::loadWAV(const std::string& filePath) {
+    SF_INFO sfInfo;
+    SNDFILE* file = sf_open(filePath.c_str(), SFM_READ, &sfInfo);
+    if (!file) {
+        std::cerr << "No se pudo abrir el archivo: " << filePath << std::endl;
+        return false;
+    }
+
+    std::vector<short> audioData(sfInfo.frames * sfInfo.channels);
+    sf_read_short(file, audioData.data(), sfInfo.frames * sfInfo.channels);
+    sf_close(file);
+
+    ALenum formatAL;
+    if (sfInfo.channels == 1) {
+        formatAL = AL_FORMAT_MONO16;
+    }
+    else if (sfInfo.channels == 2) {
+        formatAL = AL_FORMAT_STEREO16;
+    }
+    else {
+        std::cerr << "Formato incorrecto: " << filePath << std::endl;
+        return false;
+    }
+    ALuint buffer;
+    alGenBuffers(1, &buffer);
+    alBufferData(buffer, formatAL, audioData.data(), audioData.size() * sizeof(short), sfInfo.samplerate);
+
+    buffers.push_back(buffer);
+
+    return buffer;
+}
+
+// Create an audio source
+ALuint 
+AudioManager::createSource() {
+    ALuint source;
+    alGenSources(1, &source);
+    sources.push_back(source);
+    return source;
+}
+
+void 
+AudioManager::setSourcePosition(Sound sound, float x, float y, float z) {
+    alSource3f(sound.getSource(), AL_POSITION, x, y, z);
+}
+
+void 
+AudioManager::setListenerPosition(float x, float y, float z) {
+    alListener3f(AL_POSITION, x, y, z);
+}
+
+
+// Play a sound (default, once)
+void 
+AudioManager::playSound(Sound sound) {
+    alSourcei(sound.getSource(), AL_BUFFER, sound.getBuffer());
+    alSourcePlay(sound.getSource());
+}
+
+// Stop a sound
+void 
+AudioManager::stopSound(Sound sound) {
+    alSourceStop(sound.getSource());
+}
+
+// Pause a sound
+void 
+AudioManager::pauseSound(Sound sound) {
+    alSourcePause(sound.getSource());
+}
+
+// Resume a sound
+void
+AudioManager::resumeSound(Sound sound) {
+    alSourcePlay(sound.getSource());
+}
+
+// Set a sound in/out a loop
+void AudioManager::setLooping(Sound sound,bool loop)
+{
+    alSourcei(sound.getSource(), AL_LOOPING, loop ? AL_TRUE : AL_FALSE);
+}
