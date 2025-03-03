@@ -5,6 +5,7 @@ class ScenePuzzleTemplate: public SceneTemplate
 {
 	protected:
 		bool solved = false;
+		SceneRoomTemplate* room;
 	public:
 
 	virtual void Exit();

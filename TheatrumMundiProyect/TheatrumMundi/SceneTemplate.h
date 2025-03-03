@@ -8,6 +8,7 @@
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 
 class Area2DLayerManager;
+class SceneRoomTemplate;
 
 class SceneTemplate
 {
@@ -21,7 +22,7 @@ protected:
 public:
 	SceneTemplate();
 	void virtual init() {};
-	void virtual init(SceneTemplate* s) {};
+	void virtual init(SceneRoomTemplate* s) {};
 	void update();
 	void render() const;
 	void virtual refresh() {};

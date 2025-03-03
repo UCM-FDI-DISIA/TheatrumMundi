@@ -5,6 +5,7 @@ class Room1Scene : public SceneRoomTemplate
 {
 private:
 protected:
+	
 	enum Room1Event
 	{
 		InitialDialogue = 0,

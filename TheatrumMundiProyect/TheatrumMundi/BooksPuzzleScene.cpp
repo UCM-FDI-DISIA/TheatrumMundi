@@ -24,6 +24,10 @@
 
 #include "../src/Components/Transform.h"
 
+#include "Room1.h"
+
+#include "SceneRoomTemplate.h"
+
 
 using namespace std;
 
@@ -44,10 +48,12 @@ BooksPuzzleScene::~BooksPuzzleScene()
 {
 }
 
-void BooksPuzzleScene::init()
+void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted) 
 	{
+		room = sr;
+
 		auto number1 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 9 / 21, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		auto number2 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 10 / 21, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		auto number3 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 11 / 21, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
@@ -240,3 +246,11 @@ bool BooksPuzzleScene::Check()
 			myComb[1] == comb[4] && 
 			myComb[2] == comb[1];
 }
+
+void BooksPuzzleScene::Win()
+{
+	room->resolvedPuzzle(5);
+	Game::Instance()->getSceneManager()->popScene();
+}
+
+
