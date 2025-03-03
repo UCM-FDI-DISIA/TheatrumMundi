@@ -10,5 +10,8 @@ enum eventToRead {
 	Pista3,
 	Puzzle1,
 	Puzzle2,
-	Puzzle3
+	Puzzle3,
+	Calendario,
+	Movil,
+	TazaTé
 };

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -47,6 +47,7 @@
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BooksPuzzleScene.cpp" />
     <ClCompile Include="Area2DLayerManager.cpp" />
+    <ClCompile Include="CalendearMobileTestScene.cpp" />
     <ClCompile Include="DebugLogRoom.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
     <ClCompile Include="DialogTestScene.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BooksPuzzleScene.h" />
     <ClInclude Include="Area2DLayerManager.h" />
+    <ClInclude Include="CalendearMobileTestScene.h" />
     <ClInclude Include="DebugLogRoom.h" />
     <ClInclude Include="checkML.h" />
     <ClInclude Include="ClockPuzzleScene.h" />

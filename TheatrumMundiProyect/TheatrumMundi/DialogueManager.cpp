@@ -98,6 +98,12 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 	case(Puzzle3):
 		event = "Puzzle3";
 		break;
+	case(Calendario):
+		event = "Calendario";
+		break;
+	case(Movil):
+		event = "Movil";
+		break;
 	}
 }
 

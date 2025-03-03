@@ -58,6 +58,22 @@
     "id": "Sol",
     "file": "../resources/images/clock_minutero.png"
   },
+  {
+    "id": "calendear",
+    "file": "../resources/images/clock_minutero.png"
+  },
+  {
+    "id": "calendearZoom",
+    "file": "../resources/images/boton_check.png"
+  },
+  {
+    "id": "mobile",
+    "file": "../resources/images/clock_minutero.png"
+  },
+  {
+    "id": "mobileZoom",
+    "file": "../resources/images/boton_check.png"
+  },
     { "id" : "prueba", "file" : "../resources/images/socrates.png" },
     { "id" : "pathWith", "file" : "../resources/images/pathWith.jpg" },
     { "id" : "pathWithout", "file" : "../resources/images/pathWithout.jpg" },
