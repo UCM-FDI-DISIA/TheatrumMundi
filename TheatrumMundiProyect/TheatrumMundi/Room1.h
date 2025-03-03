@@ -25,7 +25,7 @@ protected:
 		event_size,
 	};
 public:
-	friend PipePuzzleScene;
+	//friend PipePuzzleScene;
 	Room1Scene();
 	~Room1Scene();
 	void init() override;

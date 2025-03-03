@@ -13,9 +13,7 @@
 
 #include "../src/components/ClickComponent.h"
 #include "../src/components/RectArea2D.h"
-#include "Pipe.h"
-#include "Module.h"
-#include "Room1.h"
+
 
 PipePuzzleScene::PipePuzzleScene()
 	:ScenePuzzleTemplate()
@@ -57,40 +55,53 @@ void PipePuzzleScene::moduleCreation()
 
 void PipePuzzleScene::pathCreation()
 {
+	auto plantilla = entityManager->addEntity();
+
+	// add transfomr
+	auto plantillaT = entityManager->addComponent<Transform>(
+		plantilla, Vector2D(0, 0), Vector2D(0, 0), 1350, 750, 0
+	);
+
+	// add image
+	entityManager->addComponent<Image>(plantilla, &sdlutils().images().at("plantilla"));
+
+	// add area of visualization of the image
+	entityManager->addComponent<RectArea2D>(plantilla);
     int nextId = 0;
 
 	//PATH 0 
 	_waterPath.push_back({ nextId, true, {'N',0,NONE}});//0
-	auto path0 = entityFactory->CreateImageEntity(entityManager, "pathWater",  Vector2D(100, 100),
-	Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+
+	auto path0 =entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(500, 500),
+	Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
 	_waterPath[0]._pathPieces.push_back({ path0, 2 });
 
 	_waterPath.push_back({ nextId, true, {'N',0,NONE} });//0
-	auto path0 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
+	 path0 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[0]._pathPieces.push_back({ path0, 1 });
 
 	_waterPath.push_back({ nextId, true, {'N',0,NONE} });//0
-	auto path0 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+	 path0 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[0]._pathPieces.push_back({ path0, 2 });
-
+	
 
 	//PATH 1
 	_waterPath.push_back({ nextId++, true,{'M',0,RIGHT} });//1
-	auto pathp1 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
-		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
-	_waterPath[1]._pathPieces.push_back({ pathp1, 2 });
-
 	auto path1 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[1]._pathPieces.push_back({ path1, 2 });
 
-	auto path1 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
+	 path1 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
+	_waterPath[1]._pathPieces.push_back({ path1, 2 });
+
+	 path1 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[1]._pathPieces.push_back({ path1, 1 });
 
-	auto path1 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+	 path1 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[1]._pathPieces.push_back({ path1, 2 });
 
@@ -101,15 +112,15 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[2]._pathPieces.push_back({ path2, 2 });
 
-	auto path2 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path2 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[2]._pathPieces.push_back({ path2, 2 });
 
-	auto path2 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path2 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[2]._pathPieces.push_back({ path2, 2 });
 
-	auto path2 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+	 path2 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[2]._pathPieces.push_back({ path2, 1 });
 
@@ -121,7 +132,7 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[3]._pathPieces.push_back({ path3, 2 });
 
-	auto path3 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+	 path3 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[3]._pathPieces.push_back({ path3, 2 });
 
@@ -132,7 +143,7 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[4]._pathPieces.push_back({ path4, 2 });
 
-	auto path4 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+	 path4 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[4]._pathPieces.push_back({ path4, 2 });
 
@@ -143,7 +154,7 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[5]._pathPieces.push_back({ path4, 1 });
 
-	auto path5 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
+	 path5 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[5]._pathPieces.push_back({ path5, 1 });
 
@@ -154,23 +165,23 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[6]._pathPieces.push_back({ path6, 1 });
 
-	auto path6 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+	 path6 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[6]._pathPieces.push_back({ path6, 1 });
 
-	auto path6 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path6 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[6]._pathPieces.push_back({ path6, 2 });
 	
-	auto path6 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path6 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[6]._pathPieces.push_back({ path6, 2 });
 
-	auto path6 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path6 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[6]._pathPieces.push_back({ path6, 2 });
 
-	auto path6 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+	 path6 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[6]._pathPieces.push_back({ path6, 1 });
 
@@ -187,7 +198,7 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[8]._pathPieces.push_back({ path8, 1 });
 
-	auto path8 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path8 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[8]._pathPieces.push_back({ path8, 2 });
 
@@ -197,7 +208,7 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[9]._pathPieces.push_back({ path9, 2 });
 
-	auto path9 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path9 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[9]._pathPieces.push_back({ path9, 2 });
 
@@ -207,7 +218,7 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[10]._pathPieces.push_back({ path10, 2 });
 
-	auto path10 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path10 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[10]._pathPieces.push_back({ path10, 2 });
 
@@ -229,23 +240,23 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[13]._pathPieces.push_back({ path13, 1 });
 
-	auto path13 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+	 path13 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[13]._pathPieces.push_back({ path13, 1 });
 	
-	auto path13 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path13 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[13]._pathPieces.push_back({ path13, 2 });
 
-	auto path13 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+	 path13 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[13]._pathPieces.push_back({ path13, 1 });
 
-	auto path13 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path13 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[13]._pathPieces.push_back({ path13, 2 });
 
-	auto path13 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path13 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[13]._pathPieces.push_back({ path13, 2 });
 
@@ -255,7 +266,7 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[14]._pathPieces.push_back({ path14, 2 });
 
-	auto path14 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+	 path14 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[14]._pathPieces.push_back({ path14, 1 });
 
@@ -265,35 +276,35 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[15]._pathPieces.push_back({ path15, 2 });
 
-	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+	 path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[15]._pathPieces.push_back({ path15, 1 });
 
-	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+	 path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[15]._pathPieces.push_back({ path15, 1 });
 
-	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[15]._pathPieces.push_back({ path15, 2 });
 
-	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[15]._pathPieces.push_back({ path15, 2 });
 
-	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[15]._pathPieces.push_back({ path15, 2 });
 
-	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+	 path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[15]._pathPieces.push_back({ path15, 1 });
 
-	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[15]._pathPieces.push_back({ path15, 2 });
 
-	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[15]._pathPieces.push_back({ path15, 2 });
 
@@ -304,15 +315,15 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[16]._pathPieces.push_back({ path16, 2 });
 
-	auto path16 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+	 path16 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[16]._pathPieces.push_back({ path16, 1 });
 
-	auto path16 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+	 path16 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[16]._pathPieces.push_back({ path16, 1 });
 
-	auto path16 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	 path16 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[16]._pathPieces.push_back({ path16, 2 });
 
@@ -323,11 +334,11 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[17]._pathPieces.push_back({ path17, 2 });
 
-	auto path17 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+	 path17 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[17]._pathPieces.push_back({ path17, 2 });
 
-	auto path17 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+	 path17 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[17]._pathPieces.push_back({ path17, 2 });
 
@@ -339,11 +350,11 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[18]._pathPieces.push_back({ path18, 2 });
 
-	auto path18 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
+	 path18 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[18]._pathPieces.push_back({ path18, 2 });
 
-	auto path18 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+	 path18 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[18]._pathPieces.push_back({ path18, 2 });
 
@@ -353,23 +364,23 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[19]._pathPieces.push_back({ path19, 2 });
 
-	auto path19 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+	 path19 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[19]._pathPieces.push_back({ path19, 2 });
 
-	auto path19 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+	 path19 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[19]._pathPieces.push_back({ path19, 2 });
 	
-	auto path19 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+	 path19 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[19]._pathPieces.push_back({ path19, 2 });
 
-	auto path19 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+	 path19 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[19]._pathPieces.push_back({ path19, 2 });
 
-	auto path19 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
+	 path19 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[19]._pathPieces.push_back({ path19, 1 });
 
@@ -379,7 +390,7 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[20]._pathPieces.push_back({ path20, 2 });
 
-	auto path20 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+	 path20 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[20]._pathPieces.push_back({ path20, 2 });
 
@@ -395,7 +406,7 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[22]._pathPieces.push_back({ path22, 2 });
 	
-	auto path22 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
+	 path22 = entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[22]._pathPieces.push_back({ path22, 2 });
 
@@ -406,16 +417,16 @@ void PipePuzzleScene::pathCreation()
 	_waterPath[23]._pathPieces.push_back({ path23, 2 });
 
 	//PATH 24
-	_waterPath.push_back({ nextId++, false ,{'M',3,DOWN} });//24
+	_waterPath.push_back({ nextId++, false ,{'M',3,DOWN},{} });//24
 	auto path24 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[24]._pathPieces.push_back({ path24, 1 });
 	
-	auto path24 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
+	path24 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[24]._pathPieces.push_back({ path24, 2 });
 	
-	auto path24 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
+	path24 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(100, 100),
 		Vector2D(0, 0), 50, 20, 0, ecs::grp::DEFAULT);
 	_waterPath[24]._pathPieces.push_back({ path24, 1 });
 }
@@ -480,15 +491,15 @@ void PipePuzzleScene::init()
 
 		//vector with pipe positions
 		vector<Vector2D> pipePositions = {
-			Vector2D(100, 100), // pos pipe 0
-			Vector2D(200, 100), // pos pipe 1
-			Vector2D(300, 100), // pos pipe 2
-			Vector2D(400, 100), // pos pipe 3
-			Vector2D(100, 200), // pos pipe 4
-			Vector2D(200, 200), // pos pipe 5
-			Vector2D(300, 200), // pos pipe 6
-			Vector2D(400, 200), // pos pipe 7
-			Vector2D(500, 200)  // pos pipe 8
+			Vector2D(330, 170), // pos pipe 0
+			Vector2D(560, 170), // pos pipe 1
+			Vector2D(330, 300), // pos pipe 2
+			Vector2D(120, 300), // pos pipe 3
+			Vector2D(700, 500), // pos pipe 4
+			Vector2D(330, 430), // pos pipe 5
+			Vector2D(700, 290), // pos pipe 6
+			Vector2D(1210, 80), // pos pipe 7
+			Vector2D(1100, 230)  // pos pipe 8
 		};
 
 		// creates the components of the pipe
@@ -499,7 +510,7 @@ void PipePuzzleScene::init()
 			
 			// add transfomr
 			auto pipeTransform = entityManager->addComponent<Transform>(
-				_pipesEnt[i], pipePositions[i], Vector2D(0, 0), 40, 40, 0
+				_pipesEnt[i], pipePositions[i], Vector2D(0, 0), 70, 70, 0
 			);
 
 			// add image
@@ -526,12 +537,12 @@ void PipePuzzleScene::init()
 
 		//vector with positions of modules
 		vector<Vector2D> modulePositions = {
-			Vector2D(400,0), // pos module 0
-			Vector2D(100, 100), // pos module 1
-			Vector2D(1000, 100), // pos module 2
-			Vector2D(800,300), // pos module 3
-			Vector2D(50,400), // pos module 4
-			Vector2D(250,600), // pos module 5
+			Vector2D(340,30), // pos module 0
+			Vector2D(120, 160), // pos module 1
+			Vector2D(710, 80), // pos module 2
+			Vector2D(558,295), // pos module 3
+			Vector2D(50,430), // pos module 4
+			Vector2D(330,620), // pos module 5
 		};
 
 
@@ -540,11 +551,10 @@ void PipePuzzleScene::init()
 
 			// create entity
 			_modulesEnt.push_back(entityManager->addEntity());
-	
 
 			// add transfomr
 			auto moduleTransform = entityManager->addComponent<Transform>(
-				_modulesEnt[i], modulePositions[i], Vector2D(0, 0), 100, 100, 0
+				_modulesEnt[i], modulePositions[i], Vector2D(0, 0), 70, 70, 0
 			);
 
 			// add image
@@ -813,11 +823,11 @@ void PipePuzzleScene::waterPassPath(int path) {
 			Image* img = _waterPath[path]._pathPieces[i].first->getMngr()->getComponent<Image>(_waterPath[path]._pathPieces[i].first);
 			if (_waterPath[path]._pathPieces[i].second == 1)//L pipe 
 			{
-				img->setTexture(&sdlutils().images().at("pathWith1"));
+				img->setTexture(&sdlutils().images().at("pathLWater"));
 			}
 			else //straight
 			{
-				img->setTexture(&sdlutils().images().at("pathWith2"));
+				img->setTexture(&sdlutils().images().at("pathWater"));
 			}
 		}
 	
@@ -828,11 +838,11 @@ void PipePuzzleScene::waterPassPath(int path) {
 			Image* img = _waterPath[path]._pathPieces[i].first->getMngr()->getComponent<Image>(_waterPath[path]._pathPieces[i].first);
 			if (_waterPath[path]._pathPieces[i].second == 1)//L pipe 
 			{
-				img->setTexture(&sdlutils().images().at("pathWithout1"));
+				img->setTexture(&sdlutils().images().at("pathLNoWater"));
 			}
 			else //straight
 			{
-				img->setTexture(&sdlutils().images().at("pathWithout2"));
+				img->setTexture(&sdlutils().images().at("pathNoWater"));
 			}
 		}
 		
@@ -993,8 +1003,6 @@ void PipePuzzleScene::Exit()
 {
 	Game::Instance()->getSceneManager()->popScene();
 }
-
-
 
 PipePuzzleScene::~PipePuzzleScene()
 {

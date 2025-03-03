@@ -126,6 +126,7 @@
     { "id" : "pathLWater", "file" : "../resources/images/pathLWater.png" },
     { "id" : "pathNoWater", "file" : "../resources/images/pathNoWater.png" },
     { "id" : "pathWater", "file" : "../resources/images/pathWater.png" },
+    { "id" : "plantilla", "file" : "../resources/images/plantilla.png" },
      { "id": "clockMinButton",
       "file": "../resources/images/boton_minutero.png"
     },
