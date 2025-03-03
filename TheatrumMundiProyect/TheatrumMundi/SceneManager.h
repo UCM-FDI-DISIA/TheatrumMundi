@@ -6,14 +6,14 @@
 class SceneTemplate;
 class SceneRoomTemplate;
 using namespace ecs;
-enum sceneName {
-	initialMenu=0,
-	Room1,
-	PipePuzzle,
-	BooksPuzzle,
-	ClockPuzzle,
-	TeaCupPuzzle,
-	Scene_Size
+enum SceneName {
+	INITIAL_MENU = 0,
+	ROOM_1,
+	PIPE_PUZZLE,
+	BOOKS_PUZZLE,
+	CLOCK_PUZZLE,
+	TEA_CUP_PUZZLE,
+	SCENE_SIZE
 };
 class SceneManager
 {
