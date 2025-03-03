@@ -109,8 +109,7 @@ void Room1Scene::init()
 
 			});
 		
-		entityFactory->CreateImageEntity(entityManager, "StudyBackground", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
-		entityFactory->CreateImageEntity(entityManager, "kei", EntityFactory::RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0);
+		
 	
 
 
