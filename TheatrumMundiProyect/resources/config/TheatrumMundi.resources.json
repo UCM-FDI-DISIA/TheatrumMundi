@@ -12,6 +12,10 @@
 
   "images": [
     {
+      "id": "ChangeRoom",
+      "file": "../resources/images/Finales/CambiarSala.PNG"
+    },
+    {
       "id": "LucySprite",
       "file": "../resources/images/Finales/Lucy.PNG"
     },
