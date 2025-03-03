@@ -34,16 +34,21 @@ Game::~Game() {
 }
 
 void Game::init() {
-	float w = GetSystemMetrics(SM_CXSCREEN);
-	float h = GetSystemMetrics(SM_CYSCREEN);
-	wscreenScale = GetSystemMetrics(SM_CXSCREEN) / 1346.0;
-	hscreenScale = GetSystemMetrics(SM_CYSCREEN) / 748.0;
+	float w ;
+	float h  ;
+	wscreenScale ;
+	hscreenScale ;
 //In debug the resolution is const
 #ifdef _DEBUG
 		w = 1349.0;
 		h = 748.0;
 		wscreenScale = 1;
 		hscreenScale = 1;	
+#else
+	w = GetSystemMetrics(SM_CXSCREEN);
+	h = GetSystemMetrics(SM_CYSCREEN);
+	wscreenScale = GetSystemMetrics(SM_CXSCREEN) / 1346.0;
+	hscreenScale = GetSystemMetrics(SM_CYSCREEN) / 748.0;
 #endif
 
 	// initialize the SDL singleton
