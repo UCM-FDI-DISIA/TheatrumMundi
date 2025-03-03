@@ -21,7 +21,8 @@ protected:
 		ResolveCase,
 		GoodEnd,
 		BadEnd,
-		Log,
+		LOGENABLE,
+		LOGDESABLE,
 		event_size,
 	};
 public:
