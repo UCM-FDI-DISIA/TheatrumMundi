@@ -1,17 +1,22 @@
 #pragma once
 #include <list>
-
+#include "EventsInfo.h"
 #include "Manager.h"
+#include "Inventory.h"
+#include "Hint.h"
 
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
 
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 
 class Area2DLayerManager;
+class SceneRoomTemplate;
 
 class SceneTemplate
 {
 protected:
+
+	Inventory* inv;
 	 ecs::EntityManager* entityManager;
 	 EntityFactory* entityFactory;
 	// DialogueManager* dialogueManager;
@@ -21,12 +26,15 @@ protected:
 public:
 	SceneTemplate();
 	void virtual init() {};
-	void virtual init(SceneTemplate* s) {};
+	void virtual init(SceneRoomTemplate* s) {};
 	void update();
 	void render() const;
 	void virtual refresh() {};
 	void virtual unload() {};
 	virtual ~SceneTemplate();
+	void startDialogue(const eventToRead& _eventToRead);
+	void endDialogue();
+	inline Inventory* GetInventory() { return inv; }
 
 };
 

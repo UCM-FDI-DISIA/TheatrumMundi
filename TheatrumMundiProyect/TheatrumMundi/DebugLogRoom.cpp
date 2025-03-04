@@ -12,6 +12,7 @@
 #include "../src/components/DragComponent.h"
 #include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
+#include "Area2DLayerManager.h"
 #include "TextInfo.h"
 
 #include "../src/game/Game.h"
@@ -34,8 +35,9 @@ void DebugLogRoom::init()
 		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
 		auto _screenDetect = entityManager->addEntity();
 		auto _screenDetectTr = entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
-			
-		entityManager->addComponent<RectArea2D>(_screenDetect);
+		
+
+		entityManager->addComponent<RectArea2D>(_screenDetect, areaLayerManager);
 		ClickComponent* passDialog = entityManager->addComponent<ClickComponent>(_screenDetect);
 		passDialog->connect(ClickComponent::JUST_CLICKED, [this, _screenDetect]()
 			{
@@ -43,7 +45,7 @@ void DebugLogRoom::init()
 					//read dialogue only if it has to
 					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
 					{
-						Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
+						Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermedia1);
 					}
 					else
 					{
@@ -57,6 +59,7 @@ void DebugLogRoom::init()
 		auto _textTest = entityManager->addEntity();
 		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
 		_dialogueObj = _textTest;
+
 
 		//Create log
 		auto _log = entityManager->addEntity();
@@ -89,14 +92,14 @@ void DebugLogRoom::init()
 		auto _openLogButtonTr = entityManager->addComponent<Transform>(_openLogButton, Vector2D(0, 0), Vector2D(0, 0), 200, 175, 0);
 		entityManager->addComponent<Image>(_openLogButton, &sdlutils().images().at("prueba"));
 
-		entityManager->addComponent<RectArea2D>(_openLogButton);
+		entityManager->addComponent<RectArea2D>(_openLogButton, areaLayerManager);
 
 		//Close log button
 		auto _closeLogButton = entityManager->addEntity();
 		auto _closeLogButtonTr = entityManager->addComponent<Transform>(_closeLogButton, Vector2D(1000, 0), Vector2D(0, 0), 200, 175, 0);
 		entityManager->addComponent<Image>(_closeLogButton, &sdlutils().images().at("prueba"));
 
-		entityManager->addComponent<RectArea2D>(_closeLogButton);
+		entityManager->addComponent<RectArea2D>(_closeLogButton, areaLayerManager);
 		_closeLogButton->getMngr()->setActive(_closeLogButton, false);
 
 		//Click component Open log button
@@ -131,7 +134,7 @@ void DebugLogRoom::init()
 		
 
 		//In this scene, in it's init, dialogue must start displaying on screen.
-		Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
+		Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermedia1);
 		
 		
 	}

@@ -57,7 +57,7 @@ public:
 	 void pathCreation();
 	 bool Check() override; 
 	 void changeDirection(int module); //changes direction of the module
-	 void init() override;
+	 void init(SceneRoomTemplate* sr) override;
 	 void waterPassPipe(int pipe); //if water can pass through a pipe (if it recives water from its neightbours)
 	 void waterPassModule(int module); //if water can pass through a module (if it recives water from its neightbours)
 	 void waterPassPath(int path);// series of conditions to check if a path has water

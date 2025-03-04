@@ -16,7 +16,10 @@
 
 #include "Area2DLayerManager.h"
 
-EntityFactory::EntityFactory(){}
+EntityFactory::EntityFactory(ecs::EntityManager* entityManager,Area2DLayerManager* areaLayerManager){
+	_myEntityManager = entityManager;
+	_myAreaLayerManager = areaLayerManager;
+}
 
 EntityFactory::~EntityFactory(){}
 
@@ -28,6 +31,7 @@ ecs::entity_t EntityFactory::CreateImageEntity(ecs::EntityManager* _entityManage
 	ecs::entity_t newElement = _entityManager->addEntity(_gId);
 	_entityManager->addComponent<Transform>(newElement, _pos, _dir, _width, _height, _rot);
 	_entityManager->addComponent<Image>(newElement, &sdlutils().images().at(_idImage));
+	//_entityManager->addComponent<RectArea2D>(newElement, _myAreaLayerManager);
 	return newElement;
 }
 
