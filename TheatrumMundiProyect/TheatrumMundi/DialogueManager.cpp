@@ -197,13 +197,13 @@ void DialogueManager::setScene(SceneTemplate* scene)
 void DialogueManager::setCharachterImage(const string& Character)
 {
 	if (Character == "Keisara") {
-		characterimg->setTexture(&sdlutils().images().at("Keisara"));
+		characterimg->setTexture(&sdlutils().images().at("KeisaraSprite"));
 	}
 	else if (Character == "Lucy") {
-		characterimg->setTexture(&sdlutils().images().at("Lucy"));
+		characterimg->setTexture(&sdlutils().images().at("LucySprite"));
 	}
 	else if (Character == "Sol") {
-		characterimg->setTexture(&sdlutils().images().at("Sol"));
+		characterimg->setTexture(&sdlutils().images().at("SolSprite"));
 	}
 }
 

@@ -91,18 +91,24 @@ void Room1Scene::init()
 		Game::Instance()->getDialogueManager()->setScene(this);
 
 		//CharacterImage
-		auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
+		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
+		auto characterimg = entityManager->addEntity(grp::DIALOGUE);
+		entityManager->addComponent<Transform>(characterimg, Vector2D(sdlutils().width() / 5, sdlutils().height() / 8), Vector2D(0, 0), 2019/2, 1122/2, 0);
+		auto imCh = entityManager->addComponent<Image>(characterimg, &sdlutils().images().at("Dialog"));
+		
+		Game::Instance()->getDialogueManager()->setCharacterImg(imCh);
 		entityManager->setActive(characterimg, false);
 
+		/*
 		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
 		auto _screenDetect = entityManager->addEntity(ecs::grp::DIALOGUE);
 		entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
 		entityManager->setActive(_screenDetect, false);
-
+		*/
 
 		//Create dialogue text entity. Object that renders dialogue Text on Screen
 		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
-		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
+		entityManager->addComponent<Transform>(_textbackground, Vector2D(-200, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
 		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
 		entityManager->addComponent<RectArea2D>(_textbackground,areaLayerManager);
 
@@ -148,7 +154,7 @@ void Room1Scene::init()
 		//Game::Instance()->getDialogueManager()->setScene(this);
 
 		//Add writeText to dialogueManager
-		SDL_Color colorDialog = { 255, 0, 0, 255 }; // Color = red
+		SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
 		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
 
 		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
