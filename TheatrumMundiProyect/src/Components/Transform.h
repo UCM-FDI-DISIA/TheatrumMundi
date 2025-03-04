@@ -18,9 +18,11 @@ public:
 	Transform(Vector2D pos, Vector2D vel, float w, float h, float r) {
 		_pos.setX(Game::Instance()->wscreenScale* pos.getX());
 		_pos.setY(Game::Instance()->hscreenScale * pos.getY());
+		//_pos.setX(pos.getX());
+		//_pos.setY(pos.getY());
 		_vel = vel;
-		_width = Game::Instance()->wscreenScale * w;
-		_height = Game::Instance()->hscreenScale * h;
+		_width = (Game::Instance()->wscreenScale * w);
+		_height = (Game::Instance()->hscreenScale * h);
 		_rot = r;
 	}
 

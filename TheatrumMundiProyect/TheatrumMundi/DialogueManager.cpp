@@ -96,7 +96,7 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 		event = "PuzzleLibros";
 		break;
 	case(Puzzle3):
-		event = "Puzzle3";
+		event = "PuzzleLibros";
 		break;
 	case(Calendario):
 		event = "Calendario";
@@ -148,6 +148,9 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 			//call scene method to disable dialogue objects on scene
 			_scene->endDialogue();
 			displayOnProcess = false;
+
+			_showText->Character = " "; // Saves new text
+			_showText->Text = " ";
 		}
 	}
 	else
