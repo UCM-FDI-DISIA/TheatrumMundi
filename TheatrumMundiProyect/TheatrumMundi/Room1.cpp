@@ -91,7 +91,7 @@ void Room1Scene::init()
  
 	if (!isStarted) {
 		isStarted = true;
-
+		finishalpuzzles = false;
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
 		Sound buttonSound = sdlutils().soundEffects().at("boton");
