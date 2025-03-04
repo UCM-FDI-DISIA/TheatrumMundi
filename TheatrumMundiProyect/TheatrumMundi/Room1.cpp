@@ -87,7 +87,10 @@ void Room1Scene::init()
 	if (!isStarted) {
 
 		auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width())/12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-		
+		auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1160 - sdlutils().width(), 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
+		ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(ChangeRoom2));
+
 		auto StudyBackground = entityFactory->CreateImageEntity(entityManager, "StudyBackground", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		auto StudyBackgroundScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(StudyBackground));
@@ -100,6 +103,14 @@ void Room1Scene::init()
 
 			if (!StudyBackgroundScroll->isScrolling()) {
 				StudyBackgroundScroll->Scroll(ScrollComponent::RIGHT);
+			}
+			});
+
+		auto ChangeRoom2Button = entityManager->getComponent<ClickComponent>(ChangeRoom2);
+		ChangeRoom2Button->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom2Button, StudyBackgroundScroll]() {
+
+			if (!StudyBackgroundScroll->isScrolling()) {
+				StudyBackgroundScroll->Scroll(ScrollComponent::LEFT);
 			}
 			});
 		
