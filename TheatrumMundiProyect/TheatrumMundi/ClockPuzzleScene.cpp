@@ -128,6 +128,22 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 				_actualMinute = 0;
 			});
 
+
+		//BackButton
+		auto _backButtonClock = entityManager->addEntity();
+		entityManager->addComponent<Transform>(_backButtonClock, Vector2D(800, 200), Vector2D(0, 0), 200, 175, 0);
+		entityManager->addComponent<Image>(_backButtonClock, &sdlutils().images().at("prueba"));
+
+		entityManager->addComponent<RectArea2D>(_backButtonClock);
+
+		//Click component Open log button
+		ClickComponent* clkOpenClock = entityManager->addComponent<ClickComponent>(_backButtonClock);
+		clkOpenClock->connect(ClickComponent::JUST_CLICKED, []()
+		{
+				std::cout << "funcion lambda de salida del reloj" << std::endl;
+				Game::Instance()->getSceneManager()->popScene();
+		});
+
 	}
 
 }

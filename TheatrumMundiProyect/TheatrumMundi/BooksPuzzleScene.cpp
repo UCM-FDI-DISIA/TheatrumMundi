@@ -330,6 +330,7 @@ void BooksPuzzleScene::refresh()
 
 void BooksPuzzleScene::unload()
 {
+	
 }
 
 bool BooksPuzzleScene::Check()
