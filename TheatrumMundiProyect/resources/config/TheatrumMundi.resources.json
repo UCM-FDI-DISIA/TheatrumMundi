@@ -256,15 +256,15 @@
     },
     {
       "id": "bookA",
-      "file": "../resources/images/BookA.png"
+      "file": "../resources/images/Finales/Libro1.png"
     },
     {
       "id": "bookB",
-      "file": "../resources/images/BookB.png"
+      "file": "../resources/images/Finales/Libro2.png"
     },
     {
       "id": "bookC",
-      "file": "../resources/images/BookC.png"
+      "file": "../resources/images/Finales/Libro3.png"
     },
     {
       "id": "incrementButton",

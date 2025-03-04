@@ -30,14 +30,14 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 	if (!isStarted) {
-
+		isStarted = true;
+		room = sr;
 		AudioManager& a = AudioManager::Instance();
 		Sound clockMinSound = sdlutils().soundEffects().at("aguja_minutero");
 		Sound clockHorSound = sdlutils().soundEffects().at("aguja_horario");
 		a.setVolume(clockMinSound,0.2);
 		a.setVolume(clockHorSound, 0.2);
 
-		room = sr;
 		//create the clock
 		auto _clockShape = entityManager->addEntity();
 		auto _clockShapeTransform = entityManager->addComponent<Transform>(_clockShape, Vector2D(600, 300), Vector2D(0, 0), 200, 200, 0);
@@ -154,6 +154,22 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 				_clockMinTransform->setRot(0);
 				_actualMinute = 0;
 			});
+
+
+		//BackButton
+		auto _backButtonClock = entityManager->addEntity();
+		entityManager->addComponent<Transform>(_backButtonClock, Vector2D(800, 200), Vector2D(0, 0), 200, 175, 0);
+		entityManager->addComponent<Image>(_backButtonClock, &sdlutils().images().at("prueba"));
+
+		entityManager->addComponent<RectArea2D>(_backButtonClock);
+
+		//Click component Open log button
+		ClickComponent* clkOpenClock = entityManager->addComponent<ClickComponent>(_backButtonClock);
+		clkOpenClock->connect(ClickComponent::JUST_CLICKED, []()
+		{
+				std::cout << "funcion lambda de salida del reloj" << std::endl;
+				Game::Instance()->getSceneManager()->popScene();
+		});
 
 	}
 
