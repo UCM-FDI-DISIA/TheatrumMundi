@@ -38,12 +38,12 @@ void InitialScene::init()
 		
 		//Title
 		auto _title = entityManager->addEntity();
-		entityManager->addComponent<Transform>(_title, Vector2D(sdlutils().width() / 4.5, sdlutils().height() /4), Vector2D(0, 0), 1470 / 2, 270 / 2, 0);
+		entityManager->addComponent<Transform>(_title, Vector2D(1349 / 4.5, 748 /4), Vector2D(0, 0), 1470 / 2, 270 / 2, 0);
 		entityManager->addComponent<Image>(_title, &sdlutils().images().at("Title"));
 		
 		//Start button room1
 		auto _startbtn = entityManager->addEntity();
-		entityManager->addComponent<Transform>(_startbtn, Vector2D(sdlutils().width()/2.8, sdlutils().height()/2), Vector2D(0, 0), 1470/4, 270/4, 0);
+		entityManager->addComponent<Transform>(_startbtn, Vector2D(1348/2.8, 748/2), Vector2D(0, 0), 1470/4, 270/4, 0);
 		entityManager->addComponent<Image>(_startbtn, &sdlutils().images().at("NewGame"));
 
 		entityManager->addComponent<RectArea2D>(_startbtn);
@@ -58,7 +58,7 @@ void InitialScene::init()
 		
 		//Exit 
 		auto _exitbtn = entityManager->addEntity();
-		entityManager->addComponent<Transform>(_exitbtn, Vector2D(sdlutils().width() / 2.8, sdlutils().height() / 1.5), Vector2D(0, 0), 1470 / 4, 270 / 4, 0);
+		entityManager->addComponent<Transform>(_exitbtn, Vector2D(1349 / 2.8, 748 / 1.5), Vector2D(0, 0), 1470 / 4, 270 / 4, 0);
 		entityManager->addComponent<Image>(_exitbtn, &sdlutils().images().at("Exit"));
 
 		entityManager->addComponent<RectArea2D>(_exitbtn);
