@@ -71,8 +71,8 @@ DialogueManager::DialogueManager() : _sceneLog(nullptr), _writeTextComp(nullptr)
 void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) {
 
 	switch (_eventToRead) {
-	case(SalaIntermediaEvento1):
-		event = "SalaIntermediaEvento1";
+	case(SalaIntermedia1):
+		event = "SalaIntermedia1";
 		break;
 	case(SalaIntermediaEvento2):
 		event = "SalaIntermediaEvento2";
