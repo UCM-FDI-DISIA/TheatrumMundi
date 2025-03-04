@@ -125,7 +125,7 @@ void Room1Scene::init()
 
 		//Create dialogue text entity. Object that renders dialogue Text on Screen
 		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
-		entityManager->addComponent<Transform>(_textbackground, Vector2D(-200, 0), Vector2D(0, 0),1349,748, 0);
+		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0),1349,748, 0);
 		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
 		entityManager->addComponent<RectArea2D>(_textbackground,areaLayerManager);
 
