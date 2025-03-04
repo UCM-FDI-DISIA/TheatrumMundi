@@ -20,6 +20,7 @@ protected:
 		TeaCupPuzzleRsv,
 		Spoon,
 		ResolveCase,
+		ResolveBottons,
 		GoodEnd,
 		BadEnd,
 		LOGENABLE,

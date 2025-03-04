@@ -86,7 +86,7 @@ void Room1Scene::init()
 {
  
 	if (!isStarted) {
-
+		isStarted = true;
 		//Register scene in dialogue manager
 		Game::Instance()->getDialogueManager()->setScene(this);
 
@@ -302,6 +302,19 @@ void Room1Scene::init()
 		buttonLogClick->connect(ClickComponent::JUST_CLICKED, [this]() {
 
 			});
+		auto buttonpos = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(750, sdlutils().height() - (268 / 3) - 20), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->getComponent<ClickComponent>(buttonpos)->connect(ClickComponent::JUST_CLICKED, [this]() { roomEvent[GoodEnd]();});
+		entityManager->setActive(buttonpos,false);
+
+		auto buttonimp = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(750, sdlutils().height() - (268 / 3)), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->getComponent<ClickComponent>(buttonimp)->connect(ClickComponent::JUST_CLICKED, [this]() { roomEvent[BadEnd]();});
+		entityManager->setActive(buttonimp, false);
+		//Resolve the case
+		roomEvent[ResolveBottons] = [this, buttonpos, buttonimp]() {
+			entityManager->setActive(buttonpos, true);
+			entityManager->setActive(buttonimp, true);
+			};
+
 
 		//X Button "B1"
 	}
