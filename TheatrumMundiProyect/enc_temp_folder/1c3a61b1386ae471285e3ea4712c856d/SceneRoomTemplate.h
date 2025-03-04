@@ -1,7 +1,7 @@
 #pragma once
 #include "SceneTemplate.h"
 #include <vector>
-
+#include "EventsInfo.h"
 #include <functional>
 class SceneRoomTemplate: public SceneTemplate
 {
@@ -16,6 +16,8 @@ protected:
 
 
 	public:
+		void startDialogue(const eventToRead& _eventToRead);
+		void endDialogue();
 		//use the room enum for de index
 		virtual void resolvedPuzzle(int i);
 		void setActiveBottons(bool active);

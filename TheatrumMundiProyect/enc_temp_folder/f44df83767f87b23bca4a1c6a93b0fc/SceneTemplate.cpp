@@ -2,7 +2,7 @@
 #include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
 #include "../TheatrumMundi/Area2DLayerManager.h"
-#include "Game.h"
+
 SceneTemplate::SceneTemplate()
 {
 	entityManager = new ecs::EntityManager();
@@ -28,15 +28,4 @@ SceneTemplate::~SceneTemplate()
 	delete entityManager;
 	delete areaLayerManager;
 	delete entityFactory;
-}
-void SceneTemplate::startDialogue(const eventToRead& _eventToRead)
-{
-	entityManager->setActiveGroup(ecs::grp::DIALOGUE, true);
-	Game::Instance()->getDialogueManager()->ReadDialogue(_eventToRead);
-
-}
-void SceneTemplate::endDialogue()
-{
-	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
-	entityManager->setActiveGroup(ecs::grp::ZOOMOBJ, false);
 }

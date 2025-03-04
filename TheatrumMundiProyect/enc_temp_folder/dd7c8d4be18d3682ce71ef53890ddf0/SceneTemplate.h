@@ -1,6 +1,6 @@
 #pragma once
 #include <list>
-#include "EventsInfo.h"
+
 #include "Manager.h"
 
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
@@ -28,10 +28,6 @@ public:
 	void virtual refresh() {};
 	void virtual unload() {};
 	virtual ~SceneTemplate();
-
-	void startDialogue(const eventToRead& _eventToRead);
-
-	void endDialogue();
 
 };
 
