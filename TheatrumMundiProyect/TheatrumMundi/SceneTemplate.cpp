@@ -33,7 +33,7 @@ SceneTemplate::~SceneTemplate()
 void SceneTemplate::startDialogue(const eventToRead& _eventToRead)
 {
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, true);
-	entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
+	//entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 	Game::Instance()->getDialogueManager()->ReadDialogue(_eventToRead);
 
 }
@@ -42,5 +42,5 @@ void SceneTemplate::endDialogue()
 	std::cout << "acabe";
 	
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
-	//entityManager->setActiveGroup(ecs::grp::ZOOMOBJ, false);
+	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
 }

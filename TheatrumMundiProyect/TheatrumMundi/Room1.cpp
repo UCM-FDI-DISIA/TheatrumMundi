@@ -21,10 +21,11 @@
 Room1Scene::Room1Scene(): SceneRoomTemplate()
 {
 	roomEvent.resize(event_size);
-	roomEvent[InitialDialogue] = [this] 
-	{
-		startDialogue(SalaIntermedia1);
-	};
+	roomEvent[InitialDialogue] = [this]
+		{
+			startDialogue(SalaIntermedia1);
+
+		};
 	roomEvent[CorpseDialogue] = [this]
 		{
 #ifdef DEBUG
@@ -106,6 +107,9 @@ void Room1Scene::init()
 
 		//Register scene in dialogue manager
 		Game::Instance()->getDialogueManager()->setScene(this);
+		//MiddleRoomBkgrnd
+		entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::MIDDLEROOM);
+		
 
 		//CharacterImage
 		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
@@ -378,7 +382,7 @@ void Room1Scene::init()
 	}
 	SDL_Delay(1000);
 
-	//roomEvent[InitialDialogue]();
+	roomEvent[InitialDialogue]();
 	
 }
 
