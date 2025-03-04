@@ -27,7 +27,11 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 	};
 	roomEvent[CorpseDialogue] = [this]
 		{
+#ifdef DEBUG
 			std::cout << "semurio";
+#endif // DEBUG
+
+			
 			startDialogue(SalaIntermedia1);
 		};
 	roomEvent[PipePuzzleSnc] = [this]
@@ -87,6 +91,19 @@ void Room1Scene::init()
  
 	if (!isStarted) {
 		isStarted = true;
+
+		//Audio sfx 
+		AudioManager& a = AudioManager::Instance();
+		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		a.setVolume(buttonSound, 0.2);
+		Sound puzzleButtonSound = sdlutils().soundEffects().at("puzzle");
+		a.setVolume(puzzleButtonSound, 0.3);
+		Sound doorSound = sdlutils().soundEffects().at("puerta");
+		//Audio music
+		Sound room1music = sdlutils().musics().at("room1music");
+		a.setLooping(room1music, true);
+		a.playSound(room1music);
+
 		//Register scene in dialogue manager
 		Game::Instance()->getDialogueManager()->setScene(this);
 
@@ -189,8 +206,9 @@ void Room1Scene::init()
 		auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
 		ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(ChangeRoom2));
 		auto _quitButton = entityFactory->CreateInteractableEntity(entityManager, "B1", entityFactory->RECTAREA, Vector2D(sdlutils().width() - 110, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, entityFactory->NODRAG, ecs::grp::UI);
-		entityManager->getComponent<ClickComponent>(_quitButton)->connect(ClickComponent::JUST_CLICKED, [this, _quitButton]()
+		entityManager->getComponent<ClickComponent>(_quitButton)->connect(ClickComponent::JUST_CLICKED, [this, _quitButton,buttonSound]()
 			{
+				AudioManager::Instance().playSound(buttonSound);
 				entityManager->setActiveGroup(ecs::grp::ZOOMOBJ, false);
 				entityManager->setActive(_quitButton, false);
 				entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, true);
@@ -254,32 +272,46 @@ void Room1Scene::init()
 		//TeaCup
 		auto TeaCup = entityFactory->CreateInteractableEntity(entityManager, "Clock", EntityFactory::RECTAREA, Vector2D(500, 200), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(TeaCup));
-		entityManager->getComponent<ClickComponent>(TeaCup)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[TeaCupPuzzleSnc](); });
+		entityManager->getComponent<ClickComponent>(TeaCup)->connect(ClickComponent::JUST_CLICKED, [this, puzzleButtonSound]() {
+			AudioManager::Instance().playSound(puzzleButtonSound);
+			roomEvent[TeaCupPuzzleSnc](); 
+			});
 
 
 		auto Clock = entityFactory->CreateInteractableEntity(entityManager, "Clock", EntityFactory::RECTAREA, Vector2D(828, 95), Vector2D(0, 0), 142, 553, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Clock));
-		entityManager->getComponent<ClickComponent>(Clock)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[ClockPuzzleSnc]();});
+		entityManager->getComponent<ClickComponent>(Clock)->connect(ClickComponent::JUST_CLICKED, [this, puzzleButtonSound]() {
+			AudioManager::Instance().playSound(puzzleButtonSound);
+			roomEvent[ClockPuzzleSnc]();
+			});
 
 		auto Shelf = entityFactory->CreateInteractableEntity(entityManager, "Shelf", EntityFactory::RECTAREA, Vector2D(214, 96), Vector2D(0, 0), 191, 548, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Shelf));
-		entityManager->getComponent<ClickComponent>(Shelf)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[BooksPuzzleScn]();});
+		entityManager->getComponent<ClickComponent>(Shelf)->connect(ClickComponent::JUST_CLICKED, [this, puzzleButtonSound]() {
+			AudioManager::Instance().playSound(puzzleButtonSound);
+			roomEvent[BooksPuzzleScn]();
+			});
 		//LivingRoom (Left)
 
 		auto Tubes = entityFactory->CreateInteractableEntity(entityManager, "Tubes", EntityFactory::RECTAREA, Vector2D(356-sdlutils().width() - 6, 127), Vector2D(0, 0), 616, 336, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Tubes));
-		entityManager->getComponent<ClickComponent>(Tubes)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[PipePuzzleSnc]();});
+		entityManager->getComponent<ClickComponent>(Tubes)->connect(ClickComponent::JUST_CLICKED, [this,puzzleButtonSound]() {
+			AudioManager::Instance().playSound(puzzleButtonSound);
+			roomEvent[PipePuzzleSnc]();
+			});
 
 		auto ChangeRoom1Button = entityManager->getComponent<ClickComponent>(ChangeRoom1);
-		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom1Button,StudyBackgroundScroll]() {
+		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom1Button,StudyBackgroundScroll, doorSound]() {
 			if (!StudyBackgroundScroll->isScrolling()) {
+				AudioManager::Instance().playSound(doorSound);
 				StudyBackgroundScroll->Scroll(ScrollComponent::RIGHT);
 			}
 			});
 
 		auto ChangeRoom2Button = entityManager->getComponent<ClickComponent>(ChangeRoom2);
-		ChangeRoom2Button->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom2Button, StudyBackgroundScroll]() {
+		ChangeRoom2Button->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom2Button, StudyBackgroundScroll, doorSound]() {
 			if (!StudyBackgroundScroll->isScrolling()) {
+				AudioManager::Instance().playSound(doorSound);
 				StudyBackgroundScroll->Scroll(ScrollComponent::LEFT);
 			}
 			});
@@ -287,14 +319,14 @@ void Room1Scene::init()
 		//UI
 		auto buttonPause = entityFactory->CreateInteractableEntity(entityManager,"B3", EntityFactory::RECTAREA ,Vector2D(20,20), Vector2D(0,0), 90,90,0,areaLayerManager,EntityFactory::NODRAG ,ecs::grp::UI);
 		ClickComponent* buttonPauseClick = entityManager->getComponent<ClickComponent>(buttonPause);
-		buttonPauseClick->connect(ClickComponent::JUST_CLICKED, [this]() {
-
+		buttonPauseClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
+			AudioManager::Instance().playSound(buttonSound);
 			});
 
 		auto buttonInventory = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3 ,20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		ClickComponent* buttonInventoryClick = entityManager->getComponent<ClickComponent>(buttonInventory);
-		buttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this]() {
-
+		buttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
+			AudioManager::Instance().playSound(buttonSound);
 			});
 
 		auto buttonLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(20, sdlutils().height() - (268/3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
@@ -302,7 +334,8 @@ void Room1Scene::init()
 		auto buttonCloseLog = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 500), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		
 		ClickComponent* buttonLogClick = entityManager->getComponent<ClickComponent>(buttonLog);
-		buttonLogClick->connect(ClickComponent::JUST_CLICKED, [this, _log, buttonLog, buttonCloseLog]() {
+		buttonLogClick->connect(ClickComponent::JUST_CLICKED, [this, _log, buttonLog, buttonCloseLog, buttonSound]() {
+			AudioManager::Instance().playSound(buttonSound);
 			//open log
 			entityManager->setActive(_log, true);
 			logActive = true;
@@ -314,7 +347,8 @@ void Room1Scene::init()
 		entityManager->setActive(buttonLog, true);
 		
 		ClickComponent* buttonCloseLogClick = entityManager->getComponent<ClickComponent>(buttonCloseLog);
-		buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [this, _log, buttonLog, buttonCloseLog]() {
+		buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [this, _log, buttonLog, buttonCloseLog, buttonSound]() {
+			AudioManager::Instance().playSound(buttonSound);
 			//open log
 			entityManager->setActive(_log, false);
 			logActive = false;

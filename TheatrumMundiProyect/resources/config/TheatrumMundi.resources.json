@@ -382,7 +382,7 @@
 
   "musics" : [
     {
-        "id": "Room1Loop",
+        "id": "room1music",
         "file":  "../resources/sound/ost/P2Room1.wav"
     }
   ]
