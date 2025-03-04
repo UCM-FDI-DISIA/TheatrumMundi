@@ -90,6 +90,9 @@ void Room1Scene::init()
 		//Register scene in dialogue manager
 		Game::Instance()->getDialogueManager()->setScene(this);
 
+		//CharacterImage
+		auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
+		entityManager->setActive(characterimg, false);
 
 		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
 		auto _screenDetect = entityManager->addEntity(ecs::grp::DIALOGUE);
@@ -223,6 +226,12 @@ void Room1Scene::init()
 				entityManager->setActive(_quitButton, true);
 			});
 
+		//TeaCup
+		auto TeaCup = entityFactory->CreateInteractableEntity(entityManager, "Clock", EntityFactory::RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(TeaCup));
+		entityManager->getComponent<ClickComponent>(TeaCup)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[TeaCupPuzzleSnc](); });
+
+
 		auto Clock = entityFactory->CreateInteractableEntity(entityManager, "Clock", EntityFactory::RECTAREA, Vector2D(828, 95), Vector2D(0, 0), 142, 553, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Clock));
 		entityManager->getComponent<ClickComponent>(Clock)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[ClockPuzzleSnc]();});
@@ -253,7 +262,9 @@ void Room1Scene::init()
 		
 
 	}
+	SDL_Delay(1000);
 
+	//roomEvent[InitialDialogue]();
 	
 }
 
