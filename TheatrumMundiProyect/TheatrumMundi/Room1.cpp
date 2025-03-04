@@ -292,8 +292,26 @@ void Room1Scene::init()
 			}
 			});
 		
-		
+		//UI
+		auto buttonPause = entityFactory->CreateInteractableEntity(entityManager,"B3", EntityFactory::RECTAREA ,Vector2D(20,20), Vector2D(0,0), 268/3,268/3,0,areaLayerManager,EntityFactory::NODRAG ,ecs::grp::INTERACTOBJ);
+		ClickComponent* buttonPauseClick = entityManager->getComponent<ClickComponent>(buttonPause);
+		buttonPauseClick->connect(ClickComponent::JUST_CLICKED, [this]() {
 
+			});
+
+		auto buttonInventory = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3 ,20), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		ClickComponent* buttonInventoryClick = entityManager->getComponent<ClickComponent>(buttonInventory);
+		buttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this]() {
+
+			});
+
+		auto buttonLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(20, sdlutils().height() - (268/3) - 20), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		ClickComponent* buttonLogClick = entityManager->getComponent<ClickComponent>(buttonLog);
+		buttonLogClick->connect(ClickComponent::JUST_CLICKED, [this]() {
+
+			});
+
+		//X Button "B1"
 	}
 	SDL_Delay(1000);
 
