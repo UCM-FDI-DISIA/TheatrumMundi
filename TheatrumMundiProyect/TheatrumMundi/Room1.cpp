@@ -98,6 +98,9 @@ void Room1Scene::init()
 		auto LivingBackground = entityFactory->CreateImageEntity(entityManager, "LivingroomBackground", Vector2D(0 - sdlutils().width(), 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(LivingBackground));
 
+		auto Corspe = entityFactory->CreateInteractableEntity(entityManager, "Corspe",EntityFactory::RECTAREA, Vector2D(919, 423), Vector2D(0, 0), 275, 327, 0, areaLayerManager,EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Corspe));
+
 		auto ChangeRoom1Button = entityManager->getComponent<ClickComponent>(ChangeRoom1);
 		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom1Button,StudyBackgroundScroll]() {
 
