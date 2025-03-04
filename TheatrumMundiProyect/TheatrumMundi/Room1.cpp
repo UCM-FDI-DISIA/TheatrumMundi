@@ -107,7 +107,6 @@ void Room1Scene::init()
 			{
 				if (!logActive) {
 					//read dialogue only if it has to
-					//read dialogue only if it has to
 					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
 					{
 						Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermedia1);
