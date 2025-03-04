@@ -5,6 +5,8 @@
 #include "../src/Components/TriggerComponent.h"
 #include "../src/Components/ClickComponent.h"
 #include "../src/Components/DragComponent.h"
+#include "../src/Components/Area2D.h"
+#include "../src/Components/Image.h"
 #include "../src/sdlutils/VirtualTimer.h"
 #include "../src/sdlutils/SDLUtils.h"
 
@@ -24,28 +26,35 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 	if (!isStarted) {
 		isStarted = true;
 		room = sr;
+		
+		auto teaCupBackground = entityFactory->CreateImageEntity(entityManager, "TeaCupBackgroundWithoutSpoon", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+		teaCupBackground->getMngr()->removeComponent<Area2D>(teaCupBackground);
+
 		ecs::entity_t teaCupSpoon = entityFactory->CreateInteractableEntity( // Spoon entity
-			entityManager, "clockMinArrow", EntityFactory::RECTAREA,
-			Vector2D(100, 400), Vector2D(), 100, 40, 0,
+			entityManager, "TeaCupSpoon", EntityFactory::RECTAREA,
+			Vector2D(100, 400), Vector2D(), 600, 400, 0,
 			areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);
 
 		ecs::entity_t teaCup = entityFactory->CreateInteractableEntity( // Cup entity
 			entityManager, "clockShape", EntityFactory::RECTAREA,
-			Vector2D(400, 400), Vector2D(), 200, 100, 0,
+			Vector2D(400, 100), Vector2D(), 460, 280, 0,
 			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		teaCup->getMngr()->removeComponent<Image>(teaCup);
 
 
 		entityManager->getComponent<ClickComponent>(teaCup) // The cup is clicked after introducing the spoon
-			->connect(ClickComponent::JUST_CLICKED, [teaCup, this]()
+			->connect(ClickComponent::JUST_CLICKED, [teaCupBackground, teaCup, this]()
 				{
 					if (_spoonIsInCup == false) return;
 					_poisonIsChecked = true;
 
 					// ... Change image revealing poinson or whatever  <-- TODO
+					Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithPoison");
+					teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
 				});
 
 		entityManager->addComponent<TriggerComponent>(teaCup) // Spoon enters the cup Area2D
-			->connect(TriggerComponent::AREA_ENTERED, [this]()
+			->connect(TriggerComponent::AREA_ENTERED, [teaCupBackground, this]()
 				{
 					_spoonIsInCup = true;
 				});
@@ -57,12 +66,14 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 				});
 
 		entityManager->getComponent<DragComponent>(teaCupSpoon) // The spoon is dropped in the cup
-			->connect(DragComponent::DRAG_END, [teaCupSpoon, this]()
+			->connect(DragComponent::DRAG_END, [teaCupBackground, teaCupSpoon, this]()
 				{
 					if (_spoonIsInCup == false) return;
 					entityManager->setActive(teaCupSpoon, false);
 
-					// ... Change image to cup with spoon  <-- TODO
+					// ... Change image to cup with spoon  <-- TODO			
+					Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithSpoon");
+					teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
 				});
 	}
 
