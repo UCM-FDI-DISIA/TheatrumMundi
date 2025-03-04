@@ -18,7 +18,6 @@ SceneManager::SceneManager()
 {
 	scenes.resize(SceneName::SCENE_SIZE);
 
-	//scenes[SceneName::INITIAL_MENU] = new DebugInventoryScene();
 	scenes[SceneName::INITIAL_MENU] = new InitialScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();

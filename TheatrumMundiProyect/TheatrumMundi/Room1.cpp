@@ -21,10 +21,11 @@
 Room1Scene::Room1Scene(): SceneRoomTemplate()
 {
 	roomEvent.resize(event_size);
-	roomEvent[InitialDialogue] = [this] 
-	{
-		startDialogue(SalaIntermedia1);
-	};
+	roomEvent[InitialDialogue] = [this]
+		{
+			startDialogue(SalaIntermedia1);
+
+		};
 	roomEvent[CorpseDialogue] = [this]
 		{
 #ifdef DEBUG
@@ -68,6 +69,9 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 		};
 	roomEvent[Spoon] = [this] {
 		// InventoryLogic
+		GetInventory()->addItem(new Hint("TeaCupSpoon", "Es una cuchara, que no lo ves o que", &sdlutils().images().at("TeaCupSpoon")));
+		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3) - 20), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT));
+		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 		};
 	roomEvent[ResolveCase] = [this] {
 		//Poner el dialogo correspondiente
@@ -106,6 +110,9 @@ void Room1Scene::init()
 
 		//Register scene in dialogue manager
 		Game::Instance()->getDialogueManager()->setScene(this);
+		//MiddleRoomBkgrnd
+		entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::MIDDLEROOM);
+		
 
 		//CharacterImage
 		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
@@ -328,6 +335,21 @@ void Room1Scene::init()
 		ClickComponent* buttonInventoryClick = entityManager->getComponent<ClickComponent>(buttonInventory);
 		buttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
 			AudioManager::Instance().playSound(buttonSound);
+			GetInventory()->setActive(!GetInventory()->getActive());  // Toggle the inventory
+
+			// If the inventory is active, activate the items
+			if (GetInventory()->getActive()) {
+
+				for (int i = 0; i < GetInventory()->getItemNumber(); ++i) {
+					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the hints
+				}
+			}
+			else {
+
+				for (int i = 0; i < GetInventory()->getItemNumber(); ++i) {
+					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the hints
+				}
+			}
 			});
 
 		auto buttonLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(20, 748 - (268/3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
@@ -372,12 +394,17 @@ void Room1Scene::init()
 			entityManager->setActive(buttonimp, true);
 			};
 
-
+		//Spoon
+		auto spoon = entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3) - 20), Vector2D(0, 0), 1000 / 3, 1000 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		entityManager->getComponent<ClickComponent>(spoon)->connect(ClickComponent::JUST_CLICKED, [this,spoon]() {
+			spoon->getMngr()->setActive(spoon,false);
+			roomEvent[Spoon]();
+			});
 		//X Button "B1"
 	}
 	SDL_Delay(1000);
 
-	//roomEvent[InitialDialogue]();
+	roomEvent[InitialDialogue]();
 	
 }
 
