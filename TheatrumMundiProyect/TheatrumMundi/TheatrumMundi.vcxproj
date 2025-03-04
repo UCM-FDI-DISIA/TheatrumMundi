@@ -45,10 +45,6 @@
     <ClCompile Include="..\SRC\sdlutils\Texture.cpp" />
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
-    <ClCompile Include="AnimatorComponent.cpp" />
-    <ClCompile Include="BooksPuzzleScene.cpp" />
-    <ClCompile Include="Area2DLayerManager.cpp" />
-    <ClCompile Include="DebugInventoryScene.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BooksPuzzleScene.cpp" />
     <ClCompile Include="Area2DLayerManager.cpp" />
@@ -58,13 +54,11 @@
     <ClCompile Include="DialogTestScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
-    <ClCompile Include="Hint.cpp" />
     <ClCompile Include="InitialScene.cpp" />
-    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Module.cpp" />
-    <ClCompile Include="PhysicsBodyComponent.cpp" />
     <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PipePuzzleScene.cpp" />
+    <ClCompile Include="PhysicsBodyComponent.cpp" />
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScenePuzzleTemplate.cpp" />
@@ -217,10 +211,6 @@
     <ClInclude Include="..\SRC\utils\ptr_iterator.h" />
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
-    <ClInclude Include="AnimatorComponent.h" />
-    <ClInclude Include="BooksPuzzleScene.h" />
-    <ClInclude Include="Area2DLayerManager.h" />
-    <ClInclude Include="DebugInventoryScene.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BooksPuzzleScene.h" />
     <ClInclude Include="Area2DLayerManager.h" />
@@ -232,13 +222,11 @@
     <ClInclude Include="Direction.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="EventsInfo.h" />
-    <ClInclude Include="Hint.h" />
     <ClInclude Include="InitialScene.h" />
-    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Module.h" />
-    <ClInclude Include="PhysicsBodyComponent.h" />
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="PipePuzzleScene.h" />
+    <ClInclude Include="PhysicsBodyComponent.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScenePuzzleTemplate.h" />
@@ -304,9 +292,6 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)src\json;$(SolutionDir)src\utils;$(SolutionDir)src\game;$(SolutionDir)src\sdlutils;$(SolutionDir)src\Components;$(SolutionDir)src\ecs;$(SolutionDir)lib\SDL2_net-2.2.0\include;$(SolutionDir)lib\SDL2_mixer-2.8.0\include;$(SolutionDir)lib\SDL2_ttf-2.24.0\include;$(SolutionDir)lib\SDL2_image-2.8.4\include;$(SolutionDir)lib\SDL2-2.30.11\include;$(IncludePath)</IncludePath>
-    <SourcePath>$(SolutionDir)\SRC</SourcePath>
-    <LibraryPath>$(SolutionDir)lib\SDL2_net-2.2.0\lib\$(Platform);$(SolutionDir)lib\SDL2_mixer-2.8.0\lib\$(Platform);$(SolutionDir)lib\SDL2_ttf-2.24.0\lib\$(Platform);$(SolutionDir)lib\SDL2_image-2.8.4\lib\$(Platform);$(SolutionDir)lib\SDL2-2.30.11\lib\$(Platform);$(LibraryPath)</LibraryPath>
     <IncludePath>$(SolutionDir)src\json;$(SolutionDir)src\utils;$(SolutionDir)src\game;$(SolutionDir)src\sdlutils;$(SolutionDir)src\Components;$(SolutionDir)src\ecs;$(SolutionDir)lib\SDL2_net-2.2.0\include;$(SolutionDir)lib\SDL2_mixer-2.8.0\include;$(SolutionDir)lib\SDL2_ttf-2.24.0\include;$(SolutionDir)lib\SDL2_image-2.8.4\include;$(SolutionDir)lib\SDL2-2.30.11\include;$(SolutionDir)lib\OpenAL_1.1_SDK\include;$(SolutionDir)lib\libsndfile-1.2.2\include;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir)\SRC</SourcePath>
     <LibraryPath>$(SolutionDir)lib\SDL2_net-2.2.0\lib\$(Platform);$(SolutionDir)lib\SDL2_mixer-2.8.0\lib\$(Platform);$(SolutionDir)lib\SDL2_ttf-2.24.0\lib\$(Platform);$(SolutionDir)lib\SDL2_image-2.8.4\lib\$(Platform);$(SolutionDir)lib\SDL2-2.30.11\lib\$(Platform);$(SolutionDir)lib\OpenAL_1.1_SDK\lib\$(Platform);$(SolutionDir)lib\libsndfile-1.2.2\lib\$(Platform);$(LibraryPath)</LibraryPath>
