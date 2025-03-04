@@ -31,6 +31,7 @@ DebugInventoryScene::~DebugInventoryScene()
 void DebugInventoryScene::init()
 {
 	inv2 = new Inventory();
+	std::vector<Vector2D> itemPositions = { {100, 100}, {100, 250}, {100, 300}, {100, 400}, {100, 500} };
 
 	if (!isStarted) 
 	{
@@ -46,14 +47,17 @@ void DebugInventoryScene::init()
 		entityManager->addComponent<RectArea2D>(_gloves);
 
 		ClickComponent* clkInv = entityManager->addComponent<ClickComponent>(_gloves);
-		clkInv->connect(ClickComponent::JUST_CLICKED, [this, _gloves]() {
+		clkInv->connect(ClickComponent::JUST_CLICKED, [this, _gloves, itemPositions]() {
 
 			_gloves->getMngr()->setActive(_gloves, false);  // Desactivate the gloves entity
 
 			// Create a hint and add it to the inventory
 			Hint* glovesHint = new Hint("gloves", "A pair of gloves", &sdlutils().images().at("gloves"));
 			inv2->addItem(glovesHint);
-			inv2->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, glovesHint->getID(), EntityFactory::RECTAREA, Vector2D(100, 100), Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::DRAG));
+
+			Vector2D itemPos = itemPositions[inv2->hints.size() % itemPositions.size()];
+
+			inv2->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, glovesHint->getID(), EntityFactory::RECTAREA, itemPos, Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::DRAG));
 			inv2->hints.back()->getMngr()->setActive(inv2->hints.back(),false);
 			glovesHint->setActive(false);  // Desactivated inicially for the inventory
 			//std::cout << "Added to inventory. Active state: " << gloves->getActive() << std::endl;
@@ -66,14 +70,17 @@ void DebugInventoryScene::init()
 		entityManager->addComponent<RectArea2D>(_spoon);
 
 		ClickComponent* clkInv2 = entityManager->addComponent<ClickComponent>(_spoon);
-		clkInv2->connect(ClickComponent::JUST_CLICKED, [this, _spoon]() {
+		clkInv2->connect(ClickComponent::JUST_CLICKED, [this, _spoon, itemPositions]() {
 
 			_spoon->getMngr()->setActive(_spoon, false);  // Desactivate the gloves entity
 
 			// Create a hint and add it to the inventory
 			Hint* spoonHint = new Hint("spoon", "Una cuchara de metal", &sdlutils().images().at("spoon"));
 			inv2->addItem(spoonHint);
-			inv2->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, spoonHint->getID(), EntityFactory::RECTAREA, Vector2D(100, 100), Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::DRAG));
+
+			Vector2D itemPos = itemPositions[inv2->hints.size() % itemPositions.size()];
+
+			inv2->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, spoonHint->getID(), EntityFactory::RECTAREA, itemPos, Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::DRAG));
 			inv2->hints.back()->getMngr()->setActive(inv2->hints.back(), false);
 			spoonHint->setActive(false);  // Desactivated inicially for the inventory
 			//std::cout << "Added to inventory. Active state: " << gloves->getActive() << std::endl;
@@ -97,7 +104,6 @@ void DebugInventoryScene::init()
 			// If the inventory is active, activate the items
 			if (inv2->getActive()) {
 
-				
 				for (int i = 0; i < 2; ++i) {
 					inv2->hints[i]->getMngr()->setActive(inv2->hints[i], true);  // Activate the hints
 				}
@@ -108,7 +114,6 @@ void DebugInventoryScene::init()
 					inv2->hints[i]->getMngr()->setActive(inv2->hints[i], false);  // Activate the hints
 				}
 			}
-			inv2->render();
 
 			std::cout << "Inventory active state: " << inv2->getActive() << std::endl;
 			/*inv2->setActive(!inv2->getActive());

@@ -18,35 +18,6 @@ Inventory::~Inventory()
 	}
 }
 
-void Inventory::render()
-{
-	/*std::cout << "Rendering inventory" << std::endl;
-	int posX = 50;  // Pos X
-	int posY = 100; // Pos Y
-	int offset = 50; // separation between items
-
-	for (int i = 0; i < items.size(); ++i) {
-		if (items[i]->getActive()) {
-			items[i]->render(posX, posY);
-			std::cout << "Rendering item at (" << posX << ", " << posY << ")" << std::endl;
-			posY += offset; // increment the Y position
-		}
-	}*/
-
-	
-	/*for (auto& item : items)
-	{
-		//std::cout << "Rendering item " << item->getDescription() << std::endl;
-		if (item->getActive())
-		{
-			item->render();
-			std::cout << "Rendering item " << item->getDescription() << std::endl;
-			
-		}
-	}*/
-	
-}
-
 std::vector<Hint*>* Inventory::getItems(int firstItem)
 {
 	if (firstItem < 0) {
