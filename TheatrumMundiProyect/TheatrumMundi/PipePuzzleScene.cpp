@@ -843,7 +843,7 @@ void PipePuzzleScene::waterPassPipe(int pipe) {
 		}
 		else {
 			
-			_waterPipes[pipe]->changePipeInfo().result = true;
+			_waterPipes[pipe]->changePipeInfo().result = false;
 			
 			
 		}
@@ -893,6 +893,7 @@ void PipePuzzleScene::waterPassModule(int module) {
 	else if (modInfo.right.first == 'N' && modInfo.right.second == 1) {
 		receivesWater = true;
 	}
+
 
 	if (modInfo.left.first == 'P' && _waterPipes[modInfo.left.second]->getPipeInfo().result) {
 		receivesWater = true;
@@ -988,6 +989,7 @@ void PipePuzzleScene::waterPassPath(int path) {
 		}
 		
 	}
+
 }
 
 
@@ -1002,21 +1004,21 @@ void PipePuzzleScene::updatePuzzle() {
 	std::queue<int> pipesToUpdate, modulesToUpdate, pathsToUpdate; 
 
 	// add modules 
-	for (int i = 0; i < _modules.size(); ++i) {
+	for (int i = 0; i < _modules.size(); i++) {
 		modulesToUpdate.push(i);
 		//std::cout << "Module " << i << " has water." << std::endl;  
 		
 	}
 
 	// add pipes
-	for (int i = 0; i < _waterPipes.size(); ++i) {
+	for (int i = 0; i < _waterPipes.size(); i++) {
 		pipesToUpdate.push(i);
 		//std::cout << "Pipe " << i << " has water." << std::endl;  
 		
 	}
 
 	// add paths
-	for (int i = 0; i < _waterPath.size(); ++i) {
+	for (int i = 0; i < _waterPath.size(); i++) {
 		pathsToUpdate.push(i);
 		//std::cout << "Path " << i << " has water." << std::endl;  
 	}
@@ -1030,23 +1032,13 @@ void PipePuzzleScene::updatePuzzle() {
 			//get the index of the fist one
 			int moduleIndex = modulesToUpdate.front();
 
+			// update x module
+			waterPassModule(moduleIndex);
 			//pop to have the next one ready
 			modulesToUpdate.pop();
 			//std::cout << "Updating Module " << moduleIndex << std::endl;  
 
-			// update x module
-			waterPassModule(moduleIndex);
 
-			// if module has water, neightbour pipes need to be checked
-			if (_modules[moduleIndex]->getModuleInfo().result) {
-				for (int i = 0; i < _waterPipes.size(); ++i) {
-					if (_waterPipes[i]->isConnectedToModule(moduleIndex) && !_waterPipes[i]->getPipeInfo().result) {
-
-						pipesToUpdate.push(i);  // x pipe needs to be checkeds
-						//std::cout << "Pipe " << i << " is now receiving water." << std::endl;
-					}
-				}
-			}
 		}
 
 		//Update pipes
@@ -1055,23 +1047,11 @@ void PipePuzzleScene::updatePuzzle() {
 			//get the index of the fist one
 			int pipeIndex = pipesToUpdate.front();
 
+			// update x pipe
+			waterPassPipe(pipeIndex);
 			//pop to have the next one ready
 			pipesToUpdate.pop();
 			//std::cout << "Updating Pipe " << pipeIndex << std::endl; 
-
-			// update x pipe
-			waterPassPipe(pipeIndex);
-
-			// if pipe has water, we need to check the paths
-			if (_waterPipes[pipeIndex]->getPipeInfo().result) {
-				for (int i = 0; i < _waterPath.size(); ++i) {
-					// check that pipe and path are conected anf path doesnt have water for it to be updated
-					if (_waterPath[i]._whoTocheck.num == pipeIndex && !_waterPath[i]._withWater) {
-						pathsToUpdate.push(i);  // x path needs to be checked
-						//std::cout << "Path " << i << " is now receiving water." << std::endl;  
-					}
-				}
-			}
 		}
 
 		//Update paths
@@ -1080,29 +1060,16 @@ void PipePuzzleScene::updatePuzzle() {
 			//get the index of the fist one
 			int pathIndex = pathsToUpdate.front();
 
+			// update x path
+			waterPassPath(pathIndex); 
 			//pop to have the next one ready
 			pathsToUpdate.pop();
 			//std::cout << "Updating Path " << pathIndex << std::endl;
-
-			// safe the previous water state
-			bool previousWaterState = _waterPath[pathIndex]._withWater;
-
-			// update x path
-			waterPassPath(pathIndex); 
-
-			// ckeck if path has change water state
-			bool waterChanged = (_waterPath[pathIndex]._withWater != previousWaterState);
-
-			// we only readd it if state of water has changed
-			if (_waterPath[pathIndex]._withWater && waterChanged) {
-				pathsToUpdate.push(pathIndex);  // if now the path has water we added again for it to be checked
-				
-			}
 		}
 
 	}
 
-	// Verificar si el puzzle está resuelto
+	// check if puzzle is correct
 	Check();
 }
 
