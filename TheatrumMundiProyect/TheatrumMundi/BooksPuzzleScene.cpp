@@ -63,7 +63,6 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		Game::Instance()->getDialogueManager()->setScene(this);
 
 		
-
 		//Create dialogue text entity. Object that renders dialogue Text on Screen
 		auto _textbackground = entityManager->addEntity(ecs::grp::DIALOGUE);
 		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
@@ -100,24 +99,6 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
 		entityManager->setActive(_textTest, false);
 
-
-
-		//Create log
-		auto _log = entityManager->addEntity();
-		entityManager->addComponent<Transform>(_log, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
-		Image* imLog = entityManager->addComponent<Image>(_log, &sdlutils().images().at("fondoPruebaLog"), 200); //background log
-
-		LogComponent* logComp = entityManager->addComponent<LogComponent>(_log); //logComponent
-
-		SDL_Color colorText = { 255, 255, 255, 255 };
-		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog =
-			entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
-
-		_log->getMngr()->setActive(_log, false); //hide log at the beggining
-
-		//Register log in dialogue manager
-		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
-		//Game::Instance()->getDialogueManager()->setScene(this);
 
 		//Add writeText to dialogueManager
 		SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
