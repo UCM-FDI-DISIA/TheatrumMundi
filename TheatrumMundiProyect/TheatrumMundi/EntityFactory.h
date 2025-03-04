@@ -9,7 +9,7 @@ class Area2DLayerManager;
 class EntityFactory {
 public:
 
-	EntityFactory();
+	EntityFactory(ecs::EntityManager* entityManager, Area2DLayerManager* areaLayerManager);
 	~EntityFactory();
 
 	enum AreaType { RECTAREA, CIRCLEAREA }; //DECIDE IF THE AREA IS RECT OR CIRCLE
@@ -33,4 +33,9 @@ public:
 	int _velocityScroll, float _time, ScrollType _isInverted, int _numPhasesScrolling,
 	Dragging _drag,	//DRAG SCROLL ENTITY
 	ecs::grpId_t gId); //GROUP OF ENTITIES
+
+private:
+
+	ecs::EntityManager* _myEntityManager;
+	Area2DLayerManager* _myAreaLayerManager;
 };

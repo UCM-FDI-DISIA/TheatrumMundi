@@ -6,8 +6,8 @@
 SceneTemplate::SceneTemplate()
 {
 	entityManager = new ecs::EntityManager();
-	entityFactory = new EntityFactory();
 	areaLayerManager = new Area2DLayerManager();
+	entityFactory = new EntityFactory(entityManager,areaLayerManager);
 	isStarted = false;
 }
 
