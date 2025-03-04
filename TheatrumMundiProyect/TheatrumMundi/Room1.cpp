@@ -27,11 +27,12 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 	};
 	roomEvent[CorpseDialogue] = [this]
 		{
+			std::cout << "semurio";
 			startDialogue(SalaIntermediaEvento1);
 		};
 	roomEvent[PipePuzzleSnc] = [this]
 		{
-			Game::Instance()->getSceneManager()->loadScene(PipePuzzleSnc,this);
+			Game::Instance()->getSceneManager()->loadScene(PIPE_PUZZLE,this);
 		};
 	roomEvent[PipePuzzleRsv] = [this] {
 		// InventoryLogic
@@ -39,7 +40,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 		};
 	roomEvent[BooksPuzzleScn] = [this]
 		{
-			Game::Instance()->getSceneManager()->loadScene(BooksPuzzleScn, this);
+			Game::Instance()->getSceneManager()->loadScene(BOOKS_PUZZLE, this);
 		};
 	roomEvent[BooksPuzzleRsv] = [this] {
 		// InventoryLogic
@@ -47,7 +48,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 		};
 	roomEvent[ClockPuzzleSnc] = [this]
 		{
-			Game::Instance()->getSceneManager()->loadScene(ClockPuzzleSnc, this);
+			Game::Instance()->getSceneManager()->loadScene(CLOCK_PUZZLE, this);
 		};
 	roomEvent[ClockPuzzleRsv] = [this] {
 		// InventoryLogic
@@ -55,7 +56,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 		};
 	roomEvent[TeaCupPuzzleSnc] = [this]
 		{
-			Game::Instance()->getSceneManager()->loadScene(TeaCupPuzzleSnc, this);
+			Game::Instance()->getSceneManager()->loadScene(TEA_CUP_PUZZLE, this);
 		};
 	roomEvent[TeaCupPuzzleRsv] = [this] {
 		// InventoryLogic
@@ -101,20 +102,23 @@ void Room1Scene::init()
 
 		auto Corspe = entityFactory->CreateInteractableEntity(entityManager, "Corspe",EntityFactory::RECTAREA, Vector2D(1000, 422), Vector2D(0, 0), 268, 326, 0, areaLayerManager,EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Corspe));
+		entityManager->getComponent<ClickComponent>(Corspe)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[CorpseDialogue]();});
 
 		auto Timetable = entityFactory->CreateInteractableEntity(entityManager, "Timetable", EntityFactory::RECTAREA, Vector2D(1173, 267), Vector2D(0, 0), 138, 182, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Timetable));
 
 		auto Clock = entityFactory->CreateInteractableEntity(entityManager, "Clock", EntityFactory::RECTAREA, Vector2D(828, 95), Vector2D(0, 0), 142, 553, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Clock));
+		entityManager->getComponent<ClickComponent>(Clock)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[ClockPuzzleSnc]();});
 
 		auto Shelf = entityFactory->CreateInteractableEntity(entityManager, "Shelf", EntityFactory::RECTAREA, Vector2D(214, 96), Vector2D(0, 0), 191, 548, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Shelf));
-
+		entityManager->getComponent<ClickComponent>(Shelf)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[BooksPuzzleScn]();});
 		//LivingRoom (Left)
 
 		auto Tubes = entityFactory->CreateInteractableEntity(entityManager, "Tubes", EntityFactory::RECTAREA, Vector2D(356-sdlutils().width() - 6, 127), Vector2D(0, 0), 616, 336, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Tubes));
+		entityManager->getComponent<ClickComponent>(Tubes)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[PipePuzzleSnc]();});
 
 		auto ChangeRoom1Button = entityManager->getComponent<ClickComponent>(ChangeRoom1);
 		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom1Button,StudyBackgroundScroll]() {
