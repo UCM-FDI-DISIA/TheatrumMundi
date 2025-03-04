@@ -87,6 +87,11 @@ void Room1Scene::init()
  
 	if (!isStarted) {
 
+		//MiddleRoombackground
+		//auto mdrmScene = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::ZOOMOBJ);
+
+		
+
 		auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width())/12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1160 - sdlutils().width(), 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
@@ -135,6 +140,12 @@ void Room1Scene::init()
 				entityManager->setActive(_quitButton, true);
 			});
 
+		//TeaCup
+		auto TeaCup = entityFactory->CreateInteractableEntity(entityManager, "Clock", EntityFactory::RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(TeaCup));
+		entityManager->getComponent<ClickComponent>(TeaCup)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[TeaCupPuzzleSnc]();});
+
+
 		auto Clock = entityFactory->CreateInteractableEntity(entityManager, "Clock", EntityFactory::RECTAREA, Vector2D(828, 95), Vector2D(0, 0), 142, 553, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Clock));
 		entityManager->getComponent<ClickComponent>(Clock)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[ClockPuzzleSnc]();});
@@ -167,10 +178,11 @@ void Room1Scene::init()
 
 		
 		
-		
+		//CharacterImage
+		auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
+		entityManager->setActive(characterimg, false);
 
-
-		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
+	/*	//All Screen: Object to detect click on screen. Used to read displayed dialogue.
 		auto _screenDetect = entityManager->addEntity(ecs::grp::DIALOGUE);
 		entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
 		entityManager->setActive(_screenDetect, false);
@@ -190,7 +202,7 @@ void Room1Scene::init()
 			});
 		entityManager->addComponent<TriggerComponent>(_textbackground);
 		entityManager->setActive(_textbackground, false);
-		
+		*/
 		
 		auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
 		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
@@ -247,9 +259,9 @@ void Room1Scene::init()
 		
 
 	}
-	//SDL_Delay(1000);
-	//_loadimg->getMngr()->setActive(_loadimg,false);
+	SDL_Delay(1000);
 
+	//roomEvent[InitialDialogue]();
 	
 }
 
