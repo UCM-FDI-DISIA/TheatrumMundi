@@ -10,6 +10,8 @@
 #include "../src/components/DragComponent.h"
 #include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
+#include "../src/Components/LogComponent.h"
+
 
 #include "AudioManager.h"
 
@@ -31,6 +33,67 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 	if (!isStarted) {
 		isStarted = true;
+
+		//Register scene in dialogue manager
+		Game::Instance()->getDialogueManager()->setScene(this);
+
+		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
+		auto _screenDetect = entityManager->addEntity(grp::DIALOGUE);
+		entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
+		entityManager->addComponent<Image>(_screenDetect, &sdlutils().images().at("fondoPruebaLog"), 100); //background log
+		entityManager->addComponent<RectArea2D>(_screenDetect, areaLayerManager);
+		entityManager->addComponent<TriggerComponent>(_screenDetect);
+		entityManager->setActive(_screenDetect, false);
+
+		//CharacterImage
+		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
+		auto characterimg = entityManager->addEntity(grp::DIALOGUE);
+		entityManager->addComponent<Transform>(characterimg, Vector2D(sdlutils().width() / 5, sdlutils().height() / 8), Vector2D(0, 0), 2019 / 2, 1122 / 2, 0);
+		auto imCh = entityManager->addComponent<Image>(characterimg, &sdlutils().images().at("Dialog"));
+
+		Game::Instance()->getDialogueManager()->setCharacterImg(imCh);
+		entityManager->setActive(characterimg, false);
+
+
+		//Create dialogue text entity. Object that renders dialogue Text on Screen
+		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
+		entityManager->addComponent<Transform>(_textbackground, Vector2D(-200, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
+		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
+		entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
+
+		entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _textbackground]()
+			{
+				if (!logActive) {
+					//read dialogue only if it has to
+					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
+					{
+						Game::Instance()->getDialogueManager()->ReadDialogue(Puzzle3);
+					}
+					else
+					{
+						_textbackground->getMngr()->setActive(_textbackground, false);
+					}
+				}
+			});
+		entityManager->addComponent<TriggerComponent>(_textbackground);
+		entityManager->setActive(_textbackground, false);
+
+
+		auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
+		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
+		entityManager->setActive(_textTest, false);
+
+
+		
+
+		//Add writeText to dialogueManager
+		SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
+		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
+
+		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
+
+		startDialogue(Puzzle3);
+
 		room = sr;
 		AudioManager& a = AudioManager::Instance();
 		Sound clockMinSound = sdlutils().soundEffects().at("aguja_minutero");
@@ -157,7 +220,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		//BackButton
-		auto _backButtonClock = entityManager->addEntity();
+		auto _backButtonClock = entityManager->addEntity(ecs::grp::INTERACTOBJ);
 		entityManager->addComponent<Transform>(_backButtonClock, Vector2D(800, 200), Vector2D(0, 0), 200, 175, 0);
 		entityManager->addComponent<Image>(_backButtonClock, &sdlutils().images().at("prueba"));
 
@@ -167,7 +230,6 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clkOpenClock = entityManager->addComponent<ClickComponent>(_backButtonClock);
 		clkOpenClock->connect(ClickComponent::JUST_CLICKED, []()
 		{
-				std::cout << "funcion lambda de salida del reloj" << std::endl;
 				Game::Instance()->getSceneManager()->popScene();
 		});
 

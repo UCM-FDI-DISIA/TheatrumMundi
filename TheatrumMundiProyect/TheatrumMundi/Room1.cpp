@@ -151,7 +151,6 @@ void Room1Scene::init()
 
 		//Register log in dialogue manager
 		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
-		//Game::Instance()->getDialogueManager()->setScene(this);
 
 		//Add writeText to dialogueManager
 		SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
