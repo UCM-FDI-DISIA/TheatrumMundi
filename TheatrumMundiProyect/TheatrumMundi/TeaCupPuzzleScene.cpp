@@ -10,6 +10,16 @@
 #include "../src/sdlutils/VirtualTimer.h"
 #include "../src/sdlutils/SDLUtils.h"
 
+#include "../src/components/Transform.h"
+
+#include "../src/components/CircleArea2D.h"
+#include "../src/components/RectArea2D.h"
+
+
+#include "AudioManager.h"
+
+#include "SceneRoomTemplate.h"
+
 TeaCupPuzzleScene::TeaCupPuzzleScene()
 {
 	_spoonIsInCup = false;
@@ -75,6 +85,20 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 					Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithSpoon");
 					teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
 				});
+
+		//BackButton
+		auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
+		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
+
+		entityManager->addComponent<RectArea2D>(_backButton);
+
+		//Click component Open log button
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
+			{
+				Game::Instance()->getSceneManager()->popScene();
+			});
 	}
 
 

@@ -218,18 +218,18 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		//BackButton
-		auto _backButtonClock = entityManager->addEntity(ecs::grp::INTERACTOBJ);
-		entityManager->addComponent<Transform>(_backButtonClock, Vector2D(800, 200), Vector2D(0, 0), 200, 175, 0);
-		entityManager->addComponent<Image>(_backButtonClock, &sdlutils().images().at("prueba"));
+		auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
+		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
 
-		entityManager->addComponent<RectArea2D>(_backButtonClock);
+		entityManager->addComponent<RectArea2D>(_backButton);
 
 		//Click component Open log button
-		ClickComponent* clkOpenClock = entityManager->addComponent<ClickComponent>(_backButtonClock);
-		clkOpenClock->connect(ClickComponent::JUST_CLICKED, []()
-		{
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
+			{
 				Game::Instance()->getSceneManager()->popScene();
-		});
+			});
 
 	}
 
