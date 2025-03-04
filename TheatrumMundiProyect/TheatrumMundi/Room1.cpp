@@ -84,7 +84,7 @@ Room1Scene::~Room1Scene()
 
 void Room1Scene::init()
 {
-	
+ 
 	if (!isStarted) {
 
 		auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width())/12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -100,15 +100,22 @@ void Room1Scene::init()
 		auto LivingBackground = entityFactory->CreateImageEntity(entityManager, "LivingroomBackground", Vector2D(- sdlutils().width()-6, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(LivingBackground));
 
+		auto _corpseZoom = entityFactory->CreateImageEntity(entityManager, "CorspeBackground", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(_corpseZoom, false);
+
 		auto Corspe = entityFactory->CreateInteractableEntity(entityManager, "Corspe",EntityFactory::RECTAREA, Vector2D(1000, 422), Vector2D(0, 0), 268, 326, 0, areaLayerManager,EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Corspe));
-		entityManager->getComponent<ClickComponent>(Corspe)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[CorpseDialogue]();});
+		entityManager->getComponent<ClickComponent>(Corspe)->connect(ClickComponent::JUST_CLICKED, [this,_corpseZoom]() {
+			_corpseZoom->getMngr()->setActive(_corpseZoom, true);
+			roomEvent[CorpseDialogue]();
+		});
+
+
 
 		auto Timetable = entityFactory->CreateInteractableEntity(entityManager, "Timetable", EntityFactory::RECTAREA, Vector2D(1173, 267), Vector2D(0, 0), 138, 182, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Timetable));
 		
 		auto _calendearZoom = entityFactory->CreateImageEntity(entityManager, "calendearZoom", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::ZOOMOBJ);
-		
 		entityManager->setActive(_calendearZoom, false);
 		auto _quitButton = entityFactory->CreateInteractableEntity(entityManager, "exit", entityFactory->RECTAREA, Vector2D(10, 10), Vector2D(0, 0), 50, 50, 0, areaLayerManager, entityFactory->NODRAG, ecs::grp::UI);
 		ClickComponent* click2 = entityManager->addComponent<ClickComponent>(_quitButton);

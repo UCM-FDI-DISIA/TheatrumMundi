@@ -342,8 +342,8 @@
 
   "musics" : [
     {
-        "id": "imperial_march",
-        "file":  "../resources/sound/imperial_march.wav"
+        "id": "Room1Loop",
+        "file":  "../resources/sound/ost/P2Room1.wav"
     }
   ]
 
