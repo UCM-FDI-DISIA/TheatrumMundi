@@ -52,13 +52,14 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted) 
 	{
+		isStarted = true;
 		room = sr;
 		auto StudyBackground = entityFactory->CreateImageEntity(entityManager, "ShelfBackground1", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 
-		auto number1 = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook1", EntityFactory::RECTAREA, Vector2D(602,0), Vector2D(0, 0), 109, 115, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		auto number2 = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook2", EntityFactory::RECTAREA, Vector2D(536,138), Vector2D(0, 0), 63, 127, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		auto number3 = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook3", EntityFactory::RECTAREA, Vector2D(69,119), Vector2D(0, 0), 743, 280, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		
+		auto number1 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(/*602,0*/sdlutils().width() * 9 / 21, sdlutils().height() - 120), Vector2D(0, 0), /*109, 115*/ 50, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto number2 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(/*536,138*/sdlutils().width() * 10 / 21, sdlutils().height() - 120), Vector2D(0, 0), /*63, 127*/50, 50, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto number3 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(/*69,119*/sdlutils().width() * 11 / 21, sdlutils().height() - 120), Vector2D(0, 0),/* 743, 280*/50, 50, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+
 		ClickComponent* clickNumber1 = entityManager->getComponent<ClickComponent>(number1);
 		clickNumber1->connect(ClickComponent::JUST_CLICKED, [this, number1]() {
 			if (myComb[0] < 9) {
@@ -153,7 +154,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		Reward->getMngr()->setActive(Reward, false);																																					
 
 		//CHECK COMBINATION
-		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 8 / 21, sdlutils().height() - 100), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() * 8 / 21, sdlutils().height() - 120), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		ClickComponent* clickcheckButton = entityManager->getComponent<ClickComponent>(checkButton);
 		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, Reward, this]() {
 			std::cout << "CLICK" << std::endl;
@@ -164,15 +165,14 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			}
 			});
 
-
 		//BOOKS
-		auto backButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(0,0), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK);
+		auto backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(0,0), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK);
 		backButton->getMngr()->setActive(backButton, false);
 
-		auto ButtonBookFirst = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(sdlutils().width() / 2, sdlutils().height() / 4), Vector2D(0, 0), 50, 300, 0,areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		auto ButtonBookSecond = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(822, sdlutils().height() / 4), Vector2D(0, 0), 50, 300, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		auto ButtonBookThird = entityFactory->CreateInteractableEntity(entityManager, "bookButton", EntityFactory::RECTAREA, Vector2D(900,sdlutils().height() / 4), Vector2D(0, 0), 50, 300, 0, areaLayerManager,EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		auto ImageBook = entityFactory->CreateImageEntity(entityManager, "prueba", Vector2D(100,100), Vector2D(0, 0), 1200, 600, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK);
+		auto ButtonBookFirst = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook1", EntityFactory::RECTAREA, Vector2D(/*sdlutils().width() / 2, sdlutils().height() / 4*/ 620, 0), Vector2D(0, 0), 85, 110, 0,areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto ButtonBookSecond = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook2", EntityFactory::RECTAREA, Vector2D(/*822, sdlutils().height() / 4*/ 515, 145), Vector2D(0, 0), 85, 110, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto ButtonBookThird = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook3", EntityFactory::RECTAREA, Vector2D(/*900,sdlutils().height() / 4*/ sdlutils().width()/2 + 70, sdlutils().height()/2 - 90), Vector2D(0, 0), 85, 110, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto ImageBook = entityFactory->CreateImageEntity(entityManager, "bookA", Vector2D(100,100), Vector2D(0, 0), 1200, 600, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK);
 		ImageBook->getMngr()->setActive(ImageBook, false);
 
 		//ClickComponent* ButtonBook1Click = entityManager->getComponent<ClickComponent>(ButtonBookFirst);
@@ -181,21 +181,18 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		//	ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, true);
 		//	ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, false);
 		//	});
-
 		//ClickComponent* ButtonBook2Click = entityManager->getComponent<ClickComponent>(ButtonBookSecond);
 		//ButtonBook2Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, increaseNumber1, increaseNumber2, increaseNumber3, backButton, checkButton, this]() {
 		//	ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookB"));
 		//	ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, true);
 		//	ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, false);
 		//	});
-
 		//ClickComponent* ButtonBook3Click = entityManager->getComponent<ClickComponent>(ButtonBookThird);
 		//ButtonBook3Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, increaseNumber1, increaseNumber2, increaseNumber3, backButton, checkButton,this]() {
 		//	ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookC"));
 		//	ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, true);
 		//	ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, false);
 		//	});
-
 		//ClickComponent* clickbackButton = entityManager->getComponent<ClickComponent>(backButton);
 		//clickbackButton->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, increaseNumber1, increaseNumber2, increaseNumber3, backButton, checkButton,this]() {
 		//	ImageBook->getMngr()->setActive(ImageBook, false);
@@ -243,9 +240,9 @@ void BooksPuzzleScene::unload()
 
 bool BooksPuzzleScene::Check()
 { //HERE WE PUT THE CORRECT COMBINATION : 6 - 4 - 1
-	return	myComb[0] == comb[6] && 
-			myComb[1] == comb[4] && 
-			myComb[2] == comb[1];
+	return	myComb[0] == comb[1] && 
+			myComb[1] == comb[6] && 
+			myComb[2] == comb[4];
 }
 
 void BooksPuzzleScene::Win()

@@ -134,7 +134,8 @@ void PipePuzzleScene::changeDirection(int module)
 void PipePuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted) {
-		sr = sr;
+		isStarted = true;
+		room = sr;
 		solved = false;
 		moduleCreation();
 		pipeCreation();

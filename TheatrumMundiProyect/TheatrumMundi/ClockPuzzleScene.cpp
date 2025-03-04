@@ -30,14 +30,14 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 	if (!isStarted) {
-
+		isStarted = true;
+		room = sr;
 		AudioManager& a = AudioManager::Instance();
 		Sound clockMinSound = sdlutils().soundEffects().at("aguja_minutero");
 		Sound clockHorSound = sdlutils().soundEffects().at("aguja_horario");
 		a.setVolume(clockMinSound,0.2);
 		a.setVolume(clockHorSound, 0.2);
 
-		room = sr;
 		//create the clock
 		auto _clockShape = entityManager->addEntity();
 		auto _clockShapeTransform = entityManager->addComponent<Transform>(_clockShape, Vector2D(600, 300), Vector2D(0, 0), 200, 200, 0);
