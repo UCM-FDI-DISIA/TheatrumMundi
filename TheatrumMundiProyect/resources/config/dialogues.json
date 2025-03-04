@@ -1,9 +1,9 @@
 {
     "Sala1":{
             "SalaIntermedia1":[
-                {"Character":"Personaje1","Text":"Esto es una prueba"},
-                {"Character":"Personaje2","Text":"Yo se supone que estoy muerto"},
-                {"Character":"Personaje3","Text":"uiiiai uiiiai"}
+                {"Character":"Sol","Text":"Esto es una prueba"},
+                {"Character":"Keisara","Text":"Yo se supone que estoy muerto"},
+                {"Character":"Lucy","Text":"uiiiai uiiiai"}
             ],
             "Sala1Intro":[
                 {"Character":"Personaje3","Text":"Why we still here... Just to suffer"}
