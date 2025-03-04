@@ -19,10 +19,10 @@ TeaCupPuzzleScene::~TeaCupPuzzleScene()
 
 }
 
-void TeaCupPuzzleScene::init()
+void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (isStarted) return;
-
+	sr = sr;
 	ecs::entity_t teaCupSpoon = entityFactory->CreateInteractableEntity( // Spoon entity
 		entityManager, "clockMinArrow", EntityFactory::RECTAREA, 
 		Vector2D(100, 400), Vector2D(), 100, 40, 0, 
