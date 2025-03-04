@@ -145,7 +145,9 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clockResetClick = entityManager->addComponent<ClickComponent>(_buttonResetPuzzle);
 		clockResetClick->connect(ClickComponent::JUST_CLICKED, [_clockHorTransform,_clockMinTransform, this]()
 			{
+#ifdef DEBUG
 				std::cout << "WAAAAAAAAAA\n";
+#endif // DEBUG
 
 				_clockHorTransform->setRot(90);
 				_actualHour = 90;
