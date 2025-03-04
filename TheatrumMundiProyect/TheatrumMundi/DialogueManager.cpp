@@ -148,6 +148,9 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 			//call scene method to disable dialogue objects on scene
 			_scene->endDialogue();
 			displayOnProcess = false;
+
+			_showText->Character = " "; // Saves new text
+			_showText->Text = " ";
 		}
 	}
 	else

@@ -37,6 +37,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		//Register scene in dialogue manager
 		Game::Instance()->getDialogueManager()->setScene(this);
 
+		
 		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
 		auto _screenDetect = entityManager->addEntity(grp::DIALOGUE);
 		entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
@@ -67,7 +68,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 					//read dialogue only if it has to
 					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
 					{
-						Game::Instance()->getDialogueManager()->ReadDialogue(Puzzle3);
+						Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermedia1);
 					}
 					else
 					{
@@ -91,8 +92,9 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
 
 		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
+		
 
-		startDialogue(Puzzle3);
+		startDialogue(SalaIntermedia1);
 
 		room = sr;
 		AudioManager& a = AudioManager::Instance();
