@@ -86,11 +86,11 @@ void WriteTextComponent<TextInfo>::render()
 {
 
 	Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
-	SDL_Rect nameRect = { 100, 500,nameText->width(),nameText->height()};
+	SDL_Rect nameRect = { 200, 470,nameText->width(),nameText->height()};
 	nameText->render(nameRect, 0);
 
 	Texture* dialogText = new Texture(sdlutils().renderer(), _currentText, _myFont, _color);
-	SDL_Rect dialogRect = { 100, 600,dialogText->width(),dialogText->height() };
+	SDL_Rect dialogRect = { 180, 550,dialogText->width(),dialogText->height() };
 	dialogText->render(dialogRect, 0);
 	
 }

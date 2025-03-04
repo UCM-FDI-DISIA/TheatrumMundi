@@ -29,8 +29,9 @@ SceneManager::SceneManager()
 
 void SceneManager::popScene()
 {
-		assert(currentscenes.empty());
-		currentscenes.pop_back();
+	std::cout << "pop scene" << endl;
+	assert(!currentscenes.empty());
+	currentscenes.pop_back();
 }
 
 
@@ -39,7 +40,6 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 {
 	scenes[index]->init(room);
 	currentscenes.push_back(scenes[index]);
-	
 	
 }
 
