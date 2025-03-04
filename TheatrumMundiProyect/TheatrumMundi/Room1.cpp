@@ -36,7 +36,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 		};
 	roomEvent[PipePuzzleRsv] = [this] {
 		// InventoryLogic
-		resolvedPuzzle(0);
+		
 		};
 	roomEvent[BooksPuzzleScn] = [this]
 		{
@@ -44,7 +44,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 		};
 	roomEvent[BooksPuzzleRsv] = [this] {
 		// InventoryLogic
-		resolvedPuzzle(1);
+		
 		};
 	roomEvent[ClockPuzzleSnc] = [this]
 		{
@@ -52,7 +52,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 		};
 	roomEvent[ClockPuzzleRsv] = [this] {
 		// InventoryLogic
-		resolvedPuzzle(2);
+		
 		};
 	roomEvent[TeaCupPuzzleSnc] = [this]
 		{
