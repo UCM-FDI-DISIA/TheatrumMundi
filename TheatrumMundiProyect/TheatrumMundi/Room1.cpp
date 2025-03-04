@@ -113,7 +113,8 @@ void Room1Scene::init()
 
 		//LivingRoom (Left)
 
-
+		auto Tubes = entityFactory->CreateInteractableEntity(entityManager, "Tubes", EntityFactory::RECTAREA, Vector2D(356-sdlutils().width() - 6, 127), Vector2D(0, 0), 616, 336, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Tubes));
 
 		auto ChangeRoom1Button = entityManager->getComponent<ClickComponent>(ChangeRoom1);
 		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom1Button,StudyBackgroundScroll]() {
