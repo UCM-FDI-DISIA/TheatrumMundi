@@ -279,6 +279,18 @@
       "file": "../resources/images/BackButton.png"
     },
     {
+        "id": "exit",
+        "file": "../resources/images/exit.png"
+    },
+    {
+        "id": "gloves",
+        "file": "../resources/images/gloves.png"
+    },
+    {
+        "id": "spoon",
+        "file": "../resources/images/spoon.png"
+    },
+    {
       "id": "bookComb0",
       "file": "../resources/images/BookComb0.png"
     },

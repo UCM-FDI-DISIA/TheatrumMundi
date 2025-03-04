@@ -84,6 +84,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 
 Room1Scene::~Room1Scene()
 {
+	
 }
 
 void Room1Scene::init()

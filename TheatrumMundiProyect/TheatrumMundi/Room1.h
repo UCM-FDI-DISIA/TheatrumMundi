@@ -1,9 +1,13 @@
 #pragma once
 #include "SceneRoomTemplate.h"
 
-class Room1Scene : public SceneRoomTemplate
+
+
+class Inventory;
+class Room1 : public SceneRoomTemplate
 {
 private:
+	Inventory* inv1;
 protected:
 	
 	enum Room1Event
