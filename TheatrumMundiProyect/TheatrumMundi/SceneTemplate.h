@@ -35,6 +35,7 @@ public:
 	void startDialogue(const eventToRead& _eventToRead);
 	void endDialogue();
 	inline Inventory* GetInventory() { return inv; }
+	inline void SetInventory(Inventory* _inv) { inv = _inv; }
 
 };
 
