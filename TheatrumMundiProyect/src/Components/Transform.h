@@ -3,6 +3,7 @@
 #pragma once
 #include "../ecs/Component.h"
 #include "../utils/Vector2D.h"
+#include "Game.h"
 #include <cassert>
 
 class Transform: public ecs::Component {
@@ -14,18 +15,26 @@ public:
 			_pos(), _vel(), _width(), _height(), _rot() {
 	}
 
-	Transform(Vector2D pos, Vector2D vel, float w, float h, float r) :
-			_pos(pos), _vel(vel), _width(w), _height(h), _rot(r) {
+	Transform(Vector2D pos, Vector2D vel, float w, float h, float r) {
+		_pos.setX(Game::Instance()->wscreenScale* pos.getX());
+		_pos.setY(Game::Instance()->hscreenScale * pos.getY());
+		//_pos.setX(pos.getX());
+		//_pos.setY(pos.getY());
+		_vel = vel;
+		_width = (Game::Instance()->wscreenScale * w);
+		_height = (Game::Instance()->hscreenScale * h);
+		_rot = r;
 	}
 
 	virtual ~Transform() {
 	}
 
 	void init(Vector2D pos, Vector2D vel, float w, float h, float r) {
-		_pos = pos;
+		_pos.setX(Game::Instance()->wscreenScale * pos.getX());
+		_pos.setY(Game::Instance()->hscreenScale * pos.getY());
 		_vel = vel;
-		_width = w;
-		_height = h;
+		_width = Game::Instance()->wscreenScale * w;
+		_height = Game::Instance()->hscreenScale * h;
 		_rot = r;
 	}
 

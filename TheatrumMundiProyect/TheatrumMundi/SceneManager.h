@@ -4,8 +4,17 @@
 #include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 
 class SceneTemplate;
-
+class SceneRoomTemplate;
 using namespace ecs;
+enum SceneName {
+	INITIAL_MENU = 0,
+	ROOM_1,
+	PIPE_PUZZLE,
+	BOOKS_PUZZLE,
+	CLOCK_PUZZLE,
+	TEA_CUP_PUZZLE,
+	SCENE_SIZE
+};
 class SceneManager
 {
 private:
@@ -15,7 +24,7 @@ protected:
 public:
 	SceneManager();
 	 void popScene();
-	 void loadScene(int index, entity_t& extradata);
+	 void loadScene(int index, SceneRoomTemplate* room);
 	 //pushback
 	 void loadScene(int index);
 	 //unload of the ram de currentscene and pop it

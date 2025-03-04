@@ -29,16 +29,16 @@ void CalendearMobileTestScene::init()
 {
 	if (!isStarted) {
 		//Creation of the Calendear Button
-		auto _calendearButton = entityFactory->CreateInteractableEntity(entityManager, "calendear", entityFactory->RECTAREA, Vector2D(600, 100), Vector2D(0, 0), 200, 200, 0, areaLayerManager, entityFactory->NODRAG);
+		auto _calendearButton = entityFactory->CreateInteractableEntity(entityManager, "calendear", entityFactory->RECTAREA,Vector2D(600, 100), Vector2D(0, 0), 200, 200, 0, areaLayerManager, entityFactory->NODRAG,ecs::grp::DEFAULT);
 		ClickComponent* calendearClick = entityManager->addComponent<ClickComponent>(_calendearButton);
 
 		//Creation of the Calendear Zoom
 		calendearClick->connect(ClickComponent::JUST_CLICKED, [this, _calendearButton]()
 			{
-				auto _calendearZoom = entityFactory->CreateImageEntity(entityManager, "calendearZoom", entityFactory->RECTAREA, Vector2D(10, 10), Vector2D(0, 0), 1300, 900, 0);
+				auto _calendearZoom = entityFactory->CreateImageEntity(entityManager, "calendearZoom", Vector2D(10, 10), Vector2D(0, 0), 1300, 900, 0, ecs::grp::DEFAULT);
 				//this->startDialogue(Calendario);
 				_calendearButton->getMngr()->setActive(_calendearButton, false);
-				auto _quitButton = entityFactory->CreateInteractableEntity(entityManager, "exit", entityFactory->RECTAREA, Vector2D(10, 10), Vector2D(0, 0), 50, 50, 0, areaLayerManager, entityFactory->NODRAG);
+				auto _quitButton = entityFactory->CreateInteractableEntity(entityManager, "exit", entityFactory->RECTAREA, Vector2D(10, 10), Vector2D(0, 0), 50, 50, 0, areaLayerManager, entityFactory->NODRAG, ecs::grp::DEFAULT);
 				ClickComponent* click2 = entityManager->addComponent<ClickComponent>(_quitButton);
 
 				//Exit Calendear Zoom
@@ -51,16 +51,16 @@ void CalendearMobileTestScene::init()
 			});
 
 		//Creation of the mobile Button 
-		auto _mobileButton = entityFactory->CreateInteractableEntity(entityManager, "mobile", entityFactory->RECTAREA, Vector2D(900, 300), Vector2D(0, 0), 100, 100, 0, areaLayerManager, entityFactory->NODRAG);
+		auto _mobileButton = entityFactory->CreateInteractableEntity(entityManager, "mobile", entityFactory->RECTAREA, Vector2D(900, 300), Vector2D(0, 0), 100, 100, 0, areaLayerManager, entityFactory->NODRAG, ecs::grp::DEFAULT);
 		ClickComponent* mobileclick = entityManager->addComponent<ClickComponent>(_mobileButton);
 
 		//Activation of Mobile Zoom
 		mobileclick->connect(ClickComponent::JUST_CLICKED, [this, _mobileButton]()
 			{
-				auto _mobileZoom = entityFactory->CreateImageEntity(entityManager, "mobileZoom", entityFactory->RECTAREA, Vector2D(10, 10), Vector2D(0, 0), 1300, 900, 0);
+				auto _mobileZoom = entityFactory->CreateImageEntity(entityManager, "mobileZoom", Vector2D(10, 10), Vector2D(0, 0), 1300, 900, 0, ecs::grp::DEFAULT);
 				//this->startDialogue(Movil);
 				_mobileButton->getMngr()->setActive(_mobileButton, false);
-				auto _quitButton = entityFactory->CreateInteractableEntity(entityManager, "exit", entityFactory->RECTAREA, Vector2D(10, 10), Vector2D(0, 0), 50, 50, 0, areaLayerManager, entityFactory->NODRAG);
+				auto _quitButton = entityFactory->CreateInteractableEntity(entityManager, "exit", entityFactory->RECTAREA, Vector2D(10, 10), Vector2D(0, 0), 50, 50, 0, areaLayerManager, entityFactory->NODRAG, ecs::grp::DEFAULT);
 				ClickComponent* click2 = entityManager->addComponent<ClickComponent>(_quitButton);
 
 				//Exit mobile Zoom

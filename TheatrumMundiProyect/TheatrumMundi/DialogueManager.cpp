@@ -7,7 +7,7 @@
 //#include "TextInfo.h"
 
 #include "../src/components/LogComponent.h"
-#include "../TheatrumMundi/DebugLogRoom.h"
+#include "SceneTemplate.h"
 
 
 using json = nlohmann::json;
@@ -71,8 +71,8 @@ DialogueManager::DialogueManager() : _sceneLog(nullptr), _writeTextComp(nullptr)
 void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) {
 
 	switch (_eventToRead) {
-	case(SalaIntermediaEvento1):
-		event = "SalaIntermediaEvento1";
+	case(SalaIntermedia1):
+		event = "SalaIntermedia1";
 		break;
 	case(SalaIntermediaEvento2):
 		event = "SalaIntermediaEvento2";
@@ -93,7 +93,7 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 		event = "Puzzle1";
 		break;
 	case(Puzzle2):
-		event = "Puzzle2";
+		event = "PuzzleLibros";
 		break;
 	case(Puzzle3):
 		event = "Puzzle3";
@@ -122,8 +122,6 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 		//If dialogueLine has finished, try to display next line
 
 		displayOnProcess = true;
-		_scene->showDialogue(true);
-		
 
 		if (mRoom[room].find(event) != mRoom[room].end() && !mRoom[room][event].empty()) {
 
@@ -148,7 +146,7 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 			_sceneLog->addDialogueLineLog("/", "/");
 			
 			//call scene method to disable dialogue objects on scene
-			_scene->showDialogue(false);
+			_scene->endDialogue();
 			displayOnProcess = false;
 		}
 	}
@@ -179,6 +177,7 @@ void DialogueManager::ReadAnswer(){
 DialogueManager::~DialogueManager()
 {
 	delete _showText;
+
 }
 
 void DialogueManager::setSceneLog(LogComponent* sceneLog)
@@ -186,7 +185,7 @@ void DialogueManager::setSceneLog(LogComponent* sceneLog)
 	_sceneLog = sceneLog;
 }
 
-void DialogueManager::setScene(DebugLogRoom* scene)
+void DialogueManager::setScene(SceneTemplate* scene)
 {
 	_scene = scene;
 }
@@ -198,13 +197,13 @@ void DialogueManager::setScene(DebugLogRoom* scene)
 void DialogueManager::setCharachterImage(const string& Character)
 {
 	if (Character == "Keisara") {
-		characterimg->setTexture(&sdlutils().images().at("Keisara"));
+		characterimg->setTexture(&sdlutils().images().at("KeisaraSprite"));
 	}
 	else if (Character == "Lucy") {
-		characterimg->setTexture(&sdlutils().images().at("Lucy"));
+		characterimg->setTexture(&sdlutils().images().at("LucySprite"));
 	}
 	else if (Character == "Sol") {
-		characterimg->setTexture(&sdlutils().images().at("Sol"));
+		characterimg->setTexture(&sdlutils().images().at("SolSprite"));
 	}
 }
 
