@@ -321,6 +321,10 @@
     {
       "id": "incrementButtonSelected",
       "file": "../resources/images/incrementButtonSelected.png"
+    },
+    {
+      "id": "Title",
+      "file": "../resources/images/TemporalTitleImage.png"
     }
   ],
 
