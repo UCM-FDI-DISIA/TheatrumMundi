@@ -13,7 +13,7 @@ class TextInfo;
 
 class LogComponent;
 
-class DebugLogRoom;
+class SceneTemplate;
 
 class Image;
 
@@ -40,7 +40,7 @@ private:
 
 	WriteTextComponent<TextInfo>* _writeTextComp;
 
-	DebugLogRoom* _scene;
+	SceneTemplate* _scene;
 
 	bool displayOnProcess;
 
@@ -53,7 +53,7 @@ public:
 		characterimg = img;
 	}
 	void setSceneLog(LogComponent* sceneLog);
-	void setScene(DebugLogRoom* scene);
+	void setScene(SceneTemplate* scene);
 	void setWriteTextComp(WriteTextComponent<TextInfo>* writeTextComp)
 	{
 		_writeTextComp = writeTextComp;

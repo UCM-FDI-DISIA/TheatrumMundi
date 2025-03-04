@@ -7,7 +7,7 @@
 //#include "TextInfo.h"
 
 #include "../src/components/LogComponent.h"
-#include "../TheatrumMundi/DebugLogRoom.h"
+#include "SceneTemplate.h"
 
 
 using json = nlohmann::json;
@@ -122,8 +122,6 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 		//If dialogueLine has finished, try to display next line
 
 		displayOnProcess = true;
-		_scene->showDialogue(true);
-		
 
 		if (mRoom[room].find(event) != mRoom[room].end() && !mRoom[room][event].empty()) {
 
@@ -148,7 +146,7 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 			_sceneLog->addDialogueLineLog("/", "/");
 			
 			//call scene method to disable dialogue objects on scene
-			_scene->showDialogue(false);
+			_scene->endDialogue();
 			displayOnProcess = false;
 		}
 	}
@@ -187,7 +185,7 @@ void DialogueManager::setSceneLog(LogComponent* sceneLog)
 	_sceneLog = sceneLog;
 }
 
-void DialogueManager::setScene(DebugLogRoom* scene)
+void DialogueManager::setScene(SceneTemplate* scene)
 {
 	_scene = scene;
 }

@@ -156,7 +156,15 @@ void Room1Scene::init()
 			});
 		
 		
-	
+		//Create dialogue text entity. Object that renders dialogue Text on Screen
+		auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
+		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
+		
+		//Add writeText to dialogueManager
+		SDL_Color colorDialog = { 255, 0, 0, 255 }; // Color = red
+		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
+
+		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
 
 
 		//Create log
@@ -174,7 +182,7 @@ void Room1Scene::init()
 
 		//Register log in dialogue manager
 		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
-
+		Game::Instance()->getDialogueManager()->setScene(this);
 
 		roomEvent[LOGENABLE] = [this] {
 			//activate log
