@@ -38,3 +38,8 @@ void Image::render() {
 	_tex->render(dest, _tr->getRot());
 
 }
+
+void Image::setAlpha(int alpha) {
+	assert(_tex != nullptr);
+	_tex->setTextureOpacity(alpha);
+}

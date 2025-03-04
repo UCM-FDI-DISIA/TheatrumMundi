@@ -11,6 +11,7 @@
 #include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
 #include "../src/Components/ScrollComponent.h"
+#include "../src/Components/ClickableSpriteComponent.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
 
 #include "Area2DLayerManager.h"
@@ -20,15 +21,13 @@ EntityFactory::EntityFactory(){}
 EntityFactory::~EntityFactory(){}
 
 //CREATES IMAGE ENTITY
-ecs::entity_t EntityFactory::CreateImageEntity(ecs::EntityManager* _entityManager, const std::string& _idImage, AreaType _typeRect,
+ecs::entity_t EntityFactory::CreateImageEntity(ecs::EntityManager* _entityManager, const std::string& _idImage,
 	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot,
 	ecs::grpId_t _gId)
 {
 	ecs::entity_t newElement = _entityManager->addEntity(_gId);
 	_entityManager->addComponent<Transform>(newElement, _pos, _dir, _width, _height, _rot);
 	_entityManager->addComponent<Image>(newElement, &sdlutils().images().at(_idImage));
-	if (_typeRect == RECTAREA)_entityManager->addComponent<RectArea2D>(newElement);
-	else if (_typeRect == CIRCLEAREA) _entityManager->addComponent<CircleArea2D>(newElement)->setLocalPos(Vector2D(_width/2,_height/2));
 	return newElement;
 }
 
@@ -44,7 +43,8 @@ ecs::entity_t EntityFactory::CreateInteractableEntity(ecs::EntityManager* _entit
 	if (_typeRect == RECTAREA)_entityManager->addComponent<RectArea2D>(newElement, _myLayer);
 	else if (_typeRect == CIRCLEAREA) _entityManager->addComponent<CircleArea2D>(newElement)->setLocalPos(Vector2D(_width/2,_height/2));
 	_entityManager->addComponent<ClickComponent>(newElement);
-	//_entityManager->addComponent<TriggerComponent>(newElement);
+	_entityManager->addComponent<TriggerComponent>(newElement);
+	_entityManager->addComponent<ClickableSpriteComponent>(newElement,_idImage);
 	if (_drag == DRAG) _entityManager->addComponent<DragComponent>(newElement);
 	return newElement;
 }
@@ -65,7 +65,18 @@ ecs::entity_t EntityFactory::CreateInteractableEntityScroll(ecs::EntityManager* 
 	else if (_isInverted == SCROLLINVERSE) _entityManager->addComponent<ScrollComponent>(newElement, _velocityScroll, _time, ScrollComponent::INVERSE, _numPhasesScrolling);
 	_entityManager->addComponent<ClickComponent>(newElement);
 	_entityManager->addComponent<TriggerComponent>(newElement);
+	_entityManager->addComponent<ClickableSpriteComponent>(newElement,_idImage);
 	if (_drag == DRAG) _entityManager->addComponent<DragComponent>(newElement);
 	return newElement;
 }
+
+//ecs::entity_t EntityFactory::CreateImageEntityScroll(ecs::EntityManager* _entityManager, const std::string& _idImage,
+//	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot,Vector2D _dirScroll, float _time)
+//{
+//	ecs::entity_t newElement = _entityManager->addEntity();
+//	_entityManager->addComponent<Transform>(newElement, _pos, _dir, _width, _height, _rot);
+//	_entityManager->addComponent<Image>(newElement, &sdlutils().images().at(_idImage));
+//	_entityManager->addComponent<ScrollComponent>(newElement, _dirScroll, _time);
+//	return newElement;
+//}
 

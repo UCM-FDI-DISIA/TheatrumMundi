@@ -52,6 +52,7 @@ enum cmpId : cmpId_t {
 	LOG_COMPONENT,
 	WRITE_TEXT_COMPONENT,
 	PHYSICSBODYCOMPONENT,
+	CLICKABLE_SPRITE_COMPONENT,
 
 	// do not remove this
 	_LAST_CMP_ID
@@ -68,10 +69,9 @@ enum grpId : cmpId_t {
 	BOOKS_PUZZLE_SCENE_REWARD,
 	DIALOGUE,
 	BACKGROUND,
-	UI,
 	INTERACTOBJ,
-	DIALOGUE_LAYER1,
-	DIALOGUE_LAYER2,
+	ZOOMOBJ,
+	UI,
 	_GRPS_LIST_, /* taken from ../game/ecs_defs */
 
 	// do not remove this

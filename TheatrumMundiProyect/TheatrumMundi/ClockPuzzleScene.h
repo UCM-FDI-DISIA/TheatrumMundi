@@ -6,7 +6,7 @@ class ClockPuzzleScene : public ScenePuzzleTemplate
 public:
 	ClockPuzzleScene();
 	~ClockPuzzleScene();
-	void init() override;
+	void init(SceneRoomTemplate* sr) override;
 	void refresh() override;
 	void unload() override;
 	bool Check() override;

@@ -17,7 +17,7 @@ public:
 	enum ScrollType { SCROLLNORMAL, SCROLLINVERSE };
 
 	//Creates an Image Entity (BACKGROUND, VISUAL ITEM FROM INVENTORY, ETC)
-	ecs::entity_t CreateImageEntity(ecs::EntityManager* _entityManager,const std::string& _idImage, AreaType _typeRect,
+	ecs::entity_t CreateImageEntity(ecs::EntityManager* _entityManager,const std::string& _idImage,
 	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot,
 	ecs::grpId_t gId); //GROUP OF ENTITIES
 
