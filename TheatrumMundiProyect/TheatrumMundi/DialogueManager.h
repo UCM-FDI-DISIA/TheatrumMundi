@@ -13,7 +13,7 @@ class TextInfo;
 
 class LogComponent;
 
-class DebugLogRoom;
+class SceneTemplate;
 
 class Image;
 
@@ -24,7 +24,7 @@ using RoomsMap = std::unordered_map<std::string, RoomDialogues>; //manage the ro
 class DialogueManager
 {
 private:
-	const int numRooms = 3;
+	const int numRooms = 1;
 	std::string room;
 	int actualroom;
 	RoomsMap mRoom; //Map with all the RoomDialogues
@@ -40,7 +40,7 @@ private:
 
 	WriteTextComponent<TextInfo>* _writeTextComp;
 
-	DebugLogRoom* _scene;
+	SceneTemplate* _scene;
 
 	bool displayOnProcess;
 
@@ -53,7 +53,7 @@ public:
 		characterimg = img;
 	}
 	void setSceneLog(LogComponent* sceneLog);
-	void setScene(DebugLogRoom* scene);
+	void setScene(SceneTemplate* scene);
 	void setWriteTextComp(WriteTextComponent<TextInfo>* writeTextComp)
 	{
 		_writeTextComp = writeTextComp;
