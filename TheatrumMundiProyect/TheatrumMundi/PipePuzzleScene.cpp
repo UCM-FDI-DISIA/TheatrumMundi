@@ -131,9 +131,11 @@ void PipePuzzleScene::changeDirection(int module)
 	
 }
 
-void PipePuzzleScene::init()
+void PipePuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted) {
+		isStarted = true;
+		room = sr;
 		solved = false;
 		moduleCreation();
 		pipeCreation();
@@ -342,7 +344,19 @@ void PipePuzzleScene::init()
 		entityManager->addComponent<RectArea2D>(exitEntity);
 
 
+		//BackButton
+		auto _backButton = entityManager->addEntity();
+		entityManager->addComponent<Transform>(_backButton, Vector2D(800, 200), Vector2D(0, 0), 200, 175, 0);
+		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("prueba"));
 
+		entityManager->addComponent<RectArea2D>(_backButton);
+
+		//Click component Open log button
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
+			{
+				Game::Instance()->getSceneManager()->popScene();
+			});
 
 	}
 }

@@ -155,6 +155,10 @@ AudioManager::setListenerPosition(float x, float y, float z) {
 }
 
 
+void AudioManager::setVolume(Sound sound, ALfloat volume) {
+    alSourcef(sound.getSource(), AL_GAIN, volume);
+}
+
 // Play a sound (default, once)
 void 
 AudioManager::playSound(Sound sound) {

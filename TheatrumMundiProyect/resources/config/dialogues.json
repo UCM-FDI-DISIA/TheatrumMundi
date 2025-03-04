@@ -1,49 +1,61 @@
 {
     "Sala1":{
-            "SalaIntermediaEvento1":[
-                {"Character":"Personaje1","Text":"Esto es una prueba"},
-                {"Character":"Personaje2","Text":"Yo se supone que estoy muerto"},
-                {"Character":"Personaje3","Text":"uiiiai uiiiai"}
+            "SalaIntermedia1":[
+                {"Character":"Sol","Text":"Esto es una prueba"},
+                {"Character":"Keisara","Text":"Yo se supone que estoy muerto"},
+                {"Character":"Lucy","Text":"uiiiai uiiiai"}
             ],
-            "SalaIntermediaEvento2":[
+            "Sala1Intro":[
                 {"Character":"Personaje3","Text":"Why we still here... Just to suffer"}
             ],
-            "Pista1":[
-                {"Character":"Personaje2","Text":"Encontre esto"}
+            "PuzzleTuberias":[
+                {"Character":"Sol","Text":"Se que has dicho que te recuerda a tu casa..."},
+                {"Character":"Sol","Text":"Pero estoy bastante seguro de que no teneis esto en la pared del salón."},
+                {"Character":"Lucy","Text":"Puedo confirmarte que no."},
+                {"Character":"Sol","Text":"Las llaves de paso me recuerdan a puertas lógicas."},
+                {"Character":"Sol","Text":"Que diversión."},
+                {"Character":"Lucy","Text":"¿Qué es una puerta lógica?"},
+                {"Character":"Sol","Text":"Déjalo."}
             ],
-            "Pista2":[
-                {"Character":"Personaje3","Text":"Que mal huele"}
+            "PuzzleTaza1":[
+                {"Character":"Sol","Text":"Queda algo de té en esta taza."},
+                {"Character":"Lucy","Text":"No lo toques, estamos en una escena del crimen."},
+                {"Character":"Sol","Text":"¿Y?"},
+                {"Character":"Lucy","Text":"Podría tener veneno."},
+                {"Character":"Lucy","Text":"Se podría confirmar con algo de plata."}
             ],
-            "Pista3":[
-                {"Character":"Personaje1","Text":"Quien coño guarda esto en un reloj wtf"}
+            "PuzzleTaza2":[
+                {"Character":"Lucy","Text":"La cuchara ha cambiado de color."},
+                {"Character":"Sol","Text":"¿Eso significa qe estaba envenenado?"},
+                {"Character":"Lucy","Text":"Si."}
             ],
-            "Puzzle1":[
-                {"Character":"Personaje1","Text":"Pista nº 1"},
-                {"Character":"Personaje1","Text":"Pista nº 2"}
+            "PuzzleLibros":[
+                {"Character":"Lucy","Text":"Alguien ha tocado esta estantería"},
+                {"Character":"Sol","Text":"Y que lo digas."},
+                {"Character":"Sol","Text":"Kei nunca dejaría libros descolocados."}
             ],
-            "Puzzle2":[
-                {"Character":"Personaje2","Text":"Pista nº 1"},
-                {"Character":"Personaje2","Text":"Pista nº 2"}
+            "Movil1":[
+                {"Character":"Lucy","Text":"Mira es el móvil de Keisara"},
+                {"Character":"Lucy","Text":"¿Tiene una llamada perdida?"},
+                {"Character":"Sol","Text":"¿Kei con una llamada perdida?"},
+                {"Character":"Sol","Text":"Imposible."},
+                {"Character":"Lucy","Text":"El registro no miente."}
+                
             ],
-            "Puzzle3":[
-                {"Character":"Personaje3","Text":"Pista nº 1"},
-                {"Character":"Personaje3","Text":"Pista nº 2"}
-            ],
-            "Calendario":[
-                {"Character":"Personaje1","Text":"Yo solo estoy para comprobar que se lee"},
-                {"Character":"Personaje3","Text":"Patatoide patatil pasta"}
-            ],
-            "Movil":[
-                {"Character":"Personaje3","Text":"Variante 1"},
-                {"Character":"Personaje3","Text":"Variante 2  (se que no funciona así) jijiijji"}
+            "Movil2":[
+                {"Character":"Lucy","Text":"Mira es el móvil de Keisara"},
+                {"Character":"Lucy","Text":"Su última llamada es con su editorial."},
+                {"Character":"Sol","Text":"Ni una llamada perdida."},
+                {"Character":"Sol","Text":"No se cómo lo hace, ojalá tener su energía para contestar a la gente"}
+                
             ]
         },
-    "Sala2":{
+    "Parte2":{
             "SalaIntermediaEvento1":[
                 {"Character":"Personaje1","Text":"Aqui pa ver si se actualiza el valor"}
             ]
         },
-    "Sala3":{
+    "Parte3":{
 
     }
 }

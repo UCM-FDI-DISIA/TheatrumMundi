@@ -3,6 +3,7 @@
 
 class array;
 class vector;
+class SceneRoomTemplate;
 
 
 class BooksPuzzleScene : public ScenePuzzleTemplate
@@ -11,7 +12,7 @@ class BooksPuzzleScene : public ScenePuzzleTemplate
 public:
 	BooksPuzzleScene(/*Room1Scene* room1*/);
 	~BooksPuzzleScene();
-	void init() override;
+	void init(SceneRoomTemplate* sr) override;
 	void refresh() override;
 	void unload() override;
 	bool Check() override; //HERE WE PUT THE CORRECT COMBINATION

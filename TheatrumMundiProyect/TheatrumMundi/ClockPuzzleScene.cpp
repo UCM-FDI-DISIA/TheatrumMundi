@@ -11,6 +11,9 @@
 #include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
 
+#include "AudioManager.h"
+
+#include "SceneRoomTemplate.h"
 
 ClockPuzzleScene::ClockPuzzleScene() : ScenePuzzleTemplate()
 {
@@ -22,11 +25,18 @@ ClockPuzzleScene::~ClockPuzzleScene()
 {
 }
 
-void ClockPuzzleScene::init()
+void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 {
 
 
 	if (!isStarted) {
+		isStarted = true;
+		room = sr;
+		AudioManager& a = AudioManager::Instance();
+		Sound clockMinSound = sdlutils().soundEffects().at("aguja_minutero");
+		Sound clockHorSound = sdlutils().soundEffects().at("aguja_horario");
+		a.setVolume(clockMinSound,0.2);
+		a.setVolume(clockHorSound, 0.2);
 
 		//create the clock
 		auto _clockShape = entityManager->addEntity();
@@ -63,9 +73,13 @@ void ClockPuzzleScene::init()
 		_actualMinute;
 
 		ClickComponent* clockMinClick = entityManager->addComponent<ClickComponent>(_buttonMin);
-		clockMinClick->connect(ClickComponent::JUST_CLICKED, [_clockMinTransform, this]()
+		clockMinClick->connect(ClickComponent::JUST_CLICKED, [_clockMinTransform, clockMinSound, this]()
 			{
-				std::cout << "CLICKED\n";
+#ifdef DEBUG
+				std::cout << "CLICKED MINUTERO\n";
+#endif // DEBUG
+
+				AudioManager::Instance().playSound(clockMinSound);
 				_clockMinTransform->setRot(_clockMinTransform->getRot() + 15);
 				_actualMinute += 15;
 				if (_actualMinute == 360) _actualMinute = 0;
@@ -83,8 +97,13 @@ void ClockPuzzleScene::init()
 
 
 		ClickComponent* clockHorClick = entityManager->addComponent<ClickComponent>(_buttonHor);
-		clockHorClick->connect(ClickComponent::JUST_CLICKED, [_clockHorTransform, this]()
+		clockHorClick->connect(ClickComponent::JUST_CLICKED, [_clockHorTransform, clockHorSound, this]()
 			{
+#ifdef DEBUG
+				std::cout << "CLICKED HORARIO\n";
+#endif // DEBUG
+
+				AudioManager::Instance().playSound(clockHorSound);
 				_clockHorTransform->setRot(_clockHorTransform->getRot() + 30);
 				_actualHour += 30;
 				if (_actualHour == 360) _actualHour = 0;
@@ -103,7 +122,13 @@ void ClockPuzzleScene::init()
 		ClickComponent* clockCheckClick = entityManager->addComponent<ClickComponent>(_buttonCheck);
 		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [_buttonCheckTransform, this]()
 			{
-				if (Check()) std::cout << "wii";
+				if (Check()) {
+#ifdef DEBUG
+					std::cout << "wii";
+#endif // DEBUG
+					Win();
+					
+				}
 			});
 
 
@@ -120,13 +145,31 @@ void ClockPuzzleScene::init()
 		ClickComponent* clockResetClick = entityManager->addComponent<ClickComponent>(_buttonResetPuzzle);
 		clockResetClick->connect(ClickComponent::JUST_CLICKED, [_clockHorTransform,_clockMinTransform, this]()
 			{
+#ifdef DEBUG
 				std::cout << "WAAAAAAAAAA\n";
+#endif // DEBUG
 
 				_clockHorTransform->setRot(90);
 				_actualHour = 90;
 				_clockMinTransform->setRot(0);
 				_actualMinute = 0;
 			});
+
+
+		//BackButton
+		auto _backButtonClock = entityManager->addEntity();
+		entityManager->addComponent<Transform>(_backButtonClock, Vector2D(800, 200), Vector2D(0, 0), 200, 175, 0);
+		entityManager->addComponent<Image>(_backButtonClock, &sdlutils().images().at("prueba"));
+
+		entityManager->addComponent<RectArea2D>(_backButtonClock);
+
+		//Click component Open log button
+		ClickComponent* clkOpenClock = entityManager->addComponent<ClickComponent>(_backButtonClock);
+		clkOpenClock->connect(ClickComponent::JUST_CLICKED, []()
+		{
+				std::cout << "funcion lambda de salida del reloj" << std::endl;
+				Game::Instance()->getSceneManager()->popScene();
+		});
 
 	}
 
@@ -145,5 +188,10 @@ bool ClockPuzzleScene::Check()
 	if (_actualHour == 180 && _actualMinute == 180) return true;
 	else 
 	return false;
+}
+
+void ClockPuzzleScene::Win()
+{
+	room->resolvedPuzzle(7);
 }
 

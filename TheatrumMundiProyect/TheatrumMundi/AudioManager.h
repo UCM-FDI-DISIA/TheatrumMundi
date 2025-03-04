@@ -35,6 +35,7 @@ public:
     void setSourcePosition(Sound source, float x, float y, float z);
     void setListenerPosition(float x, float y, float z);
 
+    void setVolume(Sound source, ALfloat volume);
     
     void playSound(Sound source);
     void stopSound(Sound source);
