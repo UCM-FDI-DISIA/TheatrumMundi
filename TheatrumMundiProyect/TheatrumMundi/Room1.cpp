@@ -16,6 +16,7 @@
 #include "../src/game/Game.h"
 #include "ClickableSpriteComponent.h"
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
+#include "Hint.h"
 
 
 Room1Scene::Room1Scene(): SceneRoomTemplate()
@@ -79,9 +80,11 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 		};
 	roomEvent[GoodEnd] = [this] {
 		// WIP
+		Game::Instance()->getSceneManager()->popScene();
 		};
 	roomEvent[BadEnd] = [this] {
 		// WIP
+		Game::Instance()->getSceneManager()->popScene();
 		};
 	
 }
