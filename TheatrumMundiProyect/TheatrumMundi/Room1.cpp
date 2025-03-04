@@ -14,7 +14,7 @@
 #include "../src/Components/ScrollComponent.h"
 #include "../src/ecs/Manager.h"
 #include "../src/game/Game.h"
-
+#include "ClickableSpriteComponent.h"
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 
 
@@ -139,7 +139,7 @@ void Room1Scene::init()
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Clock));
 		entityManager->getComponent<ClickComponent>(Clock)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[ClockPuzzleSnc]();});
 
-		auto Shelf = entityFactory->CreateInteractableEntity(entityManager, "Shelf", EntityFactory::RECTAREA, Vector2D(214, 96), Vector2D(0, 0), 191, 548, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto Shelf = entityFactory->CreateInteractableEntity(entityManager, "Shelf", EntityFactory::RECTAREA, Vector2D(214, 96), Vector2D(0, 0), 191, 548, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Shelf));
 		entityManager->getComponent<ClickComponent>(Shelf)->connect(ClickComponent::JUST_CLICKED, [this]() {roomEvent[BooksPuzzleScn]();});
 		//LivingRoom (Left)
@@ -170,11 +170,31 @@ void Room1Scene::init()
 		
 
 
+		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
+		auto _screenDetect = entityManager->addEntity(ecs::grp::DIALOGUE);
+		entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
+		entityManager->setActive(_screenDetect, false);
 
 		//Create dialogue text entity. Object that renders dialogue Text on Screen
+		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
+		entityManager->addComponent<Transform>(_textbackground, Vector2D(0,0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
+		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
+		entityManager->addComponent<RectArea2D>(_textbackground,areaLayerManager);
+		
+		entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _screenDetect]()
+			{
+				if (!logActive) {
+					//read dialogue only if it has to
+					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess());
+				}
+			});
+		entityManager->addComponent<TriggerComponent>(_textbackground);
+		entityManager->setActive(_textbackground, false);
+		
+		
 		auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
 		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
-		
+		entityManager->setActive(_textTest, false);
 		
 
 
@@ -200,7 +220,7 @@ void Room1Scene::init()
 		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
 
 		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
-
+	
 		roomEvent[LOGENABLE] = [this] {
 			//activate log
 			/*_log->getMngr()->setActive(_log, true);
@@ -224,9 +244,12 @@ void Room1Scene::init()
 			//disable close log button
 			//_closeLogButton->getMngr()->setActive(_closeLogButton, false);
 			};
+		
+
 	}
 	//SDL_Delay(1000);
 	//_loadimg->getMngr()->setActive(_loadimg,false);
+
 	
 }
 
