@@ -49,12 +49,15 @@
     <ClCompile Include="BooksPuzzleScene.cpp" />
     <ClCompile Include="Area2DLayerManager.cpp" />
     <ClCompile Include="CalendearMobileTestScene.cpp" />
+    <ClCompile Include="DebugInventoryScene.cpp" />
     <ClCompile Include="DebugLogRoom.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
     <ClCompile Include="DialogTestScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
+    <ClCompile Include="Hint.cpp" />
     <ClCompile Include="InitialScene.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PipePuzzleScene.cpp" />
@@ -215,6 +218,7 @@
     <ClInclude Include="BooksPuzzleScene.h" />
     <ClInclude Include="Area2DLayerManager.h" />
     <ClInclude Include="CalendearMobileTestScene.h" />
+    <ClInclude Include="DebugInventoryScene.h" />
     <ClInclude Include="DebugLogRoom.h" />
     <ClInclude Include="ClockPuzzleScene.h" />
     <ClInclude Include="DialogTestScene.h" />
@@ -222,7 +226,9 @@
     <ClInclude Include="Direction.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="EventsInfo.h" />
+    <ClInclude Include="Hint.h" />
     <ClInclude Include="InitialScene.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="PipePuzzleScene.h" />
