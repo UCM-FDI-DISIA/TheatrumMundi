@@ -3,6 +3,7 @@
 #include "EventsInfo.h"
 #include "Manager.h"
 #include "Inventory.h"
+#include "Hint.h"
 
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
 

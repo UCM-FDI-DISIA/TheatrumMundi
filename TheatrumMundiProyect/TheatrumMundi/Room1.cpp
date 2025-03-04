@@ -68,6 +68,8 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 		};
 	roomEvent[Spoon] = [this] {
 		// InventoryLogic
+		GetInventory()->addItem(new Hint("Spoon", "Es una cuchara, que no lo ves o que", &sdlutils().images().at("invSpoon")));
+		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "invSpoon", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3) - 20), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT));
 		};
 	roomEvent[ResolveCase] = [this] {
 		//Poner el dialogo correspondiente
@@ -373,7 +375,11 @@ void Room1Scene::init()
 			};
 
 		//Spoon
-		//auto spoon = entityFactory->CreateInteractableEntity(entityManager, "spoon", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3) - 20), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto spoon = entityFactory->CreateInteractableEntity(entityManager, "spoon", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3) - 20), Vector2D(0, 0), 1000 / 3, 1000 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		entityManager->getComponent<ClickComponent>(spoon)->connect(ClickComponent::JUST_CLICKED, [this,spoon]() {
+			spoon->getMngr()->setActive(spoon,false);
+			roomEvent[Spoon]();
+			});
 		//X Button "B1"
 	}
 	SDL_Delay(1000);
