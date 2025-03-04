@@ -120,7 +120,7 @@ void Room1Scene::init()
 		//CharacterImage
 		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
 		auto characterimg = entityManager->addEntity(grp::DIALOGUE);
-		entityManager->addComponent<Transform>(characterimg, Vector2D(1349 / 5, 748 / 8), Vector2D(0, 0), 2019/2, 1122/2, 0);
+		entityManager->addComponent<Transform>(characterimg, Vector2D(500, 50), Vector2D(0, 0), 1300*0.3, 2000*0.3, 0);
 		auto imCh = entityManager->addComponent<Image>(characterimg, &sdlutils().images().at("Dialog"));
 		
 		Game::Instance()->getDialogueManager()->setCharacterImg(imCh);
@@ -355,7 +355,7 @@ void Room1Scene::init()
 			}
 			});
 
-		auto buttonLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(20, 748 - (268/3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		auto buttonLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(1200, 748 - (268/3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		
 		auto buttonCloseLog = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 500), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		
