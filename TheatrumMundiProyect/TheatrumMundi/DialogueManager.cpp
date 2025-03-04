@@ -90,7 +90,7 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 		event = "Pista3";
 		break;
 	case(Puzzle1):
-		event = "Puzzle1";
+		event = "PuzzleTuberias";
 		break;
 	case(Puzzle2):
 		event = "PuzzleLibros";
