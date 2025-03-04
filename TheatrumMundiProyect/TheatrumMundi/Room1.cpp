@@ -212,7 +212,8 @@ void Room1Scene::init()
 		entityManager->getComponent<ClickComponent>(Corspe)->connect(ClickComponent::JUST_CLICKED, [this,_corpseZoom,_quitButton]() {
 			_corpseZoom->getMngr()->setActive(_corpseZoom, true);
 			entityManager->setActive(_quitButton, true);
-			roomEvent[CorpseDialogue]();
+			if (!finishalpuzzles)roomEvent[CorpseDialogue]();
+			else roomEvent[ResolveBottons]();
 		});
 
 
@@ -330,6 +331,7 @@ void Room1Scene::resolvedPuzzle(int i)
 		roomEvent[i]();
 		bool aux = true;
 		for (bool a : puzzlesol) if (!a) aux = false;
+		finishalpuzzles = aux;
 		if (aux) entityManager->setActive(body, true);
 	}
 else {
