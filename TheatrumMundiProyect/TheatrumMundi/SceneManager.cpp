@@ -10,6 +10,7 @@
 #include "TeaCupPuzzleScene.h"
 #include "checkML.h"
 #include "SceneRoomTemplate.h"
+#include"DebugInventoryScene.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 
 //#include "../../TheatrumMundiProyect/src/ecs/ecs.h"

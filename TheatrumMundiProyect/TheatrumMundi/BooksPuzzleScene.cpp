@@ -64,7 +64,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//CharacterImage
 		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
-		auto characterimg = entityManager->addEntity(grp::DIALOGUE);
+		auto characterimg = entityManager->addEntity(ecs::grp::DIALOGUE);
 		entityManager->addComponent<Transform>(characterimg, Vector2D(sdlutils().width() / 5, sdlutils().height() / 8), Vector2D(0, 0), 2019 / 2, 1122 / 2, 0);
 		auto imCh = entityManager->addComponent<Image>(characterimg, &sdlutils().images().at("Dialog"));
 
@@ -72,7 +72,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->setActive(characterimg, false);
 
 		//Create dialogue text entity. Object that renders dialogue Text on Screen
-		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
+		auto _textbackground = entityManager->addEntity(ecs::grp::DIALOGUE);
 		entityManager->addComponent<Transform>(_textbackground, Vector2D(-200, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
 		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
 		entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);

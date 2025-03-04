@@ -372,7 +372,8 @@ void Room1Scene::init()
 			entityManager->setActive(buttonimp, true);
 			};
 
-
+		//Spoon
+		//auto spoon = entityFactory->CreateInteractableEntity(entityManager, "spoon", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3) - 20), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		//X Button "B1"
 	}
 	SDL_Delay(1000);

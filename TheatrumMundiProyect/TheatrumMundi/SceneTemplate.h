@@ -2,6 +2,7 @@
 #include <list>
 #include "EventsInfo.h"
 #include "Manager.h"
+#include "Inventory.h"
 
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
 
@@ -13,6 +14,8 @@ class SceneRoomTemplate;
 class SceneTemplate
 {
 protected:
+
+	Inventory* inv;
 	 ecs::EntityManager* entityManager;
 	 EntityFactory* entityFactory;
 	// DialogueManager* dialogueManager;
@@ -28,10 +31,9 @@ public:
 	void virtual refresh() {};
 	void virtual unload() {};
 	virtual ~SceneTemplate();
-
 	void startDialogue(const eventToRead& _eventToRead);
-
 	void endDialogue();
+	inline Inventory* GetInventory() { return inv; }
 
 };
 
