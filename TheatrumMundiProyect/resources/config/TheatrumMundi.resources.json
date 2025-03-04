@@ -12,6 +12,58 @@
 
   "images": [
     {
+      "id": "ShelfButton",
+      "file": "../resources/images/Finales/BotonEstante.PNG"
+    },
+    {
+      "id": "Corspe",
+      "file": "../resources/images/Finales/Cadaver.PNG"
+    },
+    {
+      "id": "CorspeBackground",
+      "file": "../resources/images/Finales/CadaverFondo.PNG"
+    },
+    {
+      "id": "Shelf",
+      "file": "../resources/images/Finales/Estanteria.PNG"
+    },
+    {
+      "id": "ShelfBackground1",
+      "file": "../resources/images/Finales/EstanteriaFondo1.PNG"
+    },
+    {
+      "id": "ShelfBackground2",
+      "file": "../resources/images/Finales/EstanteriaFondo2.PNG"
+    },
+    {
+      "id": "Gloves",
+      "file": "../resources/images/Finales/Guantes.PNG"
+    },
+    {
+      "id": "Timetable",
+      "file": "../resources/images/Finales/Horario.PNG"
+    },
+    {
+      "id": "ShelfBook1",
+      "file": "../resources/images/Finales/Libro1Estanteria.PNG"
+    },
+    {
+      "id": "ShelfBook2",
+      "file": "../resources/images/Finales/Libro2Estanteria.PNG"
+    },
+    {
+      "id": "ShelfBook3",
+      "file": "../resources/images/Finales/Libro3Estanteria.PNG"
+    },
+    {
+      "id": "Clock",
+      "file": "../resources/images/Finales/Reloj.PNG"
+    },
+    {
+      "id": "Room",
+      "file": "../resources/images/Finales/SalaIntermedia.PNG"
+    },
+    {
       "id": "ChangeRoom",
       "file": "../resources/images/Finales/CambiarSala.PNG"
     },
@@ -50,6 +102,49 @@
     {
       "id": "Book3",
       "file": "../resources/images/Finales/Libro3.PNG"
+    },
+    {
+      "id": "B1",
+      "file": "../resources/images/Finales/1.PNG"
+    },
+    {
+      "id": "B2",
+      "file": "../resources/images/Finales/2.PNG"
+    },
+    {
+      "id": "B3",
+      "file": "../resources/images/Finales/3.PNG"
+    },
+    {
+      "id": "B4",
+      "file": "../resources/images/Finales/4.PNG"
+    },
+    {
+      "id": "B5",
+      "file": "../resources/images/Finales/5.PNG"
+    },
+    {
+      "id": "B6",
+      "file": "../resources/images/Finales/6.PNG"
+    },
+    {
+      "id": "B7",
+      "file": "../resources/images/Finales/7.PNG"
+    },
+    {
+      "id": "Exit",
+      "file": "../resources/images/Finales/RectangleExitButton.PNG"
+    },
+    {
+      "id": "NewGame",
+      "file": "../resources/images/Finales/RectangleNewGameButton.PNG"
+    },
+    {
+      "id": "Options",
+      "file": "../resources/images/Finales/RectangleOptionsButton.PNG"
+    },{
+      "id": "Rectangle",
+      "file": "../resources/images/Finales/RectangleEmptyButton.PNG"
     },
     {
       "id": "prueba",
