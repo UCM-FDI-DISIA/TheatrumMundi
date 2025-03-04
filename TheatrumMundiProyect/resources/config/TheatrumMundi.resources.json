@@ -336,13 +336,49 @@
       "color": "0x441155ff"
     }
   ],
-  
-  "sounds" : [
-    {
-        "id": "explosion",
-        "file":  "../resources/sound/explosion.wav"
-    }
-  ],
+
+    "sounds": [
+        {
+            "id": "explosion",
+            "file": "../resources/sound/sfx/explosion.wav"
+        },
+        {
+            "id": "agua",
+            "file": "../resources/sound/sfx/agua.wav"
+        },
+        {
+            "id": "avanzar_dialogo",
+            "file": "../resources/sound/sfx/click_avanzar_dialogo.wav"
+        },
+        {
+            "id": "boton",
+            "file": "../resources/sound/sfx/click_boton.wav"
+        },
+        {
+            "id": "puzzle",
+            "file": "../resources/sound/sfx/click_puzzle.wav"
+        },
+        {
+            "id": "aguja_horario",
+            "file": "../resources/sound/sfx/horario.wav"
+        },
+        {
+            "id": "aguja_minutero",
+            "file": "../resources/sound/sfx/minutero.wav"
+        },
+        {
+            "id": "libro",
+            "file": "../resources/sound/sfx/libro.wav"
+        },
+        {
+            "id": "taza",
+            "file": "../resources/sound/sfx/metal_taza.wav"
+        },
+        {
+            "id": "puerta",
+            "file": "../resources/sound/sfx/puerta.wav"
+        }
+    ],
 
   "musics" : [
     {
