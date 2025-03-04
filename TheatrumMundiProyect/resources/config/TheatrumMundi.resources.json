@@ -325,6 +325,26 @@
     {
       "id": "Title",
       "file": "../resources/images/TemporalTitleImage.png"
+    },
+    {
+      "id": "TeaCupSprite",
+      "file": "../resources/images/Finales/Taza.png"
+    },
+    {
+      "id": "TeaCupBackgroundWithSpoon",
+      "file": "../resources/images/Finales/TazaZoom.png"
+    },
+    {
+      "id": "TeaCupBackgroundWithoutSpoon",
+      "file": "../resources/images/Finales/TazaZoomVacia.png"
+    },
+    {
+      "id": "TeaCupBackgroundWithPoison",
+      "file": "../resources/images/Finales/TazaZoomVerde.png"
+    },
+    {
+      "id": "TeaCupSpoon",
+      "file": "../resources/images/Finales/CucharillaZoom.png"
     }
   ],
 
