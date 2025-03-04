@@ -950,6 +950,10 @@ void PipePuzzleScene::waterPassPath(int path) {
 	{
 		_waterPath[path]._withWater = _waterPipes[_waterPath[path]._whoTocheck.num]->getPipeInfo().result;
 	}
+	else
+	{
+		_waterPath[path]._withWater = true;
+	}
 
 	
 	if (_waterPath[path]._withWater) {
