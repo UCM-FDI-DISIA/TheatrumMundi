@@ -336,19 +336,23 @@ void Room1Scene::init()
 			});
 
 		//Inventory
+		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 1500, 1500, 0, ecs::grp::DEFAULT);
 		auto buttonInventory = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3 ,20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->setActive(InventoryBackground, false);
 		ClickComponent* buttonInventoryClick = entityManager->getComponent<ClickComponent>(buttonInventory);
-		buttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound,_log]() {
+		buttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound,InventoryBackground]() {
 			AudioManager::Instance().playSound(buttonSound);
 			GetInventory()->setActive(!GetInventory()->getActive());  // Toggle the inventory
 
 			// If the inventory is active, activate the items
 			if (GetInventory()->getActive()) {
+				entityManager->setActive(InventoryBackground, true);
 				for (int i = 0; i < GetInventory()->getItemNumber(); ++i) {
 					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the hints
 				}
 			}
 			else {
+				entityManager->setActive(InventoryBackground, false);
 				for (int i = 0; i < GetInventory()->getItemNumber(); ++i) {
 					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the hints
 				}
