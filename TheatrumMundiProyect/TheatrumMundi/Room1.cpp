@@ -202,6 +202,33 @@ void Room1Scene::init()
 		});
 
 
+		//Movile
+
+		auto Mobile = entityFactory->CreateInteractableEntity(entityManager, "mobile", EntityFactory::RECTAREA, Vector2D(123, 267), Vector2D(0, 0), 128, 82, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Mobile));
+
+		auto _mobileZoom = entityFactory->CreateImageEntity(entityManager, "mobileZoom", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(_mobileZoom, false);
+		auto _quitButtonmv = entityFactory->CreateInteractableEntity(entityManager, "exit", entityFactory->RECTAREA, Vector2D(10, 10), Vector2D(0, 0), 50, 50, 0, areaLayerManager, entityFactory->NODRAG, ecs::grp::UI);
+		ClickComponent* click2mv  = entityManager->addComponent<ClickComponent>(_quitButtonmv);
+		//Exit Calendear Zoom
+		click2mv->connect(ClickComponent::JUST_CLICKED, [this, _mobileZoom, Mobile, _quitButtonmv]()
+			{
+				entityManager->setActive(_mobileZoom, false);
+				entityManager->setActive(Mobile, true);
+				entityManager->setActive(_quitButtonmv, false);
+			});
+		entityManager->setActive(_quitButtonmv, false);
+		entityManager->getComponent<ClickComponent>(Mobile)->connect(ClickComponent::JUST_CLICKED, [this, _mobileZoom, Mobile, _quitButtonmv]()
+			{
+				//this->startDialogue(Calendario);
+				entityManager->setActive(Mobile, false);
+				entityManager->setActive(_mobileZoom, true);
+				entityManager->setActive(_quitButtonmv, true);
+			});
+
+
+
 
 		auto Timetable = entityFactory->CreateInteractableEntity(entityManager, "Timetable", EntityFactory::RECTAREA, Vector2D(1173, 267), Vector2D(0, 0), 138, 182, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Timetable));
