@@ -2,12 +2,11 @@
 #include <assert.h>
 #include "SceneTemplate.h"
 #include "Room1.h"
-#include "DebugLogRoom.h" //quitar
+#include "DebugLogRoom.h"
 #include "InitialScene.h"
 #include "PipePuzzleScene.h"
 #include "ClockPuzzleScene.h"
 #include "BooksPuzzleScene.h"
-#include "DebugInventoryScene.h"
 #include "TeaCupPuzzleScene.h"
 #include "checkML.h"
 #include "SceneRoomTemplate.h"

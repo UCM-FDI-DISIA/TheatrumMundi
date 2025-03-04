@@ -1,64 +1,20 @@
 #include "Inventory.h"
-#include "Hint.h"
 #include "iostream"
-#include "Transform.h"
-
 
 Inventory::Inventory()
-	: active(false), firstItem(0)
 {
 
 }
 
-Inventory::~Inventory()
+void Inventory::addItem(HintTemplate* item)
 {
-	for (auto& item : items)
-	{
-		delete item;
-	}
+	inventory.push_back(item);
 }
 
-int Inventory::getItemNumber()
+void Inventory::init()
 {
-	//when we click on the up or down arrow in the inventory, we have to change firstItem
-
-	if (firstItem < 0)
+	for (HintTemplate* item : inventory)
 	{
-		firstItem = 0; // firstItem cannot be a invalid position
+		item->render();
 	}
-	if (firstItem >= items.size())
-	{
-		return 0; // If there are no items, return 0
-	}
-	return std::min(3, static_cast<int>(items.size()) - firstItem); // Return the number of items to be rendered
-
-}
-
-/*void Inventory::setItem(ecs::Entity* _ent, const std::string& _id, SceneTemplate* _myScene)
-{
-	if (hasItem(_id))
-	{
-		_ent = _myScene->entityFactory->CreateInteractableEntity(_ent, _id, _myScene->entityFactory->RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 100, 100, 0, _myScene->areaLayerManager, _myScene->entityFactory->DRAG);
-	}
-
-
-}*/
-		
-void Inventory::addItem(Hint* item)
-{
-	items.push_back(item);
-	std::cout << "Added to inventory " << item->getDescription() << std::endl;
-}
-
-bool Inventory::hasItem(const std::string& _id) const
-{
-	for (auto item : items)
-	{
-		if (item->getID() == _id)
-		{
-			return true;
-		}
-	}
-
-	return false;
 }

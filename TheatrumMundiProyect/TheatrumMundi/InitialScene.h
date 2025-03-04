@@ -1,8 +1,6 @@
 #pragma once
 #include "SceneTemplate.h"
 #include "ecs.h"
-
-class Inventory;
 class InitialScene : public SceneTemplate
 {
 private:
