@@ -49,6 +49,7 @@ BooksPuzzleScene::BooksPuzzleScene()
 
 BooksPuzzleScene::~BooksPuzzleScene()
 {
+
 }
 
 void BooksPuzzleScene::init(SceneRoomTemplate* sr)
@@ -66,13 +67,6 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 		Game::Instance()->getDialogueManager()->setCharacterImg(imCh);
 		entityManager->setActive(characterimg, false);
-
-		/*
-		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
-		auto _screenDetect = entityManager->addEntity(ecs::grp::DIALOGUE);
-		entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
-		entityManager->setActive(_screenDetect, false);
-		*/
 
 		//Create dialogue text entity. Object that renders dialogue Text on Screen
 		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
@@ -130,6 +124,9 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		//Game::Instance()->getDialogueManager()->ReadDialogue(Puzzle2);
 		startDialogue(Puzzle2);
 
+		
+
+		//Puzzle Scene
 		room = sr;
 		auto StudyBackground = entityFactory->CreateImageEntity(entityManager, "ShelfBackground1", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 
@@ -308,6 +305,22 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, false);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, true);
 			});
+
+
+
+		//BackButton
+		auto _backButton = entityManager->addEntity();
+		entityManager->addComponent<Transform>(_backButton, Vector2D(800, 200), Vector2D(0, 0), 200, 175, 0);
+		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("prueba"));
+
+		entityManager->addComponent<RectArea2D>(_backButton);
+
+		//Click component Open log button
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
+		{
+			Game::Instance()->getSceneManager()->popScene();
+		});
 	}
 }
 

@@ -29,8 +29,8 @@ SceneManager::SceneManager()
 
 void SceneManager::popScene()
 {
-		assert(currentscenes.empty());
-		currentscenes.pop_back();
+	assert(!currentscenes.empty());
+	currentscenes.pop_back();
 }
 
 
