@@ -24,7 +24,7 @@ using RoomsMap = std::unordered_map<std::string, RoomDialogues>; //manage the ro
 class DialogueManager
 {
 private:
-	const int numRooms = 3;
+	const int numRooms = 1;
 	std::string room;
 	int actualroom;
 	RoomsMap mRoom; //Map with all the RoomDialogues
