@@ -95,11 +95,25 @@ void Room1Scene::init()
 		auto StudyBackgroundScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(StudyBackground));
 
+		//StudyRoom (Right)
 		auto LivingBackground = entityFactory->CreateImageEntity(entityManager, "LivingroomBackground", Vector2D(0 - sdlutils().width(), 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(LivingBackground));
 
-		auto Corspe = entityFactory->CreateInteractableEntity(entityManager, "Corspe",EntityFactory::RECTAREA, Vector2D(919, 423), Vector2D(0, 0), 275, 327, 0, areaLayerManager,EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto Corspe = entityFactory->CreateInteractableEntity(entityManager, "Corspe",EntityFactory::RECTAREA, Vector2D(1000, 422), Vector2D(0, 0), 268, 326, 0, areaLayerManager,EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Corspe));
+
+		auto Timetable = entityFactory->CreateInteractableEntity(entityManager, "Timetable", EntityFactory::RECTAREA, Vector2D(1173, 267), Vector2D(0, 0), 138, 182, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Timetable));
+
+		auto Clock = entityFactory->CreateInteractableEntity(entityManager, "Clock", EntityFactory::RECTAREA, Vector2D(828, 95), Vector2D(0, 0), 142, 553, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Clock));
+
+		auto Shelf = entityFactory->CreateInteractableEntity(entityManager, "Shelf", EntityFactory::RECTAREA, Vector2D(214, 96), Vector2D(0, 0), 191, 548, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Shelf));
+
+		//LivingRoom (Left)
+
+
 
 		auto ChangeRoom1Button = entityManager->getComponent<ClickComponent>(ChangeRoom1);
 		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom1Button,StudyBackgroundScroll]() {
