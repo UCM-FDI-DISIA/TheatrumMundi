@@ -52,6 +52,7 @@ enum cmpId : cmpId_t {
 	LOG_COMPONENT,
 	WRITE_TEXT_COMPONENT,
 	PHYSICSBODYCOMPONENT,
+	CLICKABLE_SPRITE_COMPONENT,
 
 	// do not remove this
 	_LAST_CMP_ID
@@ -63,10 +64,14 @@ namespace grp {
 // first number is 0 in C/C++ standard
 enum grpId : cmpId_t {
 	DEFAULT,
-	DIALOGUE,
+	BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, // ALL THE ELEMENTS
+	BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, //BOOK AND COME BACK
+	BOOKS_PUZZLE_SCENE_REWARD,
 	BACKGROUND,
-	UI,
 	INTERACTOBJ,
+	ZOOMOBJ,
+	DIALOGUE,
+	UI,
 	_GRPS_LIST_, /* taken from ../game/ecs_defs */
 
 	// do not remove this

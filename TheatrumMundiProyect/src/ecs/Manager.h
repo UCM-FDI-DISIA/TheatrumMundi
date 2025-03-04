@@ -5,7 +5,6 @@
 #include <vector>
 #include <array>
 #include <cassert>
-
 #include "Component.h"
 #include "ecs.h"
 #include "Entity.h"

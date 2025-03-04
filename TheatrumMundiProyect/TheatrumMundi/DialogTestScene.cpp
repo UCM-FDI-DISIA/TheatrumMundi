@@ -19,7 +19,7 @@ void DialogTestScene::init()
 		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
 		entityManager->addComponent<WriteTextComponent>(_textTest);
 		*/
-		Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermediaEvento1);
+		Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermedia1);
 	}
 
 }

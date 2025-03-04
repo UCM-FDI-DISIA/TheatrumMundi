@@ -2,7 +2,7 @@
 //A enum with all the dialogue information
 
 enum eventToRead {
-	SalaIntermediaEvento1,
+	SalaIntermedia1,
 	SalaIntermediaEvento2,
 	SalaIntermediaEvento3,
 	Pista1,
@@ -10,5 +10,8 @@ enum eventToRead {
 	Pista3,
 	Puzzle1,
 	Puzzle2,
-	Puzzle3
+	Puzzle3,
+	Calendario,
+	Movil,
+	TazaTé
 };

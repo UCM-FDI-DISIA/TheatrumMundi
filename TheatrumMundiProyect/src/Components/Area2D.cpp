@@ -1,5 +1,5 @@
 #include "Area2D.h"
-
+#include <iostream>
 Area2D::Area2D(Area2DLayerManager* areaLayerMngr, Vector2D localPosition)
 	: _areaLayerMngr(areaLayerMngr), _localPosition(localPosition)
 {
@@ -7,10 +7,13 @@ Area2D::Area2D(Area2DLayerManager* areaLayerMngr, Vector2D localPosition)
 	_areaLayerPos = areaLayerMngr->begin();
 }
 
-Area2D::~Area2D() {
+Area2D::~Area2D()
+{
+	if (_areaLayerMngr == nullptr) return;
+
 	_areaLayerMngr->erase(_areaLayerPos);
 }
-#include <iostream>
+
 bool Area2D::pointIsOverlayered(Vector2D point)
 {
 	if (_areaLayerMngr == nullptr) return false;

@@ -12,8 +12,151 @@
 
   "images": [
     {
+      "id": "ShelfButton",
+      "file": "../resources/images/Finales/BotonEstante.PNG"
+    },
+    {
+      "id": "Tubes",
+      "file": "../resources/images/Finales/Tuberias.PNG"
+    },
+    {
+      "id": "Corspe",
+      "file": "../resources/images/Finales/Cadaver.PNG"
+    },
+    {
+      "id": "CorspeBackground",
+      "file": "../resources/images/Finales/CadaverFondo.PNG"
+    },
+    {
+      "id": "Shelf",
+      "file": "../resources/images/Finales/Estanteria.PNG"
+    },
+    {
+      "id": "ShelfBackground1",
+      "file": "../resources/images/Finales/EstanteriaFondo1.PNG"
+    },
+    {
+      "id": "ShelfBackground2",
+      "file": "../resources/images/Finales/EstanteriaFondo2.PNG"
+    },
+    {
+      "id": "Gloves",
+      "file": "../resources/images/Finales/Guantes.PNG"
+    },
+    {
+      "id": "Timetable",
+      "file": "../resources/images/Finales/Horario.PNG"
+    },
+    {
+      "id": "ShelfBook1",
+      "file": "../resources/images/Finales/Libro1Estanteria.PNG"
+    },
+    {
+      "id": "ShelfBook2",
+      "file": "../resources/images/Finales/Libro2Estanteria.PNG"
+    },
+    {
+      "id": "ShelfBook3",
+      "file": "../resources/images/Finales/Libro3Estanteria.PNG"
+    },
+    {
+      "id": "Clock",
+      "file": "../resources/images/Finales/Reloj.PNG"
+    },
+    {
+      "id": "Room",
+      "file": "../resources/images/Finales/SalaIntermedia.PNG"
+    },
+    {
+      "id": "ChangeRoom",
+      "file": "../resources/images/Finales/CambiarSala.PNG"
+    },
+    {
+      "id": "LucySprite",
+      "file": "../resources/images/Finales/Lucy.PNG"
+    },
+    {
+      "id": "KeisaraSprite",
+      "file": "../resources/images/Finales/Keisara.PNG"
+    },
+    {
+      "id": "SolSprite",
+      "file": "../resources/images/Finales/Sol.PNG"
+    },
+    {
+      "id": "Dialog",
+      "file": "../resources/images/Finales/Dialogo.PNG"
+    },
+    {
+      "id": "StudyBackground",
+      "file": "../resources/images/Finales/EstudioFondo.PNG"
+    },
+    {
+      "id": "LivingroomBackground",
+      "file": "../resources/images/Finales/SalonFondo.PNG"
+    },
+    {
+      "id": "Book1",
+      "file": "../resources/images/Finales/Libro1.PNG"
+    },
+    {
+      "id": "Book2",
+      "file": "../resources/images/Finales/Libro2.PNG"
+    },
+    {
+      "id": "Book3",
+      "file": "../resources/images/Finales/Libro3.PNG"
+    },
+    {
+      "id": "B1",
+      "file": "../resources/images/Finales/1.PNG"
+    },
+    {
+      "id": "B2",
+      "file": "../resources/images/Finales/2.PNG"
+    },
+    {
+      "id": "B3",
+      "file": "../resources/images/Finales/3.PNG"
+    },
+    {
+      "id": "B4",
+      "file": "../resources/images/Finales/4.PNG"
+    },
+    {
+      "id": "B5",
+      "file": "../resources/images/Finales/5.PNG"
+    },
+    {
+      "id": "B6",
+      "file": "../resources/images/Finales/6.PNG"
+    },
+    {
+      "id": "B7",
+      "file": "../resources/images/Finales/7.PNG"
+    },
+    {
+      "id": "Exit",
+      "file": "../resources/images/Finales/RectangleExitButton.PNG"
+    },
+    {
+      "id": "NewGame",
+      "file": "../resources/images/Finales/RectangleNewGameButton.PNG"
+    },
+    {
+      "id": "Options",
+      "file": "../resources/images/Finales/RectangleOptionsButton.PNG"
+    },{
+      "id": "Rectangle",
+      "file": "../resources/images/Finales/RectangleEmptyButton.PNG"
+    },
+    {
       "id": "prueba",
       "file": "../resources/images/socrates.png"
+    },
+    {
+      "id": "gloves",
+      "file": "../resources/images/gloves.png"
     },
     {
       "id": "fondoPruebaLog",
@@ -22,6 +165,9 @@
     {
       "id": "prueba",
       "file": "../resources/images/socrates.png"
+    },{
+      "id": "kei",
+      "file": "../resources/images/kei.png"
     },
     {
       "id": "clockShape",
@@ -54,6 +200,22 @@
   {
     "id": "Sol",
     "file": "../resources/images/clock_minutero.png"
+  },
+  {
+    "id": "calendear",
+    "file": "../resources/images/clock_minutero.png"
+  },
+  {
+    "id": "calendearZoom",
+    "file": "../resources/images/boton_check.png"
+  },
+  {
+    "id": "mobile",
+    "file": "../resources/images/clock_minutero.png"
+  },
+  {
+    "id": "mobileZoom",
+    "file": "../resources/images/boton_check.png"
   },
     { "id" : "prueba", "file" : "../resources/images/socrates.png" },
     { "id" : "pathWith", "file" : "../resources/images/pathWith.jpg" },
@@ -127,6 +289,54 @@
     {
         "id": "spoon",
         "file": "../resources/images/spoon.png"
+    },
+    {
+      "id": "bookComb0",
+      "file": "../resources/images/BookComb0.png"
+    },
+    {
+      "id": "bookComb1",
+      "file": "../resources/images/BookComb1.png"
+    },
+    {
+      "id": "bookComb2",
+      "file": "../resources/images/BookComb2.png"
+    },
+    {
+      "id": "bookComb3",
+      "file": "../resources/images/BookComb3.png"
+    },
+    {
+      "id": "bookComb4",
+      "file": "../resources/images/BookComb4.png"
+    },
+    {
+      "id": "bookComb5",
+      "file": "../resources/images/BookComb5.png"
+    },
+    {
+      "id": "bookComb6",
+      "file": "../resources/images/BookComb6.png"
+    },
+    {
+      "id": "bookComb7",
+      "file": "../resources/images/BookComb7.png"
+    },
+    {
+      "id": "bookComb8",
+      "file": "../resources/images/BookComb8.png"
+    },
+    {
+      "id": "bookComb9",
+      "file": "../resources/images/BookComb9.png"
+    },
+    {
+      "id": "incrementButtonSelected",
+      "file": "../resources/images/incrementButtonSelected.png"
+    },
+    {
+      "id": "Title",
+      "file": "../resources/images/TemporalTitleImage.png"
     }
   ],
 
@@ -140,11 +350,17 @@
   ],
   
   "sounds" : [
-   
+    {
+        "id": "explosion",
+        "file":  "../resources/sound/explosion.wav"
+    }
   ],
 
   "musics" : [
-    
+    {
+        "id": "Room1Loop",
+        "file":  "../resources/sound/ost/P2Room1.wav"
+    }
   ]
 
 }

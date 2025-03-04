@@ -22,12 +22,12 @@ ClockPuzzleScene::~ClockPuzzleScene()
 {
 }
 
-void ClockPuzzleScene::init()
+void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 {
 
 
 	if (!isStarted) {
-
+		sr = sr;
 		//create the clock
 		auto _clockShape = entityManager->addEntity();
 		auto _clockShapeTransform = entityManager->addComponent<Transform>(_clockShape, Vector2D(600, 300), Vector2D(0, 0), 200, 200, 0);
