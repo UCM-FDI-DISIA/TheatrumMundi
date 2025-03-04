@@ -39,6 +39,7 @@ void SceneTemplate::startDialogue(const eventToRead& _eventToRead)
 void SceneTemplate::endDialogue()
 {
 	std::cout << "acabe";
+	
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 	//entityManager->setActiveGroup(ecs::grp::ZOOMOBJ, false);
 }
