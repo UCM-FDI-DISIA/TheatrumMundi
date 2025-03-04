@@ -55,7 +55,7 @@ void PipePuzzleScene::moduleCreation()
 
 void PipePuzzleScene::pathCreation()
 {
-	auto plantilla = entityManager->addEntity();
+	/*auto plantilla = entityManager->addEntity();
 
 	// add transfomr
 	auto plantillaT = entityManager->addComponent<Transform>(
@@ -66,7 +66,7 @@ void PipePuzzleScene::pathCreation()
 	entityManager->addComponent<Image>(plantilla, &sdlutils().images().at("plantilla"));
 
 	// add area of visualization of the image
-	entityManager->addComponent<RectArea2D>(plantilla);
+	entityManager->addComponent<RectArea2D>(plantilla);*/
     int nextId = 0;
 
 	//PATH 0 
@@ -165,16 +165,15 @@ void PipePuzzleScene::pathCreation()
 		Vector2D(0, 0), 75, 40, 0, ecs::grp::DEFAULT);
 	_waterPath[4]._pathPieces.push_back({ path4, 2 });
 
-	 path4 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(480, 175),
-		 Vector2D(0, 0), 80, 40, 0, ecs::grp::DEFAULT);
+	path4 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(480, 175),
+		Vector2D(0, 0), 80, 40, 0, ecs::grp::DEFAULT);
 	_waterPath[4]._pathPieces.push_back({ path4, 2 });
 
-	
 	//PATH 5 
 	_waterPath.push_back({ nextId++, true,{'P',1,NONE} });//5
 	auto path5 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(630, 150),
 		Vector2D(0, 0), 60, 60, 0, ecs::grp::DEFAULT);
-	_waterPath[5]._pathPieces.push_back({ path4, 1 });
+	_waterPath[5]._pathPieces.push_back({ path5, 1 });
 
 	 path5 = entityFactory->CreateImageEntity(entityManager, "pathLWater", Vector2D(660, 95),
 		 Vector2D(0, 0), 60, 60, 0, ecs::grp::DEFAULT);
@@ -319,51 +318,87 @@ void PipePuzzleScene::pathCreation()
 
 	//PATH 14
 	_waterPath.push_back({ nextId++, false,{'P',7,NONE} });//14
-	auto path14 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(500, 500),
+	auto path14 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(1205, 175),
 		Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
 	_waterPath[14]._pathPieces.push_back({ path14, 2 });
 
-	 path14 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(500, 500),
-		 Vector2D(0, 0), 90, 80, 0, ecs::grp::DEFAULT);
+
+	transformComponent = path14->getMngr()->getComponent<Transform>(path14);
+	transformComponent->setRot(transformComponent->getRot() + 90.0f);
+
+	 path14 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(1210, 240),
+		 Vector2D(0, 0), 60, 70, 0, ecs::grp::DEFAULT);
 	_waterPath[14]._pathPieces.push_back({ path14, 1 });
 
 	//PATH 15
 	_waterPath.push_back({ nextId++, false ,{'P',4,NONE} });//15
-	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(500, 500),
+	auto path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(720, 585),
+		Vector2D(0, 0), 70, 40, 0, ecs::grp::DEFAULT);
+	_waterPath[15]._pathPieces.push_back({ path15, 2 });
+
+	transformComponent = path15->getMngr()->getComponent<Transform>(path15);
+	transformComponent->setRot(transformComponent->getRot() + 90.0f);
+
+
+	 path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(745, 635),
+		 Vector2D(0, 0), 60, 70, 0, ecs::grp::DEFAULT);
+	_waterPath[15]._pathPieces.push_back({ path15, 1 });
+
+	transformComponent = path15->getMngr()->getComponent<Transform>(path15);
+	transformComponent->setRot(transformComponent->getRot() + 90.0f);
+
+
+	path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(810, 665),
 		Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
 	_waterPath[15]._pathPieces.push_back({ path15, 2 });
 
-	 path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(500, 500),
-		 Vector2D(0, 0), 90, 80, 0, ecs::grp::DEFAULT);
+
+	path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(900, 628),
+		Vector2D(0, 0), 60, 70, 0, ecs::grp::DEFAULT);
 	_waterPath[15]._pathPieces.push_back({ path15, 1 });
 
-	 path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(500, 500),
-		 Vector2D(0, 0), 90, 80, 0, ecs::grp::DEFAULT);
+
+	 path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(900, 565),
+		 Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
+	_waterPath[15]._pathPieces.push_back({ path15, 2 });
+
+
+	transformComponent = path15->getMngr()->getComponent<Transform>(path15);
+	transformComponent->setRot(transformComponent->getRot() + 90.0f);
+
+
+	path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(900, 475),
+		Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
+	_waterPath[15]._pathPieces.push_back({ path15, 2 });
+
+	transformComponent = path15->getMngr()->getComponent<Transform>(path15);
+	transformComponent->setRot(transformComponent->getRot() + 90.0f);
+
+	path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(900, 385),
+		Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
+	_waterPath[15]._pathPieces.push_back({ path15, 2 });
+
+	transformComponent = path15->getMngr()->getComponent<Transform>(path15);
+	transformComponent->setRot(transformComponent->getRot() + 90.0f);
+
+	path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(932, 290),
+		Vector2D(0, 0), 60, 70, 0, ecs::grp::DEFAULT);
 	_waterPath[15]._pathPieces.push_back({ path15, 1 });
 
-	 path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(500, 500),
-		 Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
+	transformComponent = path15->getMngr()->getComponent<Transform>(path15);
+	transformComponent->setRot(transformComponent->getRot() + 180.0f);
+
+	path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(992, 285),
+		Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
 	_waterPath[15]._pathPieces.push_back({ path15, 2 });
 
-	 path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(500, 500),
-		 Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
+	path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(1080, 285),
+		Vector2D(0, 0), 60, 40, 0, ecs::grp::DEFAULT);
 	_waterPath[15]._pathPieces.push_back({ path15, 2 });
 
-	 path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(500, 500),
-		 Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
-	_waterPath[15]._pathPieces.push_back({ path15, 2 });
 
-	 path15 = entityFactory->CreateImageEntity(entityManager, "pathLNoWater", Vector2D(500, 500),
-		 Vector2D(0, 0), 90, 80, 0, ecs::grp::DEFAULT);
-	_waterPath[15]._pathPieces.push_back({ path15, 1 });
 
-	 path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(500, 500),
-		 Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
-	_waterPath[15]._pathPieces.push_back({ path15, 2 });
 
-	 path15 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(500, 500),
-		 Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
-	_waterPath[15]._pathPieces.push_back({ path15, 2 });
 
 
 	//PATH 16
@@ -472,9 +507,13 @@ void PipePuzzleScene::pathCreation()
 
 	//PATH 21
 	_waterPath.push_back({ nextId++, false,{'P',8,NONE} });//21
-	auto path21 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(500, 500),
-		Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
+	auto path21 = entityFactory->CreateImageEntity(entityManager, "pathNoWater", Vector2D(1135, 345),
+		Vector2D(0, 0), 70, 40, 0, ecs::grp::DEFAULT);
 	_waterPath[21]._pathPieces.push_back({ path21, 2 });
+
+
+	transformComponent = path21->getMngr()->getComponent<Transform>(path21);
+	transformComponent->setRot(transformComponent->getRot() + 90.0f);
 
 	//PATH 22
 	_waterPath.push_back({ nextId++, true,{'M',2,DOWN} });//22
@@ -593,7 +632,7 @@ void PipePuzzleScene::init()
 			Vector2D(330, 430), // pos pipe 5
 			Vector2D(720, 290), // pos pipe 6
 			Vector2D(1210, 80), // pos pipe 7
-			Vector2D(1100, 230)  // pos pipe 8
+			Vector2D(1140, 260)  // pos pipe 8
 		};
 
 		// creates the components of the pipe
@@ -741,7 +780,7 @@ void PipePuzzleScene::init()
 
 		}
 	*/
-		// create cube
+		/*// create cube
 		auto cubeEntity = entityManager->addEntity();
 
 		// add transfomr
@@ -753,7 +792,7 @@ void PipePuzzleScene::init()
 
 		// add area of visualization of the image
 		entityManager->addComponent<RectArea2D>(cubeEntity);
-
+		*/
 		//create exit botton
 		auto exitEntity = entityManager->addEntity();
 
@@ -767,7 +806,11 @@ void PipePuzzleScene::init()
 		// add area of visualization of the image
 		entityManager->addComponent<RectArea2D>(exitEntity);
 
-
+		//add click component
+		ClickComponent* clk = entityManager->addComponent<ClickComponent>(exitEntity);
+		clk->connect(ClickComponent::JUST_CLICKED, []() {
+			Game::Instance()->getSceneManager()->popScene();
+			});
 
 
 	}
@@ -1091,11 +1134,6 @@ void PipePuzzleScene::Win()
 void PipePuzzleScene::addToInventory()
 {
 
-}
-
-void PipePuzzleScene::Exit()
-{
-	Game::Instance()->getSceneManager()->popScene();
 }
 
 PipePuzzleScene::~PipePuzzleScene()
