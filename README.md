@@ -23,6 +23,10 @@ Plataforma: PC
 
 Modo de juego: SinglePlayer
 
+# Guía de montaje Sala 1
+
+https://docs.google.com/document/d/1vjxe9P6Ty6RblXR_VoigkZ9FZleopdOIU3c0TQWM-8g/edit?usp=sharing
+
 # Mecánica
 
 ## Interacción Jugador/mundo
