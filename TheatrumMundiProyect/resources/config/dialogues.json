@@ -17,6 +17,10 @@
                 {"Character":"Lucy","Text":"¿Qué es una puerta lógica?"},
                 {"Character":"Sol","Text":"Déjalo."}
             ],
+            "PuzzleReloj":[
+                {"Character":"Sol","Text":"Que reloj mas bonito..."},
+                {"Character":"Lucy","Text":"Que casualidad que hay mucha temática de tiempo"}
+            ],
             "PuzzleTaza1":[
                 {"Character":"Sol","Text":"Queda algo de té en esta taza."},
                 {"Character":"Lucy","Text":"No lo toques, estamos en una escena del crimen."},
