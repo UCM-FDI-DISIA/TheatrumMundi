@@ -55,7 +55,7 @@ void DebugInventoryScene::init()
 			Hint* glovesHint = new Hint("gloves", "A pair of gloves", &sdlutils().images().at("gloves"));
 			inv2->addItem(glovesHint);
 
-			Vector2D itemPos = itemPositions[inv2->hints.size() % itemPositions.size()];
+			Vector2D itemPos = itemPositions[inv2->hints.size() % itemPositions.size()]; // Calculate the position of the hint in the inventory
 
 			inv2->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, glovesHint->getID(), EntityFactory::RECTAREA, itemPos, Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::DRAG));
 			inv2->hints.back()->getMngr()->setActive(inv2->hints.back(),false);
@@ -104,13 +104,13 @@ void DebugInventoryScene::init()
 			// If the inventory is active, activate the items
 			if (inv2->getActive()) {
 
-				for (int i = 0; i < 2; ++i) {
+				for (int i = 0; i < inv2->getItemNumber(); ++i) {
 					inv2->hints[i]->getMngr()->setActive(inv2->hints[i], true);  // Activate the hints
 				}
 			}
 			else {
 
-				for (int i = 0; i < 2; ++i) {
+				for (int i = 0; i < inv2->getItemNumber(); ++i) {
 					inv2->hints[i]->getMngr()->setActive(inv2->hints[i], false);  // Activate the hints
 				}
 			}

@@ -24,10 +24,10 @@ public:
 
 	void setActive(bool _active) { active = _active; }
 	bool getActive() const { return active; }
-	std::vector<Hint*>* getItems(int firstItem); //Get the hints that are going to be rendered
-	std::vector<Hint*> getItems() { return items; } //Get all the hints
+	int getItemNumber(); //Get the hints that are going to be rendered
+	std::vector<Hint*> getItems() { return items; } //Get all the hintss
 
 private:
 	bool active;
-	
+	int firstItem;
 };

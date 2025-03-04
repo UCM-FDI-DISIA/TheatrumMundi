@@ -5,7 +5,7 @@
 
 
 Inventory::Inventory()
-	: active(false)
+	: active(false), firstItem(0)
 {
 
 }
@@ -18,46 +18,19 @@ Inventory::~Inventory()
 	}
 }
 
-std::vector<Hint*>* Inventory::getItems(int firstItem)
+int Inventory::getItemNumber()
 {
-	if (firstItem < 0) {
-		std::vector<Hint*>* renderItems = new std::vector<Hint*>;
-		if (firstItem + 3 >= items.size()) {
-			for (int i = 0; i < items.size();++i) {
-				renderItems->push_back(items[i]);
-			}
-		}
-		else {
+	//when we click on the up or down arrow in the inventory, we have to change firstItem
 
-			for (int i = 0; i < 3;++i) {
-				renderItems->push_back(items[i]);
-			}
-		}
-		return renderItems;
-	}
-
-	else if(firstItem + 2 >= items.size())
+	if (firstItem < 0)
 	{
-		std::vector<Hint*>* renderItems = new std::vector<Hint*>;
-		for (int i = firstItem; i < items.size();++i) {
-			renderItems->push_back(items[i]);
-		}
-		return renderItems;
+		firstItem = 0; // firstItem cannot be a invalid position
 	}
-	else
+	if (firstItem >= items.size())
 	{
-		std::vector<Hint*>* renderItems = new std::vector<Hint*>;
-		if (firstItem + 2 >= items.size()) {
-			for (int i = firstItem; i < items.size();++i) {
-				renderItems->push_back(items[i]);
-			}
-		}
-		else {
-			for (int i = 0; i < 3;++i) {
-				renderItems->push_back(items[i]);
-			}
-		}
+		return 0; // If there are no items, return 0
 	}
+	return std::min(3, static_cast<int>(items.size()) - firstItem); // Return the number of items to be rendered
 
 }
 
