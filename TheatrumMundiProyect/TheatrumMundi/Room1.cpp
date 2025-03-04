@@ -344,6 +344,8 @@ void Room1Scene::init()
 			AudioManager::Instance().playSound(buttonSound);
 			GetInventory()->setActive(!GetInventory()->getActive());  // Toggle the inventory
 
+			std::cout << "Inventory item: " << GetInventory()->hasItem("boa2") << std::endl;
+
 			// If the inventory is active, activate the items
 			if (GetInventory()->getActive()) {
 				entityManager->setActive(InventoryBackground, true);
@@ -357,7 +359,8 @@ void Room1Scene::init()
 					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the hints
 				}
 			}
-			});
+
+		});
 
 		auto buttonLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(1200, 748 - (268/3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		

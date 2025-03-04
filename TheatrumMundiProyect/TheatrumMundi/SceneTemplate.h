@@ -35,6 +35,7 @@ public:
 	void startDialogue(const eventToRead& _eventToRead);
 	void endDialogue();
 	inline Inventory* GetInventory() { return inv; }
+	inline ecs::EntityManager* GetEntityManager() { return entityManager; }
 	inline void SetInventory(Inventory* _inv) { inv = _inv; }
 
 };

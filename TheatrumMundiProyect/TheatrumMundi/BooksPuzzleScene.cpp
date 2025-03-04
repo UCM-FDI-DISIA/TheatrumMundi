@@ -54,7 +54,7 @@ BooksPuzzleScene::~BooksPuzzleScene()
 
 void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 {
-
+	sr->SetInventory(GetInventory());
 
 	if (!isStarted) 
 	{
@@ -215,11 +215,16 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		//CHECK COMBINATION
 		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(700,480), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		ClickComponent* clickcheckButton = entityManager->getComponent<ClickComponent>(checkButton);
-		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, Reward, this]() {
+		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, Reward,sr, this]() {
 			std::cout << "CLICK" << std::endl;
 			if (Check()) {
 				std::cout << "WIN" << std::endl;
 				//Reward->getMngr()->setActive(Reward, true);
+
+				GetInventory()->addItem(new Hint("boa2", "Manecilla de las horas de un reloj (un momento)", &sdlutils().images().at("boa1")));
+				GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "boa2", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+				GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+
 				Reward->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, true);
 			}
 			});

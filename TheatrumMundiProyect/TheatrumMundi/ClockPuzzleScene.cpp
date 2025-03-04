@@ -12,7 +12,6 @@
 #include "../src/components/RectArea2D.h"
 #include "../src/Components/LogComponent.h"
 
-
 #include "AudioManager.h"
 
 #include "SceneRoomTemplate.h"
