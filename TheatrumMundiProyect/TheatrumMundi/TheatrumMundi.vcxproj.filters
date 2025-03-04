@@ -45,6 +45,11 @@
     <ClCompile Include="SceneTemplate.cpp" />
     <ClCompile Include="..\src\Components\ClickableSpriteComponent.cpp" />
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="CalendearMobileTestScene.cpp" />
+    <ClCompile Include="TeaCupPuzzleScene.cpp" />
+    <ClCompile Include="DebugInventoryScene.cpp" />
+    <ClCompile Include="Hint.cpp" />
+    <ClCompile Include="Inventory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -212,6 +217,11 @@
     <ClInclude Include="..\src\Components\ClickableSpriteComponent.h" />
     <ClInclude Include="EventsInfo.h" />
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="CalendearMobileTestScene.h" />
+    <ClInclude Include="TeaCupPuzzleScene.h" />
+    <ClInclude Include="DebugInventoryScene.h" />
+    <ClInclude Include="Hint.h" />
+    <ClInclude Include="Inventory.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />
