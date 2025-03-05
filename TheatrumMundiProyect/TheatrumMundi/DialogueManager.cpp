@@ -80,6 +80,9 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 	case(SalaIntermediaEvento3):
 		event = "SalaIntermediaEvento3";
 		break;
+	case(Cadaver):
+		event = "Cadaver";
+		break;
 	case(Pista1):
 		event = "Pista1";
 		break;

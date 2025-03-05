@@ -16,10 +16,10 @@
 #include "../src/game/Game.h"
 #include "ClickableSpriteComponent.h"
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
+#include "EventsInfo.h"
 
 
-
-Room1Scene::Room1Scene(): SceneRoomTemplate()
+Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 {
 	roomEvent.resize(event_size);
 	roomEvent[InitialDialogue] = [this]
@@ -33,8 +33,8 @@ Room1Scene::Room1Scene(): SceneRoomTemplate()
 			std::cout << "semurio";
 #endif // DEBUG
 
-			
-			startDialogue(SalaIntermedia1);
+			_eventToRead = Cadaver;
+			startDialogue(Cadaver);
 		};
 	roomEvent[PipePuzzleSnc] = [this]
 		{
@@ -145,7 +145,7 @@ void Room1Scene::init()
 					//read dialogue only if it has to
 					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
 					{
-						Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermedia1);
+						Game::Instance()->getDialogueManager()->ReadDialogue(_eventToRead);
 					}
 					else
 					{
