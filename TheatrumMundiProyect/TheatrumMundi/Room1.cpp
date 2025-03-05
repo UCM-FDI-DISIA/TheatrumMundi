@@ -260,8 +260,6 @@ void Room1Scene::init()
 		
 		entityManager->getComponent<ClickComponent>(Mobile)->connect(ClickComponent::JUST_CLICKED, [this, _mobileZoom, Mobile, _quitButton]()
 			{
-				
-				//entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 				entityManager->setActive(_mobileZoom, true);
 				entityManager->setActive(_quitButton, true);
 				roomEvent[MobileDialogue]();
@@ -273,7 +271,7 @@ void Room1Scene::init()
 		auto Timetable = entityFactory->CreateInteractableEntity(entityManager, "Timetable", EntityFactory::RECTAREA, Vector2D(1173, 267), Vector2D(0, 0), 138, 182, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Timetable));
 		
-		auto _calendearZoom = entityFactory->CreateImageEntity(entityManager, "calendearZoom", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
+		auto _calendearZoom = entityFactory->CreateImageEntity(entityManager, "TimetableZoom", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 		entityManager->setActive(_calendearZoom, false);
 		
 		entityManager->setActive(_quitButton, false);

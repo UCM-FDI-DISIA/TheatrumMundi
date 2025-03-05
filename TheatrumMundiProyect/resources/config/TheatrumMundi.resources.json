@@ -48,6 +48,10 @@
       "file": "../resources/images/Finales/Horario.PNG"
     },
     {
+      "id": "TimetableZoom",
+      "file": "../resources/images/Finales/horarioZoom.png"
+    },
+    {
       "id": "ShelfBook1",
       "file": "../resources/images/Finales/Libro1Estanteria.PNG"
     },
