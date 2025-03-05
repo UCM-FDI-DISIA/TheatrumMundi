@@ -849,7 +849,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 		// add transfomr
 		auto cubeTransform = entityManager->addComponent<Transform>(
-			cubeEntity, Vector2D(1150,580), Vector2D(0, 0), 150, 150, 0
+			cubeEntity, Vector2D(1000, 395), Vector2D(0, 0), 300, 300, 0
 		);
 		// add image
 		entityManager->addComponent<Image>(cubeEntity, &sdlutils().images().at("cube"));
@@ -1149,7 +1149,7 @@ void PipePuzzleScene::Win()
 
 	// add transfomr
 	auto gloveTransform = entityManager->addComponent<Transform>(
-		gloveEntity, Vector2D(1150, 580), Vector2D(0, 0), 150, 150, 0
+		gloveEntity, Vector2D(1200, 395), Vector2D(0, 0), 150, 150, 0
 	);
 	// add image
 	entityManager->addComponent<Image>(gloveEntity, &sdlutils().images().at("Gloves"));
