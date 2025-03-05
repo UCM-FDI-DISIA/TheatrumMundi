@@ -224,7 +224,6 @@
     "file": "../resources/images/boton_check.png"
   },
     { "id" : "prueba", "file" : "../resources/images/socrates.png" },
-    { "id" : "cube", "file" : "../resources/images/cube.jpg" },
     { "id" : "init", "file" : "../resources/images/start.jpg" },
     { "id" : "exit", "file" : "../resources/images/exit.png" },
 
@@ -236,8 +235,7 @@
     { "id" : "pathNoWater", "file" : "../resources/images/pathNoWater.png" },
     { "id" : "pathWater", "file" : "../resources/images/pathWater.png" },
     { "id" : "plantilla", "file" : "../resources/images/plantilla.png" },
-     { "id": "clockMinButton",
-    },
+    { "id" : "cube", "file" : "../resources/images/cubo.png" },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"
@@ -289,10 +287,6 @@
     {
       "id": "module2",
       "file": "../resources/images/module2.jpg"
-    },
-    {
-      "id": "cube",
-      "file": "../resources/images/cube.jpg"
     },
     {
       "id": "init",

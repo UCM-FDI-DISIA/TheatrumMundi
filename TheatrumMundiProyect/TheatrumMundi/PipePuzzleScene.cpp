@@ -15,6 +15,8 @@
 #include "../src/components/RectArea2D.h"
 #include "SceneRoomTemplate.h"
 #include "../src/components/TriggerComponent.h"
+#include "Inventory.h"
+
 
 PipePuzzleScene::PipePuzzleScene()
 	:ScenePuzzleTemplate()
@@ -617,6 +619,7 @@ void PipePuzzleScene::changeDirection(int module)
 
 void PipePuzzleScene::init(SceneRoomTemplate* sr)
 {
+	
 	if (!isStarted) {
 		solved = false;
 		isStarted = true;
@@ -841,19 +844,19 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 		}
 	*/
-		/*// create cube
+		// create cube
 		auto cubeEntity = entityManager->addEntity();
 
 		// add transfomr
 		auto cubeTransform = entityManager->addComponent<Transform>(
-			cubeEntity, Vector2D(900,580), Vector2D(0, 0), 150, 150, 0
+			cubeEntity, Vector2D(1150,580), Vector2D(0, 0), 150, 150, 0
 		);
 		// add image
 		entityManager->addComponent<Image>(cubeEntity, &sdlutils().images().at("cube"));
 
 		// add area of visualization of the image
 		entityManager->addComponent<RectArea2D>(cubeEntity);
-		*/
+		
 		//create exit botton
 		auto exitEntity = entityManager->addEntity();
 
@@ -1137,18 +1140,19 @@ void PipePuzzleScene::updatePuzzle() {
 void PipePuzzleScene::Win()
 {
 	room->resolvedPuzzle(7);
-	
+	SetInventory(room->GetInventory());
 	
 	//puts the gloves in scene
 	// create entity
-	auto gloveEntity = entityManager->addEntity();
+	gloveEntity = entityManager->addEntity();
+	bool click = false;
 
 	// add transfomr
-	auto cubeTransform = entityManager->addComponent<Transform>(
-		gloveEntity, Vector2D(900, 580), Vector2D(0, 0), 150, 150, 0
+	auto gloveTransform = entityManager->addComponent<Transform>(
+		gloveEntity, Vector2D(1150, 580), Vector2D(0, 0), 150, 150, 0
 	);
 	// add image
-	entityManager->addComponent<Image>(gloveEntity, &sdlutils().images().at("gloves"));
+	entityManager->addComponent<Image>(gloveEntity, &sdlutils().images().at("Gloves"));
 
 	// add area of visualization of the image
 	entityManager->addComponent<RectArea2D>(gloveEntity);
@@ -1156,17 +1160,17 @@ void PipePuzzleScene::Win()
 	//add click component
 	ClickComponent* clk = entityManager->addComponent<ClickComponent>(gloveEntity);
 	clk->connect(ClickComponent::JUST_CLICKED, [this]() {
-		//add object to inventory and deeactivates visibility of the image;
+
+		room->GetInventory()->addItem(new Hint("Gloves", "Me lo puedo beber??", &sdlutils().images().at("Gloves")));
+		room->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(room->GetEntityManager(), "Gloves", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		room->GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		gloveEntity->getMngr()->setActive(gloveEntity, false);
 		});
 
-	//gloveEntity->getMngr()->setActive(gloveEntity, false);
+	
 
 }
 
-void PipePuzzleScene::addToInventory()
-{
-
-}
 
 PipePuzzleScene::~PipePuzzleScene()
 {

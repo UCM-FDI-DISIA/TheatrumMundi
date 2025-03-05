@@ -11,6 +11,7 @@ class SceneManager;
 class Module;
 class Pipe;
 class Image;
+class Inventory;
 class PipePuzzleScene : public ScenePuzzleTemplate
 {
 
@@ -46,6 +47,7 @@ private:
 	std::vector<ecs::Entity*>_modulesEnt;
 	std::vector<ecs::Entity*>_pipesEnt;
 	std::vector<ecs::Entity*>_pathEnt;
+	ecs::Entity* gloveEntity;
 
 protected:
 
@@ -64,7 +66,6 @@ public:
 	 void unload() override;
 	 void updatePuzzle() ;
 	 void Win() override;
-	 void addToInventory();
 	 ~PipePuzzleScene();
 };
 
