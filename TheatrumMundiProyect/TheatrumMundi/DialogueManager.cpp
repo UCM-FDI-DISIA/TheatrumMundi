@@ -105,7 +105,7 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 		event = "Calendario";
 		break;
 	case(Movil):
-		event = "Movil";
+		event = "Movil1";
 		break;
 	}
 }

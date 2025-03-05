@@ -86,6 +86,11 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 		// WIP
 		Game::Instance()->getSceneManager()->popScene();
 		};
+	roomEvent[MobileDialogue] = [this] {
+		// WIP
+		_eventToRead = Movil;
+		startDialogue(Movil);
+		};
 	
 }
 
@@ -255,10 +260,11 @@ void Room1Scene::init()
 		
 		entityManager->getComponent<ClickComponent>(Mobile)->connect(ClickComponent::JUST_CLICKED, [this, _mobileZoom, Mobile, _quitButton]()
 			{
-				//this->startDialogue(Calendario);
-				entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
+				
+				//entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 				entityManager->setActive(_mobileZoom, true);
 				entityManager->setActive(_quitButton, true);
+				roomEvent[MobileDialogue]();
 			});
 
 

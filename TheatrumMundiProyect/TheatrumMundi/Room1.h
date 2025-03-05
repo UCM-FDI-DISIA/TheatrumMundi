@@ -24,6 +24,7 @@ protected:
 		ResolveBottons,
 		GoodEnd,
 		BadEnd,
+		MobileDialogue,
 		LOGENABLE,
 		LOGDESABLE,
 		event_size,
