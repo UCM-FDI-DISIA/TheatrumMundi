@@ -28,7 +28,7 @@ ClockPuzzleScene::~ClockPuzzleScene()
 
 void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 {
-	sr->SetInventory(GetInventory());
+	SetInventory(sr->GetInventory());
 
 	if (!isStarted) {
 		isStarted = true;

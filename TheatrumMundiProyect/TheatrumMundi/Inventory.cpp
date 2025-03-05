@@ -7,9 +7,8 @@
 Inventory::Inventory()
 	: active(false), firstItem(0)
 {
-	positionIndex = 0;
 	for (int i = 0; i < TOTALITEMSTOSHOW; ++i) {
-		positions.push_back(Vector2D(100,100 + i * 150));
+		positions.push_back(Vector2D(120,150 + i * 150));
 	}
 }
 
@@ -66,10 +65,3 @@ bool Inventory::hasItem(const std::string& _id) const
 	return false;
 }
 
-Vector2D Inventory::setPosition()
-{
-	Vector2D vectorToReturn = positions[positionIndex];
-	if (positionIndex >= TOTALITEMSTOSHOW) positionIndex = 0;
-	else ++positionIndex;
-	return vectorToReturn;
-}

@@ -54,7 +54,7 @@ BooksPuzzleScene::~BooksPuzzleScene()
 
 void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 {
-	sr->SetInventory(GetInventory());
+	SetInventory(sr->GetInventory());
 
 	if (!isStarted) 
 	{

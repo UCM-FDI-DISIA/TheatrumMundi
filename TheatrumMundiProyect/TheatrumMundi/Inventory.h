@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 #include "Entity.h"
+#include "Vector2D.h"
 
-class Vector2D;
 class SceneTemplate;
 class Hint;
 class Inventory
@@ -23,7 +23,8 @@ public:
 	void addItem(Hint* item);
 	bool hasItem(const std::string& _id) const; //Check if the hint is in the inventory
 	//void render(); //Render the the inventory
-	Vector2D setPosition();
+
+	inline Vector2D setPosition() { return positions[hints.size()]; }
 	void setActive(bool _active) { active = _active; }
 	bool getActive() const { return active; }
 	int getItemNumber(); //Get the hints that are going to be rendered
@@ -32,6 +33,5 @@ public:
 private:
 	bool active;
 	int firstItem;
-	int positionIndex;
-	const int TOTALITEMSTOSHOW = 3;
+	const int TOTALITEMSTOSHOW = 10;
 };
