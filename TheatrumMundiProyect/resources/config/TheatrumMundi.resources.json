@@ -386,6 +386,10 @@
         {
             "id": "boa2",
             "file": "../resources/images/boa2.png"
+        },
+        {
+            "id": "AAA",
+            "file": "../resources/images/veneno.png"
         }
     ],
 

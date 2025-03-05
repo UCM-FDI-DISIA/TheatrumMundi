@@ -28,7 +28,7 @@ ClockPuzzleScene::~ClockPuzzleScene()
 
 void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 {
-
+	sr->SetInventory(GetInventory());
 
 	if (!isStarted) {
 		isStarted = true;
@@ -180,9 +180,14 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		ClickComponent* clockCheckClick = entityManager->addComponent<ClickComponent>(_buttonCheck);
-		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [_buttonCheckTransform, this]()
+		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [_buttonCheckTransform, sr, this]()
 			{
 				if (Check()) {
+
+					GetInventory()->addItem(new Hint("AAA", "Me lo puedo beber??", &sdlutils().images().at("AAA")));
+					GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "AAA", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+					GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+
 #ifdef DEBUG
 					std::cout << "wii";
 #endif // DEBUG
