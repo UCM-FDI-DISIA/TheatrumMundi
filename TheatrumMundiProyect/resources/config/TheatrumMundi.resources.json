@@ -226,7 +226,7 @@
     { "id" : "prueba", "file" : "../resources/images/socrates.png" },
     { "id" : "init", "file" : "../resources/images/start.jpg" },
     { "id" : "exit", "file" : "../resources/images/exit.png" },
-
+    { "id": "clockMinButton","file" : "../resources/images/boton_minutero.png"},
     { "id" : "module", "file" : "../resources/images/module.png" },
     { "id" : "pipe1", "file" : "../resources/images/pipe1.png" },
     { "id" : "pipe2", "file" : "../resources/images/pipe2.png" },
