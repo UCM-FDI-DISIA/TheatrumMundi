@@ -384,6 +384,10 @@
       "file": "../resources/images/Finales/CucharillaZoom.png"
     },
     {
+      "id": "SceneSpoon",
+      "file": "../resources/images/Finales/Cucharilla.png"
+    },
+    {
       "id": "boa1",
       "file": "../resources/images/boa1.png"
     },
