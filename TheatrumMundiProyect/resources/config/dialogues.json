@@ -10,7 +10,10 @@
             ],
             "Cadaver":[
                 {"Character":"Lucy","Text":"Ostia, se me ha muerto la novia"},
-                {"Character":"Sol","Text":"Pues vaya mala suerte."}
+                {"Character":"Sol","Text":"Pues vaya mala suerte."},
+                {"Character":"Lucy","Text":"Por los síntomas parece que podría haber sido veneno."},
+                {"Character":"Sol","Text":"¿Y tú como sabes eso?"},
+                {"Character":"Lucy","Text":"Es conocimiento genérico de la academia."}
             ],
             "PuzzleTuberias":[
                 {"Character":"Sol","Text":"Se que has dicho que te recuerda a tu casa..."},
