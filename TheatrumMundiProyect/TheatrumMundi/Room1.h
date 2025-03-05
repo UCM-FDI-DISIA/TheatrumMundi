@@ -4,6 +4,7 @@
 class Room1Scene : public SceneRoomTemplate
 {
 private:
+	eventToRead _eventToRead;
 protected:
 	
 	enum Room1Event
@@ -23,6 +24,7 @@ protected:
 		ResolveBottons,
 		GoodEnd,
 		BadEnd,
+		MobileDialogue,
 		LOGENABLE,
 		LOGDESABLE,
 		event_size,

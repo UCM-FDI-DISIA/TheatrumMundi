@@ -7,7 +7,9 @@
 Inventory::Inventory()
 	: active(false), firstItem(0)
 {
-
+	for (int i = 0; i < TOTALITEMSTOSHOW; ++i) {
+		positions.push_back(Vector2D(120,150 + i * 150));
+	}
 }
 
 Inventory::~Inventory()
@@ -62,3 +64,4 @@ bool Inventory::hasItem(const std::string& _id) const
 
 	return false;
 }
+

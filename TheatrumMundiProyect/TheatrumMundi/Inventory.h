@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "Entity.h"
+#include "Vector2D.h"
 
 class SceneTemplate;
 class Hint;
@@ -16,12 +17,14 @@ protected:
 	std::vector<Hint*> items; //Vector of hints
 public:
 	std::vector<ecs::Entity*> hints;
+	std::vector<Vector2D> positions;
 	Inventory();
 	virtual ~Inventory();
 	void addItem(Hint* item);
 	bool hasItem(const std::string& _id) const; //Check if the hint is in the inventory
 	//void render(); //Render the the inventory
 
+	inline Vector2D setPosition() { return positions[hints.size()]; }
 	void setActive(bool _active) { active = _active; }
 	bool getActive() const { return active; }
 	int getItemNumber(); //Get the hints that are going to be rendered
@@ -30,4 +33,5 @@ public:
 private:
 	bool active;
 	int firstItem;
+	const int TOTALITEMSTOSHOW = 10;
 };

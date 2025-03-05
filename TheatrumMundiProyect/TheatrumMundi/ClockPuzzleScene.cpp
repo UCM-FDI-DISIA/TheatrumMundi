@@ -12,7 +12,6 @@
 #include "../src/components/RectArea2D.h"
 #include "../src/Components/LogComponent.h"
 
-
 #include "AudioManager.h"
 
 #include "SceneRoomTemplate.h"
@@ -29,7 +28,7 @@ ClockPuzzleScene::~ClockPuzzleScene()
 
 void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 {
-
+	SetInventory(sr->GetInventory());
 
 	if (!isStarted) {
 		isStarted = true;
@@ -181,9 +180,14 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		ClickComponent* clockCheckClick = entityManager->addComponent<ClickComponent>(_buttonCheck);
-		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [_buttonCheckTransform, this]()
+		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [_buttonCheckTransform, sr, this]()
 			{
 				if (Check()) {
+
+					sr->GetInventory()->addItem(new Hint("AAA", "Me lo puedo beber??", &sdlutils().images().at("AAA")));
+					sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "AAA", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+					sr->GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+
 #ifdef DEBUG
 					std::cout << "wii";
 #endif // DEBUG
@@ -218,18 +222,18 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		//BackButton
-		auto _backButtonClock = entityManager->addEntity(ecs::grp::INTERACTOBJ);
-		entityManager->addComponent<Transform>(_backButtonClock, Vector2D(800, 200), Vector2D(0, 0), 200, 175, 0);
-		entityManager->addComponent<Image>(_backButtonClock, &sdlutils().images().at("prueba"));
+		auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
+		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
 
-		entityManager->addComponent<RectArea2D>(_backButtonClock);
+		entityManager->addComponent<RectArea2D>(_backButton);
 
 		//Click component Open log button
-		ClickComponent* clkOpenClock = entityManager->addComponent<ClickComponent>(_backButtonClock);
-		clkOpenClock->connect(ClickComponent::JUST_CLICKED, []()
-		{
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
+			{
 				Game::Instance()->getSceneManager()->popScene();
-		});
+			});
 
 	}
 
