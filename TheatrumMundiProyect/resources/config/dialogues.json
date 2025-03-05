@@ -8,6 +8,10 @@
             "Sala1Intro":[
                 {"Character":"Personaje3","Text":"Why we still here... Just to suffer"}
             ],
+            "Cadaver":[
+                {"Character":"Lucy","Text":"Ostia, se me ha muerto la novia"},
+                {"Character":"Sol","Text":"Pues vaya mala suerte."}
+            ],
             "PuzzleTuberias":[
                 {"Character":"Sol","Text":"Se que has dicho que te recuerda a tu casa..."},
                 {"Character":"Sol","Text":"Pero estoy bastante seguro de que no teneis esto en la pared del salón."},
