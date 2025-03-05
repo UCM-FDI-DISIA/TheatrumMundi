@@ -247,10 +247,10 @@ void Room1Scene::init()
 
 		//Mobile
 
-		auto Mobile = entityFactory->CreateInteractableEntity(entityManager, "mobile", EntityFactory::RECTAREA, Vector2D(123, 267), Vector2D(0, 0), 128, 82, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		auto Mobile = entityFactory->CreateInteractableEntity(entityManager, "mobileSprite", EntityFactory::RECTAREA, Vector2D(1250, 500), Vector2D(0, 0), 245/3, 123/3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Mobile));
 
-		auto _mobileZoom = entityFactory->CreateImageEntity(entityManager, "mobileZoom", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
+		auto _mobileZoom = entityFactory->CreateImageEntity(entityManager, "mobileBackground", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 		entityManager->setActive(_mobileZoom, false);
 		
 		entityManager->getComponent<ClickComponent>(Mobile)->connect(ClickComponent::JUST_CLICKED, [this, _mobileZoom, Mobile, _quitButton]()
