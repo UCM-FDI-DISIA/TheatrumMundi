@@ -398,6 +398,18 @@
     {
       "id": "mobileBackground",
       "file": "../resources/images/Finales/TelefonoZoom.png"
+    },
+    {
+      "id": "boa1",
+      "file": "../resources/images/boa1.png"
+    },
+    {
+      "id": "boa2",
+      "file": "../resources/images/boa2.png"
+    },
+    {
+      "id": "AAA",
+      "file": "../resources/images/veneno.png"
     }
   ],
 
