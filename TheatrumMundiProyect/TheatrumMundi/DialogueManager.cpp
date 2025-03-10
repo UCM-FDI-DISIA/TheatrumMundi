@@ -80,6 +80,9 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 	case(SalaIntermediaEvento3):
 		event = "SalaIntermediaEvento3";
 		break;
+	case(Cadaver):
+		event = "Cadaver";
+		break;
 	case(Pista1):
 		event = "Pista1";
 		break;
@@ -90,19 +93,19 @@ void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) 
 		event = "Pista3";
 		break;
 	case(Puzzle1):
-		event = "Puzzle1";
+		event = "PuzzleTuberias";
 		break;
 	case(Puzzle2):
 		event = "PuzzleLibros";
 		break;
 	case(Puzzle3):
-		event = "PuzzleLibros";
+		event = "PuzzleReloj";
 		break;
 	case(Calendario):
 		event = "Calendario";
 		break;
 	case(Movil):
-		event = "Movil";
+		event = "Movil1";
 		break;
 	}
 }

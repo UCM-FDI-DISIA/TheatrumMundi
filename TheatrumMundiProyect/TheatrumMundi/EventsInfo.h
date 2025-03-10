@@ -5,6 +5,7 @@ enum eventToRead {
 	SalaIntermedia1,
 	SalaIntermediaEvento2,
 	SalaIntermediaEvento3,
+	Cadaver,
 	Pista1,
 	Pista2,
 	Pista3,

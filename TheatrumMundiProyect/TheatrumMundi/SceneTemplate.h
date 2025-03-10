@@ -3,6 +3,7 @@
 #include "EventsInfo.h"
 #include "Manager.h"
 #include "Inventory.h"
+#include "Hint.h"
 
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
 
@@ -34,6 +35,8 @@ public:
 	void startDialogue(const eventToRead& _eventToRead);
 	void endDialogue();
 	inline Inventory* GetInventory() { return inv; }
+	inline ecs::EntityManager* GetEntityManager() { return entityManager; }
+	inline void SetInventory(Inventory* _inv) { inv = _inv; }
 
 };
 

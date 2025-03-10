@@ -7,9 +7,11 @@
 #include "Module.h"
 
 using namespace std;
+class SceneManager;
 class Module;
 class Pipe;
 class Image;
+class Inventory;
 class PipePuzzleScene : public ScenePuzzleTemplate
 {
 
@@ -28,13 +30,16 @@ private:
 	//id: where in the array it is
 	//_withWater: if it has water
 	//_whoTocheck: which neighbour needs to have water in order for the path to have water
+	// _pathPieces: sub vector of pieces a path has
 	struct waterPath {
 
 		int id;
 		bool _withWater;
 		Type _whoTocheck;
+		std::vector<pair<ecs::Entity*,int>>_pathPieces; //if path has l form its 1 if its straight 2
+		
 	};
-
+	
 	std::vector<waterPath>_waterPath; //vector that contains the amount of paths 
 	std::vector<Pipe*> _waterPipes; //vector that contains the amount of water each pipe has
 	std::vector<Module*> _modules;//modules that change the direction of the water flow
@@ -42,6 +47,7 @@ private:
 	std::vector<ecs::Entity*>_modulesEnt;
 	std::vector<ecs::Entity*>_pipesEnt;
 	std::vector<ecs::Entity*>_pathEnt;
+	ecs::Entity* gloveEntity;
 
 protected:
 
@@ -60,8 +66,6 @@ public:
 	 void unload() override;
 	 void updatePuzzle() ;
 	 void Win() override;
-	 void addToInventory();
-	 void Exit() override;
 	 ~PipePuzzleScene();
 };
 

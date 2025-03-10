@@ -114,15 +114,6 @@ void DebugInventoryScene::init()
 					inv2->hints[i]->getMngr()->setActive(inv2->hints[i], false);  // Activate the hints
 				}
 			}
-
-			std::cout << "Inventory active state: " << inv2->getActive() << std::endl;
-			/*inv2->setActive(!inv2->getActive());
-			inv2->render();
-			auto glovesHint = inv2->getItem("gloves"); // Obtain the hint from the inventory
-			if (glovesHint) {
-				glovesHint->setActive(!glovesHint->getActive()); // Activate or deactivate the hint
-			}
-			std::cout << "Inventory active state: " << inv2->getActive() << std::endl;*/
 		});
 
 	}

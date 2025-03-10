@@ -8,6 +8,13 @@
             "Sala1Intro":[
                 {"Character":"Personaje3","Text":"Why we still here... Just to suffer"}
             ],
+            "Cadaver":[
+                {"Character":"Lucy","Text":"Ostia, se me ha muerto la novia"},
+                {"Character":"Sol","Text":"Pues vaya mala suerte."},
+                {"Character":"Lucy","Text":"Por los síntomas parece que podría haber sido veneno."},
+                {"Character":"Sol","Text":"¿Y tú como sabes eso?"},
+                {"Character":"Lucy","Text":"Es conocimiento genérico de la academia."}
+            ],
             "PuzzleTuberias":[
                 {"Character":"Sol","Text":"Se que has dicho que te recuerda a tu casa..."},
                 {"Character":"Sol","Text":"Pero estoy bastante seguro de que no teneis esto en la pared del salón."},
@@ -16,6 +23,10 @@
                 {"Character":"Sol","Text":"Que diversión."},
                 {"Character":"Lucy","Text":"¿Qué es una puerta lógica?"},
                 {"Character":"Sol","Text":"Déjalo."}
+            ],
+            "PuzzleReloj":[
+                {"Character":"Sol","Text":"Que reloj mas bonito..."},
+                {"Character":"Lucy","Text":"Que casualidad que hay mucha temática de tiempo"}
             ],
             "PuzzleTaza1":[
                 {"Character":"Sol","Text":"Queda algo de té en esta taza."},
