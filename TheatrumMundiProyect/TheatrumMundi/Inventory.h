@@ -29,7 +29,7 @@ public:
 	bool getActive() const { return active; }
 	int getItemNumber(); //Get the hints that are going to be rendered
 	std::vector<Hint*> getItems() { return items; } //Get all the hintss
-
+	void setDragger(bool dragger);
 private:
 	bool active;
 	int firstItem;

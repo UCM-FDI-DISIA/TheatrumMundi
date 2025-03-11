@@ -54,11 +54,11 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 		};
 	roomEvent[ClockPuzzleSnc] = [this]
 		{
+			GetInventory()->setDragger(true);
 			Game::Instance()->getSceneManager()->loadScene(CLOCK_PUZZLE, this);
 		};
 	roomEvent[ClockPuzzleRsv] = [this] {
 		// InventoryLogic
-		
 		};
 	roomEvent[TeaCupPuzzleSnc] = [this]
 		{
@@ -348,8 +348,6 @@ void Room1Scene::init()
 			AudioManager::Instance().playSound(buttonSound);
 			GetInventory()->setActive(!GetInventory()->getActive());  // Toggle the inventory
 
-			std::cout << "Inventory item: " << GetInventory()->hasItem("boa2") << std::endl;
-
 			// If the inventory is active, activate the items
 			if (GetInventory()->getActive()) {
 				entityManager->setActive(InventoryBackground, true);
@@ -360,7 +358,7 @@ void Room1Scene::init()
 			else {
 				entityManager->setActive(InventoryBackground, false);
 				for (int i = 0; i < GetInventory()->getItemNumber(); ++i) {
-					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the hints
+					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Desactivate the hints
 				}
 			}
 

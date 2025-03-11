@@ -2,6 +2,8 @@
 #include "Hint.h"
 #include "iostream"
 #include "Transform.h"
+#include "Manager.h"
+#include "DragComponent.h"
 
 
 Inventory::Inventory()
@@ -34,6 +36,27 @@ int Inventory::getItemNumber()
 	}
 	return std::min(3, static_cast<int>(items.size()) - firstItem); // Return the number of items to be rendered
 
+}
+
+/// <summary>
+/// When the puzzle scene is called this method change the NODRAG component of the Inventory Entities to true. If the puzzle scene is closed, it makes the opposite
+/// </summary>
+/// <param name="dragger"></param> --> If true Set the elems to Dragger
+void Inventory::setDragger(bool dragger)
+{
+	if (dragger) {
+		for (auto a : hints) {
+			a->getMngr()->addComponent<DragComponent>(a);			
+		}
+	}
+	else {
+		for (auto a : hints) {
+			//Caution, the last item added to the inventory may not have DragComponent
+			if (a->getMngr()->hasComponent<DragComponent>(a)) {
+				a->getMngr()->removeComponent<DragComponent>(a);
+			}
+		}
+	}
 }
 
 /*void Inventory::setItem(ecs::Entity* _ent, const std::string& _id, SceneTemplate* _myScene)

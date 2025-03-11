@@ -222,17 +222,42 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		//BackButton
-		auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto _backButton = entityManager->addEntity(ecs::grp::UI);
 		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
 		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
-
 		entityManager->addComponent<RectArea2D>(_backButton);
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr]()
 			{
+				sr->GetInventory()->setDragger(false);
 				Game::Instance()->getSceneManager()->popScene();
+			});
+
+		//Add Inventory Button to scene
+		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 1500, 1500, 0, ecs::grp::UI);
+		entityManager->setActive(InventoryBackground, false);
+		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
+		invOpen->connect(ClickComponent::JUST_CLICKED, [this,sr,InventoryBackground]()
+			{
+				//AudioManager::Instance().playSound(buttonSound);
+				sr->GetInventory()->setActive(!sr->GetInventory()->getActive());  // Toggle the inventory
+
+				// If the inventory is active, activate the items
+				if (sr->GetInventory()->getActive()) {
+					entityManager->setActive(InventoryBackground, true);
+					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+						sr->GetInventory()->hints[i]->getMngr()->setActive(sr->GetInventory()->hints[i], true);  // Activate the hints
+					}
+				}
+				else {
+					entityManager->setActive(InventoryBackground, false);
+					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+						sr->GetInventory()->hints[i]->getMngr()->setActive(sr->GetInventory()->hints[i], false);  // Desactivate the hints
+					}
+				}
 			});
 
 	}
