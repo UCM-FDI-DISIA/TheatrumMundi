@@ -38,6 +38,7 @@ public:
 	void SetSceneCount(SceneCount a);
 	void SetCharacterDead(Character cha);
 
+	int GetRoomVariant(int i);
 	bool GetCharacterState(Character cha);
 	int GetActualScene();
 

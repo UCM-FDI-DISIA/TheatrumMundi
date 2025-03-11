@@ -37,6 +37,11 @@ void DataManager::SetCharacterDead(Character cha)
     charactersAlive[cha] = false;
 }
 
+int DataManager::GetRoomVariant(int i)
+{
+    return variants[i];
+}
+
 bool DataManager::GetCharacterState(Character cha)
 {
     return charactersAlive[cha];
