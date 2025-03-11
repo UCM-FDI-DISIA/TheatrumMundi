@@ -1,22 +1,37 @@
 #pragma once
 
-#include "HintTemplate.h"
+#include <string>
 #include <vector>
+#include "Entity.h"
+#include "Vector2D.h"
 
-using namespace std;
-
+class SceneTemplate;
+class Hint;
 class Inventory
 {
 	//InventoryScene class
 	//This class is used to store the hints that the player has collected
 	//It is used to render the hints in the inventory screen
 	//It is used to add hints to the inventory
+protected:
+	std::vector<Hint*> items; //Vector of hints
 public:
+	std::vector<ecs::Entity*> hints;
+	std::vector<Vector2D> positions;
 	Inventory();
-	~Inventory();
-	void addItem(HintTemplate* item);
-	void init();
-private:
+	virtual ~Inventory();
+	void addItem(Hint* item);
+	bool hasItem(const std::string& _id) const; //Check if the hint is in the inventory
+	//void render(); //Render the the inventory
 
-	vector<HintTemplate*> inventory; //Vector of hints
+	inline Vector2D setPosition() { return positions[hints.size()]; }
+	void setActive(bool _active) { active = _active; }
+	bool getActive() const { return active; }
+	int getItemNumber(); //Get the hints that are going to be rendered
+	std::vector<Hint*> getItems() { return items; } //Get all the hintss
+
+private:
+	bool active;
+	int firstItem;
+	const int TOTALITEMSTOSHOW = 10;
 };

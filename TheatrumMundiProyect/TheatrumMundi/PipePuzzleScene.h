@@ -7,9 +7,11 @@
 #include "Module.h"
 
 using namespace std;
+class SceneManager;
 class Module;
 class Pipe;
 class Image;
+class Inventory;
 class PipePuzzleScene : public ScenePuzzleTemplate
 {
 
@@ -28,20 +30,24 @@ private:
 	//id: where in the array it is
 	//_withWater: if it has water
 	//_whoTocheck: which neighbour needs to have water in order for the path to have water
+	// _pathPieces: sub vector of pieces a path has
 	struct waterPath {
 
 		int id;
 		bool _withWater;
 		Type _whoTocheck;
+		std::vector<pair<ecs::Entity*,int>>_pathPieces; //if path has l form its 1 if its straight 2
+		
 	};
-
-	vector<waterPath>_waterPath; //vector that contains the amount of paths 
-	vector<Pipe*> _waterPipes; //vector that contains the amount of water each pipe has
-	vector<Module*> _modules;//modules that change the direction of the water flow
+	
+	std::vector<waterPath>_waterPath; //vector that contains the amount of paths 
+	std::vector<Pipe*> _waterPipes; //vector that contains the amount of water each pipe has
+	std::vector<Module*> _modules;//modules that change the direction of the water flow
 	bool solved;
-	vector<ecs::Entity*>_modulesEnt;
-	vector<ecs::Entity*>_pipesEnt;
-	vector<ecs::Entity*>_pathEnt;
+	std::vector<ecs::Entity*>_modulesEnt;
+	std::vector<ecs::Entity*>_pipesEnt;
+	std::vector<ecs::Entity*>_pathEnt;
+	ecs::Entity* gloveEntity;
 
 protected:
 
@@ -53,12 +59,13 @@ public:
 	 void pathCreation();
 	 bool Check() override; 
 	 void changeDirection(int module); //changes direction of the module
-	 void init() override;
+	 void init(SceneRoomTemplate* sr) override;
 	 void waterPassPipe(int pipe); //if water can pass through a pipe (if it recives water from its neightbours)
 	 void waterPassModule(int module); //if water can pass through a module (if it recives water from its neightbours)
 	 void waterPassPath(int path);// series of conditions to check if a path has water
 	 void unload() override;
 	 void updatePuzzle() ;
+	 void Win() override;
 	 ~PipePuzzleScene();
 };
 

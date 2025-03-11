@@ -9,22 +9,55 @@ class Transform;
 class ScrollComponent : public ecs::Component {
 private:
 	Vector2D _dir;
+	int _velocity;
 	float _timeScroll;
 	float _initialTimeScroll; //Activates if this time > 0
-	bool _isRight;
-	bool _isScrolling = false;
+	//bool _isRight;
+	//bool _isScrolling = false;
+	
 public:
 
 	__CMPID_DECL__(ecs::cmp::SCROLL_COMPONENT)
 
-	ScrollComponent(Vector2D dir, float time);
+	//ESTO SE ELIMINARIA POR PASARLE LA DIRECCION POR ADELANTADO
+	enum Inverse { NORMAL, INVERSE };
+	enum Direction { UP, DOWN, LEFT, RIGHT };
+	
+	ScrollComponent(int velocity, float time, Inverse isInverse,int numPhases);
 	~ScrollComponent();
 	//void initComponent() override;
-	void Scroll();
+	void Scroll(Direction _direction);
 	void update() override;
 	bool isScrolling();
 	void addElementToScroll(Transform* _objectT);
+
+	//AMPLIACION
+	bool finalPhaseCheck() const { return (phase == finalPhase); };
+	bool startPhaseCheck() const { return (phase == startPhase); };
+	void addPhase() {
+		finalPhase++;
+	};
+	void addPhaseAndFollow() {
+		finalPhase++;
+		phase = finalPhase;
+	}
+	void resetPhase() {
+		phase = startPhase;
+	}
+
 private:
 	//Transform *_myTransform;
 	std::vector<Transform*> _objectsTransform;
+
+	//AMPLIACION
+	int startPhase = 0;
+	int finalPhase = 0; 
+	int phase = 0; //Fase no puede ser > final y < inicio
+	//Definimos el final como el tamaño
+	//Inicializamos la fase dependiendo de en que sentido queremos moverlo,
+	//UP:: FASE = FINAL 
+	//DOWN:: FASE = INICIO
+	//LEFT:: FASE = FINAL 
+	//RIGHT:: FASE = INICIO
+
 };

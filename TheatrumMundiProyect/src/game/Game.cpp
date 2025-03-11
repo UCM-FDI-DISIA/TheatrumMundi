@@ -47,7 +47,7 @@ void Game::init() {
 #else
 	w = GetSystemMetrics(SM_CXSCREEN);
 	h = GetSystemMetrics(SM_CYSCREEN);
-	wscreenScale = GetSystemMetrics(SM_CXSCREEN) / 1346.0;
+	wscreenScale = GetSystemMetrics(SM_CXSCREEN) / 1349.0;
 	hscreenScale = GetSystemMetrics(SM_CYSCREEN) / 748.0;
 #endif
 

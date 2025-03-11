@@ -4,7 +4,9 @@
 class Room1Scene : public SceneRoomTemplate
 {
 private:
+	eventToRead _eventToRead;
 protected:
+	
 	enum Room1Event
 	{
 		InitialDialogue = 0,
@@ -19,13 +21,16 @@ protected:
 		TeaCupPuzzleRsv,
 		Spoon,
 		ResolveCase,
+		ResolveBottons,
 		GoodEnd,
 		BadEnd,
+		MobileDialogue,
 		LOGENABLE,
 		LOGDESABLE,
 		event_size,
 	};
 public:
+	//friend PipePuzzleScene;
 	Room1Scene();
 	~Room1Scene();
 	void init() override;

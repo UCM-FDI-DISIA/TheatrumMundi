@@ -8,18 +8,8 @@
 #include <iostream>
 using namespace ecs;
 
-void SceneRoomTemplate::startDialogue(const eventToRead& _eventToRead)
-{
-	entityManager->setActiveGroup(grp::DIALOGUE, true);
-	Game::Instance()->getDialogueManager()->ReadDialogue(_eventToRead);
 
-}
 
-void SceneRoomTemplate::endDialogue()
-{
-	entityManager->setActiveGroup(grp::DIALOGUE, false);
-	entityManager->setActiveGroup(grp::ZOOMOBJ, false);
-}
 
 void SceneRoomTemplate::resolvedPuzzle(int i)
 {

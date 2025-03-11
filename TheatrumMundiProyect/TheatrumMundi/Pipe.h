@@ -43,9 +43,6 @@ public:
 	pipeInfo& changePipeInfo();
 	void resetPipe();
 	bool isConnectedToModule(int moduleIndex);
-		
-
-
 	friend class PipePuzzleScene;
 };
 

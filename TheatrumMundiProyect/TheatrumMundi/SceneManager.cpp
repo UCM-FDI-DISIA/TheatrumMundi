@@ -10,6 +10,8 @@
 #include "TeaCupPuzzleScene.h"
 #include "checkML.h"
 #include "SceneRoomTemplate.h"
+#include"DebugInventoryScene.h"
+#include "MiddleRoomScene.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 
 //#include "../../TheatrumMundiProyect/src/ecs/ecs.h"
@@ -18,19 +20,21 @@ SceneManager::SceneManager()
 	scenes.resize(SceneName::SCENE_SIZE);
 
 	scenes[SceneName::INITIAL_MENU] = new InitialScene();
+	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
 	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
 
-	loadScene(SceneName::ROOM_1);
+	loadScene(SceneName::INITIAL_MENU);
 }
 
 void SceneManager::popScene()
 {
-		assert(currentscenes.empty());
-		currentscenes.pop_back();
+	std::cout << "pop scene" << endl;
+	assert(!currentscenes.empty());
+	currentscenes.pop_back();
 }
 
 
@@ -39,7 +43,6 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 {
 	scenes[index]->init(room);
 	currentscenes.push_back(scenes[index]);
-	
 	
 }
 
