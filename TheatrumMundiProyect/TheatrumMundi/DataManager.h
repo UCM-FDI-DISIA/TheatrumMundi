@@ -15,6 +15,12 @@ enum SceneCount {
 	ROOM3,
 	END	
 };
+
+enum Character {
+	KEISARA = 0,
+	SOL,
+	LUCY
+};
 class DataManager
 {
 private:
@@ -30,6 +36,7 @@ public:
 	int getRandomVariant();
 	void ResetVariants();
 	void SetSceneCount(SceneCount a);
+	void SetCharacterDead(Character cha);
 
 	~DataManager();
 

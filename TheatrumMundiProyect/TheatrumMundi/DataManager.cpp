@@ -32,6 +32,11 @@ void DataManager::SetSceneCount(SceneCount a)
     ActualScene = a;
 }
 
+void DataManager::SetCharacterDead(Character cha)
+{
+    charactersAlive[cha] = false;
+}
+
 DataManager::~DataManager()
 {
 }
