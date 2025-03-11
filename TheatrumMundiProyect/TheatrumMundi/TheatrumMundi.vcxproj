@@ -58,6 +58,7 @@
     <ClCompile Include="Hint.cpp" />
     <ClCompile Include="InitialScene.cpp" />
     <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="MiddleRoomScene.cpp" />
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PipePuzzleScene.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="Hint.h" />
     <ClInclude Include="InitialScene.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="MiddleRoomScene.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="PipePuzzleScene.h" />
