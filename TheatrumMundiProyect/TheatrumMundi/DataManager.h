@@ -38,6 +38,9 @@ public:
 	void SetSceneCount(SceneCount a);
 	void SetCharacterDead(Character cha);
 
+	bool GetCharacterState(Character cha);
+	int GetActualScene();
+
 	~DataManager();
 
 };

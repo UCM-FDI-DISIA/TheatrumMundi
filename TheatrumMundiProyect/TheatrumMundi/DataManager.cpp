@@ -37,6 +37,16 @@ void DataManager::SetCharacterDead(Character cha)
     charactersAlive[cha] = false;
 }
 
+bool DataManager::GetCharacterState(Character cha)
+{
+    return charactersAlive[cha];
+}
+
+int DataManager::GetActualScene()
+{
+    return ActualScene;
+}
+
 DataManager::~DataManager()
 {
 }
