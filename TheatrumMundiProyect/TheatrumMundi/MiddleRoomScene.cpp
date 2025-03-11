@@ -20,6 +20,9 @@
 MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 {
 	roomEvent.resize(MIDDLEROOMEVENTSIZE);
+	roomEvent[FIRST_DIALOGUE] = [this]() {
+		startDialogue(SalaIntermedia1);
+		};
 }
 
 MiddleRoomScene::~MiddleRoomScene()
@@ -177,7 +180,7 @@ void MiddleRoomScene::init()
 	}
 	SDL_Delay(1000);
 
-
+	roomEvent[FIRST_DIALOGUE]();
 }
 
 void MiddleRoomScene::resolvedPuzzle(int i)
@@ -190,4 +193,12 @@ void MiddleRoomScene::refresh()
 
 void MiddleRoomScene::unload()
 {
+}
+
+void MiddleRoomScene::endDialogue()
+{
+	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+	//Check the act room to load a specific room
+	//if(...)
+	Game::Instance()->getSceneManager()->loadScene(ROOM_1);
 }

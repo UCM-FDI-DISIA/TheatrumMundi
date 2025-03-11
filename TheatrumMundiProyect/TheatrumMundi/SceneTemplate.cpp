@@ -37,6 +37,7 @@ void SceneTemplate::startDialogue(const eventToRead& _eventToRead)
 	Game::Instance()->getDialogueManager()->ReadDialogue(_eventToRead);
 
 }
+
 void SceneTemplate::endDialogue()
 {
 	std::cout << "acabe";
