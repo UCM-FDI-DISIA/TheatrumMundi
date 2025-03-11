@@ -74,6 +74,18 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA,GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 		};
+	roomEvent[Boa1] = [this] {
+		// InventoryLogic
+		GetInventory()->addItem(new Hint("boa1", "aaaa", &sdlutils().images().at("boa1")));
+		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		};
+	roomEvent[Boa2] = [this] {
+		// InventoryLogic
+		GetInventory()->addItem(new Hint("boa2", "shhhh", &sdlutils().images().at("boa2")));
+		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "boa2", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		};
 	roomEvent[ResolveCase] = [this] {
 		//Poner el dialogo correspondiente
 		startDialogue(SalaIntermedia1);
@@ -337,25 +349,41 @@ void Room1Scene::init()
 			});
 
 		//Inventory
-		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 1500, 1500, 0, ecs::grp::UI);
+		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
 		auto buttonInventory = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3 ,20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(InventoryBackground, false);
+
+		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "UP", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 70), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->setActive(upButton, false);
+
+		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "DOWN", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->setActive(downButton, false);
+
 		ClickComponent* buttonInventoryClick = entityManager->getComponent<ClickComponent>(buttonInventory);
-		buttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound,InventoryBackground]() {
+		buttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound,InventoryBackground, upButton, downButton, buttonInventory]() {
 			AudioManager::Instance().playSound(buttonSound);
-			GetInventory()->setActive(!GetInventory()->getActive());  // Toggle the inventory
+			GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
 
 			std::cout << "Inventory item: " << GetInventory()->hasItem("boa2") << std::endl;
 
 			// If the inventory is active, activate the items
 			if (GetInventory()->getActive()) {
 				entityManager->setActive(InventoryBackground, true);
+
+				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(20);
+				entityManager->setActive(downButton, true);
+				entityManager->setActive(upButton, true);
+
 				for (int i = 0; i < GetInventory()->getItemNumber(); ++i) {
 					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the hints
 				}
 			}
 			else {
 				entityManager->setActive(InventoryBackground, false);
+				entityManager->setActive(downButton, false);
+				entityManager->setActive(upButton, false);
+				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(60 + 268 / 3);
+
 				for (int i = 0; i < GetInventory()->getItemNumber(); ++i) {
 					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the hints
 				}
@@ -411,6 +439,21 @@ void Room1Scene::init()
 		entityManager->getComponent<ClickComponent>(spoon)->connect(ClickComponent::JUST_CLICKED, [this, spoon]() {
 			spoon->getMngr()->setActive(spoon, false);
 			roomEvent[Spoon]();
+		});
+
+		//Test obj 1
+		auto boa1 = entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, Vector2D(275 - 1349 - 6, 620), Vector2D(0, 0), 121 / 3, 105 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(boa1));
+		entityManager->getComponent<ClickComponent>(boa1)->connect(ClickComponent::JUST_CLICKED, [this, boa1]() {
+			boa1->getMngr()->setActive(boa1, false);
+			roomEvent[Boa1]();
+			});
+		//Test obj 2
+		auto boa2 = entityFactory->CreateInteractableEntity(entityManager, "boa2", EntityFactory::RECTAREA, Vector2D(275 - 1349 - 6, 700), Vector2D(0, 0), 121 / 3, 105 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(boa2));
+		entityManager->getComponent<ClickComponent>(boa2)->connect(ClickComponent::JUST_CLICKED, [this, boa2]() {
+			boa2->getMngr()->setActive(boa2, false);
+			roomEvent[Boa2]();
 			});
 		//X Button "B1"
 	}

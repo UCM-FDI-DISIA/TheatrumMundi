@@ -20,6 +20,8 @@ protected:
 		TeaCupPuzzleSnc,
 		TeaCupPuzzleRsv,
 		Spoon,
+		Boa1,
+		Boa2,
 		ResolveCase,
 		ResolveBottons,
 		GoodEnd,

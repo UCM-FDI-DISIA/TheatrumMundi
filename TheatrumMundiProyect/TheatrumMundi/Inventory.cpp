@@ -8,7 +8,7 @@ Inventory::Inventory()
 	: active(false), firstItem(0)
 {
 	for (int i = 0; i < TOTALITEMSTOSHOW; ++i) {
-		positions.push_back(Vector2D(120,150 + i * 150));
+		positions.push_back(Vector2D(100,175 + i * 150));
 	}
 }
 
@@ -26,13 +26,13 @@ int Inventory::getItemNumber()
 
 	if (firstItem < 0)
 	{
-		firstItem = 0; // firstItem cannot be a invalid position
+		firstItem = 0; //firstItem cannot be a invalid position
 	}
 	if (firstItem >= items.size())
 	{
-		return 0; // If there are no items, return 0
+		return 0; //If there are no items, return 0
 	}
-	return std::min(3, static_cast<int>(items.size()) - firstItem); // Return the number of items to be rendered
+	return std::min(3, static_cast<int>(items.size()) - firstItem); //Return the number of items to be rendered
 
 }
 
