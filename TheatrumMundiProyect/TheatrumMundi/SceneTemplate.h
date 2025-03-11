@@ -16,7 +16,6 @@ class SceneTemplate
 {
 protected:
 
-	Inventory* inv;
 	 ecs::EntityManager* entityManager;
 	 EntityFactory* entityFactory;
 	// DialogueManager* dialogueManager;
@@ -34,9 +33,7 @@ public:
 	virtual ~SceneTemplate();
 	void startDialogue(const eventToRead& _eventToRead);
 	void endDialogue();
-	inline Inventory* GetInventory() { return inv; }
 	inline ecs::EntityManager* GetEntityManager() { return entityManager; }
-	inline void SetInventory(Inventory* _inv) { inv = _inv; }
 
 };
 

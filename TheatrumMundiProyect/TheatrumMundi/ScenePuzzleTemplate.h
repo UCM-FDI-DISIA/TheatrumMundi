@@ -8,7 +8,7 @@ class ScenePuzzleTemplate: public SceneTemplate
 		SceneRoomTemplate* room;
 		bool logActive = false;
 	public:
-
+	std::vector<ecs::Entity*> invObjects;
 	virtual void Exit();
 	virtual bool Check() { return true; };
 	virtual void Win() {};

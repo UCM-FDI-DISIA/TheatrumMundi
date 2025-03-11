@@ -4,7 +4,8 @@
 #include <vector>
 #include "Entity.h"
 #include "Vector2D.h"
-
+#include "Transform.h"
+#include "Manager.h"
 class SceneTemplate;
 class Hint;
 class Inventory
@@ -28,8 +29,8 @@ public:
 	void setActive(bool _active) { active = _active; }
 	bool getActive() const { return active; }
 	int getItemNumber(); //Get the hints that are going to be rendered
-	std::vector<Hint*> getItems() { return items; } //Get all the hintss
-	void setDragger(bool dragger);
+	inline std::vector<Hint*> getItems() { return items; } //Get all the hintss
+	inline Vector2D GetPosition(int i) { return hints[i]->getMngr()->getComponent<Transform>(hints[i])->getPos(); }
 private:
 	bool active;
 	int firstItem;

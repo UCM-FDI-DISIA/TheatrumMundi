@@ -7,6 +7,7 @@ class SceneRoomTemplate: public SceneTemplate
 {
 protected:
 
+	Inventory* inv;
 	std::vector<bool> puzzlesol;
 	std :: vector<ecs::entity_t> puzzleptr;
 	std::vector< std::function<void()>> roomEvent;
@@ -21,6 +22,8 @@ protected:
 		virtual void resolvedPuzzle(int i);
 		void setActiveBottons(bool active);
 		void setActiveZoomObj(bool active);
+		inline Inventory* GetInventory() { return inv; }
+
 	SceneRoomTemplate();
 	virtual ~SceneRoomTemplate();
 	

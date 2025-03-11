@@ -28,8 +28,6 @@ ClockPuzzleScene::~ClockPuzzleScene()
 
 void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 {
-	SetInventory(sr->GetInventory());
-
 	if (!isStarted) {
 		isStarted = true;
 
@@ -185,8 +183,8 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 				if (Check()) {
 
 					sr->GetInventory()->addItem(new Hint("AAA", "Me lo puedo beber??", &sdlutils().images().at("AAA")));
-					sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "AAA", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-					sr->GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+					sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "AAA", EntityFactory::RECTAREA, sr->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+					sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
 
 #ifdef DEBUG
 					std::cout << "wii";
@@ -231,7 +229,6 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr]()
 			{
-				sr->GetInventory()->setDragger(false);
 				Game::Instance()->getSceneManager()->popScene();
 			});
 
@@ -247,21 +244,28 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 				// If the inventory is active, activate the items
 				if (sr->GetInventory()->getActive()) {
-					entityManager->setActive(InventoryBackground, true);
+				//	entityManager->setActive(InventoryBackground, true);
 					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
-						sr->GetInventory()->hints[i]->getMngr()->setActive(sr->GetInventory()->hints[i], true);  // Activate the hints
+						invObjects[i]->getMngr()->setActive(invObjects[i], true);
 					}
 				}
 				else {
-					entityManager->setActive(InventoryBackground, false);
+				//	entityManager->setActive(InventoryBackground, false);
 					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
-						sr->GetInventory()->hints[i]->getMngr()->setActive(sr->GetInventory()->hints[i], false);  // Desactivate the hints
+						invObjects[i]->getMngr()->setActive(invObjects[i], false);
 					}
 				}
 			});
-
 	}
-
+	//Add inventory items to the entitymanager of the scene
+	int index = 0;
+	for (auto a : sr->GetInventory()->getItems()) {
+		if (invObjects.empty() || index >= invObjects.size()) {
+			invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, a->getID(), EntityFactory::RECTAREA, sr->GetInventory()->GetPosition(index), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::UI));
+		}
+		invObjects[index]->getMngr()->setActive(invObjects[index], false);
+		++index;
+	}
 }
 
 void ClockPuzzleScene::refresh()

@@ -54,7 +54,6 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 		};
 	roomEvent[ClockPuzzleSnc] = [this]
 		{
-			GetInventory()->setDragger(true);
 			Game::Instance()->getSceneManager()->loadScene(CLOCK_PUZZLE, this);
 		};
 	roomEvent[ClockPuzzleRsv] = [this] {

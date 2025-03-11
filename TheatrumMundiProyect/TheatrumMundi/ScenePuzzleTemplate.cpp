@@ -8,8 +8,10 @@ void ScenePuzzleTemplate::Exit()
 
 ScenePuzzleTemplate::ScenePuzzleTemplate(): SceneTemplate()
 {
+
 }
 
 ScenePuzzleTemplate::~ScenePuzzleTemplate()
 {
+	//if memory leak delete the vector of entities
 }
