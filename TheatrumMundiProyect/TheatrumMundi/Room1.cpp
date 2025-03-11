@@ -29,6 +29,10 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 		};
 	roomEvent[CorpseDialogue] = [this]
 		{
+			roomEvent[ResolveCase]();
+
+
+
 #ifdef DEBUG
 			std::cout << "semurio";
 #endif // DEBUG
@@ -76,6 +80,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 		};
 	roomEvent[ResolveCase] = [this] {
 		//Poner el dialogo correspondiente
+		//endDecision();
 		startDialogue(SalaIntermedia1);
 		};
 	roomEvent[GoodEnd] = [this] {
@@ -97,6 +102,8 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 Room1Scene::~Room1Scene()
 {
 }
+
+
 
 void Room1Scene::init()
 {
@@ -239,13 +246,101 @@ void Room1Scene::init()
 		auto _corpseZoom = entityFactory->CreateImageEntity(entityManager, "CorspeBackground", Vector2D(0, 0), Vector2D(0, 0), 1349,748, 0, ecs::grp::ZOOMOBJ);
 		entityManager->setActive(_corpseZoom, false);
 
+
+
+		auto possibleButton = entityFactory->CreateInteractableEntity(entityManager, "posible", EntityFactory::RECTAREA, Vector2D(500, 0), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(possibleButton, false);
+		entityManager->getComponent<ClickComponent>(possibleButton)->connect(ClickComponent::JUST_CLICKED, [this]() {
+
+			//if its the not correct variant one dies
+			//if ()
+			//{
+
+			//}
+		
+			//change to intermediate room
+
+			});
+		auto noPossibleButton = entityFactory->CreateInteractableEntity(entityManager, "noPosible", EntityFactory::RECTAREA, Vector2D(600, 0), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(noPossibleButton, false);
+		entityManager->getComponent<ClickComponent>(noPossibleButton)->connect(ClickComponent::JUST_CLICKED, [this]() {
+
+			//if its the not correct variant one dies
+			//if ()
+			//{
+
+			//}
+
+			//change to intermediate room
+
+
+
+			});
+
+		auto resolveButton = entityFactory->CreateInteractableEntity(entityManager, "resolve", EntityFactory::RECTAREA, Vector2D(0, 500), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(resolveButton, false);
+		
+
+
+		auto noResolveButton = entityFactory->CreateInteractableEntity(entityManager, "noResolve", EntityFactory::RECTAREA, Vector2D(0, 600), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(noResolveButton, false);
+	
+		
+		//appears when the 3 puzzles have been resolved
+		auto readyToResolveButton = entityFactory->CreateInteractableEntity(entityManager, "B5", EntityFactory::RECTAREA, Vector2D(400, 400), Vector2D(0, 0), 400, 400, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(readyToResolveButton, false);
+		entityManager->getComponent<ClickComponent>(readyToResolveButton)->connect(ClickComponent::JUST_CLICKED, [this, noResolveButton,resolveButton, readyToResolveButton]() {
+
+			entityManager->setActive(noResolveButton, true);
+			entityManager->setActive(resolveButton, true);
+			entityManager->setActive(readyToResolveButton, false);
+			
+		});
+
+		entityManager->getComponent<ClickComponent>(resolveButton)->connect(ClickComponent::JUST_CLICKED, [this, possibleButton, noPossibleButton, readyToResolveButton,resolveButton,noResolveButton]() {
+
+			entityManager->setActive(noPossibleButton, true);
+			
+			entityManager->setActive(readyToResolveButton, false);
+			entityManager->setActive(possibleButton, true);
+
+			entityManager->setActive(resolveButton, false);
+			entityManager->setActive(noResolveButton, false);
+
+			});
+
+		entityManager->getComponent<ClickComponent>(noResolveButton)->connect(ClickComponent::JUST_CLICKED, [this, noResolveButton, resolveButton, readyToResolveButton]() {
+
+
+			entityManager->setActive(noResolveButton, false);
+			entityManager->setActive(resolveButton, false);
+			entityManager->setActive(readyToResolveButton, true);
+
+
+
+			});
+
+
+
 		auto Corspe = entityFactory->CreateInteractableEntity(entityManager, "Corspe",EntityFactory::RECTAREA, Vector2D(1000, 422), Vector2D(0, 0), 268, 326, 0, areaLayerManager,EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Corspe));
-		entityManager->getComponent<ClickComponent>(Corspe)->connect(ClickComponent::JUST_CLICKED, [this,_corpseZoom,_quitButton]() {
+		entityManager->getComponent<ClickComponent>(Corspe)->connect(ClickComponent::JUST_CLICKED, [this,_corpseZoom,_quitButton,readyToResolveButton]() {
+			
 			_corpseZoom->getMngr()->setActive(_corpseZoom, true);
 			entityManager->setActive(_quitButton, true);
-			if (!finishalpuzzles)roomEvent[CorpseDialogue]();
-			else roomEvent[ResolveBottons]();
+		
+			if (finishalpuzzles)
+			{
+				entityManager->setActive(readyToResolveButton, true);
+			}
+			else
+			{
+				roomEvent[CorpseDialogue]();
+			}
+			
+
+	
+			
 
 		});
 
@@ -416,6 +511,16 @@ void Room1Scene::init()
 			roomEvent[Spoon]();
 			});
 		//X Button "B1"
+
+
+		//botton ready to resolve 
+	
+		
+
+
+
+
+
 	}
 	SDL_Delay(1000);
 
@@ -423,20 +528,26 @@ void Room1Scene::init()
 	
 }
 
+
+
 void Room1Scene::resolvedPuzzle(int i)
 {
-	if (i == ClockPuzzleRsv || i == PipePuzzleRsv || i == BooksPuzzleRsv || i == TeaCupPuzzleRsv) {
+
+	puzzlesol[i] = true;
+	std::cout << i << std::endl;
+	std::cout << puzzlesol[ClockPuzzleRsv] << std::endl;
+	std::cout << puzzlesol[PipePuzzleRsv] << std::endl;
+	std::cout << puzzlesol[BooksPuzzleRsv] << std::endl;
+	//entityManager->removeComponent<ClickComponent>(puzzleptr[i]);
+	if (puzzlesol[ClockPuzzleRsv] &&puzzlesol[PipePuzzleRsv] &&puzzlesol[BooksPuzzleRsv]) {
+		
 		roomEvent[i]();
-		bool aux = true;
-		for (bool a : puzzlesol) if (!a) aux = false;
-		finishalpuzzles = aux;
-		if (aux) entityManager->setActive(body, true);
+		finishalpuzzles = true;
 	}
-else {
-#ifdef _DEBUG
-	std::cout << i << " invalid index" << std::endl;
-#endif
-}
+	else
+	{
+		finishalpuzzles = false;
+	}
 }
 
 void Room1Scene::refresh()

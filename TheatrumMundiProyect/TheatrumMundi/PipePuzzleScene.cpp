@@ -1139,7 +1139,7 @@ void PipePuzzleScene::updatePuzzle() {
 
 void PipePuzzleScene::Win()
 {
-	room->resolvedPuzzle(7);
+	room->resolvedPuzzle(3);
 	SetInventory(room->GetInventory());
 	
 	//puts the gloves in scene
