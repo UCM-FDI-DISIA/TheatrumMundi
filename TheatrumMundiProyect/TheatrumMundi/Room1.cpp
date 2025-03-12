@@ -147,7 +147,7 @@ void Room1Scene::init()
 		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
 		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
 		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
-		RectArea2D* rb = entityManager->addComponent<RectArea2D>(_textbackground,areaLayerManager);
+		RectArea2D* dialogInteractionArea = entityManager->addComponent<RectArea2D>(_textbackground,areaLayerManager);
 
 		entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this,_textbackground]()
 			{
@@ -314,8 +314,9 @@ void Room1Scene::init()
 			AudioManager::Instance().playSound(puzzleButtonSound);
 			roomEvent[BooksPuzzleScn]();
 			});
-		//areaLayerManager->sendFront(rr->getLayerPos());
-		areaLayerManager->sendFront(rb->getLayerPos());
+		
+		// Put the dialog interaction area in front of the other interactables
+		areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
 
 		//LivingRoom (Left)
 
