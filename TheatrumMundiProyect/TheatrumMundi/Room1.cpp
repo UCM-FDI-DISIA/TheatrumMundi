@@ -103,7 +103,7 @@ void Room1Scene::init()
  
 	if (!isStarted) {
 		isStarted = true;
-		finishalpuzzles = false;
+		finishallpuzzles = false;
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
 		Sound buttonSound = sdlutils().soundEffects().at("boton");
@@ -118,10 +118,7 @@ void Room1Scene::init()
 
 		//Register scene in dialogue manager
 		Game::Instance()->getDialogueManager()->setScene(this);
-		//MiddleRoomBkgrnd
-		entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::MIDDLEROOM);
-		
-
+	
 		//CharacterImage
 		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
 		auto characterimg = entityManager->addEntity(grp::DIALOGUE);
@@ -244,7 +241,7 @@ void Room1Scene::init()
 		entityManager->getComponent<ClickComponent>(Corspe)->connect(ClickComponent::JUST_CLICKED, [this,_corpseZoom,_quitButton]() {
 			_corpseZoom->getMngr()->setActive(_corpseZoom, true);
 			entityManager->setActive(_quitButton, true);
-			if (!finishalpuzzles)roomEvent[CorpseDialogue]();
+			if (!finishallpuzzles)roomEvent[CorpseDialogue]();
 			else roomEvent[ResolveBottons]();
 
 		});
@@ -429,7 +426,7 @@ void Room1Scene::resolvedPuzzle(int i)
 		roomEvent[i]();
 		bool aux = true;
 		for (bool a : puzzlesol) if (!a) aux = false;
-		finishalpuzzles = aux;
+		finishallpuzzles = aux;
 		if (aux) entityManager->setActive(body, true);
 	}
 else {
