@@ -118,9 +118,11 @@ void Room1Scene::init()
 
 		//Register scene in dialogue manager
 		Game::Instance()->getDialogueManager()->setScene(this);
-		//MiddleRoomBkgrnd
-		entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::MIDDLEROOM);
 		
+		// FIXING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		//MiddleRoomBkgrnd
+	//	entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::MIDDLEROOM);
+		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 		//CharacterImage
 		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
@@ -131,26 +133,32 @@ void Room1Scene::init()
 		Game::Instance()->getDialogueManager()->setCharacterImg(imCh);
 		entityManager->setActive(characterimg, false);
 
-		/*
+	// FIXING AREA2D BLOCK >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
-		auto _screenDetect = entityManager->addEntity(ecs::grp::DIALOGUE);
-		entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
-		entityManager->setActive(_screenDetect, false);
-		*/
+		//auto _screenDetect = entityManager->addEntity(ecs::grp::DIALOGUE);
+		//entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
+		//entityManager->addComponent<Image>(_screenDetect, &sdlutils().images().at("boa1"));
+		//RectArea2D* rr = entityManager->addComponent<RectArea2D>(_screenDetect, areaLayerManager);
+		
+		//entityManager->setActive(_screenDetect, false);
+	// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 		//Create dialogue text entity. Object that renders dialogue Text on Screen
 		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
-		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0),1349,748, 0);
+		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
 		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
-		entityManager->addComponent<RectArea2D>(_textbackground,areaLayerManager);
+		RectArea2D* rb = entityManager->addComponent<RectArea2D>(_textbackground,areaLayerManager);
 
-		entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _textbackground]()
+		entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this,_textbackground]()
 			{
 				if (!logActive) {
 					//read dialogue only if it has to
 					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
 					{
 						Game::Instance()->getDialogueManager()->ReadDialogue(_eventToRead);
+						if(!Game::Instance()->getDialogueManager()->getDisplayOnProcess())
+							_textbackground->getMngr()->setActive(_textbackground, false);
+							//entityManager->setActive(_screenDetect, false);
 					}
 					else
 					{
@@ -306,6 +314,9 @@ void Room1Scene::init()
 			AudioManager::Instance().playSound(puzzleButtonSound);
 			roomEvent[BooksPuzzleScn]();
 			});
+		//areaLayerManager->sendFront(rr->getLayerPos());
+		areaLayerManager->sendFront(rb->getLayerPos());
+
 		//LivingRoom (Left)
 
 		auto Tubes = entityFactory->CreateInteractableEntity(entityManager, "Tubes", EntityFactory::RECTAREA, Vector2D(356-1349 - 6, 127), Vector2D(0, 0), 616, 336, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
