@@ -54,7 +54,7 @@ void InitialScene::init()
 		AudioManager::Instance().playSound(buttonSound);
 		_loadimg->getMngr()->setActive(_loadimg, true);
 		Game::Instance()->render();
-		Game::Instance()->getSceneManager()->loadScene(1);});
+		Game::Instance()->getSceneManager()->loadScene(MIDDLE_ROOM);});
 		
 		//Exit 
 		auto _exitbtn = entityManager->addEntity();

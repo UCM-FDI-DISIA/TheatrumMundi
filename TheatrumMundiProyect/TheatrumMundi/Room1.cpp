@@ -110,7 +110,7 @@ void Room1Scene::init()
  
 	if (!isStarted) {
 		isStarted = true;
-		finishalpuzzles = false;
+		finishallpuzzles = false;
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
 		Sound buttonSound = sdlutils().soundEffects().at("boton");
@@ -125,10 +125,7 @@ void Room1Scene::init()
 
 		//Register scene in dialogue manager
 		Game::Instance()->getDialogueManager()->setScene(this);
-		//MiddleRoomBkgrnd
-		entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::MIDDLEROOM);
-		
-
+	
 		//CharacterImage
 		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
 		auto characterimg = entityManager->addEntity(grp::DIALOGUE);

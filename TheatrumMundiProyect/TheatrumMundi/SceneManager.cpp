@@ -11,6 +11,7 @@
 #include "checkML.h"
 #include "SceneRoomTemplate.h"
 #include"DebugInventoryScene.h"
+#include "MiddleRoomScene.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 
 //#include "../../TheatrumMundiProyect/src/ecs/ecs.h"
@@ -19,6 +20,7 @@ SceneManager::SceneManager()
 	scenes.resize(SceneName::SCENE_SIZE);
 
 	scenes[SceneName::INITIAL_MENU] = new InitialScene();
+	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
