@@ -5,6 +5,7 @@
 
 #include "../../TheatrumMundi/TextInfo.h"
 #include "../../src/Components/Image.h"
+#include "../../src/Components/Transform.h"
 
 #include <list>
 
@@ -54,6 +55,9 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 		else totalHeight += 200;
 	}
 
+	_textTransform->setWidth(totalWidth);
+	_textTransform->setHeight(totalHeight);
+
 	// Crear la textura final con el tamaño adecuado
 	SDL_Texture* sdlFinalTexture = SDL_CreateTexture(
 		sdlutils().renderer(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, totalWidth, totalHeight);
@@ -72,7 +76,7 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 	SDL_RenderClear(sdlutils().renderer());
 
 	// Renderizar cada elemento en la textura final
-	int y = 0;
+	int y = 50;
 	for (const auto& it : *textStructure)
 	{
 		if (it.first == "/")
@@ -92,10 +96,10 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 
 			// Texto
 			Texture textTexture(sdlutils().renderer(), it.second, _myFont, _color);
-			SDL_Rect dstRect = { 500, y + 100, textTexture.width(), textTexture.height() };
+			SDL_Rect dstRect = { 500, y + 50, textTexture.width(), textTexture.height() };
 			textTexture.render(dstRect, 0.0);
 
-			y += 200;
+			y += 150;
 		}
 	}
 
@@ -105,7 +109,7 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 	// Convertir SDL_Texture* en Texture y asegurarse de que respete la transparencia
 	Texture* finalText = new Texture(sdlutils().renderer(), sdlFinalTexture);
 	_imageTextLog->setTexture(finalText);
-
+	
 
 
 	/*
@@ -200,6 +204,12 @@ template<typename T>
 void WriteTextComponent<T>::setImageLog(Image* im)
 {
 	_imageTextLog = im;
+}
+
+template<typename T>
+void WriteTextComponent<T>::setTransformLog(Transform* tr)
+{
+	_textTransform = tr;
 }
 
 template<>

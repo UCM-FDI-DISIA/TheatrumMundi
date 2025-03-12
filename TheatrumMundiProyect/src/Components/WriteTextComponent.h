@@ -8,6 +8,7 @@
 
 class TextInfo;
 class Image;
+class Transform;
 
 template <typename T>
 class WriteTextComponent : public ecs::Component
@@ -20,6 +21,7 @@ private:
 	// If it is TextInfo, DialogueManager already destroys that memory.
 
 	Image* _imageTextLog;
+	Transform* _textTransform;
 
 	const int TEXT_SPEED = 200; //20 ms
 	int lastUpdate;
@@ -42,6 +44,7 @@ public:
 	void startTextLine(); //resets values to start displaying new TextLine
 
 	void setImageLog(Image* im);
+	void setTransformLog(Transform* tr);
 
 	~WriteTextComponent();
 	

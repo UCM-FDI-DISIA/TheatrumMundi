@@ -116,21 +116,22 @@ void MiddleRoomLogDebug::init()
 		entityManager->setActive(_titleLog, false);
 
 		//scroll log buttons
-		auto scrollingLog = entityFactory->CreateInteractableEntityScroll(entityManager, "B5", EntityFactory::RECTAREA, Vector2D(1000, 0), Vector2D(0, 0), 100, 100, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::LOG);
+		auto scrollingLog = entityFactory->CreateInteractableEntityScroll(entityManager, "B5", EntityFactory::RECTAREA, Vector2D(1000, 0), Vector2D(0, 0), 100, 100, 0, areaLayerManager, 12, ((sdlutils().height()) / 12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::LOG);
 		auto downScrollLog = entityManager->getComponent<ScrollComponent>(scrollingLog);
 
-		auto upScrollingLog = entityFactory->CreateInteractableEntityScroll(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1000, 500), Vector2D(0, 0), 100, 100, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::LOG);
+		auto upScrollingLog = entityFactory->CreateInteractableEntityScroll(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1000, 500), Vector2D(0, 0), 100, 100, 0, areaLayerManager, 12, ((sdlutils().height()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::LOG);
 		auto upScrollLog = entityManager->getComponent<ScrollComponent>(upScrollingLog);
 
 		//text log
 		auto _textLog = entityManager->addEntity(ecs::grp::LOG);
-		entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 800, 748, 0);
+		Transform* trTextLog = entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 800, 748, 0);
 		Image* imTextLog = entityManager->addComponent<Image>(_textLog, &sdlutils().images().at("fondoPruebaLog"));
 		SDL_Color colorText = { 255, 255, 255, 255 };
 		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog =
 			entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
 		entityManager->setActive(_textLog, false);
 		writeLog->setImageLog(imTextLog);
+		writeLog->setTransformLog(trTextLog);
 
 		downScrollLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
 		upScrollLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
