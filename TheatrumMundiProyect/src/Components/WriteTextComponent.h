@@ -37,14 +37,12 @@ public:
 
 	void update() override;
 	void render() override;
+	void initComponent() override;
 
 
 	bool isFinished(); //checks if current TextLine has been displayed entirely on screen
 	void finishTextLine(); //finishes display of current TextLine
 	void startTextLine(); //resets values to start displaying new TextLine
-
-	void setImageLog(Image* im);
-	void setTransformLog(Transform* tr);
 
 	~WriteTextComponent();
 	

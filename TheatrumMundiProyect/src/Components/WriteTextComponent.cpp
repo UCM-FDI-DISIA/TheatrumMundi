@@ -6,6 +6,7 @@
 #include "../../TheatrumMundi/TextInfo.h"
 #include "../../src/Components/Image.h"
 #include "../../src/Components/Transform.h"
+#include "../ecs/Manager.h"
 
 #include <list>
 
@@ -152,6 +153,14 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 	
 }
 
+template<typename T>
+void WriteTextComponent<T>::initComponent()
+{
+	auto mngr = _ent->getMngr();
+	_textTransform = mngr->getComponent<Transform>(_ent);
+	_imageTextLog = mngr->getComponent<Image>(_ent);
+}
+
 template <>
 void WriteTextComponent<TextInfo>::render()
 {
@@ -198,18 +207,6 @@ void WriteTextComponent<TextInfo>::finishTextLine()
 template<>
 void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::startTextLine()
 {
-}
-
-template<typename T>
-void WriteTextComponent<T>::setImageLog(Image* im)
-{
-	_imageTextLog = im;
-}
-
-template<typename T>
-void WriteTextComponent<T>::setTransformLog(Transform* tr)
-{
-	_textTransform = tr;
 }
 
 template<>

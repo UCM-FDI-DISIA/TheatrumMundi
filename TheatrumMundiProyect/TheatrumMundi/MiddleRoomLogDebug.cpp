@@ -130,8 +130,8 @@ void MiddleRoomLogDebug::init()
 		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog =
 			entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
 		entityManager->setActive(_textLog, false);
-		writeLog->setImageLog(imTextLog);
-		writeLog->setTransformLog(trTextLog);
+		//writeLog->setImageLog(imTextLog);
+		//writeLog->setTransformLog(trTextLog);
 
 		downScrollLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
 		upScrollLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
