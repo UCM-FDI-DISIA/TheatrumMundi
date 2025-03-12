@@ -123,11 +123,11 @@ void MiddleRoomLogDebug::init()
 		entityManager->setActive(_titleLog, false);
 
 		//scroll log buttons
-		auto scrollingLog = entityFactory->CreateInteractableEntityScroll(entityManager, "decreaseButton", EntityFactory::RECTAREA, Vector2D(1000, 500), Vector2D(0, 0), 100, 100, 0, areaLayerManager, 20, 1000 /*- 1*/, EntityFactory::SCROLLNORMAL, 800/8, EntityFactory::NODRAG, ecs::grp::LOG);
-		auto downScrollLog = entityManager->getComponent<ScrollComponent>(scrollingLog);
-
-		auto upScrollingLog = entityFactory->CreateInteractableEntityScroll(entityManager, "incrementButton", EntityFactory::RECTAREA, Vector2D(1000, 0), Vector2D(0, 0), 100, 100, 0, areaLayerManager, 20, 1000 /*- 1*/, EntityFactory::SCROLLINVERSE, 800/8, EntityFactory::NODRAG, ecs::grp::LOG);
-		auto upScrollLog = entityManager->getComponent<ScrollComponent>(upScrollingLog);
+		auto scrollingLog = entityFactory->CreateInteractableEntityScroll(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1000, 100), Vector2D(0, 0), 100, 100, 270, areaLayerManager, sdlutils().height() / 50, 50, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::LOG);
+		auto upScrollingLog = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1000, 600), Vector2D(0, 0), 100, 100, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
+		auto ScrollComponentLog = entityManager->getComponent<ScrollComponent>(scrollingLog);
+		entityManager->setActive(scrollingLog, false);
+		entityManager->setActive(upScrollingLog, false);
 
 		//text log
 		auto _textLog = entityManager->addEntity(ecs::grp::LOG);
@@ -138,8 +138,8 @@ void MiddleRoomLogDebug::init()
 			entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, logScene->getLogList()); //write text component
 		entityManager->setActive(_textLog, false);
 
-		downScrollLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
-		upScrollLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
+		ScrollComponentLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
+		//upScrollLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
 
 		//log buttons
 		auto buttonOpenLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(1200, 748 - (268 / 3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
@@ -148,12 +148,14 @@ void MiddleRoomLogDebug::init()
 		
 
 
-		roomEvent[LOGENABLE] = [this, _backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog] {
+		roomEvent[LOGENABLE] = [this, _backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog, scrollingLog, upScrollingLog] {
 			//activate log
 			entityManager->setActive(_backgroundLog, true); //background
 			entityManager->setActive(_titleLog, true); //title
 			entityManager->setActive(buttonCloseLog, true); //close button
 			entityManager->setActive(buttonOpenLog, false); //open button
+			entityManager->setActive(scrollingLog, true);
+			entityManager->setActive(upScrollingLog, true);
 			//text log
 			//scroll buttons
 
@@ -167,12 +169,14 @@ void MiddleRoomLogDebug::init()
 			_openLogButton->getMngr()->setActive(_openLogButton, false);
 			*/
 			};
-		roomEvent[LOGDESABLE] = [this, _backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog] {
+		roomEvent[LOGDESABLE] = [this, _backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog, scrollingLog, upScrollingLog] {
 			//disable log
 			entityManager->setActive(_backgroundLog, false); //background
 			entityManager->setActive(_titleLog, false); //title
 			entityManager->setActive(buttonCloseLog, false); //close button
 			entityManager->setActive(buttonOpenLog, true); //open button
+			entityManager->setActive(scrollingLog, false);
+			entityManager->setActive(upScrollingLog, false);
 			//text log
 			//scroll buttons
 
@@ -207,20 +211,21 @@ void MiddleRoomLogDebug::init()
 		entityManager->setActive(buttonCloseLog, false);
 		
 		auto downScrollLogButton = entityManager->getComponent<ClickComponent>(scrollingLog);
-		downScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, downScrollLog]() {
-			if (!downScrollLog->isScrolling()) {
-				downScrollLog->Scroll(ScrollComponent::DOWN);
+		downScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
+			std::cout << "A" << std::endl;
+			if (!ScrollComponentLog->isScrolling()) {
+				ScrollComponentLog->Scroll(ScrollComponent::DOWN);
 			}
 			});
-		entityManager->setActive(scrollingLog, false);
+		//entityManager->setActive(scrollingLog, false);
 
 		auto upScrollLogButton = entityManager->getComponent<ClickComponent>(upScrollingLog);
-		upScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, upScrollLog]() {
-			if (!upScrollLog->isScrolling()) {
-				upScrollLog->Scroll(ScrollComponent::UP);
+		upScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
+			if (!ScrollComponentLog->isScrolling()) {
+				ScrollComponentLog->Scroll(ScrollComponent::UP);
 			}
 			});
-		entityManager->setActive(upScrollingLog, false);
+		//entityManager->setActive(upScrollingLog, false);
 
 		//UI
 		//Pause
