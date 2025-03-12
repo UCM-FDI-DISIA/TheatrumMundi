@@ -7,6 +7,7 @@
 #include "../ecs/Component.h"
 
 class TextInfo;
+class Image;
 
 template <typename T>
 class WriteTextComponent : public ecs::Component
@@ -17,6 +18,8 @@ private:
 	T* textStructure; //points to text structure. Log list or TextInfo.
 	// If it is log list, there is no Dynamic memory to destroy
 	// If it is TextInfo, DialogueManager already destroys that memory.
+
+	Image* _imageTextLog;
 
 	const int TEXT_SPEED = 200; //20 ms
 	int lastUpdate;
@@ -37,6 +40,8 @@ public:
 	bool isFinished(); //checks if current TextLine has been displayed entirely on screen
 	void finishTextLine(); //finishes display of current TextLine
 	void startTextLine(); //resets values to start displaying new TextLine
+
+	void setImageLog(Image* im);
 
 	~WriteTextComponent();
 	

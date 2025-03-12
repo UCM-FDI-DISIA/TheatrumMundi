@@ -116,15 +116,14 @@ void MiddleRoomLogDebug::init()
 		entityManager->setActive(_titleLog, false);
 
 		//text log
-		/*
 		auto _textLog = entityManager->addEntity(ecs::grp::LOG);
-		entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0);
-		Image* imTextLog = entityManager->addComponent<Image>(_backgroundLog, nullptr, 200);
+		entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0);
+		Image* imTextLog = entityManager->addComponent<Image>(_textLog, &sdlutils().images().at("fondoPruebaLog"));
 		SDL_Color colorText = { 255, 255, 255, 255 };
 		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog =
-			entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
-		*/
-		
+			entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
+		entityManager->setActive(_textLog, false);
+		writeLog->setImageLog(imTextLog);
 
 		//log buttons
 		auto buttonOpenLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(1200, 748 - (268 / 3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
