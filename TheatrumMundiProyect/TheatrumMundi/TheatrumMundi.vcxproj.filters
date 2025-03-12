@@ -51,6 +51,8 @@
     <ClCompile Include="Hint.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="MiddleRoomScene.cpp" />
+    <ClCompile Include="MiddleRoomLogDebug.cpp" />
+    <ClCompile Include="Log.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -224,6 +226,8 @@
     <ClInclude Include="Hint.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="MiddleRoomScene.h" />
+    <ClInclude Include="MiddleRoomLogDebug.h" />
+    <ClInclude Include="Log.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />

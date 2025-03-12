@@ -341,6 +341,10 @@
       "file": "../resources/images/IncrementButton.png"
     },
     {
+      "id": "decreaseButton",
+      "file": "../resources/images/decreaseButton.png"
+    },
+    {
       "id": "numberButton",
       "file": "../resources/images/NumberButton.png"
     },

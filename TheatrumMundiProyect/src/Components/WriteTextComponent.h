@@ -7,6 +7,8 @@
 #include "../ecs/Component.h"
 
 class TextInfo;
+class Image;
+class Transform;
 
 template <typename T>
 class WriteTextComponent : public ecs::Component
@@ -17,6 +19,9 @@ private:
 	T* textStructure; //points to text structure. Log list or TextInfo.
 	// If it is log list, there is no Dynamic memory to destroy
 	// If it is TextInfo, DialogueManager already destroys that memory.
+
+	Image* _imageTextLog;
+	Transform* _textTransform;
 
 	const int TEXT_SPEED = 200; //20 ms
 	int lastUpdate;
@@ -32,6 +37,7 @@ public:
 
 	void update() override;
 	void render() override;
+	void initComponent() override;
 
 
 	bool isFinished(); //checks if current TextLine has been displayed entirely on screen

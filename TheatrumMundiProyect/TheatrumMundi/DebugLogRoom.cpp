@@ -69,13 +69,13 @@ void DebugLogRoom::init()
 		LogComponent* logComp = entityManager->addComponent<LogComponent>(_log); //logComponent
 		
 		SDL_Color colorText = { 255, 255, 255, 255 };
-		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog =
-			entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
+		//WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog =
+			//entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
 		
 		_log->getMngr()->setActive(_log, false); //hide log at the beggining
 
 		//Register log in dialogue manager
-		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
+		//Game::Instance()->getDialogueManager()->setSceneLog(logComp);
 			
 
 		//Add writeText to dialogueManager

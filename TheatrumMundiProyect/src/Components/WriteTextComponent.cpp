@@ -4,6 +4,9 @@
 #include "../../src/sdlutils/Texture.h"
 
 #include "../../TheatrumMundi/TextInfo.h"
+#include "../../src/Components/Image.h"
+#include "../../src/Components/Transform.h"
+#include "../ecs/Manager.h"
 
 #include <list>
 
@@ -17,7 +20,7 @@ WriteTextComponent<T>::WriteTextComponent(Font& desiredFont, const SDL_Color& de
 
 //UPDATE
 template <>
-void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::update()
+void WriteTextComponent<std::list<TextInfo>>::update()
 {
 
 }
@@ -40,8 +43,77 @@ void WriteTextComponent<TextInfo>::update()
 
 //RENDER
 template <>
-void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render()
+void WriteTextComponent<std::list<TextInfo>>::render()
 {
+	// Definir el tamaño total de la textura final
+	int totalWidth = 800; // Ajusta según sea necesario
+	int totalHeight = 0;  // Se calculará dinámicamente
+
+	// Calcular la altura total sumando las alturas de cada elemento
+	for (const auto& it : *textStructure)
+	{
+		if (it.Character == "/") totalHeight += 100;
+		else totalHeight += 150;
+	}
+
+	_textTransform->setWidth(totalWidth);
+	_textTransform->setHeight(totalHeight);
+
+	// Crear la textura final con el tamaño adecuado
+	SDL_Texture* sdlFinalTexture = SDL_CreateTexture(
+		sdlutils().renderer(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, totalWidth, totalHeight);
+
+	// Habilitar mezcla alfa en la textura final
+	SDL_SetTextureBlendMode(sdlFinalTexture, SDL_BLENDMODE_BLEND); //Habilita transparencia
+
+	// Guardar el render target actual
+	SDL_Texture* prevTarget = SDL_GetRenderTarget(sdlutils().renderer());
+
+	// Establecer la nueva textura como el render target
+	SDL_SetRenderTarget(sdlutils().renderer(), sdlFinalTexture);
+
+	// Limpiar la textura con transparencia (alpha = 0)
+	SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 0, 0, 0); //Fondo completamente transparente
+	SDL_RenderClear(sdlutils().renderer());
+
+	// Renderizar cada elemento en la textura final
+	int y = 50;
+	for (const auto& it : *textStructure)
+	{
+		if (it.Character == "/")
+		{
+			// Línea divisoria
+			Texture divideLine(sdlutils().renderer(), "...--.-.-.-.-.--.-.-.-.-.-..-.--.-.-.-.---......-----...-----.....----....---...---..-.-.-.-.-.-.-.-.-.-.", _myFont, _color);
+			SDL_Rect dstVRect = { 10, y, divideLine.width(), divideLine.height() };
+			divideLine.render(dstVRect, 0.0);
+			y += 100;
+		}
+		else
+		{
+			// Autor
+			Texture authorTexture(sdlutils().renderer(), it.Character, _myFont, _color);
+			SDL_Rect dstAuthorRect = { 500, y, authorTexture.width(), authorTexture.height() };
+			authorTexture.render(dstAuthorRect, 0.0);
+
+			// Texto
+			Texture textTexture(sdlutils().renderer(), it.Text, _myFont, _color);
+			SDL_Rect dstRect = { 500, y + 50, textTexture.width(), textTexture.height() };
+			textTexture.render(dstRect, 0.0);
+
+			y += 150;
+		}
+	}
+
+	// Restaurar el render target original
+	SDL_SetRenderTarget(sdlutils().renderer(), prevTarget);
+
+	// Convertir SDL_Texture* en Texture y asegurarse de que respete la transparencia
+	Texture* finalText = new Texture(sdlutils().renderer(), sdlFinalTexture);
+	_imageTextLog->setTexture(finalText);
+	
+
+
+	/*
 	//TITLE
 	Texture* titleText = new Texture(sdlutils().renderer(), "LOG",
 		sdlutils().fonts().at("TITLE"), _color); //convert text to texture
@@ -77,8 +149,16 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 		}
 
 	}
-
+	*/
 	
+}
+
+template<typename T>
+void WriteTextComponent<T>::initComponent()
+{
+	auto mngr = _ent->getMngr();
+	_textTransform = mngr->getComponent<Transform>(_ent);
+	_imageTextLog = mngr->getComponent<Image>(_ent);
 }
 
 template <>
@@ -98,7 +178,7 @@ void WriteTextComponent<TextInfo>::render()
 
 //IS FINISHED
 template<>
-bool WriteTextComponent<std::list<std::pair<std::string, std::string>>>::isFinished()
+bool WriteTextComponent<std::list<TextInfo>>::isFinished()
 {
 	return false;
 }
@@ -112,7 +192,7 @@ bool WriteTextComponent<TextInfo>::isFinished()
 
 //FINISH TEXTLINE
 template<>
-void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::finishTextLine()
+void WriteTextComponent<std::list<TextInfo>>::finishTextLine()
 {
 }
 
@@ -125,7 +205,7 @@ void WriteTextComponent<TextInfo>::finishTextLine()
 
 //START TEXTLINE
 template<>
-void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::startTextLine()
+void WriteTextComponent<std::list<TextInfo>>::startTextLine()
 {
 }
 
@@ -146,4 +226,4 @@ WriteTextComponent<T>::~WriteTextComponent()
 // Explicit instantiation declaration
 template class WriteTextComponent<TextInfo>;
 
-template class WriteTextComponent<std::list<std::pair<std::string,std::string>>>;
+template class WriteTextComponent<std::list<TextInfo>>;

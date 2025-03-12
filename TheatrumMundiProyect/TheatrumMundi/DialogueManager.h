@@ -11,7 +11,7 @@ class WriteTextComponent;
 
 class TextInfo;
 
-class LogComponent;
+class Log;
 
 class SceneTemplate;
 
@@ -36,7 +36,7 @@ private:
 
 	TextInfo* _showText; // points to current displayed textLine
 
-	LogComponent* _sceneLog; //points to log list
+	Log* _sceneLog; //points to log list
 
 	WriteTextComponent<TextInfo>* _writeTextComp;
 
@@ -52,7 +52,7 @@ public:
 	inline void setCharacterImg(Image* img) {
 		characterimg = img;
 	}
-	void setSceneLog(LogComponent* sceneLog);
+	void setSceneLog(Log* sceneLog);
 	void setScene(SceneTemplate* scene);
 	void setWriteTextComp(WriteTextComponent<TextInfo>* writeTextComp)
 	{
