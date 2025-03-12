@@ -332,6 +332,7 @@ void Room1Scene::init()
 			if (finishalpuzzles)
 			{
 				entityManager->setActive(readyToResolveButton, true);
+				roomEvent[ResolveCase]();
 			}
 			else
 			{
@@ -339,7 +340,7 @@ void Room1Scene::init()
 			}
 			
 
-	
+
 			
 
 		});
@@ -534,11 +535,7 @@ void Room1Scene::resolvedPuzzle(int i)
 {
 
 	puzzlesol[i] = true;
-	std::cout << i << std::endl;
-	std::cout << puzzlesol[ClockPuzzleRsv] << std::endl;
-	std::cout << puzzlesol[PipePuzzleRsv] << std::endl;
-	std::cout << puzzlesol[BooksPuzzleRsv] << std::endl;
-	//entityManager->removeComponent<ClickComponent>(puzzleptr[i]);
+
 	if (puzzlesol[ClockPuzzleRsv] &&puzzlesol[PipePuzzleRsv] &&puzzlesol[BooksPuzzleRsv]) {
 		
 		roomEvent[i]();
