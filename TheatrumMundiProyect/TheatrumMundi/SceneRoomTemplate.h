@@ -19,6 +19,7 @@ protected:
 
 	public:
 		//use the room enum for de index
+
 		virtual void resolvedPuzzle(int i);
 		void setActiveBottons(bool active);
 		void setActiveZoomObj(bool active);

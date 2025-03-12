@@ -11,7 +11,7 @@
 #include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
 #include "../src/Components/LogComponent.h"
-
+#include <cassert>
 #include "AudioManager.h"
 
 #include "SceneRoomTemplate.h"
@@ -34,7 +34,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		//Register scene in dialogue manager
 		Game::Instance()->getDialogueManager()->setScene(this);
 
-		
+
 		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
 		auto _screenDetect = entityManager->addEntity(grp::DIALOGUE);
 		entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
@@ -43,7 +43,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->addComponent<TriggerComponent>(_screenDetect);
 		entityManager->setActive(_screenDetect, false);
 
-		
+
 
 		//Create dialogue text entity. Object that renders dialogue Text on Screen
 		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
@@ -86,14 +86,14 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
 
 		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
-		
+
 		startDialogue(Puzzle3);
 
 		room = sr;
 		AudioManager& a = AudioManager::Instance();
 		Sound clockMinSound = sdlutils().soundEffects().at("aguja_minutero");
 		Sound clockHorSound = sdlutils().soundEffects().at("aguja_horario");
-		a.setVolume(clockMinSound,0.2);
+		a.setVolume(clockMinSound, 0.2);
 		a.setVolume(clockHorSound, 0.2);
 
 		//create the clock
@@ -143,7 +143,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 				if (_actualMinute == 360) _actualMinute = 0;
 
 			});
-			
+
 
 		//create the buttons: hor
 		auto _buttonHor = entityManager->addEntity();
@@ -190,15 +190,15 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 					std::cout << "wii";
 #endif // DEBUG
 					Win();
-					
+
 				}
 			});
 
 
 		//create the buttons: reset button
 		auto _buttonResetPuzzle = entityManager->addEntity();
-		auto _buttonRessetPuzzleTransform = 
-		entityManager->addComponent<Transform>(_buttonResetPuzzle, Vector2D(1200, 150), Vector2D(0, 0), 70, 70, 0);
+		auto _buttonRessetPuzzleTransform =
+			entityManager->addComponent<Transform>(_buttonResetPuzzle, Vector2D(1200, 150), Vector2D(0, 0), 70, 70, 0);
 
 		entityManager->addComponent<Image>(_buttonResetPuzzle, &sdlutils().images().at("clockHorButton"));
 
@@ -206,7 +206,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		ClickComponent* clockResetClick = entityManager->addComponent<ClickComponent>(_buttonResetPuzzle);
-		clockResetClick->connect(ClickComponent::JUST_CLICKED, [_clockHorTransform,_clockMinTransform, this]()
+		clockResetClick->connect(ClickComponent::JUST_CLICKED, [_clockHorTransform, _clockMinTransform, this]()
 			{
 #ifdef DEBUG
 				std::cout << "WAAAAAAAAAA\n";
@@ -232,39 +232,59 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 				Game::Instance()->getSceneManager()->popScene();
 			});
 
-		//Add Inventory Button to scene
+		//INVENTORY
+		//Invntory Background
 		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 1500, 1500, 0, ecs::grp::UI);
 		entityManager->setActive(InventoryBackground, false);
+
+		//InventoryButton
 		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
-		invOpen->connect(ClickComponent::JUST_CLICKED, [this,sr,InventoryBackground]()
+		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground]() //Lamda function
 			{
 				//AudioManager::Instance().playSound(buttonSound);
 				sr->GetInventory()->setActive(!sr->GetInventory()->getActive());  // Toggle the inventory
 
 				// If the inventory is active, activate the items
 				if (sr->GetInventory()->getActive()) {
-				//	entityManager->setActive(InventoryBackground, true);
+					//	entityManager->setActive(InventoryBackground, true);
 					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], true);
 					}
 				}
 				else {
-				//	entityManager->setActive(InventoryBackground, false);
+					//	entityManager->setActive(InventoryBackground, false);
 					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], false);
 					}
 				}
 			});
+
 	}
+	//IMPORTANT this need to be out of the isstarted!!!
 	//Add inventory items to the entitymanager of the scene
 	int index = 0;
 	for (auto a : sr->GetInventory()->getItems()) {
-		if (invObjects.empty() || index >= invObjects.size()) {
+		if (index >= invObjects.size()) {
 			invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, a->getID(), EntityFactory::RECTAREA, sr->GetInventory()->GetPosition(index), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::UI));
 		}
 		invObjects[index]->getMngr()->setActive(invObjects[index], false);
 		++index;
+	}
+	//IMPORTANT INFORMATION:
+	// First: Needs to be out of isstarted (if you enter without X item, then tou enter again with that item you must assign the item the same information as the rest)
+	// Second: if Condition depends of the item that the scene requires, in this case the cloack hands
+	//Inventory items functionality
+	for (auto inv : invObjects) {
+		assert(inv->getMngr()->getComponent<ClickComponent>(inv) != nullptr);
+		inv->getMngr()->getComponent<ClickComponent>(inv)->connect(ClickComponent::JUST_CLICKED, [this, sr, inv]() {
+			setOriginalPos(inv->getMngr()->getComponent<Transform>(inv)->getPos());
+			});
+		inv->getMngr()->getComponent<ClickComponent>(inv)->connect(ClickComponent::JUST_RELEASED, [this, sr, inv]() {
+			//if(object id == "minutero" ||object id == "horario" && the object don't collides with the cloack)
+			inv->getMngr()->getComponent<Transform>(inv)->getPos().set(getOriginalPos());
+			//else sets the image with the id to true and the inventory thing to false in this inventory and in the room1 
+			});
 	}
 }
 

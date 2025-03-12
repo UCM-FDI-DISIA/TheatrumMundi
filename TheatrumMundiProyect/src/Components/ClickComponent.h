@@ -12,9 +12,7 @@ public:
 
 	ClickComponent();
 
-	bool isBeingClicked() {
-		return _isBeingClicked;
-	}
+	inline bool isBeingClicked() {return _isBeingClicked;}
 
 protected:
 
