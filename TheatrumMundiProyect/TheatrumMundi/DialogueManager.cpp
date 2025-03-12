@@ -7,6 +7,7 @@
 //#include "TextInfo.h"
 
 #include "../src/components/LogComponent.h"
+#include "Log.h"
 #include "SceneTemplate.h"
 
 
@@ -186,7 +187,7 @@ DialogueManager::~DialogueManager()
 
 }
 
-void DialogueManager::setSceneLog(LogComponent* sceneLog)
+void DialogueManager::setSceneLog(Log* sceneLog)
 {
 	_sceneLog = sceneLog;
 }

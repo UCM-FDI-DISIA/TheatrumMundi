@@ -17,6 +17,8 @@
 #include "ClickableSpriteComponent.h"
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 #include "EventsInfo.h"
+#include "Log.h"
+
 MiddleRoomLogDebug::MiddleRoomLogDebug() :SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 {
 	roomEvent.resize(MIDDLEROOMEVENTSIZE);
@@ -97,11 +99,16 @@ void MiddleRoomLogDebug::init()
 		//CREATE LOG
 
 		//logic log
+		Log* logScene = new Log();
+		//Register log in dialogue manager
+		Game::Instance()->getDialogueManager()->setSceneLog(logScene);
+
+		/*
 		auto _log = entityManager->addEntity(ecs::grp::LOG);
 		entityManager->addComponent<Transform>(_log, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
 		LogComponent* logComp = entityManager->addComponent<LogComponent>(_log); //logComponent
 		//Register log in dialogue manager
-		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
+		Game::Instance()->getDialogueManager()->setSceneLog(logComp);*/
 		
 		//background log
 		auto _backgroundLog = entityManager->addEntity(ecs::grp::LOG);
@@ -127,8 +134,8 @@ void MiddleRoomLogDebug::init()
 		Transform* trTextLog = entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 800, 748, 0);
 		Image* imTextLog = entityManager->addComponent<Image>(_textLog, &sdlutils().images().at("fondoPruebaLog"));
 		SDL_Color colorText = { 255, 255, 255, 255 };
-		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog =
-			entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
+		WriteTextComponent<std::list<TextInfo>>* writeLog =
+			entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, logScene->getLogList()); //write text component
 		entityManager->setActive(_textLog, false);
 
 		downScrollLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
@@ -183,21 +190,7 @@ void MiddleRoomLogDebug::init()
 
 			//activate log
 			entityManager->setActiveGroup(ecs::grp::LOG, true);
-			/*
-			entityManager->setActive(_backgroundLog, true); //background
-			entityManager->setActive(_titleLog, true); //title
-			entityManager->setActive(buttonCloseLog, true); //close button
-			*/
 			entityManager->setActive(buttonOpenLog, false); //open button
-			
-			//text log
-			//scroll buttons
-
-			//entityManager->setActive(_log, true);
-			//logActive = true;
-
-			//entityManager->setActive(buttonCloseLog, true);
-			//entityManager->setActive(buttonLog, false);
 			});
 		entityManager->setActive(buttonOpenLog, true);
 
@@ -209,22 +202,7 @@ void MiddleRoomLogDebug::init()
 
 			//disable log
 			entityManager->setActiveGroup(ecs::grp::LOG, false);
-			/*
-			entityManager->setActive(_backgroundLog, false); //background
-			entityManager->setActive(_titleLog, false); //title
-			entityManager->setActive(buttonCloseLog, false); //close button
-			*/
 			entityManager->setActive(buttonOpenLog, true); //open button
-			
-			//text log
-			//scroll buttons
-
-			/*
-			entityManager->setActive(_log, false);
-			logActive = false;
-			entityManager->setActive(buttonOpenLog, true);
-			entityManager->setActive(buttonCloseLog, false);
-			*/
 			});
 		entityManager->setActive(buttonCloseLog, false);
 		

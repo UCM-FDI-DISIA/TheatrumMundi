@@ -20,7 +20,7 @@ WriteTextComponent<T>::WriteTextComponent(Font& desiredFont, const SDL_Color& de
 
 //UPDATE
 template <>
-void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::update()
+void WriteTextComponent<std::list<TextInfo>>::update()
 {
 
 }
@@ -43,7 +43,7 @@ void WriteTextComponent<TextInfo>::update()
 
 //RENDER
 template <>
-void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render()
+void WriteTextComponent<std::list<TextInfo>>::render()
 {
 	// Definir el tamaño total de la textura final
 	int totalWidth = 800; // Ajusta según sea necesario
@@ -52,7 +52,7 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 	// Calcular la altura total sumando las alturas de cada elemento
 	for (const auto& it : *textStructure)
 	{
-		if (it.first == "/") totalHeight += 100;
+		if (it.Character == "/") totalHeight += 100;
 		else totalHeight += 150;
 	}
 
@@ -80,7 +80,7 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 	int y = 50;
 	for (const auto& it : *textStructure)
 	{
-		if (it.first == "/")
+		if (it.Character == "/")
 		{
 			// Línea divisoria
 			Texture divideLine(sdlutils().renderer(), "...--.-.-.-.-.--.-.-.-.-.-..-.--.-.-.-.---......-----...-----.....----....---...---..-.-.-.-.-.-.-.-.-.-.", _myFont, _color);
@@ -91,12 +91,12 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 		else
 		{
 			// Autor
-			Texture authorTexture(sdlutils().renderer(), it.first, _myFont, _color);
+			Texture authorTexture(sdlutils().renderer(), it.Character, _myFont, _color);
 			SDL_Rect dstAuthorRect = { 500, y, authorTexture.width(), authorTexture.height() };
 			authorTexture.render(dstAuthorRect, 0.0);
 
 			// Texto
-			Texture textTexture(sdlutils().renderer(), it.second, _myFont, _color);
+			Texture textTexture(sdlutils().renderer(), it.Text, _myFont, _color);
 			SDL_Rect dstRect = { 500, y + 50, textTexture.width(), textTexture.height() };
 			textTexture.render(dstRect, 0.0);
 
@@ -178,7 +178,7 @@ void WriteTextComponent<TextInfo>::render()
 
 //IS FINISHED
 template<>
-bool WriteTextComponent<std::list<std::pair<std::string, std::string>>>::isFinished()
+bool WriteTextComponent<std::list<TextInfo>>::isFinished()
 {
 	return false;
 }
@@ -192,7 +192,7 @@ bool WriteTextComponent<TextInfo>::isFinished()
 
 //FINISH TEXTLINE
 template<>
-void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::finishTextLine()
+void WriteTextComponent<std::list<TextInfo>>::finishTextLine()
 {
 }
 
@@ -205,7 +205,7 @@ void WriteTextComponent<TextInfo>::finishTextLine()
 
 //START TEXTLINE
 template<>
-void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::startTextLine()
+void WriteTextComponent<std::list<TextInfo>>::startTextLine()
 {
 }
 
@@ -226,4 +226,4 @@ WriteTextComponent<T>::~WriteTextComponent()
 // Explicit instantiation declaration
 template class WriteTextComponent<TextInfo>;
 
-template class WriteTextComponent<std::list<std::pair<std::string,std::string>>>;
+template class WriteTextComponent<std::list<TextInfo>>;
