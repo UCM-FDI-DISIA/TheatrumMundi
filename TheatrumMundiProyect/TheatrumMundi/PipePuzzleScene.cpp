@@ -1161,8 +1161,8 @@ void PipePuzzleScene::Win()
 	clk->connect(ClickComponent::JUST_CLICKED, [this]() {
 
 		room->GetInventory()->addItem(new Hint("Gloves", "Me lo puedo beber??", &sdlutils().images().at("Gloves")));
-	//	room->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(room->GetEntityManager(), "Gloves", EntityFactory::RECTAREA, sr->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-	//	room->GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		room->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(room->GetEntityManager(), "Gloves", EntityFactory::RECTAREA, room->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		room->GetInventory()->hints.back()->getMngr()->setActive(room->GetInventory()->hints.back(), false);
 		gloveEntity->getMngr()->setActive(gloveEntity, false);
 		});
 

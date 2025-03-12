@@ -53,6 +53,23 @@ void Inventory::addItem(Hint* item)
 {
 	items.push_back(item);
 }
+/// <summary>
+/// Remove the id item from the inventory
+/// </summary>
+/// <param name="idToRemove"></param> -->Id of the item to is going to been removed
+void Inventory::removeItem(const std::string& idToRemove)
+{
+
+	auto hintIt = hints.begin();
+	for (auto it = items.begin(); it != items.end(); ++it) {
+		if (it[0]->getID() == idToRemove) {
+			items.erase(it);
+			hints.erase(hintIt);
+			return;
+		}
+		++hintIt;
+	}
+}
 
 /// <summary>
 /// Checks if the id is define in the inventory or not
