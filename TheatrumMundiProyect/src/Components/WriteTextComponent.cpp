@@ -53,7 +53,7 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 	for (const auto& it : *textStructure)
 	{
 		if (it.first == "/") totalHeight += 100;
-		else totalHeight += 200;
+		else totalHeight += 150;
 	}
 
 	_textTransform->setWidth(totalWidth);
