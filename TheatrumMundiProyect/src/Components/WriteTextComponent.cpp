@@ -87,12 +87,12 @@ void WriteTextComponent<std::list<std::pair<std::string, std::string>>>::render(
 		{
 			// Autor
 			Texture authorTexture(sdlutils().renderer(), it.first, _myFont, _color);
-			SDL_Rect dstAuthorRect = { 200, y, authorTexture.width(), authorTexture.height() };
+			SDL_Rect dstAuthorRect = { 500, y, authorTexture.width(), authorTexture.height() };
 			authorTexture.render(dstAuthorRect, 0.0);
 
 			// Texto
 			Texture textTexture(sdlutils().renderer(), it.second, _myFont, _color);
-			SDL_Rect dstRect = { 200, y + 100, textTexture.width(), textTexture.height() };
+			SDL_Rect dstRect = { 500, y + 100, textTexture.width(), textTexture.height() };
 			textTexture.render(dstRect, 0.0);
 
 			y += 200;
