@@ -494,6 +494,10 @@
         {
             "id": "AAA",
             "file": "../resources/images/veneno.png"
+        },
+        {
+            "id": "Hanni",
+            "file": "../resources/images/asesinoDeHanni.png"
         }
     ],
 

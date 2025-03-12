@@ -22,6 +22,7 @@ protected:
 		Spoon,
 		Boa1,
 		Boa2,
+		Hanni,
 		ResolveCase,
 		ResolveBottons,
 		GoodEnd,
