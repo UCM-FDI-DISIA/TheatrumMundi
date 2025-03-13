@@ -289,6 +289,24 @@ void MiddleRoomScene::endDialogue()
 {
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 	//Check the act room to load a specific room
-	//if(...)
-	Game::Instance()->getSceneManager()->loadScene(ROOM_1);
+	int aux = Game::Instance()->getDataManager()->GetActualScene();
+	switch (aux)
+	{
+	case SceneCount::MIDDLEROOM1:
+		Game::Instance()->getSceneManager()->loadScene(ROOM_1);
+		break;
+	case SceneCount::MIDDLEROOM2:
+		Game::Instance()->getSceneManager()->loadScene(ROOM_2);
+		break;
+	case SceneCount::MIDDLEROOM3:
+		Game::Instance()->getSceneManager()->loadScene(ROOM_3);
+		break;
+	case SceneCount::END:
+		//Load the endScene WIP
+		//Game::Instance()->getSceneManager()->loadScene(ROOM_1);
+		break;
+	default:
+		break;
+	}
+	
 }
