@@ -57,17 +57,22 @@ void Inventory::addItem(Hint* item)
 /// Remove the id item from the inventory
 /// </summary>
 /// <param name="idToRemove"></param> -->Id of the item to is going to been removed
-void Inventory::removeItem(const std::string& idToRemove)
+void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& invEntityList)
 {
 
 	auto hintIt = hints.begin();
+	auto entityIt = invEntityList.begin();
 	for (auto it = items.begin(); it != items.end(); ++it) {
 		if (it[0]->getID() == idToRemove) {
 			items.erase(it);
+			hintIt[0]->getMngr()->setActive(hintIt[0], false);
 			hints.erase(hintIt);
+			entityIt[0]->getMngr()->setActive(entityIt[0], false);
+			invEntityList.erase(entityIt);
 			return;
 		}
 		++hintIt;
+		++entityIt;
 	}
 }
 

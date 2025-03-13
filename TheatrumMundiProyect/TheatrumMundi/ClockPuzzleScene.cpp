@@ -101,7 +101,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		a.setVolume(clockHorSound, 0.2);
 
 		//create the clock
-		cloack = entityFactory->CreateInteractableEntity(entityManager,"clockShape",EntityFactory::RECTAREA, Vector2D(600, 300), Vector2D(0, 0), 200, 200, 0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::DEFAULT);
+		cloack = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(600, 300), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		entityManager->addComponent<TriggerComponent>(cloack);
 		//Assigns the trigger bolean to true
 		cloack->getMngr()->getComponent<TriggerComponent>(cloack)->connect(TriggerComponent::AREA_ENTERED, [this]() {
@@ -113,7 +113,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		//create the clock hands : minute
-		longCloackHand = entityFactory->CreateInteractableEntity(entityManager,"clockMinArrow",EntityFactory::RECTAREA, Vector2D(680, 360), Vector2D(0, 0), 20, 70, 0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::BACKGROUND);
+		longCloackHand = entityFactory->CreateInteractableEntity(entityManager, "clockMinArrow", EntityFactory::RECTAREA, Vector2D(680, 360), Vector2D(0, 0), 20, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
 		auto _clockMinTransform = longCloackHand->getMngr()->getComponent<Transform>(longCloackHand);
 		if (!hasLongCloackHand) longCloackHand->getMngr()->setActive(longCloackHand, false);
 
@@ -266,55 +266,46 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
 	//Add inventory items to the entitymanager of the scene
-	
+
 	int index = 0;
 	for (auto a : sr->GetInventory()->getItems()) {
+		//if there are more items in the inventory than in my entitie array, add new Entity to the array with the inventory item information
 		if (index >= invObjects.size()) {
+
+			//Add the entitie to the array
 			invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, a->getID(), EntityFactory::RECTAREA, sr->GetInventory()->GetPosition(index), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
-		}
-		invObjects[index]->getMngr()->setActive(invObjects[index], false);
-		++index;
-	}
 
-	//IMPORTANT INFORMATION:
-	// First: Needs to be out of isstarted (if you enter without X item, then tou enter again with that item you must assign the item the same information as the rest)
-	// Second: if Condition depends of the item that the scene requires, in this case the cloack hands
-	//Inventory items functionality
 
-	index = 0; //which item id
+			//Assign lamda functions
+			
+			//if you click in one item, assign the original position to the position of the object clicked
+			invObjects.back()->getMngr()->getComponent<ClickComponent>(invObjects.back())->connect(ClickComponent::JUST_CLICKED, [this, sr]() {
+				setOriginalPos(invObjects.back()->getMngr()->getComponent<Transform>(invObjects.back())->getPos());
+				});
 
-	auto it = invObjects.begin();
-	for (auto inv : invObjects) {
-		assert(inv->getMngr()->getComponent<ClickComponent>(inv) != nullptr);
-
-		//if you click in one item, assign the original position to the position of the object clicked
-		inv->getMngr()->getComponent<ClickComponent>(inv)->connect(ClickComponent::JUST_CLICKED, [this, sr, inv]() {
-			setOriginalPos(inv->getMngr()->getComponent<Transform>(inv)->getPos());
+			//if you drop the item, compares if it was drop in or out tge cloack
+			invObjects.back()->getMngr()->getComponent<ClickComponent>(invObjects.back())->connect(ClickComponent::JUST_RELEASED, [this, sr, a]() {
+				//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
+				if (!placeHand) invObjects.back()->getMngr()->getComponent<Transform>(invObjects.back())->getPos().set(getOriginalPos());
+				//in other case remove the item from this inventory and the inventory of Room1
+				else {
+					//Add the hand to the cloack
+					if (isCloackHand(a->getID())) { 
+						
+						//remove the object from the inventory
+						sr->GetInventory()->removeItem(a->getID(),invObjects);
+					}
+					else invObjects.back()->getMngr()->getComponent<Transform>(invObjects.back())->getPos().set(getOriginalPos());
+				}
 			});
 
-		//if release the object
-		inv->getMngr()->getComponent<ClickComponent>(inv)->connect(ClickComponent::JUST_RELEASED, [this, sr, inv, index,it]() {
-			//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
-			if (!placeHand) inv->getMngr()->getComponent<Transform>(inv)->getPos().set(getOriginalPos());
-			//in other case remove the item from this inventory and the inventory of Room1
-			else {
-				//Add the hand to the cloack
-				if (isCloackHand(sr->GetInventory()->getItems()[index]->getID())) { //Error de index!!!!!!
-
-					//remove the object from the puzzleScene inventory
-
-					inv->getMngr()->getComponent<Transform>(inv)->getPos().set(getOriginalPos());
-					inv->getMngr()->setActive(inv, false);
-					invObjects.erase(it);
-					sr->GetInventory()->removeItem(sr->GetInventory()->getItems()[index]->getID());
-				}
-				else inv->getMngr()->getComponent<Transform>(inv)->getPos().set(getOriginalPos());
-			}
-			}); 
-		++index;
-		++it;
+			//Set the active item to false
+			invObjects[index]->getMngr()->setActive(invObjects[index], false);
+			++index;
+		}
 	}
 }
+
 
 void ClockPuzzleScene::refresh()
 {
