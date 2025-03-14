@@ -185,10 +185,38 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			{
 				if (Check()) {
 
+					//Assigns to the room inventory the hint
+
+					Vector2D position = sr->GetInventory()->setPosition();
 					sr->GetInventory()->addItem(new Hint("AAA", "Me lo puedo beber??", &sdlutils().images().at("AAA")));
-					sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "AAA", EntityFactory::RECTAREA, sr->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+					sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "AAA", EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 					sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
 
+					//Assign to this inventory the hint;
+					invID.push_back("AAA");
+					invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, "AAA", EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
+					invObjects.back()->getMngr()->setActive(invObjects.back(), false);
+
+					//Assign the lamda functions to the inventory item
+					invObjects.back()->getMngr()->getComponent<ClickComponent>(invObjects.back())->connect(ClickComponent::JUST_CLICKED, [this, sr]() {
+						setOriginalPos(invObjects.back()->getMngr()->getComponent<Transform>(invObjects.back())->getPos());
+						});
+
+					//if you drop the item, compares if it was drop in or out tge cloack
+					invObjects.back()->getMngr()->getComponent<ClickComponent>(invObjects.back())->connect(ClickComponent::JUST_RELEASED, [this, sr]() {
+						//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
+						if (!placeHand) invObjects.back()->getMngr()->getComponent<Transform>(invObjects.back())->getPos().set(getOriginalPos());
+						//in other case remove the item from this inventory and the inventory of Room1
+						else {
+							//Add the hand to the cloack
+							if (isCloackHand("AAA")) {
+
+								//remove the object from the inventory
+								sr->GetInventory()->removeItem("AAA", invObjects);
+							}
+							else invObjects.back()->getMngr()->getComponent<Transform>(invObjects.back())->getPos().set(getOriginalPos());
+						}
+						});
 #ifdef DEBUG
 					std::cout << "wii";
 #endif // DEBUG
@@ -269,9 +297,11 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 	int index = 0;
 	for (auto a : sr->GetInventory()->getItems()) {
-		//if there are more items in the inventory than in my entitie array, add new Entity to the array with the inventory item information
-		if (index >= invObjects.size()) {
+		//if the array of names hasn't have the name of this entity then it means that is new and has to be created again
+		if (!ItemAlreadyCreated(a->getID())) {
 
+			//Add the item name to the array names
+			invID.push_back(a->getID());
 			//Add the entitie to the array
 			invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, a->getID(), EntityFactory::RECTAREA, sr->GetInventory()->GetPosition(index), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
 

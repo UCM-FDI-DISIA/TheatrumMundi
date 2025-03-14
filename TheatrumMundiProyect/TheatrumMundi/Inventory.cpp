@@ -59,7 +59,7 @@ void Inventory::addItem(Hint* item)
 /// <param name="idToRemove"></param> -->Id of the item to is going to been removed
 void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& invEntityList)
 {
-
+	//The name don't have to be removed, if we have 2 entities of the same (imagine a BUG) then the inventory don't create the both of them
 	auto hintIt = hints.begin();
 	auto entityIt = invEntityList.begin();
 	for (auto it = items.begin(); it != items.end(); ++it) {

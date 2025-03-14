@@ -7,6 +7,7 @@ public:
 	ClockPuzzleScene();
 	~ClockPuzzleScene();
 	void init(SceneRoomTemplate* sr) override;
+	void assignItemsToInv(SceneRoomTemplate* sr);
 	void refresh() override;
 	void unload() override;
 	bool isCloackHand(const std::string& itemId);

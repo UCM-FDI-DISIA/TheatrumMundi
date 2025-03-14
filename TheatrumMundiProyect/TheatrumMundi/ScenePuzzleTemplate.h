@@ -11,10 +11,12 @@ class ScenePuzzleTemplate: public SceneTemplate
 	public:
 	inline void setOriginalPos(Vector2D pos) { originalPos = pos; };
 	inline Vector2D getOriginalPos() { return originalPos; };
-	std::vector<ecs::Entity*> invObjects;
+	std::vector<ecs::Entity*> invObjects;//Array of invEntities
+	std::vector<std::string> invID; //Array of inventory object names
 	virtual void Exit();
 	virtual bool Check() { return true; };
 	virtual void Win() {};
+	bool ItemAlreadyCreated(const std::string& id); //Search if the item is in the list
 	ScenePuzzleTemplate();
 	~ScenePuzzleTemplate();
 
