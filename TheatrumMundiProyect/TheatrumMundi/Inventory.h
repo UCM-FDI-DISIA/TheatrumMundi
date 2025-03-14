@@ -27,7 +27,7 @@ public:
 	inline Vector2D setPosition() { return positions[hints.size()]; } //Set the position of the hint
 	void setActive(bool _active) { active = _active; }
 	bool getActive() const { return active; }
-	int getItemNumber(); //Get the hints that are going to be rendered
+	int getItemNumber(); //Returns the number of items to be rendered
 
 	void setFirstItem(int _firstItem) { firstItem = _firstItem; } //Set the first hint to be rendered
 	int getFirstItem() const { return firstItem; } //Get the first hint

@@ -23,6 +23,7 @@ protected:
 		Boa1,
 		Boa2,
 		Hanni,
+		Doku,
 		ResolveCase,
 		ResolveBottons,
 		GoodEnd,

@@ -92,6 +92,12 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "Hanni", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 		};
+	roomEvent[Doku] = [this] {
+		// InventoryLogic
+		GetInventory()->addItem(new Hint("AAA", "veneno aaaa", &sdlutils().images().at("AAA")));
+		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "AAA", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		};
 	roomEvent[ResolveCase] = [this] {
 		//Poner el dialogo correspondiente
 		startDialogue(SalaIntermedia1);
@@ -277,8 +283,6 @@ void Room1Scene::init()
 			});
 
 
-
-
 		auto Timetable = entityFactory->CreateInteractableEntity(entityManager, "Timetable", EntityFactory::RECTAREA, Vector2D(1173, 267), Vector2D(0, 0), 138, 182, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Timetable));
 		
@@ -380,8 +384,8 @@ void Room1Scene::init()
 				entityManager->setActive(downButton, true);
 				entityManager->setActive(upButton, true);
 
-				for (int i = 0; i < GetInventory()->getItemNumber(); ++i) {
-					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the hints
+				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) {
+					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
 				}
 			}
 			else {
@@ -390,7 +394,8 @@ void Room1Scene::init()
 				entityManager->setActive(upButton, false);
 				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(60 + 268 / 3);
 
-				for (int i = 0; i < GetInventory()->getItemNumber(); ++i) {
+				// its okay to use the first item as the first item to show??
+				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) {
 					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Desactivate the hints
 				}
 			}
@@ -402,11 +407,24 @@ void Room1Scene::init()
 
 			AudioManager::Instance().playSound(buttonSound);
 			if (GetInventory()->getFirstItem() > 0) {
-				GetInventory()->setFirstItem(GetInventory()->getFirstItem() - 1);  // Move the inventory up
+				//Desactivate the last visible element
+				int lastVisibleIndex = GetInventory()->getFirstItem() + GetInventory()->getItemNumber() - 1;
+				if (lastVisibleIndex < GetInventory()->hints.size()) {
+					GetInventory()->hints[lastVisibleIndex]->getMngr()->setActive(GetInventory()->hints[lastVisibleIndex], false);
+				}
+
+				//Move the inventory up
+				GetInventory()->setFirstItem(GetInventory()->getFirstItem() - 1);
 				std::cout << "First item: " << GetInventory()->getFirstItem() << std::endl;
-				/*for (int i = 0; i < GetInventory()->hints.size(); ++i) {
-					GetInventory()->hints[i]->getMngr()->getComponent<Transform>(GetInventory()->hints[i])->getPos().setY(GetInventory()->setPosition().getY() + 1); // Move the hints
-				}*/
+
+				//Activate the new first visible element
+				GetInventory()->hints[GetInventory()->getFirstItem()]->getMngr()->setActive(GetInventory()->hints[GetInventory()->getFirstItem()], true);
+
+				//Change the position of the elements
+				for (int i = 0; i < GetInventory()->hints.size(); ++i) {
+					auto transform = GetInventory()->hints[i]->getMngr()->getComponent<Transform>(GetInventory()->hints[i]);
+					transform->getPos().setY(transform->getPos().getY() + 150); //Moves the hints one position up
+				}
 			}
 
 		});
@@ -415,13 +433,32 @@ void Room1Scene::init()
 		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, downButton]() {
 
 			AudioManager::Instance().playSound(buttonSound);
-			GetInventory()->setFirstItem(GetInventory()->getFirstItem() + 1);
-			std::cout << "First item: " << GetInventory()->getFirstItem() << std::endl;
-			for (int i = 0; i < GetInventory()->hints.size(); ++i) {
-				auto transform = GetInventory()->hints[i]->getMngr()->getComponent<Transform>(GetInventory()->hints[i]);
-				transform->getPos().setY(transform->getPos().getY() - 150); // Mueve los hints una posición hacia atrás
+
+			//more elements to show
+			if (GetInventory()->getFirstItem() + GetInventory()->getItemNumber() < GetInventory()->hints.size()) {
+				//Desactivate the first visible element
+				GetInventory()->hints[GetInventory()->getFirstItem()]->getMngr()->setActive(GetInventory()->hints[GetInventory()->getFirstItem()], false);
+
+				//Move the inventory down
+				GetInventory()->setFirstItem(GetInventory()->getFirstItem() + 1);
+				std::cout << "First item: " << GetInventory()->getFirstItem() << std::endl;
+
+				//Activate the new last visible element
+				int newLastVisibleIndex = GetInventory()->getFirstItem() + GetInventory()->getItemNumber() - 1;
+				if (newLastVisibleIndex < GetInventory()->hints.size()) {
+					GetInventory()->hints[newLastVisibleIndex]->getMngr()->setActive(GetInventory()->hints[newLastVisibleIndex], true);
+				}
+
+				//Change the position of the elements
+				for (int i = 0; i < GetInventory()->hints.size(); ++i) {
+					auto transform = GetInventory()->hints[i]->getMngr()->getComponent<Transform>(GetInventory()->hints[i]);
+					transform->getPos().setY(transform->getPos().getY() - 150); // Move the hints one position down
+				}
+
+				/*std::cout << "Cuchara pos: " << GetInventory()->hints[1]->getMngr()->getComponent<Transform>(GetInventory()->hints[1])->getPos().getY() << std::endl;
+				std::cout << "Boa1 pos: " << GetInventory()->hints[2]->getMngr()->getComponent<Transform>(GetInventory()->hints[2])->getPos().getY() << std::endl;
+				std::cout << "Boa2 pos: " << GetInventory()->hints[3]->getMngr()->getComponent<Transform>(GetInventory()->hints[3])->getPos().getY() << std::endl;*/
 			}
-			
 
 		});
 
@@ -453,6 +490,14 @@ void Room1Scene::init()
 		entityManager->getComponent<ClickComponent>(spoon)->connect(ClickComponent::JUST_CLICKED, [this, spoon]() {
 			spoon->getMngr()->setActive(spoon, false);
 			roomEvent[Spoon]();
+			});
+
+		//Test obj 4
+		auto doku = entityFactory->CreateInteractableEntity(entityManager, "AAA", EntityFactory::RECTAREA, Vector2D(275 - 1349 - 6, 340), Vector2D(0, 0), 121 / 3, 105 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(doku));
+		entityManager->getComponent<ClickComponent>(doku)->connect(ClickComponent::JUST_CLICKED, [this, doku]() {
+			doku->getMngr()->setActive(doku, false);
+			roomEvent[Doku]();
 			});
 
 
