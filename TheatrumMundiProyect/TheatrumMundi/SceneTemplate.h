@@ -9,6 +9,7 @@
 
 class Area2DLayerManager;
 class SceneRoomTemplate;
+class Log;
 
 class SceneTemplate
 {
@@ -19,6 +20,7 @@ protected:
 	 EntityFactory* entityFactory;
 	// DialogueManager* dialogueManager;
 	 Area2DLayerManager* areaLayerManager;
+	 Log* sceneLog;
 	/// <summary>
 	/// Control is the scene has been iniciated or not. If(!isStarted) create all entities of the scece (this conditions is OBLIGATORY IN THE SCENE INIT)
 	/// </summary>

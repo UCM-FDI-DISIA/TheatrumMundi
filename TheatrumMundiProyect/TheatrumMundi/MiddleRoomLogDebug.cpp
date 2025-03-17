@@ -99,9 +99,9 @@ void MiddleRoomLogDebug::init()
 		//CREATE LOG
 
 		//logic log
-		Log* logScene = new Log();
+		//Log* logScene = new Log();
 		//Register log in dialogue manager
-		Game::Instance()->getDialogueManager()->setSceneLog(logScene);
+		Game::Instance()->getDialogueManager()->setSceneLog(sceneLog);
 
 		/*
 		auto _log = entityManager->addEntity(ecs::grp::LOG);
@@ -135,7 +135,7 @@ void MiddleRoomLogDebug::init()
 		Image* imTextLog = entityManager->addComponent<Image>(_textLog, &sdlutils().images().at("fondoPruebaLog"));
 		SDL_Color colorText = { 255, 255, 255, 255 };
 		WriteTextComponent<std::list<TextInfo>>* writeLog =
-			entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, logScene->getLogList()); //write text component
+		entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, sceneLog->getLogList()); //write text component
 		entityManager->setActive(_textLog, false);
 
 		ScrollComponentLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));

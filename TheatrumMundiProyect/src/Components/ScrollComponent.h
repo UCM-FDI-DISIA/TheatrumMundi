@@ -30,10 +30,11 @@ public:
 	void update() override;
 	bool isScrolling();
 	void addElementToScroll(Transform* _objectT);
+	int numPhases();
 
 	//AMPLIACION
-	bool finalPhaseCheck() const { return (phase == finalPhase); };
-	bool startPhaseCheck() const { return (phase == startPhase); };
+	bool finalPhaseCheck() const { return (phase == finalPhase); }
+	bool startPhaseCheck() const { return (phase == startPhase); }
 	void addPhase() {
 		finalPhase++;
 	};
@@ -44,6 +45,7 @@ public:
 	void resetPhase() {
 		phase = startPhase;
 	}
+	
 
 private:
 	//Transform *_myTransform;

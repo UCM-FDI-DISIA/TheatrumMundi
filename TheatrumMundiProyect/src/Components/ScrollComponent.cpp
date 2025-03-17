@@ -152,3 +152,8 @@ void ScrollComponent::addElementToScroll(Transform* _objectT)
 	_objectsTransform.push_back(_objectT);
 }
 
+int ScrollComponent::numPhases()
+{
+	return finalPhase + startPhase;
+}
+

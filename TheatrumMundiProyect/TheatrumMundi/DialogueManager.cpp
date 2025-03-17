@@ -147,8 +147,8 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 		else
 		{
 			//Indicate log the dialogue Event has ended
-			_sceneLog->addDialogueLineLog("/", "/");
-			
+			//_sceneLog->addDialogueLineLog("/", "/");
+
 			//call scene method to disable dialogue objects on scene
 			_scene->endDialogue();
 			displayOnProcess = false;

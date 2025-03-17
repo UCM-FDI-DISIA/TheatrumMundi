@@ -3,6 +3,8 @@
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
 #include "../TheatrumMundi/Area2DLayerManager.h"
 #include "Game.h"
+#include "Log.h"
+
 SceneTemplate::SceneTemplate()
 {
 	inv = new Inventory();
@@ -10,6 +12,7 @@ SceneTemplate::SceneTemplate()
 	areaLayerManager = new Area2DLayerManager();
 	entityFactory = new EntityFactory(entityManager,areaLayerManager);
 	isStarted = false;
+	sceneLog = new Log();
 }
 
 void SceneTemplate::update()
@@ -29,6 +32,7 @@ SceneTemplate::~SceneTemplate()
 	delete entityManager;
 	delete areaLayerManager;
 	delete entityFactory;
+	delete sceneLog;
 }
 void SceneTemplate::startDialogue(const eventToRead& _eventToRead)
 {
