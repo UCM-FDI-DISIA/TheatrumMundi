@@ -68,7 +68,7 @@ void Game::init() {
 	sdlutils().hideCursor();
 
 	// Create the manager
-	_Dmngr = new DialogueManager();
+	_Dmngr = new DialogueManager(1); 
 	_mngr = new SceneManager();
 	
 }

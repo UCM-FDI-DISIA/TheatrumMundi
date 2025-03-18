@@ -17,11 +17,13 @@
 #include "ClickableSpriteComponent.h"
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 #include "EventsInfo.h"
+
+#include "../src/components/WriteTextComponent.h"
 MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 {
 	roomEvent.resize(MIDDLEROOMEVENTSIZE);
 	roomEvent[FIRST_DIALOGUE] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 }
 
@@ -72,7 +74,7 @@ void MiddleRoomScene::init()
 		LogComponent* logComp = entityManager->addComponent<LogComponent>(_log); //logComponent
 
 		SDL_Color colorText = { 255, 255, 255, 255 };
-		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog =
+		WriteTextComponent< std::list<std::pair<std::string, std::string>>>* writeLog =
 			entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
 
 		_log->getMngr()->setActive(_log, false); //hide log at the beggining
@@ -80,11 +82,7 @@ void MiddleRoomScene::init()
 		//Register log in dialogue manager
 		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
 
-		//Add writeText to dialogueManager
-		SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
-		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
-
-		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
+		
 
 		roomEvent[LOGENABLE] = [this] {
 			//activate log

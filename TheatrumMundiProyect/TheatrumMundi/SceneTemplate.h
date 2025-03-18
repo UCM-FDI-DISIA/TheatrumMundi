@@ -4,6 +4,7 @@
 #include "Manager.h"
 #include "Inventory.h"
 #include "Hint.h"
+#include <string>
 
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 
@@ -54,7 +55,7 @@ public:
 	/// Active de dialogue entities and pass a eventRoRead to DialogueManager
 	/// </summary>
 	/// <param name="_eventToRead"></param>
-	void startDialogue(const eventToRead& _eventToRead);
+	void startDialogue(const std::string& Character);
 	/// <summary>
 	/// Desactive de dialogue entities in scene
 	/// </summary>

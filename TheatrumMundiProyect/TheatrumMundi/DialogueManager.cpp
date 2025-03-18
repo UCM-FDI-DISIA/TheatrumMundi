@@ -6,8 +6,16 @@
 #include "RectArea2D.h"
 #include "ClickComponent.h"
 #include "TriggerComponent.h"
+#include "../src/components/LogComponent.h"
+#include "../src/components/Transform.h"
+#include "Area2DLayerManager.h"
+#include "../TheatrumMundi/TextInfo.h"
 
-DialogueManager::DialogueManager(int numRooms) : _sceneLog(nullptr), _scene(nullptr), displayOnProcess(false) {
+#include "../src/components/WriteTextComponent.h"
+
+using namespace std;
+
+DialogueManager::DialogueManager(int numRooms) : _sceneLog(nullptr), _scene(nullptr), displayOnProcess(false), characterimg(nullptr) {
     actualroom = 1;
     room = "Sala" + to_string(actualroom);
     dialogueReader = new ReadDialog(numRooms);
@@ -73,6 +81,11 @@ void DialogueManager::Init(EntityFactory* entityFactory, EntityManager* entityMa
     auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
     auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
     entityManager->setActive(_textTest, false);
+
+    //Add writeText to dialogueManager
+    SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
+    WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, _showText);
+
 
 }
 

@@ -17,14 +17,14 @@
 #include "ClickableSpriteComponent.h"
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 #include "EventsInfo.h"
+#include "../src/components/WriteTextComponent.h"
 
-
-Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
+Room1Scene::Room1Scene() : SceneRoomTemplate(), _eventToRead("SalaIntermedia1")
 {
 	roomEvent.resize(event_size);
 	roomEvent[InitialDialogue] = [this]
 		{
-			startDialogue(SalaIntermedia1);
+			startDialogue("SalaIntermedia1");
 
 		};
 	roomEvent[CorpseDialogue] = [this]
@@ -34,7 +34,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 #endif // DEBUG
 
 			_eventToRead = Cadaver;
-			startDialogue(Cadaver);
+			startDialogue("Cadaver");
 		};
 	roomEvent[PipePuzzleSnc] = [this]
 		{
@@ -76,7 +76,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 		};
 	roomEvent[ResolveCase] = [this] {
 		//Poner el dialogo correspondiente
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[GoodEnd] = [this] {
 		// WIP
@@ -89,7 +89,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 	roomEvent[MobileDialogue] = [this] {
 		// WIP
 		_eventToRead = Movil;
-		startDialogue(Movil);
+		startDialogue("Movil");
 		};
 	
 }
@@ -125,7 +125,7 @@ void Room1Scene::init()
 		entityManager->addComponent<Transform>(characterimg, Vector2D(500, 50), Vector2D(0, 0), 1300*0.3, 2000*0.3, 0);
 		auto imCh = entityManager->addComponent<Image>(characterimg, &sdlutils().images().at("Dialog"));
 		
-		Game::Instance()->getDialogueManager()->setCharacterImg(imCh);
+		//Game::Instance()->getDialogueManager()->setCharacterImage(imCh);
 		entityManager->setActive(characterimg, false);
 
 		//Create dialogue text entity. Object that renders dialogue Text on Screen
@@ -176,12 +176,6 @@ void Room1Scene::init()
 
 		//Register log in dialogue manager
 		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
-
-		//Add writeText to dialogueManager
-		SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
-		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest,sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
-
-		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
 
 		roomEvent[LOGENABLE] = [this] {
 			//activate log

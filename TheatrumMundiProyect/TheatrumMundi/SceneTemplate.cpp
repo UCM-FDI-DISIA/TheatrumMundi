@@ -3,6 +3,8 @@
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
 #include "../TheatrumMundi/Area2DLayerManager.h"
 #include "Game.h"
+
+using namespace std;
 SceneTemplate::SceneTemplate()
 {
 	inv = new Inventory();
@@ -30,7 +32,7 @@ SceneTemplate::~SceneTemplate()
 	delete areaLayerManager;
 	delete entityFactory;
 }
-void SceneTemplate::startDialogue(const eventToRead& _eventToRead)
+void SceneTemplate::startDialogue(const string& _eventToRead)
 {
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, true);
 	//entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);

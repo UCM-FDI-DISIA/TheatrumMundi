@@ -1,4 +1,10 @@
 #include "ReadDialog.h"
+#include "TextInfo.h"
+#include "../src/json/json.hpp"  // Incluye json.hpp solo aquí
+
+using json = nlohmann::json;  // Alias para json
+
+using namespace std;
 
 ReadDialog::ReadDialog(int rooms) : numRooms(rooms) {
     ReadJson();

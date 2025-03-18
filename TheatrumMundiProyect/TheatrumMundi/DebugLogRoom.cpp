@@ -45,7 +45,7 @@ void DebugLogRoom::init()
 					//read dialogue only if it has to
 					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
 					{
-						Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermedia1);
+						Game::Instance()->getDialogueManager()->ReadDialogue("SalaIntermedia1");
 					}
 					else
 					{
@@ -82,7 +82,7 @@ void DebugLogRoom::init()
 		SDL_Color colorDialog = { 255, 0, 0, 255 }; // Color = red
 		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
 
-		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
+		//Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
 			
 			
 		//BUTTONS
@@ -134,7 +134,7 @@ void DebugLogRoom::init()
 		
 
 		//In this scene, in it's init, dialogue must start displaying on screen.
-		Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermedia1);
+		Game::Instance()->getDialogueManager()->ReadDialogue("SalaIntermedia1");
 		
 		
 	}
