@@ -143,12 +143,12 @@ void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
 			}
 
 			mRoom[room][event].pop_front(); // Delete read textLine
+			
+			//Indicate log the dialogue Event has ended
+			if(mRoom[room][event].empty()) _sceneLog->addDialogueLineLog("/", "/");
 		}
 		else
 		{
-			//Indicate log the dialogue Event has ended
-			_sceneLog->addDialogueLineLog("/", "/");
-
 			//call scene method to disable dialogue objects on scene
 			_scene->endDialogue();
 			displayOnProcess = false;
