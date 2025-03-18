@@ -631,22 +631,11 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		//Register scene in dialogue manager
 		Game::Instance()->getDialogueManager()->setScene(this);
 
-
-		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
-		auto _screenDetect = entityManager->addEntity(grp::DIALOGUE);
-		entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
-		entityManager->addComponent<Image>(_screenDetect, &sdlutils().images().at("fondoPruebaLog"), 100); //background log
-		entityManager->addComponent<RectArea2D>(_screenDetect, areaLayerManager);
-		entityManager->addComponent<TriggerComponent>(_screenDetect);
-		entityManager->setActive(_screenDetect, false);
-
-
-
 		//Create dialogue text entity. Object that renders dialogue Text on Screen
 		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
-		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
+		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
 		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
-		entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
+		RectArea2D* dialogInteractionArea = entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
 
 		entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _textbackground]()
 			{
@@ -714,7 +703,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			entityManager->addComponent<Image>(_pipesEnt[i], &sdlutils().images().at("exit"));
 
 			// add area of visualization of the image
-			entityManager->addComponent<RectArea2D>(_pipesEnt[i]);
+			entityManager->addComponent<RectArea2D>(_pipesEnt[i], areaLayerManager);
 
 			Image* imageComponent = _pipesEnt[i]->getMngr()->getComponent<Image>(_pipesEnt[i]);
 
@@ -769,7 +758,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			}
 			
 			// add area of visualization of the image
-			entityManager->addComponent<RectArea2D>(_modulesEnt[i]);
+			entityManager->addComponent<RectArea2D>(_modulesEnt[i], areaLayerManager);
 
 			//add click component
 			ClickComponent* clk = entityManager->addComponent<ClickComponent>(_modulesEnt[i]);
@@ -855,7 +844,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->addComponent<Image>(cubeEntity, &sdlutils().images().at("cube"));
 
 		// add area of visualization of the image
-		entityManager->addComponent<RectArea2D>(cubeEntity);
+		entityManager->addComponent<RectArea2D>(cubeEntity, areaLayerManager);
 		
 		//create exit botton
 		auto exitEntity = entityManager->addEntity();
@@ -868,7 +857,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->addComponent<Image>(exitEntity, &sdlutils().images().at("exit"));
 
 		// add area of visualization of the image
-		entityManager->addComponent<RectArea2D>(exitEntity);
+		entityManager->addComponent<RectArea2D>(exitEntity, areaLayerManager);
 
 		//add click component
 		ClickComponent* clk = entityManager->addComponent<ClickComponent>(exitEntity);
@@ -876,7 +865,8 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			Game::Instance()->getSceneManager()->popScene();
 			});
 
-
+		// Put the dialog interaction area in front of the other interactables
+		areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
 	}
 }
 

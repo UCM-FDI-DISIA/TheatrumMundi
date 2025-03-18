@@ -76,12 +76,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
 					{
 						Game::Instance()->getDialogueManager()->ReadDialogue(Puzzle2);
-						if (!Game::Instance()->getDialogueManager()->getDisplayOnProcess())
-							_textbackground->getMngr()->setActive(_textbackground, false);
 					}
 					else
 					{
-						_textbackground->getMngr()->setActive(_textbackground, false);
+					//	_textbackground->getMngr()->setActive(_textbackground, false);
 					}
 				}
 			});
@@ -302,8 +300,6 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			if (Check()) Reward->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, true);
 			});
 
-		// Put the dialog interaction area in front of the other interactables
-		areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
 
 		//BackButton
 		auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
@@ -311,6 +307,9 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
 
 		entityManager->addComponent<RectArea2D>(_backButton);
+
+		// Put the dialog interaction area in front of the other interactables
+		areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);

@@ -36,22 +36,22 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		//Register scene in dialogue manager
 		Game::Instance()->getDialogueManager()->setScene(this);
 
-		
-		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
-		auto _screenDetect = entityManager->addEntity(grp::DIALOGUE);
-		entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
-		entityManager->addComponent<Image>(_screenDetect, &sdlutils().images().at("fondoPruebaLog"), 100); //background log
-		entityManager->addComponent<RectArea2D>(_screenDetect, areaLayerManager);
-		entityManager->addComponent<TriggerComponent>(_screenDetect);
-		entityManager->setActive(_screenDetect, false);
 
-		
+		//All Screen: Filter that covers the room during dialog
+		auto _screenFilter = entityManager->addEntity(grp::DIALOGUE);
+		entityManager->addComponent<Transform>(_screenFilter, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
+		entityManager->addComponent<Image>(_screenFilter, &sdlutils().images().at("fondoPruebaLog"), 100); //background log
+		entityManager->addComponent<RectArea2D>(_screenFilter, areaLayerManager);
+		entityManager->addComponent<TriggerComponent>(_screenFilter);
+		entityManager->setActive(_screenFilter, false);
+
+
 
 		//Create dialogue text entity. Object that renders dialogue Text on Screen
 		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
 		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
 		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
-		entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
+		RectArea2D* dialogInteractionArea = entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
 
 		entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _textbackground]()
 			{
@@ -103,14 +103,14 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		auto _clockShapeTransform = entityManager->addComponent<Transform>(_clockShape, Vector2D(600, 300), Vector2D(0, 0), 200, 200, 0);
 		entityManager->addComponent<Image>(_clockShape, &sdlutils().images().at("clockShape"));
 
-		entityManager->addComponent<RectArea2D>(_clockShape);
+		entityManager->addComponent<RectArea2D>(_clockShape, areaLayerManager);
 
 		//create the clock hands : minute
 		auto _clockMin = entityManager->addEntity();
 		auto _clockMinTransform = entityManager->addComponent<Transform>(_clockMin, Vector2D(680, 360), Vector2D(0, 0), 20, 70, 0);
 		entityManager->addComponent<Image>(_clockMin, &sdlutils().images().at("clockMinArrow"));
 
-		entityManager->addComponent<RectArea2D>(_clockMin);
+		entityManager->addComponent<RectArea2D>(_clockMin, areaLayerManager);
 
 
 		//create the clock hands : hour
@@ -119,7 +119,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		//auto _clockHorTransform = entityManager->addComponent<Transform>(_clockHor, Vector2D(200, 350), Vector2D(0, 0), 20, 60, 0);
 		entityManager->addComponent<Image>(_clockHor, &sdlutils().images().at("clockHorArrow"));
 
-		entityManager->addComponent<RectArea2D>(_clockHor);
+		entityManager->addComponent<RectArea2D>(_clockHor, areaLayerManager);
 
 
 		//create the buttons: min
@@ -128,7 +128,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		entityManager->addComponent<Image>(_buttonMin, &sdlutils().images().at("clockMinButton"));
 
-		entityManager->addComponent<RectArea2D>(_buttonMin);
+		entityManager->addComponent<RectArea2D>(_buttonMin, areaLayerManager);
 
 		_actualMinute;
 
@@ -153,7 +153,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		entityManager->addComponent<Image>(_buttonHor, &sdlutils().images().at("clockHorButton"));
 
-		entityManager->addComponent<RectArea2D>(_buttonHor);
+		entityManager->addComponent<RectArea2D>(_buttonHor, areaLayerManager);
 
 
 		ClickComponent* clockHorClick = entityManager->addComponent<ClickComponent>(_buttonHor);
@@ -176,7 +176,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		entityManager->addComponent<Image>(_buttonCheck, &sdlutils().images().at("clockCheckButton"));
 
-		entityManager->addComponent<RectArea2D>(_buttonCheck);
+		entityManager->addComponent<RectArea2D>(_buttonCheck, areaLayerManager);
 
 
 		ClickComponent* clockCheckClick = entityManager->addComponent<ClickComponent>(_buttonCheck);
@@ -204,7 +204,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		entityManager->addComponent<Image>(_buttonResetPuzzle, &sdlutils().images().at("clockHorButton"));
 
-		entityManager->addComponent<RectArea2D>(_buttonResetPuzzle);
+		entityManager->addComponent<RectArea2D>(_buttonResetPuzzle, areaLayerManager);
 
 
 		ClickComponent* clockResetClick = entityManager->addComponent<ClickComponent>(_buttonResetPuzzle);
@@ -220,13 +220,17 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 				_actualMinute = 0;
 			});
 
+		
 
 		//BackButton
 		auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
 		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
 
-		entityManager->addComponent<RectArea2D>(_backButton);
+		entityManager->addComponent<RectArea2D>(_backButton, areaLayerManager);
+
+		// Put the dialog interaction area in front of the other interactables
+		areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
