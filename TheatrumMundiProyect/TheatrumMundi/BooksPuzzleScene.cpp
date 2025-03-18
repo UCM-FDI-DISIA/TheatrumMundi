@@ -67,7 +67,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		auto _textbackground = entityManager->addEntity(ecs::grp::DIALOGUE);
 		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
 		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
-		entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
+		RectArea2D* dialogInteractionArea = entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
 
 		entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _textbackground]()
 			{
@@ -79,7 +79,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 					}
 					else
 					{
-						_textbackground->getMngr()->setActive(_textbackground, false);
+					//	_textbackground->getMngr()->setActive(_textbackground, false);
 					}
 				}
 			});
@@ -301,13 +301,15 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 
-
 		//BackButton
 		auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
 		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
 
 		entityManager->addComponent<RectArea2D>(_backButton);
+
+		// Put the dialog interaction area in front of the other interactables
+		areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);

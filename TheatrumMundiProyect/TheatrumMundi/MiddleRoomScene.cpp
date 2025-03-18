@@ -120,10 +120,6 @@ void MiddleRoomScene::init()
 					{
 						Game::Instance()->getDialogueManager()->ReadDialogue(_eventToRead);
 					}
-					else
-					{
-						_textbackground->getMngr()->setActive(_textbackground, false);
-					}
 				}
 			});
 		entityManager->addComponent<TriggerComponent>(_textbackground);
