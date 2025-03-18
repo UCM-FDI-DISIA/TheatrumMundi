@@ -1,6 +1,6 @@
 #pragma once
 #include "SceneTemplate.h"
-
+#include <list>
 class ScenePuzzleTemplate: public SceneTemplate
 {
 	protected:
@@ -12,7 +12,7 @@ class ScenePuzzleTemplate: public SceneTemplate
 	inline void setOriginalPos(Vector2D pos) { originalPos = pos; };
 	inline Vector2D getOriginalPos() { return originalPos; };
 	std::vector<ecs::Entity*> invObjects;//Array of invEntities
-	std::vector<std::string> invID; //Array of inventory object names
+	std::list<std::string> invID; //Array of inventory object names
 	virtual void Exit();
 	virtual bool Check() { return true; };
 	virtual void Win() {};

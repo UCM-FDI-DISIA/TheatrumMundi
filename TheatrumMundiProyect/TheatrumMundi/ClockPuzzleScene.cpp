@@ -295,7 +295,6 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 	//IMPORTANT this need to be out of the isstarted!!!
 	//Add inventory items to the entitymanager of the scene
 
-	int index = 0;
 	for (auto a : sr->GetInventory()->getItems()) {
 		//if the array of names hasn't have the name of this entity then it means that is new and has to be created again
 		if (!ItemAlreadyCreated(a->getID())) {
@@ -303,20 +302,22 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			//Add the item name to the array names
 			invID.push_back(a->getID());
 			//Add the entitie to the array
-			invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, a->getID(), EntityFactory::RECTAREA, sr->GetInventory()->GetPosition(index), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
+			invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, a->getID(), EntityFactory::RECTAREA, sr->GetInventory()->GetPosition(invID.size() - 1), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
 
+			auto it = invObjects.back();
+			
 
 			//Assign lamda functions
 			
 			//if you click in one item, assign the original position to the position of the object clicked
-			invObjects.back()->getMngr()->getComponent<ClickComponent>(invObjects.back())->connect(ClickComponent::JUST_CLICKED, [this, sr]() {
-				setOriginalPos(invObjects.back()->getMngr()->getComponent<Transform>(invObjects.back())->getPos());
+			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this, sr,it]() {
+				setOriginalPos(it->getMngr()->getComponent<Transform>(it)->getPos());
 				});
 
 			//if you drop the item, compares if it was drop in or out tge cloack
-			invObjects.back()->getMngr()->getComponent<ClickComponent>(invObjects.back())->connect(ClickComponent::JUST_RELEASED, [this, sr, a]() {
+			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this, sr, a,it]() {
 				//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
-				if (!placeHand) invObjects.back()->getMngr()->getComponent<Transform>(invObjects.back())->getPos().set(getOriginalPos());
+				if (!placeHand) it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
 				//in other case remove the item from this inventory and the inventory of Room1
 				else {
 					//Add the hand to the cloack
@@ -324,14 +325,14 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 						
 						//remove the object from the inventory
 						sr->GetInventory()->removeItem(a->getID(),invObjects);
+
 					}
-					else invObjects.back()->getMngr()->getComponent<Transform>(invObjects.back())->getPos().set(getOriginalPos());
+					else it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
 				}
 			});
 
 			//Set the active item to false
-			invObjects[index]->getMngr()->setActive(invObjects[index], false);
-			++index;
+			it->getMngr()->setActive(it, false);
 		}
 	}
 }
