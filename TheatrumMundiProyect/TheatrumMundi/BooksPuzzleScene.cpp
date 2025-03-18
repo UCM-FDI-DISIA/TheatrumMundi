@@ -331,9 +331,19 @@ void BooksPuzzleScene::unload()
 bool BooksPuzzleScene::Check()
 { //HERE WE PUT THE CORRECT COMBINATION : 6 - 4 - 1
 	//CORRECT ACTUAL COMBINATION: 1 - 6 - 4
-	return	myComb[0] == comb[1] && 
-			myComb[1] == comb[6] && 
-			myComb[2] == comb[4];
+
+	if (myComb[0] == comb[1] &&
+		myComb[1] == comb[6] &&
+		myComb[2] == comb[4])
+	{
+		solved = true;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
 }
 
 void BooksPuzzleScene::Win()

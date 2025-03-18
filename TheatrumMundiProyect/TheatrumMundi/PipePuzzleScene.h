@@ -43,7 +43,7 @@ private:
 	std::vector<waterPath>_waterPath; //vector that contains the amount of paths 
 	std::vector<Pipe*> _waterPipes; //vector that contains the amount of water each pipe has
 	std::vector<Module*> _modules;//modules that change the direction of the water flow
-	bool solved;
+	//bool solved;
 	std::vector<ecs::Entity*>_modulesEnt;
 	std::vector<ecs::Entity*>_pipesEnt;
 	std::vector<ecs::Entity*>_pathEnt;
