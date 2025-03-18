@@ -46,7 +46,7 @@ template <>
 void WriteTextComponent<std::list<TextInfo>>::render()
 {
 	// Definir el tamaño total de la textura final
-	int totalWidth = 800; // Ajusta según sea necesario
+	int totalWidth = 1000; // Ajusta según sea necesario
 	int totalHeight = 0;  // Se calculará dinámicamente
 
 	// Calcular la altura total sumando las alturas de cada elemento
@@ -84,7 +84,7 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 		{
 			// Línea divisoria
 			Texture divideLine(sdlutils().renderer(), "...--.-.-.-.-.--.-.-.-.-.-..-.--.-.-.-.---......-----...-----.....----....---...---..-.-.-.-.-.-.-.-.-.-.", _myFont, _color);
-			SDL_Rect dstVRect = { 10, y, divideLine.width(), divideLine.height() };
+			SDL_Rect dstVRect = { 350, y, divideLine.width(), divideLine.height() };
 			divideLine.render(dstVRect, 0.0);
 			y += 100;
 		}
@@ -92,12 +92,12 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 		{
 			// Autor
 			Texture authorTexture(sdlutils().renderer(), it.Character, _myFont, _color);
-			SDL_Rect dstAuthorRect = { 500, y, authorTexture.width(), authorTexture.height() };
+			SDL_Rect dstAuthorRect = { 400, y, authorTexture.width(), authorTexture.height() };
 			authorTexture.render(dstAuthorRect, 0.0);
 
 			// Texto
 			Texture textTexture(sdlutils().renderer(), it.Text, _myFont, _color);
-			SDL_Rect dstRect = { 500, y + 50, textTexture.width(), textTexture.height() };
+			SDL_Rect dstRect = { 400, y + 50, textTexture.width(), textTexture.height() };
 			textTexture.render(dstRect, 0.0);
 
 			y += 150;
@@ -164,6 +164,7 @@ void WriteTextComponent<T>::initComponent()
 template <>
 void WriteTextComponent<TextInfo>::render()
 {
+	if (_currentText.empty()) return;
 
 	Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
 	SDL_Rect nameRect = { 350, 465,nameText->width(),nameText->height()};
