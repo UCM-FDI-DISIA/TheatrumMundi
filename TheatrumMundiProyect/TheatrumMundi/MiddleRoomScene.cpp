@@ -94,10 +94,9 @@ void MiddleRoomScene::init()
 
 
 
-		//Create log
 		//CREATE LOG
 
-		//logic log
+		//Log is always created on each middle room scene
 		sceneLog = new Log();
 		//Register log in dialogue manager
 		Game::Instance()->getDialogueManager()->setSceneLog(sceneLog);
@@ -105,8 +104,8 @@ void MiddleRoomScene::init()
 		//background log
 		auto _backgroundLog = entityManager->addEntity(ecs::grp::LOG);
 		entityManager->addComponent<Transform>(_backgroundLog, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
-		auto imBack = entityManager->addComponent<Image>(_backgroundLog, &sdlutils().images().at("fondoPruebaLog"), 200); //background log
-		imBack->setAlpha(128);
+		auto imBack = entityManager->addComponent<Image>(_backgroundLog, &sdlutils().images().at("fondoPruebaLog")); //background log
+		//imBack->setAlpha(128);
 		entityManager->setActive(_backgroundLog, false);
 
 		//title log
@@ -132,12 +131,10 @@ void MiddleRoomScene::init()
 		entityManager->setActive(_textLog, false);
 
 		ScrollComponentLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
-		//upScrollLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
 
 		//log buttons
 		auto buttonOpenLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(1200, 748 - (268 / 3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		auto buttonCloseLog = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 500), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
-
 
 
 
