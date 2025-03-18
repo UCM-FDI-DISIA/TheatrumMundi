@@ -12,7 +12,7 @@ SceneTemplate::SceneTemplate()
 	areaLayerManager = new Area2DLayerManager();
 	entityFactory = new EntityFactory(entityManager,areaLayerManager);
 	isStarted = false;
-	sceneLog = new Log();
+	//sceneLog = new Log();
 }
 
 void SceneTemplate::update()

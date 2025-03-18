@@ -119,7 +119,7 @@ void Room1Scene::init()
 
 		//Register scene in dialogue manager
 		Game::Instance()->getDialogueManager()->setScene(this);
-		Game::Instance()->getDialogueManager()->setSceneLog(sceneLog);
+		//Game::Instance()->getDialogueManager()->setSceneLog(sceneLog);
 		//CharacterImage
 		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
 		auto characterimg = entityManager->addEntity(grp::DIALOGUE);
@@ -155,6 +155,22 @@ void Room1Scene::init()
 		entityManager->addComponent<TriggerComponent>(_textbackground);
 		entityManager->setActive(_textbackground, false);
 
+		auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
+		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
+		entityManager->setActive(_textTest, false);
+
+		//Add writeText to dialogueManager
+		SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
+		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
+
+		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
+
+
+		//CREATE LOG
+
+		//logic log
+		sceneLog = Game::Instance()->getDialogueManager()->getSceneLog();
+		//Register log in dialogue manager
 
 		//background log
 		auto _backgroundLog = entityManager->addEntity(ecs::grp::LOG);
@@ -185,32 +201,91 @@ void Room1Scene::init()
 		entityManager->setActive(_textLog, false);
 
 		ScrollComponentLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
-		if (sceneLog->getLogList()->size() > (ScrollComponentLog->numPhases() * 5)) ScrollComponentLog->addPhase();
+		//upScrollLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
 
 		//log buttons
 		auto buttonOpenLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(1200, 748 - (268 / 3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-		auto buttonCloseLog = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 500), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
+		auto buttonCloseLog = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(1200, 500), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
 
-		roomEvent[LOGENABLE] = [this, _backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog, scrollingLog, upScrollingLog] {
+
+		roomEvent[LOGENABLE] = [this, _backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog, scrollingLog, upScrollingLog, _textLog] {
 			//activate log
 			entityManager->setActive(_backgroundLog, true); //background
 			entityManager->setActive(_titleLog, true); //title
+			entityManager->setActive(_textLog, true); //text
 			entityManager->setActive(buttonCloseLog, true); //close button
 			entityManager->setActive(buttonOpenLog, false); //open button
 			entityManager->setActive(scrollingLog, true);
 			entityManager->setActive(upScrollingLog, true);
+			//text log
+			//scroll buttons
+
+			/*_log->getMngr()->setActive(_log, true);
+			logActive = true;
+
+			//activate close log button
+			_closeLogButton->getMngr()->setActive(_closeLogButton, true);
+
+			//disable open log button
+			_openLogButton->getMngr()->setActive(_openLogButton, false);
+			*/
 			};
-		roomEvent[LOGDESABLE] = [this, _backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog, scrollingLog, upScrollingLog] {
+		roomEvent[LOGDESABLE] = [this, _backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog, scrollingLog, upScrollingLog, _textLog] {
 			//disable log
 			entityManager->setActive(_backgroundLog, false); //background
 			entityManager->setActive(_titleLog, false); //title
+			entityManager->setActive(_textLog, false); //text
 			entityManager->setActive(buttonCloseLog, false); //close button
 			entityManager->setActive(buttonOpenLog, true); //open button
 			entityManager->setActive(scrollingLog, false);
 			entityManager->setActive(upScrollingLog, false);
 			//text log
 			//scroll buttons
+
+			//activate open log button
+			//_openLogButton->getMngr()->setActive(_openLogButton, true);
+			//disable close log button
+			//_closeLogButton->getMngr()->setActive(_closeLogButton, false);
 			};
+
+		ClickComponent* buttonOpenLogClick = entityManager->getComponent<ClickComponent>(buttonOpenLog);
+		buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, scrollingLog, _titleLog, buttonCloseLog, buttonOpenLog]() {
+			AudioManager::Instance().playSound(buttonSound);
+			//open log
+			//roomEvent[LOGENABLE];
+
+			//activate log
+			entityManager->setActiveGroup(ecs::grp::LOG, true);
+			entityManager->setActive(buttonOpenLog, false); //open button
+			});
+		entityManager->setActive(buttonOpenLog, true);
+
+		ClickComponent* buttonCloseLogClick = entityManager->getComponent<ClickComponent>(buttonCloseLog);
+		buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, _backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog]() {
+			AudioManager::Instance().playSound(buttonSound);
+			//close log
+			//roomEvent[LOGDESABLE];
+
+			//disable log
+			entityManager->setActiveGroup(ecs::grp::LOG, false);
+			entityManager->setActive(buttonOpenLog, true); //open button
+			});
+		entityManager->setActive(buttonCloseLog, false);
+
+		auto downScrollLogButton = entityManager->getComponent<ClickComponent>(scrollingLog);
+		downScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
+			std::cout << "A" << std::endl;
+			if (!ScrollComponentLog->isScrolling()) {
+				ScrollComponentLog->Scroll(ScrollComponent::DOWN);
+			}
+			});
+
+		auto upScrollLogButton = entityManager->getComponent<ClickComponent>(upScrollingLog);
+		upScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
+			if (!ScrollComponentLog->isScrolling()) {
+				ScrollComponentLog->Scroll(ScrollComponent::UP);
+			}
+			});
 
 
 		auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width())/12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -368,6 +443,7 @@ void Room1Scene::init()
 
 		});
 
+		/*
 		ClickComponent* buttonOpenLogClick = entityManager->getComponent<ClickComponent>(buttonOpenLog);
 		buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, scrollingLog, _titleLog, buttonCloseLog, buttonOpenLog]() {
 			AudioManager::Instance().playSound(buttonSound);
@@ -404,7 +480,7 @@ void Room1Scene::init()
 			if (!ScrollComponentLog->isScrolling()) {
 				ScrollComponentLog->Scroll(ScrollComponent::UP);
 			}
-			});
+			});*/
 
 		auto buttonpos = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3) - 20), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->getComponent<ClickComponent>(buttonpos)->connect(ClickComponent::JUST_CLICKED, [this]() { roomEvent[GoodEnd]();});

@@ -53,6 +53,7 @@ public:
 		characterimg = img;
 	}
 	void setSceneLog(Log* sceneLog);
+	Log* getSceneLog();
 	void setScene(SceneTemplate* scene);
 	void setWriteTextComp(WriteTextComponent<TextInfo>* writeTextComp)
 	{
