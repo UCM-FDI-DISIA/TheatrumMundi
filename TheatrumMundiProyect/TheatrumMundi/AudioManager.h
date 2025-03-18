@@ -44,6 +44,8 @@ public:
 
     void setLooping(Sound source, bool loop);
 
+    void setSpeed(Sound source, ALfloat speed);
+
 private:
 
     AudioManager();

@@ -189,3 +189,8 @@ void AudioManager::setLooping(Sound sound,bool loop)
 {
     alSourcei(sound.getSource(), AL_LOOPING, loop ? AL_TRUE : AL_FALSE);
 }
+
+//Set the track speed
+void AudioManager::setSpeed(Sound sound, ALfloat speed) {
+    alSourcef(sound.getSource(), AL_VELOCITY, speed);
+}
