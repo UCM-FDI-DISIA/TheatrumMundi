@@ -45,7 +45,7 @@ bool ClickComponent::areaIsClicked(std::pair<Sint32, Sint32> mousePos)
 {
 	Area2D* area = _ent->getMngr()->getComponent<Area2D>(_ent);
 	if (area == nullptr) return false;
-
+	
 	return area->containsPoint(Vector2D(mousePos.first, mousePos.second))
 		&& !(_hasLayerOpposition && area->pointIsOverlayered(Vector2D(mousePos.first, mousePos.second)))
 		&& _ent->getMngr()->isActive(_ent);

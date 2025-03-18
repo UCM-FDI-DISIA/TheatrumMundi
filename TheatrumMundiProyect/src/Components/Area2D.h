@@ -42,6 +42,10 @@ public:
 		return _localPosition;
 	}
 
+	Area2DLayerManager::iterator getLayerPos() {
+		return _areaLayerPos;
+	}
+
 protected:
 
 	Vector2D _localPosition;

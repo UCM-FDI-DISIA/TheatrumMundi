@@ -45,7 +45,7 @@ ecs::entity_t EntityFactory::CreateInteractableEntity(ecs::EntityManager* _entit
 	_entityManager->addComponent<Transform>(newElement, _pos, _dir, _width, _height, _rot);
 	_entityManager->addComponent<Image>(newElement, &sdlutils().images().at(_idImage));
 	if (_typeRect == RECTAREA)_entityManager->addComponent<RectArea2D>(newElement, _myLayer);
-	else if (_typeRect == CIRCLEAREA) _entityManager->addComponent<CircleArea2D>(newElement)->setLocalPos(Vector2D(_width/2,_height/2));
+	else if (_typeRect == CIRCLEAREA) _entityManager->addComponent<CircleArea2D>(newElement, _myLayer)->setLocalPos(Vector2D(_width/2,_height/2));
 	_entityManager->addComponent<ClickComponent>(newElement);
 	_entityManager->addComponent<TriggerComponent>(newElement);
 	_entityManager->addComponent<ClickableSpriteComponent>(newElement,_idImage);
@@ -63,8 +63,8 @@ ecs::entity_t EntityFactory::CreateInteractableEntityScroll(ecs::EntityManager* 
 	ecs::entity_t newElement = _entityManager->addEntity(_gId);
 	_entityManager->addComponent<Transform>(newElement, _pos, _dir, _width, _height, _rot);
 	_entityManager->addComponent<Image>(newElement, &sdlutils().images().at(_idImage));
-	if (_typeRect == RECTAREA)_entityManager->addComponent<RectArea2D>(newElement);
-	else if (_typeRect == CIRCLEAREA) _entityManager->addComponent<CircleArea2D>(newElement)->setLocalPos(Vector2D(_width/2,_height/2));
+	if (_typeRect == RECTAREA)_entityManager->addComponent<RectArea2D>(newElement, _myLayer);
+	else if (_typeRect == CIRCLEAREA) _entityManager->addComponent<CircleArea2D>(newElement, _myLayer)->setLocalPos(Vector2D(_width/2,_height/2));
 	if (_isInverted == SCROLLNORMAL) _entityManager->addComponent<ScrollComponent>(newElement, _velocityScroll, _time, ScrollComponent::NORMAL, _numPhasesScrolling);
 	else if (_isInverted == SCROLLINVERSE) _entityManager->addComponent<ScrollComponent>(newElement, _velocityScroll, _time, ScrollComponent::INVERSE, _numPhasesScrolling);
 	_entityManager->addComponent<ClickComponent>(newElement);

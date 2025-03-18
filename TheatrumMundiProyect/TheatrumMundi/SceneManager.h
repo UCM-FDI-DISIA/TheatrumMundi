@@ -8,6 +8,7 @@ class SceneRoomTemplate;
 using namespace ecs;
 enum SceneName {
 	INITIAL_MENU = 0,
+	MIDDLE_ROOM,
 	ROOM_1,
 	PIPE_PUZZLE,
 	BOOKS_PUZZLE,
