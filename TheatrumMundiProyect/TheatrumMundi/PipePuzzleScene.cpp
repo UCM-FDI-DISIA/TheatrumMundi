@@ -631,6 +631,14 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		//Register scene in dialogue manager
 		Game::Instance()->getDialogueManager()->setScene(this);
 
+		//All Screen: Filter that covers the room during dialog
+		auto _screenFilter = entityManager->addEntity(grp::DIALOGUE);
+		entityManager->addComponent<Transform>(_screenFilter, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
+		entityManager->addComponent<Image>(_screenFilter, &sdlutils().images().at("fondoPruebaLog"), 100); //background log
+		entityManager->addComponent<RectArea2D>(_screenFilter, areaLayerManager);
+		entityManager->addComponent<TriggerComponent>(_screenFilter);
+		entityManager->setActive(_screenFilter, false);
+
 		//Create dialogue text entity. Object that renders dialogue Text on Screen
 		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
 		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
