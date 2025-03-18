@@ -1,5 +1,11 @@
 #include "DialogueManager.h"
 #include"../src/sdlutils/SDLUtils.h"
+#include "../src/Components/Image.h"
+#include "../src/ecs/Manager.h"
+#include "EntityFactory.h"
+#include "RectArea2D.h"
+#include "ClickComponent.h"
+#include "TriggerComponent.h"
 
 DialogueManager::DialogueManager(int numRooms) : _sceneLog(nullptr), _scene(nullptr), displayOnProcess(false) {
     actualroom = 1;
@@ -11,6 +17,54 @@ DialogueManager::DialogueManager(int numRooms) : _sceneLog(nullptr), _scene(null
 DialogueManager::~DialogueManager() {
     delete _showText;
     delete dialogueReader;
+}
+
+void DialogueManager::Init(EntityFactory* entityFactory, EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, string _eventToRead)
+{
+
+    //If isMiddleRoom
+    if (isMiddleRoom) {
+        //Character (Image)
+        auto character = entityManager->addEntity(grp::DIALOGUE);
+        entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
+        characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
+
+        entityManager->setActive(character, false);
+
+        //Text Background
+        auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
+        entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
+        entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
+        entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
+
+        //Pass dialog if clicked
+        entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _textbackground, _eventToRead]()
+            {
+                if (!(_sceneLog->GetLogActive())) {
+                    //read dialogue only if it has to
+                    if (getDisplayOnProcess())
+                    {
+                        ReadDialogue(_eventToRead);
+                    }
+                    else
+                    {
+                        _textbackground->getMngr()->setActive(_textbackground, false);
+                    }
+                }
+            });
+        entityManager->addComponent<TriggerComponent>(_textbackground);
+        entityManager->setActive(_textbackground, false);
+
+
+        auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
+        auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
+        entityManager->setActive(_textTest, false);
+    }
+
+    else {
+
+    }
+
 }
 
 void DialogueManager::ReadDialogue(const string& event) {

@@ -6,6 +6,9 @@
 #include "SceneTemplate.h"
 #include "../src/Components/Image.h"
 
+
+class EntityFactory;
+
 class DialogueManager {
 private:
     ReadDialog* dialogueReader;
@@ -21,6 +24,7 @@ public:
     DialogueManager(int numRooms);
     ~DialogueManager();
 
+    void Init(EntityFactory* entityFactory, EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, string _eventToRead);
     void ReadDialogue(const string& event);
     void setSceneLog(LogComponent* sceneLog);
     void setScene(SceneTemplate* scene);
