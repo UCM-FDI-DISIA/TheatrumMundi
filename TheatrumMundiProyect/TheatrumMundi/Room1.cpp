@@ -517,17 +517,7 @@ void Room1Scene::init()
 			entityManager->getComponent<ClickComponent>(Corspe)->setActive(false);
 			entityManager->getComponent<ClickComponent>(Tubes)->setActive(false);
 			entityManager->getComponent<ClickComponent>(Timetable)->setActive(false);
-			
-			entityManager->getComponent<Image>(buttonOpenLog)->setAlpha(100);
-			entityManager->getComponent<Image>(buttonInventory)->setAlpha(100);
-			entityManager->getComponent<Image>(buttonPause)->setAlpha(100);
-			entityManager->getComponent<Image>(Shelf)->setAlpha(100);
-			entityManager->getComponent<Image>(TeaCup)->setAlpha(100);
-			entityManager->getComponent<Image>(Clock)->setAlpha(100);
-			entityManager->getComponent<Image>(spoon)->setAlpha(100);
-			entityManager->getComponent<Image>(Corspe)->setAlpha(100);
-			entityManager->getComponent<Image>(Tubes)->setAlpha(100);
-			entityManager->getComponent<Image>(Timetable)->setAlpha(100);
+
 			});
 
 		ChangeRoomScroll->connect(ScrollComponent::ENDEDSCROLLING, [this, buttonOpenLog, buttonInventory, buttonPause, Shelf, TeaCup, Clock, spoon, Corspe, Tubes, Timetable, _calendearZoom]() {
@@ -542,17 +532,13 @@ void Room1Scene::init()
 			entityManager->getComponent<ClickComponent>(Corspe)->setActive(true);
 			entityManager->getComponent<ClickComponent>(Tubes)->setActive(true);
 			entityManager->getComponent<ClickComponent>(Timetable)->setActive(true);
-			
-			entityManager->getComponent<Image>(buttonOpenLog)->setAlpha(255);
-			entityManager->getComponent<Image>(buttonInventory)->setAlpha(255);
-			entityManager->getComponent<Image>(buttonPause)->setAlpha(255);
-			entityManager->getComponent<Image>(Shelf)->setAlpha(255);
-			entityManager->getComponent<Image>(TeaCup)->setAlpha(255);
-			entityManager->getComponent<Image>(Clock)->setAlpha(255);
-			entityManager->getComponent<Image>(spoon)->setAlpha(255);
-			entityManager->getComponent<Image>(Corspe)->setAlpha(255);
-			entityManager->getComponent<Image>(Tubes)->setAlpha(255);
-			entityManager->getComponent<Image>(Timetable)->setAlpha(255);
+
+			});
+
+		buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
+			while (ScrollComponentLog->numPhases() < (Game::Instance()->getDialogueManager()->getSceneLog()->getLogList()->size() - 1 / 5)) {
+				ScrollComponentLog->addPhase();
+			}
 			});
 	}
 	SDL_Delay(1000);

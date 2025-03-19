@@ -15,9 +15,11 @@ ScrollComponent::ScrollComponent(int velocity, float time, Inverse isInverse, in
 	finalPhase = numPhases;
 	if (isInverse == Inverse::NORMAL) {
 		phase = startPhase;
+		_inverse = NORMAL;
 	}
 	else { //Inverse::INVERSE
 		phase = finalPhase;
+		_inverse = INVERSE;
 	}
 	_timeScroll = 0;
 	_initialTimeScroll = time;
@@ -34,6 +36,13 @@ ScrollComponent::~ScrollComponent()
 void ScrollComponent::Scroll(Direction _direction) {
 
 	cout << "Scroll Activated" << endl;
+
+	if (_direction == UP || _direction == DOWN) {
+		_path = UPDOWN;
+	}
+	if (_direction == LEFT || _direction == RIGHT) {
+		_path = LEFTRIGHT;
+	}
 
 	_dir = Vector2D(0, 0);
 
@@ -142,6 +151,7 @@ void ScrollComponent::update()
 		//	}
 		//}
 		if (_timeScroll == 0) {
+
 			auto& callbacks = _eventConnectionsScroll.at(ScrollComponent::ENDEDSCROLLING);
 
 			for (CALLBACK callback : callbacks)
@@ -180,6 +190,40 @@ void ScrollComponent::addElementToScroll(Transform* _objectT)
 
 int ScrollComponent::numPhases()
 {
+	/*if (_inverse == INVERSE) {
+		return finalPhase;
+	} 
+	else return (-1 * startPhase);*/
 	return finalPhase + startPhase;
+}
+
+//void ScrollComponent::restartPosition()
+//{
+//	_timeScroll == 0.1f;
+//	phase = 0;
+//	if (_path == UPDOWN) {
+//		if (_inverse == INVERSE) {
+//			_dir = Vector2D(0, (10 * _velocity * _initialTimeScroll * startPhase));
+//		}
+//		else {
+//			_dir = Vector2D(0, (10 * _velocity * _initialTimeScroll * (-finalPhase)));
+//		}
+//	}
+//	else {
+//		if (_inverse == INVERSE) {
+//			_dir = Vector2D((10 * _velocity * _initialTimeScroll) * startPhase, 0);
+//		}
+//		else {
+//			_dir = Vector2D((10 * _velocity * _initialTimeScroll) * (-finalPhase), 0);
+//		}
+//		
+//	}
+//		
+//}
+
+void ScrollComponent::addPhase()
+{
+	if (_inverse == NORMAL) finalPhase++;
+	else startPhase--;
 }
 
