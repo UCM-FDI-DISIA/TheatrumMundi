@@ -36,7 +36,9 @@ public:
     void setListenerPosition(float x, float y, float z);
 
     void setVolume(Sound source, ALfloat volume);
-    
+    void setSpeed(Sound source, ALfloat speed);
+    void setPitch(Sound source, ALfloat pitch);
+
     void playSound(Sound source);
     void stopSound(Sound source);
     void pauseSound(Sound source);
@@ -44,7 +46,7 @@ public:
 
     void setLooping(Sound source, bool loop);
 
-    void setSpeed(Sound source, ALfloat speed);
+
 
 private:
 

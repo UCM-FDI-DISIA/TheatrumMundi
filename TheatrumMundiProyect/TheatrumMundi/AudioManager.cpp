@@ -144,19 +144,33 @@ AudioManager::createSource() {
     return source;
 }
 
+//Move the sound source position in the scene
 void 
 AudioManager::setSourcePosition(Sound sound, float x, float y, float z) {
     alSource3f(sound.getSource(), AL_POSITION, x, y, z);
 }
 
+//Move the listener position in the scene
 void 
 AudioManager::setListenerPosition(float x, float y, float z) {
     alListener3f(AL_POSITION, x, y, z);
 }
 
 
-void AudioManager::setVolume(Sound sound, ALfloat volume) {
+//Modify the track volume
+void 
+AudioManager::setVolume(Sound sound, ALfloat volume) {
     alSourcef(sound.getSource(), AL_GAIN, volume);
+}
+
+//Modify the track speed
+void AudioManager::setSpeed(Sound sound, ALfloat speed) {
+    alSourcef(sound.getSource(), AL_VELOCITY, speed);
+}
+
+//Modify the track pitch
+void AudioManager::setPitch(Sound sound, ALfloat pitch) {
+    alSourcef(sound.getSource(), AL_PITCH, pitch);
 }
 
 // Play a sound (default, once)
@@ -188,9 +202,4 @@ AudioManager::resumeSound(Sound sound) {
 void AudioManager::setLooping(Sound sound,bool loop)
 {
     alSourcei(sound.getSource(), AL_LOOPING, loop ? AL_TRUE : AL_FALSE);
-}
-
-//Set the track speed
-void AudioManager::setSpeed(Sound sound, ALfloat speed) {
-    alSourcef(sound.getSource(), AL_VELOCITY, speed);
 }
