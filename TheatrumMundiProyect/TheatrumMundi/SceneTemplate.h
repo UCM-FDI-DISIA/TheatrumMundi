@@ -54,7 +54,7 @@ public:
 	/// </summary>
 	/// <param name="_eventToRead"></param>
 	void startDialogue(const eventToRead& _eventToRead);
-	void endDialogue();
+	virtual void endDialogue();
 	inline ecs::EntityManager* GetEntityManager() { return entityManager; }
 
 };
