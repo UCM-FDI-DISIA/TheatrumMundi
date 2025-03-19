@@ -4,7 +4,7 @@
 #include "../src/components/Transform.h"
 #include "../src/components/Image.h"
 #include "../../TheatrumMundiProyect/src/sdlutils/SDLUtils.h"
-
+#include "DialogueManager.h"
 #include "../src/components/ClickComponent.h"
 #include "../src/components/TriggerComponent.h"
 #include "../src/components/DragComponent.h"
@@ -188,8 +188,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		entityManager->addComponent<RectArea2D>(_backButton, areaLayerManager);
 
-		// Put the dialog interaction area in front of the other interactables
-		areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
+		
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);

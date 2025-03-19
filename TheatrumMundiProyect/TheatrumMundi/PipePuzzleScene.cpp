@@ -16,7 +16,7 @@
 #include "SceneRoomTemplate.h"
 #include "../src/components/TriggerComponent.h"
 #include "Inventory.h"
-
+#include "DialogueManager.h"
 
 PipePuzzleScene::PipePuzzleScene()
 	:ScenePuzzleTemplate()
@@ -823,8 +823,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			Game::Instance()->getSceneManager()->popScene();
 			});
 
-		// Put the dialog interaction area in front of the other interactables
-		areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
+		
 	}
 }
 

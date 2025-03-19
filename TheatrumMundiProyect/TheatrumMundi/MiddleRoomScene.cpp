@@ -18,56 +18,56 @@
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 #include "DataManager.h"
 #include "EventsInfo.h"
-
+#include "DialogueManager.h"
 #include "../src/components/WriteTextComponent.h"
 MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 {
-	dialogueManager = new DialogueManager(0);
+	dialogueManager = new DialogueManager(1);
 	roomEvent.resize(MIDDLEROOMEVENTSIZE);
 	roomEvent[FIRST_DIALOGUE] = [this]() {
 		startDialogue("SalaIntermedia1");
 		};
 	//ROOM1
 	roomEvent[AFTER_ROOM1_GOOD3] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM1_BAD2] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM1_GOOD3] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	//ROOM2
 	roomEvent[AFTER_ROOM2_GOOD3] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM2_GOOD2] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM2_BAD2] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM2_BAD1] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	//ROOM3
 	roomEvent[AFTER_ROOM3_GOOD3] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_GOOD2SL] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_GOOD2KL] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_BAD2SK] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_BAD1K] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_BAD1S] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 }
 
@@ -92,7 +92,7 @@ void MiddleRoomScene::init()
 		//MiddleRoomBackground
 		entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::MIDDLEROOM);
 
-		dialogueManager->Init(0,entityFactory,entityManager,true,areaLayerManager, "SalaIntermedia1");
+		
 		//CharacterImage
 		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
 		
@@ -189,7 +189,7 @@ void MiddleRoomScene::init()
 
 			});
 		entityManager->setActive(buttonCloseLog, false);
-
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
 	}
 	SDL_Delay(1000);
 
@@ -257,6 +257,7 @@ void MiddleRoomScene::unload()
 
 void MiddleRoomScene::endDialogue()
 {
+	std::cout << "entro";
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 	//Check the act room to load a specific room
 	int aux = Game::Instance()->getDataManager()->GetActualScene();

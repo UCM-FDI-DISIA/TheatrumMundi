@@ -34,6 +34,7 @@ public:
     void setCharacterImage(const std::string& Character);
 
     TextInfo* getShowText();
+    inline void setdisplayOnProcess(bool disply) { displayOnProcess = disply; }
     bool getDisplayOnProcess();
 };
 

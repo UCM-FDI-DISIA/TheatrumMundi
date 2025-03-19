@@ -14,6 +14,7 @@
 #include "../src/components/RectArea2D.h"
 #include "Area2DLayerManager.h"
 #include "TextInfo.h"
+#include "DialogueManager.h"
 
 #include "../src/game/Game.h"
 

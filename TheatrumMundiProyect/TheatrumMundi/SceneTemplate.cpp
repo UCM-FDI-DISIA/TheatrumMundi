@@ -38,6 +38,7 @@ SceneTemplate::~SceneTemplate()
 void SceneTemplate::startDialogue(const string& _eventToRead)
 {
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, true);
+	dialogueManager->setdisplayOnProcess(true);
 	//entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 	dialogueManager->ReadDialogue(_eventToRead);
 
@@ -45,6 +46,7 @@ void SceneTemplate::startDialogue(const string& _eventToRead)
 
 void SceneTemplate::endDialogue()
 {
+	dialogueManager->setdisplayOnProcess(false);
 	std::cout << "acabe";
 	
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);

@@ -18,7 +18,7 @@
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 #include "EventsInfo.h"
 #include "../src/components/WriteTextComponent.h"
-
+#include "DialogueManager.h"
 Room1Scene::Room1Scene() : SceneRoomTemplate(), _eventToRead("SalaIntermedia1")
 {
 	dialogueManager = new DialogueManager(1);

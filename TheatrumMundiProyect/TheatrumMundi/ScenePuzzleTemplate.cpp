@@ -2,7 +2,7 @@
 #include "SceneRoomTemplate.h"
 #include "ClickComponent.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
-
+#include "SDLUtils.h"
 
 
 

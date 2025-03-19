@@ -30,6 +30,8 @@
 
 #include "SceneRoomTemplate.h"
 
+#include "DialogueManager.h"
+
 
 
 using namespace std;
@@ -264,8 +266,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 		entityManager->addComponent<RectArea2D>(_backButton);
 
-		// Put the dialog interaction area in front of the other interactables
-		areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
+		
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);

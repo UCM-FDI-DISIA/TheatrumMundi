@@ -57,7 +57,9 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
     entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
     entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
-    entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
+    auto dialogInteractionArea = entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
+    // Put the dialog interaction area in front of the other interactables
+    areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
 
     //Pass dialog if clicked
     entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _textbackground, _eventToRead]()
@@ -85,7 +87,7 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     //Add writeText to dialogueManager
     SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
     WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, _showText);
-
+    
 
 }
 

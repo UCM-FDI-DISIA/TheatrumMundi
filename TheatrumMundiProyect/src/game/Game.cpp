@@ -23,7 +23,6 @@ Game* Game::Instance()
 Game::~Game() {
 
 	delete _mngr;
-	delete _Dmngr;
 	// release InputHandler if the instance was created correctly.
 	if (InputHandler::HasInstance())
 		InputHandler::Release();

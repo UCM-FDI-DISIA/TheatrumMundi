@@ -2,7 +2,7 @@
 #include "../src/Components/WriteTextComponent.h"
 #include "../src/Components/Transform.h"
 #include "../src/game/Game.h"
-
+#include "DialogueManager.h"
 DialogTestScene::DialogTestScene(): SceneRoomTemplate()
 {
 }
