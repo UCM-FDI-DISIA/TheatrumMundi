@@ -8,6 +8,10 @@
 using namespace std;
 
 ScrollComponent::ScrollComponent(int velocity, float time, Inverse isInverse, int numPhases) : ecs::Component() {
+	
+	_eventConnectionsScroll.insert({ STARTSCROLLING, {} });
+	_eventConnectionsScroll.insert({ ENDEDSCROLLING, {} });
+
 	finalPhase = numPhases;
 	if (isInverse == Inverse::NORMAL) {
 		phase = startPhase;
@@ -67,6 +71,11 @@ void ScrollComponent::Scroll(Direction _direction) {
 	for (Transform* e : _objectsTransform) { //Apply direction to all objects
 		e->getVel().set(_dir); 
 	}
+
+	auto& callbacks = _eventConnectionsScroll.at(ScrollComponent::STARTSCROLLING);
+
+	for (CALLBACK callback : callbacks)
+		callback();
 }
 
 void ScrollComponent::update()
@@ -132,6 +141,12 @@ void ScrollComponent::update()
 		//		}
 		//	}
 		//}
+		if (_timeScroll == 0) {
+			auto& callbacks = _eventConnectionsScroll.at(ScrollComponent::ENDEDSCROLLING);
+
+			for (CALLBACK callback : callbacks)
+				callback();
+		}
 	} 
 	else 
 	{
@@ -142,8 +157,19 @@ void ScrollComponent::update()
 }
 
 bool ScrollComponent::isScrolling() {
-	if (_objectsTransform.empty()) return false;
-	return _objectsTransform[0]->getVel().magnitude() > 0; //Check if the first element is moving
+	if (_timeScroll > 0) {
+		return true;
+	}
+	return false;
+}
+
+bool ScrollComponent::connect(EVENT_TYPE eventType, CALLBACK action) {
+	auto eventHashIt = _eventConnectionsScroll.find(eventType);
+	if (eventHashIt == _eventConnectionsScroll.end()) return false;
+
+	eventHashIt->second.push_back(action);
+
+	return true;
 }
 
 void ScrollComponent::addElementToScroll(Transform* _objectT)

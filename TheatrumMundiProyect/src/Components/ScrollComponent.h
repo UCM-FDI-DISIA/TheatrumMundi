@@ -3,6 +3,8 @@
 #include "../utils/Vector2D.h"
 #include <cassert>
 #include <vector>
+#include <unordered_map>
+#include <functional>
 
 class Transform;
 
@@ -19,6 +21,11 @@ public:
 
 	__CMPID_DECL__(ecs::cmp::SCROLL_COMPONENT)
 
+	using EVENT_TYPE = int; // Alias type that refers to the EventType enum, that will be extended
+	using CALLBACK = std::function<void()>;
+
+	enum EventTypeScroll { STARTSCROLLING, ENDEDSCROLLING }; // Type of scrolling event
+
 	//ESTO SE ELIMINARIA POR PASARLE LA DIRECCION POR ADELANTADO
 	enum Inverse { NORMAL, INVERSE };
 	enum Direction { UP, DOWN, LEFT, RIGHT };
@@ -31,6 +38,7 @@ public:
 	bool isScrolling();
 	void addElementToScroll(Transform* _objectT);
 	int numPhases();
+	bool connect(EVENT_TYPE, CALLBACK);
 
 	//AMPLIACION
 	bool finalPhaseCheck() const { return (phase == finalPhase); }
@@ -45,7 +53,6 @@ public:
 	void resetPhase() {
 		phase = startPhase;
 	}
-	
 
 private:
 	//Transform *_myTransform;
@@ -62,4 +69,6 @@ private:
 	//LEFT:: FASE = FINAL 
 	//RIGHT:: FASE = INICIO
 
+protected:
+	std::unordered_map<EVENT_TYPE, std::vector<CALLBACK>> _eventConnectionsScroll;
 };

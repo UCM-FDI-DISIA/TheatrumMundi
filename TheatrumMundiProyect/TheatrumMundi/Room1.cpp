@@ -248,45 +248,6 @@ void Room1Scene::init()
 			//_closeLogButton->getMngr()->setActive(_closeLogButton, false);
 			};
 
-		ClickComponent* buttonOpenLogClick = entityManager->getComponent<ClickComponent>(buttonOpenLog);
-		buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, scrollingLog, _titleLog, buttonCloseLog, buttonOpenLog]() {
-			AudioManager::Instance().playSound(buttonSound);
-			//open log
-			//roomEvent[LOGENABLE];
-
-			//activate log
-			entityManager->setActiveGroup(ecs::grp::LOG, true);
-			entityManager->setActive(buttonOpenLog, false); //open button
-			});
-		entityManager->setActive(buttonOpenLog, true);
-
-		ClickComponent* buttonCloseLogClick = entityManager->getComponent<ClickComponent>(buttonCloseLog);
-		buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, _backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog]() {
-			AudioManager::Instance().playSound(buttonSound);
-			//close log
-			//roomEvent[LOGDESABLE];
-
-			//disable log
-			entityManager->setActiveGroup(ecs::grp::LOG, false);
-			entityManager->setActive(buttonOpenLog, true); //open button
-			});
-		entityManager->setActive(buttonCloseLog, false);
-
-		auto downScrollLogButton = entityManager->getComponent<ClickComponent>(scrollingLog);
-		downScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
-			std::cout << "A" << std::endl;
-			if (!ScrollComponentLog->isScrolling()) {
-				ScrollComponentLog->Scroll(ScrollComponent::DOWN);
-			}
-			});
-
-		auto upScrollLogButton = entityManager->getComponent<ClickComponent>(upScrollingLog);
-		upScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
-			if (!ScrollComponentLog->isScrolling()) {
-				ScrollComponentLog->Scroll(ScrollComponent::UP);
-			}
-			});
-
 
 		auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width())/12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1160 - 1349, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -393,7 +354,7 @@ void Room1Scene::init()
 			});
 
 		auto ChangeRoom1Button = entityManager->getComponent<ClickComponent>(ChangeRoom1);
-		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom1Button,StudyBackgroundScroll, doorSound]() {
+		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom1Button,StudyBackgroundScroll, doorSound, buttonOpenLog, ChangeRoomScroll]() {
 			if (!StudyBackgroundScroll->isScrolling()) {
 				AudioManager::Instance().playSound(doorSound);
 				StudyBackgroundScroll->Scroll(ScrollComponent::RIGHT);
@@ -407,6 +368,7 @@ void Room1Scene::init()
 				StudyBackgroundScroll->Scroll(ScrollComponent::LEFT);
 			}
 			});
+
 		
 		//UI
 		//Pause
@@ -503,6 +465,95 @@ void Room1Scene::init()
 			roomEvent[Spoon]();
 			});
 		//X Button "B1"
+
+		ClickComponent* buttonOpenLogClick = entityManager->getComponent<ClickComponent>(buttonOpenLog);
+		buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, scrollingLog, _titleLog, buttonCloseLog, buttonOpenLog]() {
+			AudioManager::Instance().playSound(buttonSound);
+			//open log
+			//roomEvent[LOGENABLE];
+
+			//activate log
+			entityManager->setActiveGroup(ecs::grp::LOG, true);
+			entityManager->setActive(buttonOpenLog, false); //open button
+			});
+		entityManager->setActive(buttonOpenLog, true);
+
+		ClickComponent* buttonCloseLogClick = entityManager->getComponent<ClickComponent>(buttonCloseLog);
+		buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, _backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog]() {
+			AudioManager::Instance().playSound(buttonSound);
+			//close log
+			//roomEvent[LOGDESABLE];
+
+			//disable log
+			entityManager->setActiveGroup(ecs::grp::LOG, false);
+			entityManager->setActive(buttonOpenLog, true); //open button
+			});
+		entityManager->setActive(buttonCloseLog, false);
+
+		auto downScrollLogButton = entityManager->getComponent<ClickComponent>(scrollingLog);
+		downScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
+			std::cout << "A" << std::endl;
+			if (!ScrollComponentLog->isScrolling()) {
+				ScrollComponentLog->Scroll(ScrollComponent::DOWN);
+			}
+			});
+
+		auto upScrollLogButton = entityManager->getComponent<ClickComponent>(upScrollingLog);
+		upScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
+			if (!ScrollComponentLog->isScrolling()) {
+				ScrollComponentLog->Scroll(ScrollComponent::UP);
+			}
+			});
+
+		ChangeRoomScroll->connect(ScrollComponent::STARTSCROLLING, [this, buttonOpenLog,buttonInventory,buttonPause,Shelf,TeaCup,Clock,spoon,Corspe,Tubes,Timetable,_calendearZoom]() {
+			
+			entityManager->getComponent<ClickComponent>(buttonOpenLog)->setActive(false);
+			entityManager->getComponent<ClickComponent>(buttonInventory)->setActive(false);
+			entityManager->getComponent<ClickComponent>(buttonPause)->setActive(false);
+			entityManager->getComponent<ClickComponent>(Shelf)->setActive(false);
+			entityManager->getComponent<ClickComponent>(TeaCup)->setActive(false);
+			entityManager->getComponent<ClickComponent>(Clock)->setActive(false);
+			entityManager->getComponent<ClickComponent>(spoon)->setActive(false);
+			entityManager->getComponent<ClickComponent>(Corspe)->setActive(false);
+			entityManager->getComponent<ClickComponent>(Tubes)->setActive(false);
+			entityManager->getComponent<ClickComponent>(Timetable)->setActive(false);
+			
+			entityManager->getComponent<Image>(buttonOpenLog)->setAlpha(100);
+			entityManager->getComponent<Image>(buttonInventory)->setAlpha(100);
+			entityManager->getComponent<Image>(buttonPause)->setAlpha(100);
+			entityManager->getComponent<Image>(Shelf)->setAlpha(100);
+			entityManager->getComponent<Image>(TeaCup)->setAlpha(100);
+			entityManager->getComponent<Image>(Clock)->setAlpha(100);
+			entityManager->getComponent<Image>(spoon)->setAlpha(100);
+			entityManager->getComponent<Image>(Corspe)->setAlpha(100);
+			entityManager->getComponent<Image>(Tubes)->setAlpha(100);
+			entityManager->getComponent<Image>(Timetable)->setAlpha(100);
+			});
+
+		ChangeRoomScroll->connect(ScrollComponent::ENDEDSCROLLING, [this, buttonOpenLog, buttonInventory, buttonPause, Shelf, TeaCup, Clock, spoon, Corspe, Tubes, Timetable, _calendearZoom]() {
+			
+			entityManager->getComponent<ClickComponent>(buttonOpenLog)->setActive(true);
+			entityManager->getComponent<ClickComponent>(buttonInventory)->setActive(true);
+			entityManager->getComponent<ClickComponent>(buttonPause)->setActive(true);
+			entityManager->getComponent<ClickComponent>(Shelf)->setActive(true);
+			entityManager->getComponent<ClickComponent>(TeaCup)->setActive(true);
+			entityManager->getComponent<ClickComponent>(Clock)->setActive(true);
+			entityManager->getComponent<ClickComponent>(spoon)->setActive(true);
+			entityManager->getComponent<ClickComponent>(Corspe)->setActive(true);
+			entityManager->getComponent<ClickComponent>(Tubes)->setActive(true);
+			entityManager->getComponent<ClickComponent>(Timetable)->setActive(true);
+			
+			entityManager->getComponent<Image>(buttonOpenLog)->setAlpha(255);
+			entityManager->getComponent<Image>(buttonInventory)->setAlpha(255);
+			entityManager->getComponent<Image>(buttonPause)->setAlpha(255);
+			entityManager->getComponent<Image>(Shelf)->setAlpha(255);
+			entityManager->getComponent<Image>(TeaCup)->setAlpha(255);
+			entityManager->getComponent<Image>(Clock)->setAlpha(255);
+			entityManager->getComponent<Image>(spoon)->setAlpha(255);
+			entityManager->getComponent<Image>(Corspe)->setAlpha(255);
+			entityManager->getComponent<Image>(Tubes)->setAlpha(255);
+			entityManager->getComponent<Image>(Timetable)->setAlpha(255);
+			});
 	}
 	SDL_Delay(1000);
 
