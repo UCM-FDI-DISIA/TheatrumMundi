@@ -24,6 +24,7 @@ Game::~Game() {
 
 	delete _mngr;
 	delete _Dmngr;
+	delete _dataManager;
 	// release InputHandler if the instance was created correctly.
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
@@ -70,6 +71,7 @@ void Game::init() {
 	// Create the manager
 	_Dmngr = new DialogueManager();
 	_mngr = new SceneManager();
+	_dataManager = new DataManager();
 	
 }
 
@@ -135,6 +137,11 @@ DialogueManager* Game::getDialogueManager()
 {
 	assert(_Dmngr != nullptr);
 	return _Dmngr;
+}
+
+DataManager* Game::getDataManager()
+{
+	return _dataManager;
 }
 
 void Game::checkCollisions() {

@@ -109,6 +109,7 @@ void Room1Scene::init()
 {
  
 	if (!isStarted) {
+	
 		isStarted = true;
 		finishallpuzzles = false;
 		//Audio sfx 
@@ -243,30 +244,39 @@ void Room1Scene::init()
 		auto _corpseZoom = entityFactory->CreateImageEntity(entityManager, "CorspeBackground", Vector2D(0, 0), Vector2D(0, 0), 1349,748, 0, ecs::grp::ZOOMOBJ);
 		entityManager->setActive(_corpseZoom, false);
 
-
-
+		//set the scene the variant is 
+		Game::Instance()->getDataManager()->SetSceneCount(ROOM1);
+		//get actual variant
+		int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(ROOM1);
+		std::cout << "VARIANTE"<<variantAct << std::endl;
+	
 		auto possibleButton = entityFactory->CreateInteractableEntity(entityManager, "posible", EntityFactory::RECTAREA, Vector2D(500, 0), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 		entityManager->setActive(possibleButton, false);
-		entityManager->getComponent<ClickComponent>(possibleButton)->connect(ClickComponent::JUST_CLICKED, [this]() {
+		entityManager->getComponent<ClickComponent>(possibleButton)->connect(ClickComponent::JUST_CLICKED, [this,variantAct]() {
 
 			//if its the not correct variant one dies
-			//if ()
-			//{
+			if (variantAct!=0)
+			{
+				Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
+				std::cout << "NO CORRECTA DE POS" << std::endl;
 
-			//}
+
+			}
+		
 		
 			//change to intermediate room
 
 			});
 		auto noPossibleButton = entityFactory->CreateInteractableEntity(entityManager, "noPosible", EntityFactory::RECTAREA, Vector2D(600, 0), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 		entityManager->setActive(noPossibleButton, false);
-		entityManager->getComponent<ClickComponent>(noPossibleButton)->connect(ClickComponent::JUST_CLICKED, [this]() {
+		entityManager->getComponent<ClickComponent>(noPossibleButton)->connect(ClickComponent::JUST_CLICKED, [this,variantAct]() {
 
 			//if its the not correct variant one dies
-			//if ()
-			//{
-
-			//}
+			if (variantAct != 1||2)
+			{
+				std::cout << "NO CORRECTA DE NO POS" << std::endl;
+				Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
+			}
 
 			//change to intermediate room
 
@@ -285,7 +295,7 @@ void Room1Scene::init()
 		
 		//appears when the 3 puzzles have been resolved
 		auto readyToResolveButton = entityFactory->CreateInteractableEntity(entityManager, "B5", EntityFactory::RECTAREA, Vector2D(400, 400), Vector2D(0, 0), 400, 400, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
-		entityManager->setActive(readyToResolveButton, false);
+
 		entityManager->getComponent<ClickComponent>(readyToResolveButton)->connect(ClickComponent::JUST_CLICKED, [this, noResolveButton,resolveButton, readyToResolveButton]() {
 
 			entityManager->setActive(noResolveButton, true);
@@ -293,7 +303,8 @@ void Room1Scene::init()
 			entityManager->setActive(readyToResolveButton, false);
 			
 		});
-
+		entityManager->setActive(readyToResolveButton, false);
+		entityManager->setActive(readyToResolveButton, false);
 		entityManager->getComponent<ClickComponent>(resolveButton)->connect(ClickComponent::JUST_CLICKED, [this, possibleButton, noPossibleButton, readyToResolveButton,resolveButton,noResolveButton]() {
 
 			entityManager->setActive(noPossibleButton, true);
@@ -325,8 +336,9 @@ void Room1Scene::init()
 			
 			_corpseZoom->getMngr()->setActive(_corpseZoom, true);
 			entityManager->setActive(_quitButton, true);
+	
 		
-			if (finishalpuzzles)
+			if (finishallpuzzles)
 			{
 				entityManager->setActive(readyToResolveButton, true);
 				roomEvent[ResolveCase]();
@@ -334,6 +346,7 @@ void Room1Scene::init()
 			else
 			{
 				roomEvent[CorpseDialogue]();
+				entityManager->setActive(readyToResolveButton, false);
 			}
 			
 
@@ -441,7 +454,7 @@ void Room1Scene::init()
 			AudioManager::Instance().playSound(buttonSound);
 			GetInventory()->setActive(!GetInventory()->getActive());  // Toggle the inventory
 
-			std::cout << "Inventory item: " << GetInventory()->hasItem("boa2") << std::endl;
+			//std::cout << "Inventory item: " << GetInventory()->hasItem("boa2") << std::endl;
 
 			// If the inventory is active, activate the items
 			if (GetInventory()->getActive()) {
@@ -511,7 +524,7 @@ void Room1Scene::init()
 		//X Button "B1"
 
 
-		//botton ready to resolve 
+		std::cout << finishallpuzzles << std::endl;
 	
 		
 
@@ -536,11 +549,11 @@ void Room1Scene::resolvedPuzzle(int i)
 	if (puzzlesol[ClockPuzzleRsv] &&puzzlesol[PipePuzzleRsv] &&puzzlesol[BooksPuzzleRsv]) {
 		
 		roomEvent[i]();
-		finishalpuzzles = true;
+		finishallpuzzles = true;
 	}
 	else
 	{
-		finishalpuzzles = false;
+		finishallpuzzles = false;
 	}
 }
 

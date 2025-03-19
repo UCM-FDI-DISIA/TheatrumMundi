@@ -19,7 +19,7 @@ protected:
 	/// </summary>
 	std::vector< std::function<void()>> roomEvent;
 	//ecs::entity_t readyToResolveBotton;
-	bool finishalpuzzles;
+	bool finishallpuzzles;
 	bool logActive = false;
 	//inventory
 

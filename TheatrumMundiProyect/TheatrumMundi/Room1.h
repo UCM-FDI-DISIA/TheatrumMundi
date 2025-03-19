@@ -6,7 +6,6 @@ class Room1Scene : public SceneRoomTemplate
 private:
 	eventToRead _eventToRead;
 protected:
-	bool finishallpuzzles;
 	enum Room1Event
 	{
 		InitialDialogue = 0,

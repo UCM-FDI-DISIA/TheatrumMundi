@@ -15,11 +15,11 @@ private:
 	
 	 SceneManager* _mngr;
 	 DialogueManager* _Dmngr;
+	 DataManager* _dataManager;
 	 Game();
 	
 	 void checkCollisions();
 public:
-	
 	static Game* Instance();
 	~Game();
 	void init();
