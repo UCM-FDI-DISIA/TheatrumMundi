@@ -20,8 +20,8 @@ ClockPuzzleScene::ClockPuzzleScene() : ScenePuzzleTemplate()
 {
 	_actualHour = 90;
 	_actualMinute = 0;
-	hasLongCloackHand = false;
-	hasShortCloackHand = false;
+	hasLongClockHand = false;
+	hasShortClockHand = false;
 	
 
 }
@@ -102,26 +102,26 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		a.setVolume(clockHorSound, 0.2);
 
 		//create the clock
-		cloack = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(600, 300), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		entityManager->addComponent<TriggerComponent>(cloack);
+		clock = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(600, 300), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		entityManager->addComponent<TriggerComponent>(clock);
 		//Assigns the trigger bolean to true
-		cloack->getMngr()->getComponent<TriggerComponent>(cloack)->connect(TriggerComponent::AREA_ENTERED, [this]() {
+		clock->getMngr()->getComponent<TriggerComponent>(clock)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
 			});
 		//Assigns the trigger bolean to false
-		cloack->getMngr()->getComponent<TriggerComponent>(cloack)->connect(TriggerComponent::AREA_LEFT, [this]() {
+		clock->getMngr()->getComponent<TriggerComponent>(clock)->connect(TriggerComponent::AREA_LEFT, [this]() {
 			SetplacedHand(false);
 			});
 
 		//create the clock hands : minute
-		longCloackHand = entityFactory->CreateInteractableEntity(entityManager, "clockMinArrow", EntityFactory::RECTAREA, Vector2D(680, 360), Vector2D(0, 0), 20, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
-		auto _clockMinTransform = longCloackHand->getMngr()->getComponent<Transform>(longCloackHand);
-		if (!hasLongCloackHand) longCloackHand->getMngr()->setActive(longCloackHand, false);
+		longClockHand = entityFactory->CreateInteractableEntity(entityManager, "clockMinArrow", EntityFactory::RECTAREA, Vector2D(680, 360), Vector2D(0, 0), 20, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
+		auto _clockMinTransform = longClockHand->getMngr()->getComponent<Transform>(longClockHand);
+		if (!hasLongClockHand) longClockHand->getMngr()->setActive(longClockHand, false);
 
 		//create the clock hands : hour
-		shortCloackHand = entityFactory->CreateInteractableEntity(entityManager, "clockHorArrow", EntityFactory::RECTAREA, Vector2D(695, 360), Vector2D(0, 0), 20, 60, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
-		auto _clockHorTransform = shortCloackHand->getMngr()->getComponent<Transform>(shortCloackHand);
-		if (!hasShortCloackHand) shortCloackHand->getMngr()->setActive(shortCloackHand, false);
+		shortClockHand = entityFactory->CreateInteractableEntity(entityManager, "clockHorArrow", EntityFactory::RECTAREA, Vector2D(695, 360), Vector2D(0, 0), 20, 60, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
+		auto _clockHorTransform = shortClockHand->getMngr()->getComponent<Transform>(shortClockHand);
+		if (!hasShortClockHand) shortClockHand->getMngr()->setActive(shortClockHand, false);
 
 		//create the buttons: min
 		auto _buttonMin = entityManager->addEntity();
@@ -142,7 +142,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 #ifdef DEBUG
 					std::cout << "CLICKED MINUTERO\n";
 #endif // DEBUG
-					if (hasLongCloackHand) {
+					if (hasLongClockHand) {
 						AudioManager::Instance().playSound(clockMinSound);
 						_clockMinTransform->setRot(_clockMinTransform->getRot() + 15);
 						_actualMinute += 15;
@@ -169,7 +169,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 #ifdef DEBUG
 					std::cout << "CLICKED HORARIO\n";
 #endif // DEBUG
-					if (hasShortCloackHand) {
+					if (hasShortClockHand) {
 						AudioManager::Instance().playSound(clockHorSound);
 						_clockHorTransform->setRot(_clockHorTransform->getRot() + 30);
 						_actualHour += 30;
@@ -296,13 +296,13 @@ void ClockPuzzleScene::unload()
 bool ClockPuzzleScene::isItemHand(const std::string& itemId)
 {
 	if (itemId == "boa2") {
-		hasLongCloackHand = true;
-		longCloackHand->getMngr()->setActive(longCloackHand, true);
+		hasLongClockHand = true;
+		longClockHand->getMngr()->setActive(longClockHand, true);
 		return true;
 	}
 	else if (itemId == "TeaCupSpoon") {
-		hasShortCloackHand = true;
-		shortCloackHand->getMngr()->setActive(shortCloackHand, true);
+		hasShortClockHand = true;
+		shortClockHand->getMngr()->setActive(shortClockHand, true);
 		return true;
 	}
 	return false;

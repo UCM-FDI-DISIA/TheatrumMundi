@@ -40,16 +40,34 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		auto teaCupBackground = entityFactory->CreateImageEntity(entityManager, "TeaCupBackgroundWithoutSpoon", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		teaCupBackground->getMngr()->removeComponent<Area2D>(teaCupBackground);
 
-		ecs::entity_t teaCupSpoon = entityFactory->CreateInteractableEntity( // Spoon entity
+		/*ecs::entity_t teaCupSpoon = entityFactory->CreateInteractableEntity( // Spoon entity
 			entityManager, "TeaCupSpoon", EntityFactory::RECTAREA,
 			Vector2D(100, 400), Vector2D(), 600, 400, 0,
-			areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);
+			areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);*/
 
 		ecs::entity_t teaCup = entityFactory->CreateInteractableEntity( // Cup entity
 			entityManager, "clockShape", EntityFactory::RECTAREA,
 			Vector2D(400, 100), Vector2D(), 460, 280, 0,
 			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+
+		/*entityManager->addComponent<TriggerComponent>(teaCup) // Spoon enters the cup Area2D
+			->connect(TriggerComponent::AREA_ENTERED, [teaCupBackground, this]()
+				{
+					_spoonIsInCup = true;
+				});*/
+
 		teaCup->getMngr()->removeComponent<Image>(teaCup);
+
+		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_ENTERED, [this]() {
+			SetplacedHand(true);
+			});
+		//Assigns the trigger bolean to false
+		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_LEFT, [this]() {
+			SetplacedHand(false);
+			});
+
+		//create the spoon
+		//spoon = entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(100, 400), Vector2D(0, 0), 600, 400, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);
 
 
 		entityManager->getComponent<ClickComponent>(teaCup) // The cup is clicked after introducing the spoon
@@ -63,19 +81,13 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 					teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
 				});
 
-		entityManager->addComponent<TriggerComponent>(teaCup) // Spoon enters the cup Area2D
-			->connect(TriggerComponent::AREA_ENTERED, [teaCupBackground, this]()
-				{
-					_spoonIsInCup = true;
-				});
-
-		entityManager->getComponent<TriggerComponent>(teaCup) // Spoon leaves the cup Area2D
+		/*entityManager->getComponent<TriggerComponent>(teaCup) // Spoon leaves the cup Area2D
 			->connect(TriggerComponent::AREA_LEFT, [this]()
 				{
 					_spoonIsInCup = false;
-				});
+				});*/
 
-		entityManager->getComponent<DragComponent>(teaCupSpoon) // The spoon is dropped in the cup
+		/*entityManager->getComponent<DragComponent>(teaCupSpoon) // The spoon is dropped in the cup
 			->connect(DragComponent::DRAG_END, [teaCupBackground, teaCupSpoon, this]()
 				{
 					if (_spoonIsInCup == false) return;
@@ -84,7 +96,15 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 					// ... Change image to cup with spoon  <-- TODO			
 					Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithSpoon");
 					teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
-				});
+				});*/
+
+		if (_spoonIsInCup) {
+			//entityManager->setActive(spoon, false);
+			//Change image to cup with spoon < --TODO
+				Texture * tx = &sdlutils().images().at("TeaCupBackgroundWithSpoon");
+			teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
+
+		}
 
 		//BackButton
 		auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
@@ -99,9 +119,38 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 			{
 				Game::Instance()->getSceneManager()->popScene();
 			});
+
+		//INVENTORY
+		//Invntory Background
+		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
+		entityManager->setActive(InventoryBackground, false);
+
+		//InventoryButton
+		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
+		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground]() //Lamda function
+			{
+				//AudioManager::Instance().playSound(buttonSound);
+				sr->GetInventory()->setActive(!sr->GetInventory()->getActive());  // Toggle the inventory
+
+				// If the inventory is active, activate the items
+				if (sr->GetInventory()->getActive()) {
+					//	entityManager->setActive(InventoryBackground, true);
+					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+						invObjects[i]->getMngr()->setActive(invObjects[i], true);
+					}
+				}
+				else {
+					//	entityManager->setActive(InventoryBackground, false);
+					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+						invObjects[i]->getMngr()->setActive(invObjects[i], false);
+					}
+				}
+			});
+
 	}
 
-
+	createInvEntities(sr);
 }
 
 void TeaCupPuzzleScene::refresh()
@@ -121,5 +170,10 @@ bool TeaCupPuzzleScene::Check()
 
 bool TeaCupPuzzleScene::isItemHand(const std::string& itemId)
 {
+	if (itemId == "TeaCupSpoon") {
+		_spoonIsInCup = true; //???
+		//spoon->getMngr()->setActive(spoon, true); 
+		return true;
+	}
 	return false;
 }
