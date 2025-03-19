@@ -257,6 +257,7 @@ void MiddleRoomScene::unload()
 
 void MiddleRoomScene::endDialogue()
 {
+	dialogueManager->setdisplayOnProcess(false);
 	std::cout << "entro";
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 	//Check the act room to load a specific room

@@ -420,7 +420,6 @@ void Room1Scene::init()
 	}
 	SDL_Delay(1000);
 
-	roomEvent[InitialDialogue]();
 	
 }
 
