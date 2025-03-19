@@ -16,11 +16,54 @@
 #include "../src/game/Game.h"
 #include "ClickableSpriteComponent.h"
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
+#include "DataManager.h"
 #include "EventsInfo.h"
 MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 {
 	roomEvent.resize(MIDDLEROOMEVENTSIZE);
 	roomEvent[FIRST_DIALOGUE] = [this]() {
+		startDialogue(SalaIntermedia1);
+		};
+	//ROOM1
+	roomEvent[AFTER_ROOM1_GOOD3] = [this]() {
+		startDialogue(SalaIntermedia1);
+		};
+	roomEvent[AFTER_ROOM1_BAD2] = [this]() {
+		startDialogue(SalaIntermedia1);
+		};
+	roomEvent[AFTER_ROOM1_GOOD3] = [this]() {
+		startDialogue(SalaIntermedia1);
+		};
+	//ROOM2
+	roomEvent[AFTER_ROOM2_GOOD3] = [this]() {
+		startDialogue(SalaIntermedia1);
+		};
+	roomEvent[AFTER_ROOM2_GOOD2] = [this]() {
+		startDialogue(SalaIntermedia1);
+		};
+	roomEvent[AFTER_ROOM2_BAD2] = [this]() {
+		startDialogue(SalaIntermedia1);
+		};
+	roomEvent[AFTER_ROOM2_BAD1] = [this]() {
+		startDialogue(SalaIntermedia1);
+		};
+	//ROOM3
+	roomEvent[AFTER_ROOM3_GOOD3] = [this]() {
+		startDialogue(SalaIntermedia1);
+		};
+	roomEvent[AFTER_ROOM3_GOOD2SL] = [this]() {
+		startDialogue(SalaIntermedia1);
+		};
+	roomEvent[AFTER_ROOM3_GOOD2KL] = [this]() {
+		startDialogue(SalaIntermedia1);
+		};
+	roomEvent[AFTER_ROOM3_BAD2SK] = [this]() {
+		startDialogue(SalaIntermedia1);
+		};
+	roomEvent[AFTER_ROOM3_BAD1K] = [this]() {
+		startDialogue(SalaIntermedia1);
+		};
+	roomEvent[AFTER_ROOM3_BAD1S] = [this]() {
 		startDialogue(SalaIntermedia1);
 		};
 }
@@ -76,10 +119,6 @@ void MiddleRoomScene::init()
 					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
 					{
 						Game::Instance()->getDialogueManager()->ReadDialogue(_eventToRead);
-					}
-					else
-					{
-						_textbackground->getMngr()->setActive(_textbackground, false);
 					}
 				}
 			});
@@ -189,6 +228,53 @@ void MiddleRoomScene::resolvedPuzzle(int i)
 
 void MiddleRoomScene::refresh()
 {
+	int aux = Game::Instance()->getDataManager()->GetActualScene();
+	bool auxkei = Game::Instance()->getDataManager()->GetCharacterState(Character::KEISARA);
+	bool auxlucy = Game::Instance()->getDataManager()->GetCharacterState(Character::LUCY);
+	bool auxsol = Game::Instance()->getDataManager()->GetCharacterState(Character::SOL);
+	switch (aux)
+	{
+	case SceneCount::MIDDLEROOM2:
+		if (auxkei && auxlucy && auxsol) roomEvent[AFTER_ROOM1_GOOD3]();
+		else if (!auxkei && auxlucy && auxsol)roomEvent[AFTER_ROOM1_BAD2]();
+		else {
+		#ifdef _DEBUG
+			std::cout << "INVALID CHARACTERS STATE";
+		#endif // DEBUG
+		}
+		break;
+	case SceneCount::MIDDLEROOM3:
+		if (auxkei && auxlucy && auxsol) roomEvent[AFTER_ROOM2_GOOD3]();
+		else if (!auxkei && auxlucy && auxsol)roomEvent[AFTER_ROOM2_GOOD2]();
+		else if (auxkei && !auxlucy && auxsol)roomEvent[AFTER_ROOM2_BAD2]();
+		else if (!auxkei && !auxlucy && auxsol)roomEvent[AFTER_ROOM2_BAD1]();
+		else {
+		#ifdef _DEBUG
+			std::cout << "INVALID CHARACTERS STATE";
+		#endif // DEBUG
+		}
+		break;
+	case SceneCount::END:
+		if (auxkei && auxlucy && auxsol) roomEvent[AFTER_ROOM3_GOOD3]();
+		else if (!auxkei && auxlucy && auxsol)roomEvent[AFTER_ROOM3_GOOD2SL]();
+		else if (auxkei && auxlucy && !auxsol)roomEvent[AFTER_ROOM3_GOOD2KL]();
+		else if (auxkei && !auxlucy && auxsol)roomEvent[AFTER_ROOM3_BAD2SK]();
+		else if (!auxkei && !auxlucy && auxsol)roomEvent[AFTER_ROOM3_BAD1S]();
+		else if (auxkei && !auxlucy && !auxsol)roomEvent[AFTER_ROOM3_BAD1K]();
+		else {
+#ifdef _DEBUG
+			std::cout << "INVALID CHARACTERS STATE";
+#endif // DEBUG
+		}
+		break;
+		break;
+	default:
+	#ifdef _DEBUG
+		std::cout << "ERROR INVALID SCENECOUNT";
+	#endif // DEBUG
+
+		break;
+	}
 }
 
 void MiddleRoomScene::unload()
@@ -199,6 +285,24 @@ void MiddleRoomScene::endDialogue()
 {
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 	//Check the act room to load a specific room
-	//if(...)
-	Game::Instance()->getSceneManager()->loadScene(ROOM_1);
+	int aux = Game::Instance()->getDataManager()->GetActualScene();
+	switch (aux)
+	{
+	case SceneCount::MIDDLEROOM1:
+		Game::Instance()->getSceneManager()->loadScene(ROOM_1);
+		break;
+	case SceneCount::MIDDLEROOM2:
+		Game::Instance()->getSceneManager()->loadScene(ROOM_2);
+		break;
+	case SceneCount::MIDDLEROOM3:
+		Game::Instance()->getSceneManager()->loadScene(ROOM_3);
+		break;
+	case SceneCount::END:
+		//Load the endScene WIP
+		//Game::Instance()->getSceneManager()->loadScene(ROOM_1);
+		break;
+	default:
+		break;
+	}
+	
 }
