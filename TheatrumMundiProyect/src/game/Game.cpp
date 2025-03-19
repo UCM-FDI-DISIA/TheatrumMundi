@@ -68,7 +68,6 @@ void Game::init() {
 	sdlutils().hideCursor();
 
 	// Create the manager
-	_Dmngr = new DialogueManager(1); 
 	_mngr = new SceneManager();
 	
 }
@@ -131,11 +130,7 @@ void Game::exit()
 {
 	_exitGame = true;
 }
-DialogueManager* Game::getDialogueManager()
-{
-	assert(_Dmngr != nullptr);
-	return _Dmngr;
-}
+
 
 void Game::checkCollisions() {
 	

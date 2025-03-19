@@ -21,6 +21,7 @@
 
 Room1Scene::Room1Scene() : SceneRoomTemplate(), _eventToRead("SalaIntermedia1")
 {
+	dialogueManager = new DialogueManager(1);
 	roomEvent.resize(event_size);
 	roomEvent[InitialDialogue] = [this]
 		{
@@ -116,8 +117,9 @@ void Room1Scene::init()
 		a.setLooping(room1music, true);
 		a.playSound(room1music);
 
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
 		//Register scene in dialogue manager
-		Game::Instance()->getDialogueManager()->setScene(this);
+		dialogueManager->setScene(this);
 
 		//CharacterImage
 		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
@@ -138,10 +140,10 @@ void Room1Scene::init()
 			{
 				if (!logActive) {
 					//read dialogue only if it has to
-					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
+					if (dialogueManager->getDisplayOnProcess())
 					{
-						Game::Instance()->getDialogueManager()->ReadDialogue(_eventToRead);
-						if(!Game::Instance()->getDialogueManager()->getDisplayOnProcess())
+						dialogueManager->ReadDialogue(_eventToRead);
+						if(dialogueManager->getDisplayOnProcess())
 							_textbackground->getMngr()->setActive(_textbackground, false);
 							//entityManager->setActive(_screenDetect, false);
 					}
@@ -175,7 +177,7 @@ void Room1Scene::init()
 		_log->getMngr()->setActive(_log, false); //hide log at the beggining
 
 		//Register log in dialogue manager
-		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
+		dialogueManager->setSceneLog(logComp);
 
 		roomEvent[LOGENABLE] = [this] {
 			//activate log

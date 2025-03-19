@@ -34,7 +34,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		isStarted = true;
 
 		//Register scene in dialogue manager
-		Game::Instance()->getDialogueManager()->setScene(this);
+		dialogueManager->setScene(this);
 
 		
 		startDialogue("Puzzle3");

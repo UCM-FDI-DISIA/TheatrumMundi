@@ -27,7 +27,7 @@ public:
     DialogueManager(int numRooms);
     ~DialogueManager();
 
-    void Init(EntityFactory* entityFactory, ecs::EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, std::string _eventToRead);
+    void Init(int numRooms,EntityFactory* entityFactory, ecs::EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, std::string _eventToRead);
     void ReadDialogue(const std::string& event);
     void setSceneLog(LogComponent* sceneLog);
     void setScene(SceneTemplate* scene);

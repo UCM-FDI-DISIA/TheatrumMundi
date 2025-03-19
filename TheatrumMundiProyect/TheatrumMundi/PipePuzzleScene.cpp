@@ -629,7 +629,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		pathCreation();
 
 		//Register scene in dialogue manager
-		Game::Instance()->getDialogueManager()->setScene(this);
+		dialogueManager->setScene(this);
 
 		startDialogue("Puzzle1");
 

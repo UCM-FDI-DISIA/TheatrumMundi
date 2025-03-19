@@ -2,15 +2,19 @@
 #include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
 #include "../TheatrumMundi/Area2DLayerManager.h"
+#include "DialogueManager.h"
 #include "Game.h"
 
 using namespace std;
+
 SceneTemplate::SceneTemplate()
 {
 	inv = new Inventory();
 	entityManager = new ecs::EntityManager();
 	areaLayerManager = new Area2DLayerManager();
-	entityFactory = new EntityFactory(entityManager,areaLayerManager);
+	entityFactory = new EntityFactory(entityManager, areaLayerManager);
+	dialogueManager = new DialogueManager(0);
+
 	isStarted = false;
 }
 
@@ -36,7 +40,7 @@ void SceneTemplate::startDialogue(const string& _eventToRead)
 {
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, true);
 	//entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
-	Game::Instance()->getDialogueManager()->ReadDialogue(_eventToRead);
+	dialogueManager->ReadDialogue(_eventToRead);
 
 }
 

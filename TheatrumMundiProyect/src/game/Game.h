@@ -26,7 +26,6 @@ public:
 	void render()const;
 	void start();
 	SceneManager* getSceneManager();
-	DialogueManager* getDialogueManager();
 	DataManager* getDataManager();
 	Game& operator=(const Game& o) = delete;
 	Game(const Game& o) = delete;

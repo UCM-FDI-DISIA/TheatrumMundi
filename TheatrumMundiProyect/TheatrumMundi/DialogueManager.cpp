@@ -27,9 +27,9 @@ DialogueManager::~DialogueManager() {
     delete dialogueReader;
 }
 
-void DialogueManager::Init(EntityFactory* entityFactory, EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, string _eventToRead)
+void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, string _eventToRead)
 {
-
+   
     if (isMiddleRoom) {
         //Character (Image)
         auto character = entityManager->addEntity(grp::DIALOGUE);

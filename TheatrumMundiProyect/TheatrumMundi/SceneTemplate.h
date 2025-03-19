@@ -10,6 +10,7 @@
 
 class Area2DLayerManager;
 class SceneRoomTemplate;
+class DialogueManager;
 
 class SceneTemplate
 {
@@ -18,6 +19,7 @@ protected:
 	Inventory* inv;
 	 ecs::EntityManager* entityManager;
 	 EntityFactory* entityFactory;
+	 DialogueManager* dialogueManager;
 	// DialogueManager* dialogueManager;
 	 Area2DLayerManager* areaLayerManager;
 	/// <summary>

@@ -60,7 +60,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 	{
 		isStarted = true;
 		//Register scene in dialogue manager
-		Game::Instance()->getDialogueManager()->setScene(this);
+		dialogueManager->setScene(this);
 
 		//Game::Instance()->getDialogueManager()->ReadDialogue(Puzzle2);
 		startDialogue("Puzzle2");
