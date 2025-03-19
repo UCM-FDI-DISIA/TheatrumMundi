@@ -22,7 +22,8 @@ ClockPuzzleScene::ClockPuzzleScene() : ScenePuzzleTemplate()
 	_actualMinute = 0;
 	hasLongCloackHand = false;
 	hasShortCloackHand = false;
-	placeHand = false;
+	
+
 }
 
 ClockPuzzleScene::~ClockPuzzleScene()
@@ -105,11 +106,11 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->addComponent<TriggerComponent>(cloack);
 		//Assigns the trigger bolean to true
 		cloack->getMngr()->getComponent<TriggerComponent>(cloack)->connect(TriggerComponent::AREA_ENTERED, [this]() {
-			placeHand = true;
+			SetplacedHand(true);
 			});
 		//Assigns the trigger bolean to false
 		cloack->getMngr()->getComponent<TriggerComponent>(cloack)->connect(TriggerComponent::AREA_LEFT, [this]() {
-			placeHand = false;
+			SetplacedHand(false);
 			});
 
 		//create the clock hands : minute
@@ -135,14 +136,18 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clockMinClick = entityManager->addComponent<ClickComponent>(_buttonMin);
 		clockMinClick->connect(ClickComponent::JUST_CLICKED, [_clockMinTransform, clockMinSound, this]()
 			{
+				if (!getSolved()) {
+
+
 #ifdef DEBUG
-				std::cout << "CLICKED MINUTERO\n";
+					std::cout << "CLICKED MINUTERO\n";
 #endif // DEBUG
-				if (hasLongCloackHand) {
-					AudioManager::Instance().playSound(clockMinSound);
-					_clockMinTransform->setRot(_clockMinTransform->getRot() + 15);
-					_actualMinute += 15;
-					if (_actualMinute == 360) _actualMinute = 0;
+					if (hasLongCloackHand) {
+						AudioManager::Instance().playSound(clockMinSound);
+						_clockMinTransform->setRot(_clockMinTransform->getRot() + 15);
+						_actualMinute += 15;
+						if (_actualMinute == 360) _actualMinute = 0;
+					}
 				}
 			});
 
@@ -159,71 +164,20 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clockHorClick = entityManager->addComponent<ClickComponent>(_buttonHor);
 		clockHorClick->connect(ClickComponent::JUST_CLICKED, [_clockHorTransform, clockHorSound, this]()
 			{
+				if (!getSolved()) {
+
 #ifdef DEBUG
-				std::cout << "CLICKED HORARIO\n";
+					std::cout << "CLICKED HORARIO\n";
 #endif // DEBUG
-				if (hasShortCloackHand) {
-					AudioManager::Instance().playSound(clockHorSound);
-					_clockHorTransform->setRot(_clockHorTransform->getRot() + 30);
-					_actualHour += 30;
-					if (_actualHour == 360) _actualHour = 0;
+					if (hasShortCloackHand) {
+						AudioManager::Instance().playSound(clockHorSound);
+						_clockHorTransform->setRot(_clockHorTransform->getRot() + 30);
+						_actualHour += 30;
+						if (_actualHour == 360) _actualHour = 0;
+					}
 				}
 			});
 
-
-		//create the buttons: check
-		auto _buttonCheck = entityManager->addEntity();
-		auto _buttonCheckTransform = entityManager->addComponent<Transform>(_buttonCheck, Vector2D(100, 550), Vector2D(0, 0), 70, 70, 0);
-
-		entityManager->addComponent<Image>(_buttonCheck, &sdlutils().images().at("clockCheckButton"));
-
-		entityManager->addComponent<RectArea2D>(_buttonCheck);
-
-
-		ClickComponent* clockCheckClick = entityManager->addComponent<ClickComponent>(_buttonCheck);
-		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [_buttonCheckTransform, sr, this]()
-			{
-				if (Check()) {
-
-					//Assigns to the room inventory the hint
-
-					Vector2D position = sr->GetInventory()->setPosition();
-					sr->GetInventory()->addItem(new Hint("AAA", "Me lo puedo beber??", &sdlutils().images().at("AAA")));
-					sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "AAA", EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-					sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
-
-					//Assign to this inventory the hint;
-					invID.push_back("AAA");
-					invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, "AAA", EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
-					invObjects.back()->getMngr()->setActive(invObjects.back(), false);
-
-					//Assign the lamda functions to the inventory item
-					invObjects.back()->getMngr()->getComponent<ClickComponent>(invObjects.back())->connect(ClickComponent::JUST_CLICKED, [this, sr]() {
-						setOriginalPos(invObjects.back()->getMngr()->getComponent<Transform>(invObjects.back())->getPos());
-						});
-
-					//if you drop the item, compares if it was drop in or out tge cloack
-					invObjects.back()->getMngr()->getComponent<ClickComponent>(invObjects.back())->connect(ClickComponent::JUST_RELEASED, [this, sr]() {
-						//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
-						if (!placeHand) invObjects.back()->getMngr()->getComponent<Transform>(invObjects.back())->getPos().set(getOriginalPos());
-						//in other case remove the item from this inventory and the inventory of Room1
-						else {
-							//Add the hand to the cloack
-							if (isCloackHand("AAA")) {
-
-								//remove the object from the inventory
-								sr->GetInventory()->removeItem("AAA", invObjects);
-							}
-							else invObjects.back()->getMngr()->getComponent<Transform>(invObjects.back())->getPos().set(getOriginalPos());
-						}
-						});
-#ifdef DEBUG
-					std::cout << "wii";
-#endif // DEBUG
-					Win();
-
-				}
-			});
 
 
 		//create the buttons: reset button
@@ -239,15 +193,44 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clockResetClick = entityManager->addComponent<ClickComponent>(_buttonResetPuzzle);
 		clockResetClick->connect(ClickComponent::JUST_CLICKED, [_clockHorTransform, _clockMinTransform, this]()
 			{
+				if (!getSolved()) {
+
 #ifdef DEBUG
-				std::cout << "WAAAAAAAAAA\n";
+					std::cout << "WAAAAAAAAAA\n";
 #endif // DEBUG
 
-				_clockHorTransform->setRot(90);
-				_actualHour = 90;
-				_clockMinTransform->setRot(0);
-				_actualMinute = 0;
+					_clockHorTransform->setRot(90);
+					_actualHour = 90;
+					_clockMinTransform->setRot(0);
+					_actualMinute = 0;
+				}
 			});
+
+		//create the buttons: check
+		auto _buttonCheck = entityManager->addEntity();
+		auto _buttonCheckTransform = entityManager->addComponent<Transform>(_buttonCheck, Vector2D(100, 550), Vector2D(0, 0), 70, 70, 0);
+
+		entityManager->addComponent<Image>(_buttonCheck, &sdlutils().images().at("clockCheckButton"));
+
+		entityManager->addComponent<RectArea2D>(_buttonCheck);
+
+
+		ClickComponent* clockCheckClick = entityManager->addComponent<ClickComponent>(_buttonCheck);
+		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [_buttonCheckTransform, sr, this,_buttonCheck,_buttonHor,_buttonMin, _buttonResetPuzzle]()
+			{
+				if (Check() && !getSolved()) {
+					Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+					//Assign to this inventory the hint;
+					AddInvItem("AAA", "Me lo puedo beber??",position, sr);
+					
+#ifdef DEBUG
+					std::cout << "wii";
+#endif // DEBUG
+					Win();
+
+				}
+			});
+
 
 
 		//BackButton
@@ -293,48 +276,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
-	//Add inventory items to the entitymanager of the scene
-
-	for (auto a : sr->GetInventory()->getItems()) {
-		//if the array of names hasn't have the name of this entity then it means that is new and has to be created again
-		if (!ItemAlreadyCreated(a->getID())) {
-
-			//Add the item name to the array names
-			invID.push_back(a->getID());
-			//Add the entitie to the array
-			invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, a->getID(), EntityFactory::RECTAREA, sr->GetInventory()->GetPosition(invID.size() - 1), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
-
-			auto it = invObjects.back();
-			
-
-			//Assign lamda functions
-			
-			//if you click in one item, assign the original position to the position of the object clicked
-			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this, sr,it]() {
-				setOriginalPos(it->getMngr()->getComponent<Transform>(it)->getPos());
-				});
-
-			//if you drop the item, compares if it was drop in or out tge cloack
-			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this, sr, a,it]() {
-				//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
-				if (!placeHand) it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
-				//in other case remove the item from this inventory and the inventory of Room1
-				else {
-					//Add the hand to the cloack
-					if (isCloackHand(a->getID())) { 
-						
-						//remove the object from the inventory
-						sr->GetInventory()->removeItem(a->getID(),invObjects);
-
-					}
-					else it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
-				}
-			});
-
-			//Set the active item to false
-			it->getMngr()->setActive(it, false);
-		}
-	}
+	createInvEntities(sr);
 }
 
 
@@ -351,7 +293,7 @@ void ClockPuzzleScene::unload()
 /// </summary>
 /// <param name="itemId"></param> --> item to got dropped
 /// <returns></returns> --> true if the item is a cloack hand and the cloack detected and false in other case
-bool ClockPuzzleScene::isCloackHand(const std::string& itemId)
+bool ClockPuzzleScene::isItemHand(const std::string& itemId)
 {
 	if (itemId == "boa2") {
 		hasLongCloackHand = true;
@@ -376,5 +318,6 @@ bool ClockPuzzleScene::Check()
 void ClockPuzzleScene::Win()
 {
 	room->resolvedPuzzle(7);
+	setSolved(true);
 }
 

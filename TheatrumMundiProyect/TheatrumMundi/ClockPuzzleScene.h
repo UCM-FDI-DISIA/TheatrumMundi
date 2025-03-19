@@ -7,10 +7,9 @@ public:
 	ClockPuzzleScene();
 	~ClockPuzzleScene();
 	void init(SceneRoomTemplate* sr) override;
-	void assignItemsToInv(SceneRoomTemplate* sr);
 	void refresh() override;
 	void unload() override;
-	bool isCloackHand(const std::string& itemId);
+	bool isItemHand(const std::string& itemId) override;
 	bool Check() override;
 	void Win() override;
 private:
@@ -18,7 +17,6 @@ private:
 	int _actualMinute;
 	bool hasLongCloackHand; //if the cloack have the minute hand
 	bool hasShortCloackHand; //if the cloack have the hour hand
-	bool placeHand; //if an object is on the trigger
 	Entity* cloack;
 	Entity* longCloackHand;
 	Entity* shortCloackHand;
