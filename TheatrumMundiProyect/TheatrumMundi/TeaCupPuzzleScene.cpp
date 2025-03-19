@@ -118,3 +118,8 @@ bool TeaCupPuzzleScene::Check()
 {
 	return _poisonIsChecked;
 }
+
+bool TeaCupPuzzleScene::isItemHand(const std::string& itemId)
+{
+	return false;
+}

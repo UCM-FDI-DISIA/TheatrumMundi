@@ -69,6 +69,7 @@ void Game::init() {
 
 	// Create the manager
 	_mngr = new SceneManager();
+	_datamngr = new DataManager();
 	
 }
 
@@ -131,6 +132,11 @@ void Game::exit()
 	_exitGame = true;
 }
 
+
+DataManager* Game::getDataManager()
+{
+	return _datamngr;
+}
 
 void Game::checkCollisions() {
 	

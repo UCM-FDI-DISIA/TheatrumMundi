@@ -1,15 +1,125 @@
 #include "ScenePuzzleTemplate.h"
+#include "SceneRoomTemplate.h"
+#include "ClickComponent.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
+
+
+
 
 void ScenePuzzleTemplate::Exit()
 {
 	Game::Instance()->getSceneManager()->popScene();
 }
 
+
+/// <summary>
+/// Searcch if the item is already created
+/// </summary>
+/// <param name="id"></param> --> item to search
+/// <returns></returns> --> return true if the item exists and false in the other case
+bool ScenePuzzleTemplate::ItemAlreadyCreated(const std::string& id)
+{
+	for (auto a : invID) {
+		if (a == id) return true;
+	}
+	return false;
+}
+
 ScenePuzzleTemplate::ScenePuzzleTemplate(): SceneTemplate()
 {
+	placeHand = false;
 }
 
 ScenePuzzleTemplate::~ScenePuzzleTemplate()
 {
+	//if memory leak delete the vector of entities
+}
+/// <summary>
+/// For all the Inventory itmes in the SceneRoomTemplate, we created a new Entity in the puzzle Scenes
+/// </summary>
+/// <param name="sr"></param> --> Referebce to thee SceneRoomTemplate
+void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
+{
+	int index = 0; // Need to search for the respective position of the item
+	for (auto a : sr->GetInventory()->getItems()) {
+		//if the array of names hasn't have the name of this entity then it means that is new and has to be created again
+		if (!ItemAlreadyCreated(a->getID())) {
+
+			//Add the item name to the array names
+			invID.push_back(a->getID());
+			//Add the entitie to the array
+			invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, a->getID(), EntityFactory::RECTAREA, sr->GetInventory()->GetPosition(index), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
+
+			auto it = invObjects.back();
+
+
+			//Assign lamda functions
+
+			//if you click in one item, assign the original position to the position of the object clicked
+			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this, sr, it]() {
+				setOriginalPos(it->getMngr()->getComponent<Transform>(it)->getPos());
+				});
+
+			//if you drop the item, compares if it was drop in or out tge cloack
+			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this, sr, a, it]() {
+				//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
+				if (!placeHand) it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
+				//in other case remove the item from this inventory and the inventory of Room1
+				else {
+					//Add the hand to the cloack
+					if (isItemHand(a->getID())) {
+
+						//remove the object from the inventory
+						sr->GetInventory()->removeItem(a->getID(), invObjects);
+
+					}
+					else it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
+				}
+				});
+
+			//Set the active item to false
+			it->getMngr()->setActive(it, false);
+		}
+		++index; //Add 1 to the position index
+	}
+}
+
+/// <summary>
+/// Add a new item to the InventoryEntity Array
+/// </summary>
+/// <param name="id"></param> --> Name of the item to include
+/// <param name="position"></param> --> Position of the new Item to set
+/// <param name="sr"></param> --> Reference to the SceneRoom
+void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& description, const Vector2D& position, SceneRoomTemplate* sr)
+{
+	if (!ItemAlreadyCreated(id)) {
+		sr->GetInventory()->addItem(new Hint(id, description, &sdlutils().images().at(id)));
+		sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
+		invID.push_back(id);
+		invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
+		auto it = invObjects.back();
+		it->getMngr()->setActive(it, false);
+
+		//Assign the lamda functions to the inventory item
+		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this,it]() {
+			setOriginalPos(it->getMngr()->getComponent<Transform>(it)->getPos());
+			});
+
+		//if you drop the item, compares if it was drop in or out tge cloack
+		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this,id,sr,it]() {
+			//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
+			if (!placeHand) it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
+			//in other case remove the item from this inventory and the inventory of Room1
+			else {
+				//Add the hand to the cloack
+				if (isItemHand(id)) {
+
+					//remove the object from the inventory
+					sr->GetInventory()->removeItem(id, invObjects);
+				}
+				else it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
+			}
+			});
+	}
 }

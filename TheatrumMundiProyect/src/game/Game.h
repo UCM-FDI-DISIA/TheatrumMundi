@@ -15,6 +15,7 @@ private:
 	
 	 SceneManager* _mngr;
 	 DialogueManager* _Dmngr;
+	 DataManager* _datamngr;
 	 Game();
 	
 	 void checkCollisions();

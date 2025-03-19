@@ -9,7 +9,6 @@ using namespace std;
 
 SceneTemplate::SceneTemplate()
 {
-	inv = new Inventory();
 	entityManager = new ecs::EntityManager();
 	areaLayerManager = new Area2DLayerManager();
 	entityFactory = new EntityFactory(entityManager, areaLayerManager);
