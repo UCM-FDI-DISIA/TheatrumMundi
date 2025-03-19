@@ -58,7 +58,6 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 		};
 	roomEvent[ClockPuzzleRsv] = [this] {
 		// InventoryLogic
-		
 		};
 	roomEvent[TeaCupPuzzleSnc] = [this]
 		{
@@ -379,8 +378,6 @@ void Room1Scene::init()
 			AudioManager::Instance().playSound(buttonSound);
 			GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
 
-			std::cout << "Inventory item: " << GetInventory()->hasItem("boa2") << std::endl;
-
 			// If the inventory is active, activate the items
 			if (GetInventory()->getActive()) {
 				entityManager->setActive(InventoryBackground, true);
@@ -536,12 +533,12 @@ void Room1Scene::init()
 			});
 		entityManager->setActive(buttonCloseLog, false);
 
-		// Botón que confirma que es posible el asesinato
+		// Botï¿½n que confirma que es posible el asesinato
 		auto buttonPosible = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3) - 20), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->getComponent<ClickComponent>(buttonPosible)->connect(ClickComponent::JUST_CLICKED, [this]() { roomEvent[GoodEnd]();});
 		entityManager->setActive(buttonPosible,false);
 
-		// Botón que confirma que es imposible el asesinato
+		// Botï¿½n que confirma que es imposible el asesinato
 		auto buttonImposible = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3)), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->getComponent<ClickComponent>(buttonImposible)->connect(ClickComponent::JUST_CLICKED, [this]() { roomEvent[BadEnd]();});
 		entityManager->setActive(buttonImposible, false);
