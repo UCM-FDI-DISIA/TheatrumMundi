@@ -42,6 +42,7 @@ void SceneManager::popScene()
 void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 {
 	scenes[index]->init(room);
+	cout << "actindexscene" << index << endl;
 	currentscenes.push_back(scenes[index]);
 	
 }
@@ -49,6 +50,7 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 void SceneManager::loadScene(int index)
 {
 	scenes[index]->init();
+	cout << "actindexscene" << index<<endl;
 	currentscenes.push_back(scenes[index]);
 }
 
