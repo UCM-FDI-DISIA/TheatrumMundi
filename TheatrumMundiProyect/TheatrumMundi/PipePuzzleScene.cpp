@@ -16,7 +16,7 @@
 #include "SceneRoomTemplate.h"
 #include "../src/components/TriggerComponent.h"
 #include "Inventory.h"
-
+#include "DialogueManager.h"
 
 PipePuzzleScene::PipePuzzleScene()
 	:ScenePuzzleTemplate()
@@ -629,59 +629,9 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		pathCreation();
 
 		//Register scene in dialogue manager
-		Game::Instance()->getDialogueManager()->setScene(this);
+		dialogueManager->setScene(this);
 
-		//All Screen: Filter that covers the room during dialog
-		auto _screenFilter = entityManager->addEntity(grp::DIALOGUE);
-		entityManager->addComponent<Transform>(_screenFilter, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
-		entityManager->addComponent<Image>(_screenFilter, &sdlutils().images().at("fondoPruebaLog"), 100); //background log
-		entityManager->addComponent<RectArea2D>(_screenFilter, areaLayerManager);
-		entityManager->addComponent<TriggerComponent>(_screenFilter);
-		entityManager->setActive(_screenFilter, false);
-
-		//Create dialogue text entity. Object that renders dialogue Text on Screen
-		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
-		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
-		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
-		RectArea2D* dialogInteractionArea = entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
-
-		entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _textbackground]()
-			{
-				if (!logActive) {
-					//read dialogue only if it has to
-					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
-					{
-						Game::Instance()->getDialogueManager()->ReadDialogue(Puzzle1);
-					}
-					else
-					{
-						_textbackground->getMngr()->setActive(_textbackground, false);
-					}
-				}
-			});
-		entityManager->addComponent<TriggerComponent>(_textbackground);
-		entityManager->setActive(_textbackground, false);
-
-		//CharacterImage
-		auto characterimg = entityManager->addEntity(grp::DIALOGUE);
-		entityManager->addComponent<Transform>(characterimg, Vector2D(0, 200), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
-		auto imCh = entityManager->addComponent<Image>(characterimg, &sdlutils().images().at("Dialog"));
-
-		Game::Instance()->getDialogueManager()->setCharacterImg(imCh);
-		entityManager->setActive(characterimg, false);
-
-		auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
-		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
-		entityManager->setActive(_textTest, false);
-
-
-		//Add writeText to dialogueManager
-		SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
-		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
-
-		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
-
-		startDialogue(Puzzle1);
+		startDialogue("Puzzle1");
 
 		//vector with pipe positions
 		vector<Vector2D> pipePositions = {
@@ -873,8 +823,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			Game::Instance()->getSceneManager()->popScene();
 			});
 
-		// Put the dialog interaction area in front of the other interactables
-		areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
+		
 	}
 }
 

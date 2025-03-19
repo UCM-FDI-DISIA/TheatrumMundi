@@ -4,8 +4,8 @@
 #include <vector>
 #include "Entity.h"
 #include "Vector2D.h"
-#include "Transform.h"
 #include "Manager.h"
+#include "../../src/Components/Transform.h"
 class SceneTemplate;
 class Hint;
 class Inventory

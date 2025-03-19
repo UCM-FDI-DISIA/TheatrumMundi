@@ -18,53 +18,56 @@
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 #include "DataManager.h"
 #include "EventsInfo.h"
+#include "DialogueManager.h"
+#include "../src/components/WriteTextComponent.h"
 MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 {
+	dialogueManager = new DialogueManager(1);
 	roomEvent.resize(MIDDLEROOMEVENTSIZE);
 	roomEvent[FIRST_DIALOGUE] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	//ROOM1
 	roomEvent[AFTER_ROOM1_GOOD3] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM1_BAD2] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM1_GOOD3] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	//ROOM2
 	roomEvent[AFTER_ROOM2_GOOD3] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM2_GOOD2] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM2_BAD2] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM2_BAD1] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	//ROOM3
 	roomEvent[AFTER_ROOM3_GOOD3] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_GOOD2SL] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_GOOD2KL] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_BAD2SK] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_BAD1K] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_BAD1S] = [this]() {
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 }
 
@@ -85,21 +88,17 @@ void MiddleRoomScene::init()
 		a.playSound(room1music);
 
 		//Register scene in dialogue manager
-		Game::Instance()->getDialogueManager()->setScene(this);
-		//MiddleRoomBkgrnd
+		dialogueManager->setScene(this);
+		//MiddleRoomBackground
 		entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::MIDDLEROOM);
 
-
+		
 		//CharacterImage
 		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
-		auto characterimg = entityManager->addEntity(grp::DIALOGUE);
-		entityManager->addComponent<Transform>(characterimg, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
-		auto imCh = entityManager->addComponent<Image>(characterimg, &sdlutils().images().at("Dialog"));
+		
+		
 
-		Game::Instance()->getDialogueManager()->setCharacterImg(imCh);
-		entityManager->setActive(characterimg, false);
-
-		/*
+		/*Fdua
 		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
 		auto _screenDetect = entityManager->addEntity(ecs::grp::DIALOGUE);
 		entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
@@ -107,28 +106,7 @@ void MiddleRoomScene::init()
 		*/
 
 		//Create dialogue text entity. Object that renders dialogue Text on Screen
-		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
-		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
-		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
-		entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
-
-		entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _textbackground]()
-			{
-				if (!logActive) {
-					//read dialogue only if it has to
-					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
-					{
-						Game::Instance()->getDialogueManager()->ReadDialogue(_eventToRead);
-					}
-				}
-			});
-		entityManager->addComponent<TriggerComponent>(_textbackground);
-		entityManager->setActive(_textbackground, false);
-
-
-		auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
-		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
-		entityManager->setActive(_textTest, false);
+		
 
 
 
@@ -140,19 +118,15 @@ void MiddleRoomScene::init()
 		LogComponent* logComp = entityManager->addComponent<LogComponent>(_log); //logComponent
 
 		SDL_Color colorText = { 255, 255, 255, 255 };
-		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog =
+		WriteTextComponent< std::list<std::pair<std::string, std::string>>>* writeLog =
 			entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
 
 		_log->getMngr()->setActive(_log, false); //hide log at the beggining
 
 		//Register log in dialogue manager
-		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
+		dialogueManager->setSceneLog(logComp);
 
-		//Add writeText to dialogueManager
-		SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
-		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
-
-		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
+		
 
 		roomEvent[LOGENABLE] = [this] {
 			//activate log
@@ -215,7 +189,7 @@ void MiddleRoomScene::init()
 
 			});
 		entityManager->setActive(buttonCloseLog, false);
-
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
 	}
 	SDL_Delay(1000);
 
@@ -283,6 +257,8 @@ void MiddleRoomScene::unload()
 
 void MiddleRoomScene::endDialogue()
 {
+	dialogueManager->setdisplayOnProcess(false);
+	std::cout << "entro";
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 	//Check the act room to load a specific room
 	int aux = Game::Instance()->getDataManager()->GetActualScene();

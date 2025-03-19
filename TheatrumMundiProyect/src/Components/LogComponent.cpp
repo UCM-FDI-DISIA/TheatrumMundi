@@ -6,6 +6,17 @@ using namespace std;
 
 LogComponent::LogComponent()
 {
+	_logActive = false;
+}
+
+void LogComponent::SetLogActive(bool logActive)
+{
+	_logActive = logActive;
+}
+
+bool LogComponent::GetLogActive()
+{
+	return _logActive;
 }
 
 
