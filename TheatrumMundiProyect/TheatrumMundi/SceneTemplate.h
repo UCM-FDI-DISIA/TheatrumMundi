@@ -14,7 +14,6 @@ class SceneTemplate
 {
 protected:
 
-	Inventory* inv;
 	 ecs::EntityManager* entityManager;
 	 EntityFactory* entityFactory;
 	// DialogueManager* dialogueManager;
@@ -55,13 +54,8 @@ public:
 	/// </summary>
 	/// <param name="_eventToRead"></param>
 	void startDialogue(const eventToRead& _eventToRead);
-	/// <summary>
-	/// Desactive de dialogue entities in scene
-	/// </summary>
-	virtual void endDialogue();
-	inline Inventory* GetInventory() { return inv; }
+	void endDialogue();
 	inline ecs::EntityManager* GetEntityManager() { return entityManager; }
-	inline void SetInventory(Inventory* _inv) { inv = _inv; }
 
 };
 

@@ -54,8 +54,6 @@ BooksPuzzleScene::~BooksPuzzleScene()
 
 void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 {
-	SetInventory(sr->GetInventory());
-
 	if (!isStarted) 
 	{
 		isStarted = true;
@@ -222,12 +220,12 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 				//Reward->getMngr()->setActive(Reward, true);
 
 				sr->GetInventory()->addItem(new Hint("boa2", "Manecilla de las horas de un reloj (un momento)", &sdlutils().images().at("boa2")));
-				sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "boa2", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-				sr->GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+				sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "boa2", EntityFactory::RECTAREA, sr->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+				sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
 
 				sr->GetInventory()->addItem(new Hint("exit", "Etiqueta de un bote de cianuro", &sdlutils().images().at("exit")));
-				sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "exit", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-				sr->GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+				sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "exit", EntityFactory::RECTAREA, sr->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+				sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
 
 				Reward->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, true);
 			}
