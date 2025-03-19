@@ -50,8 +50,8 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		a.setVolume(clockHorSound, 0.2);
 
 		//create the clock
-		cloack = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(600, 300), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		entityManager->addComponent<TriggerComponent>(cloack);
+		clock = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(600, 300), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		entityManager->addComponent<TriggerComponent>(clock);
 		//Assigns the trigger bolean to true
 		clock->getMngr()->getComponent<TriggerComponent>(clock)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
@@ -67,9 +67,9 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		if (!hasLongClockHand) longClockHand->getMngr()->setActive(longClockHand, false);
 
 		//create the clock hands : hour
-		shortCloackHand = entityFactory->CreateInteractableEntity(entityManager, "clockHorArrow", EntityFactory::RECTAREA, Vector2D(695, 360), Vector2D(0, 0), 20, 60, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
-		auto _clockHorTransform = shortCloackHand->getMngr()->getComponent<Transform>(shortCloackHand);
-		if (!hasShortCloackHand) shortCloackHand->getMngr()->setActive(shortCloackHand, false);
+		shortClockHand = entityFactory->CreateInteractableEntity(entityManager, "clockHorArrow", EntityFactory::RECTAREA, Vector2D(695, 360), Vector2D(0, 0), 20, 60, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
+		auto _clockHorTransform = shortClockHand->getMngr()->getComponent<Transform>(shortClockHand);
+		if (!hasShortClockHand) shortClockHand->getMngr()->setActive(shortClockHand, false);
 
 		//create the buttons: min
 		auto _buttonMin = entityManager->addEntity();
