@@ -4,6 +4,7 @@
 #include <vector>
 #include "../../TheatrumMundi/SceneManager.h"
 #include "../../TheatrumMundi/DialogueManager.h"
+#include "../../TheatrumMundi/DataManager.h"
 
 class Transform;
 class GameState;
@@ -14,6 +15,7 @@ private:
 	
 	 SceneManager* _mngr;
 	 DialogueManager* _Dmngr;
+	 DataManager* _datamngr;
 	 Game();
 	
 	 void checkCollisions();
@@ -26,6 +28,7 @@ public:
 	void start();
 	SceneManager* getSceneManager();
 	DialogueManager* getDialogueManager();
+	DataManager* getDataManager();
 	Game& operator=(const Game& o) = delete;
 	Game(const Game& o) = delete;
 	void exit();

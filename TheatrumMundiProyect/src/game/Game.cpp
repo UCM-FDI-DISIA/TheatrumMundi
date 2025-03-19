@@ -70,6 +70,7 @@ void Game::init() {
 	// Create the manager
 	_Dmngr = new DialogueManager();
 	_mngr = new SceneManager();
+	_datamngr = new DataManager();
 	
 }
 
@@ -135,6 +136,11 @@ DialogueManager* Game::getDialogueManager()
 {
 	assert(_Dmngr != nullptr);
 	return _Dmngr;
+}
+
+DataManager* Game::getDataManager()
+{
+	return _datamngr;
 }
 
 void Game::checkCollisions() {
