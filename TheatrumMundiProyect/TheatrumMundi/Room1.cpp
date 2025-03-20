@@ -233,8 +233,6 @@ void Room1Scene::init()
 		auto LivingBackground = entityFactory->CreateImageEntity(entityManager, "LivingroomBackground", Vector2D(- 1349-6, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(LivingBackground));
 
-		auto _corpseZoom = entityFactory->CreateImageEntity(entityManager, "CorspeBackground", Vector2D(0, 0), Vector2D(0, 0), 1349,748, 0, ecs::grp::ZOOMOBJ);
-		entityManager->setActive(_corpseZoom, false);
 
 		//set the scene the variant is 
 		Game::Instance()->getDataManager()->SetSceneCount(ROOM1);
@@ -319,33 +317,6 @@ void Room1Scene::init()
 
 
 			});
-
-
-
-		auto Corspe = entityFactory->CreateInteractableEntity(entityManager, "Corspe",EntityFactory::RECTAREA, Vector2D(1000, 422), Vector2D(0, 0), 268, 326, 0, areaLayerManager,EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Corspe));
-		entityManager->getComponent<ClickComponent>(Corspe)->connect(ClickComponent::JUST_CLICKED, [this,_corpseZoom,_quitButton,readyToResolveButton]() {
-			
-			_corpseZoom->getMngr()->setActive(_corpseZoom, true);
-			entityManager->setActive(_quitButton, true);
-	
-		
-			if (finishallpuzzles)
-			{
-				entityManager->setActive(readyToResolveButton, true);
-				roomEvent[ResolveCase]();
-			}
-			else
-			{
-				roomEvent[CorpseDialogue]();
-				entityManager->setActive(readyToResolveButton, false);
-			}
-			
-
-
-			
-
-		});
 
 
 		//Mobile
