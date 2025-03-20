@@ -407,9 +407,9 @@ void Room1Scene::init()
 		entityManager->addComponent<RectArea2D>(_corpseZoom, areaLayerManager);
 		entityManager->setActive(_corpseZoom, false);
 
-		auto Corspe = entityFactory->CreateInteractableEntity(entityManager, "Corspe", EntityFactory::RECTAREA, Vector2D(1000, 422), Vector2D(0, 0), 268, 326, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Corspe));
-		entityManager->getComponent<ClickComponent>(Corspe)->connect(ClickComponent::JUST_CLICKED, [this, _corpseZoom, _quitButton]() {
+		body = entityFactory->CreateInteractableEntity(entityManager, "Corspe", EntityFactory::RECTAREA, Vector2D(1000, 422), Vector2D(0, 0), 268, 326, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(body));
+		entityManager->getComponent<ClickComponent>(body)->connect(ClickComponent::JUST_CLICKED, [this, _corpseZoom, _quitButton]() {
 			_corpseZoom->getMngr()->setActive(_corpseZoom, true);
 			entityManager->setActive(_quitButton, true);
 			if (!finishallpuzzles)roomEvent[CorpseDialogue]();
@@ -530,17 +530,22 @@ void Room1Scene::init()
 
 void Room1Scene::resolvedPuzzle(int i)
 {
-
-	puzzlesol[i] = true;
-
-	if (puzzlesol[ClockPuzzleRsv] &&puzzlesol[PipePuzzleRsv] &&puzzlesol[BooksPuzzleRsv]) {
-		
-		roomEvent[i]();
-		finishallpuzzles = true;
+	if (i <4) {
+		int auxevent = event_size;
+		if (i == 0)  auxevent = PipePuzzleRsv;
+		else if (i == 1)  auxevent = BooksPuzzleRsv;
+		else if (i == 2)  auxevent = ClockPuzzleRsv;
+		else if (i == 3)  auxevent = TeaCupPuzzleRsv;
+		roomEvent[auxevent]();
+		bool aux = true;
+		for (bool a : puzzlesol) if (!a) aux = false;
+		finishallpuzzles = aux;
+		if (aux) entityManager->setActive(body, true);
 	}
-	else
-	{
-		finishallpuzzles = false;
+	else {
+#ifdef _DEBUG
+		std::cout << i << " invalid index" << std::endl;
+#endif
 	}
 }
 
