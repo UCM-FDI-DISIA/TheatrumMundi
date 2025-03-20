@@ -407,60 +407,14 @@ void Room1Scene::init()
 		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound,upButton]() {
 
 			AudioManager::Instance().playSound(buttonSound);
-			if (GetInventory()->getFirstItem() > 0) {
-				//Desactivate the last visible element
-				int lastVisibleIndex = GetInventory()->getFirstItem() + GetInventory()->getItemNumber() - 1;
-				if (lastVisibleIndex < GetInventory()->hints.size()) {
-					GetInventory()->hints[lastVisibleIndex]->getMngr()->setActive(GetInventory()->hints[lastVisibleIndex], false);
-				}
-
-				//Move the inventory up
-				GetInventory()->setFirstItem(GetInventory()->getFirstItem() - 1);
-				std::cout << "First item: " << GetInventory()->getFirstItem() << std::endl;
-
-				//Activate the new first visible element
-				GetInventory()->hints[GetInventory()->getFirstItem()]->getMngr()->setActive(GetInventory()->hints[GetInventory()->getFirstItem()], true);
-
-				//Change the position of the elements
-				for (int i = 0; i < GetInventory()->hints.size(); ++i) {
-					auto transform = GetInventory()->hints[i]->getMngr()->getComponent<Transform>(GetInventory()->hints[i]);
-					transform->getPos().setY(transform->getPos().getY() + 150); //Moves the hints one position up
-				}
-			}
-
+			scrollInventory(-1);
 		});
 
 		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
 		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, downButton]() {
 
 			AudioManager::Instance().playSound(buttonSound);
-
-			//more elements to show
-			if (GetInventory()->getFirstItem() + GetInventory()->getItemNumber() < GetInventory()->hints.size()) {
-				//Desactivate the first visible element
-				GetInventory()->hints[GetInventory()->getFirstItem()]->getMngr()->setActive(GetInventory()->hints[GetInventory()->getFirstItem()], false);
-
-				//Move the inventory down
-				GetInventory()->setFirstItem(GetInventory()->getFirstItem() + 1);
-				std::cout << "First item: " << GetInventory()->getFirstItem() << std::endl;
-
-				//Activate the new last visible element
-				int newLastVisibleIndex = GetInventory()->getFirstItem() + GetInventory()->getItemNumber() - 1;
-				if (newLastVisibleIndex < GetInventory()->hints.size()) {
-					GetInventory()->hints[newLastVisibleIndex]->getMngr()->setActive(GetInventory()->hints[newLastVisibleIndex], true);
-				}
-
-				//Change the position of the elements
-				for (int i = 0; i < GetInventory()->hints.size(); ++i) {
-					auto transform = GetInventory()->hints[i]->getMngr()->getComponent<Transform>(GetInventory()->hints[i]);
-					transform->getPos().setY(transform->getPos().getY() - 150); // Move the hints one position down
-				}
-
-				/*std::cout << "Cuchara pos: " << GetInventory()->hints[1]->getMngr()->getComponent<Transform>(GetInventory()->hints[1])->getPos().getY() << std::endl;
-				std::cout << "Boa1 pos: " << GetInventory()->hints[2]->getMngr()->getComponent<Transform>(GetInventory()->hints[2])->getPos().getY() << std::endl;
-				std::cout << "Boa2 pos: " << GetInventory()->hints[3]->getMngr()->getComponent<Transform>(GetInventory()->hints[3])->getPos().getY() << std::endl;*/
-			}
-
+			scrollInventory(1);
 		});
 
 		//Test obj 1

@@ -37,7 +37,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		isStarted = true;
 		room = sr;
 		
-		auto teaCupBackground = entityFactory->CreateImageEntity(entityManager, "TeaCupBackgroundWithoutSpoon", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+		teaCupBackground = entityFactory->CreateImageEntity(entityManager, "TeaCupBackgroundWithoutSpoon", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		teaCupBackground->getMngr()->removeComponent<Area2D>(teaCupBackground);
 
 		/*ecs::entity_t teaCupSpoon = entityFactory->CreateInteractableEntity( // Spoon entity
@@ -71,7 +71,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		entityManager->getComponent<ClickComponent>(teaCup) // The cup is clicked after introducing the spoon
-			->connect(ClickComponent::JUST_CLICKED, [teaCupBackground, teaCup, this]()
+			->connect(ClickComponent::JUST_CLICKED, [teaCup, this]()
 				{
 					if (_spoonIsInCup == false) return;
 					_poisonIsChecked = true;
@@ -98,13 +98,13 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 					teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
 				});*/
 
-		if (_spoonIsInCup) {
+		/*if (_spoonIsInCup) {
 			//entityManager->setActive(spoon, false);
 			//Change image to cup with spoon < --TODO
 				Texture * tx = &sdlutils().images().at("TeaCupBackgroundWithSpoon");
 			teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
 
-		}
+		}*/
 
 		//BackButton
 		auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
@@ -135,13 +135,13 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 
 				// If the inventory is active, activate the items
 				if (sr->GetInventory()->getActive()) {
-					//	entityManager->setActive(InventoryBackground, true);
+					//entityManager->setActive(InventoryBackground, true);
 					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], true);
 					}
 				}
 				else {
-					//	entityManager->setActive(InventoryBackground, false);
+					//entityManager->setActive(InventoryBackground, false);
 					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], false);
 					}
@@ -172,6 +172,8 @@ bool TeaCupPuzzleScene::isItemHand(const std::string& itemId)
 {
 	if (itemId == "TeaCupSpoon") {
 		_spoonIsInCup = true; //???
+		Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithSpoon");
+		teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
 		//spoon->getMngr()->setActive(spoon, true); 
 		return true;
 	}
