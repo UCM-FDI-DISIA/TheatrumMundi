@@ -17,19 +17,16 @@ protected:
 	/// Vector of lambda funtions of events
 	/// </summary>
 	std::vector< std::function<void()>> roomEvent;
-	ecs::entity_t body;
-	/// <summary>
-	/// Bool to control if all puzzles have been resolved
-	/// </summary>
+	//ecs::entity_t readyToResolveBotton;
 	bool finishallpuzzles;
 	bool logActive = false;
+	entity_t body;
 	//inventory
 
 
 	public:
 		//use the room enum for de index
-
-		virtual void resolvedPuzzle(int i);
+		virtual void resolvedPuzzle(int i)=0;
 		void setActiveBottons(bool active);
 		void setActiveZoomObj(bool active);
 		inline Inventory* GetInventory() { return inv; }

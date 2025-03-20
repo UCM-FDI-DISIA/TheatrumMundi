@@ -261,14 +261,18 @@ bool ClockPuzzleScene::isItemHand(const std::string& itemId)
 
 bool ClockPuzzleScene::Check()
 {
-	if (_actualHour == 180 && _actualMinute == 180) return true;
+	if (_actualHour == 180 && _actualMinute == 180 && !solved)
+	{
+		solved = true;
+		return true;
+	}
 	else 
 	return false;
 }
 
 void ClockPuzzleScene::Win()
 {
-	room->resolvedPuzzle(7);
+	room->resolvedPuzzle(2);
 	setSolved(true);
 }
 

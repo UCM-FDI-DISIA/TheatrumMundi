@@ -24,6 +24,7 @@ Game* Game::Instance()
 Game::~Game() {
 
 	delete _mngr;
+	delete _dataManager;
 	// release InputHandler if the instance was created correctly.
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
@@ -135,7 +136,7 @@ void Game::exit()
 
 DataManager* Game::getDataManager()
 {
-	return _datamngr;
+	return _dataManager;
 }
 
 void Game::checkCollisions() {
