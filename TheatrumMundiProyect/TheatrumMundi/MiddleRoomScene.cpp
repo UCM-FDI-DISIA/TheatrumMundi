@@ -108,25 +108,6 @@ void MiddleRoomScene::init()
 		*/
 
 		//Create dialogue text entity. Object that renders dialogue Text on Screen
-		
-
-
-
-		//Create log
-		auto _log = entityManager->addEntity(ecs::grp::UI);
-		entityManager->addComponent<Transform>(_log, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
-		Image* imLog = entityManager->addComponent<Image>(_log, &sdlutils().images().at("fondoPruebaLog"), 200); //background log
-
-		LogComponent* logComp = entityManager->addComponent<LogComponent>(_log); //logComponent
-
-		SDL_Color colorText = { 255, 255, 255, 255 };
-		WriteTextComponent< std::list<std::pair<std::string, std::string>>>* writeLog =
-			entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
-
-		_log->getMngr()->setActive(_log, false); //hide log at the beggining
-
-		//Register log in dialogue manager
-		dialogueManager->setSceneLog(logComp);
 
 		
 
@@ -137,7 +118,7 @@ void MiddleRoomScene::init()
 		//Log is always created on each middle room scene
 		sceneLog = new Log();
 		//Register log in dialogue manager
-		Game::Instance()->getDialogueManager()->setSceneLog(sceneLog);
+		dialogueManager->setSceneLog(sceneLog);
 
 		//background log
 		auto _backgroundLog = entityManager->addEntity(ecs::grp::LOG);

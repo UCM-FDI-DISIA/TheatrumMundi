@@ -11,6 +11,7 @@ private:
 	// first: author
 	// second: dialogueLine
 	std::list<TextInfo> _log;
+	bool _logActive;
 
 public:
 	
@@ -18,6 +19,9 @@ public:
 
 	//add new dialogue line to log registry
 	void addDialogueLineLog(std::string author, std::string dialogueLine);
+
+	void SetLogActive(bool logActive);
+	bool GetLogActive();
 
 	//delete of enitities
 	~Log();

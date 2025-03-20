@@ -16,3 +16,13 @@ void Log::addDialogueLineLog(std::string author, std::string dialogueLine)
 Log::~Log()
 {
 }
+
+void Log::SetLogActive(bool logActive)
+{
+	_logActive = logActive;
+}
+
+bool Log::GetLogActive()
+{
+	return _logActive;
+}
