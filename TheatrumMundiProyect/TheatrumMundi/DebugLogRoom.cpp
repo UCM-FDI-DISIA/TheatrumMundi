@@ -14,6 +14,7 @@
 #include "../src/components/RectArea2D.h"
 #include "Area2DLayerManager.h"
 #include "TextInfo.h"
+#include "DialogueManager.h"
 
 #include "../src/game/Game.h"
 
@@ -30,7 +31,7 @@ void DebugLogRoom::init()
 {
 	if (!isStarted) {
 		//Register scene in dialogue manager
-		Game::Instance()->getDialogueManager()->setScene(this);
+		dialogueManager->setScene(this);
 
 		//All Screen: Object to detect click on screen. Used to read displayed dialogue.
 		auto _screenDetect = entityManager->addEntity();
@@ -43,9 +44,10 @@ void DebugLogRoom::init()
 			{
 				if (!logActive && !isClickingButton) {
 					//read dialogue only if it has to
-					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
+					if (dialogueManager->getDisplayOnProcess())
 					{
-						Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermedia1);
+						dialogueManager->ReadDialogue("SalaIntermedia1");
+						dialogueManager->ReadDialogue("SalaIntermedia1");
 					}
 					else
 					{
@@ -75,14 +77,14 @@ void DebugLogRoom::init()
 		_log->getMngr()->setActive(_log, false); //hide log at the beggining
 
 		//Register log in dialogue manager
-		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
+		dialogueManager->setSceneLog(logComp);
 			
 
 		//Add writeText to dialogueManager
 		SDL_Color colorDialog = { 255, 0, 0, 255 }; // Color = red
-		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
+		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog,dialogueManager->getShowText());
 
-		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
+		//Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
 			
 			
 		//BUTTONS
@@ -134,7 +136,7 @@ void DebugLogRoom::init()
 		
 
 		//In this scene, in it's init, dialogue must start displaying on screen.
-		Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermedia1);
+		dialogueManager->ReadDialogue("SalaIntermedia1");
 		
 		
 	}

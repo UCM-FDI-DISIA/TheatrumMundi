@@ -4,19 +4,21 @@
 #include "Manager.h"
 #include "Inventory.h"
 #include "Hint.h"
+#include <string>
 
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 
 class Area2DLayerManager;
 class SceneRoomTemplate;
+class DialogueManager;
 
 class SceneTemplate
 {
 protected:
 
-	Inventory* inv;
 	 ecs::EntityManager* entityManager;
 	 EntityFactory* entityFactory;
+	 DialogueManager* dialogueManager;
 	// DialogueManager* dialogueManager;
 	 Area2DLayerManager* areaLayerManager;
 	/// <summary>
@@ -54,14 +56,12 @@ public:
 	/// Active de dialogue entities and pass a eventRoRead to DialogueManager
 	/// </summary>
 	/// <param name="_eventToRead"></param>
-	void startDialogue(const eventToRead& _eventToRead);
+	void startDialogue(const std::string& Character);
 	/// <summary>
 	/// Desactive de dialogue entities in scene
 	/// </summary>
 	virtual void endDialogue();
-	inline Inventory* GetInventory() { return inv; }
 	inline ecs::EntityManager* GetEntityManager() { return entityManager; }
-	inline void SetInventory(Inventory* _inv) { inv = _inv; }
 
 };
 

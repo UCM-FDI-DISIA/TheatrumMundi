@@ -1,5 +1,8 @@
 #include "Area2D.h"
-#include <iostream>
+
+#include "../ecs/Entity.h"
+#include "../ecs/Manager.h"
+
 Area2D::Area2D(Area2DLayerManager* areaLayerMngr, Vector2D localPosition)
 	: _areaLayerMngr(areaLayerMngr), _localPosition(localPosition)
 {
@@ -25,7 +28,9 @@ bool Area2D::pointIsOverlayered(Vector2D point)
 	
 	while (areaRvIt != _areaLayerMngr->rend() && !overlayered)
 	{
-		overlayered = (*areaRvIt)->containsPoint(point); 
+		bool entityIsActive = (*areaRvIt)->getContext()->getMngr()->isActive((*areaRvIt)->getContext());
+
+		overlayered = (*areaRvIt)->containsPoint(point) && entityIsActive;
 		++areaRvIt;
 	}
 

@@ -3,7 +3,6 @@
 
 #include <vector>
 #include "../../TheatrumMundi/SceneManager.h"
-#include "../../TheatrumMundi/DialogueManager.h"
 #include "../../TheatrumMundi/DataManager.h"
 
 class Transform;
@@ -14,19 +13,19 @@ class Game {
 private:
 	
 	 SceneManager* _mngr;
-	 DialogueManager* _Dmngr;
-	 DataManager* _dataManager;
+	 
+	 DataManager* _datamngr;
 	 Game();
 	
 	 void checkCollisions();
 public:
+	
 	static Game* Instance();
 	~Game();
 	void init();
 	void render()const;
 	void start();
 	SceneManager* getSceneManager();
-	DialogueManager* getDialogueManager();
 	DataManager* getDataManager();
 	Game& operator=(const Game& o) = delete;
 	Game(const Game& o) = delete;

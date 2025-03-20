@@ -6,9 +6,8 @@
 class SceneRoomTemplate: public SceneTemplate
 {
 protected:
-	/// <summary>
-	/// vector of the resolve puzzles in this Room
-	/// </summary>
+
+	Inventory* inv;
 	std::vector<bool> puzzlesol;
 	/// <summary>
 	/// Vector of pointer to puzzle entities of scene
@@ -18,7 +17,10 @@ protected:
 	/// Vector of lambda funtions of events
 	/// </summary>
 	std::vector< std::function<void()>> roomEvent;
-	//ecs::entity_t readyToResolveBotton;
+	ecs::entity_t body;
+	/// <summary>
+	/// Bool to control if all puzzles have been resolved
+	/// </summary>
 	bool finishallpuzzles;
 	bool logActive = false;
 	//inventory
@@ -26,9 +28,12 @@ protected:
 
 	public:
 		//use the room enum for de index
-		virtual void resolvedPuzzle(int i)=0;
+
+		virtual void resolvedPuzzle(int i);
 		void setActiveBottons(bool active);
 		void setActiveZoomObj(bool active);
+		inline Inventory* GetInventory() { return inv; }
+
 	SceneRoomTemplate();
 	virtual ~SceneRoomTemplate();
 	

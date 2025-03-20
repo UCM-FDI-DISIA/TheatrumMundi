@@ -30,6 +30,8 @@
 
 #include "SceneRoomTemplate.h"
 
+#include "DialogueManager.h"
+
 
 
 using namespace std;
@@ -54,60 +56,14 @@ BooksPuzzleScene::~BooksPuzzleScene()
 
 void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 {
-	SetInventory(sr->GetInventory());
-
 	if (!isStarted) 
 	{
 		isStarted = true;
 		//Register scene in dialogue manager
-		Game::Instance()->getDialogueManager()->setScene(this);
-
-		
-		//Create dialogue text entity. Object that renders dialogue Text on Screen
-		auto _textbackground = entityManager->addEntity(ecs::grp::DIALOGUE);
-		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
-		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
-		entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
-
-		entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _textbackground]()
-			{
-				if (!logActive) {
-					//read dialogue only if it has to
-					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
-					{
-						Game::Instance()->getDialogueManager()->ReadDialogue(Puzzle2);
-					}
-					else
-					{
-						_textbackground->getMngr()->setActive(_textbackground, false);
-					}
-				}
-			});
-		entityManager->addComponent<TriggerComponent>(_textbackground);
-		entityManager->setActive(_textbackground, false);
-
-		//CharacterImage
-		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
-		auto characterimg = entityManager->addEntity(ecs::grp::DIALOGUE);
-		entityManager->addComponent<Transform>(characterimg, Vector2D(0, 200), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
-		auto imCh = entityManager->addComponent<Image>(characterimg, &sdlutils().images().at("Dialog"));
-
-		Game::Instance()->getDialogueManager()->setCharacterImg(imCh);
-		entityManager->setActive(characterimg, false);
-
-		auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
-		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
-		entityManager->setActive(_textTest, false);
-
-
-		//Add writeText to dialogueManager
-		SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
-		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
-
-		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
+		dialogueManager->setScene(this);
 
 		//Game::Instance()->getDialogueManager()->ReadDialogue(Puzzle2);
-		startDialogue(Puzzle2);
+		startDialogue("Puzzle2");
 
 		
 
@@ -223,12 +179,12 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 				//Reward->getMngr()->setActive(Reward, true);
 
 				sr->GetInventory()->addItem(new Hint("boa2", "Manecilla de las horas de un reloj (un momento)", &sdlutils().images().at("boa2")));
-				sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "boa2", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-				sr->GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+				sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "boa2", EntityFactory::RECTAREA, sr->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+				sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
 
 				sr->GetInventory()->addItem(new Hint("exit", "Etiqueta de un bote de cianuro", &sdlutils().images().at("exit")));
-				sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "exit", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-				sr->GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+				sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "exit", EntityFactory::RECTAREA, sr->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+				sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
 
 				Reward->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, true);
 			}
@@ -301,7 +257,8 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			if (Check()) Reward->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, true);
 			});
 
-
+		// Put the dialog interaction area in front of the other interactables
+		//areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
 
 		//BackButton
 		auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
@@ -309,6 +266,8 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
 
 		entityManager->addComponent<RectArea2D>(_backButton);
+
+		
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
