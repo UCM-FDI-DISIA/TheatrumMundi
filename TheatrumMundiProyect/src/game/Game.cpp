@@ -69,7 +69,6 @@ void Game::init() {
 	sdlutils().hideCursor();
 
 	// Create the manager
-	_Dmngr = new DialogueManager();
 	_mngr = new SceneManager();
 	_dataManager = new DataManager();
 	
@@ -133,10 +132,11 @@ void Game::exit()
 {
 	_exitGame = true;
 }
-DialogueManager* Game::getDialogueManager()
+
+
+DataManager* Game::getDataManager()
 {
-	assert(_Dmngr != nullptr);
-	return _Dmngr;
+	return _datamngr;
 }
 
 DataManager* Game::getDataManager()

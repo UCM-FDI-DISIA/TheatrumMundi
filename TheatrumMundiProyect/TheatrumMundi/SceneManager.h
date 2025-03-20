@@ -14,6 +14,8 @@ enum SceneName {
 	BOOKS_PUZZLE,
 	CLOCK_PUZZLE,
 	TEA_CUP_PUZZLE,
+	ROOM_2,
+	ROOM_3,
 	SCENE_SIZE
 };
 class SceneManager

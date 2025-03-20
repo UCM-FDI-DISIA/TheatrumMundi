@@ -15,6 +15,7 @@ private:
 	// first: author
 	// second: dialogueLine
 	std::list<std::pair<std::string, std::string>> _log;
+	bool _logActive;
 
 protected:
 public:
@@ -22,6 +23,11 @@ public:
 
 	LogComponent();
 	
+	//Log activo?
+
+	void SetLogActive(bool logActive);
+	bool GetLogActive();
+
 	//add new dialogue line to log registry
 	void addDialogueLineLog(std::string author, std::string dialogueLine);
 

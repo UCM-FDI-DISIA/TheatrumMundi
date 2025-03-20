@@ -21,8 +21,8 @@ void SceneRoomTemplate::setActiveZoomObj(bool active)
 
 SceneRoomTemplate::SceneRoomTemplate() : SceneTemplate()
 {
-	for (int i = 0; i < 8;i++)puzzlesol.push_back(false);
-	//init inventory
+	for (int i = 0; i < 3;i++)puzzlesol.push_back(false);
+	inv = new Inventory();
 }
 
 SceneRoomTemplate::~SceneRoomTemplate()

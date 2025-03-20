@@ -6,9 +6,8 @@
 class SceneRoomTemplate: public SceneTemplate
 {
 protected:
-	/// <summary>
-	/// vector of the resolve puzzles in this Room
-	/// </summary>
+
+	Inventory* inv;
 	std::vector<bool> puzzlesol;
 	/// <summary>
 	/// Vector of pointer to puzzle entities of scene
@@ -29,6 +28,8 @@ protected:
 		virtual void resolvedPuzzle(int i)=0;
 		void setActiveBottons(bool active);
 		void setActiveZoomObj(bool active);
+		inline Inventory* GetInventory() { return inv; }
+
 	SceneRoomTemplate();
 	virtual ~SceneRoomTemplate();
 	

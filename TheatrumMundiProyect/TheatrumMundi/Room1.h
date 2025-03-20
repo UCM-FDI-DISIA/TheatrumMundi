@@ -4,7 +4,7 @@
 class Room1Scene : public SceneRoomTemplate
 {
 private:
-	eventToRead _eventToRead;
+	std::string _eventToRead;
 protected:
 	enum Room1Event
 	{
