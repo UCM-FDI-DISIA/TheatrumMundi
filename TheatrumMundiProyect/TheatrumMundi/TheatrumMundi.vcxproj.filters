@@ -53,6 +53,7 @@
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="MiddleRoomScene.cpp" />
     <ClCompile Include="ReadDialog.cpp" />
+    <ClCompile Include="CSVdataRecolector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -228,6 +229,7 @@
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="MiddleRoomScene.h" />
     <ClInclude Include="ReadDialog.h" />
+    <ClInclude Include="CSVdataRecolector.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />

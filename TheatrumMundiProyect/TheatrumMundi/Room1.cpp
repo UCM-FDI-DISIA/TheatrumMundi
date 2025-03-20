@@ -30,6 +30,10 @@ Room1Scene::Room1Scene() : SceneRoomTemplate(), _eventToRead("SalaIntermedia1")
 		};
 	roomEvent[CorpseDialogue] = [this]
 		{
+			roomEvent[ResolveCase]();
+
+
+
 #ifdef DEBUG
 			std::cout << "semurio";
 #endif // DEBUG
@@ -122,10 +126,13 @@ Room1Scene::~Room1Scene()
 {
 }
 
+
+
 void Room1Scene::init()
 {
  
 	if (!isStarted) {
+	
 		isStarted = true;
 		finishallpuzzles = false;
 		//Audio sfx 
@@ -250,6 +257,92 @@ void Room1Scene::init()
 		auto LivingBackground = entityFactory->CreateImageEntity(entityManager, "LivingroomBackground", Vector2D(- 1349-6, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(LivingBackground));
 
+
+		//set the scene the variant is 
+		Game::Instance()->getDataManager()->SetSceneCount(ROOM1);
+		//get actual variant
+		int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(ROOM1);
+		std::cout << "VARIANTE"<<variantAct << std::endl;
+	
+		auto possibleButton = entityFactory->CreateInteractableEntity(entityManager, "posible", EntityFactory::RECTAREA, Vector2D(500, 0), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(possibleButton, false);
+		entityManager->getComponent<ClickComponent>(possibleButton)->connect(ClickComponent::JUST_CLICKED, [this,variantAct]() {
+
+			//if its the not correct variant one dies
+			if (variantAct!=0)
+			{
+				Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
+				std::cout << "NO CORRECTA DE POS" << std::endl;
+
+
+			}
+		
+		
+			//change to intermediate room
+
+			});
+		auto noPossibleButton = entityFactory->CreateInteractableEntity(entityManager, "noPosible", EntityFactory::RECTAREA, Vector2D(600, 0), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(noPossibleButton, false);
+		entityManager->getComponent<ClickComponent>(noPossibleButton)->connect(ClickComponent::JUST_CLICKED, [this,variantAct]() {
+
+			//if its the not correct variant one dies
+			if (variantAct != 1||2)
+			{
+				std::cout << "NO CORRECTA DE NO POS" << std::endl;
+				Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
+			}
+
+			//change to intermediate room
+
+
+
+			});
+
+		auto resolveButton = entityFactory->CreateInteractableEntity(entityManager, "resolve", EntityFactory::RECTAREA, Vector2D(0, 500), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(resolveButton, false);
+		
+
+
+		auto noResolveButton = entityFactory->CreateInteractableEntity(entityManager, "noResolve", EntityFactory::RECTAREA, Vector2D(0, 600), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(noResolveButton, false);
+	
+		
+		//appears when the 3 puzzles have been resolved
+		auto readyToResolveButton = entityFactory->CreateInteractableEntity(entityManager, "B5", EntityFactory::RECTAREA, Vector2D(400, 400), Vector2D(0, 0), 400, 400, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+
+		entityManager->getComponent<ClickComponent>(readyToResolveButton)->connect(ClickComponent::JUST_CLICKED, [this, noResolveButton,resolveButton, readyToResolveButton]() {
+
+			entityManager->setActive(noResolveButton, true);
+			entityManager->setActive(resolveButton, true);
+			entityManager->setActive(readyToResolveButton, false);
+			
+		});
+		entityManager->setActive(readyToResolveButton, false);
+		entityManager->setActive(readyToResolveButton, false);
+		entityManager->getComponent<ClickComponent>(resolveButton)->connect(ClickComponent::JUST_CLICKED, [this, possibleButton, noPossibleButton, readyToResolveButton,resolveButton,noResolveButton]() {
+
+			entityManager->setActive(noPossibleButton, true);
+			
+			entityManager->setActive(readyToResolveButton, false);
+			entityManager->setActive(possibleButton, true);
+
+			entityManager->setActive(resolveButton, false);
+			entityManager->setActive(noResolveButton, false);
+
+			});
+
+		entityManager->getComponent<ClickComponent>(noResolveButton)->connect(ClickComponent::JUST_CLICKED, [this, noResolveButton, resolveButton, readyToResolveButton]() {
+
+
+			entityManager->setActive(noResolveButton, false);
+			entityManager->setActive(resolveButton, false);
+			entityManager->setActive(readyToResolveButton, true);
+
+
+
+			});
+
+
 		//Mobile
 
 		auto Mobile = entityFactory->CreateInteractableEntity(entityManager, "mobileSprite", EntityFactory::RECTAREA, Vector2D(1250, 500), Vector2D(0, 0), 245/3, 123/3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -336,9 +429,9 @@ void Room1Scene::init()
 		entityManager->addComponent<RectArea2D>(_corpseZoom, areaLayerManager);
 		entityManager->setActive(_corpseZoom, false);
 
-		auto Corspe = entityFactory->CreateInteractableEntity(entityManager, "Corspe", EntityFactory::RECTAREA, Vector2D(1000, 422), Vector2D(0, 0), 268, 326, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Corspe));
-		entityManager->getComponent<ClickComponent>(Corspe)->connect(ClickComponent::JUST_CLICKED, [this, _corpseZoom, _quitButton]() {
+		body = entityFactory->CreateInteractableEntity(entityManager, "Corspe", EntityFactory::RECTAREA, Vector2D(1000, 422), Vector2D(0, 0), 268, 326, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(body));
+		entityManager->getComponent<ClickComponent>(body)->connect(ClickComponent::JUST_CLICKED, [this, _corpseZoom, _quitButton]() {
 			_corpseZoom->getMngr()->setActive(_corpseZoom, true);
 			entityManager->setActive(_quitButton, true);
 			if (!finishallpuzzles)roomEvent[CorpseDialogue]();
@@ -503,26 +596,43 @@ void Room1Scene::init()
 			};
 
 		//X Button "B1"
+
+
+		std::cout << finishallpuzzles << std::endl;
+	
+		
+
+
+
+
+
 	}
 	SDL_Delay(1000);
 
 	
 }
 
+
+
 void Room1Scene::resolvedPuzzle(int i)
 {
-	if (i == ClockPuzzleRsv || i == PipePuzzleRsv || i == BooksPuzzleRsv || i == TeaCupPuzzleRsv) {
-		roomEvent[i]();
+	if (i <4) {
+		int auxevent = event_size;
+		if (i == 0)  auxevent = PipePuzzleRsv;
+		else if (i == 1)  auxevent = BooksPuzzleRsv;
+		else if (i == 2)  auxevent = ClockPuzzleRsv;
+		else if (i == 3)  auxevent = TeaCupPuzzleRsv;
+		roomEvent[auxevent]();
 		bool aux = true;
 		for (bool a : puzzlesol) if (!a) aux = false;
 		finishallpuzzles = aux;
 		if (aux) entityManager->setActive(body, true);
 	}
-else {
+	else {
 #ifdef _DEBUG
-	std::cout << i << " invalid index" << std::endl;
+		std::cout << i << " invalid index" << std::endl;
 #endif
-}
+	}
 }
 
 void Room1Scene::refresh()
