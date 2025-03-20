@@ -4,7 +4,6 @@
 #include "../TheatrumMundi/Area2DLayerManager.h"
 #include "DialogueManager.h"
 #include "Game.h"
-#include "Log.h"
 
 using namespace std;
 
@@ -36,7 +35,6 @@ SceneTemplate::~SceneTemplate()
 	delete entityManager;
 	delete areaLayerManager;
 	delete entityFactory;
-	delete sceneLog;
 }
 void SceneTemplate::startDialogue(const string& _eventToRead)
 {

@@ -45,6 +45,7 @@ void WriteTextComponent<TextInfo>::update()
 template <>
 void WriteTextComponent<std::list<TextInfo>>::render()
 {
+	if (textStructure->empty()) return;
 	// Definir el tamaño total de la textura final
 	int totalWidth = 1000; // Ajusta según sea necesario
 	int totalHeight = 0;  // Se calculará dinámicamente

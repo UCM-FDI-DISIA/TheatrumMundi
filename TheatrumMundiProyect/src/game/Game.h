@@ -7,12 +7,14 @@
 
 class Transform;
 class GameState;
+class Log;
 
 class Game {
 	
 private:
 	
 	 SceneManager* _mngr;
+	 Log* _log;
 	 
 	 DataManager* _datamngr;
 	 Game();
@@ -27,6 +29,7 @@ public:
 	void start();
 	SceneManager* getSceneManager();
 	DataManager* getDataManager();
+	Log* getLog();
 	Game& operator=(const Game& o) = delete;
 	Game(const Game& o) = delete;
 	void exit();

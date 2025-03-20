@@ -125,28 +125,9 @@ void Room1Scene::init()
 		dialogueManager->setScene(this);
 
 
-
-		//Create log
-		auto _log = entityManager->addEntity(ecs::grp::UI);
-		entityManager->addComponent<Transform>(_log, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
-		Image* imLog = entityManager->addComponent<Image>(_log, &sdlutils().images().at("fondoPruebaLog"), 200); //background log
-
-		LogComponent* logComp = entityManager->addComponent<LogComponent>(_log); //logComponent
-
-		SDL_Color colorText = { 255, 255, 255, 255 };
-		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog =
-			entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
-
-		_log->getMngr()->setActive(_log, false); //hide log at the beggining
-
-		//Register log in dialogue manager
-		dialogueManager->setSceneLog(logComp);
-
-
 		//CREATE LOG
 
 		//logic log
-		sceneLog = Game::Instance()->getDialogueManager()->getSceneLog();
 		//Register log in dialogue manager
 
 		//background log
@@ -174,7 +155,7 @@ void Room1Scene::init()
 		Image* imTextLog = entityManager->addComponent<Image>(_textLog, &sdlutils().images().at("fondoPruebaLog"));
 		SDL_Color colorText = { 255, 255, 255, 255 };
 		WriteTextComponent<std::list<TextInfo>>* writeLog =
-			entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, sceneLog->getLogList()); //write text component
+			entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, Game::Instance()->getLog()->getLogList()); //write text component
 		entityManager->setActive(_textLog, false);
 
 		ScrollComponentLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
@@ -349,10 +330,6 @@ void Room1Scene::init()
 		// Quit corpse zoom sbutton
 		areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(_quitButton)->getLayerPos());
 
-		// Put the dialog interaction area in front of the other interactables
-		areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
-
-		
 		//UI
 		//Pause
 		auto buttonPause = entityFactory->CreateInteractableEntity(entityManager,"B3", EntityFactory::RECTAREA ,Vector2D(20,20), Vector2D(0,0), 90,90,0,areaLayerManager,EntityFactory::NODRAG ,ecs::grp::UI);

@@ -116,9 +116,7 @@ void MiddleRoomScene::init()
 		//CREATE LOG
 
 		//Log is always created on each middle room scene
-		sceneLog = new Log();
 		//Register log in dialogue manager
-		dialogueManager->setSceneLog(sceneLog);
 
 		//background log
 		auto _backgroundLog = entityManager->addEntity(ecs::grp::LOG);
@@ -146,7 +144,7 @@ void MiddleRoomScene::init()
 		Image* imTextLog = entityManager->addComponent<Image>(_textLog, &sdlutils().images().at("fondoPruebaLog"));
 		SDL_Color colorText = { 255, 255, 255, 255 };
 		WriteTextComponent<std::list<TextInfo>>* writeLog =
-			entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, sceneLog->getLogList()); //write text component
+			entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, Game::Instance()->getLog()->getLogList()); //write text component
 		entityManager->setActive(_textLog, false);
 
 		ScrollComponentLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));

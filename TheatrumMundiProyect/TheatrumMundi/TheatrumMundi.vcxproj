@@ -51,7 +51,6 @@
     <ClCompile Include="CalendearMobileTestScene.cpp" />
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="DebugInventoryScene.cpp" />
-    <ClCompile Include="DebugLogRoom.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
     <ClCompile Include="DialogTestScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
@@ -224,7 +223,6 @@
     <ClInclude Include="CalendearMobileTestScene.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="DebugInventoryScene.h" />
-    <ClInclude Include="DebugLogRoom.h" />
     <ClInclude Include="ClockPuzzleScene.h" />
     <ClInclude Include="DialogTestScene.h" />
     <ClInclude Include="DialogueManager.h" />

@@ -17,7 +17,7 @@
 
 using namespace std;
 
-DialogueManager::DialogueManager(int numRooms) : _sceneLog(nullptr), _scene(nullptr), displayOnProcess(false), characterimg(nullptr) {
+DialogueManager::DialogueManager(int numRooms) : _scene(nullptr), displayOnProcess(false), characterimg(nullptr) {
     actualroom = 1;
     room = "Sala" + to_string(actualroom);
     dialogueReader = new ReadDialog(numRooms);
@@ -66,7 +66,7 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     //Pass dialog if clicked
     entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _textbackground, _eventToRead]()
         {
-            if (!(_sceneLog->GetLogActive())) {
+            if (!(Game::Instance()->getLog()->GetLogActive())) {
                 //read dialogue only if it has to
                 if (getDisplayOnProcess())
                 {
@@ -93,16 +93,6 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
 
 }
 
-void DialogueManager::setSceneLog(Log* sceneLog)
-{
-	_sceneLog = sceneLog;
-}
-
-Log* DialogueManager::getSceneLog()
-{
-	return _sceneLog;
-}
-
 void DialogueManager::setScene(SceneTemplate* scene)
 {
 	_scene = scene;
@@ -115,6 +105,7 @@ void DialogueManager::ReadDialogue(const string& event) {
         TextInfo elem = roomDialogues[event].front();
         _showText->Character = elem.Character;
         _showText->Text = elem.Text;
+        Game::Instance()->getLog()->addDialogueLineLog(elem.Character, elem.Text);
         setCharacterImage(elem.Character);
         roomDialogues[event].pop_front();
     }

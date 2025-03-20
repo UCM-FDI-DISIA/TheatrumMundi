@@ -7,6 +7,8 @@
 #include "../utils/Vector2D.h"
 #include "../utils/Collisions.h"
 
+#include "../../TheatrumMundi/Log.h"
+
 #include <Windows.h>
 
 
@@ -69,6 +71,7 @@ void Game::init() {
 	// Create the manager
 	_mngr = new SceneManager();
 	_datamngr = new DataManager();
+	_log = new Log();
 	
 }
 
@@ -135,6 +138,11 @@ void Game::exit()
 DataManager* Game::getDataManager()
 {
 	return _datamngr;
+}
+
+Log* Game::getLog()
+{
+	return _log;
 }
 
 void Game::checkCollisions() {
