@@ -6,13 +6,14 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../utils/Vector2D.h"
 #include "../utils/Collisions.h"
-
+#include "../../TheatrumMundi/CSVdataRecolector.h"
 #include <Windows.h>
 
 
 Game* Game::_instance = nullptr;
 Game::Game() {
 	_exitGame = false;
+	
 }
 Game* Game::Instance()
 {
@@ -69,7 +70,7 @@ void Game::init() {
 	// Create the manager
 	_mngr = new SceneManager();
 	_datamngr = new DataManager();
-	
+	_csvdata = new CSVdataRecolector();
 }
 
 void Game::render() const
@@ -116,7 +117,7 @@ void Game::start() {
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
 	}
-
+	_csvdata->safeData();
 }
 
 SceneManager* Game::getSceneManager()
