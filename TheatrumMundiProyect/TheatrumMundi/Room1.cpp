@@ -135,7 +135,8 @@ void Room1Scene::init()
 		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
 		RectArea2D* dialogInteractionArea = entityManager->addComponent<RectArea2D>(_textbackground,areaLayerManager);
 
-		entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this,_textbackground]()
+		auto _textbackgroundClick = entityManager->addComponent<ClickComponent>(_textbackground);
+		_textbackgroundClick->connect(ClickComponent::JUST_CLICKED, [this,_textbackground]()
 			{
 				if (!logActive) {
 					//read dialogue only if it has to
@@ -185,7 +186,7 @@ void Room1Scene::init()
 		entityManager->setActive(_titleLog, false);
 
 		//scroll log buttons
-		auto scrollingLog = entityFactory->CreateInteractableEntityScroll(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1000, 100), Vector2D(0, 0), 100, 100, 270, areaLayerManager, sdlutils().height() / 50, 50, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::LOG);
+		auto scrollingLog = entityFactory->CreateInteractableEntityScroll(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1000, 100), Vector2D(0, 0), 100, 100, 270, areaLayerManager, sdlutils().height() / 50, 50, EntityFactory::SCROLLINVERSE, 0, EntityFactory::NODRAG, ecs::grp::LOG);
 		auto upScrollingLog = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1000, 600), Vector2D(0, 0), 100, 100, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
 		auto ScrollComponentLog = entityManager->getComponent<ScrollComponent>(scrollingLog);
 		entityManager->setActive(scrollingLog, false);
@@ -535,8 +536,14 @@ void Room1Scene::init()
 
 			});
 
-		buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
-			while (ScrollComponentLog->numPhases() < (Game::Instance()->getDialogueManager()->getSceneLog()->getLogList()->size() - 1 / 5)) {
+		//buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
+		//	while (ScrollComponentLog->numPhases() < (Game::Instance()->getDialogueManager()->getSceneLog()->getLogList()->size() / 5)) {
+		//		ScrollComponentLog->addPhase();
+		//	}
+		//	});
+
+		_textbackgroundClick->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
+			while (ScrollComponentLog->numPhases() < (Game::Instance()->getDialogueManager()->getSceneLog()->getLogList()->size() / 5)) {
 				ScrollComponentLog->addPhase();
 			}
 			});

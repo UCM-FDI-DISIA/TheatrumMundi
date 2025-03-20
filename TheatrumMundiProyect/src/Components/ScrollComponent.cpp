@@ -12,13 +12,14 @@ ScrollComponent::ScrollComponent(int velocity, float time, Inverse isInverse, in
 	_eventConnectionsScroll.insert({ STARTSCROLLING, {} });
 	_eventConnectionsScroll.insert({ ENDEDSCROLLING, {} });
 
-	finalPhase = numPhases;
 	if (isInverse == Inverse::NORMAL) {
-		phase = startPhase;
+		finalPhase = numPhases;
+		phase = 0;
 		_inverse = NORMAL;
 	}
 	else { //Inverse::INVERSE
-		phase = finalPhase;
+		startPhase = 0 - numPhases;
+		phase = 0;
 		_inverse = INVERSE;
 	}
 	_timeScroll = 0;
@@ -49,6 +50,8 @@ void ScrollComponent::Scroll(Direction _direction) {
 	switch (_direction) {
 		case UP:
 			if (!startPhaseCheck()) {
+				std::cout << "FASE: " << phase << std::endl;
+				std::cout << "FASE INICIAL: " << startPhase << std::endl;
 				_dir = Vector2D(0, -1 * _velocity);
 				phase--;
 			}
@@ -190,11 +193,8 @@ void ScrollComponent::addElementToScroll(Transform* _objectT)
 
 int ScrollComponent::numPhases()
 {
-	/*if (_inverse == INVERSE) {
-		return finalPhase;
-	} 
-	else return (-1 * startPhase);*/
-	return finalPhase + startPhase;
+	if (finalPhase + startPhase > 0) return finalPhase + startPhase;
+	else return (-1 * (finalPhase + startPhase));
 }
 
 //void ScrollComponent::restartPosition()
