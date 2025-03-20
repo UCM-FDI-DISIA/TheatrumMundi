@@ -49,6 +49,7 @@
     <ClCompile Include="BooksPuzzleScene.cpp" />
     <ClCompile Include="Area2DLayerManager.cpp" />
     <ClCompile Include="CalendearMobileTestScene.cpp" />
+    <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="DebugInventoryScene.cpp" />
     <ClCompile Include="DebugLogRoom.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
@@ -65,6 +66,7 @@
     <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PipePuzzleScene.cpp" />
     <ClCompile Include="PhysicsBodyComponent.cpp" />
+    <ClCompile Include="ReadDialog.cpp" />
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScenePuzzleTemplate.cpp" />
@@ -221,6 +223,7 @@
     <ClInclude Include="BooksPuzzleScene.h" />
     <ClInclude Include="Area2DLayerManager.h" />
     <ClInclude Include="CalendearMobileTestScene.h" />
+    <ClInclude Include="DataManager.h" />
     <ClInclude Include="DebugInventoryScene.h" />
     <ClInclude Include="DebugLogRoom.h" />
     <ClInclude Include="ClockPuzzleScene.h" />
@@ -239,6 +242,7 @@
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="PipePuzzleScene.h" />
     <ClInclude Include="PhysicsBodyComponent.h" />
+    <ClInclude Include="ReadDialog.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScenePuzzleTemplate.h" />
