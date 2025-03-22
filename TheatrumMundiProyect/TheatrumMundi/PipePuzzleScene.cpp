@@ -58,18 +58,7 @@ void PipePuzzleScene::moduleCreation()
 
 void PipePuzzleScene::pathCreation()
 {
-	/*auto plantilla = entityManager->addEntity();
-
-	// add transfomr
-	auto plantillaT = entityManager->addComponent<Transform>(
-		plantilla, Vector2D(0, 0), Vector2D(0, 0), 1350, 750, 0
-	);
-
-	// add image
-	entityManager->addComponent<Image>(plantilla, &sdlutils().images().at("plantilla"));
-
-	// add area of visualization of the image
-	entityManager->addComponent<RectArea2D>(plantilla);*/
+	
     int nextId = 0;
 
 	//PATH 0 
@@ -569,7 +558,7 @@ void PipePuzzleScene::pathCreation()
 
 bool PipePuzzleScene::Check()
 {
-	if (_waterPipes[8]->getPipeInfo().result ==true) //the last pipe has the solution
+	if (_waterPipes[8]->getPipeInfo().result ==true&&!solved) //the last pipe has the solution
 	{
 		solved = true;
 		Win();
@@ -577,7 +566,7 @@ bool PipePuzzleScene::Check()
 	}
 	else
 	{
-		solved= false;
+
 		return false;
 	}
 }
@@ -621,6 +610,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 {
 	
 	if (!isStarted) {
+		_updatePuzzle = false;
 		solved = false;
 		isStarted = true;
 		room = sr;
@@ -725,72 +715,6 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 				});
 		}
 
-
-/*		vector<Vector2D> pathPositions = {
-	Vector2D(50, 50),
-	Vector2D(150, 50),
-	Vector2D(250, 50),
-	Vector2D(350, 50),
-	Vector2D(450, 50),
-	Vector2D(550, 50),
-	Vector2D(650, 50),
-	Vector2D(750, 50),
-
-	Vector2D(50, 150),
-	Vector2D(150, 150),
-	Vector2D(250, 150),
-	Vector2D(350, 150),
-	Vector2D(450, 150),
-	Vector2D(550, 150),
-	Vector2D(650, 150),
-	Vector2D(750, 150),
-
-	Vector2D(50, 250),
-	Vector2D(150, 250),
-	Vector2D(250, 250),
-	Vector2D(350, 250),
-	Vector2D(450, 250),
-	Vector2D(550, 250),
-	Vector2D(650, 250),
-	Vector2D(750, 250),
-	Vector2D(400, 350)
-		};
-
-
-
-		for (int i = 0; i < pathPositions.size(); i++) {
-
-			// create path
-			_pathEnt.push_back(entityManager->addEntity());
-			
-
-			// add transform
-			auto pathTransform = entityManager->addComponent<Transform>(
-				_pathEnt[i], pathPositions[i], Vector2D(0, 0), 60, 60, 0
-			);
-
-			cout << "CARGADO" << i << endl;
-			// add image
-			entityManager->addComponent<Image>(_pathEnt[i], &sdlutils().images().at("init"));
-			// add area of visualization of the image
-			entityManager->addComponent<RectArea2D>(_pathEnt[i]);
-			Image* imageComponent = _pathEnt[i]->getMngr()->getComponent<Image>(_pathEnt[i]);
-
-			if (_waterPath[i]._withWater)
-			{
-				//texture with water
-				imageComponent->setTexture(&sdlutils().images().at("pathWith"));
-
-			}
-			else
-			{
-				imageComponent->setTexture(&sdlutils().images().at("pathWithout"));
-			}
-			
-			
-
-		}
-	*/
 		// create cube
 		auto cubeEntity = entityManager->addEntity();
 
@@ -1011,74 +935,46 @@ void PipePuzzleScene::unload()
 }
 void PipePuzzleScene::updatePuzzle() {
 
-	//create queue for 3 types of elements that have to be updated 
-	std::queue<int> pipesToUpdate, modulesToUpdate, pathsToUpdate; 
+	bool stateChanged = true;
 
-	// add modules 
-	for (int i = 0; i < _modules.size(); i++) {
-		modulesToUpdate.push(i);
-		//std::cout << "Module " << i << " has water." << std::endl;  
-		
-	}
-
-	// add pipes
-	for (int i = 0; i < _waterPipes.size(); i++) {
-		pipesToUpdate.push(i);
-		//std::cout << "Pipe " << i << " has water." << std::endl;  
-		
-	}
-
-	// add paths
-	for (int i = 0; i < _waterPath.size(); i++) {
-		pathsToUpdate.push(i);
-		//std::cout << "Path " << i << " has water." << std::endl;  
-	}
-
-	//while there is something to update we process
-	while (!pipesToUpdate.empty() || !modulesToUpdate.empty() || !pathsToUpdate.empty()) {
-
-		//Update modules
-		while (!modulesToUpdate.empty()) {
-
-			//get the index of the fist one
-			int moduleIndex = modulesToUpdate.front();
-
-			// update x module
-			waterPassModule(moduleIndex);
-			//pop to have the next one ready
-			modulesToUpdate.pop();
-			//std::cout << "Updating Module " << moduleIndex << std::endl;  
+	while (stateChanged) {
+		stateChanged = false;
 
 
+		for (int i = 0; i < _modules.size(); i++) {
+			bool before = _modules[i]->getModuleInfo().result;
+			waterPassModule(i);
+			bool after = _modules[i]->getModuleInfo().result;
+
+			if (before != after) {
+				stateChanged = true;
+			}
 		}
 
-		//Update pipes
-		while (!pipesToUpdate.empty()) {
+		for (int i = 0; i < _waterPipes.size(); i++) {
+			bool before = _waterPipes[i]->getPipeInfo().result;
+			waterPassPipe(i);
+			bool after = _waterPipes[i]->getPipeInfo().result;
 
-			//get the index of the fist one
-			int pipeIndex = pipesToUpdate.front();
 
-			// update x pipe
-			waterPassPipe(pipeIndex);
-			//pop to have the next one ready
-			pipesToUpdate.pop();
-			//std::cout << "Updating Pipe " << pipeIndex << std::endl; 
+			if (before != after) {
+				stateChanged = true;
+			}
 		}
 
-		//Update paths
-		while (!pathsToUpdate.empty()) {
+		for (int i = 0; i < _waterPath.size(); i++) {
+			bool before = _waterPath[i]._withWater;
+			waterPassPath(i);
+			bool after = _waterPath[i]._withWater;
 
-			//get the index of the fist one
-			int pathIndex = pathsToUpdate.front();
 
-			// update x path
-			waterPassPath(pathIndex); 
-			//pop to have the next one ready
-			pathsToUpdate.pop();
-			//std::cout << "Updating Path " << pathIndex << std::endl;
+			if (before != after) {
+				stateChanged = true;
+			}
 		}
 
 	}
+
 
 	// check if puzzle is correct
 	Check();

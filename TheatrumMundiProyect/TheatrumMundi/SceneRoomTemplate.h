@@ -23,7 +23,7 @@ protected:
 	/// </summary>
 	bool finishallpuzzles;
 	bool logActive = false;
-	entity_t body;
+
 	//inventory
 
 
