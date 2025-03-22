@@ -14,7 +14,7 @@ private:
 	
 	 SceneManager* _mngr;
 	 
-	 DataManager* _datamngr;
+	 DataManager* _dataManager;
 	 CSVdataRecolector* _csvdata;
 	 Game();
 	
