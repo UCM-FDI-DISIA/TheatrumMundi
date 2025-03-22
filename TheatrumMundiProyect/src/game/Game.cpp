@@ -70,7 +70,7 @@ void Game::init() {
 
 	// Create the manager
 	_mngr = new SceneManager();
-	_datamngr = new DataManager();
+	_dataManager = new DataManager();
 	_csvdata = new CSVdataRecolector();
 }
 
@@ -131,6 +131,7 @@ SceneManager* Game::getSceneManager()
 void Game::exit()
 {
 	_exitGame = true;
+	_csvdata->AddEntry("jaja","TUMADRE",Vector2D(10,100));
 }
 
 
