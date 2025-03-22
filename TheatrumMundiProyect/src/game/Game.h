@@ -7,14 +7,15 @@
 
 class Transform;
 class GameState;
-
+class CSVdataRecolector;
 class Game {
 	
 private:
 	
 	 SceneManager* _mngr;
 	 
-	 DataManager* _datamngr;
+	 DataManager* _dataManager;
+	 CSVdataRecolector* _csvdata;
 	 Game();
 	
 	 void checkCollisions();

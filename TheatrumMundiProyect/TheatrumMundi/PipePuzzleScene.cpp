@@ -1086,7 +1086,7 @@ void PipePuzzleScene::updatePuzzle() {
 
 void PipePuzzleScene::Win()
 {
-	room->resolvedPuzzle(7);
+	room->resolvedPuzzle(0);
 	
 	//puts the gloves in scene
 	// create entity

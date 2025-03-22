@@ -23,13 +23,13 @@ protected:
 	/// </summary>
 	bool finishallpuzzles;
 	bool logActive = false;
+	entity_t body;
 	//inventory
 
 
 	public:
 		//use the room enum for de index
-
-		virtual void resolvedPuzzle(int i);
+		virtual void resolvedPuzzle(int i)=0;
 		void setActiveBottons(bool active);
 		void setActiveZoomObj(bool active);
 		inline Inventory* GetInventory() { return inv; }

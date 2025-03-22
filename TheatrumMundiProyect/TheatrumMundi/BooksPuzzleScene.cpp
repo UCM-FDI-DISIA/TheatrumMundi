@@ -307,7 +307,7 @@ bool BooksPuzzleScene::Check()
 
 void BooksPuzzleScene::Win()
 {
-	room->resolvedPuzzle(5);
+	room->resolvedPuzzle(1);
 	//Game::Instance()->getSceneManager()->popScene();
 }
 

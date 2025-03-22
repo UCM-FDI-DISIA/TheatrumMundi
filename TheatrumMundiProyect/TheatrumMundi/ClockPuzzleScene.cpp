@@ -272,7 +272,7 @@ bool ClockPuzzleScene::Check()
 
 void ClockPuzzleScene::Win()
 {
-	room->resolvedPuzzle(7);
+	room->resolvedPuzzle(2);
 	setSolved(true);
 }
 
