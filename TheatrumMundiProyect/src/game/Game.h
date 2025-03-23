@@ -27,6 +27,7 @@ public:
 	void start();
 	SceneManager* getSceneManager();
 	DataManager* getDataManager();
+	CSVdataRecolector* getCSVDataColector();
 	Game& operator=(const Game& o) = delete;
 	Game(const Game& o) = delete;
 	void exit();

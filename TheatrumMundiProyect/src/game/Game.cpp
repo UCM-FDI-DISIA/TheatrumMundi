@@ -131,13 +131,18 @@ SceneManager* Game::getSceneManager()
 void Game::exit()
 {
 	_exitGame = true;
-	_csvdata->AddEntry("jaja","TUMADRE",Vector2D(10,100));
+	
 }
 
 
 DataManager* Game::getDataManager()
 {
 	return _dataManager;
+}
+
+CSVdataRecolector* Game::getCSVDataColector()
+{
+	return _csvdata;
 }
 
 void Game::checkCollisions() {
