@@ -614,6 +614,17 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		solved = false;
 		isStarted = true;
 		room = sr;
+
+		//Create string segnment sprite
+
+		//Create background
+
+		//Create cube without water
+
+		//create rope sprite without clickability
+
+
+
 		moduleCreation();
 		pipeCreation();
 		pathCreation();
@@ -984,7 +995,27 @@ void PipePuzzleScene::Win()
 {
 	room->resolvedPuzzle(0);
 	
-	//puts the gloves in scene
+
+	//Change the texture of the cube sprite to one with water
+
+	//remove Click component of exit botton until the hints are picked
+
+	//rope has activated the clickable component
+
+	//if clicked remove click comonent and start animation 
+
+	//ANIMATION
+
+	//upadte with scroll the rope segment until a certain distance
+	// add globes and clock once all the rope in dowm and change the cubicule to one without a cube 
+	//scroll upwards with the items 
+	//when animation has ended exit is availabke again
+
+
+
+
+
+	/*//puts the gloves in scene
 	// create entity
 	gloveEntity = entityManager->addEntity();
 	bool click = false;
@@ -1009,7 +1040,10 @@ void PipePuzzleScene::Win()
 		gloveEntity->getMngr()->setActive(gloveEntity, false);
 		});
 
-	
+	*/
+
+
+
 
 }
 
