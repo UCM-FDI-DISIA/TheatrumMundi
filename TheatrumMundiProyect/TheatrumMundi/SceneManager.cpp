@@ -11,10 +11,9 @@
 #include "checkML.h"
 #include "SceneRoomTemplate.h"
 #include"DebugInventoryScene.h"
+#include "MosaicPuzzleScene.h"
 #include "MiddleRoomScene.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
-
-//#include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 SceneManager::SceneManager()
 {
 	scenes.resize(SceneName::SCENE_SIZE);
@@ -26,8 +25,9 @@ SceneManager::SceneManager()
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
 	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
+	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
 
-	loadScene(SceneName::INITIAL_MENU);
+	loadScene(SceneName::MOSAIC_SCENE);
 }
 
 void SceneManager::popScene()

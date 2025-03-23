@@ -70,7 +70,7 @@ void Game::init() {
 
 	// Create the manager
 	_mngr = new SceneManager();
-	_datamngr = new DataManager();
+	_dataManager = new DataManager();
 	_csvdata = new CSVdataRecolector();
 }
 

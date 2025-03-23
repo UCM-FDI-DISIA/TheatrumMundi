@@ -1,0 +1,25 @@
+#pragma once
+#include "ScenePuzzleTemplate.h"
+#include <vector>
+class Vector2D;
+class MosaicPuzzleScene : public ScenePuzzleTemplate
+{
+private:
+	const int TOTALSQUARES = 8; //Total of interactuable squares of the mosaic
+	const int SQUAREWIDTH = 32; // Size of each square
+	std::vector<std::string>imgId = {"a","b","c","d","e","f","g","h"}; //array of the images of each square
+	std::vector<Vector2D> positions; //Positions of the 
+	std::vector<int> indexPositions = {5,3,6,0,2,1,4,7}; //Sets the positions of 
+protected:
+	std::vector<entity_t> squares; //Array of the squares
+public:
+
+	MosaicPuzzleScene();
+	~MosaicPuzzleScene();
+	void init(SceneRoomTemplate* sr);
+	bool Check() override;
+	void Win() override;
+	void Exit() override;
+
+};
+
