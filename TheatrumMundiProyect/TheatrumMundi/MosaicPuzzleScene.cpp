@@ -29,11 +29,11 @@ MosaicPuzzleScene::~MosaicPuzzleScene()
 {
 }
 
-void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
+void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
 {
 	if (!isStarted) {
 		isStarted = true;
-		room = sr;
+	//	room = sr;
 
 #pragma region SpecificEntitiesOfTheScene
 		//Background
@@ -51,7 +51,7 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 			physicis->AddObjectToList(mosaicBorder->getMngr()->getComponent<RectArea2D>(mosaicBorder)); //Adds the collision to the MosaicBorder
 
 			//When the square got released, checks if the puzzle was solved correctly
-			squares.back()->getMngr()->getComponent<ClickComponent>(squares.back())->connect(ClickComponent::JUST_RELEASED, [this, sr]() {
+			squares.back()->getMngr()->getComponent<ClickComponent>(squares.back())->connect(ClickComponent::JUST_RELEASED, [this /*, sr */ ]() {
 				if (Check()) { //If the puzzle is solved correctly, calls Win
 					Win();
 				}
@@ -86,7 +86,7 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 
 		
 	}
-	createInvEntities(sr);
+//	createInvEntities(sr);
 }
 
 /// <summary>
