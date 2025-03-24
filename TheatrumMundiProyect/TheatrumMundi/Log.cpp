@@ -176,12 +176,6 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 		});
 
 	/*
-	buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
-		while (ScrollComponentLog->numPhases() < (Game::Instance()->getDialogueManager()->getSceneLog()->getLogList()->size() / 5)) {
-			ScrollComponentLog->addPhase();
-		}
-		});
-
 	_textbackgroundClick->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
 		while (ScrollComponentLog->numPhases() < (Game::Instance()->getDialogueManager()->getSceneLog()->getLogList()->size() / 5)) {
 			ScrollComponentLog->addPhase();
