@@ -12,6 +12,7 @@
 #include "SceneRoomTemplate.h"
 #include"DebugInventoryScene.h"
 #include "MiddleRoomScene.h"
+#include "DragPuzzleScene.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 
 //#include "../../TheatrumMundiProyect/src/ecs/ecs.h"
@@ -26,6 +27,8 @@ SceneManager::SceneManager()
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
 	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
+
+	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 
 	loadScene(SceneName::INITIAL_MENU);
 }
