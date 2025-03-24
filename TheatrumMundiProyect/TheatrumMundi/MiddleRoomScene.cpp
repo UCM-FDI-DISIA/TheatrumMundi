@@ -117,7 +117,7 @@ void MiddleRoomScene::init()
 
 		//Log is always created on each middle room scene
 		//Register log in dialogue manager
-
+		/*
 		//background log
 		auto _backgroundLog = entityManager->addEntity(ecs::grp::LOG);
 		entityManager->addComponent<Transform>(_backgroundLog, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
@@ -175,7 +175,7 @@ void MiddleRoomScene::init()
 			//disable open log button
 			_openLogButton->getMngr()->setActive(_openLogButton, false);
 			*/
-			};
+			/* };
 		roomEvent[LOGDESABLE] = [this, _backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog, scrollingLog, upScrollingLog] {
 			//disable log
 			entityManager->setActive(_backgroundLog, false); //background
@@ -232,7 +232,7 @@ void MiddleRoomScene::init()
 				ScrollComponentLog->Scroll(ScrollComponent::UP);
 			}
 			});
-
+		*/
 
 		//UI
 		//Pause
@@ -254,6 +254,7 @@ void MiddleRoomScene::init()
 		//	}
 		//	});
 
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
 	}
 	SDL_Delay(1000);

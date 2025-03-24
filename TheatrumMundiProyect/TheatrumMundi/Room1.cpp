@@ -131,6 +131,7 @@ void Room1Scene::init()
 		//Register log in dialogue manager
 
 		//background log
+
 		auto _backgroundLog = entityManager->addEntity(ecs::grp::LOG);
 		entityManager->addComponent<Transform>(_backgroundLog, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
 		entityManager->addComponent<Image>(_backgroundLog, &sdlutils().images().at("fondoPruebaLog"), 200); //background log

@@ -3,6 +3,14 @@
 #include <list>
 #include <string>
 #include "TextInfo.h"
+#include "ecs.h"
+
+class SceneTemplate;
+class EntityFactory;
+class Image;
+class Area2DLayerManager;
+class TextInfo;
+
 
 class Log
 {
@@ -22,6 +30,10 @@ public:
 
 	void SetLogActive(bool logActive);
 	bool GetLogActive();
+
+	void Init(EntityFactory* entityFactory, ecs::EntityManager* entityManager, Area2DLayerManager* areaLayerManager);
+
+
 
 	//delete of enitities
 	~Log();
