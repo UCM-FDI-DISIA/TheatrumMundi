@@ -40,7 +40,7 @@ void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
 		//auto background = entityFactory->CreateImageEntity(entityManager,"MosaicBackground",Vector2D(0,0),Vector2D(0,0),32,32,0,ecs::grp::BACKGROUND);
 
 		//Mosaic Border
-		auto mosaicBorder = entityFactory->CreateInteractableEntity(entityManager, "MosaicBorder", EntityFactory::RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		auto mosaicBorder = entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 
 		//SquareEntities
 		for (int i = 0; i < TOTALSQUARES; ++i) { //Creation of the squares and assignation in the different possitions
@@ -50,8 +50,15 @@ void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
 			auto physicis = squares.back()->getMngr()->addComponent<PhysicsBodyComponent>(squares.back());
 			physicis->AddObjectToList(mosaicBorder->getMngr()->getComponent<RectArea2D>(mosaicBorder)); //Adds the collision to the MosaicBorder
 
+			//When tou clicked in the square, keeps the original position of the square
+			auto it = squares.back();
+			it->getMngr()->getComponent<ClickComponent>(squares.back())->connect(ClickComponent::JUST_CLICKED, [this /*, sr */,it]() {
+				firstPos = it->getMngr()->getComponent<Transform>(it)->getPos();
+			});
+
 			//When the square got released, checks if the puzzle was solved correctly
-			squares.back()->getMngr()->getComponent<ClickComponent>(squares.back())->connect(ClickComponent::JUST_RELEASED, [this /*, sr */ ]() {
+			 it->getMngr()->getComponent<ClickComponent>(squares.back())->connect(ClickComponent::JUST_RELEASED, [this /*, sr */,it ]() {
+				 CorrectPositions(it);
 				if (Check()) { //If the puzzle is solved correctly, calls Win
 					Win();
 				}
@@ -87,6 +94,35 @@ void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
 		
 	}
 //	createInvEntities(sr);
+}
+
+/// <summary>
+/// Corrects the position of the square in case is not in the correct place
+/// </summary>
+/// <param name="square"></param>
+void MosaicPuzzleScene::CorrectPositions(entity_t square)
+{
+	auto& actPosition = entityManager->getComponent<Transform>(square)->getPos();
+
+	//Compare X
+	int diff = actPosition.getX() - firstPos.getX(); //What is the difference between the actual spot to the future spot
+	if (diff > 0 && diff >= SQUAREWIDTH / 2) { //if the square is closed to the right than to the left and player wants to go to the right sets the position to the right 
+		actPosition.setX(firstPos.getX() + SQUAREWIDTH);
+	}
+	else if (diff < 0 && -diff >= SQUAREWIDTH / 2) { //if the square is closed to the left than to the right and player wants to go to the left sets the position to the left 
+		actPosition.setX(firstPos.getX() - SQUAREWIDTH);
+	}
+	else actPosition.setX(firstPos.getX());
+
+	//Compare Y
+	diff = actPosition.getY() - firstPos.getY();
+	if (diff > 0 && diff >= SQUAREWIDTH / 2) { //if the square is closed to the Top than to the Bottom  and player wants to go to the top sets the position to the top
+		actPosition.setY(firstPos.getY() + SQUAREWIDTH);
+	}
+	else if (diff < 0 && -diff >= SQUAREWIDTH / 2) { //if the square is closed to the Bottom than to the Top  and player wants to go to the bottom sets the position to the bottom
+		actPosition.setY(firstPos.getY() - SQUAREWIDTH);
+	}
+	else actPosition.setY(firstPos.getY());
 }
 
 /// <summary>

@@ -24,7 +24,7 @@ PhysicsBodyComponent::PhysicsBodyComponent(const list<Area2D*>& _colisionableObj
 /// </summary>
 PhysicsBodyComponent::~PhysicsBodyComponent()
 {
-	for (auto& elem : colisionableObjects) delete elem;
+	//for (auto& elem : colisionableObjects) delete elem;
 }
 
 /// <summary>
