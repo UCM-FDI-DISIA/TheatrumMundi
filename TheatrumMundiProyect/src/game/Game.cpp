@@ -131,6 +131,7 @@ SceneManager* Game::getSceneManager()
 void Game::exit()
 {
 	_exitGame = true;
+	_csvdata->AddEntry("jaja","TUMADRE",Vector2D(10,100));
 }
 
 
