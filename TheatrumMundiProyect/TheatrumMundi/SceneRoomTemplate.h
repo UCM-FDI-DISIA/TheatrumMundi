@@ -33,11 +33,14 @@ protected:
 		void setActiveBottons(bool active);
 		void setActiveZoomObj(bool active);
 		inline Inventory* GetInventory() { return inv; }
+		/// <summary>
+		/// Scroll the inventory up or down depending on the direction
+		/// </summary>
+		/// <param name="dir"></param>
+		void scrollInventory(int dir);
 
 	SceneRoomTemplate();
 	virtual ~SceneRoomTemplate();
 	
-	
-
 };
 

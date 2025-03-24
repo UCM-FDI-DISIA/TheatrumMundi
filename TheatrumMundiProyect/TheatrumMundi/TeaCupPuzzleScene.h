@@ -18,5 +18,7 @@ protected:
 
 	bool _spoonIsInCup;
 	bool _poisonIsChecked;
+	Entity* spoon;
+	Entity* teaCupBackground;
 };
 
