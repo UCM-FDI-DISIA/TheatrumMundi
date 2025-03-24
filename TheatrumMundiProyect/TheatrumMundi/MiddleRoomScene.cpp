@@ -254,8 +254,9 @@ void MiddleRoomScene::init()
 		//	}
 		//	});
 
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+		
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 	}
 	SDL_Delay(1000);
 

@@ -64,11 +64,26 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	auto imBack = entityManager->addComponent<Image>(_backgroundLog, &sdlutils().images().at("fondoPruebaLog")); //background log
 	entityManager->setActive(_backgroundLog, false);
 
+	auto LogArea = entityManager->addComponent<RectArea2D>(_backgroundLog, areaLayerManager);
+	
+
 	//title log
 	auto _titleLog = entityManager->addEntity(ecs::grp::LOG);
 	entityManager->addComponent<Transform>(_titleLog, Vector2D(50, 50), Vector2D(0, 0), 100, 100, 0);
 	entityManager->addComponent<Image>(_titleLog, &sdlutils().images().at("B7"));
 	entityManager->setActive(_titleLog, false);
+
+	//text log
+	auto _textLog = entityManager->addEntity(ecs::grp::LOG);
+	Transform* trTextLog = entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 800, 748, 0);
+	Image* imTextLog = entityManager->addComponent<Image>(_textLog, &sdlutils().images().at("fondoPruebaLog"));
+	SDL_Color colorText = { 255, 255, 255, 255 };
+	WriteTextComponent<std::list<TextInfo>>* writeLog =
+		entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, &_log); //write text component
+	entityManager->setActive(_textLog, false);
+
+	// Put the dialog interaction area in front of the other interactables
+	areaLayerManager->sendFront(LogArea->getLayerPos());
 
 	//scroll log buttons
 	
@@ -78,14 +93,6 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	entityManager->setActive(scrollingLog, false);
 	entityManager->setActive(upScrollingLog, false);
 
-	//text log
-	auto _textLog = entityManager->addEntity(ecs::grp::LOG);
-	Transform* trTextLog = entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 800, 748, 0);
-	Image* imTextLog = entityManager->addComponent<Image>(_textLog, &sdlutils().images().at("fondoPruebaLog"));
-	SDL_Color colorText = { 255, 255, 255, 255 };
-	WriteTextComponent<std::list<TextInfo>>* writeLog =
-	entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, &_log); //write text component
-	entityManager->setActive(_textLog, false);
 
 	ScrollComponentLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
 
@@ -180,4 +187,6 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 			ScrollComponentLog->addPhase();
 		}
 		});*/
+
+		
 }
