@@ -1015,7 +1015,7 @@ void PipePuzzleScene::Win()
 
 
 
-	/*//puts the gloves in scene
+	//puts the gloves in scene
 	// create entity
 	gloveEntity = entityManager->addEntity();
 	bool click = false;
@@ -1040,7 +1040,7 @@ void PipePuzzleScene::Win()
 		gloveEntity->getMngr()->setActive(gloveEntity, false);
 		});
 
-	*/
+	
 
 
 

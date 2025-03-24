@@ -166,7 +166,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clockCheckClick = entityManager->addComponent<ClickComponent>(_buttonCheck);
 		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [_buttonCheckTransform, sr, this,_buttonCheck,_buttonHor,_buttonMin, _buttonResetPuzzle]()
 			{
-				if (Check() && !getSolved()) {
+				if (Check() && getSolved()) {
 					Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
 					//Assign to this inventory the hint;
 					AddInvItem("AAA", "Me lo puedo beber??",position, sr);
@@ -261,8 +261,9 @@ bool ClockPuzzleScene::isItemHand(const std::string& itemId)
 
 bool ClockPuzzleScene::Check()
 {
-	if (_actualHour == 180 && _actualMinute == 180 && !solved)
+	if (_actualHour == 180 && _actualMinute == 180&&!solved)
 	{
+		
 		solved = true;
 		return true;
 	}
@@ -273,6 +274,6 @@ bool ClockPuzzleScene::Check()
 void ClockPuzzleScene::Win()
 {
 	room->resolvedPuzzle(2);
-	setSolved(true);
+	//setSolved(true);
 }
 
