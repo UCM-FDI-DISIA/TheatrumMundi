@@ -77,7 +77,11 @@ bool CircleArea2D::_overlapsWith(CircleArea2D* circleArea)
 
 bool CircleArea2D::_overlapsWith(TiledAreaComponent* area)
 {
-	return false;
+	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
+	Transform* extrentTr = area->getContext()->getMngr()->getComponent<Transform>(area->getContext());
+
+	if (transform == nullptr || extrentTr == nullptr) return false;
+	return area->CheckCollisionInTilesCircles(extrentTr->getPos() + getLocalPos(), getRadius());
 }
 
 bool CircleArea2D::_overlapsWith(RectArea2D* rectArea)

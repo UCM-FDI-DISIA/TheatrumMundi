@@ -27,11 +27,12 @@ public:
 
 	 bool _overlapsWith(TiledAreaComponent* area) override;
 
-	 bool _overlapsWith(CircleArea2D* rectArea) override;
+	 bool _overlapsWith(CircleArea2D* circleArea) override;
 
 	 void setActiveTile();
 
 	 bool CheckCollisionInTiles(SDL_Rect& _collition);
+	 bool CheckCollisionInTilesCircles(const Vector2D& pos,int rad);
 
 	 inline int getWidth() {
 		 return _width;

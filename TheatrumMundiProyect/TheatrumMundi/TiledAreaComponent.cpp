@@ -132,10 +132,15 @@ bool TiledAreaComponent::_overlapsWith(TiledAreaComponent* area)
 }
 
 
-bool TiledAreaComponent::_overlapsWith(CircleArea2D* rectArea)
+bool TiledAreaComponent::_overlapsWith(CircleArea2D* circleArea)
 {
-    return false;
+    Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
+    Transform* extrentTr = circleArea->getContext()->getMngr()->getComponent<Transform>(circleArea->getContext());
+
+    if (_objTransform == nullptr || extrentTr == nullptr) return false;
+    return CheckCollisionInTilesCircles(extrentTr->getPos() + circleArea->getLocalPos(), circleArea->getRadius());
 }
+
 
 void TiledAreaComponent::setActiveTile()
 {
@@ -158,3 +163,18 @@ bool TiledAreaComponent::CheckCollisionInTiles(SDL_Rect& _collition)
     }
     return false;
 }
+
+bool TiledAreaComponent::CheckCollisionInTilesCircles(const Vector2D& pos, int rad)
+{
+    for (int i = 0; i < matcol.size();i++) {
+        for (int j = 0; j < matcol[i].size(); j++) {
+            if (Collisions::rectCollidesWithCircle(
+                matcopos[i][j] + _objTransform->getPos() + _localPosition, unitw, unith,
+                pos, rad
+            )) return true;
+        }
+    }
+    return false;
+}
+
+
