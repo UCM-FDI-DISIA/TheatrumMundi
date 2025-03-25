@@ -6,6 +6,7 @@
 #include "CircleArea2D.h"
 #include "RectArea2D.h"
 #include "../utils/Collisions.h"
+using namespace std;
 TiledAreaComponent::TiledAreaComponent(Area2DLayerManager* areaLayerMngr, Transform* objTransform, int width, int height, int fil, int col)
 :Area2D(areaLayerMngr,Vector2D(0,0)){
  
@@ -124,7 +125,7 @@ bool TiledAreaComponent::_overlapsWith(TiledAreaComponent* area)
     };
 
     SDL_Rect rs;
-    if (SDL_IntersectRect(&thisRect, &otherRect, &rs)) return (area->CheckCollisionInTiles(rs) && this->CheckCollisionInTiles(rs));
+    if (SDL_IntersectRect(&thisRect, &otherRect, &rs)) { return( this->CheckCollisionInTiles(rs)&&area->CheckCollisionInTiles(rs)); }
     else
     {
         return false;
@@ -149,20 +150,23 @@ void TiledAreaComponent::setActiveTile(bool t, int i, int j)
 
 bool TiledAreaComponent::CheckCollisionInTiles(SDL_Rect& _collition)
 {
-    _collition.x -= _objTransform->getPos().getX();
-    _collition.y -= _objTransform->getPos().getY();
-    Vector2D auxpos;
+ 
+    Vector2D auxpos = _objTransform->getPos();
+    
+    bool flag = false;
     for (int i = 0; i < matcol.size();i++) {
         for (int j = 0; j < matcol[i].size(); j++)
         {
-            auxpos = matcopos [i][j];
-            if (_collition.x>=auxpos.getX()&& _collition.x <= auxpos.getX()+unitw&&
-                _collition.y >= auxpos.getY() && _collition.x <= auxpos.getY() + unith) {
-                return matcol[i][j];
+            SDL_Rect auxRect = { auxpos.getX()+(i*unitw) ,auxpos.getY()+(unith*j),unitw,unith};
+            SDL_Rect* aaaa= new SDL_Rect();
+                if(SDL_IntersectRect(&auxRect,&_collition,aaaa)){
+                if (matcol[i][j]) {
+                    flag = true;
+                }
             }
         }
     }
-    return false;
+    return flag;
 }
 
 bool TiledAreaComponent::CheckCollisionInTilesCircles(const Vector2D& pos, int rad)

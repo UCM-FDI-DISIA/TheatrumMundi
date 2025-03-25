@@ -27,7 +27,7 @@ public:
 
 	void AddObjectToList(TiledAreaComponent* newArea);
 
-	void AddObjectofList(std::list<Area2D*> listarea);
+	void AddObjectofList(std::list<Area2D*> listarea, Area2D* myarea);
 
 	bool CheckAreaColision(Area2D* entityArea); //Checks if there is a colision with one of the objects 
 };

@@ -3,7 +3,7 @@
 #include "../src/Components/CircleArea2D.h"
 #include "../src/Components/RectArea2D.h"
 #include "TiledAreaComponent.h"
-
+#include "iostream"
 using namespace std;
 
 PhysicsBodyComponent::PhysicsBodyComponent()
@@ -25,7 +25,7 @@ PhysicsBodyComponent::PhysicsBodyComponent(const list<Area2D*>& _colisionableObj
 /// </summary>
 PhysicsBodyComponent::~PhysicsBodyComponent()
 {
-	for (auto& elem : colisionableObjects) delete elem;
+	//for (auto& elem : colisionableObjects) delete elem;
 }
 
 /// <summary>
@@ -51,9 +51,11 @@ void PhysicsBodyComponent::AddObjectToList(TiledAreaComponent* newArea)
 	colisionableObjects.push_back(newArea);
 }
 
-void PhysicsBodyComponent::AddObjectofList(list<Area2D*> listarea)
+void PhysicsBodyComponent::AddObjectofList(list<Area2D*> listarea,Area2D* myarea)
 {
-	colisionableObjects = listarea;
+	for (auto a : listarea)
+		colisionableObjects.push_back(a);
+	colisionableObjects.remove(myarea);
 }
 
 /// <summary>
@@ -66,6 +68,7 @@ bool PhysicsBodyComponent::CheckAreaColision(Area2D* entityArea)
 	for (auto& elem : colisionableObjects) {
 		if (elem->overlapsWithArea(entityArea)) return false;
 	}
+	
 	return true;
 }
 
