@@ -24,8 +24,6 @@ MosaicPuzzleScene::MosaicPuzzleScene()
 		if(i < 3) positions.push_back(Vector2D(300 , 100 + (index * SQUAREWIDTH))); //First row possitions (0-2)
 		else if(i < 6) positions.push_back(Vector2D(300 + SQUAREWIDTH, 100 + (index * SQUAREWIDTH))); //Second row possitions (3-5)
 		else positions.push_back(Vector2D(300 + (2 * SQUAREWIDTH), 100 + (index * SQUAREWIDTH))); //Third row possitions (6-8)
-
-		std::cout << positions.back() << "\n";
 		++index;
 
 	}
@@ -46,8 +44,11 @@ void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
 		//auto background = entityFactory->CreateImageEntity(entityManager,"MosaicBackground",Vector2D(0,0),Vector2D(0,0),32,32,0,ecs::grp::BACKGROUND);
 
 		//Mosaic Border
-		auto mosaicBorder = entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-
+		//auto mosaicBorderLeft = entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(100, 100), Vector2D(0, 0), 50, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		//auto mosaicBorderTop = entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(580, -500), Vector2D(0, 0), 50, 500, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		//auto mosaicBorderRight = entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(900, 100), Vector2D(0, 0), 50, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		//auto mosaicBorderBottom = entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(580, 850), Vector2D(0, 0), 50, 500, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		
 		//SquareEntities
 		for (int i = 0; i < TOTALSQUARES; ++i) { //Creation of the squares and assignation in the different possitions
 			squares.push_back(entityManager->addEntity());
@@ -63,7 +64,10 @@ void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
 
 			//Add collisions to the square
 			auto physicis = it->getMngr()->addComponent<PhysicsBodyComponent>(it);
-			physicis->AddObjectToList(mosaicBorder->getMngr()->getComponent<RectArea2D>(mosaicBorder)); //Adds the collision to the MosaicBorder
+		/*	physicis->AddObjectToList(mosaicBorderLeft->getMngr()->getComponent<RectArea2D>(mosaicBorderLeft));
+			physicis->AddObjectToList(mosaicBorderTop->getMngr()->getComponent<RectArea2D>(mosaicBorderTop)); //Adds the collision to the MosaicBorder
+			physicis->AddObjectToList(mosaicBorderRight->getMngr()->getComponent<RectArea2D>(mosaicBorderRight)); //Adds the collision to the MosaicBorder
+			physicis->AddObjectToList(mosaicBorderBottom->getMngr()->getComponent<RectArea2D>(mosaicBorderBottom)); //Adds the collision to the MosaicBorder*/
 
 			//When tou clicked in the square, keeps the original position of the square
 
