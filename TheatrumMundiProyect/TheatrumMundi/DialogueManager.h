@@ -29,6 +29,7 @@ private:
     int actualroom;
     std::string room;
     WriteTextComponent<TextInfo>* _writeTextComp;
+    std::string _eventToRead;
 
 public:
     DialogueManager(int numRooms);
@@ -38,6 +39,7 @@ public:
     void ReadDialogue(const std::string& event);
     void setScene(SceneTemplate* scene);
     void setCharacterImage(const std::string& Character);
+    void setEventToRead(std::string _eventToRead);
     TextInfo* getShowText();
     inline void setdisplayOnProcess(bool disply) { displayOnProcess = disply; }
     bool getDisplayOnProcess();

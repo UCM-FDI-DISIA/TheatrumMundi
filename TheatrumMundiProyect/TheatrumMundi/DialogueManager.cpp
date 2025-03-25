@@ -27,7 +27,7 @@ DialogueManager::~DialogueManager() {
     delete dialogueReader;
 }
 
-void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, string _eventToRead)
+void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, string event)
 {
    
     if (isMiddleRoom) {
@@ -62,7 +62,7 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
 
     //Pass dialog if clicked
-    entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _textbackground, _eventToRead]()
+    entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _textbackground]()
         {
             if (!(Game::Instance()->getLog()->GetLogActive())) {
                 //read dialogue only if it has to
@@ -138,6 +138,11 @@ void DialogueManager::setCharacterImage(const string& Character) {
     if (Character == "Keisara") characterimg->setTexture(&sdlutils().images().at("KeisaraSprite"));
     else if (Character == "Lucy") characterimg->setTexture(&sdlutils().images().at("LucySprite"));
     else if (Character == "Sol") characterimg->setTexture(&sdlutils().images().at("SolSprite"));
+}
+
+void DialogueManager::setEventToRead(std::string eventToRead)
+{
+    _eventToRead = eventToRead;
 }
 
 TextInfo* DialogueManager::getShowText() {

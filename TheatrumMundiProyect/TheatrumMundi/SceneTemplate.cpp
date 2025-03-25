@@ -41,6 +41,7 @@ void SceneTemplate::startDialogue(const string& _eventToRead)
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, true);
 	dialogueManager->setdisplayOnProcess(true);
 	//entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
+	dialogueManager->setEventToRead(_eventToRead);
 	dialogueManager->ReadDialogue(_eventToRead);
 
 }
