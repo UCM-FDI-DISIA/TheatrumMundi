@@ -9,6 +9,7 @@ class Transform;
 class GameState;
 class Log;
 
+class CSVdataRecolector;
 class Game {
 	
 private:
@@ -16,12 +17,12 @@ private:
 	 SceneManager* _mngr;
 	 Log* _log;
 	 
-	 DataManager* _datamngr;
+	 DataManager* _dataManager;
+	 CSVdataRecolector* _csvdata;
 	 Game();
 	
 	 void checkCollisions();
 public:
-	
 	static Game* Instance();
 	~Game();
 	void init();

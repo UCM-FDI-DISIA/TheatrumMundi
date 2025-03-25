@@ -9,7 +9,12 @@ DataManager::DataManager()
 }
 
 int DataManager::getRandomVariant()
+
 {
+
+    //0 = es posible
+    // 1 y 2 = variantes de ha sido un mago 
+
     int mage = sdlutils().rand().nextInt(0,2);
 
     if (mage != 0) {

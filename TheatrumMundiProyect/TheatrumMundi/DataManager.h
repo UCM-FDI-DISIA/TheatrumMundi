@@ -26,7 +26,7 @@ class DataManager
 private:
 	SceneCount ActualScene;
 
-	std::vector<int> variants;
+	std::vector<int> variants;// rooms 
 	std::vector<bool> charactersAlive;
 
 protected:

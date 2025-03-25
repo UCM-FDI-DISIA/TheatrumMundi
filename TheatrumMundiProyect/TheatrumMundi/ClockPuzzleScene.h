@@ -15,10 +15,10 @@ public:
 private:
 	int _actualHour;
 	int _actualMinute;
-	bool hasLongCloackHand; //if the cloack have the minute hand
-	bool hasShortCloackHand; //if the cloack have the hour hand
-	Entity* cloack;
-	Entity* longCloackHand;
-	Entity* shortCloackHand;
+	bool hasLongClockHand; //if the cloack have the minute hand
+	bool hasShortClockHand; //if the cloack have the hour hand
+	Entity* clock;
+	Entity* longClockHand;
+	Entity* shortClockHand;
 };
 

@@ -6,7 +6,6 @@ class Room1Scene : public SceneRoomTemplate
 private:
 	std::string _eventToRead;
 protected:
-	
 	enum Room1Event
 	{
 		InitialDialogue = 0,
@@ -20,6 +19,10 @@ protected:
 		TeaCupPuzzleSnc,
 		TeaCupPuzzleRsv,
 		Spoon,
+		//Boa1,
+		//Boa2,
+		//Hanni,
+		//Doku,
 		ResolveCase,
 		ResolveBottons,
 		GoodEnd,

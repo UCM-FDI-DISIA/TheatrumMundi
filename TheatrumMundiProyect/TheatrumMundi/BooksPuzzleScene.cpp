@@ -124,7 +124,8 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, Reward,sr, this]() {
 			std::cout << "CLICK" << std::endl;
 			if (Check()) {
-				std::cout << "WIN" << std::endl;
+				Win();
+				//std::cout << "WIN" << std::endl;
 				//Reward->getMngr()->setActive(Reward, true);
 
 				sr->GetInventory()->addItem(new Hint("boa2", "Manecilla de las horas de un reloj (un momento)", &sdlutils().images().at("boa2")));
@@ -214,15 +215,25 @@ void BooksPuzzleScene::unload()
 bool BooksPuzzleScene::Check()
 { //HERE WE PUT THE CORRECT COMBINATION : 6 - 4 - 1
 	//CORRECT ACTUAL COMBINATION: 1 - 6 - 4
-	return	myComb[0] == comb[1] && 
-			myComb[1] == comb[6] && 
-			myComb[2] == comb[4];
+
+	if (myComb[0] == comb[1] &&
+		myComb[1] == comb[6] &&
+		myComb[2] == comb[4])
+	{
+		solved = true;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
 }
 
 void BooksPuzzleScene::Win()
 {
-	room->resolvedPuzzle(5);
-	Game::Instance()->getSceneManager()->popScene();
+	room->resolvedPuzzle(1);
+	//Game::Instance()->getSceneManager()->popScene();
 }
 
 

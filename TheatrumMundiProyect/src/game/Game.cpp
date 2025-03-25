@@ -9,12 +9,14 @@
 
 #include "../../TheatrumMundi/Log.h"
 
+#include "../../TheatrumMundi/CSVdataRecolector.h"
 #include <Windows.h>
 
 
 Game* Game::_instance = nullptr;
 Game::Game() {
 	_exitGame = false;
+	
 }
 Game* Game::Instance()
 {
@@ -25,6 +27,7 @@ Game* Game::Instance()
 Game::~Game() {
 
 	delete _mngr;
+	delete _dataManager;
 	// release InputHandler if the instance was created correctly.
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
@@ -70,9 +73,10 @@ void Game::init() {
 
 	// Create the manager
 	_mngr = new SceneManager();
-	_datamngr = new DataManager();
 	_log = new Log();
 	
+	_dataManager = new DataManager();
+	_csvdata = new CSVdataRecolector();
 }
 
 void Game::render() const
@@ -119,7 +123,7 @@ void Game::start() {
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
 	}
-
+	_csvdata->safeData();
 }
 
 SceneManager* Game::getSceneManager()
@@ -132,12 +136,13 @@ SceneManager* Game::getSceneManager()
 void Game::exit()
 {
 	_exitGame = true;
+	_csvdata->AddEntry("jaja","TUMADRE",Vector2D(10,100));
 }
 
 
 DataManager* Game::getDataManager()
 {
-	return _datamngr;
+	return _dataManager;
 }
 
 Log* Game::getLog()
