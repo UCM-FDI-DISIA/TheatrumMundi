@@ -56,6 +56,7 @@
     <ClCompile Include="ClockPuzzleScene.cpp" />
     <ClCompile Include="DialogTestScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
+    <ClCompile Include="DragPuzzleScene.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="Hint.cpp" />
     <ClCompile Include="InitialScene.cpp" />
@@ -72,6 +73,7 @@
     <ClCompile Include="SceneRoomTemplate.cpp" />
     <ClCompile Include="SceneTemplate.cpp" />
     <ClCompile Include="TeaCupPuzzleScene.cpp" />
+    <ClCompile Include="TiledAreaComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -230,6 +232,7 @@
     <ClInclude Include="DialogTestScene.h" />
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="Direction.h" />
+    <ClInclude Include="DragPuzzleScene.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="EventsInfo.h" />
     <ClInclude Include="Hint.h" />
@@ -248,6 +251,7 @@
     <ClInclude Include="SceneTemplate.h" />
     <ClInclude Include="TeaCupPuzzleScene.h" />
     <ClInclude Include="TextInfo.h" />
+    <ClInclude Include="TiledAreaComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />

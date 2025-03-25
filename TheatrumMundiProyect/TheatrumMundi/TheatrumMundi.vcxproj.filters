@@ -54,6 +54,8 @@
     <ClCompile Include="MiddleRoomScene.cpp" />
     <ClCompile Include="ReadDialog.cpp" />
     <ClCompile Include="CSVdataRecolector.cpp" />
+    <ClCompile Include="DragPuzzleScene.cpp" />
+    <ClCompile Include="TiledAreaComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -230,6 +232,8 @@
     <ClInclude Include="MiddleRoomScene.h" />
     <ClInclude Include="ReadDialog.h" />
     <ClInclude Include="CSVdataRecolector.h" />
+    <ClInclude Include="DragPuzzleScene.h" />
+    <ClInclude Include="TiledAreaComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />
