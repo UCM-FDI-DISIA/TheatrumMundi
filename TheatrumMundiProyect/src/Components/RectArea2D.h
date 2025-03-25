@@ -25,6 +25,7 @@ public:
 
 	bool _overlapsWith(RectArea2D* rectArea) override;
 	bool _overlapsWith(CircleArea2D* rectArea) override;
+	bool _overlapsWith(TiledAreaComponent* area) override;
 
 	void setWidth(int value) {
 		_width = value;

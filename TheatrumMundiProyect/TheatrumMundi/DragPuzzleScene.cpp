@@ -32,7 +32,9 @@ bool DragPuzzleScene::Check()
 {
     if (_goalPos ==_triggerObj->getPos()) {
         Win();
+        return true;
    }
+    return false;
 }
 
 void DragPuzzleScene::Win()

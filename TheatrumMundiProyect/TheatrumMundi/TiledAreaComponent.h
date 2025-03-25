@@ -1,6 +1,7 @@
 #pragma once
 #include "Area2D.h"
 #include <vector>
+#include <SDL.h>
 class Transform;
 class TiledAreaComponent : public Area2D
 {
@@ -10,6 +11,8 @@ private:
 	Transform* _objTransform;
 	int _width;
 	int _height;
+	int unitw;
+	int unith;
 protected:
 
 public:
@@ -22,8 +25,20 @@ public:
 
 	 bool _overlapsWith(RectArea2D* rectArea) override;
 
+	 bool _overlapsWith(TiledAreaComponent* area) override;
+
 	 bool _overlapsWith(CircleArea2D* rectArea) override;
 
 	 void setActiveTile();
+
+	 bool CheckCollisionInTiles(SDL_Rect& _collition);
+
+	 inline int getWidth() {
+		 return _width;
+	 }
+
+	 inline int getHeight() {
+		 return _height;
+	 }
 };
 

@@ -5,6 +5,7 @@
 #include "Transform.h"
 #include "RectArea2D.h"
 #include "../utils/Collisions.h"
+#include "../../TheatrumMundi/TiledAreaComponent.h"
 
 CircleArea2D::CircleArea2D(Area2DLayerManager* areaLayerMngr, Vector2D localPos, int radius)
 	: Area2D(areaLayerMngr, localPos), _radius(radius)
@@ -72,6 +73,11 @@ bool CircleArea2D::_overlapsWith(CircleArea2D* circleArea)
 	Vector2D vDistance = (transform->getPos() + _localPosition) - (extrentTr->getPos() + circleArea->getLocalPos());
 
 	return vDistance.magnitude() <= _radius + circleArea->getRadius();
+}
+
+bool CircleArea2D::_overlapsWith(TiledAreaComponent* area)
+{
+	return false;
 }
 
 bool CircleArea2D::_overlapsWith(RectArea2D* rectArea)
