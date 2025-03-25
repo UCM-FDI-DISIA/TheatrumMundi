@@ -7,9 +7,9 @@
 #include "RectArea2D.h"
 #include "../utils/Collisions.h"
 TiledAreaComponent::TiledAreaComponent(Area2DLayerManager* areaLayerMngr, Transform* objTransform, int width, int height, int fil, int col)
-:Area2D(areaLayerMngr,_objTransform->getPos()){
-    _areaLayerMngr = areaLayerMngr;
-    objTransform = _objTransform;
+:Area2D(areaLayerMngr,Vector2D(0,0)){
+ 
+    _objTransform = objTransform;
     _width = width;
     _height = height;
 
@@ -54,7 +54,7 @@ bool TiledAreaComponent::containsPoint(Vector2D point)
             {
                 SDL_Rect auxrect = {
                 wordX+(i*unitw),
-                wordY+ (i * unith),
+                wordY+ (j * unith),
                 unitw,
                 unith
                 };
@@ -142,8 +142,9 @@ bool TiledAreaComponent::_overlapsWith(CircleArea2D* circleArea)
 }
 
 
-void TiledAreaComponent::setActiveTile()
+void TiledAreaComponent::setActiveTile(bool t, int i, int j)
 {
+    matcol[i][j] = t;
 }
 
 bool TiledAreaComponent::CheckCollisionInTiles(SDL_Rect& _collition)

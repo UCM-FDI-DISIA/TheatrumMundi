@@ -30,7 +30,7 @@ SceneManager::SceneManager()
 
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 
-	loadScene(SceneName::INITIAL_MENU);
+	loadScene(SceneName::DRAG_PUZZLE);
 }
 
 void SceneManager::popScene()

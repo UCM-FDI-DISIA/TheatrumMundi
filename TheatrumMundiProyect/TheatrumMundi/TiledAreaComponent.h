@@ -29,7 +29,7 @@ public:
 
 	 bool _overlapsWith(CircleArea2D* circleArea) override;
 
-	 void setActiveTile();
+	 void setActiveTile(bool t, int i, int j);
 
 	 bool CheckCollisionInTiles(SDL_Rect& _collition);
 	 bool CheckCollisionInTilesCircles(const Vector2D& pos,int rad);

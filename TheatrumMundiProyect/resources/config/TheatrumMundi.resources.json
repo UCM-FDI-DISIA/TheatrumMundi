@@ -445,6 +445,14 @@
       "file": "../resources/images/veneno.png"
     },
     {
+      "id": "piezaL1",
+      "file": "../resources/images/temporales/piezadeL1.png"
+    },
+    {
+      "id": "piezaL2",
+      "file": "../resources/images/temporales/piezadeL2.png"
+    },
+    {
       "id": "Hanni",
       "file": "../resources/images/asesinoDeHanni.png"
     }
