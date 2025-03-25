@@ -6,7 +6,6 @@
 #include "ClickableSpriteComponent.h"
 #include "SDLUtils.h"
 #include "Image.h"
-#include "ClickComponent.h"
 #include "TriggerComponent.h"
 #include "DragComponent.h"
 MosaicPuzzleScene::MosaicPuzzleScene()
@@ -105,6 +104,10 @@ void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
 
 #pragma region Buttons
 		//Creation of all the buttons
+		auto reset = entityFactory->CreateInteractableEntity(entityManager, "clockHorButton", EntityFactory::RECTAREA, Vector2D(800, 0), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		reset->getMngr()->getComponent<ClickComponent>(reset)->connect(ClickComponent::JUST_CLICKED, [this] {
+			ResetPuzzle();
+			});
 #pragma endregion
 
 		
@@ -139,6 +142,13 @@ void MosaicPuzzleScene::CorrectPositions(entity_t square)
 		actPosition.setY(firstPos.getY() - SQUAREWIDTH);
 	}
 	else actPosition.setY(firstPos.getY());
+}
+
+void MosaicPuzzleScene::ResetPuzzle()
+{
+	for (int i = 0; i < TOTALSQUARES; ++i) {
+		squares[i]->getMngr()->getComponent<Transform>(squares[i])->getPos().set(positions[indexPositions[i]]);
+	}
 }
 
 /// <summary>

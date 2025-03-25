@@ -19,6 +19,7 @@ public:
 	~MosaicPuzzleScene();
 	void init(/*SceneRoomTemplate* sr*/);
 	void CorrectPositions(entity_t square);
+	void ResetPuzzle();
 	bool Check() override;
 	void Win() override;
 	void Exit() override;
