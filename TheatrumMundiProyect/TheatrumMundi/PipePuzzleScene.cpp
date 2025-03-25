@@ -626,7 +626,47 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
 		0, ecs::grp::DEFAULT);
 
+		// create entity
+		gloveEntity = entityFactory->CreateInteractableEntity(entityManager, "Gloves", EntityFactory::RECTAREA,
+			Vector2D(1200, 895), Vector2D(0, 0), 150, 150, 0,
+			areaLayerManager,
+			EntityFactory::NODRAG,
+			ecs::grp::INTERACTOBJ);
 
+		//add click component
+		ClickComponent* clk = entityManager->getComponent<ClickComponent>(gloveEntity);
+		clk->connect(ClickComponent::JUST_CLICKED, [this]() {
+
+			/*;*/
+			room->GetInventory()->addItem(new Hint("Gloves", "Me lo puedo beber??", &sdlutils().images().at("Gloves")));
+			room->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(room->GetEntityManager(), "Gloves", EntityFactory::RECTAREA, room->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+			room->GetInventory()->hints.back()->getMngr()->setActive(room->GetInventory()->hints.back(), false);
+			gloveEntity->getMngr()->setActive(gloveEntity, false);
+			});
+
+		// create entity
+		_clock = entityFactory->CreateInteractableEntity(entityManager, "Gloves", EntityFactory::RECTAREA,
+			Vector2D(1000, 895), Vector2D(0, 0), 150, 150, 0,
+			areaLayerManager,
+			EntityFactory::NODRAG,
+			ecs::grp::INTERACTOBJ);
+
+		//add click component
+		clk = entityManager->getComponent<ClickComponent>(gloveEntity);
+		clk->connect(ClickComponent::JUST_CLICKED, [this]() {
+
+			/*;*/
+			room->GetInventory()->addItem(new Hint("Gloves", "Me lo puedo beber??", &sdlutils().images().at("Gloves")));
+			room->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(room->GetEntityManager(), "Gloves", EntityFactory::RECTAREA, room->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+			room->GetInventory()->hints.back()->getMngr()->setActive(room->GetInventory()->hints.back(), false);
+			gloveEntity->getMngr()->setActive(gloveEntity, false);
+			});
+
+		//entityManager->setActive(gloveEntity, false);
+		//entityManager->setActive(_clock, false);
+
+		areaLayerManager->sendBack(entityManager->getComponent<RectArea2D>(gloveEntity)->getLayerPos());
+		areaLayerManager->sendBack(entityManager->getComponent<RectArea2D>(_clock)->getLayerPos());
 
 		//Create background
 		auto background = entityFactory->CreateImageEntity(entityManager, "Pared",
@@ -637,6 +677,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
 		0, ecs::grp::DEFAULT);
 	
+
 		//Create string segnment sprite
 		
 		_rope = entityFactory->CreateInteractableEntityScroll(entityManager, "rope", EntityFactory::RECTAREA,
@@ -644,8 +685,40 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			2, 150, EntityFactory::SCROLLNORMAL, 1,
 			EntityFactory::NODRAG,
 			ecs::grp::INTERACTOBJ);
+		//if clicked remove click comonent and start animation 
+		ClickComponent* clComponent = _rope->getMngr()->getComponent<ClickComponent>(_rope);
 
-		entityManager->setActive(_rope, false);
+		clComponent->connect(ClickComponent::JUST_CLICKED, [this]() {
+			//std::cout << "PULSADO CUERDA";
+			if (solved)
+			{
+				if (!entityManager->getComponent<ScrollComponent>(_rope)->isScrolling()) {
+					auto ScrollCube = entityManager->getComponent<ScrollComponent>(_rope);
+					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_cubeWithoutWater));
+					entityManager->getComponent<ScrollComponent>(_rope)->Scroll(ScrollComponent::DOWN);
+				}
+
+				//add gloves and clock
+				if (!entityManager->getComponent<ScrollComponent>(_rope)->isScrolling() && entityManager->getComponent<ScrollComponent>(_rope)->finalPhaseCheck())
+				{
+					Image* img = entityManager->getComponent<Image>(_cubeWithoutWater);
+					img->setTexture(&sdlutils().images().at("fullRope"));
+
+					auto ScrollCube = entityManager->getComponent<ScrollComponent>(_rope);
+					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(gloveEntity));
+					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_cubeWithoutWater));
+					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_clock));
+					entityManager->getComponent<ScrollComponent>(_rope)->Scroll(ScrollComponent::UP);
+					entityManager->setActive(gloveEntity, true);
+					entityManager->setActive(_clock, true);
+
+
+				}
+
+			}
+
+			});
+		//entityManager->setActive(_rope, false);
 
 
 		moduleCreation();
@@ -762,22 +835,15 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->addComponent<RectArea2D>(exitEntity, areaLayerManager);
 
 		//add click component
-		ClickComponent* clk = entityManager->addComponent<ClickComponent>(exitEntity);
+		 clk = entityManager->addComponent<ClickComponent>(exitEntity);
 		clk->connect(ClickComponent::JUST_CLICKED, []() {
 			Game::Instance()->getSceneManager()->popScene();
 			});
 
-		
-		/*//create exit botton
-		 _exit = entityFactory->CreateImageEntity(entityManager, "exit",
-			Vector2D(50, 580), Vector2D(0, 0), 150, 150, 0, ecs::grp::DEFAULT);
-	*/
-	
-
 
 		// create entity
 		gloveEntity = entityFactory->CreateInteractableEntity(entityManager, "Gloves", EntityFactory::RECTAREA,
-			Vector2D(1200, 495), Vector2D(0, 0), 150, 150, 0,
+			Vector2D(1200, 895), Vector2D(0, 0), 150, 150, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::INTERACTOBJ);
@@ -795,7 +861,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 		// create entity
 		_clock = entityFactory->CreateInteractableEntity(entityManager, "Gloves", EntityFactory::RECTAREA,
-			Vector2D(1100, 495), Vector2D(0, 0), 150, 150, 0,
+			Vector2D(1000, 895), Vector2D(0, 0), 150, 150, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::INTERACTOBJ);
@@ -1056,51 +1122,6 @@ void PipePuzzleScene::Win()
 	//Change the texture of the cube sprite to one with water
 	Image* img = entityManager->getComponent<Image>(_cubeWithoutWater);
 	img->setTexture(&sdlutils().images().at("cubeWithWater"));
-
-	//rope visible
-	entityManager->setActive(_rope, true);
-
-	//if clicked remove click comonent and start animation 
-	ClickComponent* clComponent = _rope->getMngr()->getComponent<ClickComponent>(_rope);
-	changed = false;
-	clComponent->connect(ClickComponent::JUST_CLICKED, [this]() {
-		//std::cout << "PULSADO CUERDA";
-		if (!entityManager->getComponent<ScrollComponent>(_rope)->isScrolling()&&!changed) {
-			auto ScrollCube = entityManager->getComponent<ScrollComponent>(_rope);
-			ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_cubeWithoutWater));
-			entityManager->getComponent<ScrollComponent>(_rope)->Scroll(ScrollComponent::DOWN);
-		}
-		else
-		{
-			Image* img = entityManager->getComponent<Image>(_cubeWithoutWater);
-			img->setTexture(&sdlutils().images().at("fullRope"));
-			changed = true;
-			
-		}
-
-		//add gloves and clock
-		if (changed )
-		{
-			entityManager->getComponent<ScrollComponent>(_rope)->Scroll(ScrollComponent::UP);
-			entityManager->setActive(gloveEntity, true);
-			entityManager->setActive(_clock, true);
-
-			auto ScrollCube = entityManager->getComponent<ScrollComponent>(_rope);
-			ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(gloveEntity));
-			ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_cubeWithoutWater));
-			ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_clock));
-
-		}
-		
-		});
-	
-	
-
-		
-	
-
-
-
 
 }
 

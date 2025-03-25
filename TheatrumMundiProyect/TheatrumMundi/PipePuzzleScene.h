@@ -12,6 +12,7 @@ class Module;
 class Pipe;
 class Image;
 class Inventory;
+class ClickComponent;
 class PipePuzzleScene : public ScenePuzzleTemplate
 {
 
@@ -53,7 +54,7 @@ private:
 	ecs::Entity* _cubeWithoutWater;
 	ecs::Entity* _clock;
 	ecs::Entity* _exit;
-	bool changed;
+	ClickComponent* clComponent;
 
 protected:
 
