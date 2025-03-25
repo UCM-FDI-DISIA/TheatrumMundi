@@ -33,6 +33,10 @@ public:
 	inline void setActive(bool _active) { active = _active; } //set the item to active or not
 	inline bool getActive() const { return active; } //Returns if the item is active or not
 	int getItemNumber(); //Get the hints that are going to be rendered
+
+	void setFirstItem(int _firstItem) { firstItem = _firstItem; } //Set the first hint to be rendered
+	int getFirstItem() const { return firstItem; } //Get the first hint
+
 	inline std::vector<Hint*> getItems() { return items; } //Get all the hintss
 	inline Vector2D GetPosition(int i) { return hints[i]->getMngr()->getComponent<Transform>(hints[i])->getPos(); } //Return the position of the item in the inventory USING IN THE CREATION OF THE INVENTITIES IN THE PUZZLESCENES
 private:

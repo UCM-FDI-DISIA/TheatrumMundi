@@ -52,3 +52,5 @@ void SceneTemplate::endDialogue()
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
 }
+
+//metodo global inv flechas
