@@ -120,17 +120,10 @@ void Room1Scene::init()
 		a.setLooping(room1music, true);
 		a.playSound(room1music);
 
-		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
 		//Register scene in dialogue manager
 		dialogueManager->setScene(this);
 
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
-
-
-
 		
-
-
 		auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width())/12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1160 - 1349, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
@@ -377,6 +370,10 @@ void Room1Scene::init()
 		//		ScrollComponentLog->addPhase();
 		//	}
 		//	});
+
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 	}
 	SDL_Delay(1000);
 
