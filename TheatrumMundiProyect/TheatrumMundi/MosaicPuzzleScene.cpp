@@ -3,6 +3,12 @@
 #include "SceneRoomTemplate.h"
 #include "ClickComponent.h"
 #include "RectArea2D.h"
+#include "ClickableSpriteComponent.h"
+#include "SDLUtils.h"
+#include "Image.h"
+#include "ClickComponent.h"
+#include "TriggerComponent.h"
+#include "DragComponent.h"
 MosaicPuzzleScene::MosaicPuzzleScene()
 {
 	//Assignation of the possitions 
@@ -16,10 +22,11 @@ MosaicPuzzleScene::MosaicPuzzleScene()
 		}
 
 		//Assign the positions of the different rows
-		if(i < 3) positions.push_back(Vector2D(100 , 100 + index * SQUAREWIDTH)); //First row possitions (0-2)
-		else if(i < 6) positions.push_back(Vector2D(100 + SQUAREWIDTH, 100 + index * SQUAREWIDTH)); //Second row possitions (3-5)
-		else positions.push_back(Vector2D(100 + 2 * SQUAREWIDTH, 100 + index * SQUAREWIDTH)); //Third row possitions (6-8)
+		if(i < 3) positions.push_back(Vector2D(300 , 100 + (index * SQUAREWIDTH))); //First row possitions (0-2)
+		else if(i < 6) positions.push_back(Vector2D(300 + SQUAREWIDTH, 100 + (index * SQUAREWIDTH))); //Second row possitions (3-5)
+		else positions.push_back(Vector2D(300 + (2 * SQUAREWIDTH), 100 + (index * SQUAREWIDTH))); //Third row possitions (6-8)
 
+		std::cout << positions.back() << "\n";
 		++index;
 
 	}
@@ -44,20 +51,29 @@ void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
 
 		//SquareEntities
 		for (int i = 0; i < TOTALSQUARES; ++i) { //Creation of the squares and assignation in the different possitions
-			squares.push_back(entityFactory->CreateInteractableEntity(entityManager, imgId[i], EntityFactory::RECTAREA, positions[indexPositions[i]], Vector2D(0, 0), SQUAREWIDTH, SQUAREWIDTH, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::INTERACTOBJ));
+			squares.push_back(entityManager->addEntity());
+			auto& it = squares.back();
+
+			//Asignación de los componentes
+			it->getMngr()->addComponent<Transform>(it,positions[indexPositions[i]],Vector2D(0,0),SQUAREWIDTH,SQUAREWIDTH,0);
+			it->getMngr()->addComponent<Image>(it, &sdlutils().images().at(imgId[i]));
+			it->getMngr()->addComponent<RectArea2D>(it,areaLayerManager);
+			it->getMngr()->addComponent<ClickComponent>(it);
+			it->getMngr()->addComponent<TriggerComponent>(it);
+			it->getMngr()->addComponent<DragComponent>(it);
 
 			//Add collisions to the square
-			auto physicis = squares.back()->getMngr()->addComponent<PhysicsBodyComponent>(squares.back());
+			auto physicis = it->getMngr()->addComponent<PhysicsBodyComponent>(it);
 			physicis->AddObjectToList(mosaicBorder->getMngr()->getComponent<RectArea2D>(mosaicBorder)); //Adds the collision to the MosaicBorder
 
 			//When tou clicked in the square, keeps the original position of the square
-			auto it = squares.back();
-			it->getMngr()->getComponent<ClickComponent>(squares.back())->connect(ClickComponent::JUST_CLICKED, [this /*, sr */,it]() {
+
+			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this /*, sr */,it]() {
 				firstPos = it->getMngr()->getComponent<Transform>(it)->getPos();
 			});
 
 			//When the square got released, checks if the puzzle was solved correctly
-			 it->getMngr()->getComponent<ClickComponent>(squares.back())->connect(ClickComponent::JUST_RELEASED, [this /*, sr */,it ]() {
+			 it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this /*, sr */,it ]() {
 				 CorrectPositions(it);
 				if (Check()) { //If the puzzle is solved correctly, calls Win
 					Win();
@@ -133,7 +149,7 @@ bool MosaicPuzzleScene::Check()
 {
 	int index = 0;
 	bool win = true;
-	while (win && index <= TOTALSQUARES) {
+	while (win && index < TOTALSQUARES) {
 		auto transform = squares[index]->getMngr()->getComponent<Transform>(squares[index])->getPos();
 		if (positions[index].getX() != transform.getX() && positions[index].getY() != transform.getY())  { //if the positions aren't the same return false
 			win = false;
