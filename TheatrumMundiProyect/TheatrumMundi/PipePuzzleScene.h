@@ -49,7 +49,11 @@ private:
 	std::vector<ecs::Entity*>_pathEnt;
 	ecs::Entity* gloveEntity;
 	bool _updatePuzzle;
-	std::queue<int> pipesToUpdate, modulesToUpdate, pathsToUpdate; 
+	ecs::Entity* _rope;
+	ecs::Entity* _cubeWithoutWater;
+	ecs::Entity* _clock;
+	ecs::Entity* _exit;
+	bool changed;
 
 protected:
 

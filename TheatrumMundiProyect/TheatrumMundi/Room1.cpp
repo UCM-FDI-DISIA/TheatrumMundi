@@ -257,7 +257,7 @@ void Room1Scene::init()
 		Game::Instance()->getDataManager()->SetSceneCount(ROOM1);
 		//get actual variant
 		int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(ROOM1);
-		std::cout << "VARIANTE" << variantAct << std::endl;
+		//std::cout << "VARIANTE" << variantAct << std::endl;
 
 		auto possibleButton = entityFactory->CreateInteractableEntity(entityManager, "posible", EntityFactory::RECTAREA, Vector2D(500, 0), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 		entityManager->setActive(possibleButton, false);
@@ -267,7 +267,7 @@ void Room1Scene::init()
 			if (variantAct != 0)
 			{
 				Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
-				std::cout << "NO CORRECTA DE POS" << std::endl;
+				//std::cout << "NO CORRECTA DE POS" << std::endl;
 
 
 			}
@@ -283,7 +283,7 @@ void Room1Scene::init()
 			//if its the not correct variant one dies
 			if (variantAct != 1 || 2)
 			{
-				std::cout << "NO CORRECTA DE NO POS" << std::endl;
+				//std::cout << "NO CORRECTA DE NO POS" << std::endl;
 				Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
 			}
 
@@ -635,7 +635,7 @@ void Room1Scene::resolvedPuzzle(int i)
 		else if (i == 3)  auxevent = TeaCupPuzzleRsv;
 		roomEvent[auxevent]();
 		puzzlesol[i] = true;
-		std::cout << "Puzle resuelto" << i << std::endl;
+		//std::cout << "Puzle resuelto" << i << std::endl;
 		bool aux = true;
 		for (bool a : puzzlesol) if (!a) aux = false;
 		finishallpuzzles = aux;
