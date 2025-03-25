@@ -11,13 +11,11 @@
 #include "SceneTemplate.h"
 #include "../src/components/Transform.h"
 #include "Area2DLayerManager.h"
-#include "../TheatrumMundi/TextInfo.h"
 
-#include "../src/components/WriteTextComponent.h"
 
 using namespace std;
 
-DialogueManager::DialogueManager(int numRooms) : _scene(nullptr), displayOnProcess(false), characterimg(nullptr) {
+DialogueManager::DialogueManager(int numRooms) : _scene(nullptr), displayOnProcess(false), characterimg(nullptr), _writeTextComp(nullptr){
     actualroom = 1;
     room = "Sala" + to_string(actualroom);
     dialogueReader = new ReadDialog(numRooms);
@@ -90,7 +88,7 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
     WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, _showText);
     
-
+    _writeTextComp = writeLogentityManager;
 }
 
 void DialogueManager::setScene(SceneTemplate* scene)
@@ -101,18 +99,39 @@ void DialogueManager::setScene(SceneTemplate* scene)
 void DialogueManager::ReadDialogue(const string& event) {
     auto& roomDialogues = dialogueReader->getRoomDialogues(room);
 
-    if (!roomDialogues[event].empty()) {
-        TextInfo elem = roomDialogues[event].front();
-        _showText->Character = elem.Character;
-        _showText->Text = elem.Text;
-        Game::Instance()->getLog()->addDialogueLineLog(elem.Character, elem.Text);
-        setCharacterImage(elem.Character);
-        roomDialogues[event].pop_front();
+    if (_writeTextComp->isFinished())
+    {
+        if (!roomDialogues[event].empty()) {
+            
+            displayOnProcess = true;
+            _writeTextComp->startTextLine();
+
+            TextInfo elem = roomDialogues[event].front();
+            _showText->Character = elem.Character;
+            _showText->Text = elem.Text;
+
+            Game::Instance()->getLog()->addDialogueLineLog(elem.Character, elem.Text);
+            setCharacterImage(elem.Character);
+
+            roomDialogues[event].pop_front();
+        }
+        else {
+            //Indicate log the dialogue Event has ended
+            Game::Instance()->getLog()->addDialogueLineLog("/", "/");
+
+            _scene->endDialogue();
+            displayOnProcess = false;
+
+            _showText->Character = " "; // Saves new text
+            _showText->Text = " ";
+            _writeTextComp->startTextLine();
+        }
     }
-    else {
-        _scene->endDialogue();
-        displayOnProcess = false;
+    else
+    {
+        _writeTextComp->finishTextLine();
     }
+    
 }
 
 void DialogueManager::setCharacterImage(const string& Character) {

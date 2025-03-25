@@ -3,17 +3,21 @@
 
 #include "ReadDialog.h"
 
+#include "../src/Components/WriteTextComponent.h";
+#include "TextInfo.h"
 
 #include <string>
 
 #include "ecs.h"
+
+template <typename T>
+class WriteTextComponent;
 
 class SceneTemplate;
 class EntityFactory;
 class Image;
 class Log;
 class Area2DLayerManager;
-class TextInfo;
 
 class DialogueManager {
 private:
@@ -24,6 +28,7 @@ private:
     bool displayOnProcess;
     int actualroom;
     std::string room;
+    WriteTextComponent<TextInfo>* _writeTextComp;
 
 public:
     DialogueManager(int numRooms);

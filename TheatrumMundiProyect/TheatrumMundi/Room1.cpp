@@ -371,7 +371,7 @@ void Room1Scene::init()
 		//	}
 		//	});
 
-		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, _eventToRead);
 
 		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 	}
