@@ -62,7 +62,8 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
 
     //Pass dialog if clicked
-    entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this, _textbackground]()
+    auto clickTextDialgue = entityManager->addComponent<ClickComponent>(_textbackground);
+    clickTextDialgue->connect(ClickComponent::JUST_CLICKED, [this, _textbackground]()
         {
             if (!(Game::Instance()->getLog()->GetLogActive())) {
                 //read dialogue only if it has to
@@ -76,6 +77,7 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
                 }
             }
         });
+    Game::Instance()->getLog()->setTextDialogue(clickTextDialgue);
     entityManager->addComponent<TriggerComponent>(_textbackground);
     entityManager->setActive(_textbackground, false);
 

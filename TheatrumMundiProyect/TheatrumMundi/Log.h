@@ -10,7 +10,7 @@ class EntityFactory;
 class Image;
 class Area2DLayerManager;
 class TextInfo;
-
+class ClickComponent;
 
 class Log
 {
@@ -20,6 +20,7 @@ private:
 	// second: dialogueLine
 	std::list<TextInfo> _log;
 	bool _logActive;
+	ClickComponent* _textDialogueComp;
 
 public:
 	
@@ -27,12 +28,12 @@ public:
 
 	//add new dialogue line to log registry
 	void addDialogueLineLog(std::string author, std::string dialogueLine);
+	void cleanLogList();
 
 	void SetLogActive(bool logActive);
 	bool GetLogActive();
 
 	void Init(EntityFactory* entityFactory, ecs::EntityManager* entityManager, Area2DLayerManager* areaLayerManager);
-
 
 
 	//delete of enitities
@@ -41,6 +42,11 @@ public:
 	std::list<TextInfo>* getLogList()
 	{
 		return &_log;
+	}
+
+	void setTextDialogue(ClickComponent* textDialogue)
+	{
+		_textDialogueComp = textDialogue;
 	}
 
 

@@ -27,7 +27,7 @@
 
 using namespace std;
 
-Log::Log()
+Log::Log(): _textDialogueComp(nullptr)
 {
 }
 
@@ -38,6 +38,10 @@ void Log::addDialogueLineLog(std::string author, std::string dialogueLine)
 	aux.Character = author;
 	aux.Text = dialogueLine;
 	_log.push_front(aux);
+}
+
+void Log::cleanLogList()
+{
 }
 
 Log::~Log()
@@ -101,46 +105,6 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	auto buttonCloseLog = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 500), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
 
 
-	/*
-	roomEvent[LOGENABLE] = [this, _backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog, scrollingLog, upScrollingLog] {
-		//activate log
-		entityManager->setActive(_backgroundLog, true); //background
-		entityManager->setActive(_titleLog, true); //title
-		entityManager->setActive(buttonCloseLog, true); //close button
-		entityManager->setActive(buttonOpenLog, false); //open button
-		entityManager->setActive(scrollingLog, true);
-		entityManager->setActive(upScrollingLog, true);
-		//text log
-		//scroll buttons
-
-		/*_log->getMngr()->setActive(_log, true);
-		logActive = true;
-
-		//activate close log button
-		_closeLogButton->getMngr()->setActive(_closeLogButton, true);
-
-		//disable open log button
-		_openLogButton->getMngr()->setActive(_openLogButton, false);
-		*/
-	/*
-		};
-	roomEvent[LOGDESABLE] = [this, _backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog, scrollingLog, upScrollingLog] {
-		//disable log
-		entityManager->setActive(_backgroundLog, false); //background
-		entityManager->setActive(_titleLog, false); //title
-		entityManager->setActive(buttonCloseLog, false); //close button
-		entityManager->setActive(buttonOpenLog, true); //open button
-		entityManager->setActive(scrollingLog, false);
-		entityManager->setActive(upScrollingLog, false);
-		//text log
-		//scroll buttons
-
-		//activate open log button
-		//_openLogButton->getMngr()->setActive(_openLogButton, true);
-		//disable close log button
-		//_closeLogButton->getMngr()->setActive(_closeLogButton, false);
-		};*/
-
 	ClickComponent* buttonOpenLogClick = entityManager->getComponent<ClickComponent>(buttonOpenLog);
 	buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [_titleLog, buttonCloseLog, buttonOpenLog, entityManager]() {
 		//activate log
@@ -175,12 +139,12 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 		}
 		});
 
-	/*
-	_textbackgroundClick->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
-		while (ScrollComponentLog->numPhases() < (Game::Instance()->getDialogueManager()->getSceneLog()->getLogList()->size() / 5)) {
+	
+	_textDialogueComp->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
+		while (ScrollComponentLog->numPhases() < (_log.size() / 5)) {
 			ScrollComponentLog->addPhase();
 		}
-		});*/
+		});
 
 		
 }
