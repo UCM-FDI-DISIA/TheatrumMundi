@@ -2,6 +2,7 @@
 #include "../src/Components/Area2D.h"
 #include "../src/Components/CircleArea2D.h"
 #include "../src/Components/RectArea2D.h"
+#include "TiledAreaComponent.h"
 
 using namespace std;
 
@@ -43,6 +44,16 @@ void PhysicsBodyComponent::AddObjectToList(RectArea2D* newArea)
 void PhysicsBodyComponent::AddObjectToList(CircleArea2D* newArea)
 {
 	colisionableObjects.push_back(newArea);
+}
+
+void PhysicsBodyComponent::AddObjectToList(TiledAreaComponent* newArea)
+{
+	colisionableObjects.push_back(newArea);
+}
+
+void PhysicsBodyComponent::AddObjectofList(list<Area2D*> listarea)
+{
+	colisionableObjects = listarea;
 }
 
 /// <summary>
