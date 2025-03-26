@@ -30,6 +30,7 @@ public:
 	void start();
 	SceneManager* getSceneManager();
 	DataManager* getDataManager();
+	CSVdataRecolector* getCSVDataColector();
 	Log* getLog();
 	Game& operator=(const Game& o) = delete;
 	Game(const Game& o) = delete;

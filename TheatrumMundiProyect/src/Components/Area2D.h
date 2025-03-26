@@ -7,6 +7,7 @@
 
 class RectArea2D;
 class CircleArea2D;
+class TiledAreaComponent;
 
 class Area2D : public ecs::Component
 {
@@ -32,7 +33,7 @@ public:
 
 	virtual bool _overlapsWith(RectArea2D* rectArea) = 0;
 	virtual bool _overlapsWith(CircleArea2D* rectArea) = 0;
-
+	virtual bool _overlapsWith(TiledAreaComponent* area) = 0;
 
 	void setLocalPos(Vector2D pos) {
 		_localPosition = pos;

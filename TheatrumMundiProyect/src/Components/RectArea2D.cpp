@@ -6,6 +6,7 @@
 #include "Transform.h"
 #include "CircleArea2D.h"
 #include "../utils/Collisions.h"
+#include "../../TheatrumMundi/TiledAreaComponent.h"
 
 RectArea2D::RectArea2D(Area2DLayerManager* areaLayerMngr, Vector2D localPos, int width, int height)
 	: Area2D(areaLayerMngr, localPos), _width(width), _height(height)
@@ -106,4 +107,34 @@ bool RectArea2D::_overlapsWith(CircleArea2D* circleArea)
 		transform->getPos() + _localPosition, _width, _height,
 		extrentTr->getPos() + circleArea->getLocalPos(), circleArea->getRadius()
 	);
+}
+
+bool RectArea2D::_overlapsWith(TiledAreaComponent* area)
+{
+	Transform* transform = _ent->getMngr()->getComponent<Transform>(_ent);
+	Transform* extrentTr = area->getContext()->getMngr()->getComponent<Transform>(area->getContext());
+
+	if (transform == nullptr || extrentTr == nullptr) return false;
+
+	SDL_Rect thisRect = {
+		transform->getPos().getX() + _localPosition.getX(),
+
+		transform->getPos().getY() + _localPosition.getY(),
+		_width,
+		_height
+	};
+
+	SDL_Rect otherRect = {
+		extrentTr->getPos().getX() + area->getLocalPos().getX(),
+		extrentTr->getPos().getY() + area->getLocalPos().getY(),
+		area->getWidth(),
+		area->getHeight()
+	};
+
+	SDL_Rect rs;
+	if (SDL_IntersectRect(&thisRect, &otherRect, &rs)) return area->CheckCollisionInTiles(rs);
+	else
+	{
+		return false;
+	}
 }
