@@ -819,21 +819,17 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 				});
 		}
 
-		auto exitEntity = entityManager->addEntity();
-		// add transfomr
-		auto exitTransform = entityManager->addComponent<Transform>(
-			exitEntity, Vector2D(50, 580), Vector2D(0, 0), 150, 150, 0
-		);
-		// add image
-		entityManager->addComponent<Image>(exitEntity, &sdlutils().images().at("exit"));
+		auto _backButton = entityManager->addEntity(ecs::grp::UI);
+		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
+		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
 
-		// add area of visualization of the image
-		entityManager->addComponent<RectArea2D>(exitEntity, areaLayerManager);
+		entityManager->addComponent<RectArea2D>(_backButton, areaLayerManager);
 
-		//add click component
-		 clk = entityManager->addComponent<ClickComponent>(exitEntity);
-		clk->connect(ClickComponent::JUST_CLICKED, []() {
-			Game::Instance()->getSceneManager()->popScene();
+		//Click component Open log button
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr]()
+			{
+				Game::Instance()->getSceneManager()->popScene();
 			});
 
 /*
