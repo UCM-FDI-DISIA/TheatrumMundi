@@ -19,10 +19,6 @@ protected:
 		TeaCupPuzzleSnc,
 		TeaCupPuzzleRsv,
 		Spoon,
-		//Boa1,
-		//Boa2,
-		//Hanni,
-		//Doku,
 		ResolveCase,
 		ResolveBottons,
 		GoodEnd,
@@ -30,16 +26,41 @@ protected:
 		MobileDialogue,
 		LOGENABLE,
 		LOGDESABLE,
-		event_size,
+		EVENTS_SIZE,
 	};
+
 public:
+
 	//friend PipePuzzleScene;
 	Room1Scene();
 	~Room1Scene();
+
 	void init() override;
 	void resolvedPuzzle(int i) override;
 	void refresh() override;
 	void unload() override;
 
+private:
+
+	void _setRoomEvents();
+	void _setRoomAudio();
+	void _setGlobalFeatures();
+
+	void _setRoomBackground();
+	void _setDialog();
+	void _setUI();
+
+	struct {
+		Sound uiButton;
+		Sound puzzleButton;
+	} rmSounds;
+
+	struct {
+		ecs::entity_t corpseQuitButton;
+		ecs::entity_t pauseButton;
+		ecs::entity_t inventoryButton;
+
+		ecs::entity_t backgroundScroll;
+	} rmObjects;
 };
 
