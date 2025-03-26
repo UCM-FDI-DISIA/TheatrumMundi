@@ -15,6 +15,9 @@ Inventory::Inventory()
 		positions.push_back(Vector2D(100, 175 + i * 150));
 	}
 	originalPos = { 0,0 };
+
+	_textDescription = new std::string;
+	*_textDescription = "Hello!";
 }
 /// <summary>
 /// Destroy the reference to the hints

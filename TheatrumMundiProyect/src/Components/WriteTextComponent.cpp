@@ -9,6 +9,9 @@
 #include "../ecs/Manager.h"
 
 #include <list>
+#include <string>
+
+using namespace std;
 
 //CONSTRUCTOR
 template <typename T>
@@ -21,6 +24,12 @@ WriteTextComponent<T>::WriteTextComponent(Font& desiredFont, const SDL_Color& de
 //UPDATE
 template <>
 void WriteTextComponent<std::list<TextInfo>>::update()
+{
+
+}
+
+template <typename T>
+void WriteTextComponent<T>::update()
 {
 
 }
@@ -177,6 +186,16 @@ void WriteTextComponent<TextInfo>::render()
 	
 }
 
+template <>
+void WriteTextComponent<string>::render()
+{
+	if (textStructure->empty()) return;
+
+	Texture* dialogText = new Texture(sdlutils().renderer(), *textStructure, _myFont, _color);
+	SDL_Rect dialogRect = { 350, 550,dialogText->width(),dialogText->height() };
+	dialogText->render(dialogRect, 0);
+
+}
 
 //IS FINISHED
 template<>
@@ -229,3 +248,5 @@ WriteTextComponent<T>::~WriteTextComponent()
 template class WriteTextComponent<TextInfo>;
 
 template class WriteTextComponent<std::list<TextInfo>>;
+
+template class WriteTextComponent<string>;

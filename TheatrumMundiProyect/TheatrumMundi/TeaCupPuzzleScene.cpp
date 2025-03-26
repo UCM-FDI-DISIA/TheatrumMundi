@@ -15,10 +15,15 @@
 #include "../src/components/CircleArea2D.h"
 #include "../src/components/RectArea2D.h"
 
+#include "../src/Components/WriteTextComponent.h"
 
 #include "AudioManager.h"
 
 #include "SceneRoomTemplate.h"
+
+#include <string>
+
+using namespace std;
 
 TeaCupPuzzleScene::TeaCupPuzzleScene()
 {
@@ -124,6 +129,15 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		//Invntory Background
 		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
 		entityManager->setActive(InventoryBackground, false);
+
+		auto _textTest = entityManager->addEntity(ecs::grp::DEFAULT);
+		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
+		entityManager->setActive(_textTest, false);
+
+		//Add writeText to description
+		SDL_Color colorDialog = { 0, 0, 0, 255 };
+		WriteTextComponent<string>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<string>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, sr->GetInventory()->getTextDescription());
+
 
 		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(upButton, false);
