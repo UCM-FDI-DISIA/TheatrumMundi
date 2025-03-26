@@ -9,6 +9,7 @@
 class TextInfo;
 class Image;
 class Transform;
+class DescriptionInfo;
 
 template <typename T>
 class WriteTextComponent : public ecs::Component

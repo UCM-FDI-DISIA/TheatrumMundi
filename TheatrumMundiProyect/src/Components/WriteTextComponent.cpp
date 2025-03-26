@@ -4,6 +4,7 @@
 #include "../../src/sdlutils/Texture.h"
 
 #include "../../TheatrumMundi/TextInfo.h"
+#include "../../TheatrumMundi/DescriptionInfo.h"
 #include "../../src/Components/Image.h"
 #include "../../src/Components/Transform.h"
 #include "../ecs/Manager.h"
@@ -187,12 +188,12 @@ void WriteTextComponent<TextInfo>::render()
 }
 
 template <>
-void WriteTextComponent<string>::render()
+void WriteTextComponent<DescriptionInfo>::render()
 {
-	if (textStructure->empty()) return;
+	if (textStructure->Description.empty()) return;
 
-	Texture* dialogText = new Texture(sdlutils().renderer(), *textStructure, _myFont, _color);
-	SDL_Rect dialogRect = { 350, 550,dialogText->width(),dialogText->height() };
+	Texture* dialogText = new Texture(sdlutils().renderer(), textStructure->Description, _myFont, _color);
+	SDL_Rect dialogRect = { 350, textStructure->posY, dialogText->width(),dialogText->height() };
 	dialogText->render(dialogRect, 0);
 
 }
@@ -249,4 +250,4 @@ template class WriteTextComponent<TextInfo>;
 
 template class WriteTextComponent<std::list<TextInfo>>;
 
-template class WriteTextComponent<string>;
+template class WriteTextComponent<DescriptionInfo>;

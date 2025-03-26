@@ -23,6 +23,8 @@
 
 #include <string>
 
+#include "../../TheatrumMundi/DescriptionInfo.h"
+
 using namespace std;
 
 TeaCupPuzzleScene::TeaCupPuzzleScene()
@@ -136,7 +138,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Add writeText to description
 		SDL_Color colorDialog = { 0, 0, 0, 255 };
-		WriteTextComponent<string>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<string>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, sr->GetInventory()->getTextDescription());
+		WriteTextComponent<DescriptionInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, sr->GetInventory()->getTextDescription());
 
 
 		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);

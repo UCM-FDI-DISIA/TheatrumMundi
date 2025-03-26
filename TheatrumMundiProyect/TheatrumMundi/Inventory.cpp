@@ -5,6 +5,7 @@
 #include "Manager.h"
 #include "DragComponent.h"
 
+
 /// <summary>
 /// Create the inventory, setting the array of positions, the fitst item, the active to false and the originalPos to 0,0
 /// </summary>
@@ -16,8 +17,7 @@ Inventory::Inventory()
 	}
 	originalPos = { 0,0 };
 
-	_textDescription = new std::string;
-	*_textDescription = " ";
+	_textDescription = new DescriptionInfo{" ",0};
 }
 /// <summary>
 /// Destroy the reference to the hints
