@@ -24,6 +24,7 @@ public:
 
 	bool _overlapsWith(RectArea2D* rectArea) override;
 	bool _overlapsWith(CircleArea2D* rectArea) override;
+	bool _overlapsWith(TiledAreaComponent* area) override;
 
 	void setRadius(int value) {
 		_radius = value;

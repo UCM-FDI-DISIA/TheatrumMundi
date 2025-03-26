@@ -8,12 +8,19 @@
 using namespace std;
 
 ScrollComponent::ScrollComponent(int velocity, float time, Inverse isInverse, int numPhases) : ecs::Component() {
-	finalPhase = numPhases;
+	
+	_eventConnectionsScroll.insert({ STARTSCROLLING, {} });
+	_eventConnectionsScroll.insert({ ENDEDSCROLLING, {} });
+
 	if (isInverse == Inverse::NORMAL) {
-		phase = startPhase;
+		finalPhase = numPhases;
+		phase = 0;
+		_inverse = NORMAL;
 	}
 	else { //Inverse::INVERSE
-		phase = finalPhase;
+		startPhase = 0 - numPhases;
+		phase = 0;
+		_inverse = INVERSE;
 	}
 	_timeScroll = 0;
 	_initialTimeScroll = time;
@@ -31,11 +38,20 @@ void ScrollComponent::Scroll(Direction _direction) {
 
 	cout << "Scroll Activated" << endl;
 
+	if (_direction == UP || _direction == DOWN) {
+		_path = UPDOWN;
+	}
+	if (_direction == LEFT || _direction == RIGHT) {
+		_path = LEFTRIGHT;
+	}
+
 	_dir = Vector2D(0, 0);
 
 	switch (_direction) {
 		case UP:
 			if (!startPhaseCheck()) {
+				std::cout << "FASE: " << phase << std::endl;
+				std::cout << "FASE INICIAL: " << startPhase << std::endl;
 				_dir = Vector2D(0, -1 * _velocity);
 				phase--;
 			}
@@ -67,6 +83,11 @@ void ScrollComponent::Scroll(Direction _direction) {
 	for (Transform* e : _objectsTransform) { //Apply direction to all objects
 		e->getVel().set(_dir); 
 	}
+
+	auto& callbacks = _eventConnectionsScroll.at(ScrollComponent::STARTSCROLLING);
+
+	for (CALLBACK callback : callbacks)
+		callback();
 }
 
 void ScrollComponent::update()
@@ -132,6 +153,13 @@ void ScrollComponent::update()
 		//		}
 		//	}
 		//}
+		if (_timeScroll == 0) {
+
+			auto& callbacks = _eventConnectionsScroll.at(ScrollComponent::ENDEDSCROLLING);
+
+			for (CALLBACK callback : callbacks)
+				callback();
+		}
 	} 
 	else 
 	{
@@ -142,13 +170,60 @@ void ScrollComponent::update()
 }
 
 bool ScrollComponent::isScrolling() {
-	if (_objectsTransform.empty()) return false;
-	return _objectsTransform[0]->getVel().magnitude() > 0; //Check if the first element is moving
+	if (_timeScroll > 0) {
+		return true;
+	}
+	return false;
+}
+
+bool ScrollComponent::connect(EVENT_TYPE eventType, CALLBACK action) {
+	auto eventHashIt = _eventConnectionsScroll.find(eventType);
+	if (eventHashIt == _eventConnectionsScroll.end()) return false;
+
+	eventHashIt->second.push_back(action);
+
+	return true;
 }
 
 void ScrollComponent::addElementToScroll(Transform* _objectT)
 {
 	assert(_objectT != nullptr);
 	_objectsTransform.push_back(_objectT);
+}
+
+int ScrollComponent::numPhases()
+{
+	if (finalPhase + startPhase > 0) return finalPhase + startPhase;
+	else return (-1 * (finalPhase + startPhase));
+}
+
+//void ScrollComponent::restartPosition()
+//{
+//	_timeScroll == 0.1f;
+//	phase = 0;
+//	if (_path == UPDOWN) {
+//		if (_inverse == INVERSE) {
+//			_dir = Vector2D(0, (10 * _velocity * _initialTimeScroll * startPhase));
+//		}
+//		else {
+//			_dir = Vector2D(0, (10 * _velocity * _initialTimeScroll * (-finalPhase)));
+//		}
+//	}
+//	else {
+//		if (_inverse == INVERSE) {
+//			_dir = Vector2D((10 * _velocity * _initialTimeScroll) * startPhase, 0);
+//		}
+//		else {
+//			_dir = Vector2D((10 * _velocity * _initialTimeScroll) * (-finalPhase), 0);
+//		}
+//		
+//	}
+//		
+//}
+
+void ScrollComponent::addPhase()
+{
+	if (_inverse == NORMAL) finalPhase++;
+	else startPhase--;
 }
 

@@ -14,27 +14,13 @@ CSVdataRecolector::CSVdataRecolector()
 	lastmousepos = Vector2D(0, 0);
 	totalmouseMovement = Vector2D(0, 0);
 	numtester = 1;
-	enterScene("ROOM1");
-	
-	AddEntry("A", "ROOM1", Vector2D(0, 0));
-	AddEntry("A", "ROOM1", Vector2D(0, 0));
-	SDL_Delay(1000);
-	AddEntry("A", "ROOM1", Vector2D(0, 0));
-	SDL_Delay(1000);
-	exitScene("ROOM1");
-	enterScene("ROOM3");
-	AddEntry("A", "ROOM3", Vector2D(0, 0));
-	SDL_Delay(1000);
-	AddEntry("B", "ROOM3", Vector2D(0, 0));
-	
-	exitScene("ROOM3");
 }
 
 CSVdataRecolector::~CSVdataRecolector()
 {
 }
 
-void CSVdataRecolector::AddEntry(const std::string& _id, const std::string _scene, Vector2D pos)
+void CSVdataRecolector::AddEntry(const std::string& _id, const std::string _scene)
 {
 	//clickDataTimeLine
 	ClickDataTimeLine aux = { _id,_scene,sdlutils().currRealTime()};
@@ -59,7 +45,7 @@ void CSVdataRecolector::AddEntry(const std::string& _id, const std::string _scen
 	 auxvec.setY(std::abs(auxvec.getY() - lastmousepos.getY()));
 	 lastmousepos;
 	 totalmouseMovement += auxvec;
-
+	 
 }
 
 void CSVdataRecolector::enterScene(const std::string scene)
@@ -82,7 +68,7 @@ void CSVdataRecolector::exitScene(const std::string scene)
 
 void CSVdataRecolector::safeData()
 {
-	std::string filename = "../PlanDePruebas/Tester" + std::to_string(numtester);
+	std::string filename = "../	/Tester" + std::to_string(numtester);
 	filename += ".csv";
 	std::fstream archive;
 	archive.open(filename, std::ios::out | std::ios::app);

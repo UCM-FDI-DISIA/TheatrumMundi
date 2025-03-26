@@ -4,6 +4,7 @@
 class Area2D;
 class CircleArea2D;
 class RectArea2D;
+class TiledAreaComponent;
 class PhysicsBodyComponent : public ecs::Component
 {
 private:
@@ -23,6 +24,10 @@ public:
 	void AddObjectToList(RectArea2D* newArea); //Add a Rect Colision to the list
 
 	void AddObjectToList(CircleArea2D* newArea); //Add a Circle Colision to the list
+
+	void AddObjectToList(TiledAreaComponent* newArea);
+
+	void AddObjectofList(std::list<Area2D*> listarea, Area2D* myarea);
 
 	bool CheckAreaColision(Area2D* entityArea); //Checks if there is a colision with one of the objects 
 };
