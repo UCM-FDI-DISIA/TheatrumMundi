@@ -165,7 +165,7 @@
     },
     {
       "id": "fondoPruebaLog",
-      "file": "../resources/images/fondoLogPrueba.jpg"
+      "file": "../resources/images/fondoLogPrueba.png"
     },
     {
       "id": "prueba",
@@ -343,6 +343,10 @@
     {
       "id": "incrementButton",
       "file": "../resources/images/IncrementButton.png"
+    },
+    {
+      "id": "decreaseButton",
+      "file": "../resources/images/decreaseButton.png"
     },
     {
       "id": "numberButton",

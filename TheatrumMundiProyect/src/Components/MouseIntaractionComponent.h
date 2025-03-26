@@ -21,6 +21,8 @@ public:
 
 	void setLayerOpposition(bool value) { _hasLayerOpposition = value; }
 	bool hasLayerOpposition() { return _hasLayerOpposition; }
+	void setActive(bool value) { _isActive = value; }
+	bool isActive(bool value) { return _isActive; }
 
 protected:
 
@@ -31,4 +33,6 @@ protected:
 	virtual void handleMouseInput() = 0;
 
 	bool _hasLayerOpposition = true;
+
+	bool _isActive = true;
 };

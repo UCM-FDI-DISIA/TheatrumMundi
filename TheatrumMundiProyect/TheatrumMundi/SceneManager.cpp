@@ -2,7 +2,6 @@
 #include <assert.h>
 #include "SceneTemplate.h"
 #include "Room1.h"
-#include "DebugLogRoom.h"
 #include "InitialScene.h"
 #include "PipePuzzleScene.h"
 #include "ClockPuzzleScene.h"

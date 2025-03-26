@@ -1,6 +1,7 @@
 #include "ScenePuzzleTemplate.h"
 #include "SceneRoomTemplate.h"
 #include "ClickComponent.h"
+#include "TriggerComponent.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 #include "SDLUtils.h"
 
@@ -56,8 +57,9 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 			//Assign lamda functions
 
 			//if you click in one item, assign the original position to the position of the object clicked
-			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this, sr, it]() {
+			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this, sr, it, a]() {
 				setOriginalPos(it->getMngr()->getComponent<Transform>(it)->getPos());
+				sr->GetInventory()->setTextDescription(a->getDescription());
 				});
 
 			//if you drop the item, compares if it was drop in or out tge cloack
@@ -75,6 +77,12 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 					}
 					else it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
 				}
+				});
+
+			it->getMngr()->getComponent<TriggerComponent>(it)->connect(TriggerComponent::AREA_ENTERED, [this, sr, a]() {
+				//SetplacedHand(true);
+				//llamar a cambiar descripcion
+				sr->GetInventory()->setTextDescription(a->getDescription());
 				});
 
 			//Set the active item to false

@@ -40,7 +40,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		dialogueManager->setScene(this);
 
 		
-		startDialogue("Puzzle3");
+		//startDialogue("Puzzle3");
 
 		room = sr;
 		AudioManager& a = AudioManager::Instance();
@@ -189,13 +189,6 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->addComponent<RectArea2D>(_backButton, areaLayerManager);
 
 		
-
-		//Click component Open log button
-		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr]()
-			{
-				Game::Instance()->getSceneManager()->popScene();
-			});
 
 		//INVENTORY
 		//Invntory Background

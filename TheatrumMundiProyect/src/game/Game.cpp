@@ -6,6 +6,9 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../utils/Vector2D.h"
 #include "../utils/Collisions.h"
+
+#include "../../TheatrumMundi/Log.h"
+
 #include "../../TheatrumMundi/CSVdataRecolector.h"
 #include <Windows.h>
 
@@ -70,6 +73,8 @@ void Game::init() {
 
 	// Create the manager
 	_mngr = new SceneManager();
+	_log = new Log();
+	
 	_dataManager = new DataManager();
 	_csvdata = new CSVdataRecolector();
 }
@@ -143,6 +148,10 @@ DataManager* Game::getDataManager()
 CSVdataRecolector* Game::getCSVDataColector()
 {
 	return _csvdata;
+}
+Log* Game::getLog()
+{
+	return _log;
 }
 
 void Game::checkCollisions() {
