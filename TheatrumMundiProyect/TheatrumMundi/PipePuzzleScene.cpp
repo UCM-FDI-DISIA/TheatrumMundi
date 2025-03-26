@@ -624,14 +624,14 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		Vector2D(0, 0),
 		4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
 		2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
-		0, ecs::grp::DEFAULT);
-
+		0, ecs::grp::UNDER);
+		//
 		// create entity
 		gloveEntity = entityFactory->CreateInteractableEntity(entityManager, "Gloves", EntityFactory::RECTAREA,
 			Vector2D(1200, 895), Vector2D(0, 0), 150, 150, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
-			ecs::grp::INTERACTOBJ);
+			ecs::grp::UNDER);
 
 		//add click component
 		ClickComponent* clk = entityManager->getComponent<ClickComponent>(gloveEntity);
@@ -649,7 +649,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			Vector2D(1000, 895), Vector2D(0, 0), 150, 150, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
-			ecs::grp::INTERACTOBJ);
+			ecs::grp::DEFAULT);
 
 		//add click component
 		clk = entityManager->getComponent<ClickComponent>(gloveEntity);
@@ -665,8 +665,8 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		//entityManager->setActive(gloveEntity, false);
 		//entityManager->setActive(_clock, false);
 
-		areaLayerManager->sendBack(entityManager->getComponent<RectArea2D>(gloveEntity)->getLayerPos());
-		areaLayerManager->sendBack(entityManager->getComponent<RectArea2D>(_clock)->getLayerPos());
+		//areaLayerManager->sendBack(entityManager->getComponent<RectArea2D>(gloveEntity)->getLayerPos());
+		//areaLayerManager->sendBack(entityManager->getComponent<RectArea2D>(_clock)->getLayerPos());
 
 		//Create background
 		auto background = entityFactory->CreateImageEntity(entityManager, "Pared",
@@ -692,11 +692,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			//std::cout << "PULSADO CUERDA";
 			if (solved)
 			{
-				if (!entityManager->getComponent<ScrollComponent>(_rope)->isScrolling()) {
-					auto ScrollCube = entityManager->getComponent<ScrollComponent>(_rope);
-					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_cubeWithoutWater));
-					entityManager->getComponent<ScrollComponent>(_rope)->Scroll(ScrollComponent::DOWN);
-				}
+				
 
 				//add gloves and clock
 				if (!entityManager->getComponent<ScrollComponent>(_rope)->isScrolling() && entityManager->getComponent<ScrollComponent>(_rope)->finalPhaseCheck())
@@ -709,8 +705,8 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_cubeWithoutWater));
 					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_clock));
 					entityManager->getComponent<ScrollComponent>(_rope)->Scroll(ScrollComponent::UP);
-					entityManager->setActive(gloveEntity, true);
-					entityManager->setActive(_clock, true);
+					//entityManager->setActive(gloveEntity, true);
+					//entityManager->setActive(_clock, true);
 
 
 				}
@@ -840,14 +836,14 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			Game::Instance()->getSceneManager()->popScene();
 			});
 
-
+/*
 		// create entity
 		gloveEntity = entityFactory->CreateInteractableEntity(entityManager, "Gloves", EntityFactory::RECTAREA,
 			Vector2D(1200, 895), Vector2D(0, 0), 150, 150, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::INTERACTOBJ);
-
+			*/
 		//add click component
 		clk = entityManager->getComponent<ClickComponent>(gloveEntity);
 		clk->connect(ClickComponent::JUST_CLICKED, [this]() {
@@ -860,12 +856,12 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		// create entity
-		_clock = entityFactory->CreateInteractableEntity(entityManager, "Gloves", EntityFactory::RECTAREA,
+	/*	_clock = entityFactory->CreateInteractableEntity(entityManager, "Gloves", EntityFactory::RECTAREA,
 			Vector2D(1000, 895), Vector2D(0, 0), 150, 150, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::INTERACTOBJ);
-
+	*/
 		//add click component
 		 clk = entityManager->getComponent<ClickComponent>(gloveEntity);
 		clk->connect(ClickComponent::JUST_CLICKED, [this]() {
@@ -877,8 +873,8 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			gloveEntity->getMngr()->setActive(gloveEntity, false);
 			});
 		
-		entityManager->setActive(gloveEntity, false);
-		entityManager->setActive(_clock, false);
+		//entityManager->setActive(gloveEntity, false);
+		//entityManager->setActive(_clock, false);
 	}
 }
 
@@ -1122,7 +1118,11 @@ void PipePuzzleScene::Win()
 	//Change the texture of the cube sprite to one with water
 	Image* img = entityManager->getComponent<Image>(_cubeWithoutWater);
 	img->setTexture(&sdlutils().images().at("cubeWithWater"));
-
+	if (!entityManager->getComponent<ScrollComponent>(_rope)->isScrolling()) {
+		auto ScrollCube = entityManager->getComponent<ScrollComponent>(_rope);
+		ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_cubeWithoutWater));
+		entityManager->getComponent<ScrollComponent>(_rope)->Scroll(ScrollComponent::DOWN);
+	}
 }
 
 PipePuzzleScene::~PipePuzzleScene()
