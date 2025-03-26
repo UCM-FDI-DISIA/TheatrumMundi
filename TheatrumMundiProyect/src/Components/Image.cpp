@@ -26,13 +26,15 @@ Image::~Image() {
 void Image::initComponent() {
 	auto mngr = _ent->getMngr();
 	_tr = mngr->getComponent<Transform>(_ent);
+	_mw = _tr->getWidth();
+	_mh = _tr->getHeight();
 	assert(_tr != nullptr);
 }
 
 void Image::render() {
-	
-	SDL_Rect dest = build_sdlrect(_tr->getPos(), _tr->getWidth(),
-		_tr->getHeight());
+	Vector2D pos = _tr->getPos() + posoffset;
+	SDL_Rect dest = build_sdlrect(pos, _mw,
+		_mh);
 
 	assert(_tex != nullptr);
 	_tex->render(dest, _tr->getRot());
