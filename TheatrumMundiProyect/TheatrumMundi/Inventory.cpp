@@ -17,7 +17,7 @@ Inventory::Inventory()
 	originalPos = { 0,0 };
 
 	_textDescription = new std::string;
-	*_textDescription = "Hello!";
+	*_textDescription = " ";
 }
 /// <summary>
 /// Destroy the reference to the hints
