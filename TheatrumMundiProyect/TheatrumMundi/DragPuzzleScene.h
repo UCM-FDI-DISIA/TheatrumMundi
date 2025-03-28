@@ -1,10 +1,11 @@
 #pragma once
 #include "ScenePuzzleTemplate.h"
 #include "Vector2D.h"
+#include "vector"
 class DragPuzzleScene: public ScenePuzzleTemplate 
 {
 private:
-	Vector2D posMat[7][6];
+	std::vector<std::vector<Vector2D>> posMat;
 	Vector2D _goalPos;
 	Transform* _triggerObj;
 

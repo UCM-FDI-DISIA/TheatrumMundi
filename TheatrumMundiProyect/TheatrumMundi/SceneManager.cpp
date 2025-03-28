@@ -29,7 +29,7 @@ SceneManager::SceneManager()
 
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 
-	loadScene(SceneName::INITIAL_MENU);
+	loadScene(SceneName::DRAG_PUZZLE);
 }
 
 void SceneManager::popScene()
@@ -79,7 +79,7 @@ void SceneManager::update()
 
 SceneManager::~SceneManager()
 {
-	for (auto a : scenes) delete a;
+	for (auto a : scenes) if(a!=nullptr) delete a;
 
 	currentscenes.clear();
 }

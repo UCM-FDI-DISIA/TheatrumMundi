@@ -457,6 +457,38 @@
       "file": "../resources/images/temporales/piezadeL2.png"
     },
     {
+      "id": "MatPared",
+      "file": "../resources/images/temporales/MatrizPared.png"
+    },
+    {
+      "id": "MatHueco",
+      "file": "../resources/images/temporales/MatrizCuadrado.png"
+    },
+    {
+      "id": "CosaQueArrastras",
+      "file": "../resources/images/temporales/Cosaquearrastras.png"
+    },
+    {
+      "id": "piezade4",
+      "file": "../resources/images/temporales/piezade4.png"
+    },
+    {
+      "id": "piezade2",
+      "file": "../resources/images/temporales/piezade2.png"
+    },
+    {
+      "id": "piezade3",
+      "file": "../resources/images/temporales/piezade3.png"
+    },
+    {
+      "id": "piezademeta",
+      "file": "../resources/images/temporales/piezademeta.png"
+    },
+    {
+      "id": "piezadez",
+      "file": "../resources/images/temporales/piezadeZ.png"
+    },
+    {
       "id": "Hanni",
       "file": "../resources/images/asesinoDeHanni.png"
     }

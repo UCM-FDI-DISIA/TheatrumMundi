@@ -123,7 +123,6 @@ void Game::start() {
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
 	}
-	_csvdata->safeData();
 }
 
 SceneManager* Game::getSceneManager()

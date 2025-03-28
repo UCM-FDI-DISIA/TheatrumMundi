@@ -26,6 +26,10 @@ public:
 	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer,
 	Dragging _drag, //DRAG ENTITY
 	ecs::grpId_t gId); //GROUP OF ENTITIES
+	//Create a Image with rectCollider.
+	ecs::entity_t CreateRectImageWithCollider(ecs::EntityManager* _entityManager, const std::string& _idImage,
+		Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer,
+		ecs::grpId_t gId);
 
 	//Creates a scroll interactable entity (MOVES FROM ONE ROOM TO ANOTHER) or scroll dragging interactable entity (SCROLL BUTTON TO LOG OR INVENTORY)
 	ecs::entity_t CreateInteractableEntityScroll(ecs::EntityManager* _entityManager,const std::string& _idImage, AreaType _typeRect,
@@ -33,7 +37,7 @@ public:
 	int _velocityScroll, float _time, ScrollType _isInverted, int _numPhasesScrolling,
 	Dragging _drag,	//DRAG SCROLL ENTITY
 	ecs::grpId_t gId); //GROUP OF ENTITIES
-
+	//Create a drag obj with a tiled collider
 	ecs::entity_t CreateInteractableEntityTiledCollider(ecs::EntityManager* _entityManager, const std::string& _idImage,
 		Vector2D _pos, Vector2D _dir, int _width, int _height, int col, int fil, int _rot, Area2DLayerManager* _myLayer, ecs::grpId_t _gId);
 
