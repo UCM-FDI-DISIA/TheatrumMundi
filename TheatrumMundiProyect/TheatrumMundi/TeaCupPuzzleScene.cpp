@@ -67,6 +67,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 
 		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
+			std::cout << "pasa por el triger de la taza" << std::endl;
 			});
 		//Assigns the trigger bolean to false
 		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_LEFT, [this]() {
@@ -137,9 +138,10 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->setActive(_textTest, false);
 
 		//Add writeText to description
-		SDL_Color colorDialog = { 0, 0, 0, 255 };
+		SDL_Color colorDialog = { 255, 255, 255, 255 };
 		WriteTextComponent<DescriptionInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, sr->GetInventory()->getTextDescription());
 
+		
 
 		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(upButton, false);

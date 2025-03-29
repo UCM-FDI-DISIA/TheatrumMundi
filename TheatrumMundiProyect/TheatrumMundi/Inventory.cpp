@@ -48,6 +48,35 @@ int Inventory::getItemNumber()
 	return std::min(3, static_cast<int>(items.size()) - firstItem); //Return the number of items to be rendered
 
 }
+
+/// <summary>
+/// Sets description to be rendered on screen
+/// </summary>
+/// <param name="descrip"></param>
+void Inventory::setTextDescription(std::string _id, std::vector<Entity*>& invEntityList, Transform* backgroundTextTransform)
+{
+	auto hintIt = hints.begin();
+	auto entityIt = invEntityList.begin();
+	int index = 0;
+
+	for (auto it = items.begin(); it != items.end(); ++it) {
+		if (it[0]->getID() == _id) {
+			//set description
+			_textDescription->Description = it[0]->getDescription();
+
+			//set background position
+			backgroundTextTransform->getPos().setY(GetPosition(index).getY() + 40);
+			backgroundTextTransform->getPos().setX(340);
+
+			//set description position
+			_textDescription->posY = GetPosition(index).getY();
+			std::cout << positions[0].getY() << std::endl;
+		}
+		++hintIt;
+		++entityIt;
+		index++;
+	}
+}
 /// <summary>
 /// Add a new Hint to the inventory
 /// </summary>

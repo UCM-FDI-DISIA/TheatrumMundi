@@ -43,11 +43,7 @@ public:
 	inline std::vector<Hint*> getItems() { return items; } //Get all the hintss
 	inline Vector2D GetPosition(int i) { return hints[i]->getMngr()->getComponent<Transform>(hints[i])->getPos(); } //Return the position of the item in the inventory USING IN THE CREATION OF THE INVENTITIES IN THE PUZZLESCENES
 	
-	void setTextDescription(std::string descrip) 
-	{ 
-		_textDescription->Description = descrip;
-		_textDescription->posY = 100;
-	}
+	void setTextDescription(std::string _id, std::vector<Entity*>& invEntityList, Transform* backgroundTextTransform);
 	DescriptionInfo* getTextDescription() { return _textDescription; }
 
 private:

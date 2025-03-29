@@ -41,6 +41,10 @@ ScenePuzzleTemplate::~ScenePuzzleTemplate()
 /// <param name="sr"></param> --> Referebce to thee SceneRoomTemplate
 void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 {
+	//visual background for item description text
+	auto _backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::DEFAULT);
+	entityManager->setActive(_backgroundTextDescription, false);
+
 	int index = 0; // Need to search for the respective position of the item
 	for (auto a : sr->GetInventory()->getItems()) {
 		//if the array of names hasn't have the name of this entity then it means that is new and has to be created again
@@ -57,9 +61,10 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 			//Assign lamda functions
 
 			//if you click in one item, assign the original position to the position of the object clicked
-			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this, sr, it, a]() {
+			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this, sr, it, a, _backgroundTextDescription]() {
 				setOriginalPos(it->getMngr()->getComponent<Transform>(it)->getPos());
-				sr->GetInventory()->setTextDescription(a->getDescription());
+				entityManager->setActive(_backgroundTextDescription, true);
+				sr->GetInventory()->setTextDescription(a->getID(), invObjects, _backgroundTextDescription->getMngr()->getComponent<Transform>(_backgroundTextDescription));
 				});
 
 			//if you drop the item, compares if it was drop in or out tge cloack
@@ -82,7 +87,8 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 			it->getMngr()->getComponent<TriggerComponent>(it)->connect(TriggerComponent::AREA_ENTERED, [this, sr, a]() {
 				//SetplacedHand(true);
 				//llamar a cambiar descripcion
-				sr->GetInventory()->setTextDescription(a->getDescription());
+				//sr->GetInventory()->setTextDescription(a->getID(), invObjects, _backgroundTextDescription->getMngr()->getComponent<Transform>(_backgroundTextDescription));
+				std::cout << "pasa por el triger de descripcion" << std::endl;
 				});
 
 			//Set the active item to false
