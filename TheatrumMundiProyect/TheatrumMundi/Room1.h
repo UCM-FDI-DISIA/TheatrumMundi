@@ -1,6 +1,8 @@
 #pragma once
 #include "SceneRoomTemplate.h"
 
+#include "../TheatrumMundi/AudioManager.h"
+
 class Room1Scene : public SceneRoomTemplate
 {
 private:
@@ -46,21 +48,23 @@ private:
 	void _setRoomAudio();
 	void _setGlobalFeatures();
 
-	void _setRoomBackground();
+	//void _setRoomBackground();
 	void _setDialog();
 	void _setUI();
-
-	struct {
+	
+	struct roomSounds {
 		Sound uiButton;
 		Sound puzzleButton;
 	} rmSounds;
 
-	struct {
-		ecs::entity_t corpseQuitButton;
-		ecs::entity_t pauseButton;
-		ecs::entity_t inventoryButton;
+	struct roomObjects {
+		ecs::entity_t quitButton		  = nullptr;
+		ecs::entity_t pauseButton		  = nullptr;
+		ecs::entity_t inventoryButton	  = nullptr;
+		ecs::entity_t posibleCaseButton   = nullptr;
+		ecs::entity_t imposibleCaseButton = nullptr;
 
 		ecs::entity_t backgroundScroll;
-	} rmObjects;
+	}rmObjects;
 };
 
