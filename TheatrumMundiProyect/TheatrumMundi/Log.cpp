@@ -5,13 +5,12 @@
 
 #include"../src/sdlutils/SDLUtils.h"
 #include "../src/Components/Image.h"
-#include "../src/ecs/Manager.h"
-#include "EntityFactory.h"
+
 #include "RectArea2D.h"
 #include "ClickComponent.h"
 #include "TriggerComponent.h"
 #include "../src/components/LogComponent.h"
-#include "Log.h"
+
 #include "SceneTemplate.h"
 #include "../src/components/Transform.h"
 #include "Area2DLayerManager.h"
@@ -21,9 +20,7 @@
 
 #include "../src/Components/ScrollComponent.h"
 
-#include "../src/components/ClickComponent.h"
 
-#include "Area2DLayerManager.h"
 
 using namespace std;
 
