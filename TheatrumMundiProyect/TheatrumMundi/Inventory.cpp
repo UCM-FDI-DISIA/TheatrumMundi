@@ -50,29 +50,30 @@ int Inventory::getItemNumber()
 }
 
 /// <summary>
-/// Sets description to be rendered on screen
+/// Changes text description displayed on screen
 /// </summary>
-/// <param name="descrip"></param>
+/// <param name="_id">Item id</param>
+/// <param name="invEntityList">Iventory item entities</param>
+/// <param name="backgroundTextTransform">Visual item description background's transform</param>
 void Inventory::setTextDescription(std::string _id, std::vector<Entity*>& invEntityList, Transform* backgroundTextTransform)
 {
-	auto hintIt = hints.begin();
-	auto entityIt = invEntityList.begin();
 	int index = 0;
 
-	for (auto it = items.begin(); it != items.end(); ++it) {
-		if (it[0]->getID() == _id) {
-			//set description
+	//Searches item with desired id
+	for (auto it = items.begin(); it != items.end(); ++it)
+	{
+		if (it[0]->getID() == _id)
+		{
+			//set text description
 			_textDescription->Description = it[0]->getDescription();
 
 			//set background position
 			backgroundTextTransform->getPos().setY(GetPosition(index).getY() + 40);
 			backgroundTextTransform->getPos().setX(340);
 
-			//set description position
+			//set text description position
 			_textDescription->posY = GetPosition(index).getY();
 		}
-		++hintIt;
-		++entityIt;
 		index++;
 	}
 }
