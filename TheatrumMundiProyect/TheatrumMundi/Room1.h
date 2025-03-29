@@ -3,6 +3,8 @@
 
 #include "../TheatrumMundi/AudioManager.h"
 
+class ScrollComponent;
+
 class Room1Scene : public SceneRoomTemplate
 {
 private:
@@ -48,7 +50,7 @@ private:
 	void _setRoomAudio();
 	void _setGlobalFeatures();
 
-	//void _setRoomBackground();
+	void _setRoomBackground();
 	void _setDialog();
 	void _setUI();
 	
@@ -64,7 +66,7 @@ private:
 		ecs::entity_t posibleCaseButton   = nullptr;
 		ecs::entity_t imposibleCaseButton = nullptr;
 
-		ecs::entity_t backgroundScroll;
-	}rmObjects;
+		ScrollComponent* backgroundScroll = nullptr;
+	} rmObjects;
 };
 
