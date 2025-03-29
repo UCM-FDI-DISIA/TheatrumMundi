@@ -70,7 +70,6 @@ void Inventory::setTextDescription(std::string _id, std::vector<Entity*>& invEnt
 
 			//set description position
 			_textDescription->posY = GetPosition(index).getY();
-			std::cout << positions[0].getY() << std::endl;
 		}
 		++hintIt;
 		++entityIt;
