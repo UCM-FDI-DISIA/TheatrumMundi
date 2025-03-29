@@ -40,6 +40,8 @@ public:
 	//Create a drag obj with a tiled collider
 	ecs::entity_t CreateInteractableEntityTiledCollider(ecs::EntityManager* _entityManager, const std::string& _idImage,
 		Vector2D _pos, Vector2D _dir, int _width, int _height, int col, int fil, int _rot, Area2DLayerManager* _myLayer, ecs::grpId_t _gId);
+	ecs::entity_t CreateTriggerEntity(ecs::EntityManager* _entityManager, const std::string& _idImage,
+		Vector2D _pos, Vector2D _dir, int _width, int _height , int _rot, Area2DLayerManager* _myLayer, ecs::grpId_t _gId);
 
 private:
 
