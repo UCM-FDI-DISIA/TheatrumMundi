@@ -40,7 +40,7 @@ void DragPuzzleScene::init()
         };
         Vector2D auxposinit = Vector2D(250, 50);
         Vector2D auxpos;
-        int auxtiledsize = 64;
+        
         for (int i = 0; i < 9;i++) {
             for (int j = 0;j < 8;j++)
             {
@@ -58,21 +58,27 @@ void DragPuzzleScene::init()
                 posMat[i][j] = auxpos;
             }
         }
-
-        //Finish point
-        auto goal = entityFactory->CreateTriggerEntity(entityManager, "piezademeta", posMat[7][1], Vector2D(0, 0), auxtiledsize, auxtiledsize, 0, areaLayerManager, ecs::grp::INTERACTOBJ);
-        entityManager->getComponent<TriggerComponent>(goal)->setTargetGroup(ecs::grp::INTERACTOBJ);
-        entityManager->getComponent<TriggerComponent>(goal)->connect(TriggerComponent::AREA_ENTERED, [this] {
-            //  std::list<entity_t> collist = goaltrigger->getOverlappingEntities();
-            //  for (auto a : collist) {
-            Win();
-            //  }
-            });
         //Drag objCreation;
-       //the thing to drag 
-        auto thething = entityFactory->CreateInteractableEntityTiledCollider(entityManager, "CosaQueArrastras", posMat[1][3], Vector2D(0, 0), auxtiledsize, auxtiledsize, 1, 1, 0, areaLayerManager, ecs::grp::INTERACTOBJ);
-        auxlist.push_back(entityManager->getComponent<TiledAreaComponent>(thething));
-        /*
+      //the thing to drag 
+        _triggerObj = entityFactory->CreateInteractableEntityTiledCollider(entityManager, "CosaQueArrastras", posMat[1][3], Vector2D(0, 0), auxtiledsize, auxtiledsize, 1, 1, 0, areaLayerManager, ecs::grp::INTERACTOBJ);
+        auxlist.push_back(entityManager->getComponent<TiledAreaComponent>(_triggerObj));
+        entityManager->getComponent<DragComponent>(_triggerObj)->connect(DragComponent::DRAG_END, [this]() {
+            Transform* aux = entityManager->getComponent<Transform>(_triggerObj);
+            aux->getPos() = NearMatPoint(aux->getPos());
+            });
+        //Finish point
+        auto goal = entityFactory->CreateTriggerEntity(entityManager, "piezademeta", posMat[7][1], Vector2D(0, 0), auxtiledsize, auxtiledsize, 0, areaLayerManager, ecs::grp::BACKGROUND);
+        TriggerComponent* goaltrigger =entityManager->getComponent<TriggerComponent>(goal);
+        goaltrigger->setTargetGroup(ecs::grp::INTERACTOBJ);
+        goaltrigger->connect(TriggerComponent::AREA_ENTERED, [this,goaltrigger] {
+
+            std::list<entity_t> collist = goaltrigger->getOverlappingEntities();
+              for (auto a : collist) {
+            if(a == _triggerObj)Check();
+              }
+            });
+       
+        
          //L UP
          auto _a = entityFactory->CreateInteractableEntityTiledCollider(entityManager, "piezaL2",posMat[5][2], Vector2D(0, 0), auxtiledsize * 2, auxtiledsize * 2, 2, 2, 0, areaLayerManager, ecs::grp::INTERACTOBJ);
          entityManager->getComponent<TiledAreaComponent>(_a)->setActiveTile(false, 1, 1);
@@ -106,18 +112,9 @@ void DragPuzzleScene::init()
          entityManager->getComponent<PhysicsBodyComponent>(_c)->AddObjectofList(auxlist, entityManager->getComponent<TiledAreaComponent>(_c));
          entityManager->getComponent<PhysicsBodyComponent>(_d)->AddObjectofList(auxlist, entityManager->getComponent<TiledAreaComponent>(_d));
          entityManager->getComponent<PhysicsBodyComponent>(_e)->AddObjectofList(auxlist, entityManager->getComponent<TiledAreaComponent>(_e));
-         entityManager->getComponent<PhysicsBodyComponent>(_f)->AddObjectofList(auxlist, entityManager->getComponent<TiledAreaComponent>(_f));*/
-        entityManager->getComponent<PhysicsBodyComponent>(thething)->AddObjectofList(auxlist, entityManager->getComponent<TiledAreaComponent>(thething));
-        /*auto a = entityFactory->CreateInteractableEntityTiledCollider(entityManager, "piezaL1", Vector2D(0, 0), Vector2D(0, 0), 100, 100, 2, 2, 0, areaLayerManager, ecs::grp::DEFAULT);
-        a->getMngr()->getComponent<TiledAreaComponent>(a)->setActiveTile(false,0, 1);
-        auto b = entityFactory->CreateInteractableEntityTiledCollider(entityManager, "piezaL2", Vector2D(200, 0), Vector2D(0, 0), 100, 100, 2, 2, 0, areaLayerManager, ecs::grp::DEFAULT);
-        b->getMngr()->getComponent<TiledAreaComponent>(b)->setActiveTile(false, 1, 1);
-        auxlist.push_back(b->getMngr()->getComponent<TiledAreaComponent>(b));
-        auxlist.push_back(a->getMngr()->getComponent<TiledAreaComponent>(a));
-
-
-        a->getMngr()->getComponent<PhysicsBodyComponent>(a)->AddObjectofList(auxlist, a->getMngr()->getComponent<TiledAreaComponent>(a));
-        b->getMngr()->getComponent<PhysicsBodyComponent>(b)->AddObjectofList(auxlist, b->getMngr()->getComponent<TiledAreaComponent>(b));*/
+         entityManager->getComponent<PhysicsBodyComponent>(_f)->AddObjectofList(auxlist, entityManager->getComponent<TiledAreaComponent>(_f));
+        entityManager->getComponent<PhysicsBodyComponent>(_triggerObj)->AddObjectofList(auxlist, entityManager->getComponent<TiledAreaComponent>(_triggerObj));
+        
 
     }
 }
@@ -126,16 +123,46 @@ void DragPuzzleScene::unload()
 {
 }
 
+Vector2D DragPuzzleScene::NearMatPoint(Vector2D pos)
+{
+    int auxi = 0;
+    int auxj = 0;
+    bool _aux = false;
+    while (!_aux){
+        if  (pos.getX()- posMat[auxi][auxj].getX() < auxtiledsize) {
+            if (abs(posMat[auxi][auxj].getX() - pos.getX()) >abs(posMat[auxi + 1][auxj].getX() - pos.getX())) {
+                auxi++;
+                _aux = true;
+            }
+            else {
+                _aux = true;
+            }
+        }
+        else auxi++;
+       }
+    _aux = false;
+    while (!_aux) 
+    {
+        if (abs(pos.getY()- posMat[auxi][auxj].getY()) < auxtiledsize) {
+         if (abs(posMat[auxi][auxj].getY() - pos.getY()) > abs(posMat[auxi][auxj+1].getY() - pos.getY())) {
+            auxj++;
+            _aux = true;
+            }
+        else {
+            _aux = true;
+        }
+        }
+        else  auxj++;
+    }
+    return posMat[auxi][auxj];
+}
+
 void DragPuzzleScene::Exit()
 {
 }
 
 bool DragPuzzleScene::Check()
 {
-    if (_goalPos ==_triggerObj->getPos()) {
-        Win();
-        return true;
-   }
     return false;
 }
 
