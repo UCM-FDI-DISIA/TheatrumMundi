@@ -616,6 +616,64 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		isStarted = true;
 		room = sr;
 
+
+		//INVENTORY
+		//Invntory Background
+		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
+		entityManager->setActive(InventoryBackground, false);
+
+		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->setActive(upButton, false);
+
+		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->setActive(downButton, false);
+
+		//InventoryButton
+		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
+		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton]() //Lamda function
+			{
+				//AudioManager::Instance().playSound(buttonSound);
+				sr->GetInventory()->setActive(!sr->GetInventory()->getActive());  // Toggle the inventory
+
+				// If the inventory is active, activate the items
+				if (sr->GetInventory()->getActive()) {
+					entityManager->setActive(InventoryBackground, true);
+
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(20);
+					entityManager->setActive(downButton, true);
+					entityManager->setActive(upButton, true);
+
+					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+						invObjects[i]->getMngr()->setActive(invObjects[i], true);
+					}
+				}
+				else {
+					entityManager->setActive(InventoryBackground, false);
+					entityManager->setActive(InventoryBackground, false);
+					entityManager->setActive(downButton, false);
+					entityManager->setActive(upButton, false);
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(60 + 268 / 3);
+
+					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+						invObjects[i]->getMngr()->setActive(invObjects[i], false);
+					}
+				}
+			});
+
+		ClickComponent* UPbuttonInventoryClick = entityManager->getComponent<ClickComponent>(upButton);
+		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ upButton, sr]() {
+
+			//AudioManager::Instance().playSound(buttonSound);
+			sr->scrollInventory(-1);
+			});
+
+		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
+		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ downButton, sr]() {
+
+			//AudioManager::Instance().playSound(buttonSound);
+			sr->scrollInventory(1);
+			});
 		//Create cube without water
 		_cubeWithoutWater = entityFactory->CreateImageEntity(entityManager, "cubeWithoutWater",
 
@@ -627,46 +685,38 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		0, ecs::grp::UNDER);
 		//
 		// create entity
-		gloveEntity = entityFactory->CreateInteractableEntity(entityManager, "Gloves", EntityFactory::RECTAREA,
-			Vector2D(1200, 895), Vector2D(0, 0), 150, 150, 0,
-			areaLayerManager,
-			EntityFactory::NODRAG,
-			ecs::grp::UNDER);
-
-		//add click component
-		ClickComponent* clk = entityManager->getComponent<ClickComponent>(gloveEntity);
-		clk->connect(ClickComponent::JUST_CLICKED, [this]() {
-
-			/*;*/
-			room->GetInventory()->addItem(new Hint("Gloves", "Me lo puedo beber??", &sdlutils().images().at("Gloves")));
-			room->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(room->GetEntityManager(), "Gloves", EntityFactory::RECTAREA, room->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-			room->GetInventory()->hints.back()->getMngr()->setActive(room->GetInventory()->hints.back(), false);
-			gloveEntity->getMngr()->setActive(gloveEntity, false);
-			});
-
-		// create entity
-		_clock = entityFactory->CreateInteractableEntity(entityManager, "Gloves", EntityFactory::RECTAREA,
-			Vector2D(1000, 895), Vector2D(0, 0), 150, 150, 0,
+		auto gloveEntity = entityFactory->CreateInteractableEntity(entityManager, "guantes", EntityFactory::RECTAREA,
+			Vector2D(1150, 840), Vector2D(0, 0), 150, 150, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
 
 		//add click component
-		clk = entityManager->getComponent<ClickComponent>(gloveEntity);
-		clk->connect(ClickComponent::JUST_CLICKED, [this]() {
+		ClickComponent* clk = entityManager->getComponent<ClickComponent>(gloveEntity);
+		clk->connect(ClickComponent::JUST_CLICKED, [this,gloveEntity,sr]() {
 
-			/*;*/
-			room->GetInventory()->addItem(new Hint("Gloves", "Me lo puedo beber??", &sdlutils().images().at("Gloves")));
-			room->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(room->GetEntityManager(), "Gloves", EntityFactory::RECTAREA, room->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-			room->GetInventory()->hints.back()->getMngr()->setActive(room->GetInventory()->hints.back(), false);
+			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+			AddInvItem("guantes", "Me lo puedo beber??", position, sr);
 			gloveEntity->getMngr()->setActive(gloveEntity, false);
 			});
 
-		//entityManager->setActive(gloveEntity, false);
-		//entityManager->setActive(_clock, false);
+		// create entity
+		auto clock = entityFactory->CreateInteractableEntity(entityManager, "minutero", EntityFactory::RECTAREA,
+			Vector2D(950, 770), Vector2D(0, 0), 150,150, 0,
+			areaLayerManager,
+			EntityFactory::NODRAG,
+			ecs::grp::DEFAULT);
 
-		//areaLayerManager->sendBack(entityManager->getComponent<RectArea2D>(gloveEntity)->getLayerPos());
-		//areaLayerManager->sendBack(entityManager->getComponent<RectArea2D>(_clock)->getLayerPos());
+		//add click component
+		clk = entityManager->getComponent<ClickComponent>(clock);
+		clk->connect(ClickComponent::JUST_CLICKED, [this, clock,sr]() {
+
+			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+			AddInvItem("minutero", "Me lo puedo beber??", position, sr);
+			clock->getMngr()->setActive(clock, false);
+			});
+
+		
 
 		//Create background
 		auto background = entityFactory->CreateImageEntity(entityManager, "Pared",
@@ -688,7 +738,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		//if clicked remove click comonent and start animation 
 		ClickComponent* clComponent = _rope->getMngr()->getComponent<ClickComponent>(_rope);
 
-		clComponent->connect(ClickComponent::JUST_CLICKED, [this]() {
+		clComponent->connect(ClickComponent::JUST_CLICKED, [this,gloveEntity,clock]() {
 			//std::cout << "PULSADO CUERDA";
 			if (solved)
 			{
@@ -703,7 +753,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 					auto ScrollCube = entityManager->getComponent<ScrollComponent>(_rope);
 					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(gloveEntity));
 					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_cubeWithoutWater));
-					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_clock));
+					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(clock));
 					entityManager->getComponent<ScrollComponent>(_rope)->Scroll(ScrollComponent::UP);
 					//entityManager->setActive(gloveEntity, true);
 					//entityManager->setActive(_clock, true);
@@ -832,46 +882,12 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 				Game::Instance()->getSceneManager()->popScene();
 			});
 
-/*
-		// create entity
-		gloveEntity = entityFactory->CreateInteractableEntity(entityManager, "Gloves", EntityFactory::RECTAREA,
-			Vector2D(1200, 895), Vector2D(0, 0), 150, 150, 0,
-			areaLayerManager,
-			EntityFactory::NODRAG,
-			ecs::grp::INTERACTOBJ);
-			*/
-		//add click component
-		clk = entityManager->getComponent<ClickComponent>(gloveEntity);
-		clk->connect(ClickComponent::JUST_CLICKED, [this]() {
 
-			/*;*/
-			room->GetInventory()->addItem(new Hint("Gloves", "Me lo puedo beber??", &sdlutils().images().at("Gloves")));
-			room->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(room->GetEntityManager(), "Gloves", EntityFactory::RECTAREA, room->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-			room->GetInventory()->hints.back()->getMngr()->setActive(room->GetInventory()->hints.back(), false);
-			gloveEntity->getMngr()->setActive(gloveEntity, false);
-			});
 
-		// create entity
-	/*	_clock = entityFactory->CreateInteractableEntity(entityManager, "Gloves", EntityFactory::RECTAREA,
-			Vector2D(1000, 895), Vector2D(0, 0), 150, 150, 0,
-			areaLayerManager,
-			EntityFactory::NODRAG,
-			ecs::grp::INTERACTOBJ);
-	*/
-		//add click component
-		 clk = entityManager->getComponent<ClickComponent>(gloveEntity);
-		clk->connect(ClickComponent::JUST_CLICKED, [this]() {
-
-			/*;*/
-			room->GetInventory()->addItem(new Hint("Gloves", "Me lo puedo beber??", &sdlutils().images().at("Gloves")));
-			room->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(room->GetEntityManager(), "Gloves", EntityFactory::RECTAREA, room->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-			room->GetInventory()->hints.back()->getMngr()->setActive(room->GetInventory()->hints.back(), false);
-			gloveEntity->getMngr()->setActive(gloveEntity, false);
-			});
-		
-		//entityManager->setActive(gloveEntity, false);
-		//entityManager->setActive(_clock, false);
 	}
+	
+	//IMPORTANT this need to be out of the isstarted!!!
+	createInvEntities(sr);
 }
 
 void PipePuzzleScene::waterPassPipe(int pipe) {

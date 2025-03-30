@@ -52,7 +52,6 @@ private:
 	bool _updatePuzzle;
 	ecs::Entity* _rope;
 	ecs::Entity* _cubeWithoutWater;
-	ecs::Entity* _clock;
 	ecs::Entity* _exit;
 	ClickComponent* clComponent;
 

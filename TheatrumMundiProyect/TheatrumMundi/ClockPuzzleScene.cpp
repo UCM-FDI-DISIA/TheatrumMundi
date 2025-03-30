@@ -163,13 +163,19 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->addComponent<RectArea2D>(_buttonCheck, areaLayerManager);
 
 
+		//auto container = entityFactory->CreateImageEntity(entityManager, "horaria", Vector2D(510, 548), Vector2D(0, 0), 140, 200, 0, ecs::grp::D);
+		//container->getMngr()->setActive(container, false);
+
+
+
+
 		ClickComponent* clockCheckClick = entityManager->addComponent<ClickComponent>(_buttonCheck);
 		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [_buttonCheckTransform, sr, this,_buttonCheck,_buttonHor,_buttonMin, _buttonResetPuzzle]()
 			{
 				if (Check() && getSolved()) {
 					Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
 					//Assign to this inventory the hint;
-					AddInvItem("AAA", "Me lo puedo beber??",position, sr);
+					AddInvItem("frasco", "Me lo puedo beber??",position, sr);
 					
 #ifdef DEBUG
 					std::cout << "wii";
@@ -275,12 +281,12 @@ void ClockPuzzleScene::unload()
 /// <returns></returns> --> true if the item is a cloack hand and the cloack detected and false in other case
 bool ClockPuzzleScene::isItemHand(const std::string& itemId)
 {
-	if (itemId == "boa2") {
+	if (itemId == "minutero") {
 		hasLongClockHand = true;
 		longClockHand->getMngr()->setActive(longClockHand, true);
 		return true;
 	}
-	else if (itemId == "TeaCupSpoon") {
+	else if (itemId == "horaria") {
 		hasShortClockHand = true;
 		shortClockHand->getMngr()->setActive(shortClockHand, true);
 		return true;

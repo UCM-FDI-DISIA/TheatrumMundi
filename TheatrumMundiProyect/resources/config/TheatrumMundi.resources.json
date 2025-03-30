@@ -40,7 +40,7 @@
       "file": "../resources/images/Finales/EstanteriaFondo2.PNG"
     },
     {
-      "id": "Gloves",
+      "id": "guantes",
       "file": "../resources/images/Finales/Guantes.PNG"
     },
     {
@@ -245,7 +245,10 @@
     { "id" : "fullRope", "file" : "../resources/images/Finales/MontaplatosSinNada.png" },
     { "id" : "Pared", "file" : "../resources/images/Finales/Pared.png" },
     { "id" : "rope", "file" : "../resources/images/Finales/Cuerda.png" },
-
+    { "id" : "minutero", "file" : "../resources/images/Finales/minutero.png" },
+    { "id" : "horaria", "file" : "../resources/images/Finales/horaria.png" },
+    { "id" : "etiquetaV1", "file" : "../resources/images/Finales/etiquetaV1.png" },
+    { "id" : "estanteria2", "file" : "../resources/images/Finales/EstanteriaFondo2.PNG" },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"
