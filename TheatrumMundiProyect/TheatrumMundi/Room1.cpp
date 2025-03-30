@@ -371,14 +371,14 @@ void Room1Scene::init()
 			});
 
 		//Inventory
-		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
+		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
 		auto buttonInventory = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3 ,20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(InventoryBackground, false);
 
-		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(upButton, false);
 
-		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(downButton, false);
 
 		ClickComponent* buttonInventoryClick = entityManager->getComponent<ClickComponent>(buttonInventory);
@@ -390,7 +390,9 @@ void Room1Scene::init()
 			if (GetInventory()->getActive()) {
 				entityManager->setActive(InventoryBackground, true);
 
-				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(20);
+				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(925);
+				//change the position of the log button
+
 				entityManager->setActive(downButton, true);
 				entityManager->setActive(upButton, true);
 
@@ -400,9 +402,12 @@ void Room1Scene::init()
 			}
 			else {
 				entityManager->setActive(InventoryBackground, false);
+
 				entityManager->setActive(downButton, false);
 				entityManager->setActive(upButton, false);
+
 				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(60 + 268 / 3);
+				//change the position of the log button
 
 				// its okay to use the first item as the first item to show??
 				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) {

@@ -13,7 +13,7 @@ Inventory::Inventory()
 	: active(false), firstItem(0)
 {
 	for (int i = 0; i < TOTALITEMSTOSHOW; ++i) {
-		positions.push_back(Vector2D(100, 175 + i * 150));
+		positions.push_back(Vector2D(1135, 175 + i * 150));
 	}
 	originalPos = { 0,0 };
 
