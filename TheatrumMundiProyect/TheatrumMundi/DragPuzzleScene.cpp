@@ -136,7 +136,25 @@ void DragPuzzleScene::init()
          entityManager->getComponent<PhysicsBodyComponent>(_f)->AddObjectofList(auxlist, entityManager->getComponent<TiledAreaComponent>(_f));
         entityManager->getComponent<PhysicsBodyComponent>(_triggerObj)->AddObjectofList(auxlist, entityManager->getComponent<TiledAreaComponent>(_triggerObj));
         
-
+        Transform* _atr = entityManager->getComponent<Transform>(_a);
+        Transform* _btr = entityManager->getComponent<Transform>(_b);
+        Transform* _ctr = entityManager->getComponent<Transform>(_c);
+        Transform* _dtr = entityManager->getComponent<Transform>(_d);
+        Transform* _etr = entityManager->getComponent<Transform>(_e);
+        Transform* _ftr = entityManager->getComponent<Transform>(_f);
+        Transform* _triggerobjtr = entityManager->getComponent<Transform>(_triggerObj);
+        //Reset Btn
+        auto _reset = entityFactory->CreateInteractableEntity(entityManager,"Hanni",EntityFactory::RECTAREA,posMat[8][7],Vector2D(0,0),auxtiledsize,auxtiledsize,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::INTERACTOBJ);
+        entityManager->getComponent<ClickComponent>(_reset)->connect(ClickComponent::JUST_CLICKED, [this,_atr,_btr,_ctr,_dtr,_etr,_ftr,_triggerobjtr]() {
+            _atr->getPos() = posMat[5][2];
+            _btr->getPos() = posMat[2][5];
+            _ctr->getPos() = posMat[4][4];
+            _dtr->getPos() = posMat[6][3];
+            _etr->getPos() = posMat[2][3];
+            _ftr->getPos() = posMat[5][5];
+             _triggerobjtr->getPos() = posMat[1][3];
+            });
+                    
     }
 }
 
