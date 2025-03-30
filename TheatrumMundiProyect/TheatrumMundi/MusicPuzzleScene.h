@@ -28,8 +28,7 @@ private:
 		FA,
 		SOL,
 		LA,
-		SI,
-		HIGH_DO
+		SI
 	};
 
 	std::vector<Notes> _correctComb1 = { DO, RE, MI}; //correct phase combination
@@ -42,7 +41,10 @@ private:
 
 	bool checkPhaseCombination(); //checks if current combination is correct
 	void cleanCombination(); //cleans combinations vectors
-	void addNoteToComb(Notes a);
+	void addNoteToComb(Notes a); //deals with all possibilities when a note is added to the comb
+	void changePhase(); //deals with all changes when a phase is changed
+	void playAnimation(bool correct); //plays correct or incorrect animation
 
-	void createPianoButtons();
+	void createPianoButtons(); //creates all sceme notesButtons
+
 };

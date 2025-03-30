@@ -65,7 +65,7 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
         room = sr;
 
         //background + musical notes helpful guide (visual)
-       // auto StudyBackground = entityFactory->CreateImageEntity(entityManager, "ShelfBackground1", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+        //auto StudyBackground = entityFactory->CreateImageEntity(entityManager, "ShelfBackground1", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 
 
         //piano buttons
@@ -114,7 +114,7 @@ void MusicPuzzleScene::Win()
 
 bool MusicPuzzleScene::checkPhaseCombination()
 {
-    auto _correctComb = _correctCombinations[_phase];
+    auto _correctComb = _correctCombinations[_phase]; //correct combination based on current phase
     int index = 0;
     bool correctAns = true;
 
@@ -162,25 +162,62 @@ void MusicPuzzleScene::addNoteToComb(Notes pressedNote)
         {
             if (!Check())
             {
-                _phase++;
-                cleanCombination();
-                cout << "PHASE: "<< _phase << endl;
-                //debug correct comb
-                cout << "CORRECT COMB:";
-                for (auto a : _correctCombinations[_phase])
-                {
-                    cout << a << " ";
-                }
-                cout << endl;
+                changePhase();
             }
         }
         else //wrong combination
         {
+            //play animation
+            playAnimation(false);
+
             //clean current comb
             cleanCombination();
+
+            //reset image musical score if needed
         }
     }
-    
+}
+
+void MusicPuzzleScene::changePhase()
+{
+    //play animation
+    playAnimation(true);
+
+    //clean currentComb
+    cleanCombination();
+
+    //increment phase
+    _phase++;
+
+    //change musical score & mirror
+
+
+    //debugs
+    cout << "PHASE: " << _phase << endl;
+    cout << "CORRECT COMB:";
+    for (auto a : _correctCombinations[_phase])
+    {
+        cout << a << " ";
+    }
+    cout << endl;
+}
+
+void MusicPuzzleScene::playAnimation(bool correct)
+{
+    //no buttons can be pressed, the current comb plays on audio and each note appears on screen
+    //-->insert animation
+
+
+    if (correct)
+    {
+        //if currentComb was correct a joyful sound is played after
+        //joyful sound
+    }
+    else
+    {
+        //if currentComb was incorrect a bad sound is played after
+        //bad sound
+    }
 }
 
 void MusicPuzzleScene::createPianoButtons()
@@ -192,8 +229,7 @@ void MusicPuzzleScene::createPianoButtons()
     auto buttSol = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(694, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
     auto buttLa = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(738, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
     auto buttSi = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(782, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-    auto buttHighDo = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(826, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-
+    
 
     ClickComponent* clickButtDo = entityManager->getComponent<ClickComponent>(buttDo);
     clickButtDo->connect(ClickComponent::JUST_CLICKED, [this]() {
@@ -228,11 +264,6 @@ void MusicPuzzleScene::createPianoButtons()
     ClickComponent* clickButtSi = entityManager->getComponent<ClickComponent>(buttSi);
     clickButtSi->connect(ClickComponent::JUST_CLICKED, [this]() {
         addNoteToComb(SI);
-        });
-
-    ClickComponent* clickButtHighDo = entityManager->getComponent<ClickComponent>(buttHighDo);
-    clickButtHighDo->connect(ClickComponent::JUST_CLICKED, [this]() {
-        addNoteToComb(HIGH_DO);
         });
 }
 
