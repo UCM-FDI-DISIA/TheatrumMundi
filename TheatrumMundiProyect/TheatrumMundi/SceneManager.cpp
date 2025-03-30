@@ -2,7 +2,6 @@
 #include <assert.h>
 #include "SceneTemplate.h"
 #include "Room1.h"
-#include "DebugLogRoom.h"
 #include "InitialScene.h"
 #include "PipePuzzleScene.h"
 #include "ClockPuzzleScene.h"
@@ -13,6 +12,7 @@
 #include"DebugInventoryScene.h"
 #include "MosaicPuzzleScene.h"
 #include "MiddleRoomScene.h"
+#include "DragPuzzleScene.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 SceneManager::SceneManager()
 {
@@ -26,8 +26,9 @@ SceneManager::SceneManager()
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
 	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
+	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 
-	loadScene(SceneName::MOSAIC_SCENE);
+	loadScene(SceneName::INITIAL_MENU);
 }
 
 void SceneManager::popScene()
@@ -42,7 +43,7 @@ void SceneManager::popScene()
 void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 {
 	scenes[index]->init(room);
-	cout << "actindexscene" << index << endl;
+	actsceneindex = index;
 	currentscenes.push_back(scenes[index]);
 	
 }
@@ -50,7 +51,7 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 void SceneManager::loadScene(int index)
 {
 	scenes[index]->init();
-	cout << "actindexscene" << index<<endl;
+	actsceneindex = index;
 	currentscenes.push_back(scenes[index]);
 }
 

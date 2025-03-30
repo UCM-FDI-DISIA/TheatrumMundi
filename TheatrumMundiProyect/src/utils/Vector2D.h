@@ -124,7 +124,18 @@ public:
 	inline Vector2D operator*(float d) const {
 		return Vector2D(_x * d, _y * d);
 	}
-
+	inline void operator-=(const Vector2D& v) {
+		_x -= v._x; _y -= v._y;
+	}
+	inline void operator+=(const Vector2D& v) {
+		_x += v._x; _y += v._y;
+	}
+	inline bool operator==(const Vector2D& v) {
+		return (_x == v._x&& _y == v._y);
+	}
+	inline bool operator!=(const Vector2D& v) {
+		return (_x != v._x || _y != v._y);
+	}
 	// division by constant (scaling)
 	inline Vector2D operator/(float d) const {
 		return Vector2D(_x / d, _y / d);

@@ -15,6 +15,7 @@ SceneTemplate::SceneTemplate()
 	dialogueManager = new DialogueManager(0);
 
 	isStarted = false;
+	//sceneLog = new Log();
 }
 
 void SceneTemplate::update()
@@ -40,6 +41,7 @@ void SceneTemplate::startDialogue(const string& _eventToRead)
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, true);
 	dialogueManager->setdisplayOnProcess(true);
 	//entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
+	dialogueManager->setEventToRead(_eventToRead);
 	dialogueManager->ReadDialogue(_eventToRead);
 
 }
@@ -52,3 +54,5 @@ void SceneTemplate::endDialogue()
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
 }
+
+//metodo global inv flechas

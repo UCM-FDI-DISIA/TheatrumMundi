@@ -22,20 +22,20 @@ class CSVdataRecolector
 	{
 		std::string scene;
 		float passtime;
-		float totaltimeinscene;
+		float totaltimesinscene;
 		float totalclicks;
 	};
 	std::list<ClickDataTimeLine> clickdataTimeList;
 	std::unordered_map<std::string, ClicksDataSummary> clicksSummaryMap;
 	std::unordered_map<std::string, SceneData> SceneSummaryMap;
 	float iniSceneTime;
-	float totaltime;
 	Vector2D lastmousepos;
-	float totalmouseMovement;
+	Vector2D totalmouseMovement;
+	int numtester;
 public:
 	CSVdataRecolector();
 	~CSVdataRecolector();
-	void AddEntry(const std::string& _id,const std::string _scene,Vector2D pos);
+	void AddEntry(const std::string& _id,const std::string _scene);
 	void enterScene(const std::string scene);
 	void exitScene(const std::string scene);
 	void safeData();

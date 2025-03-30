@@ -2,7 +2,8 @@
 #include "../src/Components/Area2D.h"
 #include "../src/Components/CircleArea2D.h"
 #include "../src/Components/RectArea2D.h"
-
+#include "TiledAreaComponent.h"
+#include "iostream"
 using namespace std;
 
 PhysicsBodyComponent::PhysicsBodyComponent()
@@ -45,6 +46,18 @@ void PhysicsBodyComponent::AddObjectToList(CircleArea2D* newArea)
 	colisionableObjects.push_back(newArea);
 }
 
+void PhysicsBodyComponent::AddObjectToList(TiledAreaComponent* newArea)
+{
+	colisionableObjects.push_back(newArea);
+}
+
+void PhysicsBodyComponent::AddObjectofList(list<Area2D*> listarea,Area2D* myarea)
+{
+	for (auto a : listarea)
+		colisionableObjects.push_back(a);
+	colisionableObjects.remove(myarea);
+}
+
 /// <summary>
 /// Compares if the CircleArea of the entity collides with some objet of the list
 /// </summary>
@@ -55,6 +68,7 @@ bool PhysicsBodyComponent::CheckAreaColision(Area2D* entityArea)
 	for (auto& elem : colisionableObjects) {
 		if (elem->overlapsWithArea(entityArea)) return false;
 	}
+	
 	return true;
 }
 

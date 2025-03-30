@@ -34,6 +34,9 @@ public:
 	Dragging _drag,	//DRAG SCROLL ENTITY
 	ecs::grpId_t gId); //GROUP OF ENTITIES
 
+	ecs::entity_t CreateInteractableEntityTiledCollider(ecs::EntityManager* _entityManager, const std::string& _idImage,
+		Vector2D _pos, Vector2D _dir, int _width, int _height, int col, int fil, int _rot, Area2DLayerManager* _myLayer, ecs::grpId_t _gId);
+
 private:
 
 	ecs::EntityManager* _myEntityManager;

@@ -5,6 +5,7 @@
 #include "Manager.h"
 #include "DragComponent.h"
 
+
 /// <summary>
 /// Create the inventory, setting the array of positions, the fitst item, the active to false and the originalPos to 0,0
 /// </summary>
@@ -12,9 +13,11 @@ Inventory::Inventory()
 	: active(false), firstItem(0)
 {
 	for (int i = 0; i < TOTALITEMSTOSHOW; ++i) {
-		positions.push_back(Vector2D(120,150 + i * 150));
+		positions.push_back(Vector2D(100, 175 + i * 150));
 	}
 	originalPos = { 0,0 };
+
+	_textDescription = new DescriptionInfo{" ",0};
 }
 /// <summary>
 /// Destroy the reference to the hints
@@ -36,13 +39,13 @@ int Inventory::getItemNumber()
 
 	if (firstItem < 0)
 	{
-		firstItem = 0; // firstItem cannot be a invalid position
+		firstItem = 0; //firstItem cannot be a invalid position
 	}
 	if (firstItem >= items.size())
 	{
-		return 0; // If there are no items, return 0
+		return 0; //If there are no items, return 0
 	}
-	return std::min(3, static_cast<int>(items.size()) - firstItem); // Return the number of items to be rendered
+	return std::min(3, static_cast<int>(items.size()) - firstItem); //Return the number of items to be rendered
 
 }
 /// <summary>
