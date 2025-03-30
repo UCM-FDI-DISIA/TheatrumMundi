@@ -32,9 +32,13 @@
 
 #include "SceneRoomTemplate.h"
 
-MusicPuzzleScene::MusicPuzzleScene(): _phase(1)
+using namespace std;
+
+MusicPuzzleScene::MusicPuzzleScene(): _phase(0)
 {
-    
+    _correctCombinations.push_back(_correctComb1);
+    _correctCombinations.push_back(_correctComb2);
+    _correctCombinations.push_back(_correctComb3);
 }
 
 MusicPuzzleScene::~MusicPuzzleScene()
@@ -53,27 +57,23 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
         room = sr;
 
         //background + musical notes helpful guide (visual)
-        auto StudyBackground = entityFactory->CreateImageEntity(entityManager, "ShelfBackground1", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+       // auto StudyBackground = entityFactory->CreateImageEntity(entityManager, "ShelfBackground1", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 
 
         //piano buttons
-        auto number1 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), /*109, 115*/ 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-        auto number2 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(562, 430), Vector2D(0, 0), /*63, 127*/40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-        auto number3 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(606, 430), Vector2D(0, 0),/* 743, 280*/40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+        auto buttDo = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), /*109, 115*/ 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+        auto buttRe = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(562, 430), Vector2D(0, 0), /*63, 127*/40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+        auto buttMi = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(606, 430), Vector2D(0, 0),/* 743, 280*/40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+        //auto buttFa = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), /*109, 115*/ 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+        //auto buttSol = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(562, 430), Vector2D(0, 0), /*63, 127*/40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+        //auto buttLa = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(606, 430), Vector2D(0, 0),/* 743, 280*/40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+        //auto buttSi = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), /*109, 115*/ 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+        //auto buttHighDo = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), /*109, 115*/ 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
-		ClickComponent* clickNumber1 = entityManager->getComponent<ClickComponent>(number1);
-		clickNumber1->connect(ClickComponent::JUST_CLICKED, [this, number1]() {
-			
-			});
 
-		ClickComponent* clickNumber2 = entityManager->getComponent<ClickComponent>(number2);
-		clickNumber2->connect(ClickComponent::JUST_CLICKED, [this, number2]() {
-			
-			});
-
-		ClickComponent* clickNumber3 = entityManager->getComponent<ClickComponent>(number3);
-		clickNumber3->connect(ClickComponent::JUST_CLICKED, [this, number3]() {
-			
+		ClickComponent* clickButtDo = entityManager->getComponent<ClickComponent>(buttDo);
+        clickButtDo->connect(ClickComponent::JUST_CLICKED, [this, buttDo]() {
+            addNoteToComb(DO);
 			});
 
         //musical score (changes in each round)
@@ -109,11 +109,74 @@ void MusicPuzzleScene::Win()
 
 bool MusicPuzzleScene::checkPhaseCombination()
 {
-    return false;
+    auto _correctComb = _correctCombinations[_phase];
+    int index = 0;
+    bool correctAns = true;
+
+    while (index < _correctComb.size() && correctAns)
+    {
+        if (_currentComb[index] != _correctComb[index])
+        {
+            correctAns = false;
+        }
+        else
+        {
+            index++;
+        }
+    }
+    
+    return correctAns;
 }
 
 void MusicPuzzleScene::cleanCombination()
 {
+    _currentComb.clear();
+}
+
+void MusicPuzzleScene::addNoteToComb(Notes pressedNote)
+{
+    //debug correct comb
+    cout << "CORRECT COMB:" << endl;
+    for (auto a : _correctComb1)
+    {
+        cout << a << " ";
+    }
+    cout << endl;
+
+    //debug button pressed
+    cout << "BUTTON PRESSED: " << DO << endl;
+
+    //save button pressed on currentComb
+    _currentComb.push_back(pressedNote);
+
+    //debug currentComb
+    cout << "CURRENT COMB:" << endl;
+    for (auto a : _currentComb)
+    {
+        cout << a << " ";
+    }
+    cout << endl;
+    
+    //if currentComb is full check if its correct
+    if (_currentComb.size() >= _correctCombinations[_phase].size())
+    {
+        //check
+        if (checkPhaseCombination()) //if its correct
+        {
+            if (_phase == 3)
+            {
+                //puzzle win
+                cout << "PUZZLE WIN" << endl;
+            }
+            else _phase++;
+        }
+        else //wrong combination
+        {
+            //clean current comb
+            cleanCombination();
+        }
+    }
+    
 }
 
 

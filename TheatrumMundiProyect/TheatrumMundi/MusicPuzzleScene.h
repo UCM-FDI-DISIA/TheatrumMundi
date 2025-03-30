@@ -29,16 +29,18 @@ private:
 		SOL,
 		LA,
 		SI,
-		DO_ALTO
+		HIGH_DO
 	};
 
 	std::vector<Notes> _correctComb1 = { DO, RE, MI}; //correct phase combination
 	std::vector<Notes> _correctComb2 = { DO, RE, MI, FA, SOL };; //correct phase combination
 	std::vector<Notes> _correctComb3 = { DO, RE, MI, FA, SOL, LA, SI };; //correct phase combination
 
+	std::vector<std::vector<Notes>> _correctCombinations; //includes all correctCombinations
 	std::vector<Notes> _currentComb; //players combination
 	int _phase; //current phase player is in
 
 	bool checkPhaseCombination(); //checks if current combination is correct
 	void cleanCombination(); //cleans combinations vectors
+	void addNoteToComb(Notes a);
 };

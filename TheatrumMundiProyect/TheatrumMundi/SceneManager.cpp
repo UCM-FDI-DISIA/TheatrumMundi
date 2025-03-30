@@ -28,7 +28,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
 	scenes[SceneName::MUSIC_PUZZLE] = new MusicPuzzleScene();
 
-	loadScene(MUSIC_PUZZLE);
+	loadScene(SceneName::MUSIC_PUZZLE, nullptr);
 }
 
 void SceneManager::popScene()
