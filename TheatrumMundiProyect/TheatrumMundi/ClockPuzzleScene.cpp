@@ -163,19 +163,24 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->addComponent<RectArea2D>(_buttonCheck, areaLayerManager);
 
 
-		//auto container = entityFactory->CreateImageEntity(entityManager, "horaria", Vector2D(510, 548), Vector2D(0, 0), 140, 200, 0, ecs::grp::D);
-		//container->getMngr()->setActive(container, false);
 
-
+		auto container = entityFactory->CreateInteractableEntity(entityManager, "frascoV1", EntityFactory::RECTAREA,
+			Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+			areaLayerManager,
+			EntityFactory::NODRAG,
+			ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+		container->getMngr()->setActive(container, false);
 
 
 		ClickComponent* clockCheckClick = entityManager->addComponent<ClickComponent>(_buttonCheck);
-		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [_buttonCheckTransform, sr, this,_buttonCheck,_buttonHor,_buttonMin, _buttonResetPuzzle]()
+		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [_buttonCheckTransform, sr, this,_buttonCheck,_buttonHor,_buttonMin, _buttonResetPuzzle,container]()
 			{
 				if (Check() && getSolved()) {
+					container->getMngr()->setActive(container, true);
+
 					Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
 					//Assign to this inventory the hint;
-					AddInvItem("frasco", "Me lo puedo beber??",position, sr);
+					AddInvItem("frascoV1", "Me lo puedo beber??",position, sr);
 					
 #ifdef DEBUG
 					std::cout << "wii";
@@ -185,7 +190,13 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 				}
 			});
 
+		ClickComponent* clk = entityManager->getComponent<ClickComponent>(container);
+		clk->connect(ClickComponent::JUST_CLICKED, [this, container, sr]() {
 
+			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+			AddInvItem("frascoV1", "Me lo puedo beber??", position, sr);
+			container->getMngr()->setActive(container, false);
+			});
 
 		//BackButton
 		auto _backButton = entityManager->addEntity(ecs::grp::UI);
