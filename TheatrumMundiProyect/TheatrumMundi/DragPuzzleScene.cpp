@@ -146,15 +146,17 @@ void DragPuzzleScene::init()
         //Reset Btn
         auto _reset = entityFactory->CreateInteractableEntity(entityManager,"Hanni",EntityFactory::RECTAREA,posMat[8][7],Vector2D(0,0),auxtiledsize,auxtiledsize,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::INTERACTOBJ);
         entityManager->getComponent<ClickComponent>(_reset)->connect(ClickComponent::JUST_CLICKED, [this,_atr,_btr,_ctr,_dtr,_etr,_ftr,_triggerobjtr]() {
-            _atr->getPos() = posMat[5][2];
-            _btr->getPos() = posMat[2][5];
-            _ctr->getPos() = posMat[4][4];
-            _dtr->getPos() = posMat[6][3];
-            _etr->getPos() = posMat[2][3];
-            _ftr->getPos() = posMat[5][5];
-             _triggerobjtr->getPos() = posMat[1][3];
-            });
-                    
+            if (!solved) {
+                _atr->getPos() = posMat[5][2];
+                _btr->getPos() = posMat[2][5];
+                _ctr->getPos() = posMat[4][4];
+                _dtr->getPos() = posMat[6][3];
+                _etr->getPos() = posMat[2][3];
+                _ftr->getPos() = posMat[5][5];
+                _triggerobjtr->getPos() = posMat[1][3];
+            }
+          });
+         
     }
 }
 
@@ -198,14 +200,19 @@ Vector2D DragPuzzleScene::NearMatPoint(Vector2D pos)
 
 void DragPuzzleScene::Exit()
 {
+    Game::Instance()->getSceneManager()->popScene();
 }
 
 bool DragPuzzleScene::Check()
 {
-    return false;
+    Win();
+    return true;
 }
 
 void DragPuzzleScene::Win()
 {
+    entityManager->removeComponent<TriggerComponent>(_triggerObj);
+    solved = true;
+    // WIP active de respective part in room2 scene
     std::cout << "WEIN";
 }
