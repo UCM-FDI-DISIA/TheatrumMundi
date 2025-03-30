@@ -459,6 +459,54 @@
     {
       "id": "Hanni",
       "file": "../resources/images/asesinoDeHanni.png"
+    },
+    {
+      "id": "Cuervo",
+      "file": "../resources/images/Cuervo.jpeg"
+    },
+    {
+      "id": "FondoCementerio",
+      "file": "../resources/images/temporales/Room2/FondoCementerio.jpg"
+    },
+    {
+      "id": "FondoCripta",
+      "file": "../resources/images/temporales/Room2/FondoCripta.jpeg"
+    },
+    {
+      "id": "EntradaOculta",
+      "file": "../resources/images/temporales/Room2/Entrada oculta.jpeg"
+    },
+    {
+      "id": "Gancho",
+      "file": "../resources/images/temporales/Room2/Gancho.jpg"
+    },
+    {
+      "id": "Mosaico",
+      "file": "../resources/images/temporales/Room2//Mosaico.jpeg"
+    },
+    {
+      "id": "Organo",
+      "file": "../resources/images/temporales/Room2//Organo.jpeg"
+    },
+    {
+      "id": "Pala",
+      "file": "../resources/images/temporales/Room2/Pala.jpeg"
+    },
+    {
+      "id": "Palo",
+      "file": "../resources/images/temporales/Room2/Palo.jpeg"
+    },
+    {
+      "id": "PaasadizoSecretoEspejo",
+      "file": "../resources/images/temporales/Room2/PasadizoSecreto(Espejo).jpeg"
+    },
+    {
+      "id": "PuertaSantuario",
+      "file": "../resources/images/temporales/Room2/Puerta.jpg"
+    },
+    {
+      "id": "Ventana",
+      "file": "../resources/images/temporales/Room2/Ventana.jpeg"
     }
   ],
 

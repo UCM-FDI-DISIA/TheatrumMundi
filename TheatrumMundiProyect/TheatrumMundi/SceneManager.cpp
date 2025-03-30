@@ -2,6 +2,7 @@
 #include <assert.h>
 #include "SceneTemplate.h"
 #include "Room1.h"
+#include "Room2.h"
 #include "InitialScene.h"
 #include "PipePuzzleScene.h"
 #include "ClockPuzzleScene.h"
@@ -21,6 +22,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::INITIAL_MENU] = new InitialScene();
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
+	scenes[SceneName::ROOM_2] = new Room2Scene();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
@@ -28,7 +30,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 
-	loadScene(SceneName::INITIAL_MENU);
+	loadScene(SceneName::ROOM_2);
 }
 
 void SceneManager::popScene()

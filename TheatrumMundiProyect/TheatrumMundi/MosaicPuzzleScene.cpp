@@ -112,11 +112,11 @@ MosaicPuzzleScene::~MosaicPuzzleScene()
 
 }
 
-void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
+void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted) {
 		isStarted = true;
-	//	room = sr;
+		room = sr;
 
 #pragma region SpecificEntitiesOfTheScene
 		//Background
@@ -144,7 +144,7 @@ void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
 
 		
 	}
-//	createInvEntities(sr);
+	createInvEntities(sr);
 }
 
 /// <summary>

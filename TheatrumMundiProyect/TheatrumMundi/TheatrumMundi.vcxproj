@@ -69,6 +69,7 @@
     <ClCompile Include="PhysicsBodyComponent.cpp" />
     <ClCompile Include="ReadDialog.cpp" />
     <ClCompile Include="Room1.cpp" />
+    <ClCompile Include="Room2.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScenePuzzleTemplate.cpp" />
     <ClCompile Include="SceneRoomTemplate.cpp" />
@@ -248,6 +249,7 @@
     <ClInclude Include="PhysicsBodyComponent.h" />
     <ClInclude Include="ReadDialog.h" />
     <ClInclude Include="Room1.h" />
+    <ClInclude Include="Room2.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScenePuzzleTemplate.h" />
     <ClInclude Include="SceneRoomTemplate.h" />
