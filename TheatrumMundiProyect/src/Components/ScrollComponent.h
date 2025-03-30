@@ -3,6 +3,8 @@
 #include "../utils/Vector2D.h"
 #include <cassert>
 #include <vector>
+#include <unordered_map>
+#include <functional>
 
 class Transform;
 
@@ -10,6 +12,7 @@ class ScrollComponent : public ecs::Component {
 private:
 	Vector2D _dir;
 	int _velocity;
+	int _initialVelocity;
 	float _timeScroll;
 	float _initialTimeScroll; //Activates if this time > 0
 	//bool _isRight;
@@ -19,9 +22,17 @@ public:
 
 	__CMPID_DECL__(ecs::cmp::SCROLL_COMPONENT)
 
+	using EVENT_TYPE = int; // Alias type that refers to the EventType enum, that will be extended
+	using CALLBACK = std::function<void()>;
+
+	enum EventTypeScroll { STARTSCROLLING, ENDEDSCROLLING }; // Type of scrolling event
+
 	//ESTO SE ELIMINARIA POR PASARLE LA DIRECCION POR ADELANTADO
 	enum Inverse { NORMAL, INVERSE };
 	enum Direction { UP, DOWN, LEFT, RIGHT };
+	enum Path { LEFTRIGHT, UPDOWN };
+	Path _path;
+	Inverse _inverse;
 	
 	ScrollComponent(int velocity, float time, Inverse isInverse,int numPhases);
 	~ScrollComponent();
@@ -30,13 +41,14 @@ public:
 	void update() override;
 	bool isScrolling();
 	void addElementToScroll(Transform* _objectT);
+	int numPhases();
+	bool connect(EVENT_TYPE, CALLBACK);
+	//void restartPosition();
 
 	//AMPLIACION
-	bool finalPhaseCheck() const { return (phase == finalPhase); };
-	bool startPhaseCheck() const { return (phase == startPhase); };
-	void addPhase() {
-		finalPhase++;
-	};
+	bool finalPhaseCheck() const { return (phase == finalPhase); }
+	bool startPhaseCheck() const { return (phase == startPhase); }
+	void addPhase();
 	void addPhaseAndFollow() {
 		finalPhase++;
 		phase = finalPhase;
@@ -60,4 +72,6 @@ private:
 	//LEFT:: FASE = FINAL 
 	//RIGHT:: FASE = INICIO
 
+protected:
+	std::unordered_map<EVENT_TYPE, std::vector<CALLBACK>> _eventConnectionsScroll;
 };

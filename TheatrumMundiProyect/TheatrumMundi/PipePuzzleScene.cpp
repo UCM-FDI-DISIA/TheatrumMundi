@@ -724,7 +724,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		//Register scene in dialogue manager
 		dialogueManager->setScene(this);
 
-		startDialogue("Puzzle1");
+		//startDialogue("Puzzle1");
 
 		//vector with pipe positions
 		vector<Vector2D> pipePositions = {

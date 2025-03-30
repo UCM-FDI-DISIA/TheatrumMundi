@@ -165,7 +165,7 @@
     },
     {
       "id": "fondoPruebaLog",
-      "file": "../resources/images/fondoLogPrueba.jpg"
+      "file": "../resources/images/fondoLogPrueba.png"
     },
     {
       "id": "prueba",
@@ -351,6 +351,10 @@
       "file": "../resources/images/IncrementButton.png"
     },
     {
+      "id": "decreaseButton",
+      "file": "../resources/images/decreaseButton.png"
+    },
+    {
       "id": "numberButton",
       "file": "../resources/images/NumberButton.png"
     },
@@ -449,6 +453,14 @@
     {
       "id": "AAA",
       "file": "../resources/images/veneno.png"
+    },
+    {
+      "id": "piezaL1",
+      "file": "../resources/images/temporales/piezadeL1.png"
+    },
+    {
+      "id": "piezaL2",
+      "file": "../resources/images/temporales/piezadeL2.png"
     },
     {
       "id": "Hanni",

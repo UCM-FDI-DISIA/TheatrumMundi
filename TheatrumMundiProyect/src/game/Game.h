@@ -7,12 +7,15 @@
 
 class Transform;
 class GameState;
+class Log;
+
 class CSVdataRecolector;
 class Game {
 	
 private:
 	
 	 SceneManager* _mngr;
+	 Log* _log;
 	 
 	 DataManager* _dataManager;
 	 CSVdataRecolector* _csvdata;
@@ -28,6 +31,8 @@ public:
 	void start();
 	SceneManager* getSceneManager();
 	DataManager* getDataManager();
+	CSVdataRecolector* getCSVDataColector();
+	Log* getLog();
 	Game& operator=(const Game& o) = delete;
 	Game(const Game& o) = delete;
 	void exit();

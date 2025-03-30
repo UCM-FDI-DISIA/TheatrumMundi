@@ -74,6 +74,7 @@ enum grpId : cmpId_t {
 	ZOOMOBJ,
 	DIALOGUE,
 	UI,
+	LOG,
 	_GRPS_LIST_, /* taken from ../game/ecs_defs */
 
 	// do not remove this

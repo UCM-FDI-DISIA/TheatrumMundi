@@ -27,6 +27,7 @@ private:
     //Image* _imgOriginal;
     TriggerComponent* _tr;
     Transform* _transform;
+    Image* _img;
     Transform* _transformOriginal;
     std::string _idImage;
     int alphaCursorEntered;

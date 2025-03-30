@@ -40,7 +40,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		dialogueManager->setScene(this);
 
 		
-		startDialogue("Puzzle3");
+		//startDialogue("Puzzle3");
 
 		room = sr;
 		AudioManager& a = AudioManager::Instance();
@@ -194,6 +194,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			{
 				Game::Instance()->getSceneManager()->popScene();
 			});
+		
 
 		//INVENTORY
 		//Invntory Background
