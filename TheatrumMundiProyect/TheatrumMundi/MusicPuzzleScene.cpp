@@ -47,6 +47,14 @@ MusicPuzzleScene::MusicPuzzleScene(): _phase(0)
         cout << a << " ";
     }
     cout << endl;
+
+    //debug currentComb
+    cout << "CURRENT COMB:";
+    for (auto a : _currentComb)
+    {
+        cout << a << " ";
+    }
+    cout << endl;
 }
 
 MusicPuzzleScene::~MusicPuzzleScene()
@@ -173,6 +181,14 @@ void MusicPuzzleScene::addNoteToComb(Notes pressedNote)
             //clean current comb
             cleanCombination();
 
+            //debug currentComb
+            cout << "CURRENT COMB:";
+            for (auto a : _currentComb)
+            {
+                cout << a << " ";
+            }
+            cout << endl;
+
             //reset image musical score if needed
         }
     }
@@ -196,6 +212,14 @@ void MusicPuzzleScene::changePhase()
     cout << "PHASE: " << _phase << endl;
     cout << "CORRECT COMB:";
     for (auto a : _correctCombinations[_phase])
+    {
+        cout << a << " ";
+    }
+    cout << endl;
+
+    //debug currentComb
+    cout << "CURRENT COMB:";
+    for (auto a : _currentComb)
     {
         cout << a << " ";
     }
