@@ -8,6 +8,84 @@
 #include "Image.h"
 #include "TriggerComponent.h"
 #include "DragComponent.h"
+
+/// <summary>
+/// Create the dragSquares
+/// </summary>
+void MosaicPuzzleScene::createSquares(const entity_t& mosaicBorderLeft, const entity_t& mosaicBorderTop, const entity_t& mosaicBorderRight, const entity_t& mosaicBorderBottom)
+{
+	for (int i = 0; i < TOTALSQUARES; ++i) { //Creation of the squares and assignation in the different possitions
+
+		squares.push_back(entityManager->addEntity()); //Add the entity to the list
+		auto& it = squares.back(); //Reference to the entity
+
+		//Component asignation
+		it->getMngr()->addComponent<Transform>(it, positions[indexPositions[i]], Vector2D(0, 0), SQUAREWIDTH, SQUAREWIDTH, 0); //Assign the position
+		it->getMngr()->addComponent<Image>(it, &sdlutils().images().at(imgId[i])); //Assign the image
+		it->getMngr()->addComponent<RectArea2D>(it, areaLayerManager); //Assign the area
+		//Logic Componentes
+		it->getMngr()->addComponent<ClickComponent>(it); 
+		it->getMngr()->addComponent<TriggerComponent>(it);
+		it->getMngr()->addComponent<DragComponent>(it);
+
+		//Add collisions to the square
+		auto physicis = it->getMngr()->addComponent<PhysicsBodyComponent>(it);
+		physicis->AddObjectToList(mosaicBorderLeft->getMngr()->getComponent<RectArea2D>(mosaicBorderLeft)); //Adds the collision to the MosaicBorder (LEFT)
+		physicis->AddObjectToList(mosaicBorderTop->getMngr()->getComponent<RectArea2D>(mosaicBorderTop)); //Adds the collision to the MosaicBorder (TOP)
+		physicis->AddObjectToList(mosaicBorderRight->getMngr()->getComponent<RectArea2D>(mosaicBorderRight)); //Adds the collision to the MosaicBorder (RIGHT)
+		physicis->AddObjectToList(mosaicBorderBottom->getMngr()->getComponent<RectArea2D>(mosaicBorderBottom)); //Adds the collision to the MosaicBorder (BOTTOM)
+
+		//When tou clicked in the square, keeps the original position of the square
+
+		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this, it]() {
+			firstPos = it->getMngr()->getComponent<Transform>(it)->getPos();
+			});
+
+		//When the square got released, checks if the puzzle was solved correctly
+		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this,it]() {
+			CorrectPositions(it);
+			if (Check()) { //If the puzzle is solved correctly, calls Win
+				Win();
+			}
+			});
+	}
+	//Add collisions between the sqaures
+	for (auto actualSquare : squares) {
+
+#ifdef DEBUG
+		assert(actualSquare->getMngr()->getComponent<PhysicsBodyComponent>(actualSquare) != nullptr);
+#endif // DEBUG
+
+		auto physyicComponent = actualSquare->getMngr()->getComponent<PhysicsBodyComponent>(actualSquare); //Reference to the physics component of the ActualSquare
+
+		for (auto SquareToAdd : squares) { //For each Square, add collision with them
+			if (actualSquare != SquareToAdd) {
+
+#ifdef DEBUG
+				assert(SquareToAdd->getMngr()->getComponent<PhysicsBodyComponent>(SquareToAdd) != nullptr);
+#endif // DEBUG
+				physyicComponent->AddObjectToList(SquareToAdd->getMngr()->getComponent<RectArea2D>(SquareToAdd));
+			}
+		}
+	}
+}
+/// <summary>
+/// Create one of the MosaicBorder
+/// </summary>
+/// <param name="position"></param>
+/// <param name="rot"></param>
+/// <returns></returns>
+entity_t MosaicPuzzleScene::createBorder(const Vector2D& position, float width, float height)
+{
+
+	entity_t newBorder = entityManager->addEntity();
+	newBorder->getMngr()->addComponent<Transform>(newBorder, position, Vector2D(0, 0), width, height, 0);
+	newBorder->getMngr()->addComponent<Image>(newBorder, &sdlutils().images().at("B1"));
+	newBorder->getMngr()->addComponent<RectArea2D>(newBorder,areaLayerManager);
+	newBorder->getMngr()->addComponent<TriggerComponent>(newBorder);
+	return newBorder;
+
+}
 MosaicPuzzleScene::MosaicPuzzleScene()
 {
 	//Assignation of the possitions 
@@ -21,9 +99,9 @@ MosaicPuzzleScene::MosaicPuzzleScene()
 		}
 
 		//Assign the positions of the different rows
-		if(i < 3) positions.push_back(Vector2D(300 , 100 + (index * SQUAREWIDTH))); //First row possitions (0-2)
-		else if(i < 6) positions.push_back(Vector2D(300 + SQUAREWIDTH, 100 + (index * SQUAREWIDTH))); //Second row possitions (3-5)
-		else positions.push_back(Vector2D(300 + (2 * SQUAREWIDTH), 100 + (index * SQUAREWIDTH))); //Third row possitions (6-8)
+		if(i < 3) positions.push_back(Vector2D(350 ,75 + (index * SQUAREWIDTH))); //First row possitions (0-2)
+		else if(i < 6) positions.push_back(Vector2D(350 + SQUAREWIDTH, 75 + (index * SQUAREWIDTH))); //Second row possitions (3-5)
+		else positions.push_back(Vector2D(350 + (2 * SQUAREWIDTH), 75 + (index * SQUAREWIDTH))); //Third row possitions (6-8)
 		++index;
 
 	}
@@ -31,6 +109,7 @@ MosaicPuzzleScene::MosaicPuzzleScene()
 
 MosaicPuzzleScene::~MosaicPuzzleScene()
 {
+
 }
 
 void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
@@ -44,64 +123,13 @@ void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
 		//auto background = entityFactory->CreateImageEntity(entityManager,"MosaicBackground",Vector2D(0,0),Vector2D(0,0),32,32,0,ecs::grp::BACKGROUND);
 
 		//Mosaic Border
-		//auto mosaicBorderLeft = entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(100, 100), Vector2D(0, 0), 50, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-		//auto mosaicBorderTop = entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(580, -500), Vector2D(0, 0), 50, 500, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-		//auto mosaicBorderRight = entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(900, 100), Vector2D(0, 0), 50, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-		//auto mosaicBorderBottom = entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(580, 850), Vector2D(0, 0), 50, 500, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		auto mosaicBorderLeft = createBorder(Vector2D(330, 90),20,600);
+		auto mosaicBorderTop = createBorder(Vector2D(350, 50),600, 20);
+		auto mosaicBorderRight = createBorder(Vector2D(950, 90),20,600);
+		auto mosaicBorderBottom = createBorder(Vector2D(350, 675),600, 20);
 		
 		//SquareEntities
-		for (int i = 0; i < TOTALSQUARES; ++i) { //Creation of the squares and assignation in the different possitions
-			squares.push_back(entityManager->addEntity());
-			auto& it = squares.back();
-
-			//Asignación de los componentes
-			it->getMngr()->addComponent<Transform>(it,positions[indexPositions[i]],Vector2D(0,0),SQUAREWIDTH,SQUAREWIDTH,0);
-			it->getMngr()->addComponent<Image>(it, &sdlutils().images().at(imgId[i]));
-			it->getMngr()->addComponent<RectArea2D>(it,areaLayerManager);
-			it->getMngr()->addComponent<ClickComponent>(it);
-			it->getMngr()->addComponent<TriggerComponent>(it);
-			it->getMngr()->addComponent<DragComponent>(it);
-
-			//Add collisions to the square
-			auto physicis = it->getMngr()->addComponent<PhysicsBodyComponent>(it);
-		/*	physicis->AddObjectToList(mosaicBorderLeft->getMngr()->getComponent<RectArea2D>(mosaicBorderLeft));
-			physicis->AddObjectToList(mosaicBorderTop->getMngr()->getComponent<RectArea2D>(mosaicBorderTop)); //Adds the collision to the MosaicBorder
-			physicis->AddObjectToList(mosaicBorderRight->getMngr()->getComponent<RectArea2D>(mosaicBorderRight)); //Adds the collision to the MosaicBorder
-			physicis->AddObjectToList(mosaicBorderBottom->getMngr()->getComponent<RectArea2D>(mosaicBorderBottom)); //Adds the collision to the MosaicBorder*/
-
-			//When tou clicked in the square, keeps the original position of the square
-
-			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this /*, sr */,it]() {
-				firstPos = it->getMngr()->getComponent<Transform>(it)->getPos();
-			});
-
-			//When the square got released, checks if the puzzle was solved correctly
-			 it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this /*, sr */,it ]() {
-				 CorrectPositions(it);
-				if (Check()) { //If the puzzle is solved correctly, calls Win
-					Win();
-				}
-				});
-		}
-		//Add collisions between the sqaures
-		for (auto actualSquare : squares) {
-
-#ifdef DEBUG
-			assert(actualSquare->getMngr()->getComponent<PhysicsBodyComponent>(actualSquare) != nullptr);
-#endif // DEBUG
-
-			auto physyicComponent = actualSquare->getMngr()->getComponent<PhysicsBodyComponent>(actualSquare); //Reference to the physics component of the ActualSquare
-
-			for (auto SquareToAdd : squares) { //For each Square, add collision with them
-				if (actualSquare != SquareToAdd) {
-
-#ifdef DEBUG
-					assert(SquareToAdd->getMngr()->getComponent<PhysicsBodyComponent>(SquareToAdd) != nullptr);
-#endif // DEBUG
-					physyicComponent->AddObjectToList(SquareToAdd->getMngr()->getComponent<RectArea2D>(SquareToAdd));
-				}
-			}
-		}
+		createSquares(mosaicBorderLeft, mosaicBorderTop, mosaicBorderRight, mosaicBorderBottom);
 #pragma endregion
 
 
