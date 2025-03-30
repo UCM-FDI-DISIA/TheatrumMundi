@@ -375,6 +375,8 @@ void Room1Scene::init()
 		auto buttonInventory = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3 ,20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(InventoryBackground, false);
 
+		auto InvArea = entityManager->addComponent<RectArea2D>(InventoryBackground, areaLayerManager);
+
 		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(upButton, false);
 
@@ -382,7 +384,7 @@ void Room1Scene::init()
 		entityManager->setActive(downButton, false);
 
 		ClickComponent* buttonInventoryClick = entityManager->getComponent<ClickComponent>(buttonInventory);
-		buttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound,InventoryBackground, upButton, downButton, buttonInventory]() {
+		buttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound,InventoryBackground, upButton, downButton, buttonInventory, InvArea]() {
 			AudioManager::Instance().playSound(buttonSound);
 			GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
 
@@ -392,6 +394,11 @@ void Room1Scene::init()
 
 				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(925);
 				//change the position of the log button
+				areaLayerManager->sendFront(InvArea->getLayerPos());
+
+				areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(upButton)->getLayerPos());
+				areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(downButton)->getLayerPos());
+
 
 				entityManager->setActive(downButton, true);
 				entityManager->setActive(upButton, true);
