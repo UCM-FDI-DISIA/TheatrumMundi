@@ -16,6 +16,7 @@ enum SceneName {
 	CLOCK_PUZZLE,
 	TEA_CUP_PUZZLE,
 	ROOM_2,
+	MUSIC_PUZZLE,
 	ROOM_3,
 	SCENE_SIZE
 };
