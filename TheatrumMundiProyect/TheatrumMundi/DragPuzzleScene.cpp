@@ -83,29 +83,50 @@ void DragPuzzleScene::init()
          auto _a = entityFactory->CreateInteractableEntityTiledCollider(entityManager, "piezaL2",posMat[5][2], Vector2D(0, 0), auxtiledsize * 2, auxtiledsize * 2, 2, 2, 0, areaLayerManager, ecs::grp::INTERACTOBJ);
          entityManager->getComponent<TiledAreaComponent>(_a)->setActiveTile(false, 1, 1);
          auxlist.push_back(entityManager->getComponent<TiledAreaComponent>(_a));
+         entityManager->getComponent<DragComponent>(_a)->connect(DragComponent::DRAG_END, [this,_a]() {
+             Transform* aux = entityManager->getComponent<Transform>(_a);
+             aux->getPos() = NearMatPoint(aux->getPos());
+             });
 
          //L DOWM
          auto _b = entityFactory->CreateInteractableEntityTiledCollider(entityManager, "piezaL1", posMat[2][5], Vector2D(0, 0), auxtiledsize * 2, auxtiledsize * 2, 2, 2, 0, areaLayerManager, ecs::grp::INTERACTOBJ);
          entityManager->getComponent<TiledAreaComponent>(_b)->setActiveTile(false, 0, 1);
          auxlist.push_back(entityManager->getComponent<TiledAreaComponent>(_b));
+         entityManager->getComponent<DragComponent>(_b)->connect(DragComponent::DRAG_END, [this, _b]() {
+             Transform* aux = entityManager->getComponent<Transform>(_b);
+             aux->getPos() = NearMatPoint(aux->getPos());
+             });
 
          // I
          auto _c = entityFactory->CreateInteractableEntityTiledCollider(entityManager, "piezade3", posMat[4][4], Vector2D(0, 0), auxtiledsize * 1, auxtiledsize * 3, 1, 3, 0, areaLayerManager, ecs::grp::INTERACTOBJ);
          auxlist.push_back(entityManager->getComponent<TiledAreaComponent>(_c));
-
+         entityManager->getComponent<DragComponent>(_c)->connect(DragComponent::DRAG_END, [this, _c]() {
+             Transform* aux = entityManager->getComponent<Transform>(_c);
+             aux->getPos() = NearMatPoint(aux->getPos());
+             });
          // 2x2
          auto _d = entityFactory->CreateInteractableEntityTiledCollider(entityManager, "piezade4", posMat[6][3], Vector2D(0, 0), auxtiledsize * 2, auxtiledsize * 2, 2, 2, 0, areaLayerManager, ecs::grp::INTERACTOBJ);
          auxlist.push_back(entityManager->getComponent<TiledAreaComponent>(_d));
-
+         entityManager->getComponent<DragComponent>(_d)->connect(DragComponent::DRAG_END, [this, _d]() {
+             Transform* aux = entityManager->getComponent<Transform>(_d);
+             aux->getPos() = NearMatPoint(aux->getPos());
+             });
          // 2x1
          auto _e = entityFactory->CreateInteractableEntityTiledCollider(entityManager, "piezade2", posMat[2][3], Vector2D(0, 0), auxtiledsize*2 , auxtiledsize, 2, 1, 0, areaLayerManager, ecs::grp::INTERACTOBJ);
          auxlist.push_back(entityManager->getComponent<TiledAreaComponent>(_e));
-
+         entityManager->getComponent<DragComponent>(_e)->connect(DragComponent::DRAG_END, [this, _e]() {
+             Transform* aux = entityManager->getComponent<Transform>(_e);
+             aux->getPos() = NearMatPoint(aux->getPos());
+             });
          //z
          auto _f = entityFactory->CreateInteractableEntityTiledCollider(entityManager, "piezadez", posMat[5][5], Vector2D(0, 0), auxtiledsize*3, auxtiledsize * 2, 3, 2, 0, areaLayerManager, ecs::grp::INTERACTOBJ);
          auxlist.push_back(entityManager->getComponent<TiledAreaComponent>(_f));
          entityManager->getComponent<TiledAreaComponent>(_f)->setActiveTile(false, 0, 0);
          entityManager->getComponent<TiledAreaComponent>(_f)->setActiveTile(false, 2, 1);
+         entityManager->getComponent<DragComponent>(_f)->connect(DragComponent::DRAG_END, [this, _f]() {
+             Transform* aux = entityManager->getComponent<Transform>(_f);
+             aux->getPos() = NearMatPoint(aux->getPos());
+             });
          //Add de collisionslist
          entityManager->getComponent<PhysicsBodyComponent>(_b)->AddObjectofList(auxlist, entityManager->getComponent<TiledAreaComponent>(_b));
          entityManager->getComponent<PhysicsBodyComponent>(_a)->AddObjectofList(auxlist, entityManager->getComponent<TiledAreaComponent>(_a));
