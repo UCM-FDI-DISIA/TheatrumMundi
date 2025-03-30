@@ -43,4 +43,6 @@ private:
 	bool checkPhaseCombination(); //checks if current combination is correct
 	void cleanCombination(); //cleans combinations vectors
 	void addNoteToComb(Notes a);
+
+	void createPianoButtons();
 };

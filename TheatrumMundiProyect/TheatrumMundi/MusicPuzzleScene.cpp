@@ -39,6 +39,14 @@ MusicPuzzleScene::MusicPuzzleScene(): _phase(0)
     _correctCombinations.push_back(_correctComb1);
     _correctCombinations.push_back(_correctComb2);
     _correctCombinations.push_back(_correctComb3);
+
+    //debug correct comb
+    cout << "CORRECT COMB:" << endl;
+    for (auto a : _correctCombinations[_phase])
+    {
+        cout << a << " ";
+    }
+    cout << endl;
 }
 
 MusicPuzzleScene::~MusicPuzzleScene()
@@ -61,20 +69,7 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
 
 
         //piano buttons
-        auto buttDo = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), /*109, 115*/ 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-        auto buttRe = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(562, 430), Vector2D(0, 0), /*63, 127*/40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-        auto buttMi = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(606, 430), Vector2D(0, 0),/* 743, 280*/40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-        //auto buttFa = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), /*109, 115*/ 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-        //auto buttSol = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(562, 430), Vector2D(0, 0), /*63, 127*/40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-        //auto buttLa = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(606, 430), Vector2D(0, 0),/* 743, 280*/40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-        //auto buttSi = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), /*109, 115*/ 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-        //auto buttHighDo = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), /*109, 115*/ 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-
-
-		ClickComponent* clickButtDo = entityManager->getComponent<ClickComponent>(buttDo);
-        clickButtDo->connect(ClickComponent::JUST_CLICKED, [this, buttDo]() {
-            addNoteToComb(DO);
-			});
+        createPianoButtons();
 
         //musical score (changes in each round)
 
@@ -100,7 +95,17 @@ void MusicPuzzleScene::unload()
 
 bool MusicPuzzleScene::Check()
 {
-    return false;
+    if (_phase == _correctCombinations.size() - 1)
+    {
+        //puzzle win
+        cout << "PUZZLE WIN" << endl;
+        solved = true;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 void MusicPuzzleScene::Win()
@@ -135,22 +140,14 @@ void MusicPuzzleScene::cleanCombination()
 
 void MusicPuzzleScene::addNoteToComb(Notes pressedNote)
 {
-    //debug correct comb
-    cout << "CORRECT COMB:" << endl;
-    for (auto a : _correctComb1)
-    {
-        cout << a << " ";
-    }
-    cout << endl;
-
     //debug button pressed
-    cout << "BUTTON PRESSED: " << DO << endl;
+    cout << "BUTTON PRESSED: " << pressedNote << endl;
 
     //save button pressed on currentComb
     _currentComb.push_back(pressedNote);
 
     //debug currentComb
-    cout << "CURRENT COMB:" << endl;
+    cout << "CURRENT COMB:";
     for (auto a : _currentComb)
     {
         cout << a << " ";
@@ -163,12 +160,19 @@ void MusicPuzzleScene::addNoteToComb(Notes pressedNote)
         //check
         if (checkPhaseCombination()) //if its correct
         {
-            if (_phase == 3)
+            if (!Check())
             {
-                //puzzle win
-                cout << "PUZZLE WIN" << endl;
+                _phase++;
+                cleanCombination();
+                cout << "PHASE: "<< _phase << endl;
+                //debug correct comb
+                cout << "CORRECT COMB:";
+                for (auto a : _correctCombinations[_phase])
+                {
+                    cout << a << " ";
+                }
+                cout << endl;
             }
-            else _phase++;
         }
         else //wrong combination
         {
@@ -177,6 +181,59 @@ void MusicPuzzleScene::addNoteToComb(Notes pressedNote)
         }
     }
     
+}
+
+void MusicPuzzleScene::createPianoButtons()
+{
+    auto buttDo = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+    auto buttRe = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(562, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+    auto buttMi = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(606, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+    auto buttFa = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(650, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+    auto buttSol = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(694, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+    auto buttLa = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(738, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+    auto buttSi = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(782, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+    auto buttHighDo = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(826, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+
+
+    ClickComponent* clickButtDo = entityManager->getComponent<ClickComponent>(buttDo);
+    clickButtDo->connect(ClickComponent::JUST_CLICKED, [this]() {
+        addNoteToComb(DO);
+        });
+
+    ClickComponent* clickButtRe = entityManager->getComponent<ClickComponent>(buttRe);
+    clickButtRe->connect(ClickComponent::JUST_CLICKED, [this]() {
+        addNoteToComb(RE);
+        });
+
+    ClickComponent* clickButtMi = entityManager->getComponent<ClickComponent>(buttMi);
+    clickButtMi->connect(ClickComponent::JUST_CLICKED, [this]() {
+        addNoteToComb(MI);
+        });
+
+    ClickComponent* clickButtFa = entityManager->getComponent<ClickComponent>(buttFa);
+    clickButtFa->connect(ClickComponent::JUST_CLICKED, [this]() {
+        addNoteToComb(FA);
+        });
+
+    ClickComponent* clickButtSol = entityManager->getComponent<ClickComponent>(buttSol);
+    clickButtSol->connect(ClickComponent::JUST_CLICKED, [this]() {
+        addNoteToComb(SOL);
+        });
+
+    ClickComponent* clickButtLa = entityManager->getComponent<ClickComponent>(buttLa);
+    clickButtLa->connect(ClickComponent::JUST_CLICKED, [this]() {
+        addNoteToComb(LA);
+        });
+
+    ClickComponent* clickButtSi = entityManager->getComponent<ClickComponent>(buttSi);
+    clickButtSi->connect(ClickComponent::JUST_CLICKED, [this]() {
+        addNoteToComb(SI);
+        });
+
+    ClickComponent* clickButtHighDo = entityManager->getComponent<ClickComponent>(buttHighDo);
+    clickButtHighDo->connect(ClickComponent::JUST_CLICKED, [this]() {
+        addNoteToComb(HIGH_DO);
+        });
 }
 
 
