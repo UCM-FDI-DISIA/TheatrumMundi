@@ -16,11 +16,7 @@ enum SceneCount {
 	END	
 };
 
-enum Character {
-	KEISARA = 0,
-	SOL,
-	LUCY
-};
+
 class DataManager
 {
 private:
@@ -31,6 +27,11 @@ private:
 
 protected:
 public:
+	enum Character {
+		KEISARA = 0,
+		SOL,
+		LUCY
+	};
 	DataManager();
 
 	int getRandomVariant();

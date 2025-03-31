@@ -1,5 +1,6 @@
 #include "Room1.h"
 #include <list>
+#include "DataManager.h"
 #include "../src/utils/Vector2D.h"
 #include "../src/components/Transform.h"
 #include "../src/components/Image.h"
@@ -112,6 +113,7 @@ Room1Scene::Room1Scene() : SceneRoomTemplate(), _eventToRead("SalaIntermedia1")
 		};
 	roomEvent[BadEnd] = [this] {
 		// WIP
+		Game::Instance()->getDataManager()->SetCharacterDead(DataManager::KEISARA);
 		Game::Instance()->getSceneManager()->popScene();
 		};
 	roomEvent[MobileDialogue] = [this] {
@@ -484,12 +486,19 @@ void Room1Scene::init()
 
 		// Button that confirms the assesination
 		auto buttonPosible = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3) - 20), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-		entityManager->getComponent<ClickComponent>(buttonPosible)->connect(ClickComponent::JUST_CLICKED, [this]() { roomEvent[GoodEnd]();});
+		entityManager->getComponent<ClickComponent>(buttonPosible)->connect(ClickComponent::JUST_CLICKED, [this]() {
+			if (Game::Instance()->getDataManager()->GetRoomVariant(0) == 0) roomEvent[GoodEnd]();
+			else roomEvent[GoodEnd]();
+
+			});
 		entityManager->setActive(buttonPosible,false);
 
 		// Button that confirms the assesination is not possible
 		auto buttonImposible = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3)), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-		entityManager->getComponent<ClickComponent>(buttonImposible)->connect(ClickComponent::JUST_CLICKED, [this]() { roomEvent[BadEnd]();});
+		entityManager->getComponent<ClickComponent>(buttonImposible)->connect(ClickComponent::JUST_CLICKED, [this]() { 
+			if (Game::Instance()->getDataManager()->GetRoomVariant(0) > 0)roomEvent[GoodEnd]();
+			else roomEvent[BadEnd]();
+			});
 		entityManager->setActive(buttonImposible, false);
 
 		//Resolve the case
