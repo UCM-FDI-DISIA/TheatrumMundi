@@ -65,7 +65,65 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		//Game::Instance()->getDialogueManager()->ReadDialogue(Puzzle2);
 		//startDialogue("Puzzle2");
 
-		
+
+		//INVENTORY
+		//Invntory Background
+		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
+		entityManager->setActive(InventoryBackground, false);
+
+		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->setActive(upButton, false);
+
+		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->setActive(downButton, false);
+
+		//InventoryButton
+		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
+		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton]() //Lamda function
+			{
+				//AudioManager::Instance().playSound(buttonSound);
+				sr->GetInventory()->setActive(!sr->GetInventory()->getActive());  // Toggle the inventory
+
+				// If the inventory is active, activate the items
+				if (sr->GetInventory()->getActive()) {
+					entityManager->setActive(InventoryBackground, true);
+
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(20);
+					entityManager->setActive(downButton, true);
+					entityManager->setActive(upButton, true);
+
+					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+						invObjects[i]->getMngr()->setActive(invObjects[i], true);
+					}
+				}
+				else {
+					entityManager->setActive(InventoryBackground, false);
+					entityManager->setActive(InventoryBackground, false);
+					entityManager->setActive(downButton, false);
+					entityManager->setActive(upButton, false);
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(60 + 268 / 3);
+
+					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+						invObjects[i]->getMngr()->setActive(invObjects[i], false);
+					}
+				}
+			});
+
+		ClickComponent* UPbuttonInventoryClick = entityManager->getComponent<ClickComponent>(upButton);
+		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ upButton, sr]() {
+
+			//AudioManager::Instance().playSound(buttonSound);
+			sr->scrollInventory(-1);
+			});
+
+		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
+		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ downButton, sr]() {
+
+			//AudioManager::Instance().playSound(buttonSound);
+			sr->scrollInventory(1);
+			});
+
 
 		//Puzzle Scene
 		room = sr;
@@ -115,30 +173,71 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		//REWARD ENTITY
-		auto Reward = entityFactory->CreateImageEntity(entityManager, "prueba", Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0, ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
-		Reward->getMngr()->setActive(Reward, false);																																					
+		auto clock = entityFactory->CreateInteractableEntity(entityManager, "horaria", EntityFactory::RECTAREA,
+			Vector2D(410, 548), Vector2D(0, 0), 340, 200, 0,
+			areaLayerManager,
+			EntityFactory::NODRAG,
+			ecs::grp::DEFAULT);
+		clock->getMngr()->setActive(clock, false);	
+		//variant logic
+		int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
+		entity_t tag;
+		if (variant <= 1) {
+			tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV1", EntityFactory::RECTAREA,
+				Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+				areaLayerManager,
+				EntityFactory::NODRAG,
+				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+			entityManager->setActive(tag, false);
+		}
+		 else if (variant == 2) {
+			 tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV2", EntityFactory::RECTAREA,
+				 Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+				 areaLayerManager,
+				 EntityFactory::NODRAG,
+				 ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+			 entityManager->setActive(tag, false);
+		 }
+		
+
 
 		//CHECK COMBINATION
 		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(700,480), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		ClickComponent* clickcheckButton = entityManager->getComponent<ClickComponent>(checkButton);
-		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, Reward,sr, this]() {
+		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, tag,clock,sr, StudyBackground,this]() {
 			std::cout << "CLICK" << std::endl;
 			if (Check()) {
 				Win();
+				Image* img = entityManager->getComponent<Image>(StudyBackground);
+				img->setTexture(&sdlutils().images().at("estanteria2"));
 				//std::cout << "WIN" << std::endl;
-				//Reward->getMngr()->setActive(Reward, true);
-
-				sr->GetInventory()->addItem(new Hint("boa2", "Manecilla de las horas de un reloj (un momento)", &sdlutils().images().at("boa2")));
-				sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "boa2", EntityFactory::RECTAREA, sr->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-				sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
-
-				sr->GetInventory()->addItem(new Hint("exit", "Etiqueta de un bote de cianuro", &sdlutils().images().at("exit")));
-				sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), "exit", EntityFactory::RECTAREA, sr->GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-				sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
-
-				Reward->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, true);
+				clock->getMngr()->setActive(clock, true);
+				tag->getMngr()->setActive(tag, true);
+				
+				clock->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, true);
+				tag->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, true);
 			}
 			});
+
+		ClickComponent* clk = entityManager->getComponent<ClickComponent>(clock);
+		clk->connect(ClickComponent::JUST_CLICKED, [this, clock, sr]() {
+
+			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+			AddInvItem("horaria", "La manecilla de las horas de un reloj.", position, sr);
+			clock->getMngr()->setActive(clock, false);
+			});
+
+		clk = entityManager->getComponent<ClickComponent>(tag);
+		clk->connect(ClickComponent::JUST_CLICKED, [variant,this, tag, sr]() {
+
+			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+			if(variant <= 1)AddInvItem("etiquetaV1", "Etiqueta de alguna clase de químico.", position, sr);
+			else if(variant == 2) AddInvItem("etiquetaV2", "Etiqueta de alguna clase de químico.", position, sr);
+			tag->getMngr()->setActive(tag, false);
+			});
+
+
+
 
 		//BOOKS
 		auto backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20,20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK);
@@ -151,35 +250,43 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		ImageBook->getMngr()->setActive(ImageBook, false);
 
 		ClickComponent* ButtonBook1Click = entityManager->getComponent<ClickComponent>(ButtonBookFirst);
-		ButtonBook1Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, Reward, this]() {
+		ButtonBook1Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock,tag, this]() {
 			ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookA"));
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, true);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, false);
-			Reward->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, false);
+			clock->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, false);
+			tag->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, false);
 			});
 
 		ClickComponent* ButtonBook2Click = entityManager->getComponent<ClickComponent>(ButtonBookSecond);
-		ButtonBook2Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, Reward, this]() {
+		ButtonBook2Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock, tag, this]() {
 			ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookB"));
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, true);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, false);
-			Reward->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, false);
+			clock->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, false);
+			tag->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, false);
 			});
 
 		ClickComponent* ButtonBook3Click = entityManager->getComponent<ClickComponent>(ButtonBookThird);
-		ButtonBook3Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, Reward, this]() {
+		ButtonBook3Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock, tag, this]() {
 			ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookC"));
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, true);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, false);
-			Reward->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, false);
+			clock->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, false);
+			tag->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, false);
 			});
 
 		ClickComponent* clickbackButton = entityManager->getComponent<ClickComponent>(backButton);
-		clickbackButton->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, Reward, this]() {
+		clickbackButton->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock, tag, this]() {
 			ImageBook->getMngr()->setActive(ImageBook, false);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, false);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, true);
-			if (Check()) Reward->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, true);
+			if (Check())
+			{
+				clock->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, false);
+				tag->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, false);
+			}
+
 			});
 
 		// Put the dialog interaction area in front of the other interactables
@@ -201,6 +308,8 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			Game::Instance()->getSceneManager()->popScene();
 		});
 	}
+	//IMPORTANT this need to be out of the isstarted!!!
+	createInvEntities(sr);
 }
 
 void BooksPuzzleScene::refresh()
