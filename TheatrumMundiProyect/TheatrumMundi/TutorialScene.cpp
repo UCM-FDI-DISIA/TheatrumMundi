@@ -25,6 +25,8 @@
 #include "DialogueManager.h"
 
 
+#include "GameSave.h"
+
 TutorialScene::TutorialScene() : SceneRoomTemplate(), _eventToRead("SalaIntermedia1")
 {
 	dialogueManager = new DialogueManager(1);
@@ -94,7 +96,23 @@ void TutorialScene::init()
 		clkTut->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
 
 			AudioManager::Instance().playSound(buttonSound);
+			GameSave save;
+			save.setTutoCompleted(true);
+			save.Write("savegame.dat");
+			});
 
+
+		auto botonBack = entityManager->addEntity();
+		entityManager->addComponent<Transform>(botonBack, Vector2D(1348 / 2.5, 748 / 4), Vector2D(0, 0), 1470 / 4, 270 / 4, 0);
+		entityManager->addComponent<Image>(botonBack, &sdlutils().images().at("Hanni"));
+
+		entityManager->addComponent<RectArea2D>(botonBack);
+
+		ClickComponent* clkBack = entityManager->addComponent<ClickComponent>(botonBack);
+		clkBack->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
+
+			AudioManager::Instance().playSound(buttonSound);
+			Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
 			});
 
 

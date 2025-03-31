@@ -57,6 +57,7 @@
     <ClCompile Include="DialogueManager.cpp" />
     <ClCompile Include="DragPuzzleScene.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
+    <ClCompile Include="GameSave.cpp" />
     <ClCompile Include="Hint.cpp" />
     <ClCompile Include="InitialScene.cpp" />
     <ClCompile Include="Inventory.cpp" />
@@ -238,6 +239,7 @@
     <ClInclude Include="DragPuzzleScene.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="EventsInfo.h" />
+    <ClInclude Include="GameSave.h" />
     <ClInclude Include="Hint.h" />
     <ClInclude Include="InitialScene.h" />
     <ClInclude Include="Inventory.h" />

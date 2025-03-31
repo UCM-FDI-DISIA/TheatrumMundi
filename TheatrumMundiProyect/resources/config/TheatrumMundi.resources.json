@@ -506,6 +506,10 @@
     {
         "id": "TutorialButtonTemp",
         "file": "../resources/images/temporales/RectangleTutorialButton.png"
+    },
+    {
+        "id": "NewGameLocked",
+        "file":  "../resources/images/temporales/GameLocked.png"
     }
   ],
 
