@@ -251,6 +251,11 @@
     { "id" : "estanteria2", "file" : "../resources/images/Finales/EstanteriaFondo2.PNG" },
     { "id" : "frascoV1", "file" : "../resources/images/Finales/frascoV1.png" },
     { "id" : "frascoV2", "file" : "../resources/images/Finales/frascoV2.PNG" },
+    { "id" : "RelojFondo1", "file" : "../resources/images/Finales/RelojFondo1.PNG" },
+    { "id" : "RelojFondo2", "file" : "../resources/images/Finales/RelojFondo2.PNG" },
+    { "id" : "BotonMinutero", "file" : "../resources/images/Finales/BotonMinutero.PNG" },
+    { "id" : "BotonHoraria", "file" : "../resources/images/Finales/BotonHoraria.PNG" },
+    { "id" : "BotonComprobarReloj", "file" : "../resources/images/Finales/BotonComprobarReloj.PNG" },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"

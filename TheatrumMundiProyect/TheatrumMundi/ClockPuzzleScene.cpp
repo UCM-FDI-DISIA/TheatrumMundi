@@ -49,8 +49,18 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		a.setVolume(clockMinSound, 0.2);
 		a.setVolume(clockHorSound, 0.2);
 
+
+		//Create background
+		auto background = entityFactory->CreateImageEntity(entityManager, "RelojFondo1",
+			Vector2D((1349 - (4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0))) / 2.0,
+				(748 - (2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0))) / 2.0),
+			Vector2D(0, 0),
+			4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
+			2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
+			0, ecs::grp::DEFAULT);
+
 		//create the clock
-		clock = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(600, 300), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		clock = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(420,50), Vector2D(0, 0), 300, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		entityManager->addComponent<TriggerComponent>(clock);
 		//Assigns the trigger bolean to true
 		clock->getMngr()->getComponent<TriggerComponent>(clock)->connect(TriggerComponent::AREA_ENTERED, [this]() {
@@ -60,6 +70,8 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		clock->getMngr()->getComponent<TriggerComponent>(clock)->connect(TriggerComponent::AREA_LEFT, [this]() {
 			SetplacedHand(false);
 			});
+		entityManager->removeComponent<Image>(clock);
+
 
 		//create the clock hands : minute
 		longClockHand = entityFactory->CreateInteractableEntity(entityManager, "minutero", EntityFactory::RECTAREA, Vector2D(680, 360), Vector2D(0, 0), 20, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
@@ -73,9 +85,9 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//create the buttons: min
 		auto _buttonMin = entityManager->addEntity();
-		auto _buttonMinTransform = entityManager->addComponent<Transform>(_buttonMin, Vector2D(200, 600), Vector2D(0, 0), 30, 30, 0);
+		auto _buttonMinTransform = entityManager->addComponent<Transform>(_buttonMin, Vector2D(400, 345), Vector2D(0, 0), 120, 120, 0);
 
-		entityManager->addComponent<Image>(_buttonMin, &sdlutils().images().at("clockMinButton"));
+		entityManager->addComponent<Image>(_buttonMin, &sdlutils().images().at("BotonMinutero"));
 
 		entityManager->addComponent<RectArea2D>(_buttonMin, areaLayerManager);
 
@@ -102,9 +114,9 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//create the buttons: hor
 		auto _buttonHor = entityManager->addEntity();
-		auto _buttonHorTransform = entityManager->addComponent<Transform>(_buttonHor, Vector2D(200, 550), Vector2D(0, 0), 30, 30, 0);
+		auto _buttonHorTransform = entityManager->addComponent<Transform>(_buttonHor, Vector2D(310,345), Vector2D(0, 0), 120, 120, 0);
 
-		entityManager->addComponent<Image>(_buttonHor, &sdlutils().images().at("clockHorButton"));
+		entityManager->addComponent<Image>(_buttonHor, &sdlutils().images().at("BotonHoraria"));
 
 		entityManager->addComponent<RectArea2D>(_buttonHor, areaLayerManager);
 
@@ -128,7 +140,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 
-		//create the buttons: reset button
+		/*//create the buttons: reset button
 		auto _buttonResetPuzzle = entityManager->addEntity();
 		auto _buttonRessetPuzzleTransform =
 			entityManager->addComponent<Transform>(_buttonResetPuzzle, Vector2D(1200, 150), Vector2D(0, 0), 70, 70, 0);
@@ -153,12 +165,12 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 					_actualMinute = 0;
 				}
 			});
-
+			*/
 		//create the buttons: check
 		auto _buttonCheck = entityManager->addEntity();
-		auto _buttonCheckTransform = entityManager->addComponent<Transform>(_buttonCheck, Vector2D(100, 550), Vector2D(0, 0), 70, 70, 0);
+		auto _buttonCheckTransform = entityManager->addComponent<Transform>(_buttonCheck, Vector2D(600, 345), Vector2D(0, 0), 120, 120, 0);
 
-		entityManager->addComponent<Image>(_buttonCheck, &sdlutils().images().at("clockCheckButton"));
+		entityManager->addComponent<Image>(_buttonCheck, &sdlutils().images().at("BotonComprobarReloj"));
 
 		entityManager->addComponent<RectArea2D>(_buttonCheck, areaLayerManager);
 
@@ -182,9 +194,11 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			container->getMngr()->setActive(container, false);
 		}
 		ClickComponent* clockCheckClick = entityManager->addComponent<ClickComponent>(_buttonCheck);
-		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [variant,_buttonCheckTransform, sr, this,_buttonCheck,_buttonHor,_buttonMin, _buttonResetPuzzle,container]()
+		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [variant,_buttonCheckTransform, sr, this,_buttonCheck,_buttonHor,_buttonMin,container,background]()
 			{
 				if (Check() && getSolved()) {
+					Image* img = entityManager->getComponent<Image>(background);
+					img->setTexture(&sdlutils().images().at("FondoReloj2"));
 					container->getMngr()->setActive(container, true);
 
 					Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
@@ -199,6 +213,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 				}
 			});
 
+		//REWARD
 		ClickComponent* clk = entityManager->getComponent<ClickComponent>(container);
 		clk->connect(ClickComponent::JUST_CLICKED, [this, container, sr]() {
 
