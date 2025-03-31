@@ -182,17 +182,23 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		//variant logic
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
 		entity_t tag;
-		 if(variant <=1 ) tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV1", EntityFactory::RECTAREA,
-			Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
-			areaLayerManager,
-			EntityFactory::NODRAG,
-			ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
-		 else if(variant ==2) tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV2", EntityFactory::RECTAREA,
-			 Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
-			 areaLayerManager,
-			 EntityFactory::NODRAG,
-			 ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
-		tag->getMngr()->setActive(tag, false);
+		if (variant <= 1) {
+			tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV1", EntityFactory::RECTAREA,
+				Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+				areaLayerManager,
+				EntityFactory::NODRAG,
+				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+			entityManager->setActive(tag, false);
+		}
+		 else if (variant == 2) {
+			 tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV2", EntityFactory::RECTAREA,
+				 Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+				 areaLayerManager,
+				 EntityFactory::NODRAG,
+				 ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+			 entityManager->setActive(tag, false);
+		 }
+		
 
 
 		//CHECK COMBINATION
