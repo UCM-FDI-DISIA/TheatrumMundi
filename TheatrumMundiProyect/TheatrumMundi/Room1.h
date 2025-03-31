@@ -51,6 +51,8 @@ private:
 	void _setGlobalFeatures();
 
 	void _setRoomBackground();
+	void _setCaseResolution();
+	void _setInteractuables();
 	void _setDialog();
 	void _setUI();
 	

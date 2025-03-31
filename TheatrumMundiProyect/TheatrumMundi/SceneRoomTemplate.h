@@ -20,7 +20,7 @@ protected:
 	//ecs::entity_t readyToResolveBotton;
 	bool finishallpuzzles;
 	bool logActive = false;
-	entity_t body;
+	entity_t characterCorpse;
 	//inventory
 
 
