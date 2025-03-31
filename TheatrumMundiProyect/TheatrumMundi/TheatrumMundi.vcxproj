@@ -76,6 +76,7 @@
     <ClCompile Include="SceneTemplate.cpp" />
     <ClCompile Include="TeaCupPuzzleScene.cpp" />
     <ClCompile Include="TiledAreaComponent.cpp" />
+    <ClCompile Include="TutorialScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -257,6 +258,7 @@
     <ClInclude Include="TeaCupPuzzleScene.h" />
     <ClInclude Include="TextInfo.h" />
     <ClInclude Include="TiledAreaComponent.h" />
+    <ClInclude Include="TutorialScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />

@@ -20,6 +20,7 @@ enum SceneName {
 	MOSAIC_SCENE,
 	DRAG_PUZZLE,
 	ROOM_3,
+	TUTORIAL_SCENE,
 	SCENE_SIZE
 };
 class SceneManager

@@ -14,6 +14,7 @@
 #include "MiddleRoomScene.h"
 #include "MusicPuzzleScene.h"
 #include "DragPuzzleScene.h"
+#include "TutorialScene.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 SceneManager::SceneManager()
 {
@@ -29,6 +30,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::MUSIC_PUZZLE] = new MusicPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
+	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 
 	loadScene(SceneName::INITIAL_MENU);
 }
