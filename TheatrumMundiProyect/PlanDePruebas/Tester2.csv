@@ -1,0 +1,18 @@
+Resumen de click en botones
+ID;Scene;Numero de click
+A;ROOM1;2
+
+
+Tiempo en las escenas
+Scene;Tiempo;Veces en la escena;totalClicks
+ROOM1;0;1;2
+tiempo de juego total: ;;0;min
+
+Mov en x;0
+Mov en y;0
+
+
+Historial de click
+ID;Scene;Segundo Concreto
+A;ROOM1;4.131
+A;ROOM1;4.135

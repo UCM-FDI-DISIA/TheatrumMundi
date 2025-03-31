@@ -1,4 +1,9 @@
 
+Duración total 30-40min
+Duración por puzzle 5-10min
+Duración del tutorial 5min
+duración sala 10 min
+
 ## Cosas a testear
 
 -Comprensión de los objetos interactuables en escena por parte del jugador.

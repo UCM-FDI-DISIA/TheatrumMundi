@@ -54,6 +54,9 @@
     <ClCompile Include="SceneTemplate.cpp" />
     <ClCompile Include="TeaCupPuzzleScene.cpp" />
     <ClCompile Include="CSVdataRecolector.cpp" />
+    <ClCompile Include="MosaicPuzzleScene.cpp" />
+    <ClCompile Include="DragPuzzleScene.cpp" />
+    <ClCompile Include="TiledAreaComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -230,6 +233,9 @@
     <ClInclude Include="TeaCupPuzzleScene.h" />
     <ClInclude Include="TextInfo.h" />
     <ClInclude Include="CSVdataRecolector.h" />
+    <ClInclude Include="MosaicPuzzleScene.h" />
+    <ClInclude Include="DragPuzzleScene.h" />
+    <ClInclude Include="TiledAreaComponent.h" />
     <ClInclude Include="DescriptionInfo.h" />
   </ItemGroup>
   <ItemGroup>
