@@ -3,6 +3,7 @@
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
 #include "../TheatrumMundi/Area2DLayerManager.h"
 #include "DialogueManager.h"
+#include "PauseManager.h"
 #include "Game.h"
 
 using namespace std;
@@ -13,6 +14,7 @@ SceneTemplate::SceneTemplate()
 	areaLayerManager = new Area2DLayerManager();
 	entityFactory = new EntityFactory(entityManager, areaLayerManager);
 	dialogueManager = new DialogueManager(0);
+	pauseManager = new PauseManager();
 
 	isStarted = false;
 	//sceneLog = new Log();

@@ -20,9 +20,9 @@
 #include "Log.h"
 
 
-
 #include "../src/components/WriteTextComponent.h"
 #include "DialogueManager.h"
+#include "PauseManager.h"
 Room1Scene::Room1Scene() : SceneRoomTemplate(), _eventToRead("SalaIntermedia1")
 {
 	dialogueManager = new DialogueManager(1);
@@ -153,7 +153,7 @@ void Room1Scene::init()
 
 		//Register scene in dialogue manager
 		dialogueManager->setScene(this);
-
+		pauseManager->setScene(this);
 		
 		auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width())/12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1160 - 1349, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -364,11 +364,11 @@ void Room1Scene::init()
 
 		//UI
 		//Pause
-		auto buttonPause = entityFactory->CreateInteractableEntity(entityManager,"B3", EntityFactory::RECTAREA ,Vector2D(20,20), Vector2D(0,0), 90,90,0,areaLayerManager,EntityFactory::NODRAG ,ecs::grp::UI);
-		ClickComponent* buttonPauseClick = entityManager->getComponent<ClickComponent>(buttonPause);
-		buttonPauseClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
-			AudioManager::Instance().playSound(buttonSound);
-			});
+		//auto buttonPause = entityFactory->CreateInteractableEntity(entityManager,"B3", EntityFactory::RECTAREA ,Vector2D(20,20), Vector2D(0,0), 90,90,0,areaLayerManager,EntityFactory::NODRAG ,ecs::grp::UI);
+		//ClickComponent* buttonPauseClick = entityManager->getComponent<ClickComponent>(buttonPause);
+		//buttonPauseClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
+		//	AudioManager::Instance().playSound(buttonSound);
+		//	});
 
 		//Inventory
 		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
@@ -478,6 +478,7 @@ void Room1Scene::init()
 		//X Button "B1"
 
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, _eventToRead);
+		pauseManager->Init(entityFactory, entityManager, areaLayerManager);
 
 		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 
