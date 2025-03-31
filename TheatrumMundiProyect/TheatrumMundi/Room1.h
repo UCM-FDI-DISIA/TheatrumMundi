@@ -40,6 +40,6 @@ public:
 	void resolvedPuzzle(int i) override;
 	void refresh() override;
 	void unload() override;
-
+	void ResolveScene() override;
 };
 

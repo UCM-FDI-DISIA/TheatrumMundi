@@ -345,4 +345,9 @@ void BooksPuzzleScene::Win()
 	//Game::Instance()->getSceneManager()->popScene();
 }
 
+void BooksPuzzleScene::ResolveScene()
+{
+	Win();
+}
+
 

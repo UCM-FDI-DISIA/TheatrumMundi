@@ -12,6 +12,7 @@ public:
 	bool isItemHand(const std::string& itemId) override;
 	bool Check() override;
 	void Win() override;
+	void ResolveScene() override;
 private:
 	int _actualHour;
 	int _actualMinute;

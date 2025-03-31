@@ -83,4 +83,9 @@ SceneManager::~SceneManager()
 	currentscenes.clear();
 }
 
+void SceneManager::ResolveActScene()
+{
+	currentscenes.back()->ResolveScene();
+}
+
 

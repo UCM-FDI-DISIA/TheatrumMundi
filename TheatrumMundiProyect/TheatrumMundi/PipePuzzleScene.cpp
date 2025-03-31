@@ -1152,6 +1152,11 @@ void PipePuzzleScene::Win()
 	}
 }
 
+void PipePuzzleScene::ResolveScene()
+{
+	Win();
+}
+
 PipePuzzleScene::~PipePuzzleScene()
 {
 	unload();

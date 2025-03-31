@@ -45,6 +45,7 @@ public:
 	 inline int getSceneIndex() { return actsceneindex; };
 	 //delete of enitities
 	~SceneManager();
+	void ResolveActScene();
 
 	
 };

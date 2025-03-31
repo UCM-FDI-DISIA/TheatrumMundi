@@ -122,6 +122,22 @@ void Game::start() {
 
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
+
+		//cheats
+#ifdef _DEBUG
+		//load room1
+		if (ihdlr.isKeyDown(SDL_SCANCODE_1)) {
+			std::cout << "Load Room1Scene"<<std::endl;
+			_mngr->loadScene(SceneName::ROOM_1);
+		}
+		if (ihdlr.isKeyDown(SDL_SCANCODE_2)) {
+			std::cout << "Load Room1Scene" << std::endl;
+		}
+		if (ihdlr.isKeyDown(SDL_SCANCODE_S)) {
+			_mngr->ResolveActScene();
+		}
+#endif // _DEBUG
+
 	}
 }
 
