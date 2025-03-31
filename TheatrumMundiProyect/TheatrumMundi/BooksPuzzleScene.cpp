@@ -47,6 +47,8 @@ BooksPuzzleScene::BooksPuzzleScene()
 	for (int i = 0; i < myComb.size(); ++i) {
 		myComb[i] = 0;
 	}
+
+	dialogueManager = new DialogueManager(1);
 }
 
 BooksPuzzleScene::~BooksPuzzleScene()
@@ -308,8 +310,11 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			Game::Instance()->getSceneManager()->popScene();
 		});
 
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+	
+		startDialogue("PuzzleLibros");
+}
 
-	}
 	//IMPORTANT this need to be out of the isstarted!!!
 	createInvEntities(sr);
 }

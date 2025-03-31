@@ -284,9 +284,9 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
 		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+	
+		startDialogue("PuzzleReloj");
 	}
-
-	startDialogue("PuzzleReloj");
 
 	//IMPORTANT this need to be out of the isstarted!!!
 	createInvEntities(sr);

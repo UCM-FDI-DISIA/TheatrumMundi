@@ -117,7 +117,7 @@ Room1Scene::Room1Scene() : SceneRoomTemplate(), _eventToRead("SalaIntermedia1")
 	roomEvent[MobileDialogue] = [this] {
 		// WIP
 		_eventToRead = Movil;
-		startDialogue("Movil");
+		startDialogue("Movil1");
 		};
 	
 }
