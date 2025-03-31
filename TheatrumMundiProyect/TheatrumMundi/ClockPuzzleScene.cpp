@@ -162,26 +162,35 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		entityManager->addComponent<RectArea2D>(_buttonCheck, areaLayerManager);
 
-
-
-		auto container = entityFactory->CreateInteractableEntity(entityManager, "frascoV1", EntityFactory::RECTAREA,
-			Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
-			areaLayerManager,
-			EntityFactory::NODRAG,
-			ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
-		container->getMngr()->setActive(container, false);
-
-
+		//room variant logic
+		int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
+		entity_t container;
+		if (variant <= 1) {
+			container = entityFactory->CreateInteractableEntity(entityManager, "frascoV2", EntityFactory::RECTAREA,
+				Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+				areaLayerManager,
+				EntityFactory::NODRAG,
+				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+			container->getMngr()->setActive(container, false);
+		}
+		else if (variant == 2) {
+			container = entityFactory->CreateInteractableEntity(entityManager, "frascoV1", EntityFactory::RECTAREA,
+				Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+				areaLayerManager,
+				EntityFactory::NODRAG,
+				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+			container->getMngr()->setActive(container, false);
+		}
 		ClickComponent* clockCheckClick = entityManager->addComponent<ClickComponent>(_buttonCheck);
-		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [_buttonCheckTransform, sr, this,_buttonCheck,_buttonHor,_buttonMin, _buttonResetPuzzle,container]()
+		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [variant,_buttonCheckTransform, sr, this,_buttonCheck,_buttonHor,_buttonMin, _buttonResetPuzzle,container]()
 			{
 				if (Check() && getSolved()) {
 					container->getMngr()->setActive(container, true);
 
 					Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
 					//Assign to this inventory the hint;
-					AddInvItem("frascoV1", "Me lo puedo beber??",position, sr);
-					
+					if(variant <=1)AddInvItem("frascoV2", "Un frasco vacio.",position, sr);
+					else if (variant ==2)AddInvItem("frascoV1", "Contiene restos de algo.", position, sr);
 #ifdef DEBUG
 					std::cout << "wii";
 #endif // DEBUG

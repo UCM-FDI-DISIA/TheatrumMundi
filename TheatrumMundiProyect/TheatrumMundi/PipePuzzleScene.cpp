@@ -683,22 +683,37 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
 		2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
 		0, ecs::grp::UNDER);
-		//
-		// create entity
-		auto gloveEntity = entityFactory->CreateInteractableEntity(entityManager, "guantes", EntityFactory::RECTAREA,
-			Vector2D(1150, 840), Vector2D(0, 0), 150, 150, 0,
-			areaLayerManager,
-			EntityFactory::NODRAG,
-			ecs::grp::DEFAULT);
+		
+		
+		//Viriant logic
+		int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
+		entity_t gloveEntity;
+		ClickComponent* clk;
+		std::cout << "variant:" << variant << endl;
+		if (variant <= 1) {
+			// create entity
+			gloveEntity = entityFactory->CreateInteractableEntity(entityManager, "guantes", EntityFactory::RECTAREA,
+				Vector2D(1150, 840), Vector2D(0, 0), 150, 150, 0,
+				areaLayerManager,
+				EntityFactory::NODRAG,
+				ecs::grp::DEFAULT);
+			//add click component
+			clk = entityManager->getComponent<ClickComponent>(gloveEntity);
+			clk->connect(ClickComponent::JUST_CLICKED, [this, gloveEntity, sr]() {
 
-		//add click component
-		ClickComponent* clk = entityManager->getComponent<ClickComponent>(gloveEntity);
-		clk->connect(ClickComponent::JUST_CLICKED, [this,gloveEntity,sr]() {
+				Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+				AddInvItem("guantes", "Un par de guantes", position, sr);
+				gloveEntity->getMngr()->setActive(gloveEntity, false);
+				});
+		}
+		else if (variant == 2) {
+			//Mage variant 2
+			// create entity
+			
+		}
 
-			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-			AddInvItem("guantes", "Me lo puedo beber??", position, sr);
-			gloveEntity->getMngr()->setActive(gloveEntity, false);
-			});
+
+		
 
 		// create entity
 		auto clock = entityFactory->CreateInteractableEntity(entityManager, "minutero", EntityFactory::RECTAREA,
@@ -712,7 +727,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		clk->connect(ClickComponent::JUST_CLICKED, [this, clock,sr]() {
 
 			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-			AddInvItem("minutero", "Me lo puedo beber??", position, sr);
+			AddInvItem("minutero", "La manecilla de los minutos de un reloj", position, sr);
 			clock->getMngr()->setActive(clock, false);
 			});
 
@@ -738,7 +753,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		//if clicked remove click comonent and start animation 
 		ClickComponent* clComponent = _rope->getMngr()->getComponent<ClickComponent>(_rope);
 
-		clComponent->connect(ClickComponent::JUST_CLICKED, [this,gloveEntity,clock]() {
+		clComponent->connect(ClickComponent::JUST_CLICKED, [this,gloveEntity,clock,variant]() {
 			//std::cout << "PULSADO CUERDA";
 			if (solved)
 			{
@@ -751,7 +766,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 					img->setTexture(&sdlutils().images().at("fullRope"));
 
 					auto ScrollCube = entityManager->getComponent<ScrollComponent>(_rope);
-					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(gloveEntity));
+					if(variant<=1)ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(gloveEntity));
 					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_cubeWithoutWater));
 					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(clock));
 					entityManager->getComponent<ScrollComponent>(_rope)->Scroll(ScrollComponent::UP);

@@ -179,13 +179,21 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
 		clock->getMngr()->setActive(clock, false);	
-
-		auto tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV1", EntityFactory::RECTAREA,
+		//variant logic
+		int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
+		entity_t tag;
+		 if(variant <=1 ) tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV1", EntityFactory::RECTAREA,
 			Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+		 else if(variant ==2) tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV2", EntityFactory::RECTAREA,
+			 Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+			 areaLayerManager,
+			 EntityFactory::NODRAG,
+			 ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
 		tag->getMngr()->setActive(tag, false);
+
 
 		//CHECK COMBINATION
 		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(700,480), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
@@ -209,15 +217,16 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		clk->connect(ClickComponent::JUST_CLICKED, [this, clock, sr]() {
 
 			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-			AddInvItem("horaria", "Me lo puedo beber??", position, sr);
+			AddInvItem("horaria", "La manecilla de las horas de un reloj.", position, sr);
 			clock->getMngr()->setActive(clock, false);
 			});
 
 		clk = entityManager->getComponent<ClickComponent>(tag);
-		clk->connect(ClickComponent::JUST_CLICKED, [this, tag, sr]() {
+		clk->connect(ClickComponent::JUST_CLICKED, [variant,this, tag, sr]() {
 
 			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-			AddInvItem("etiquetaV1", "Me lo puedo beber??", position, sr);
+			if(variant <= 1)AddInvItem("etiquetaV1", "Etiqueta de alguna clase de químico.", position, sr);
+			else if(variant == 2) AddInvItem("etiquetaV2", "Etiqueta de alguna clase de químico.", position, sr);
 			tag->getMngr()->setActive(tag, false);
 			});
 
