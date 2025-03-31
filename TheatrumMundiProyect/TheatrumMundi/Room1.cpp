@@ -273,7 +273,7 @@ void Room1Scene::_setUI()
 	entityManager->setActive(inventoryDownButton, false);
 
 	entityManager->getComponent<ClickComponent>(rmObjects.inventoryButton)
-		->connect(ClickComponent::JUST_CLICKED, [this, InventoryBackground, inventoryUpButton, inventoryDownButton]()
+		->connect(ClickComponent::JUST_CLICKED, [this, InventoryBackground, inventoryUpButton, inventoryDownButton, InvArea]()
 		{
 			AudioManager::Instance().playSound(rmSounds.uiButton);
 			GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
@@ -282,7 +282,14 @@ void Room1Scene::_setUI()
 			{
 				entityManager->setActive(InventoryBackground, true);
 
-				rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->getPos().setX(20);
+				entityManager->getComponent<Transform>(rmObjects.inventoryButton)->getPos().setX(925);
+
+				//change the position of the log button
+				areaLayerManager->sendFront(InvArea->getLayerPos());
+
+				areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inventoryUpButton)->getLayerPos());
+				areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inventoryDownButton)->getLayerPos());
+
 				entityManager->setActive(inventoryDownButton, true);
 				entityManager->setActive(inventoryUpButton,   true);
 
