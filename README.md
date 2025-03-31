@@ -396,47 +396,49 @@ En caso negativo habrá dos variantes:
 
   
 
-Sala 2 ->  La temática de esta sala es el miedo a no encajar, no ser comprendido y ser dejado atrás. Su color principal será el verde. La sala consistirá en un cementerio, dividido en dos pantallas. La primera siendo el exterior que contiene un mausoleo y la segunda el interior de dicho mausoleo.
+Sala 2 -> La temática de esta sala es el miedo a no encajar, no ser comprendido y ser dejado atrás. Su color principal será el verde. La sala consistirá en un cementerio, dividido en dos pantallas. La primera siendo el exterior, donde hay varias tumbas y la puerta de un mausoleo, y la segunda el interior de dicho mausoleo.
 
   
 
 Asesinato: Muerte por golpe en la nuca con una pala al programador (Sol).
 
 Pruebas a encontrar: Llave para abrir el mausoleo, pala del crimen, cuerda y varilla de apertura de ventana.
-
-  
-
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeVEeLZxG8H84N8L6hG4Ji2FAugVtN2_dfSBANrESoJMKDynrY2aPN9YSjfjxaq2DppvVChHbSFG8OjNKNC_5bLWJPpLVD693R47M4YKLMWkHZ_Qr8mqTjioI9kc-n0kBssb34d1A?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
   
 
-Ciclo de juego (resolución de caso):
-
-  
-
-En la primera pantalla de la sala encontramos el exterior de un cementerio, rodeado por una alta valla, con dos tumbas (una de ellas subterráneas y una de ellas de piedra y exterior). A la derecha, está la puerta del mausoleo. El cadáver está apoyado en la puerta de la valla, lo que hace imposible que esta se haya usado para salir del lugar. 
+**En la primera pantalla de la sala encontramos el exterior de un cementerio, rodeado por una alta valla, con varias tumbas. A la derecha, está la puerta del mausoleo. El cadáver está apoyado en la puerta de la valla, lo que hace imposible que esta se haya usado para salir del lugar. 
 
 El cuerpo de Sol presenta un traumatismo craneal en la parte posterior de la cabeza, acompañado de secreción de sangre por los oídos.
 
-En una de las tumbas se encuentra el nido de un cuervo, que ha robado la llave del mausoleo. Para poder obtenerla, tendrás que intercambiarla por un objeto brillante, que en este caso será un collar encontrado en la otra tumba.
+Antes de poder acceder al mausoleo, será necesario investigar 2 tumbas. 
 
   
+La primera tendrá un epitafio con 2 candados, los cuales son puzzles que resolver:
 
-La tumba podrá abrirse al resolver dos puzzles:
-
-  
 
 - Puzzle candado 1:  
-    
+-El puzzle consiste en mover los bloques que obstruyen el camino, de tal forma que se pueda mover una insignia a su posición correcta.
+    **![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeiAh1Clxx3FKEWrwkxm6CHsL9SN1aMawMKpGXviT32zTDGipyGkMPMiwJjg3JHEZTBI5PD6t9bjTeQutktSPvrJVaPzUKFVq97QlWJZfOe0VeExuVYJMCVfd6Fb0WX8hLP2CH3oA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXctbRS4is8s6zikbca3R4h5A15RqsolcfxZlus_yQso9UIcGUOmono2YBA0w_rQQ2-jhR4wSVIWZIyxz7QEKsSon5IUVJ7FaURrK372QX0A3ZLz0Gl7cCMu-icAl7RQIvfv_Wo6qw?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
-El puzzle consiste en mover los bloques que obstruyen el camino, de tal forma que se pueda mover el escarabajo (o piedra) a su posición correcta. Comentario de Kaisara respecto a que a lo largo de la historia muchas personas enterraban a sus seres queridos con sus joyas y artefactos de mayor valor.
+
+
+- Puzzle candado 2:
+-El puzzle consiste en modificar un código pulsando varios botones los cuales pueden modificarse tanto a ellos mismos como a otros hasta hacer que todos tengan la señal O.
+**![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfP2SBfNU_WnEw7XWZAmWJkFmpN04F5BHDzvEMaWcYGp4Po0JDbjCkM_cwR24BxUrCKbtZR2l8AHOXN1lW8BqRYMhFKpCAQW1kF9B7w2IvX5dbR4xhdV8McNRfau5ofRNYpXQECRQ?key=J7nf_FWWHfuhd8vnjF8jXdc4)**
+  
+
+
+Tras resolver ambos puzzles, obtendrás una joya que estuviese enterrada en la tumba y (introduce pista que no tengo ni idea por ahora).
 
   
 
-- Puzzle candado 2:
-    
+En la cruz de otra tumba se encuentra el nido de un cuervo, que ha robado la llave del mausoleo. Para poder obtenerla, tendrás que intercambiarla por el objeto obtenido anteriormente. Al acercarse por primera vez al cuervo, Keisara y Lucy comentarán que parece haber robado una llave y que no la soltará porque es muy brillante.
 
-El puzzle consiste en modificar un código pulsando varios botones los cuales pueden modificarse tanto a ellos mismos como a otros hasta hacer que todos tengan la señal O.
+  
+
+Tras esto, se obtendrá la llave y se podrá abrir el mausoleo (la parte derecha de la pantalla).
 
   
 
@@ -449,7 +451,15 @@ Al abrir el mausoleo se pasará a la segunda pantalla. En el interior se encuent
 
 Al seleccionar el mosaico desorganizado se accede al puzzle. Se trata de un típico puzzle deslizante 4x4. Se deben deslizar las piezas para formar la imagen correcta.
 
-Al resolverlo el mosaico se romperá como un espejo, desvelando un hueco oculto en la pared del mausoleo. Ahí, se encuentra la pala y un órgano. El nuevo espejo descubierto y el órgano serán otros dos puzzles.
+Al resolverlo, quedará un hueco en una esquina inferior y el mosaico se romperá como un espejo, desvelando un hueco oculto en la pared del mausoleo. Ahí, se encuentra la pala y un órgano. El órgano será otro puzzle.
+
+  
+  
+
+- Ventana:
+    
+
+Se debe comprobar si la ventana está cerrada o abierta. De forma que se pueda comprobar si alguien ha podido entrar al mausoleo o no. Para ello se necesita tanto una cuerda como un utensilio para enganchar a la ventana y poder subir a comprobarlo.
 
   
   
@@ -461,13 +471,6 @@ Puzzle musical que al resolverlo abre un compartimento dentro del órgano. Dentr
 
   
 
-- Ventana:
-    
-
-Se debe comprobar si la ventana está cerrada o abierta. De forma que se pueda comprobar si alguien ha podido entrar al mausoleo o no. Para ello se necesita tanto la cuerda como el utensilio para enganchar a la ventana y poder subir a comprobarlo.
-
-  
-
 Una vez comprobado el estado de la ventana, se podrá responder a la pregunta de la sala: ¿Es el asesinato posible?
 
   
@@ -476,7 +479,7 @@ Las pruebas que se descubren con los puzzles tienen algunas variaciones. En caso
 
   
 
-La pala encontrada estará manchada de sangre, se encontrará una cuerda y el utensilio para colgarla. Si la cuerda es lo suficientemente larga se podrá llegar a la ventana y la ventana estará abierta (indicando que se puede abrir).
+La pala encontrada estará manchada de sangre, se encontrará cuerdas(que serán suficientemente largas para llegar a la ventana y fuertes para soportar a alguien) y el utensilio para abrir la ventana. Además, se podrá comprobar que la ventana está abierta.
 
   
 
@@ -484,25 +487,13 @@ En caso negativo habrá dos variantes:
 
   
 
--La pala está limpia, se encuentra el utensilio, la cuerda es demasiado corta y por tanto no se puede comprobar el estado de la ventana.
+-La pala está limpia y no se encontrará el utensilio para abrir la ventana.
 
   
 
--La pala está manchada de sangre, la cuerda es larga, el utensilio pero la ventana no está abierta.
+-Las cuerdas serán demasiado cortas y endebles, y la ventana estará cerrada.
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   
   
 

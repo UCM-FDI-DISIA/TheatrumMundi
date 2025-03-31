@@ -1,194 +1,96 @@
 #include "DialogueManager.h"
-#include <fstream>
-#include <cassert>
-#include "../src/json/json.hpp";
+#include"../src/sdlutils/SDLUtils.h"
 #include "../src/Components/Image.h"
-//#include "../src/Components/WriteTextComponent.h";
-//#include "TextInfo.h"
-
+#include "../src/ecs/Manager.h"
+#include "EntityFactory.h"
+#include "RectArea2D.h"
+#include "ClickComponent.h"
+#include "TriggerComponent.h"
 #include "../src/components/LogComponent.h"
+#include "Log.h"
 #include "SceneTemplate.h"
+#include "../src/components/Transform.h"
+#include "Area2DLayerManager.h"
 
-
-using json = nlohmann::json;
 
 using namespace std;
 
-/// <summary>
-/// Fills the Dialogue map with all the dialogue Events for each room
-/// </summary>
-void DialogueManager::ReadJson(){
-
-	//Open de json path
-
-	ifstream mJson("../resources/config/dialogues.json");
-	assert(mJson);
-	json dialogues;
-    mJson >> dialogues;
-	
-	//set room dialogues
-	for (int i = 1; i <= numRooms; ++i) {
-
-		string room = "Sala" + to_string(i);
-		assert(dialogues.contains(room));
-		RoomDialogues r;
-
-		//Set all events from the specific room
-		for (auto& elem : dialogues[room].items()) {
-
-			//Fill r with all the evenet dialogues 
-			for (auto& elem2 : elem.value()) {
-
-				string character = elem2["Character"];
-				string text = elem2["Text"];
-				r[elem.key()].push_back(TextInfo{ character,text });
-			}
-		}
-
-		//Upload Map
-		mRoom[room] = r;
-	}
-
+DialogueManager::DialogueManager(int numRooms) : _scene(nullptr), displayOnProcess(false), characterimg(nullptr), _writeTextComp(nullptr){
+    actualroom = 1;
+    room = "Sala" + to_string(actualroom);
+    dialogueReader = new ReadDialog(numRooms);
+    _showText = new TextInfo{ " ", " " };
 }
 
-
-DialogueManager::DialogueManager() : _sceneLog(nullptr), _writeTextComp(nullptr), _scene(nullptr), displayOnProcess(false){
-
-	actualroom = 1;
-	room = "Sala" + to_string(actualroom);
-	//Load Json in the dialogue map
-	ReadJson();
-
-	_showText = new TextInfo{ " " , " " }; //initialize showing text
-
+DialogueManager::~DialogueManager() {
+    delete _showText;
+    delete dialogueReader;
 }
 
-/// <summary>
-/// Parsed the event to string so the map can read it
-/// </summary>
-/// <param name="event"></param> --> Event parsed
-/// <param name="_eventToRead"></param> --> Event to parse
-void DialogueManager::ParseEnum(string& event, const eventToRead& _eventToRead) {
-
-	switch (_eventToRead) {
-	case(SalaIntermedia1):
-		event = "SalaIntermedia1";
-		break;
-	case(SalaIntermediaEvento2):
-		event = "SalaIntermediaEvento2";
-		break;
-	case(SalaIntermediaEvento3):
-		event = "SalaIntermediaEvento3";
-		break;
-	case(Cadaver):
-		event = "Cadaver";
-		break;
-	case(Pista1):
-		event = "Pista1";
-		break;
-	case(Pista2):
-		event = "Pista2";
-		break;
-	case(Pista3):
-		event = "Pista3";
-		break;
-	case(Puzzle1):
-		event = "PuzzleTuberias";
-		break;
-	case(Puzzle2):
-		event = "PuzzleLibros";
-		break;
-	case(Puzzle3):
-		event = "PuzzleReloj";
-		break;
-	case(Calendario):
-		event = "Calendario";
-		break;
-	case(Movil):
-		event = "Movil1";
-		break;
-	}
-}
-
-/// <summary>
-/// Read the first dialogue from the event and showed on screen
-/// </summary>
-/// <param name="_eventToRead">Id of dialogue event to display</param>
-void DialogueManager::ReadDialogue(const eventToRead& _eventToRead) {
-	
-	string event;
-	ParseEnum(event, _eventToRead); //convert id to string
-	
-	
-	if (_writeTextComp->isFinished()) //has dialogueLine finished animating?
-	{
-		//If dialogueLine has finished, try to display next line
-
-		displayOnProcess = true;
-
-		if (mRoom[room].find(event) != mRoom[room].end() && !mRoom[room][event].empty()) {
-
-			TextInfo elem = mRoom[room][event].front(); // Gets first element
-
-			_showText->Character = elem.Character; // Saves new text
-			_showText->Text = elem.Text;
-
-			setCharachterImage(elem.Character);
-
-			_writeTextComp->startTextLine(); //starts animating line
-
-			if (_sceneLog) {
-				_sceneLog->addDialogueLineLog(elem.Character, elem.Text); //adds line to log system
-			}
-
-			mRoom[room][event].pop_front(); // Delete read textLine
-		}
-		else
-		{
-			//Indicate log the dialogue Event has ended
-			_sceneLog->addDialogueLineLog("/", "/");
-			
-			//call scene method to disable dialogue objects on scene
-			_scene->endDialogue();
-			displayOnProcess = false;
-
-			_showText->Character = " "; // Saves new text
-			_showText->Text = " ";
-		}
-	}
-	else
-	{
-		//Show complete dialogueLine on screen
-		_writeTextComp->finishTextLine();
-	}
-}
-
-/// <summary>
-/// Show the answer text on screen and upload the value of room
-/// </summary>
-void DialogueManager::ReadAnswer(){
-
-	//First read the answer, after that upload the value of the room because this means that we finish with the actual room
-	//Read and show the answer
-	cout << "Ask if a mage do it" << endl;
-
-	//UNTOCHABLE
-	++actualroom;
-	if (actualroom <= numRooms) {
-		room = "Sala" + to_string(actualroom);
-	}
-}
-
-
-DialogueManager::~DialogueManager()
+void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, string event)
 {
-	delete _showText;
+   
+    if (isMiddleRoom) {
+        //Character (Image)
+        auto character = entityManager->addEntity(grp::DIALOGUE);
+        entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
+        characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
 
-}
+        entityManager->setActive(character, false);
 
-void DialogueManager::setSceneLog(LogComponent* sceneLog)
-{
-	_sceneLog = sceneLog;
+        
+    }
+
+    else {
+
+        //Character (Image)
+        auto character = entityManager->addEntity(grp::DIALOGUE);
+        entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
+        characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
+
+        entityManager->setActive(character, false);
+       
+
+    }
+
+    //Text Background
+    auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
+    entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
+    entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
+    auto dialogInteractionArea = entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
+    // Put the dialog interaction area in front of the other interactables
+    areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
+
+    //Pass dialog if clicked
+    auto clickTextDialgue = entityManager->addComponent<ClickComponent>(_textbackground);
+    clickTextDialgue->connect(ClickComponent::JUST_CLICKED, [this, _textbackground]()
+        {
+            if (!(Game::Instance()->getLog()->GetLogActive())) {
+                //read dialogue only if it has to
+                if (getDisplayOnProcess())
+                {
+                    ReadDialogue(_eventToRead);
+                }
+                else
+                {
+                    _textbackground->getMngr()->setActive(_textbackground, false);
+                }
+            }
+        });
+    Game::Instance()->getLog()->setTextDialogue(clickTextDialgue);
+    entityManager->addComponent<TriggerComponent>(_textbackground);
+    entityManager->setActive(_textbackground, false);
+
+
+    auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
+    auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
+    entityManager->setActive(_textTest, false);
+
+    //Add writeText to dialogueManager
+    SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
+    WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, _showText);
+    
+    _writeTextComp = writeLogentityManager;
 }
 
 void DialogueManager::setScene(SceneTemplate* scene)
@@ -196,30 +98,59 @@ void DialogueManager::setScene(SceneTemplate* scene)
 	_scene = scene;
 }
 
-/// <summary>
-/// Modify the Texture from the scene
-/// </summary>
-/// <param name="Character"></param>
-void DialogueManager::setCharachterImage(const string& Character)
-{
-	if (Character == "Keisara") {
-		characterimg->setTexture(&sdlutils().images().at("KeisaraSprite"));
-	}
-	else if (Character == "Lucy") {
-		characterimg->setTexture(&sdlutils().images().at("LucySprite"));
-	}
-	else if (Character == "Sol") {
-		characterimg->setTexture(&sdlutils().images().at("SolSprite"));
-	}
+void DialogueManager::ReadDialogue(const string& event) {
+    auto& roomDialogues = dialogueReader->getRoomDialogues(room);
+
+    if (_writeTextComp->isFinished())
+    {
+        if (!roomDialogues[event].empty()) {
+            
+            displayOnProcess = true;
+            _writeTextComp->startTextLine();
+
+            TextInfo elem = roomDialogues[event].front();
+            _showText->Character = elem.Character;
+            _showText->Text = elem.Text;
+
+            Game::Instance()->getLog()->addDialogueLineLog(elem.Character, elem.Text);
+            setCharacterImage(elem.Character);
+
+            roomDialogues[event].pop_front();
+        }
+        else {
+            //Indicate log the dialogue Event has ended
+            Game::Instance()->getLog()->addDialogueLineLog("/", "/");
+
+            _scene->endDialogue();
+            displayOnProcess = false;
+
+            _showText->Character = " "; // Saves new text
+            _showText->Text = " ";
+            _writeTextComp->startTextLine();
+        }
+    }
+    else
+    {
+        _writeTextComp->finishTextLine();
+    }
+    
 }
 
-TextInfo* DialogueManager::getShowText()
-{
-	return _showText;
+void DialogueManager::setCharacterImage(const string& Character) {
+    if (Character == "Keisara") characterimg->setTexture(&sdlutils().images().at("KeisaraSprite"));
+    else if (Character == "Lucy") characterimg->setTexture(&sdlutils().images().at("LucySprite"));
+    else if (Character == "Sol") characterimg->setTexture(&sdlutils().images().at("SolSprite"));
 }
 
-bool DialogueManager::getDisplayOnProcess()
+void DialogueManager::setEventToRead(std::string eventToRead)
 {
-	return displayOnProcess;
+    _eventToRead = eventToRead;
 }
 
+TextInfo* DialogueManager::getShowText() {
+    return _showText;
+}
+
+bool DialogueManager::getDisplayOnProcess() {
+    return displayOnProcess;
+}

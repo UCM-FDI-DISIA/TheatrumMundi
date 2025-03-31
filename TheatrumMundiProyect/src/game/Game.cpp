@@ -7,12 +7,16 @@
 #include "../utils/Vector2D.h"
 #include "../utils/Collisions.h"
 
+#include "../../TheatrumMundi/Log.h"
+
+#include "../../TheatrumMundi/CSVdataRecolector.h"
 #include <Windows.h>
 
 
 Game* Game::_instance = nullptr;
 Game::Game() {
 	_exitGame = false;
+	
 }
 Game* Game::Instance()
 {
@@ -23,7 +27,7 @@ Game* Game::Instance()
 Game::~Game() {
 
 	delete _mngr;
-	delete _Dmngr;
+	delete _dataManager;
 	// release InputHandler if the instance was created correctly.
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
@@ -68,10 +72,11 @@ void Game::init() {
 	sdlutils().hideCursor();
 
 	// Create the manager
-	_Dmngr = new DialogueManager();
 	_mngr = new SceneManager();
-	_datamngr = new DataManager();
+	_log = new Log();
 	
+	_dataManager = new DataManager();
+	_csvdata = new CSVdataRecolector();
 }
 
 void Game::render() const
@@ -118,7 +123,6 @@ void Game::start() {
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
 	}
-
 }
 
 SceneManager* Game::getSceneManager()
@@ -131,16 +135,22 @@ SceneManager* Game::getSceneManager()
 void Game::exit()
 {
 	_exitGame = true;
+	
 }
-DialogueManager* Game::getDialogueManager()
-{
-	assert(_Dmngr != nullptr);
-	return _Dmngr;
-}
+
 
 DataManager* Game::getDataManager()
 {
-	return _datamngr;
+	return _dataManager;
+}
+
+CSVdataRecolector* Game::getCSVDataColector()
+{
+	return _csvdata;
+}
+Log* Game::getLog()
+{
+	return _log;
 }
 
 void Game::checkCollisions() {

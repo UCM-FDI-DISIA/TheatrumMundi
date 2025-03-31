@@ -6,9 +6,8 @@
 class SceneRoomTemplate: public SceneTemplate
 {
 protected:
-	/// <summary>
-	/// vector of the resolve puzzles in this Room
-	/// </summary>
+
+	Inventory* inv;
 	std::vector<bool> puzzlesol;
 	/// <summary>
 	/// Vector of pointer to puzzle entities of scene
@@ -24,18 +23,24 @@ protected:
 	/// </summary>
 	bool finishallpuzzles;
 	bool logActive = false;
+
 	//inventory
 
 
 	public:
 		//use the room enum for de index
-		virtual void resolvedPuzzle(int i);
+		virtual void resolvedPuzzle(int i)=0;
 		void setActiveBottons(bool active);
 		void setActiveZoomObj(bool active);
+		inline Inventory* GetInventory() { return inv; }
+		/// <summary>
+		/// Scroll the inventory up or down depending on the direction
+		/// </summary>
+		/// <param name="dir"></param>
+		void scrollInventory(int dir);
+
 	SceneRoomTemplate();
 	virtual ~SceneRoomTemplate();
 	
-	
-
 };
 

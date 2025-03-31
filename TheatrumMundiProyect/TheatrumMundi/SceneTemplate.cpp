@@ -2,14 +2,20 @@
 #include "../../TheatrumMundiProyect/src/ecs/ecs.h"
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
 #include "../TheatrumMundi/Area2DLayerManager.h"
+#include "DialogueManager.h"
 #include "Game.h"
+
+using namespace std;
+
 SceneTemplate::SceneTemplate()
 {
-	inv = new Inventory();
 	entityManager = new ecs::EntityManager();
 	areaLayerManager = new Area2DLayerManager();
-	entityFactory = new EntityFactory(entityManager,areaLayerManager);
+	entityFactory = new EntityFactory(entityManager, areaLayerManager);
+	dialogueManager = new DialogueManager(0);
+
 	isStarted = false;
+	//sceneLog = new Log();
 }
 
 void SceneTemplate::update()
@@ -30,18 +36,23 @@ SceneTemplate::~SceneTemplate()
 	delete areaLayerManager;
 	delete entityFactory;
 }
-void SceneTemplate::startDialogue(const eventToRead& _eventToRead)
+void SceneTemplate::startDialogue(const string& _eventToRead)
 {
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, true);
+	dialogueManager->setdisplayOnProcess(true);
 	//entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
-	Game::Instance()->getDialogueManager()->ReadDialogue(_eventToRead);
+	dialogueManager->setEventToRead(_eventToRead);
+	dialogueManager->ReadDialogue(_eventToRead);
 
 }
 
 void SceneTemplate::endDialogue()
 {
+	dialogueManager->setdisplayOnProcess(false);
 	std::cout << "acabe";
 	
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
 }
+
+//metodo global inv flechas

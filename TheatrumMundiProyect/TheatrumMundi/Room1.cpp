@@ -17,14 +17,19 @@
 #include "ClickableSpriteComponent.h"
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 #include "EventsInfo.h"
+#include "Log.h"
 
 
-Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
+
+#include "../src/components/WriteTextComponent.h"
+#include "DialogueManager.h"
+Room1Scene::Room1Scene() : SceneRoomTemplate(), _eventToRead("SalaIntermedia1")
 {
+	dialogueManager = new DialogueManager(1);
 	roomEvent.resize(event_size);
 	roomEvent[InitialDialogue] = [this]
 		{
-			startDialogue(SalaIntermedia1);
+			startDialogue("SalaIntermedia1");
 
 		};
 	roomEvent[CorpseDialogue] = [this]
@@ -34,7 +39,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 #endif // DEBUG
 
 			_eventToRead = Cadaver;
-			startDialogue(Cadaver);
+			startDialogue("Cadaver");
 		};
 	roomEvent[PipePuzzleSnc] = [this]
 		{
@@ -58,7 +63,6 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 		};
 	roomEvent[ClockPuzzleRsv] = [this] {
 		// InventoryLogic
-		
 		};
 	roomEvent[TeaCupPuzzleSnc] = [this]
 		{
@@ -74,9 +78,33 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA,GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 		};
+	/*roomEvent[Boa1] = [this] {
+		// InventoryLogic
+		GetInventory()->addItem(new Hint("boa1", "aaaa", &sdlutils().images().at("boa1")));
+		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		};*/
+	/*roomEvent[Boa2] = [this] {
+		// InventoryLogic
+		GetInventory()->addItem(new Hint("boa2", "shhhh", &sdlutils().images().at("boa2")));
+		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "boa2", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		};*/
+	/*roomEvent[Hanni] = [this] {
+		// InventoryLogic
+		GetInventory()->addItem(new Hint("hanni", "D:", &sdlutils().images().at("Hanni")));
+		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "Hanni", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		};*/
+	/*roomEvent[Doku] = [this] {
+		// InventoryLogic
+		GetInventory()->addItem(new Hint("AAA", "veneno aaaa", &sdlutils().images().at("AAA")));
+		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "AAA", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		};*/
 	roomEvent[ResolveCase] = [this] {
 		//Poner el dialogo correspondiente
-		startDialogue(SalaIntermedia1);
+		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[GoodEnd] = [this] {
 		// WIP
@@ -89,7 +117,7 @@ Room1Scene::Room1Scene(): SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 	roomEvent[MobileDialogue] = [this] {
 		// WIP
 		_eventToRead = Movil;
-		startDialogue(Movil);
+		startDialogue("Movil");
 		};
 	
 }
@@ -117,95 +145,9 @@ void Room1Scene::init()
 		a.playSound(room1music);
 
 		//Register scene in dialogue manager
-		Game::Instance()->getDialogueManager()->setScene(this);
+		dialogueManager->setScene(this);
 
-		//CharacterImage
-		//auto characterimg = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 500, 500, 0, ecs::grp::DIALOGUE);
-		auto characterimg = entityManager->addEntity(grp::DIALOGUE);
-		entityManager->addComponent<Transform>(characterimg, Vector2D(500, 50), Vector2D(0, 0), 1300*0.3, 2000*0.3, 0);
-		auto imCh = entityManager->addComponent<Image>(characterimg, &sdlutils().images().at("Dialog"));
 		
-		Game::Instance()->getDialogueManager()->setCharacterImg(imCh);
-		entityManager->setActive(characterimg, false);
-
-		//Create dialogue text entity. Object that renders dialogue Text on Screen
-		auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
-		entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
-		entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
-		RectArea2D* dialogInteractionArea = entityManager->addComponent<RectArea2D>(_textbackground,areaLayerManager);
-
-		entityManager->addComponent<ClickComponent>(_textbackground)->connect(ClickComponent::JUST_CLICKED, [this,_textbackground]()
-			{
-				if (!logActive) {
-					//read dialogue only if it has to
-					if (Game::Instance()->getDialogueManager()->getDisplayOnProcess())
-					{
-						Game::Instance()->getDialogueManager()->ReadDialogue(_eventToRead);
-					}
-					else 
-					{
-						entityManager->setActive(_textbackground, false);
-					}
-						
-				}
-			});
-		entityManager->addComponent<TriggerComponent>(_textbackground);
-		entityManager->setActive(_textbackground, false);
-
-
-		auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
-		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
-		entityManager->setActive(_textTest, false);
-
-
-
-		//Create log
-		auto _log = entityManager->addEntity(ecs::grp::UI);
-		entityManager->addComponent<Transform>(_log, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
-		Image* imLog = entityManager->addComponent<Image>(_log, &sdlutils().images().at("fondoPruebaLog"), 200); //background log
-
-		LogComponent* logComp = entityManager->addComponent<LogComponent>(_log); //logComponent
-
-		SDL_Color colorText = { 255, 255, 255, 255 };
-		WriteTextComponent<std::list<std::pair<std::string, std::string>>>* writeLog =
-			entityManager->addComponent<WriteTextComponent<std::list<std::pair<std::string, std::string>>>>(_log, sdlutils().fonts().at("BASE"), colorText, logComp->getLogList()); //write text component
-
-		_log->getMngr()->setActive(_log, false); //hide log at the beggining
-
-		//Register log in dialogue manager
-		Game::Instance()->getDialogueManager()->setSceneLog(logComp);
-
-		//Add writeText to dialogueManager
-		SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
-		WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest,sdlutils().fonts().at("BASE"), colorDialog, Game::Instance()->getDialogueManager()->getShowText());
-
-		Game::Instance()->getDialogueManager()->setWriteTextComp(writeLogentityManager);
-
-		roomEvent[LOGENABLE] = [this] {
-			//activate log
-			/*_log->getMngr()->setActive(_log, true);
-			logActive = true;
-
-			//activate close log button
-			_closeLogButton->getMngr()->setActive(_closeLogButton, true);
-
-			//disable open log button
-			_openLogButton->getMngr()->setActive(_openLogButton, false);
-			*/
-			};
-		roomEvent[LOGDESABLE] = [this, _log] {
-			//disable log
-			_log->getMngr()->setActive(_log, false);
-			logActive = false;
-
-			//activate open log button
-			//_openLogButton->getMngr()->setActive(_openLogButton, true);
-
-			//disable close log button
-			//_closeLogButton->getMngr()->setActive(_closeLogButton, false);
-			};
-
-
 		auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width())/12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1160 - 1349, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
@@ -228,6 +170,122 @@ void Room1Scene::init()
 		auto LivingBackground = entityFactory->CreateImageEntity(entityManager, "LivingroomBackground", Vector2D(- 1349-6, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(LivingBackground));
 
+		auto _corpseZoom = entityFactory->CreateImageEntity(entityManager, "CorspeBackground", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(_corpseZoom, false);
+
+		//set the scene the variant is 
+		Game::Instance()->getDataManager()->SetSceneCount(ROOM1);
+		//get actual variant
+		int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(ROOM1);
+		//std::cout << "VARIANTE" << variantAct << std::endl;
+
+		auto possibleButton = entityFactory->CreateInteractableEntity(entityManager, "posible", EntityFactory::RECTAREA, Vector2D(500, 0), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(possibleButton, false);
+		entityManager->getComponent<ClickComponent>(possibleButton)->connect(ClickComponent::JUST_CLICKED, [this, variantAct]() {
+
+			//if its the not correct variant one dies
+			if (variantAct != 0)
+			{
+				Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
+				//std::cout << "NO CORRECTA DE POS" << std::endl;
+
+
+			}
+
+
+			//change to intermediate room
+
+			});
+		auto noPossibleButton = entityFactory->CreateInteractableEntity(entityManager, "noPosible", EntityFactory::RECTAREA, Vector2D(600, 0), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(noPossibleButton, false);
+		entityManager->getComponent<ClickComponent>(noPossibleButton)->connect(ClickComponent::JUST_CLICKED, [this, variantAct]() {
+
+			//if its the not correct variant one dies
+			if (variantAct != 1 || 2)
+			{
+				//std::cout << "NO CORRECTA DE NO POS" << std::endl;
+				Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
+			}
+
+			//change to intermediate room
+
+
+
+			});
+
+		auto resolveButton = entityFactory->CreateInteractableEntity(entityManager, "resolve", EntityFactory::RECTAREA, Vector2D(0, 500), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(resolveButton, false);
+
+
+
+		auto noResolveButton = entityFactory->CreateInteractableEntity(entityManager, "noResolve", EntityFactory::RECTAREA, Vector2D(0, 600), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		entityManager->setActive(noResolveButton, false);
+
+
+		//appears when the 3 puzzles have been resolved
+		auto readyToResolveButton = entityFactory->CreateInteractableEntity(entityManager, "B5", EntityFactory::RECTAREA, Vector2D(400, 400), Vector2D(0, 0), 400, 400, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+
+		entityManager->getComponent<ClickComponent>(readyToResolveButton)->connect(ClickComponent::JUST_CLICKED, [this, noResolveButton, resolveButton, readyToResolveButton]() {
+
+			entityManager->setActive(noResolveButton, true);
+			entityManager->setActive(resolveButton, true);
+			entityManager->setActive(readyToResolveButton, false);
+
+			});
+		entityManager->setActive(readyToResolveButton, false);
+		entityManager->setActive(readyToResolveButton, false);
+		entityManager->getComponent<ClickComponent>(resolveButton)->connect(ClickComponent::JUST_CLICKED, [this, possibleButton, noPossibleButton, readyToResolveButton, resolveButton, noResolveButton]() {
+
+			entityManager->setActive(noPossibleButton, true);
+
+			entityManager->setActive(readyToResolveButton, false);
+			entityManager->setActive(possibleButton, true);
+
+			entityManager->setActive(resolveButton, false);
+			entityManager->setActive(noResolveButton, false);
+
+			});
+
+		entityManager->getComponent<ClickComponent>(noResolveButton)->connect(ClickComponent::JUST_CLICKED, [this, noResolveButton, resolveButton, readyToResolveButton]() {
+
+
+			entityManager->setActive(noResolveButton, false);
+			entityManager->setActive(resolveButton, false);
+			entityManager->setActive(readyToResolveButton, true);
+
+
+
+			});
+
+
+
+		auto Corspe = entityFactory->CreateInteractableEntity(entityManager, "Corspe", EntityFactory::RECTAREA, Vector2D(1000, 422), Vector2D(0, 0), 268, 326, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Corspe));
+		entityManager->getComponent<ClickComponent>(Corspe)->connect(ClickComponent::JUST_CLICKED, [this, _corpseZoom, _quitButton, readyToResolveButton]() {
+
+			_corpseZoom->getMngr()->setActive(_corpseZoom, true);
+			entityManager->setActive(_quitButton, true);
+
+
+			if (finishallpuzzles)
+			{
+				entityManager->setActive(readyToResolveButton, true);
+				roomEvent[ResolveCase]();
+			}
+			else
+			{
+				roomEvent[CorpseDialogue]();
+				entityManager->setActive(readyToResolveButton, false);
+			}
+
+
+
+
+
+			});
+
+
+
 		//Mobile
 
 		auto Mobile = entityFactory->CreateInteractableEntity(entityManager, "mobileSprite", EntityFactory::RECTAREA, Vector2D(1250, 500), Vector2D(0, 0), 245/3, 123/3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -242,8 +300,6 @@ void Room1Scene::init()
 				entityManager->setActive(_quitButton, true);
 				roomEvent[MobileDialogue]();
 			});
-
-
 
 
 		auto Timetable = entityFactory->CreateInteractableEntity(entityManager, "Timetable", EntityFactory::RECTAREA, Vector2D(1173, 267), Vector2D(0, 0), 138, 182, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -296,7 +352,7 @@ void Room1Scene::init()
 			});
 
 		auto ChangeRoom1Button = entityManager->getComponent<ClickComponent>(ChangeRoom1);
-		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom1Button,StudyBackgroundScroll, doorSound]() {
+		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom1Button,StudyBackgroundScroll, doorSound, ChangeRoomScroll]() {
 			if (!StudyBackgroundScroll->isScrolling()) {
 				AudioManager::Instance().playSound(doorSound);
 				StudyBackgroundScroll->Scroll(ScrollComponent::RIGHT);
@@ -312,27 +368,23 @@ void Room1Scene::init()
 			});
 
 
-		auto _corpseZoom = entityFactory->CreateImageEntity(entityManager, "CorspeBackground", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
+		/*auto _corpseZoom = entityFactory->CreateImageEntity(entityManager, "CorspeBackground", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 		entityManager->addComponent<RectArea2D>(_corpseZoom, areaLayerManager);
-		entityManager->setActive(_corpseZoom, false);
+		entityManager->setActive(_corpseZoom, false);*/
 
-		auto Corspe = entityFactory->CreateInteractableEntity(entityManager, "Corspe", EntityFactory::RECTAREA, Vector2D(1000, 422), Vector2D(0, 0), 268, 326, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Corspe));
-		entityManager->getComponent<ClickComponent>(Corspe)->connect(ClickComponent::JUST_CLICKED, [this, _corpseZoom, _quitButton]() {
+	/*	body = entityFactory->CreateInteractableEntity(entityManager, "Corspe", EntityFactory::RECTAREA, Vector2D(1000, 422), Vector2D(0, 0), 268, 326, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(body));
+		entityManager->getComponent<ClickComponent>(body)->connect(ClickComponent::JUST_CLICKED, [this, _corpseZoom, _quitButton]() {
 			_corpseZoom->getMngr()->setActive(_corpseZoom, true);
 			entityManager->setActive(_quitButton, true);
 			if (!finishallpuzzles)roomEvent[CorpseDialogue]();
 			else roomEvent[ResolveBottons]();
-
-			});
+			
+			});*/
 
 		// Quit corpse zoom sbutton
 		areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(_quitButton)->getLayerPos());
 
-		// Put the dialog interaction area in front of the other interactables
-		areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
-
-		
 		//UI
 		//Pause
 		auto buttonPause = entityFactory->CreateInteractableEntity(entityManager,"B3", EntityFactory::RECTAREA ,Vector2D(20,20), Vector2D(0,0), 90,90,0,areaLayerManager,EntityFactory::NODRAG ,ecs::grp::UI);
@@ -342,67 +394,100 @@ void Room1Scene::init()
 			});
 
 		//Inventory
-		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 1500, 1500, 0, ecs::grp::UI);
+		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
 		auto buttonInventory = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3 ,20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(InventoryBackground, false);
-		ClickComponent* buttonInventoryClick = entityManager->getComponent<ClickComponent>(buttonInventory);
-		buttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound,InventoryBackground]() {
-			AudioManager::Instance().playSound(buttonSound);
-			GetInventory()->setActive(!GetInventory()->getActive());  // Toggle the inventory
 
-			std::cout << "Inventory item: " << GetInventory()->hasItem("boa2") << std::endl;
+		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->setActive(upButton, false);
+
+		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->setActive(downButton, false);
+
+		ClickComponent* buttonInventoryClick = entityManager->getComponent<ClickComponent>(buttonInventory);
+		buttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound,InventoryBackground, upButton, downButton, buttonInventory]() {
+			AudioManager::Instance().playSound(buttonSound);
+			GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
 
 			// If the inventory is active, activate the items
 			if (GetInventory()->getActive()) {
 				entityManager->setActive(InventoryBackground, true);
-				for (int i = 0; i < GetInventory()->getItemNumber(); ++i) {
-					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the hints
+
+				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(20);
+				entityManager->setActive(downButton, true);
+				entityManager->setActive(upButton, true);
+
+				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) {
+					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
 				}
 			}
 			else {
 				entityManager->setActive(InventoryBackground, false);
-				for (int i = 0; i < GetInventory()->getItemNumber(); ++i) {
-					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the hints
+				entityManager->setActive(downButton, false);
+				entityManager->setActive(upButton, false);
+				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(60 + 268 / 3);
+
+				// its okay to use the first item as the first item to show??
+				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) {
+					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Desactivate the hints
 				}
 			}
 
 		});
 
-		auto buttonLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(1200, 748 - (268/3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		
-		auto buttonCloseLog = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 500), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-		
-		ClickComponent* buttonLogClick = entityManager->getComponent<ClickComponent>(buttonLog);
-		buttonLogClick->connect(ClickComponent::JUST_CLICKED, [this, _log, buttonLog, buttonCloseLog, buttonSound]() {
+		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
+		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, downButton]() {
+
 			AudioManager::Instance().playSound(buttonSound);
-			//open log
-			entityManager->setActive(_log, true);
-			logActive = true;
-			
-			entityManager->setActive(buttonCloseLog, true);
-			entityManager->setActive(buttonLog, false);
+			scrollInventory(1);
+		});
+
+		//Test obj 1
+		/*auto boa1 = entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, Vector2D(275 - 1349 - 6, 620), Vector2D(0, 0), 121 / 3, 105 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(boa1));
+		entityManager->getComponent<ClickComponent>(boa1)->connect(ClickComponent::JUST_CLICKED, [this, boa1]() {
+			boa1->getMngr()->setActive(boa1, false);
+			roomEvent[Boa1]();
+			});*/
+		//Test obj 2
+		/*auto boa2 = entityFactory->CreateInteractableEntity(entityManager, "boa2", EntityFactory::RECTAREA, Vector2D(275 - 1349 - 6, 700), Vector2D(0, 0), 121 / 3, 105 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(boa2));
+		entityManager->getComponent<ClickComponent>(boa2)->connect(ClickComponent::JUST_CLICKED, [this, boa2]() {
+			boa2->getMngr()->setActive(boa2, false);
+			roomEvent[Boa2]();
+			});*/
+		//Test obj 3
+		/*auto hanni = entityFactory->CreateInteractableEntity(entityManager, "Hanni", EntityFactory::RECTAREA, Vector2D(275 - 549 - 6, 700), Vector2D(0, 0), 121 / 3, 105 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(hanni));
+		entityManager->getComponent<ClickComponent>(hanni)->connect(ClickComponent::JUST_CLICKED, [this, hanni]() {
+			hanni->getMngr()->setActive(hanni, false);
+			roomEvent[Hanni]();
+			});*/
+
+		//Spoon
+		auto spoon = entityFactory->CreateInteractableEntity(entityManager, "SceneSpoon", EntityFactory::RECTAREA, Vector2D(275 - 1349 - 6, 540), Vector2D(0, 0), 121 / 3, 105 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(spoon));
+		entityManager->getComponent<ClickComponent>(spoon)->connect(ClickComponent::JUST_CLICKED, [this, spoon]() {
+			spoon->getMngr()->setActive(spoon, false);
+			roomEvent[Spoon]();
 			});
 
-		entityManager->setActive(buttonLog, true);
-		
-		ClickComponent* buttonCloseLogClick = entityManager->getComponent<ClickComponent>(buttonCloseLog);
-		buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [this, _log, buttonLog, buttonCloseLog, buttonSound]() {
-			AudioManager::Instance().playSound(buttonSound);
-			//open log
-			entityManager->setActive(_log, false);
-			logActive = false;
-			entityManager->setActive(buttonLog, true);
-			entityManager->setActive(buttonCloseLog, false);
+		//Test obj 4
+		/*auto doku = entityFactory->CreateInteractableEntity(entityManager, "AAA", EntityFactory::RECTAREA, Vector2D(275 - 1349 - 6, 340), Vector2D(0, 0), 121 / 3, 105 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(doku));
+		entityManager->getComponent<ClickComponent>(doku)->connect(ClickComponent::JUST_CLICKED, [this, doku]() {
+			doku->getMngr()->setActive(doku, false);
+			roomEvent[Doku]();
+			});*/
 
-			});
-		entityManager->setActive(buttonCloseLog, false);
 
-		// Botón que confirma que es posible el asesinato
+		// Button that confirms the assesination
 		auto buttonPosible = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3) - 20), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->getComponent<ClickComponent>(buttonPosible)->connect(ClickComponent::JUST_CLICKED, [this]() { roomEvent[GoodEnd]();});
 		entityManager->setActive(buttonPosible,false);
 
-		// Botón que confirma que es imposible el asesinato
+		// Button that confirms the assesination is not possible
 		auto buttonImposible = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3)), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->getComponent<ClickComponent>(buttonImposible)->connect(ClickComponent::JUST_CLICKED, [this]() { roomEvent[BadEnd]();});
 		entityManager->setActive(buttonImposible, false);
@@ -413,35 +498,43 @@ void Room1Scene::init()
 			entityManager->setActive(buttonImposible, true);
 			};
 
-		//Spoon
-		auto spoon = entityFactory->CreateInteractableEntity(entityManager, "SceneSpoon", EntityFactory::RECTAREA, Vector2D(275 - 1349 - 6, 540), Vector2D(0, 0), 121 / 3, 105 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-		StudyBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(spoon));
-		entityManager->getComponent<ClickComponent>(spoon)->connect(ClickComponent::JUST_CLICKED, [this, spoon]() {
-			spoon->getMngr()->setActive(spoon, false);
-			roomEvent[Spoon]();
-			});
 		//X Button "B1"
+
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, _eventToRead);
+
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+
+		std::cout << finishallpuzzles << std::endl;
+	
+
 	}
 	SDL_Delay(1000);
 
-	roomEvent[InitialDialogue]();
 	
 }
 
 void Room1Scene::resolvedPuzzle(int i)
 {
-	if (i == ClockPuzzleRsv || i == PipePuzzleRsv || i == BooksPuzzleRsv || i == TeaCupPuzzleRsv) {
-		roomEvent[i]();
+	if (i <4) {
+		int auxevent = event_size;
+		if (i == 0)  auxevent = PipePuzzleRsv;
+		else if (i == 1)  auxevent = BooksPuzzleRsv;
+		else if (i == 2)  auxevent = ClockPuzzleRsv;
+		else if (i == 3)  auxevent = TeaCupPuzzleRsv;
+		roomEvent[auxevent]();
+		puzzlesol[i] = true;
+		//std::cout << "Puzle resuelto" << i << std::endl;
 		bool aux = true;
 		for (bool a : puzzlesol) if (!a) aux = false;
 		finishallpuzzles = aux;
-		if (aux) entityManager->setActive(body, true);
+		//if (aux) entityManager->setActive(body, true);
 	}
-else {
+	else {
 #ifdef _DEBUG
-	std::cout << i << " invalid index" << std::endl;
+		std::cout << i << " invalid index" << std::endl;
 #endif
-}
+	}
+
 }
 
 void Room1Scene::refresh()

@@ -3,19 +3,22 @@
 
 #include <vector>
 #include "../../TheatrumMundi/SceneManager.h"
-#include "../../TheatrumMundi/DialogueManager.h"
 #include "../../TheatrumMundi/DataManager.h"
 
 class Transform;
 class GameState;
+class Log;
 
+class CSVdataRecolector;
 class Game {
 	
 private:
 	
 	 SceneManager* _mngr;
-	 DialogueManager* _Dmngr;
-	 DataManager* _datamngr;
+	 Log* _log;
+	 
+	 DataManager* _dataManager;
+	 CSVdataRecolector* _csvdata;
 	 Game();
 	
 	 void checkCollisions();
@@ -27,8 +30,9 @@ public:
 	void render()const;
 	void start();
 	SceneManager* getSceneManager();
-	DialogueManager* getDialogueManager();
 	DataManager* getDataManager();
+	CSVdataRecolector* getCSVDataColector();
+	Log* getLog();
 	Game& operator=(const Game& o) = delete;
 	Game(const Game& o) = delete;
 	void exit();

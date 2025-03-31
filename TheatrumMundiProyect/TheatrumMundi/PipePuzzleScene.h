@@ -12,6 +12,7 @@ class Module;
 class Pipe;
 class Image;
 class Inventory;
+class ClickComponent;
 class PipePuzzleScene : public ScenePuzzleTemplate
 {
 
@@ -43,11 +44,16 @@ private:
 	std::vector<waterPath>_waterPath; //vector that contains the amount of paths 
 	std::vector<Pipe*> _waterPipes; //vector that contains the amount of water each pipe has
 	std::vector<Module*> _modules;//modules that change the direction of the water flow
-	bool solved;
+	//bool solved;
 	std::vector<ecs::Entity*>_modulesEnt;
 	std::vector<ecs::Entity*>_pipesEnt;
 	std::vector<ecs::Entity*>_pathEnt;
 	ecs::Entity* gloveEntity;
+	bool _updatePuzzle;
+	ecs::Entity* _rope;
+	ecs::Entity* _cubeWithoutWater;
+	ecs::Entity* _exit;
+	ClickComponent* clComponent;
 
 protected:
 
@@ -64,7 +70,7 @@ public:
 	 void waterPassModule(int module); //if water can pass through a module (if it recives water from its neightbours)
 	 void waterPassPath(int path);// series of conditions to check if a path has water
 	 void unload() override;
-	 void updatePuzzle() ;
+	 void updatePuzzle();
 	 void Win() override;
 	 ~PipePuzzleScene();
 };

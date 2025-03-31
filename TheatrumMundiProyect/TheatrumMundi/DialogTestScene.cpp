@@ -2,6 +2,7 @@
 #include "../src/Components/WriteTextComponent.h"
 #include "../src/Components/Transform.h"
 #include "../src/game/Game.h"
+#include "DialogueManager.h"
 
 DialogTestScene::DialogTestScene(): SceneRoomTemplate()
 {
@@ -19,7 +20,7 @@ void DialogTestScene::init()
 		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
 		entityManager->addComponent<WriteTextComponent>(_textTest);
 		*/
-		Game::Instance()->getDialogueManager()->ReadDialogue(SalaIntermedia1);
+		dialogueManager->ReadDialogue("SalaIntermedia1");
 	}
 
 }

@@ -32,6 +32,12 @@ public:
 	Texture(SDL_Renderer *renderer, const std::string &text, const Font &font,
 			const SDL_Color &fgColor, const SDL_Color &bgColor);
 
+	// Recibe una SDL_Texture*
+	Texture(SDL_Renderer* renderer, SDL_Texture* texture)
+		: _renderer(renderer), _texture(texture) {
+		assert(_texture != nullptr);
+		SDL_QueryTexture(_texture, nullptr, nullptr, &_width, &_height);
+	}
 
 	virtual ~Texture() {
 		if (_texture != nullptr)
