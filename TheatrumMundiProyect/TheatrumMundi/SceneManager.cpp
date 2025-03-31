@@ -78,7 +78,7 @@ void SceneManager::update()
 
 SceneManager::~SceneManager()
 {
-	for (auto a : scenes) delete a;
+	for (auto a : scenes) if(a!=nullptr) delete a;
 
 	currentscenes.clear();
 }

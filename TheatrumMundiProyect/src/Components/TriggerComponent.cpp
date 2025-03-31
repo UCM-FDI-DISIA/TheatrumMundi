@@ -9,10 +9,12 @@
 
 TriggerComponent::TriggerComponent()
 {
+	targetlayer = ecs::grp::DEFAULT;
 	_eventConnections.insert({ CURSOR_ENTERED, {} });
 	_eventConnections.insert({ CURSOR_LEFT,    {} });
 	_eventConnections.insert({ AREA_ENTERED,   {} });
 	_eventConnections.insert({ AREA_LEFT,      {} });
+
 }
 
 void TriggerComponent::handleMouseInput()
@@ -66,7 +68,7 @@ void TriggerComponent::updateOverlappingEntities()
 	Area2D* area = _ent->getMngr()->getComponent<Area2D>(_ent);
 	if (area == nullptr) return; // Can't check overlapping without Area2D
 
-	const auto& allEntities = _ent->getMngr()->getEntities(); // Checking the entities with an Area2D that overlaps
+	const auto& allEntities = _ent->getMngr()->getEntities(targetlayer); // Checking the entities with an Area2D that overlaps
 
 	for (auto e : allEntities)
 	{
