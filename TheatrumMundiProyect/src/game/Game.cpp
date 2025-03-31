@@ -123,7 +123,6 @@ void Game::start() {
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
 	}
-	_csvdata->safeData();
 }
 
 SceneManager* Game::getSceneManager()
@@ -136,7 +135,7 @@ SceneManager* Game::getSceneManager()
 void Game::exit()
 {
 	_exitGame = true;
-	_csvdata->AddEntry("jaja","TUMADRE",Vector2D(10,100));
+	
 }
 
 
@@ -145,6 +144,10 @@ DataManager* Game::getDataManager()
 	return _dataManager;
 }
 
+CSVdataRecolector* Game::getCSVDataColector()
+{
+	return _csvdata;
+}
 Log* Game::getLog()
 {
 	return _log;

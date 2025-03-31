@@ -16,6 +16,9 @@ enum SceneName {
 	CLOCK_PUZZLE,
 	TEA_CUP_PUZZLE,
 	ROOM_2,
+	MUSIC_PUZZLE,
+	MOSAIC_SCENE,
+	DRAG_PUZZLE,
 	ROOM_3,
 	SCENE_SIZE
 };
@@ -24,6 +27,7 @@ class SceneManager
 private:
 	std::vector<SceneTemplate*> scenes;
 	std::list<SceneTemplate*> currentscenes;
+	int actsceneindex;
 protected:
 public:
 	SceneManager();
@@ -38,8 +42,11 @@ public:
 	 void refrest();
 	 //update of the currentscene
 	 void update();
+	 //Get the actSceneIndex ONLY USE FOR PLAYTESTING
+	 inline int getSceneIndex() { return actsceneindex; };
 	 //delete of enitities
 	~SceneManager();
+
 	
 };
 

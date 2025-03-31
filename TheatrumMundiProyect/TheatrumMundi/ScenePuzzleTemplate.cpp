@@ -1,8 +1,11 @@
 #include "ScenePuzzleTemplate.h"
 #include "SceneRoomTemplate.h"
 #include "ClickComponent.h"
+#include "TriggerComponent.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 #include "SDLUtils.h"
+
+#include "../src/Components/WriteTextComponent.h"
 
 
 
@@ -40,6 +43,20 @@ ScenePuzzleTemplate::~ScenePuzzleTemplate()
 /// <param name="sr"></param> --> Referebce to thee SceneRoomTemplate
 void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 {
+	//CREATE DESCRIPTION ENTITIES
+	
+	//visual background for item description text
+	auto _backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::DEFAULT);
+	entityManager->setActive(_backgroundTextDescription, false);
+
+	//description text entity
+	auto textDescriptionEnt = entityManager->addEntity(ecs::grp::DEFAULT);
+	auto _testTextTranform = entityManager->addComponent<Transform>(textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
+	entityManager->setActive(textDescriptionEnt, false);
+	SDL_Color colorDialog = { 255, 255, 255, 255 };
+	entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, sr->GetInventory()->getTextDescription());
+
+
 	int index = 0; // Need to search for the respective position of the item
 	for (auto a : sr->GetInventory()->getItems()) {
 		//if the array of names hasn't have the name of this entity then it means that is new and has to be created again
@@ -52,12 +69,15 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 
 			auto it = invObjects.back();
 
-
 			//Assign lamda functions
 
 			//if you click in one item, assign the original position to the position of the object clicked
-			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this, sr, it]() {
+			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this, sr, it, a, _backgroundTextDescription, textDescriptionEnt]() {
 				setOriginalPos(it->getMngr()->getComponent<Transform>(it)->getPos());
+				entityManager->setActive(_backgroundTextDescription, false);
+				
+				//hide item description when item has been clicked
+				entityManager->setActive(textDescriptionEnt, false);
 				});
 
 			//if you drop the item, compares if it was drop in or out tge cloack
@@ -75,6 +95,23 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 					}
 					else it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
 				}
+				});
+
+			//if mouse is on item, show item description
+			it->getMngr()->getComponent<TriggerComponent>(it)->connect(TriggerComponent::CURSOR_ENTERED, [this, sr, a, _backgroundTextDescription, textDescriptionEnt]() {
+				//show item description entities
+				entityManager->setActive(_backgroundTextDescription, true);
+				entityManager->setActive(textDescriptionEnt, true);
+
+				//change text description
+				sr->GetInventory()->setTextDescription(a->getID(), invObjects, _backgroundTextDescription->getMngr()->getComponent<Transform>(_backgroundTextDescription)); 
+				});
+
+			//if mouse leaves item, hide item description
+			it->getMngr()->getComponent<TriggerComponent>(it)->connect(TriggerComponent::CURSOR_LEFT, [this, sr, a, _backgroundTextDescription, textDescriptionEnt]() {
+				//hide item description entities
+				entityManager->setActive(_backgroundTextDescription, false);
+				entityManager->setActive(textDescriptionEnt, false);
 				});
 
 			//Set the active item to false

@@ -6,6 +6,8 @@
 #include "Vector2D.h"
 #include "Manager.h"
 #include "../../src/Components/Transform.h"
+#include <string>
+#include "../../TheatrumMundi/DescriptionInfo.h"
 class SceneTemplate;
 class Hint;
 class Inventory
@@ -18,6 +20,7 @@ protected:
 	std::vector<Hint*> items; //Vector of hints
 	Vector2D originalPos;
 	std::vector<Vector2D> positions; //Array where all the positions are
+	DescriptionInfo* _textDescription; //TextDescription that displays on screen
 public:
 
 	std::vector<ecs::Entity*> hints; //Array of inventory entities
@@ -39,6 +42,10 @@ public:
 
 	inline std::vector<Hint*> getItems() { return items; } //Get all the hintss
 	inline Vector2D GetPosition(int i) { return hints[i]->getMngr()->getComponent<Transform>(hints[i])->getPos(); } //Return the position of the item in the inventory USING IN THE CREATION OF THE INVENTITIES IN THE PUZZLESCENES
+	
+	void setTextDescription(std::string _id, std::vector<Entity*>& invEntityList, Transform* backgroundTextTransform); //Sets item description on screen
+	DescriptionInfo* getTextDescription() { return _textDescription; } //Gets item description
+
 private:
 	bool active; //Defines if the object is active or not
 	int firstItem; //Index to set the first item of the inventory (if firstItem == 1) shows the 1,2 and 3 objects of the array of hints

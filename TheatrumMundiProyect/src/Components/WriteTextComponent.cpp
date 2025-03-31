@@ -4,11 +4,15 @@
 #include "../../src/sdlutils/Texture.h"
 
 #include "../../TheatrumMundi/TextInfo.h"
+#include "../../TheatrumMundi/DescriptionInfo.h"
 #include "../../src/Components/Image.h"
 #include "../../src/Components/Transform.h"
 #include "../ecs/Manager.h"
 
 #include <list>
+#include <string>
+
+using namespace std;
 
 //CONSTRUCTOR
 template <typename T>
@@ -21,6 +25,12 @@ WriteTextComponent<T>::WriteTextComponent(Font& desiredFont, const SDL_Color& de
 //UPDATE
 template <>
 void WriteTextComponent<std::list<TextInfo>>::update()
+{
+
+}
+
+template <typename T>
+void WriteTextComponent<T>::update()
 {
 
 }
@@ -111,6 +121,8 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 	// Convertir SDL_Texture* en Texture y asegurarse de que respete la transparencia
 	Texture* finalText = new Texture(sdlutils().renderer(), sdlFinalTexture);
 	_imageTextLog->setTexture(finalText);
+	_imageTextLog->setW(finalText->width());
+	_imageTextLog->setH(finalText->height());
 	
 
 
@@ -177,6 +189,16 @@ void WriteTextComponent<TextInfo>::render()
 	
 }
 
+template <>
+void WriteTextComponent<DescriptionInfo>::render()
+{
+	if (textStructure->Description.empty()) return;
+
+	Texture* dialogText = new Texture(sdlutils().renderer(), textStructure->Description, _myFont, _color);
+	SDL_Rect dialogRect = { 350, textStructure->posY + 60, dialogText->width(),dialogText->height() };
+	dialogText->render(dialogRect, 0);
+
+}
 
 //IS FINISHED
 template<>
@@ -229,3 +251,5 @@ WriteTextComponent<T>::~WriteTextComponent()
 template class WriteTextComponent<TextInfo>;
 
 template class WriteTextComponent<std::list<TextInfo>>;
+
+template class WriteTextComponent<DescriptionInfo>;

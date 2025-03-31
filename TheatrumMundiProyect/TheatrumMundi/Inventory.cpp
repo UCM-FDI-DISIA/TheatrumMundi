@@ -5,6 +5,7 @@
 #include "Manager.h"
 #include "DragComponent.h"
 
+
 /// <summary>
 /// Create the inventory, setting the array of positions, the fitst item, the active to false and the originalPos to 0,0
 /// </summary>
@@ -12,9 +13,11 @@ Inventory::Inventory()
 	: active(false), firstItem(0)
 {
 	for (int i = 0; i < TOTALITEMSTOSHOW; ++i) {
-		positions.push_back(Vector2D(100, 175 + i * 150));
+		positions.push_back(Vector2D(1135, 175 + i * 150));
 	}
 	originalPos = { 0,0 };
+
+	_textDescription = new DescriptionInfo{" ",0};
 }
 /// <summary>
 /// Destroy the reference to the hints
@@ -44,6 +47,35 @@ int Inventory::getItemNumber()
 	}
 	return std::min(3, static_cast<int>(items.size()) - firstItem); //Return the number of items to be rendered
 
+}
+
+/// <summary>
+/// Changes text description displayed on screen
+/// </summary>
+/// <param name="_id">Item id</param>
+/// <param name="invEntityList">Iventory item entities</param>
+/// <param name="backgroundTextTransform">Visual item description background's transform</param>
+void Inventory::setTextDescription(std::string _id, std::vector<Entity*>& invEntityList, Transform* backgroundTextTransform)
+{
+	int index = 0;
+
+	//Searches item with desired id
+	for (auto it = items.begin(); it != items.end(); ++it)
+	{
+		if (it[0]->getID() == _id)
+		{
+			//set text description
+			_textDescription->Description = it[0]->getDescription();
+
+			//set background position
+			backgroundTextTransform->getPos().setY(GetPosition(index).getY() + 40);
+			backgroundTextTransform->getPos().setX(340);
+
+			//set text description position
+			_textDescription->posY = GetPosition(index).getY();
+		}
+		index++;
+	}
 }
 /// <summary>
 /// Add a new Hint to the inventory

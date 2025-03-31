@@ -55,6 +55,7 @@
     <ClCompile Include="ClockPuzzleScene.cpp" />
     <ClCompile Include="DialogTestScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
+    <ClCompile Include="DragPuzzleScene.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="Hint.cpp" />
     <ClCompile Include="InitialScene.cpp" />
@@ -63,6 +64,8 @@
     <ClCompile Include="MiddleRoomScene.cpp" />
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="PauseManager.cpp" />
+    <ClCompile Include="MusicPuzzleScene.cpp" />
+    <ClCompile Include="MosaicPuzzleScene.cpp" />
     <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PipePuzzleScene.cpp" />
     <ClCompile Include="PhysicsBodyComponent.cpp" />
@@ -73,6 +76,7 @@
     <ClCompile Include="SceneRoomTemplate.cpp" />
     <ClCompile Include="SceneTemplate.cpp" />
     <ClCompile Include="TeaCupPuzzleScene.cpp" />
+    <ClCompile Include="TiledAreaComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -227,9 +231,11 @@
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="DebugInventoryScene.h" />
     <ClInclude Include="ClockPuzzleScene.h" />
+    <ClInclude Include="DescriptionInfo.h" />
     <ClInclude Include="DialogTestScene.h" />
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="Direction.h" />
+    <ClInclude Include="DragPuzzleScene.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="EventsInfo.h" />
     <ClInclude Include="Hint.h" />
@@ -239,6 +245,8 @@
     <ClInclude Include="MiddleRoomScene.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="PauseManager.h" />
+    <ClInclude Include="MusicPuzzleScene.h" />
+    <ClInclude Include="MosaicPuzzleScene.h" />
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="PipePuzzleScene.h" />
     <ClInclude Include="PhysicsBodyComponent.h" />
@@ -250,6 +258,7 @@
     <ClInclude Include="SceneTemplate.h" />
     <ClInclude Include="TeaCupPuzzleScene.h" />
     <ClInclude Include="TextInfo.h" />
+    <ClInclude Include="TiledAreaComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />

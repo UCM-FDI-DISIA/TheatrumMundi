@@ -63,6 +63,7 @@ namespace grp {
 // list of group identifiers - note that we rely on that the
 // first number is 0 in C/C++ standard
 enum grpId : cmpId_t {
+	UNDER,
 	DEFAULT,
 	BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, // ALL THE ELEMENTS
 	BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, //BOOK AND COME BACK

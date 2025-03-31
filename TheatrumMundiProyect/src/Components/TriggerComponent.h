@@ -22,13 +22,15 @@ public:
 	std::list<ecs::entity_t> const& triggerContextEntities() { 
 		return _callbackContextEntities;
 	}
-
+	inline void setTargetGroup(ecs::grp::grpId aux) {
+		targetlayer = aux;
+	};
 	void update() override;
 
 private:
 
 	void updateTriggerState();
-
+	ecs::grp::grpId targetlayer;
 	std::list<ecs::entity_t> _callbackContextEntities; // The entity that triggered the current callback
 
 protected:
