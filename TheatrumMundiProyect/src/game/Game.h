@@ -23,6 +23,7 @@ private:
 	
 	 void checkCollisions();
 public:
+	
 	static Game* Instance();
 	~Game();
 	void init();

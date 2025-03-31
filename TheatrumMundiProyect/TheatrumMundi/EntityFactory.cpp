@@ -54,6 +54,16 @@ ecs::entity_t EntityFactory::CreateInteractableEntity(ecs::EntityManager* _entit
 	return newElement;
 }
 
+ecs::entity_t EntityFactory::CreateRectImageWithCollider(ecs::EntityManager* _entityManager, const std::string& _idImage, Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer, ecs::grpId_t gId)
+{
+	ecs::entity_t newElement = _entityManager->addEntity(gId);
+	_entityManager->addComponent<Transform>(newElement, _pos, _dir, _width, _height, _rot);
+	_entityManager->addComponent<Image>(newElement, &sdlutils().images().at(_idImage));
+	_entityManager->addComponent<RectArea2D>(newElement, _myLayer);
+	_entityManager->addComponent<PhysicsBodyComponent>(newElement);
+	return newElement;
+}
+
 ecs::entity_t  EntityFactory::CreateInteractableEntityTiledCollider(ecs::EntityManager* _entityManager, const std::string& _idImage,
 	Vector2D _pos, Vector2D _dir, int _width, int _height,int col, int fil, int _rot, Area2DLayerManager* _myLayer, ecs::grpId_t _gId)
 {
@@ -71,6 +81,23 @@ ecs::entity_t  EntityFactory::CreateInteractableEntityTiledCollider(ecs::EntityM
 	_entityManager->addComponent<DragComponent>(newElement);
 
 	_entityManager->addComponent<PhysicsBodyComponent>(newElement);
+	return newElement;
+}
+
+ecs::entity_t EntityFactory::CreateTriggerEntity(ecs::EntityManager* _entityManager, const std::string& _idImage, Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer, ecs::grpId_t _gId)
+{
+
+	ecs::entity_t newElement = _entityManager->addEntity(_gId);
+	Transform* trans = _entityManager->addComponent<Transform>(newElement, _pos, _dir, _width, _height, _rot);
+
+	_entityManager->addComponent<Image>(newElement, &sdlutils().images().at(_idImage));
+
+	_entityManager->addComponent<ClickComponent>(newElement);
+
+	_entityManager->addComponent<RectArea2D>(newElement, _myLayer);
+
+	_entityManager->addComponent<TriggerComponent>(newElement);
+
 	return newElement;
 }
 

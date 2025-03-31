@@ -121,6 +121,8 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 	// Convertir SDL_Texture* en Texture y asegurarse de que respete la transparencia
 	Texture* finalText = new Texture(sdlutils().renderer(), sdlFinalTexture);
 	_imageTextLog->setTexture(finalText);
+	_imageTextLog->setW(finalText->width());
+	_imageTextLog->setH(finalText->height());
 	
 
 
@@ -193,7 +195,7 @@ void WriteTextComponent<DescriptionInfo>::render()
 	if (textStructure->Description.empty()) return;
 
 	Texture* dialogText = new Texture(sdlutils().renderer(), textStructure->Description, _myFont, _color);
-	SDL_Rect dialogRect = { 350, textStructure->posY, dialogText->width(),dialogText->height() };
+	SDL_Rect dialogRect = { 350, textStructure->posY + 60, dialogText->width(),dialogText->height() };
 	dialogText->render(dialogRect, 0);
 
 }

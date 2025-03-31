@@ -30,8 +30,8 @@ void ClickableSpriteComponent::initComponent() {
         });
         
         _tr->connect(TriggerComponent::CURSOR_LEFT, [this]() {
-        _img->setW(_transform->getWidth() + 10);
-        _img->setH(_transform->getHeight() + 10);
+        _img->setW(_transform->getWidth());
+        _img->setH(_transform->getHeight());
         _img->setPosOffset(0,0);
         //_transform->getPos().set(_transform->getPos() + Vector2D(-5,-5));
         });
