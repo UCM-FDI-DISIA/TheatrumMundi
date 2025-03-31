@@ -121,6 +121,8 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 	// Convertir SDL_Texture* en Texture y asegurarse de que respete la transparencia
 	Texture* finalText = new Texture(sdlutils().renderer(), sdlFinalTexture);
 	_imageTextLog->setTexture(finalText);
+	_imageTextLog->setW(finalText->width());
+	_imageTextLog->setH(finalText->height());
 	
 
 
