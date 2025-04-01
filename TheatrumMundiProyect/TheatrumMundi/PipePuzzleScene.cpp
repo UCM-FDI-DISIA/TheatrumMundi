@@ -661,7 +661,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 		// create entity
 		auto clock = entityFactory->CreateInteractableEntity(entityManager, "minutero", EntityFactory::RECTAREA,
-			Vector2D(950, 770), Vector2D(0, 0), 150,150, 0,
+			Vector2D(1000, 880), Vector2D(0, 0), 150,180, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);

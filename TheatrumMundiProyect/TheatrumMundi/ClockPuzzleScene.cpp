@@ -74,12 +74,12 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		//create the clock hands : minute
-		longClockHand = entityFactory->CreateInteractableEntity(entityManager, "minutero", EntityFactory::RECTAREA, Vector2D(680, 360), Vector2D(0, 0), 20, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
+		longClockHand = entityFactory->CreateInteractableEntity(entityManager, "minutero", EntityFactory::RECTAREA, Vector2D(475, 40), Vector2D(0, 0), 100, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
 		auto _clockMinTransform = longClockHand->getMngr()->getComponent<Transform>(longClockHand);
 		if (!hasLongClockHand) longClockHand->getMngr()->setActive(longClockHand, false);
 
 		//create the clock hands : hour
-		shortClockHand = entityFactory->CreateInteractableEntity(entityManager, "horaria", EntityFactory::RECTAREA, Vector2D(695, 360), Vector2D(0, 0), 20, 60, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
+		shortClockHand = entityFactory->CreateInteractableEntity(entityManager, "horaria", EntityFactory::RECTAREA, Vector2D(470,75), Vector2D(0, 0), 100, 150, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
 		auto _clockHorTransform = shortClockHand->getMngr()->getComponent<Transform>(shortClockHand);
 		if (!hasShortClockHand) shortClockHand->getMngr()->setActive(shortClockHand, false);
 
@@ -205,6 +205,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 					//Assign to this inventory the hint;
 					if(variant <=1)AddInvItem("frascoV2", "Un frasco vacio.",position, sr);
 					else if (variant ==2)AddInvItem("frascoV1", "Contiene restos de algo.", position, sr);
+
 #ifdef DEBUG
 					std::cout << "wii";
 #endif // DEBUG
@@ -217,8 +218,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clk = entityManager->getComponent<ClickComponent>(container);
 		clk->connect(ClickComponent::JUST_CLICKED, [this, container, sr]() {
 
-			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-			AddInvItem("frascoV1", "Me lo puedo beber??", position, sr);
+		
 			container->getMngr()->setActive(container, false);
 			});
 

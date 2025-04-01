@@ -174,7 +174,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//REWARD ENTITY
 		auto clock = entityFactory->CreateInteractableEntity(entityManager, "horaria", EntityFactory::RECTAREA,
-			Vector2D(410, 548), Vector2D(0, 0), 340, 200, 0,
+			Vector2D(700, 640), Vector2D(0, 0), 100, 150, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
@@ -184,7 +184,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		entity_t tag;
 		if (variant <= 1) {
 			tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV1", EntityFactory::RECTAREA,
-				Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+				Vector2D(510, 548), Vector2D(0, 0), 120, 120, 0,
 				areaLayerManager,
 				EntityFactory::NODRAG,
 				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
@@ -192,7 +192,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		}
 		 else if (variant == 2) {
 			 tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV2", EntityFactory::RECTAREA,
-				 Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+				 Vector2D(510, 548), Vector2D(0, 0), 120, 120, 0,
 				 areaLayerManager,
 				 EntityFactory::NODRAG,
 				 ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
