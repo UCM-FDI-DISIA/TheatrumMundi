@@ -69,7 +69,8 @@ void Inventory::setTextDescription(std::string _id, std::vector<Entity*>& invEnt
 
 			//set background position
 			backgroundTextTransform->getPos().setY(GetPosition(index).getY() + 40);
-			backgroundTextTransform->getPos().setX(340);
+			backgroundTextTransform->getPos().setX(535);
+			backgroundTextTransform->setWidth(100);
 
 			//set text description position
 			_textDescription->posY = GetPosition(index).getY();

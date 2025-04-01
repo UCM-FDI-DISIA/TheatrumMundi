@@ -52,7 +52,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 
 	//description text entity
 	auto textDescriptionEnt = entityManager->addEntity(ecs::grp::DEFAULT);
-	auto _testTextTranform = entityManager->addComponent<Transform>(textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
+	auto _testTextTranform = entityManager->addComponent<Transform>(textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
 	entityManager->setActive(textDescriptionEnt, false);
 	SDL_Color colorDialog = { 255, 255, 255, 255 };
 	entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, sr->GetInventory()->getTextDescription());
