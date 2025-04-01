@@ -511,6 +511,10 @@
     {
       "id": "Tumba",
       "file": "../resources/images/temporales/Room2/Tumba.jpeg"
+    },
+    {
+      "id": "Cadaver2",
+      "file": "../resources/images/temporales/Room2/Cadaver.png"
     }
   ],
 
