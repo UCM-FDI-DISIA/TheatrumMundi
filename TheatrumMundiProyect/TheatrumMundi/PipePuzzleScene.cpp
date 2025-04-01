@@ -970,9 +970,8 @@ void PipePuzzleScene::waterPassPipe(int pipe) {
 void PipePuzzleScene::waterPassModule(int module) {
 	Module::moduleInfo modInfo = _modules[module]->getModuleInfo();
 
-	//checks if the four neightbourds the module has, carries water
 	bool receivesWater = false;
-	//std::cout << _waterPipes[modInfo.right.second]<< _waterPipes[modInfo.right.second]->getPipeInfo().result << endl;
+	
 	if (_waterPath[modInfo.whoToCheck.second]._withWater) {
 		receivesWater = true;
 	}

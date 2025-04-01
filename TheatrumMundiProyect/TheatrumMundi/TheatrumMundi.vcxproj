@@ -65,7 +65,6 @@
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="MusicPuzzleScene.cpp" />
     <ClCompile Include="MosaicPuzzleScene.cpp" />
-    <ClCompile Include="Path.cpp" />
     <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PipePuzzleScene.cpp" />
     <ClCompile Include="PhysicsBodyComponent.cpp" />
@@ -246,7 +245,6 @@
     <ClInclude Include="Module.h" />
     <ClInclude Include="MusicPuzzleScene.h" />
     <ClInclude Include="MosaicPuzzleScene.h" />
-    <ClInclude Include="Path.h" />
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="PipePuzzleScene.h" />
     <ClInclude Include="PhysicsBodyComponent.h" />
