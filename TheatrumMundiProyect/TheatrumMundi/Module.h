@@ -16,10 +16,7 @@ protected:
 	{
 		int name;
 		Directions dir;
-		pair<char, int> right;
-		pair<char, int> left;
-		pair<char, int> up;
-		pair<char, int> down;
+		pair<char, int> whoToCheck;
 		bool result;
 	};
 private:
