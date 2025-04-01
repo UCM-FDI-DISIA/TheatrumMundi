@@ -415,7 +415,7 @@ void Room1Scene::init()
 			if (GetInventory()->getActive()) {
 				entityManager->setActive(InventoryBackground, true);
 
-				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(925);
+				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->setPosX(925);
 				//change the position of the log button
 				areaLayerManager->sendFront(InvArea->getLayerPos());
 
@@ -436,7 +436,7 @@ void Room1Scene::init()
 				entityManager->setActive(downButton, false);
 				entityManager->setActive(upButton, false);
 
-				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(60 + 268 / 3);
+				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->setPosX(60 + 268 / 3);
 				//change the position of the log button
 
 				// its okay to use the first item as the first item to show??
