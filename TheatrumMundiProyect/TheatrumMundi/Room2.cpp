@@ -85,8 +85,10 @@ Room2Scene::Room2Scene()
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 		hook->getMngr()->setActive(hook, false);
 	};
-	roomEvent[SecretExit] = [this] {
+	roomEvent[SecretEntry] = [this] {
 		//Depende de si es escena aparte o no
+		secretEntryZoom->getMngr()->setActive(secretEntryZoom, true);
+		_quitButton->getMngr()->setActive(_quitButton, true);
 	};
 	roomEvent[ResolveCase] = [this] {
 		//IMPORTANT assign dialogue
@@ -157,6 +159,10 @@ void Room2Scene::init()
 			entityManager->setActiveGroup(ecs::grp::ZOOMOBJ, false);
 			entityManager->setActive(_quitButton, false);
 			entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, true);
+			if (!puzzlesol[2]) {
+				mirror->getMngr()->setActive(mirror, false);
+				secretEntry->getMngr()->setActive(secretEntry, false);
+			}
 		});
 		entityManager->setActive(_quitButton, false);
 
@@ -255,6 +261,10 @@ void Room2Scene::init()
 				AudioManager::Instance().playSound(doorSound);
 				CementeryBackgroundScroll->Scroll(ScrollComponent::LEFT);
 			}
+			else if (!isOpen) {
+				roomEvent[DoorScene]();
+				resolvedPuzzle(2);
+			}
 		});
 #pragma endregion
 
@@ -303,16 +313,11 @@ void Room2Scene::init()
 			resolvedPuzzle(3);
 		});
 
-		auto door = entityFactory->CreateInteractableEntity(entityManager, "PuertaSantuario", EntityFactory::RECTAREA, Vector2D(1170, 300), Vector2D(0, 0), 450 / 3, 626 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-		CementeryBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(door));
-		entityManager->getComponent<ClickComponent>(door)->connect(ClickComponent::JUST_CLICKED, [this]() {
-			roomEvent[DoorScene]();
-			resolvedPuzzle(2);
-		});
-
 #pragma endregion
 
 #pragma region MausoleumEntities
+
+#pragma region PreSolveMosaic
 
 		//Before Completing mosaic
 		auto mosaic = entityFactory->CreateInteractableEntity(entityManager, "Mosaico", EntityFactory::RECTAREA, Vector2D(400 + 1344, 300), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -326,6 +331,10 @@ void Room2Scene::init()
 		entityManager->getComponent<ClickComponent>(window)->connect(ClickComponent::JUST_CLICKED, [this]() {
 			roomEvent[WindowScene]();
 		});
+
+#pragma endregion
+
+#pragma region SolvedMosaic
 
 		//After completeing mosaic
 		organMosaic = entityFactory->CreateInteractableEntity(entityManager, "Organo", EntityFactory::RECTAREA, Vector2D(500 + 1344, 390), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -354,27 +363,35 @@ void Room2Scene::init()
 		});
 		rope->getMngr()->setActive(rope, false);
 
+#pragma endregion
+
+#pragma region SolvedOrgan
+
 		//After completeing organ
 
 		hook = entityFactory->CreateInteractableEntity(entityManager, "Gancho", EntityFactory::RECTAREA, Vector2D(400, 190), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 		entityManager->getComponent<ClickComponent>(hook)->connect(ClickComponent::JUST_CLICKED, [this]() {
 			roomEvent[Hook]();
-		});
+			});
 		hook->getMngr()->setActive(hook, false);
 
-		mirror = entityFactory->CreateImageEntity(entityManager, "Ventana",Vector2D(400, 300), Vector2D(0, 0), 200 / 3, 235 / 3, 0, ecs::grp::INTERACTOBJ);
+		mirror = entityFactory->CreateImageEntity(entityManager, "Ventana", Vector2D(400, 300), Vector2D(0, 0), 200 / 3, 235 / 3, 0, ecs::grp::INTERACTOBJ);
 		CementeryBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(mirror));
 		mirror->getMngr()->setActive(mirror, false);
 
 		secretEntry = entityFactory->CreateInteractableEntity(entityManager, "PaasadizoSecretoEspejo", EntityFactory::RECTAREA, Vector2D(400, 390), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		CementeryBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(secretEntry));
 		entityManager->getComponent<ClickComponent>(secretEntry)->connect(ClickComponent::JUST_CLICKED, [this]() {
-			roomEvent[SecretExit]();
+			roomEvent[SecretEntry]();
 		});
 		secretEntry->getMngr()->setActive(secretEntry, false);
 
 
+		secretEntryZoom = entityFactory->CreateImageEntity(entityManager, "EntradaOculta", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
+		secretEntryZoom->getMngr()->setActive(secretEntryZoom, false);
 
+#pragma endregion
+		
 #pragma endregion
 
 
