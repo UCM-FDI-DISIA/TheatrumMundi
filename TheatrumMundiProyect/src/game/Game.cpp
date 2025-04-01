@@ -72,11 +72,11 @@ void Game::init() {
 	sdlutils().hideCursor();
 
 	// Create the manager
-	_mngr = new SceneManager();
+
 	_log = new Log();
-	
 	_dataManager = new DataManager();
 	_csvdata = new CSVdataRecolector();
+	_mngr = new SceneManager();
 }
 
 void Game::render() const

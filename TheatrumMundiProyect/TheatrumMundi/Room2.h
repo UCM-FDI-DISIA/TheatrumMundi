@@ -5,6 +5,11 @@ class Room2Scene : public SceneRoomTemplate
 private:
 	std::string _eventToRead;
 	bool isOpen;
+
+	//Referencwe to entities which appear and dissapear
+	ecs::entity_t organ;
+	ecs::entity_t mirror;
+	ecs::entity_t secretEntry;
 protected:
 	enum Room1Event
 	{

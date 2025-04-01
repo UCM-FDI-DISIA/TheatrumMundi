@@ -462,7 +462,7 @@
     },
     {
       "id": "Cuervo",
-      "file": "../resources/images/Cuervo.jpeg"
+      "file": "../resources/images/temporales/Room2/Cuervo.jpeg"
     },
     {
       "id": "FondoCementerio",
@@ -507,6 +507,10 @@
     {
       "id": "Ventana",
       "file": "../resources/images/temporales/Room2/Ventana.jpeg"
+    },
+    {
+      "id": "Tumba",
+      "file": "../resources/images/temporales/Room2/Tumba.jpeg"
     }
   ],
 
