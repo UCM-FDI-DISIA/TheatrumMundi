@@ -99,12 +99,12 @@ public:
 
 	// the window's width
 	inline int width() {
-		return _width;
+		return 1349;
 	}
 
 	// the window's height
 	inline int height() {
-		return _height;
+		return 748;
 	}
 
 	// toggle to full-screen/window mode

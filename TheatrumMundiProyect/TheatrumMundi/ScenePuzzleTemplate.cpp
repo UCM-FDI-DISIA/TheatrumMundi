@@ -84,7 +84,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 			//if you drop the item, compares if it was drop in or out tge cloack
 			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this, sr, a, it, _backgroundTextDescription, textDescriptionEnt]() {
 				//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
-				if (!placeHand) it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
+				if (!placeHand) it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
 				//in other case remove the item from this inventory and the inventory of Room1
 				else {
 					//Add the hand to the cloack
@@ -94,7 +94,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 						sr->GetInventory()->removeItem(a->getID(), invObjects);
 
 					}
-					else it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
+					else it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
 				}
 
 				entityManager->setActive(_backgroundTextDescription, false);
@@ -159,7 +159,7 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 		//if you drop the item, compares if it was drop in or out tge cloack
 		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this,id,sr,it]() {
 			//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
-			if (!placeHand) it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
+			if (!placeHand) it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
 			//in other case remove the item from this inventory and the inventory of Room1
 			else {
 				//Add the hand to the cloack
@@ -168,7 +168,7 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 					//remove the object from the inventory
 					sr->GetInventory()->removeItem(id, invObjects);
 				}
-				else it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
+				else it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
 			}
 			});
 	}

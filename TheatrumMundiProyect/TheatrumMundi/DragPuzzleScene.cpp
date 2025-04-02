@@ -44,7 +44,7 @@ void DragPuzzleScene::init()
         for (int i = 0; i < 9;i++) {
             for (int j = 0;j < 8;j++)
             {
-                auxpos = Vector2D(i * auxtiledsize + auxposinit.getX(), j * auxtiledsize + auxposinit.getY());
+                auxpos = Vector2D(i * auxtiledsize + auxposinit.getX()*Game::Instance()->wscreenScale, j * auxtiledsize + auxposinit.getY()* Game::Instance()->wscreenScale);
                 if (wallMat[j][i]) {
                     //wall
 
@@ -64,7 +64,7 @@ void DragPuzzleScene::init()
         auxlist.push_back(entityManager->getComponent<TiledAreaComponent>(_triggerObj));
         entityManager->getComponent<DragComponent>(_triggerObj)->connect(DragComponent::DRAG_END, [this]() {
             Transform* aux = entityManager->getComponent<Transform>(_triggerObj);
-            aux->getPos() = NearMatPoint(aux->getPos());
+            aux->setPos(NearMatPoint(aux->getPos()));
             });
         //Finish point
         auto goal = entityFactory->CreateTriggerEntity(entityManager, "piezademeta", posMat[7][1], Vector2D(0, 0), auxtiledsize, auxtiledsize, 0, areaLayerManager, ecs::grp::BACKGROUND);
@@ -85,7 +85,7 @@ void DragPuzzleScene::init()
          auxlist.push_back(entityManager->getComponent<TiledAreaComponent>(_a));
          entityManager->getComponent<DragComponent>(_a)->connect(DragComponent::DRAG_END, [this,_a]() {
              Transform* aux = entityManager->getComponent<Transform>(_a);
-             aux->getPos() = NearMatPoint(aux->getPos());
+             aux->setPos(NearMatPoint(aux->getPos()));
              });
 
          //L DOWM
@@ -94,7 +94,7 @@ void DragPuzzleScene::init()
          auxlist.push_back(entityManager->getComponent<TiledAreaComponent>(_b));
          entityManager->getComponent<DragComponent>(_b)->connect(DragComponent::DRAG_END, [this, _b]() {
              Transform* aux = entityManager->getComponent<Transform>(_b);
-             aux->getPos() = NearMatPoint(aux->getPos());
+             aux->setPos(NearMatPoint(aux->getPos()));
              });
 
          // I
@@ -102,21 +102,21 @@ void DragPuzzleScene::init()
          auxlist.push_back(entityManager->getComponent<TiledAreaComponent>(_c));
          entityManager->getComponent<DragComponent>(_c)->connect(DragComponent::DRAG_END, [this, _c]() {
              Transform* aux = entityManager->getComponent<Transform>(_c);
-             aux->getPos() = NearMatPoint(aux->getPos());
+             aux->setPos(NearMatPoint(aux->getPos()));
              });
          // 2x2
          auto _d = entityFactory->CreateInteractableEntityTiledCollider(entityManager, "piezade4", posMat[6][3], Vector2D(0, 0), auxtiledsize * 2, auxtiledsize * 2, 2, 2, 0, areaLayerManager, ecs::grp::INTERACTOBJ);
          auxlist.push_back(entityManager->getComponent<TiledAreaComponent>(_d));
          entityManager->getComponent<DragComponent>(_d)->connect(DragComponent::DRAG_END, [this, _d]() {
              Transform* aux = entityManager->getComponent<Transform>(_d);
-             aux->getPos() = NearMatPoint(aux->getPos());
+             aux->setPos(NearMatPoint(aux->getPos()));
              });
          // 2x1
          auto _e = entityFactory->CreateInteractableEntityTiledCollider(entityManager, "piezade2", posMat[2][3], Vector2D(0, 0), auxtiledsize*2 , auxtiledsize, 2, 1, 0, areaLayerManager, ecs::grp::INTERACTOBJ);
          auxlist.push_back(entityManager->getComponent<TiledAreaComponent>(_e));
          entityManager->getComponent<DragComponent>(_e)->connect(DragComponent::DRAG_END, [this, _e]() {
              Transform* aux = entityManager->getComponent<Transform>(_e);
-             aux->getPos() = NearMatPoint(aux->getPos());
+             aux->setPos(NearMatPoint(aux->getPos()));
              });
          //z
          auto _f = entityFactory->CreateInteractableEntityTiledCollider(entityManager, "piezadez", posMat[5][5], Vector2D(0, 0), auxtiledsize*3, auxtiledsize * 2, 3, 2, 0, areaLayerManager, ecs::grp::INTERACTOBJ);
@@ -125,7 +125,7 @@ void DragPuzzleScene::init()
          entityManager->getComponent<TiledAreaComponent>(_f)->setActiveTile(false, 2, 1);
          entityManager->getComponent<DragComponent>(_f)->connect(DragComponent::DRAG_END, [this, _f]() {
              Transform* aux = entityManager->getComponent<Transform>(_f);
-             aux->getPos() = NearMatPoint(aux->getPos());
+             aux->setPos(NearMatPoint(aux->getPos()));
              });
          //Add de collisionslist
          entityManager->getComponent<PhysicsBodyComponent>(_b)->AddObjectofList(auxlist, entityManager->getComponent<TiledAreaComponent>(_b));
@@ -147,13 +147,13 @@ void DragPuzzleScene::init()
         auto _reset = entityFactory->CreateInteractableEntity(entityManager,"Hanni",EntityFactory::RECTAREA,posMat[8][7],Vector2D(0,0),auxtiledsize,auxtiledsize,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::INTERACTOBJ);
         entityManager->getComponent<ClickComponent>(_reset)->connect(ClickComponent::JUST_CLICKED, [this,_atr,_btr,_ctr,_dtr,_etr,_ftr,_triggerobjtr]() {
             if (!solved) {
-                _atr->getPos() = posMat[5][2];
-                _btr->getPos() = posMat[2][5];
-                _ctr->getPos() = posMat[4][4];
-                _dtr->getPos() = posMat[6][3];
-                _etr->getPos() = posMat[2][3];
-                _ftr->getPos() = posMat[5][5];
-                _triggerobjtr->getPos() = posMat[1][3];
+                _atr->setPos(posMat[5][2]);
+                _btr->setPos(posMat[2][5]);
+                _ctr->setPos(posMat[4][4]);
+                _dtr->setPos(posMat[6][3]);
+                _etr->setPos(posMat[2][3]);
+                _ftr->setPos(posMat[5][5]);
+                _triggerobjtr->setPos(posMat[1][3]);
             }
           });
          
