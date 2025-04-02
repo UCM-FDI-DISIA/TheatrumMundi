@@ -53,7 +53,6 @@
                 {"Character":" ","Text":"Jajaja..."},
                 {"Character":" ","Text":"¡Hasta ahora!"},
                 {"Character":"Sol","Text":"Capullo."},
-                {"Character":"Lucy","Text":"Capullo."},
                 {"Character":"Lucy","Text":"Y ahora no responde."},
                 {"Character":"Lucy","Text":"Que desgraciado."},
                 {"Character":"Sol","Text":"¿Crees que deberíamos..."},
@@ -136,7 +135,22 @@
         },
     "Parte2":{
             "SalaIntermediaEvento1":[
-                {"Character":"Personaje1","Text":"Aqui pa ver si se actualiza el valor"}
+                {"Character":" ","Text":"Bueno, bueno, bueno."},
+                {"Character":" ","Text":"Parece que el incentivo a funcionado."},
+                {"Character":" ","Text":"¡Me habéis hecho caso!"},
+                {"Character":"Sol","Text":"Tienes un problema."},
+                {"Character":"Lucy","Text":"Creo que eso es quedarse corto."},
+                {"Character":" ","Text":"¡Oh no! Desprecio hacia mi persona."},
+                {"Character":" ","Text":"¿Qué podré hacer contra eso?"},
+                {"Character":" ","Text":"Jajaja"},
+                {"Character":"Sol","Text":"Si, si, todo muy gracioso."},
+                {"Character":"Sol","Text":"Ha muerto por veneno, ¿es eso lo que querías oír?"},
+                {"Character":" ","Text":"¡Claro que no! Eso era obvio."},
+                {"Character":" ","Text":"Mi adivinanza es otra:"},
+                {"Character":" ","Text":"¿Es posible que vuestra querida amiga haya sido asesinada?"},
+                {"Character":"Lucy","Text":"¿Qué?"},
+                {"Character":" ","Text":"Venga, con toda la información que tenéis deberíais de poder responder a eso."},
+                {"Character":" ","Text":"¿Cuál es vuestra respuesta?"}
             ]
         },
     "Parte3":{
