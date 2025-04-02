@@ -19,6 +19,8 @@
 #include "EventsInfo.h"
 #include "Log.h"
 
+#include "PauseManager.h"
+
 
 #include "../src/components/WriteTextComponent.h"
 #include "DialogueManager.h"
@@ -248,14 +250,14 @@ void Room1Scene::_setUI()
 
 	entityManager->setActive(rmObjects.quitButton, false);
 
-	// Pause Button
-	rmObjects.pauseButton = entityFactory->CreateInteractableEntity(entityManager, "B3", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-	
-	entityManager->getComponent<ClickComponent>(rmObjects.pauseButton)
-		->connect(ClickComponent::JUST_CLICKED, [this]() 
-		{
-			AudioManager::Instance().playSound(rmSounds.uiButton);
-		});
+
+	// Pause Logic
+	pauseManager->setScene(this);
+	pauseManager->Init(entityFactory,entityManager,areaLayerManager);
+
+	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getbackgroundNotInteractable())->getLayerPos());
+	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getreanudePauseButton())->getLayerPos());
+	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getexitPauseButton())->getLayerPos());
 
 	//Inventory
 	auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
@@ -338,7 +340,7 @@ void Room1Scene::_setUI()
 
 	entityManager->setActive(rmObjects.imposibleCaseButton, false);
 
-	//Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager); TODO Last line in the Init function gives problems
+	//Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 }
 
 void Room1Scene::_setRoomBackground()
