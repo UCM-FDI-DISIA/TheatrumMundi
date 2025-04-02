@@ -10,7 +10,7 @@
 // Class that represents a specific sound and allows total abstraction over the AudioManager
 class Sound {
 public:
-    Sound(const std::string& filePath);
+    Sound(const std::string& filePath = "");
     ~Sound();
     ALuint getSource() const;
     ALuint getBuffer() const;
