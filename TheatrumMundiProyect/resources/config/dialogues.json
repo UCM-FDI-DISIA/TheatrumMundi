@@ -1,22 +1,20 @@
 {   "Sala0":{
     "SalaIntermedia1":[
-        {"Character":"Sol","Text":"Esto es una prueba"},
-        {"Character":"Keisara","Text":"Yo se supone que estoy muerto"},
-        {"Character":"Lucy","Text":"uiiiai uiiiai"}
+        {"Character":" ","Text":"..."},
+        {"Character":" ","Text":"Un nuevo día, una nueva ventana de oportunidad."},
+        {"Character":" ","Text":"Qué divertido es ver la vida de alguien pasar."},
+        {"Character":" ","Text":"¿Qué podría ser aún mejor?"},
+        {"Character":" ","Text":"¿Ver sus últimos momentos?"},
+        {"Character":" ","Text":"No."},
+        {"Character":" ","Text":"Eso le quitaría la gracia a todo."},
+        {"Character":" ","Text":"No hay espacio para lo seguro,"},
+        {"Character":" ","Text":"ya sea un drama o totalmente absurdo."},
+        {"Character":" ","Text":"Lo realmente entretenido, sería decidir por uno mismo"},
+        {"Character":" ","Text":"si la escena ante nuestros ojos."},
+        {"Character":" ","Text":"es algo plausible o totalmente ficticio."},
     ]
     },
     "Sala1":{
-            "SalaIntermedia1":[
-                {"Character":"Sol","Text":"Esto es una prueba"},
-                {"Character":"Keisara","Text":"Yo se supone que estoy muerto"},
-                {"Character":"Lucy","Text":"uiiiai uiiiai"},
-                {"Character":"Lucy","Text":"aaaaaaa"},
-                {"Character":"Lucy","Text":"lalalalaalal"},
-                {"Character":"Lucy","Text":"uyuyuyuyuyui"},
-                {"Character":"Keisara","Text":"Yo se supone que "},
-                {"Character":"Keisara","Text":"Yo se "},
-                {"Character":"Keisara","Text":"Yo"}
-            ],
             "Sala1Intro":[
                 {"Character":"Personaje3","Text":"Why we still here... Just to suffer"}
             ],
