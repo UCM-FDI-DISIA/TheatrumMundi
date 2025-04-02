@@ -29,7 +29,7 @@ DialogueManager::~DialogueManager() {
 
 void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, string event)
 {
-   
+
     if (isMiddleRoom) {
         //Character (Image)
         auto character = entityManager->addEntity(grp::DIALOGUE);

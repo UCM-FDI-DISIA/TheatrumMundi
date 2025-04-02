@@ -22,7 +22,7 @@
 PipePuzzleScene::PipePuzzleScene()
 	:ScenePuzzleTemplate()
 {
-	
+	dialogueManager = new DialogueManager(1);
 }
 
 void PipePuzzleScene::pipeCreation()
@@ -900,6 +900,9 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			sr->scrollInventory(1);
 			});
 
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+
+		startDialogue("PuzzleTuberias");
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
 	createInvEntities(sr);
