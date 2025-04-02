@@ -74,7 +74,7 @@ ecs::entity_t  EntityFactory::CreateInteractableEntityTiledCollider(ecs::EntityM
 	
 	_entityManager->addComponent<ClickComponent>(newElement);
 	
-	_entityManager->addComponent<TiledAreaComponent>(newElement, _myLayer, trans, _width, _height, col, fil);
+	_entityManager->addComponent<TiledAreaComponent>(newElement, _myLayer, trans, col, fil);
 
 	_entityManager->addComponent<TriggerComponent>(newElement);
 

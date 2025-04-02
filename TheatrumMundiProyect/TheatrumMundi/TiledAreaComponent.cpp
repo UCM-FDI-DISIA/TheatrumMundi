@@ -7,12 +7,12 @@
 #include "RectArea2D.h"
 #include "../utils/Collisions.h"
 using namespace std;
-TiledAreaComponent::TiledAreaComponent(Area2DLayerManager* areaLayerMngr, Transform* objTransform, int width, int height, int fil, int col)
+TiledAreaComponent::TiledAreaComponent(Area2DLayerManager* areaLayerMngr, Transform* objTransform, int fil, int col)
 :Area2D(areaLayerMngr,Vector2D(0,0)){
  
     _objTransform = objTransform;
-    _width = width;
-    _height = height;
+    _width = objTransform->getWidth();
+    _height = objTransform->getHeight();
 
     matcol = std::vector(fil, std::vector(col, true));
     matcopos = std::vector(fil, std::vector(col, Vector2D(0,0)));
