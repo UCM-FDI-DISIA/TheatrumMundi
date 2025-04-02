@@ -195,7 +195,7 @@ void WriteTextComponent<DescriptionInfo>::render()
 	if (textStructure->Description.empty()) return;
 
 	Texture* dialogText = new Texture(sdlutils().renderer(), textStructure->Description, _myFont, _color);
-	SDL_Rect dialogRect = { 350, textStructure->posY + 60, dialogText->width(),dialogText->height() };
+	SDL_Rect dialogRect = { 680, textStructure->posY + 60, dialogText->width(),dialogText->height() };
 	dialogText->render(dialogRect, 0);
 
 }

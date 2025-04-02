@@ -25,12 +25,16 @@
 
 #include "../../TheatrumMundi/DescriptionInfo.h"
 
+#include "DialogueManager.h"
+
 using namespace std;
 
 TeaCupPuzzleScene::TeaCupPuzzleScene()
 {
 	_spoonIsInCup = false;
 	_poisonIsChecked = false;
+
+	dialogueManager = new DialogueManager(1);
 }
 
 TeaCupPuzzleScene::~TeaCupPuzzleScene()
@@ -41,9 +45,12 @@ TeaCupPuzzleScene::~TeaCupPuzzleScene()
 void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted) {
+		
 		isStarted = true;
 		room = sr;
 		
+		dialogueManager->setScene(this);
+
 		teaCupBackground = entityFactory->CreateImageEntity(entityManager, "TeaCupBackgroundWithoutSpoon", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		teaCupBackground->getMngr()->removeComponent<Area2D>(teaCupBackground);
 
@@ -87,6 +94,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 					// ... Change image revealing poinson or whatever  <-- TODO
 					Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithPoison");
 					teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
+					startDialogue("PuzzleTaza2");
 				});
 
 		/*entityManager->getComponent<TriggerComponent>(teaCup) // Spoon leaves the cup Area2D
@@ -154,7 +162,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 				if (sr->GetInventory()->getActive()) {
 					entityManager->setActive(InventoryBackground, true);
 
-					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(925);
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(925);
 					entityManager->setActive(downButton, true);
 					entityManager->setActive(upButton, true);
 
@@ -167,7 +175,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(InventoryBackground, false);
 					entityManager->setActive(downButton, false);
 					entityManager->setActive(upButton, false);
-					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(60 + 268 / 3);
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 
 					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], false);
@@ -189,6 +197,9 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 			sr->scrollInventory(1);
 			});
 
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+
+		startDialogue("PuzzleTaza1");
 	}
 
 	createInvEntities(sr);
