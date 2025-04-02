@@ -31,6 +31,9 @@ bool ScenePuzzleTemplate::ItemAlreadyCreated(const std::string& id)
 void ScenePuzzleTemplate::compareInv(SceneRoomTemplate* sr)
 {
 	bool isItemInRoom = false;
+	auto entityIt = invObjects.begin();
+	auto IdIt = invID.begin();
+	std::list<std::list<std::string>::iterator>IdToErase;
 	for (auto id : invID) {
 		for (auto srId : sr->GetInventory()->getItems()) {
 			if (id == srId->getID()) {
@@ -39,8 +42,21 @@ void ScenePuzzleTemplate::compareInv(SceneRoomTemplate* sr)
 			}
 		}
 		if (!isItemInRoom) {
-			sr->GetInventory()->removeItem(id, invObjects);
+			//Maybe should setActivefalse first
+			invObjects.erase(entityIt);
+			IdToErase.push_back(IdIt);
+			entityIt = invObjects.begin();
+			IdIt = invID.begin();
 		}
+		else {
+			++entityIt;
+			++IdIt;
+		}
+		isItemInRoom = false;
+	}
+	while (!IdToErase.empty()) {
+		invID.erase(IdToErase.front());
+		IdToErase.pop_front();
 	}
 }
 
@@ -109,7 +125,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 					if (isItemHand(a->getID())) {
 
 						//remove the object from the inventory
-						sr->GetInventory()->removeItem(a->getID(), invObjects);
+						sr->GetInventory()->removeItem(a->getID(), invObjects,invID);
 
 					}
 					else it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
@@ -135,9 +151,6 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 
 			//Set the active item to false
 			it->getMngr()->setActive(it, false);
-		}
-		else {
-			sr->GetInventory()->removeItem(a->getID(), invObjects);
 		}
 		++index; //Add 1 to the position index
 	}
@@ -175,7 +188,7 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 				if (isItemHand(id)) {
 
 					//remove the object from the inventory
-					sr->GetInventory()->removeItem(id, invObjects);
+					sr->GetInventory()->removeItem(id, invObjects, invID);
 				}
 				else it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
 			}

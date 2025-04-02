@@ -89,11 +89,12 @@ void Inventory::addItem(Hint* item)
 /// Remove the id item from the inventory
 /// </summary>
 /// <param name="idToRemove"></param> -->Id of the item to is going to been removed
-void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& invEntityList)
+void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& invEntityList, std::list<std::string>& invIdList)
 {
 	//The name don't have to be removed, if we have 2 entities of the same (imagine a BUG) then the inventory don't create the both of them
 	auto hintIt = hints.begin();
 	auto entityIt = invEntityList.begin();
+	auto IdIt = invIdList.begin();
 	for (auto it = items.begin(); it != items.end(); ++it) {
 		if (it[0]->getID() == idToRemove) {
 			items.erase(it);
@@ -101,11 +102,17 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 			hints.erase(hintIt);
 			entityIt[0]->getMngr()->setActive(entityIt[0], false);
 			invEntityList.erase(entityIt);
+			invIdList.erase(IdIt);
 			return;
 		}
 		++hintIt;
 		++entityIt;
+		++IdIt;
 	}
+}
+
+void Inventory::eraseNotRoomItems()
+{
 }
 
 /// <summary>
