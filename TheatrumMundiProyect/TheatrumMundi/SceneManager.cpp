@@ -12,7 +12,9 @@
 #include"DebugInventoryScene.h"
 #include "MosaicPuzzleScene.h"
 #include "MiddleRoomScene.h"
+#include "MusicPuzzleScene.h"
 #include "DragPuzzleScene.h"
+#include "XOPuzzleScene.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 SceneManager::SceneManager()
 {
@@ -25,8 +27,10 @@ SceneManager::SceneManager()
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
 	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
+	scenes[SceneName::MUSIC_PUZZLE] = new MusicPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
+	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
 
 	loadScene(SceneName::DRAG_PUZZLE);
 }

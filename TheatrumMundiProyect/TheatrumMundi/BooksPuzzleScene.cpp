@@ -34,6 +34,7 @@
 
 
 
+
 using namespace std;
 
 BooksPuzzleScene::BooksPuzzleScene()
@@ -68,13 +69,13 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//INVENTORY
 		//Invntory Background
-		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
+		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
 		entityManager->setActive(InventoryBackground, false);
 
-		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(upButton, false);
 
-		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(downButton, false);
 
 		//InventoryButton
@@ -89,7 +90,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 				if (sr->GetInventory()->getActive()) {
 					entityManager->setActive(InventoryBackground, true);
 
-					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(20);
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(925);
 					entityManager->setActive(downButton, true);
 					entityManager->setActive(upButton, true);
 
@@ -102,7 +103,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(InventoryBackground, false);
 					entityManager->setActive(downButton, false);
 					entityManager->setActive(upButton, false);
-					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(60 + 268 / 3);
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 
 					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], false);
@@ -307,6 +308,8 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		{
 			Game::Instance()->getSceneManager()->popScene();
 		});
+
+
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
 	createInvEntities(sr);

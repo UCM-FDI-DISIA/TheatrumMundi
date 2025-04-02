@@ -62,12 +62,12 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		//create the clock hands : minute
-		longClockHand = entityFactory->CreateInteractableEntity(entityManager, "clockMinArrow", EntityFactory::RECTAREA, Vector2D(680, 360), Vector2D(0, 0), 20, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
+		longClockHand = entityFactory->CreateInteractableEntity(entityManager, "minutero", EntityFactory::RECTAREA, Vector2D(680, 360), Vector2D(0, 0), 20, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
 		auto _clockMinTransform = longClockHand->getMngr()->getComponent<Transform>(longClockHand);
 		if (!hasLongClockHand) longClockHand->getMngr()->setActive(longClockHand, false);
 
 		//create the clock hands : hour
-		shortClockHand = entityFactory->CreateInteractableEntity(entityManager, "clockHorArrow", EntityFactory::RECTAREA, Vector2D(695, 360), Vector2D(0, 0), 20, 60, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
+		shortClockHand = entityFactory->CreateInteractableEntity(entityManager, "horaria", EntityFactory::RECTAREA, Vector2D(695, 360), Vector2D(0, 0), 20, 60, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
 		auto _clockHorTransform = shortClockHand->getMngr()->getComponent<Transform>(shortClockHand);
 		if (!hasShortClockHand) shortClockHand->getMngr()->setActive(shortClockHand, false);
 
@@ -224,13 +224,13 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//INVENTORY
 		//Invntory Background
-		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
+		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1150, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
 		entityManager->setActive(InventoryBackground, false);
 
-		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(upButton, false);
 
-		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(downButton, false);
 
 		//InventoryButton
@@ -245,7 +245,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 				if (sr->GetInventory()->getActive()) {
 					entityManager->setActive(InventoryBackground, true);
 
-					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(20);
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(925);
 					entityManager->setActive(downButton, true);
 					entityManager->setActive(upButton, true);
 
@@ -258,7 +258,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(InventoryBackground, false);
 					entityManager->setActive(downButton, false);
 					entityManager->setActive(upButton, false);
-					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(60 + 268 / 3);
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 
 					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], false);

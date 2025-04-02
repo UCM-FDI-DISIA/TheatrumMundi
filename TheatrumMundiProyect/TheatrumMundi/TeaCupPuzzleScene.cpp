@@ -67,6 +67,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 
 		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
+			std::cout << "pasa por el triger de la taza" << std::endl;
 			});
 		//Assigns the trigger bolean to false
 		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_LEFT, [this]() {
@@ -129,28 +130,22 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//INVENTORY
 		//Invntory Background
-		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
+		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
 		entityManager->setActive(InventoryBackground, false);
 
-		auto _textTest = entityManager->addEntity(ecs::grp::DEFAULT);
-		auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
-		entityManager->setActive(_textTest, false);
+		
+		
 
-		//Add writeText to description
-		SDL_Color colorDialog = { 0, 0, 0, 255 };
-		WriteTextComponent<DescriptionInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, sr->GetInventory()->getTextDescription());
-
-
-		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(upButton, false);
 
-		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(downButton, false);
 
 		//InventoryButton
 		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
-		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, _textTest, InventoryBackground, upButton, downButton, inventoryButton]() //Lamda function
+		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton]() //Lamda function
 		{
 				//AudioManager::Instance().playSound(buttonSound);
 				sr->GetInventory()->setActive(!sr->GetInventory()->getActive());  // Toggle the inventory
@@ -159,10 +154,9 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 				if (sr->GetInventory()->getActive()) {
 					entityManager->setActive(InventoryBackground, true);
 
-					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(20);
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(925);
 					entityManager->setActive(downButton, true);
 					entityManager->setActive(upButton, true);
-					entityManager->setActive(_textTest, true);
 
 					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], true);
@@ -173,8 +167,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(InventoryBackground, false);
 					entityManager->setActive(downButton, false);
 					entityManager->setActive(upButton, false);
-					entityManager->setActive(_textTest, false);
-					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(60 + 268 / 3);
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 
 					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], false);
