@@ -19,7 +19,7 @@ void ReadDialog::ReadJson() {
 	mJson >> dialogues;
 
 	//set room dialogues
-	for (int i = 1; i <= numRooms; ++i) {
+	for (int i = 0; i <= numRooms; ++i) {
 
 		string room = "Sala" + to_string(i);
 		assert(dialogues.contains(room));
