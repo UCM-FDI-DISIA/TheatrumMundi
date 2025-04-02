@@ -15,6 +15,7 @@
 #include "MusicPuzzleScene.h"
 #include "DragPuzzleScene.h"
 #include "TutorialScene.h"
+#include "XOPuzzleScene.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 SceneManager::SceneManager()
 {
@@ -31,6 +32,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
+	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
 
 	loadScene(SceneName::INITIAL_MENU);
 }

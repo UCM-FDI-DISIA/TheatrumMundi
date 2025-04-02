@@ -16,7 +16,7 @@ private:
 protected:
 
 public:
-	TiledAreaComponent(Area2DLayerManager* areaLayerMngr, Transform* objTransform, int width, int height, int fil, int col);
+	TiledAreaComponent(Area2DLayerManager* areaLayerMngr, Transform* objTransform, int fil, int col);
 	~TiledAreaComponent();
 
 	 bool containsPoint(Vector2D point) override;
