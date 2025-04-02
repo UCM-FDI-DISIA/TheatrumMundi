@@ -140,6 +140,7 @@ void DialogueManager::setCharacterImage(const string& Character) {
     if (Character == "Keisara") characterimg->setTexture(&sdlutils().images().at("KeisaraSprite"));
     else if (Character == "Lucy") characterimg->setTexture(&sdlutils().images().at("LucySprite"));
     else if (Character == "Sol") characterimg->setTexture(&sdlutils().images().at("SolSprite"));
+    else if (Character == " ") characterimg->setTexture(&sdlutils().images().at("Hanni")); //narrador
 }
 
 void DialogueManager::setEventToRead(std::string eventToRead)
