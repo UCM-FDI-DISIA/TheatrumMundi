@@ -16,7 +16,7 @@
 using namespace std;
 
 DialogueManager::DialogueManager(int numRooms) : _scene(nullptr), displayOnProcess(false), characterimg(nullptr), _writeTextComp(nullptr){
-    actualroom = 1;
+    actualroom = numRooms;
     room = "Sala" + to_string(actualroom);
     dialogueReader = new ReadDialog(numRooms);
     _showText = new TextInfo{ " ", " " };
