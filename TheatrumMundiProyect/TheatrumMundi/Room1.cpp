@@ -338,7 +338,7 @@ void Room1Scene::_setUI()
 
 	entityManager->setActive(rmObjects.imposibleCaseButton, false);
 
-	//Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager); TODO Last line in the Init function gives problems
+	Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 }
 
 void Room1Scene::_setRoomBackground()

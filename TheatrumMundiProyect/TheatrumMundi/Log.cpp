@@ -134,11 +134,12 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 		}
 		});
 	
+	/*
 	_textDialogueComp->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
 		while (ScrollComponentLog->numPhases() < (_log.size() / 5)) {
 			ScrollComponentLog->addPhase();
 		}
-		});
+		});*/
 
 		
 }
