@@ -1,4 +1,4 @@
-#include "Room1.h"
+  #include "Room1.h"
 #include <list>
 #include "../src/utils/Vector2D.h"
 #include "../src/components/Transform.h"
@@ -18,7 +18,6 @@
 #include "../TheatrumMundi/EntityFactory.h"
 #include "EventsInfo.h"
 #include "Log.h"
-
 
 
 #include "../src/components/WriteTextComponent.h"
@@ -339,7 +338,7 @@ void Room1Scene::_setUI()
 
 	entityManager->setActive(rmObjects.imposibleCaseButton, false);
 
-	//Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager); TODO Last line in the Init function gives problems
+	Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 }
 
 void Room1Scene::_setRoomBackground()

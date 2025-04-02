@@ -28,6 +28,8 @@ CalendearMobileTestScene::~CalendearMobileTestScene()
 void CalendearMobileTestScene::init()
 {
 	if (!isStarted) {
+
+		isStarted = true;
 		//Creation of the Calendear Button
 		auto _calendearButton = entityFactory->CreateInteractableEntity(entityManager, "calendear", entityFactory->RECTAREA,Vector2D(600, 100), Vector2D(0, 0), 200, 200, 0, areaLayerManager, entityFactory->NODRAG,ecs::grp::DEFAULT);
 		ClickComponent* calendearClick = entityManager->addComponent<ClickComponent>(_calendearButton);
@@ -71,7 +73,10 @@ void CalendearMobileTestScene::init()
 						_quitButton->getMngr()->setActive(_quitButton, false);
 					});
 			});
+
+
 	}
+
 }
 
 void CalendearMobileTestScene::refresh()

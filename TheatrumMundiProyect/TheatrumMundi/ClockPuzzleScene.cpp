@@ -13,6 +13,8 @@
 #include "../src/Components/LogComponent.h"
 #include <cassert>
 #include "AudioManager.h"
+#include "../src/game/Game.h"
+#include "Log.h"
 
 #include "SceneRoomTemplate.h"
 
@@ -22,7 +24,7 @@ ClockPuzzleScene::ClockPuzzleScene() : ScenePuzzleTemplate()
 	_actualMinute = 0;
 	hasLongClockHand = false;
 	hasShortClockHand = false;
-	
+	dialogueManager = new DialogueManager(1);
 
 }
 
@@ -40,7 +42,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		dialogueManager->setScene(this);
 
 		
-		//startDialogue("Puzzle3");
+		
 
 		room = sr;
 		AudioManager& a = AudioManager::Instance();
@@ -87,9 +89,9 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 				if (!getSolved()) {
 
 
-#ifdef DEBUG
+					#ifdef DEBUG
 					std::cout << "CLICKED MINUTERO\n";
-#endif // DEBUG
+					#endif // DEBUG
 					if (hasLongClockHand) {
 						AudioManager::Instance().playSound(clockMinSound);
 						_clockMinTransform->setRot(_clockMinTransform->getRot() + 15);
@@ -280,7 +282,12 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			sr->scrollInventory(1);
 			});
 
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+	
+		startDialogue("PuzzleReloj");
 	}
+
 	//IMPORTANT this need to be out of the isstarted!!!
 	createInvEntities(sr);
 }

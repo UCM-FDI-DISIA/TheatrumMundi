@@ -25,12 +25,16 @@
 
 #include "../../TheatrumMundi/DescriptionInfo.h"
 
+#include "DialogueManager.h"
+
 using namespace std;
 
 TeaCupPuzzleScene::TeaCupPuzzleScene()
 {
 	_spoonIsInCup = false;
 	_poisonIsChecked = false;
+
+	dialogueManager = new DialogueManager(1);
 }
 
 TeaCupPuzzleScene::~TeaCupPuzzleScene()
@@ -41,9 +45,12 @@ TeaCupPuzzleScene::~TeaCupPuzzleScene()
 void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted) {
+		
 		isStarted = true;
 		room = sr;
 		
+		dialogueManager->setScene(this);
+
 		teaCupBackground = entityFactory->CreateImageEntity(entityManager, "TeaCupBackgroundWithoutSpoon", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		teaCupBackground->getMngr()->removeComponent<Area2D>(teaCupBackground);
 
@@ -87,6 +94,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 					// ... Change image revealing poinson or whatever  <-- TODO
 					Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithPoison");
 					teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
+					startDialogue("PuzzleTaza2");
 				});
 
 		/*entityManager->getComponent<TriggerComponent>(teaCup) // Spoon leaves the cup Area2D
@@ -189,6 +197,9 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 			sr->scrollInventory(1);
 			});
 
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+
+		startDialogue("PuzzleTaza1");
 	}
 
 	createInvEntities(sr);
