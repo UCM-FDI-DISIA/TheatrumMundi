@@ -47,6 +47,8 @@ class ScenePuzzleTemplate: public SceneTemplate
 
 	bool ItemAlreadyCreated(const std::string& id); //Search if the item is in the list, this is to evitate duplications of an item
 
+	void compareInv(SceneRoomTemplate* sr); //Compare the inventory of the room with the inventory of the puzzle
+
 	ScenePuzzleTemplate();
 
 	~ScenePuzzleTemplate();

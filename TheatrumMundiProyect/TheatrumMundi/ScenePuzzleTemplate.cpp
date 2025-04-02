@@ -28,6 +28,22 @@ bool ScenePuzzleTemplate::ItemAlreadyCreated(const std::string& id)
 	return false;
 }
 
+void ScenePuzzleTemplate::compareInv(SceneRoomTemplate* sr)
+{
+	bool isItemInRoom = false;
+	for (auto id : invID) {
+		for (auto srId : sr->GetInventory()->getItems()) {
+			if (id == srId->getID()) {
+				isItemInRoom = true;
+				break;
+			}
+		}
+		if (!isItemInRoom) {
+			sr->GetInventory()->removeItem(id, invObjects);
+		}
+	}
+}
+
 ScenePuzzleTemplate::ScenePuzzleTemplate(): SceneTemplate()
 {
 	placeHand = false;
@@ -43,6 +59,8 @@ ScenePuzzleTemplate::~ScenePuzzleTemplate()
 /// <param name="sr"></param> --> Referebce to thee SceneRoomTemplate
 void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 {
+	//REMOVE INVALID ENTITIES
+	compareInv(sr);
 	//CREATE DESCRIPTION ENTITIES
 	
 	//visual background for item description text
@@ -63,6 +81,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 		if (!ItemAlreadyCreated(a->getID())) {
 
 			//Add the item name to the array names
+
 			invID.push_back(a->getID());
 			//Add the entitie to the array
 			invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, a->getID(), EntityFactory::RECTAREA, sr->GetInventory()->GetPosition(index), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
@@ -116,6 +135,9 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 
 			//Set the active item to false
 			it->getMngr()->setActive(it, false);
+		}
+		else {
+			sr->GetInventory()->removeItem(a->getID(), invObjects);
 		}
 		++index; //Add 1 to the position index
 	}

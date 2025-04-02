@@ -96,6 +96,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], true);
 					}
+
+					for (auto hint : sr->GetInventory()->getItems()) {
+						std::cout << "Objeto en inventario: " << hint->getID() << std::endl;
+					}
 				}
 				else {
 					entityManager->setActive(InventoryBackground, false);
@@ -223,7 +227,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		clk->connect(ClickComponent::JUST_CLICKED, [this, clock, sr]() {
 
 			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-			AddInvItem("horaria", "La manecilla de las horas de un reloj.", position, sr);
+			AddInvItem("horaria", "La manecilla de las horas de un reloj", position, sr);
 			clock->getMngr()->setActive(clock, false);
 			});
 

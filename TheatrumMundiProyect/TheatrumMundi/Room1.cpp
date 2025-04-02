@@ -415,6 +415,10 @@ void Room1Scene::init()
 			if (GetInventory()->getActive()) {
 				entityManager->setActive(InventoryBackground, true);
 
+				for (auto hint : GetInventory()->getItems()) {
+					std::cout << "Objeto en inventario: " << hint->getID() << std::endl;
+				}
+
 				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(925);
 				//change the position of the log button
 				areaLayerManager->sendFront(InvArea->getLayerPos());
@@ -426,9 +430,9 @@ void Room1Scene::init()
 				entityManager->setActive(downButton, true);
 				entityManager->setActive(upButton, true);
 
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) {
-					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
-				}
+				for (int i = 0; i < GetInventory()->getItems().size(); ++i) {
+                    GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);
+                }
 			}
 			else {
 				entityManager->setActive(InventoryBackground, false);
@@ -440,8 +444,8 @@ void Room1Scene::init()
 				//change the position of the log button
 
 				// its okay to use the first item as the first item to show??
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) {
-					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Desactivate the hints
+				for (int i = 0; i < GetInventory()->hints.size(); ++i) {
+					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);
 				}
 			}
 
@@ -522,6 +526,7 @@ void Room1Scene::init()
 	}
 	SDL_Delay(1000);
 
+	
 	
 }
 
