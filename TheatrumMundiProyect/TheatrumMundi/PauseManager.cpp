@@ -45,13 +45,7 @@ void PauseManager::Init(EntityFactory* entityFactory, ecs::EntityManager* entity
 
 	//ENTIDADCONENTITYFACTORY
 	_backgroundNotInteractable = entityFactory->CreateInteractableEntity(entityManager,"EmptyImage",EntityFactory::RECTAREA,Vector2D(0,0),Vector2D(0,0),1349,748,0,areaLayerManager,EntityFactory::NODRAG, ecs::grp::BACKGROUNDPAUSE);
-	//_backgroundNotInteractable = entityManager->addEntity(grp::BACKGROUNDPAUSE);
-	//entityManager->addComponent<Transform>(_backgroundNotInteractable, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
-	//entityManager->addComponent<RectArea2D>(_backgroundNotInteractable, areaLayerManager);
 	entityManager->setActive(_backgroundNotInteractable, false);
-	
-
-	//entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
 
 	//GO TO ROOM
 	_reanudePauseButton = entityFactory->CreateInteractableEntity(entityManager, "B3", EntityFactory::RECTAREA, Vector2D(470, 270), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTPAUSE);
