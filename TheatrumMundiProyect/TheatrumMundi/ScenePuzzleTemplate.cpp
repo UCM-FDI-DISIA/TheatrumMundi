@@ -57,6 +57,11 @@ void ScenePuzzleTemplate::compareInv(SceneRoomTemplate* sr)
 	while (!IdToErase.empty()) {
 		invID.erase(IdToErase.front());
 		IdToErase.pop_front();
+		//change the position of the items
+		for (auto& hint : sr->GetInventory()->hints) {
+			auto transform = hint->getMngr()->getComponent<Transform>(hint);
+			transform->getPos().setY(transform->getPos().getY() - 150);
+		}
 	}
 }
 
@@ -126,6 +131,9 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 
 						//remove the object from the inventory
 						sr->GetInventory()->removeItem(a->getID(), invObjects,invID);
+						
+						//change the position of the items
+						sr->scrollInventory(1);
 
 					}
 					else it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());

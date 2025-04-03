@@ -97,9 +97,6 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 						invObjects[i]->getMngr()->setActive(invObjects[i], true);
 					}
 
-					for (auto hint : sr->GetInventory()->getItems()) {
-						std::cout << "Objeto en inventario: " << hint->getID() << std::endl;
-					}
 				}
 				else {
 					entityManager->setActive(InventoryBackground, false);

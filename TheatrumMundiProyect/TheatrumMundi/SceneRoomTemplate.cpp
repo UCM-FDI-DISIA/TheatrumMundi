@@ -54,13 +54,10 @@ void SceneRoomTemplate::scrollInventory(int dir)
         }
     }
     else if (dir == 1) { // Scroll DOWN
-        if (GetInventory()->getFirstItem() + GetInventory()->getItemNumber() < GetInventory()->hints.size()) {
-
+		if (GetInventory()->getFirstItem() + GetInventory()->getItemNumber() < GetInventory()->hints.size()) //take care of the case when we are at the end of the inventory
+        {
             GetInventory()->hints[GetInventory()->getFirstItem()]->getMngr()->setActive(GetInventory()->hints[GetInventory()->getFirstItem()], false);
-
-
             GetInventory()->setFirstItem(GetInventory()->getFirstItem() + 1);
-
 
             int newLastVisibleIndex = GetInventory()->getFirstItem() + GetInventory()->getItemNumber() - 1;
             if (newLastVisibleIndex < GetInventory()->hints.size()) {
