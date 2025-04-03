@@ -109,14 +109,24 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 
 	//scroll log buttons
 	
-	auto scrollingLog = entityFactory->CreateInteractableEntityScroll(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1100, 80), Vector2D(0, 0), 80, 80, 270, areaLayerManager, sdlutils().height() / 50, 50, EntityFactory::SCROLLINVERSE, 0, EntityFactory::NODRAG, ecs::grp::LOG);
-	auto upScrollingLog = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1100, 580), Vector2D(0, 0), 80, 80, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
-	auto ScrollComponentLog = entityManager->getComponent<ScrollComponent>(scrollingLog);
-	entityManager->setActive(scrollingLog, false);
-	entityManager->setActive(upScrollingLog, false);
+	auto scrollDownLog = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1100, 80), Vector2D(0, 0), 80, 80, 270, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
+	auto scrollUpLog = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1100, 580), Vector2D(0, 0), 80, 80, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
+	
+	ClickComponent* buttonScrollUpClick = entityManager->getComponent<ClickComponent>(scrollDownLog);
+	buttonScrollUpClick->connect(ClickComponent::JUST_CLICKED, [this]() {
+		previous();
+		setRenderedDialogueLines();
+		});
+	entityManager->setActive(scrollDownLog, false);
+
+	ClickComponent* buttonScrollDownClick = entityManager->getComponent<ClickComponent>(scrollUpLog);
+	buttonScrollDownClick->connect(ClickComponent::JUST_CLICKED, [this]() {
+		next();
+		setRenderedDialogueLines();
+		});
+	entityManager->setActive(scrollUpLog, false);
 
 
-	ScrollComponentLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
 
 	//log buttons
 	auto buttonOpenLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(1200, 748 - (268 / 3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
@@ -142,7 +152,9 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 		});
 	entityManager->setActive(buttonCloseLog, false);
 
+
 	
+	/*
 	auto downScrollLogButton = entityManager->getComponent<ClickComponent>(scrollingLog);
 	downScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
 		std::cout << "A" << std::endl;
@@ -162,7 +174,7 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 		while (ScrollComponentLog->numPhases() < (_log.size() / 5)) {
 			ScrollComponentLog->addPhase();
 		}
-		});
+		});*/
 	
 	/*
 	_textDialogueComp->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
