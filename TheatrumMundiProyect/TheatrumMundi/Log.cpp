@@ -76,6 +76,32 @@ void Log::setRenderedDialogueLines()
 	}
 }
 
+void Log::next()
+{
+	// Calcular cuántos elementos hay hasta el final de la lista
+	int distanceToEnd = std::distance(_firstRenderLine, _log.end());
+
+	if (distanceToEnd <= 5) return;
+
+	// Avanzar hasta el mínimo entre 5 elementos y los elementos restantes
+	int steps = std::min(5, distanceToEnd);
+
+	// Avanzar el iterador
+	std::advance(_firstRenderLine, steps);
+}
+
+void Log::previous()
+{
+	// Calcular cuántos elementos hay desde el principio de la lista hasta el iterador actual
+	int distanceToStart = std::distance(_log.begin(), _firstRenderLine);
+
+	// Retroceder hasta el mínimo entre 5 elementos y los elementos restantes
+	int steps = std::min(5, distanceToStart);
+
+	// Retroceder el iterador
+	std::advance(_firstRenderLine, -steps);
+}
+
 void Log::SetLogActive(bool logActive)
 {
 	_logActive = logActive;
@@ -147,7 +173,8 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	entityManager->setActive(buttonOpenLog, true);
 
 	ClickComponent* buttonCloseLogClick = entityManager->getComponent<ClickComponent>(buttonCloseLog);
-	buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [_backgroundLog, buttonCloseLog, buttonOpenLog, entityManager]() {
+	buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [this, _backgroundLog, buttonCloseLog, buttonOpenLog, entityManager]() {
+		_firstRenderLine = _log.begin();
 		//disable log
 		entityManager->setActiveGroup(ecs::grp::LOG, false);
 		entityManager->setActive(buttonOpenLog, true); //open button

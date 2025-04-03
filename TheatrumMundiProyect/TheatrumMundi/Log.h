@@ -49,7 +49,7 @@ public:
 
 	void setRenderedDialogueLines(); //sets rendering dialogue lines dependig of iterator
 
-	void next() { std::advance(_firstRenderLine, std::min(5, static_cast<int>(std::distance(_firstRenderLine, _log.end())))); } //used for scroll
+	void next(); //used for scroll
 
-	void previous() {std::advance(_firstRenderLine, -std::min(5, static_cast<int>(std::distance(_log.begin(), _firstRenderLine))));} //used for scroll
+	void previous(); //used for scroll
 };
