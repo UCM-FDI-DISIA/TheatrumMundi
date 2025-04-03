@@ -203,3 +203,53 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 			});
 	}
 }
+
+void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
+{
+	if (!sr->GetInventory() || invObjects.empty()) return;
+
+	if (dir == -1) { // Scroll UP
+		if (sr->GetInventory()->getFirstItem() > 0) {
+
+			int lastVisibleIndex = sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber() - 1;
+			if (lastVisibleIndex < invObjects.size()) {
+				invObjects[lastVisibleIndex]->getMngr()->setActive(invObjects[lastVisibleIndex], false);
+			}
+
+
+			sr->GetInventory()->setFirstItem(sr->GetInventory()->getFirstItem() - 1);
+
+
+			invObjects[sr->GetInventory()->getFirstItem()]->getMngr()->setActive(invObjects[sr->GetInventory()->getFirstItem()], true);
+
+
+			for (size_t i = 0; i < invObjects.size(); ++i) {
+				if (i >= sr->GetInventory()->getFirstItem() && i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber()) {
+					auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
+					transform->getPos().setY(transform->getPos().getY() + 150); // Ajustar la posición de los objetos visibles
+				}
+			}
+		}
+	}
+	else if (dir == 1) { // Scroll DOWN
+		if (sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber() < invObjects.size()) {
+			// Desactivar el primer objeto visible
+			invObjects[sr->GetInventory()->getFirstItem()]->getMngr()->setActive(invObjects[sr->GetInventory()->getFirstItem()], false);
+			sr->GetInventory()->setFirstItem(sr->GetInventory()->getFirstItem() + 1);
+
+			int newLastVisibleIndex = sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber() - 1;
+			if (newLastVisibleIndex < invObjects.size()) {
+				// Activar el nuevo último objeto visible
+				invObjects[newLastVisibleIndex]->getMngr()->setActive(invObjects[newLastVisibleIndex], true);
+			}
+
+			// Ajustar las posiciones de los objetos
+			for (size_t i = 0; i < invObjects.size(); ++i) {
+				if (i >= sr->GetInventory()->getFirstItem() && i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber()) {
+					auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
+					transform->getPos().setY(transform->getPos().getY() - 150); // Ajustar la posición de los objetos visibles
+				}
+			}
+		}
+	}
+}

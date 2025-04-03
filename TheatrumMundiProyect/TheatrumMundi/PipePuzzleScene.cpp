@@ -656,10 +656,13 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(downButton, true);
 					entityManager->setActive(upButton, true);
 
-					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], true);
 					}
 
+					/*for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
+						sr->GetInventory()->hints[i]->getMngr()->setActive(sr->GetInventory()->hints[i], true);
+					}*/
 				}
 				else {
 					entityManager->setActive(InventoryBackground, false);
@@ -668,7 +671,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(upButton, false);
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(60 + 268 / 3);
 
-					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], false);
 					}
 				}
@@ -678,14 +681,14 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ upButton, sr]() {
 
 			//AudioManager::Instance().playSound(buttonSound);
-			sr->scrollInventory(-1);
+			scrollInventoryPuzzle(-1, sr);
 			});
 
 		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
 		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ downButton, sr]() {
 
 			//AudioManager::Instance().playSound(buttonSound);
-			sr->scrollInventory(1);
+			scrollInventoryPuzzle(1, sr);
 			});
 
 		

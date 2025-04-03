@@ -37,7 +37,7 @@ protected:
 		/// Scroll the inventory up or down depending on the direction
 		/// </summary>
 		/// <param name="dir"></param>
-		void scrollInventory(int dir);
+		void scrollInventory(int dir); //scroll room1
 
 	SceneRoomTemplate();
 	virtual ~SceneRoomTemplate();

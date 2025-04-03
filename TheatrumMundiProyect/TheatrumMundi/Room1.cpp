@@ -428,7 +428,7 @@ void Room1Scene::init()
 				entityManager->setActive(downButton, true);
 				entityManager->setActive(upButton, true);
 
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) {
+				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getFirstItem() + GetInventory()->getItemNumber(); ++i) {
                     GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);
                 }
 			}
@@ -442,7 +442,7 @@ void Room1Scene::init()
 				//change the position of the log button
 
 				// its okay to use the first item as the first item to show??
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) {
+				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getFirstItem() + GetInventory()->getItemNumber(); ++i) {
 					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);
 				}
 			}
