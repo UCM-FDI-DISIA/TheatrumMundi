@@ -179,13 +179,28 @@ void WriteTextComponent<TextInfo>::render()
 {
 	if (_currentText.empty()) return;
 
-	Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
-	SDL_Rect nameRect = { 350, 465,nameText->width(),nameText->height()};
-	nameText->render(nameRect, 0);
+	if (isMiddleRoom)
+	{
+		Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
+		SDL_Rect nameRect = { 350, 465,nameText->width(),nameText->height() };
+		nameText->render(nameRect, 0);
 
-	Texture* dialogText = new Texture(sdlutils().renderer(), _currentText, _myFont, _color);
-	SDL_Rect dialogRect = { 350, 550,dialogText->width(),dialogText->height() };
-	dialogText->render(dialogRect, 0);
+		Texture* dialogText = new Texture(sdlutils().renderer(), _currentText, _myFont, _color);
+		SDL_Rect dialogRect = { 350, 550,dialogText->width(),dialogText->height() };
+		dialogText->render(dialogRect, 0);
+	}
+	else
+	{
+		Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
+		SDL_Rect nameRect = { 350, 465,nameText->width(),nameText->height() };
+		nameText->render(nameRect, 0);
+
+		Texture* dialogText = new Texture(sdlutils().renderer(), _currentText, _myFont, _color);
+		SDL_Rect dialogRect = { 375, 550,dialogText->width(),dialogText->height() };
+		dialogText->render(dialogRect, 0);
+	}
+
+	
 	
 }
 
@@ -231,6 +246,12 @@ void WriteTextComponent<TextInfo>::finishTextLine()
 template<>
 void WriteTextComponent<std::list<TextInfo>>::startTextLine()
 {
+}
+
+template<typename T>
+void WriteTextComponent<T>::setMiddleRoom(bool state)
+{
+	isMiddleRoom = state;
 }
 
 template<>

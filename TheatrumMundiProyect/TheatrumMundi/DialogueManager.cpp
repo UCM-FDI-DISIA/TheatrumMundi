@@ -29,8 +29,15 @@ DialogueManager::~DialogueManager() {
 
 void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, string event)
 {
+    //if its middle room, character image is rendered first
+    if (isMiddleRoom) {
+        //Character (Image)
+        auto character = entityManager->addEntity(grp::DIALOGUE);
+        entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
+        characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
 
-   
+        entityManager->setActive(character, false);
+    }
 
     //Text Background
     auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
@@ -60,8 +67,9 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     entityManager->addComponent<TriggerComponent>(_textbackground);
     entityManager->setActive(_textbackground, false);
 
-    //character image
-    if (isMiddleRoom) {
+    //if it isnt middle room character image is rendered last
+    if(!isMiddleRoom) 
+    {
         //Character (Image)
         auto character = entityManager->addEntity(grp::DIALOGUE);
         entityManager->addComponent<Transform>(character, Vector2D(50, 310), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
@@ -69,16 +77,6 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
 
         entityManager->setActive(character, false);
     }
-    else {
-
-        //Character (Image)
-        auto character = entityManager->addEntity(grp::DIALOGUE);
-        entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
-        characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
-
-        entityManager->setActive(character, false);
-    }
-
 
     auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
     auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
@@ -87,7 +85,8 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     //Add writeText to dialogueManager
     SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
     WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, _showText);
-    
+    writeLogentityManager->setMiddleRoom(isMiddleRoom);
+
     _writeTextComp = writeLogentityManager;
 }
 

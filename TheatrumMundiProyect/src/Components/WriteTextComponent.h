@@ -29,6 +29,8 @@ private:
 	std::string _currentText;
 	int charsToShow;
 
+	bool isMiddleRoom;
+
 public:
 	//ID
 	__CMPID_DECL__(ecs::cmp::WRITE_TEXT_COMPONENT);
@@ -44,6 +46,8 @@ public:
 	bool isFinished(); //checks if current TextLine has been displayed entirely on screen
 	void finishTextLine(); //finishes display of current TextLine
 	void startTextLine(); //resets values to start displaying new TextLine
+
+	void setMiddleRoom(bool state);
 
 	~WriteTextComponent();
 	
