@@ -1,6 +1,7 @@
 #include "ScenePuzzleTemplate.h"
 #include "SceneRoomTemplate.h"
 #include "ClickComponent.h"
+#include "DragComponent.h"
 #include "TriggerComponent.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 #include "SDLUtils.h"
@@ -51,7 +52,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 
 	//description text entity
 	auto textDescriptionEnt = entityManager->addEntity(ecs::grp::DEFAULT);
-	auto _testTextTranform = entityManager->addComponent<Transform>(textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
+	auto _testTextTranform = entityManager->addComponent<Transform>(textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
 	entityManager->setActive(textDescriptionEnt, false);
 	SDL_Color colorDialog = { 255, 255, 255, 255 };
 	entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, sr->GetInventory()->getTextDescription());
@@ -81,7 +82,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 				});
 
 			//if you drop the item, compares if it was drop in or out tge cloack
-			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this, sr, a, it]() {
+			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this, sr, a, it, _backgroundTextDescription, textDescriptionEnt]() {
 				//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
 				if (!placeHand) it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
 				//in other case remove the item from this inventory and the inventory of Room1
@@ -95,16 +96,28 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 					}
 					else it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
 				}
+
+				entityManager->setActive(_backgroundTextDescription, false);
+
+				//hide item description when item has been clicked
+				entityManager->setActive(textDescriptionEnt, false);
 				});
 
 			//if mouse is on item, show item description
-			it->getMngr()->getComponent<TriggerComponent>(it)->connect(TriggerComponent::CURSOR_ENTERED, [this, sr, a, _backgroundTextDescription, textDescriptionEnt]() {
-				//show item description entities
-				entityManager->setActive(_backgroundTextDescription, true);
-				entityManager->setActive(textDescriptionEnt, true);
+			it->getMngr()->getComponent<TriggerComponent>(it)->connect(TriggerComponent::CURSOR_ENTERED, [this, sr, a, _backgroundTextDescription, textDescriptionEnt, it]() {
+				if (!entityManager->getComponent<DragComponent>(it)->isBeingClicked())
+				{
+					//show item description entities
+					entityManager->setActive(_backgroundTextDescription, true);
+					entityManager->setActive(textDescriptionEnt, true);
 
-				//change text description
-				sr->GetInventory()->setTextDescription(a->getID(), invObjects, _backgroundTextDescription->getMngr()->getComponent<Transform>(_backgroundTextDescription)); 
+					//change text description
+					sr->GetInventory()->setTextDescription(a->getID(), invObjects, _backgroundTextDescription->getMngr()->getComponent<Transform>(_backgroundTextDescription));
+
+				}
+				
+				
+				
 				});
 
 			//if mouse leaves item, hide item description

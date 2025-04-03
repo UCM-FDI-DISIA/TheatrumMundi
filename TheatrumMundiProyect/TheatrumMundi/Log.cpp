@@ -5,13 +5,12 @@
 
 #include"../src/sdlutils/SDLUtils.h"
 #include "../src/Components/Image.h"
-#include "../src/ecs/Manager.h"
-#include "EntityFactory.h"
+
 #include "RectArea2D.h"
 #include "ClickComponent.h"
 #include "TriggerComponent.h"
 #include "../src/components/LogComponent.h"
-#include "Log.h"
+
 #include "SceneTemplate.h"
 #include "../src/components/Transform.h"
 #include "Area2DLayerManager.h"
@@ -21,9 +20,7 @@
 
 #include "../src/Components/ScrollComponent.h"
 
-#include "../src/components/ClickComponent.h"
 
-#include "Area2DLayerManager.h"
 
 using namespace std;
 
@@ -72,13 +69,6 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 
 	auto LogArea = entityManager->addComponent<RectArea2D>(_backgroundLog, areaLayerManager);
 	
-
-	//title log
-	auto _titleLog = entityManager->addEntity(ecs::grp::LOG);
-	entityManager->addComponent<Transform>(_titleLog, Vector2D(50, 50), Vector2D(0, 0), 100, 100, 0);
-	entityManager->addComponent<Image>(_titleLog, &sdlutils().images().at("B7"));
-	entityManager->setActive(_titleLog, false);
-
 	//text log
 	auto _textLog = entityManager->addEntity(ecs::grp::LOG);
 	Transform* trTextLog = entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 800, 748, 0);
@@ -93,8 +83,8 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 
 	//scroll log buttons
 	
-	auto scrollingLog = entityFactory->CreateInteractableEntityScroll(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1200, 100), Vector2D(0, 0), 50, 50, 270, areaLayerManager, sdlutils().height() / 50, 50, EntityFactory::SCROLLINVERSE, 0, EntityFactory::NODRAG, ecs::grp::LOG);
-	auto upScrollingLog = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1200, 600), Vector2D(0, 0), 50, 50, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
+	auto scrollingLog = entityFactory->CreateInteractableEntityScroll(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1100, 80), Vector2D(0, 0), 80, 80, 270, areaLayerManager, sdlutils().height() / 50, 50, EntityFactory::SCROLLINVERSE, 0, EntityFactory::NODRAG, ecs::grp::LOG);
+	auto upScrollingLog = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1100, 580), Vector2D(0, 0), 80, 80, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
 	auto ScrollComponentLog = entityManager->getComponent<ScrollComponent>(scrollingLog);
 	entityManager->setActive(scrollingLog, false);
 	entityManager->setActive(upScrollingLog, false);
@@ -104,10 +94,10 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 
 	//log buttons
 	auto buttonOpenLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(1200, 748 - (268 / 3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DIALOGUE);
-	auto buttonCloseLog = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 500), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
+	auto buttonCloseLog = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(50, 50), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
 
 	ClickComponent* buttonOpenLogClick = entityManager->getComponent<ClickComponent>(buttonOpenLog);
-	buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [_titleLog, buttonCloseLog, buttonOpenLog, entityManager]() {
+	buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [buttonCloseLog, buttonOpenLog, entityManager]() {
 		//activate log
 		entityManager->setActiveGroup(ecs::grp::LOG, true);
 		entityManager->setActive(buttonOpenLog, false); //close button
@@ -117,7 +107,7 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	entityManager->setActive(buttonOpenLog, true);
 
 	ClickComponent* buttonCloseLogClick = entityManager->getComponent<ClickComponent>(buttonCloseLog);
-	buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [_backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog, entityManager]() {
+	buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [_backgroundLog, buttonCloseLog, buttonOpenLog, entityManager]() {
 		//disable log
 		entityManager->setActiveGroup(ecs::grp::LOG, false);
 		entityManager->setActive(buttonOpenLog, true); //open button
@@ -146,11 +136,12 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 		}
 		});
 	
+	/*
 	_textDialogueComp->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
 		while (ScrollComponentLog->numPhases() < (_log.size() / 5)) {
 			ScrollComponentLog->addPhase();
 		}
-		});
+		});*/
 
 		
 }
