@@ -30,28 +30,7 @@ DialogueManager::~DialogueManager() {
 void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, string event)
 {
 
-    if (isMiddleRoom) {
-        //Character (Image)
-        auto character = entityManager->addEntity(grp::DIALOGUE);
-        entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
-        characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
-
-        entityManager->setActive(character, false);
-
-        
-    }
-
-    else {
-
-        //Character (Image)
-        auto character = entityManager->addEntity(grp::DIALOGUE);
-        entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
-        characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
-
-        entityManager->setActive(character, false);
-       
-
-    }
+   
 
     //Text Background
     auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
@@ -80,6 +59,25 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     Game::Instance()->getLog()->setTextDialogue(clickTextDialgue);
     entityManager->addComponent<TriggerComponent>(_textbackground);
     entityManager->setActive(_textbackground, false);
+
+    //character image
+    if (isMiddleRoom) {
+        //Character (Image)
+        auto character = entityManager->addEntity(grp::DIALOGUE);
+        entityManager->addComponent<Transform>(character, Vector2D(50, 310), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
+        characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
+
+        entityManager->setActive(character, false);
+    }
+    else {
+
+        //Character (Image)
+        auto character = entityManager->addEntity(grp::DIALOGUE);
+        entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
+        characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
+
+        entityManager->setActive(character, false);
+    }
 
 
     auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
