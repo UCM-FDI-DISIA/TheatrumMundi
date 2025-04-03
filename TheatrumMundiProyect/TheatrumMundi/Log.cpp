@@ -66,6 +66,7 @@ void Log::setRenderedDialogueLines()
 		//cleans list of rendering dialogue lines
 		cleanRenderedList();
 
+		//stores iterator's following 5 lines
 		for (int i = 0; i < LINES_DISPLAYED; i++)
 		{
 			if (logIt == _log.end()) { return; }
