@@ -153,33 +153,33 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 /// <param name="square"></param>
 void MosaicPuzzleScene::CorrectPositions(entity_t square)
 {
-	auto& actPosition = entityManager->getComponent<Transform>(square)->getPos();
+	Transform* actPosition = entityManager->getComponent<Transform>(square);
 
 	//Compare X
-	int diff = actPosition.getX() - firstPos.getX(); //What is the difference between the actual spot to the future spot
+	int diff = actPosition->getPos().getX() - firstPos.getX(); //What is the difference between the actual spot to the future spot
 	if (diff > 0 && diff >= SQUAREWIDTH / 2) { //if the square is closed to the right than to the left and player wants to go to the right sets the position to the right 
-		actPosition.setX(firstPos.getX() + SQUAREWIDTH);
+		actPosition->setPosX(firstPos.getX() + SQUAREWIDTH);
 	}
 	else if (diff < 0 && -diff >= SQUAREWIDTH / 2) { //if the square is closed to the left than to the right and player wants to go to the left sets the position to the left 
-		actPosition.setX(firstPos.getX() - SQUAREWIDTH);
+		actPosition->setPosX(firstPos.getX() - SQUAREWIDTH);
 	}
-	else actPosition.setX(firstPos.getX());
+	else actPosition->setPosX(firstPos.getX());
 
 	//Compare Y
-	diff = actPosition.getY() - firstPos.getY();
+	diff = actPosition->getPos().getY() - firstPos.getY();
 	if (diff > 0 && diff >= SQUAREWIDTH / 2) { //if the square is closed to the Top than to the Bottom  and player wants to go to the top sets the position to the top
-		actPosition.setY(firstPos.getY() + SQUAREWIDTH);
+		actPosition->setPosY(firstPos.getY() + SQUAREWIDTH);
 	}
 	else if (diff < 0 && -diff >= SQUAREWIDTH / 2) { //if the square is closed to the Bottom than to the Top  and player wants to go to the bottom sets the position to the bottom
-		actPosition.setY(firstPos.getY() - SQUAREWIDTH);
+		actPosition->setPosY(firstPos.getY() - SQUAREWIDTH);
 	}
-	else actPosition.setY(firstPos.getY());
+	else actPosition->setPosY(firstPos.getY());
 }
 
 void MosaicPuzzleScene::ResetPuzzle()
 {
 	for (int i = 0; i < TOTALSQUARES; ++i) {
-		squares[i]->getMngr()->getComponent<Transform>(squares[i])->getPos().set(positions[indexPositions[i]]);
+		squares[i]->getMngr()->getComponent<Transform>(squares[i])->setPos(positions[indexPositions[i]]);
 	}
 }
 

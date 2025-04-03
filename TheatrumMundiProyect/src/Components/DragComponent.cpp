@@ -75,14 +75,14 @@ void DragComponent::moveEntity(std::pair<Sint32, Sint32> mousePos) // TODO Use p
 		mousePos.first - _entityDragPoint.getX(),
 		mousePos.second - _entityDragPoint.getY()
 	);
-	tr->getPos().set(newPosition);
+	tr->setPosPure(newPosition);
 
 	//ChecksPhysics from the entity
 	PhysicsBodyComponent* phy = _ent->getMngr()->getComponent<PhysicsBodyComponent>(_ent);
 	Area2D* area = _ent->getMngr()->getComponent<RectArea2D>(_ent);
 	assert(area != nullptr);
 	if (phy != nullptr && !phy->CheckAreaColision(area)) {
-		tr->getPos().set(oldPosition);
+		tr->setPosPure(oldPosition);
 		updateEntityDragPoint(ih().getMousePos());
 	}
 }

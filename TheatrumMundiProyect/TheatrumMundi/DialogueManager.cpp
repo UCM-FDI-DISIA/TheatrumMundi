@@ -16,7 +16,7 @@
 using namespace std;
 
 DialogueManager::DialogueManager(int numRooms) : _scene(nullptr), displayOnProcess(false), characterimg(nullptr), _writeTextComp(nullptr){
-    actualroom = 1;
+    actualroom = numRooms;
     room = "Sala" + to_string(actualroom);
     dialogueReader = new ReadDialog(numRooms);
     _showText = new TextInfo{ " ", " " };
@@ -29,7 +29,7 @@ DialogueManager::~DialogueManager() {
 
 void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, string event)
 {
-   
+
     if (isMiddleRoom) {
         //Character (Image)
         auto character = entityManager->addEntity(grp::DIALOGUE);
@@ -140,6 +140,7 @@ void DialogueManager::setCharacterImage(const string& Character) {
     if (Character == "Keisara") characterimg->setTexture(&sdlutils().images().at("KeisaraSprite"));
     else if (Character == "Lucy") characterimg->setTexture(&sdlutils().images().at("LucySprite"));
     else if (Character == "Sol") characterimg->setTexture(&sdlutils().images().at("SolSprite"));
+    else if (Character == " ") characterimg->setTexture(&sdlutils().images().at("Hanni")); //narrador
 }
 
 void DialogueManager::setEventToRead(std::string eventToRead)

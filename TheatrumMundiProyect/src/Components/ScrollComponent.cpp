@@ -81,7 +81,7 @@ void ScrollComponent::Scroll(Direction _direction) {
 	std::cout << phase << endl;
 
 	for (Transform* e : _objectsTransform) { //Apply direction to all objects
-		e->getVel().set(_dir); 
+		e->setVel(_dir); 
 	}
 
 	auto& callbacks = _eventConnectionsScroll.at(ScrollComponent::STARTSCROLLING);
@@ -164,7 +164,7 @@ void ScrollComponent::update()
 	else 
 	{
 		for (Transform* e : _objectsTransform) {
-			e->getVel().set(Vector2D(0,0)); //DETENEMOS TODOS LOS OBJETOS AL NO HABER ACTIVADO EL SCROLL
+			e->setVel(Vector2D(0,0)); //DETENEMOS TODOS LOS OBJETOS AL NO HABER ACTIVADO EL SCROLL
 		}
 	}
 }

@@ -24,7 +24,7 @@ private:
 	Image* _imageTextLog;
 	Transform* _textTransform;
 
-	const int TEXT_SPEED = 200; //20 ms
+	const int TEXT_SPEED = 35; //20 ms
 	int lastUpdate;
 	std::string _currentText;
 	int charsToShow;

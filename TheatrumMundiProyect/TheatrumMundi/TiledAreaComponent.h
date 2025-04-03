@@ -13,10 +13,11 @@ private:
 	int _height;
 	int unitw;
 	int unith;
+	std::vector<SDL_Rect> myTiledCol;
 protected:
 
 public:
-	TiledAreaComponent(Area2DLayerManager* areaLayerMngr, Transform* objTransform, int width, int height, int fil, int col);
+	TiledAreaComponent(Area2DLayerManager* areaLayerMngr, Transform* objTransform, int fil, int col);
 	~TiledAreaComponent();
 
 	 bool containsPoint(Vector2D point) override;
@@ -32,6 +33,7 @@ public:
 	 void setActiveTile(bool t, int i, int j);
 
 	 bool CheckCollisionInTiles(SDL_Rect& _collition);
+	 inline std::vector<SDL_Rect> getTilesCol() { return myTiledCol; };
 	 bool CheckCollisionInTilesCircles(const Vector2D& pos,int rad);
 
 	 inline int getWidth() {
