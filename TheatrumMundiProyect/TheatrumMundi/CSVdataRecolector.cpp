@@ -87,7 +87,7 @@ void CSVdataRecolector::safeData()
 		archive << a.second.scene << ";" << a.second.passtime / 1000.0 << ";" << a.second.totaltimesinscene<< ";" << a.second.totalclicks << "\n";
 		totaltimaingame += a.second.passtime;
 	}
-	archive << "tiempo de juego total: "<<";" << ";" << totaltimaingame / 6000 << ";" << "min";
+	archive << "tiempo de juego total: "<<";" << ";" << totaltimaingame / 60000.0 << ";" << "min";
 	archive << "\n" << "\n";
 	//Movement of the mouse
 	archive << "Mov en x" << ";" << totalmouseMovement.getX() << "\n" << "Mov en y" << ";" << totalmouseMovement.getY() << "\n";
