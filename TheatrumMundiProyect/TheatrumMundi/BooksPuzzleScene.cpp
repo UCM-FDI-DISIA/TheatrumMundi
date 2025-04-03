@@ -31,6 +31,8 @@
 #include "SceneRoomTemplate.h"
 
 #include "DialogueManager.h"
+#include "../src/game/Game.h"
+#include "Log.h"
 
 
 
@@ -311,13 +313,16 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			Game::Instance()->getSceneManager()->popScene();
 		});
 
-		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
-	
-		startDialogue("PuzzleLibros");
-}
+		dialogueManager->Init(1, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 
+		
+}
+	
 	//IMPORTANT this need to be out of the isstarted!!!
 	createInvEntities(sr);
+
+	startDialogue("PuzzleLibros");
 }
 
 void BooksPuzzleScene::refresh()
