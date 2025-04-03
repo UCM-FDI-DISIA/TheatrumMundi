@@ -1,4 +1,67 @@
-{   "Sala0":{
+{   "Tutorial":{
+    "Tutorial0":[
+        {"Character":" ","Text":"..."},
+        {"Character":" ","Text":"Oh?"},
+        {"Character":" ","Text":"No esperaba tener invitados tan pronto."},
+        {"Character":" ","Text":"Perdona el estado de la sala."},
+        {"Character":" ","Text":"Un poco vacía lo sé."},
+        {"Character":" ","Text":"Te puedo ayudar a llegar a un lugar más divertido."},
+        {"Character":" ","Text":"¿No sabrás por casualidad la contraseña?"},
+        {"Character":" ","Text":"No me mires así, solo quiero hacer esto más entretenido para ti."},
+        {"Character":" ","Text":"¿Por qué no me haces un favor y lo miras en mis anotaciones?"},
+        {"Character":" ","Text":"Luego me dicen que no hace falta apuntarlo todo."}
+        
+    ],
+    "Tutorial1":[
+        {"Character":" ","Text":"¿Y bien?"},
+        {"Character":" ","Text":"¿La encontraste?"}
+    ],
+    "Tutorial2":[
+        {"Character":" ","Text":"¡Perfecto!"},
+        {"Character":" ","Text":"Ahora hay una puerta"},
+        {"Character":" ","Text":"Venga no tengas miedo, pasa por ella."}
+        
+    ],
+    "Tutorial3":[
+        {"Character":" ","Text":"¿Ves? ¡Una televisión!"},
+        {"Character":" ","Text":"A todo el mundo le gusta la televisión."},
+        {"Character":" ","Text":"Bueno, puede que eso fuese verdad hace 20 años."},
+        {"Character":" ","Text":"Por eso la tenemos en el almacén."},
+        {"Character":" ","Text":"Tengo que dejar de irme por las ramas."},
+        {"Character":" ","Text":"¿Por qué me sigues mirando así?"},
+        {"Character":" ","Text":"Sé que la sala sigue ligeramente cochambrosa, pero tengo que educarte antes de nada.Por eso la tenemos en el almacén."},
+        {"Character":" ","Text":"Tengo que asegurarme de que vas a consumir mi trabajo de manera correcta."},
+        {"Character":" ","Text":"¡Se acabó la charla!"},
+        {"Character":" ","Text":"¿Ves como se mueve el televisor cuando lo señalas?"},
+        {"Character":" ","Text":"Eso significa que puedes interactuar con él."},
+        {"Character":" ","Text":"Adelante."}
+        
+    ],
+    "Tutorial4":[
+        {"Character":" ","Text":"Vaya."},
+        {"Character":" ","Text":"No tiene señal."},
+        {"Character":" ","Text":"¿Me pregunto por qué será?"},
+        {"Character":" ","Text":"Probablemente no tenga nada que ver con la antena en el suelo al lado de la televisión."}
+        
+    ],
+    "Tutorial5":[
+        {"Character":" ","Text":"¡Muy bien hecho!"},
+        {"Character":" ","Text":"Sabía que quedaban personas funcionales en este mundo."},
+        {"Character":" ","Text":"¡Y mira! Se ha añadido a tus objetos."}
+        
+    ],
+    "Tutorial6":[
+        {"Character":" ","Text":"Pues solo queda poner la antena en el televisor."}
+    ],
+    "Tutorial7":[
+        {"Character":" ","Text":"Venga este paso es sencillo."},
+        {"Character":" ","Text":"Agarra la antena de tus objetos y arrastrala a su lugar."}
+    ],
+    "Tutorial8":[
+        {"Character":" ","Text":"Fantástico"}
+    ]
+    },
+    "Sala0":{
     "SalaIntermedia1":[
         {"Character":" ","Text":"..."},
         {"Character":" ","Text":"Un nuevo día, una nueva ventana de oportunidad."},
@@ -78,7 +141,7 @@
                 {"Character":"Lucy","Text":"Ya tendré tiempo para lamentar más tarde si fallamos."},
                 {"Character":"Sol","Text":"..."},
                 {"Character":"Sol","Text":"Entonces,¿veneno?"},
-                {"Character":"Lucy","Text":"Probablemente."},
+                {"Character":"Lucy","Text":"Probablemente."}
             ],
             "PuzzleTuberias":[
                 {"Character":"Sol","Text":"Se que has dicho que te recuerda a tu casa..."},
