@@ -43,9 +43,11 @@ void PauseManager::Init(EntityFactory* entityFactory, ecs::EntityManager* entity
 	auto _backgroundPause = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(450, 250), Vector2D(0, 0), 450, 250, 0, ecs::grp::BACKGROUNDPAUSE);
 	entityManager->setActive(_backgroundPause, false);
 
-	_backgroundNotInteractable = entityManager->addEntity(grp::BACKGROUNDPAUSE);
-	entityManager->addComponent<Transform>(_backgroundNotInteractable, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
-	entityManager->addComponent<RectArea2D>(_backgroundNotInteractable, areaLayerManager);
+	//ENTIDADCONENTITYFACTORY
+	_backgroundNotInteractable = entityFactory->CreateInteractableEntity(entityManager,"EmptyImage",EntityFactory::RECTAREA,Vector2D(0,0),Vector2D(0,0),1349,748,0,areaLayerManager,EntityFactory::NODRAG, ecs::grp::BACKGROUNDPAUSE);
+	//_backgroundNotInteractable = entityManager->addEntity(grp::BACKGROUNDPAUSE);
+	//entityManager->addComponent<Transform>(_backgroundNotInteractable, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
+	//entityManager->addComponent<RectArea2D>(_backgroundNotInteractable, areaLayerManager);
 	entityManager->setActive(_backgroundNotInteractable, false);
 	
 
