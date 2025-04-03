@@ -58,17 +58,7 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 	if (textStructure->empty()) return;
 	// Definir el tamaño total de la textura final
 	int totalWidth = 1000; // Ajusta según sea necesario
-	int totalHeight = 0;  // Se calculará dinámicamente
-
-	// Calcular la altura total sumando las alturas de cada elemento
-	for (const auto& it : *textStructure)
-	{
-		if (it.Character == "/") totalHeight += 100;
-		else totalHeight += 150;
-	}
-
-	_textTransform->setWidth(totalWidth);
-	_textTransform->setHeight(totalHeight);
+	int totalHeight = 800;  // Se calculará dinámicamente
 
 	// Crear la textura final con el tamaño adecuado
 	SDL_Texture* sdlFinalTexture = SDL_CreateTexture(
@@ -97,7 +87,7 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 			Texture divideLine(sdlutils().renderer(), "...--.-.-.-.-.--.-.-.-.-.-..-.--.-.-.-.---......-----...-----.....----....---...---..-.-.-.-.-.-.-.-.-.-.", _myFont, _color);
 			SDL_Rect dstVRect = { 350, y, divideLine.width(), divideLine.height() };
 			divideLine.render(dstVRect, 0.0);
-			y += 100;
+			y += 80;
 		}
 		else
 		{
@@ -106,12 +96,15 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 			SDL_Rect dstAuthorRect = { 400, y, authorTexture.width(), authorTexture.height() };
 			authorTexture.render(dstAuthorRect, 0.0);
 
+			if (it.Character == " ") { y += 25; }
+			else { y += 50; }
+
 			// Texto
 			Texture textTexture(sdlutils().renderer(), it.Text, _myFont, _color);
-			SDL_Rect dstRect = { 400, y + 50, textTexture.width(), textTexture.height() };
+			SDL_Rect dstRect = { 400, y, textTexture.width(), textTexture.height() };
 			textTexture.render(dstRect, 0.0);
 
-			y += 150;
+			y += 100;
 		}
 	}
 
@@ -120,18 +113,14 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 
 	// Convertir SDL_Texture* en Texture y asegurarse de que respete la transparencia
 	Texture* finalText = new Texture(sdlutils().renderer(), sdlFinalTexture);
-	_imageTextLog->setTexture(finalText);
-	_imageTextLog->setW(finalText->width());
-	_imageTextLog->setH(finalText->height());
-	
+	SDL_Rect dstRect = { 0, 0, finalText->width(), finalText->height() };
+	finalText->render(dstRect, 0.0);
 }
 
 template<typename T>
 void WriteTextComponent<T>::initComponent()
 {
 	auto mngr = _ent->getMngr();
-	_textTransform = mngr->getComponent<Transform>(_ent);
-	_imageTextLog = mngr->getComponent<Image>(_ent);
 }
 
 template <>

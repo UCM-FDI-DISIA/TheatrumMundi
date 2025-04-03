@@ -100,8 +100,7 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	
 	//text log
 	auto _textLog = entityManager->addEntity(ecs::grp::LOG);
-	Transform* trTextLog = entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 800, 748, 0);
-	Image* imTextLog = entityManager->addComponent<Image>(_textLog, &sdlutils().images().at("fondoPruebaLog"));
+	Transform* trTextLog = entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 800, 600, 0);
 	SDL_Color colorText = { 255, 255, 255, 255 };
 	WriteTextComponent<std::list<TextInfo>>* writeLog =
 		entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, &_renderedDialogueLines); //write text component
