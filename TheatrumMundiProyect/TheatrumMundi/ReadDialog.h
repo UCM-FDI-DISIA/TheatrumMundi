@@ -17,6 +17,7 @@ private:
 
 public:
     ReadDialog(int rooms);
+    ~ReadDialog();
     void ReadJson();
     RoomDialogues& getRoomDialogues(const std::string& room);
 };

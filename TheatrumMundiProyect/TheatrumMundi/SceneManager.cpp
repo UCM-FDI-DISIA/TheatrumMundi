@@ -32,7 +32,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
 
-	loadScene(SceneName::DRAG_PUZZLE);
+	loadScene(SceneName::INITIAL_MENU);
 }
 
 void SceneManager::popScene()

@@ -689,8 +689,14 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Create string segnment sprite
 		
+		/*
+		* auto ChangeRoom1 = 
+		sentityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0,
+		areaLayerManager, 12, ((sdlutils().width()) / 12) , EntityFactory::SCROLLNORMAL, 1, 
+		EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		*/
 		_rope = entityFactory->CreateInteractableEntityScroll(entityManager, "rope", EntityFactory::RECTAREA,
-			Vector2D(1200, 400), Vector2D(0, 0), 324 / 3, 893 / 3, 0, areaLayerManager,
+			Vector2D(1200, 400), Vector2D(0, 0), 324 / 3, 893 / 3, 1, areaLayerManager,
 			2, 150, EntityFactory::SCROLLNORMAL, 1,
 			EntityFactory::NODRAG,
 			ecs::grp::INTERACTOBJ);
@@ -1086,6 +1092,7 @@ void PipePuzzleScene::unload()
 {
 	for (auto a : _waterPipes) delete a;
 	for (auto a : _modules) delete a;
+	
 }
 void PipePuzzleScene::updatePuzzle() {
     bool stateChanged = true;

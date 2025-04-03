@@ -68,7 +68,7 @@ void CSVdataRecolector::exitScene(const std::string scene)
 
 void CSVdataRecolector::safeData()
 {
-	std::string filename = "../	/Tester" + std::to_string(numtester);
+	std::string filename = "../PlanDePruebas/Tester" + std::to_string(numtester);
 	filename += ".csv";
 	std::fstream archive;
 	archive.open(filename, std::ios::out | std::ios::app);

@@ -42,10 +42,12 @@ void Log::addDialogueLineLog(std::string author, std::string dialogueLine)
 
 void Log::cleanLogList()
 {
+	_log.clear();
 }
 
 Log::~Log()
 {
+	_log.clear();
 }
 
 void Log::SetLogActive(bool logActive)

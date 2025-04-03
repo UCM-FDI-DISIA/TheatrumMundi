@@ -25,9 +25,12 @@ Game* Game::Instance()
 		return _instance;
 }
 Game::~Game() {
+	
 
 	delete _mngr;
 	delete _dataManager;
+	delete _log;
+	delete _csvdata;
 	// release InputHandler if the instance was created correctly.
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
@@ -110,6 +113,7 @@ void Game::start() {
 
 		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
 			_exitGame = true;
+			_csvdata->safeData();
 			continue;
 		}
 
