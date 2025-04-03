@@ -51,6 +51,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 	entityManager->setActive(_backgroundTextDescription, false);
 
 	//description text entity
+	//ENTIDADSINENTITYFACTORY
 	auto textDescriptionEnt = entityManager->addEntity(ecs::grp::DEFAULT);
 	auto _testTextTranform = entityManager->addComponent<Transform>(textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
 	entityManager->setActive(textDescriptionEnt, false);

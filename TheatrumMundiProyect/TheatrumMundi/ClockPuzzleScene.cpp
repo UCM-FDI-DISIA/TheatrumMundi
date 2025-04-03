@@ -74,6 +74,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		if (!hasShortClockHand) shortClockHand->getMngr()->setActive(shortClockHand, false);
 
 		//create the buttons: min
+		//ENTIDADSINENTITYFACTORY
 		auto _buttonMin = entityManager->addEntity();
 		auto _buttonMinTransform = entityManager->addComponent<Transform>(_buttonMin, Vector2D(200, 600), Vector2D(0, 0), 30, 30, 0);
 
@@ -103,6 +104,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		//create the buttons: hor
+		//ENTIDADSINENTITYFACTORY
 		auto _buttonHor = entityManager->addEntity();
 		auto _buttonHorTransform = entityManager->addComponent<Transform>(_buttonHor, Vector2D(200, 550), Vector2D(0, 0), 30, 30, 0);
 
@@ -131,6 +133,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		//create the buttons: reset button
+		//ENTIDADSINENTITYFACTORY
 		auto _buttonResetPuzzle = entityManager->addEntity();
 		auto _buttonRessetPuzzleTransform =
 			entityManager->addComponent<Transform>(_buttonResetPuzzle, Vector2D(1200, 150), Vector2D(0, 0), 70, 70, 0);
@@ -157,6 +160,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		//create the buttons: check
+		//ENTIDADSINENTITYFACTORY
 		auto _buttonCheck = entityManager->addEntity();
 		auto _buttonCheckTransform = entityManager->addComponent<Transform>(_buttonCheck, Vector2D(100, 550), Vector2D(0, 0), 70, 70, 0);
 
@@ -210,6 +214,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		//BackButton
+		//ENTIDADSINENTITYFACTORY
 		auto _backButton = entityManager->addEntity(ecs::grp::UI);
 		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
 		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));

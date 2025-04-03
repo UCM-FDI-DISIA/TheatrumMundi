@@ -33,17 +33,20 @@ void InitialScene::init()
 
 
 		//Background
+		//ENTIDADSINENTITYFACTORY
 		auto _background = entityManager->addEntity();
 		entityManager->addComponent<Transform>(_background, Vector2D(0, 0), Vector2D(0, 0),2019/1.5, 1122/1.5, 0);
 		entityManager->addComponent<Image>(_background, &sdlutils().images().at("Room"));
 		
 		
 		//Title
+		//ENTIDADSINENTITYFACTORY
 		auto _title = entityManager->addEntity();
 		entityManager->addComponent<Transform>(_title, Vector2D(1349 / 4.5, 748 /4), Vector2D(0, 0), 1470 / 2, 270 / 2, 0);
 		entityManager->addComponent<Image>(_title, &sdlutils().images().at("Title"));
 		
 		//Start button room1
+		//ENTIDADSINENTITYFACTORY
 		auto _startbtn = entityManager->addEntity();
 		entityManager->addComponent<Transform>(_startbtn, Vector2D(1348/2.8, 748/2), Vector2D(0, 0), 1470/4, 270/4, 0);
 		entityManager->addComponent<Image>(_startbtn, &sdlutils().images().at("NewGame"));
@@ -63,6 +66,7 @@ void InitialScene::init()
 		});
 		
 		//Exit 
+		//ENTIDADSINENTITYFACTORY
 		auto _exitbtn = entityManager->addEntity();
 		entityManager->addComponent<Transform>(_exitbtn, Vector2D(1349 / 2.8, 748 / 1.5), Vector2D(0, 0), 1470 / 4, 270 / 4, 0);
 		entityManager->addComponent<Image>(_exitbtn, &sdlutils().images().at("Exit"));
@@ -76,6 +80,7 @@ void InitialScene::init()
 				Game::Instance()->exit();
 			});
 
+		//ENTIDADSINENTITYFACTORY
 		_loadimg = entityManager->addEntity();
 		entityManager->addComponent<Transform>(_loadimg, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
 		entityManager->addComponent<Image>(_loadimg, &sdlutils().images().at("loading"));

@@ -36,10 +36,12 @@ void DebugInventoryScene::init()
 	if (!isStarted) 
 	{
 		//All Screen
+		//ENTIDADSINENTITYFACTORY
 		auto _screenDetect = entityManager->addEntity();
 		auto _screenDetectTr = entityManager->addComponent<Transform>(_screenDetect, Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0);
 
 		//Create hints entitys
+		//ENTIDADSINENTITYFACTORY
 		auto _gloves = entityManager->addEntity();
 		entityManager->addComponent<Transform>(_gloves, Vector2D(500, 500), Vector2D(0, 0), 100, 100, 0);
 		entityManager->addComponent<Image>(_gloves, &sdlutils().images().at("gloves"));
@@ -63,6 +65,7 @@ void DebugInventoryScene::init()
 			//std::cout << "Added to inventory. Active state: " << gloves->getActive() << std::endl;
 		});
 
+		//ENTIDADSINENTITYFACTORY
 		auto _spoon = entityManager->addEntity();
 		entityManager->addComponent<Transform>(_spoon, Vector2D(500, 600), Vector2D(0, 0), 100, 100, 0);
 		entityManager->addComponent<Image>(_spoon, &sdlutils().images().at("kei"));
@@ -89,6 +92,7 @@ void DebugInventoryScene::init()
 
 
 		//inv button
+		//ENTIDADSINENTITYFACTORY
 		auto _button = entityManager->addEntity();
 		entityManager->addComponent<Transform>(_button, Vector2D(800, 200), Vector2D(0, 0), 200, 200, 0);
 		entityManager->addComponent<Image>(_button, &sdlutils().images().at("exit"));

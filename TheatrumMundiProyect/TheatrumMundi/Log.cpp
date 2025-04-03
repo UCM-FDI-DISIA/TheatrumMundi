@@ -43,6 +43,8 @@ void Log::cleanLogList()
 
 Log::~Log()
 {
+	_log.clear();
+	delete _textDialogueComp;
 }
 
 void Log::SetLogActive(bool logActive)
@@ -60,6 +62,7 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	//CREATE SCENE ENTITIES OF LOG
 
 	//background log
+	//ENTIDADSINENTITYFACTORY
 	auto _backgroundLog = entityManager->addEntity(ecs::grp::LOG);
 	entityManager->addComponent<Transform>(_backgroundLog, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
 	auto imBack = entityManager->addComponent<Image>(_backgroundLog, &sdlutils().images().at("fondoPruebaLog")); //background log
@@ -69,12 +72,14 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	
 
 	//title log
+	//ENTIDADSINENTITYFACTORY
 	auto _titleLog = entityManager->addEntity(ecs::grp::LOG);
 	entityManager->addComponent<Transform>(_titleLog, Vector2D(50, 50), Vector2D(0, 0), 100, 100, 0);
 	entityManager->addComponent<Image>(_titleLog, &sdlutils().images().at("B7"));
 	entityManager->setActive(_titleLog, false);
 
 	//text log
+	//ENTIDADSINENTITYFACTORY
 	auto _textLog = entityManager->addEntity(ecs::grp::LOG);
 	Transform* trTextLog = entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 800, 748, 0);
 	Image* imTextLog = entityManager->addComponent<Image>(_textLog, &sdlutils().images().at("fondoPruebaLog"));

@@ -32,6 +32,7 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
 
     if (isMiddleRoom) {
         //Character (Image)
+        //ENTIDADSINENTITYFACTORY
         auto character = entityManager->addEntity(grp::DIALOGUE);
         entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
         characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
@@ -44,6 +45,7 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     else {
 
         //Character (Image)
+        //ENTIDADSINENTITYFACTORY
         auto character = entityManager->addEntity(grp::DIALOGUE);
         entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
         characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
@@ -54,6 +56,7 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     }
 
     //Text Background
+    //ENTIDADSINENTITYFACTORY
     auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
     entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
     entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
@@ -81,7 +84,7 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     entityManager->addComponent<TriggerComponent>(_textbackground);
     entityManager->setActive(_textbackground, false);
 
-
+    //ENTIDADSINENTITYFACTORY
     auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
     auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
     entityManager->setActive(_textTest, false);

@@ -130,17 +130,17 @@ void Game::reset()
 	//Asserts
 	assert(_log != nullptr);
 	assert(_dataManager != nullptr);
-	assert(_mngr != nullptr);
+	//assert(_mngr != nullptr);
 
 	//Destroy log and data manager
 	Game::Instance()->getLog()->~Log();
 	Game::Instance()->getDataManager()->~DataManager();
-	Game::Instance()->getSceneManager()->~SceneManager();
+	//Game::Instance()->getSceneManager()->~SceneManager();
 	
 	//Generate a new Log and a new DataManager
 	_log = new Log();
 	_dataManager = new DataManager();
-	_mngr = new SceneManager();
+	//_mngr = new SceneManager();
 
 }
 

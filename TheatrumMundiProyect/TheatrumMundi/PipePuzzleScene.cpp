@@ -752,6 +752,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		for (int i = 0; i < pipePositions.size(); i++) {
 
 			// create entity
+			//ENTIDADSINENTITYFACTORY
 			_pipesEnt.push_back(entityManager->addEntity());
 			
 			// add transfomr
@@ -796,7 +797,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		for (int i = 0; i < modulePositions.size(); i++) {
 
 			// create entity
-
+			//ENTIDADSINENTITYFACTORY
 			_modulesEnt.push_back(entityManager->addEntity());
 
 			// add transfomr
@@ -828,6 +829,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 				});
 		}
 
+		//ENTIDADSINENTITYFACTORY
 		auto _backButton = entityManager->addEntity(ecs::grp::UI);
 		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
 		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
