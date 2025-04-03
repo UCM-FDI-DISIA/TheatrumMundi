@@ -59,9 +59,11 @@ void Log::setRenderedDialogueLines()
 	//temporal iterator
 	auto logIt = _firstRenderLine;
 
+	//verifies if iterator is at end
 	if (logIt == _log.end()) { return;}
 	else
 	{
+		//cleans list of rendering dialogue lines
 		cleanRenderedList();
 
 		for (int i = 0; i < LINES_DISPLAYED; i++)

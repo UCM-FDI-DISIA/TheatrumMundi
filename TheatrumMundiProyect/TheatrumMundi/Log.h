@@ -22,7 +22,7 @@ private:
 	std::list<TextInfo> _renderedDialogueLines; //list of current dialogue lines displayed on log menu
 	std::list<TextInfo>::iterator _firstRenderLine; //points to current first dialogue line to be displayed on log menu
 
-	const int LINES_DISPLAYED = 5;
+	const int LINES_DISPLAYED = 5; //number of lines displayed on screen
 
 public:
 	
@@ -47,9 +47,9 @@ public:
 
 	std::list<TextInfo>* getRenderedDialogueLines() { return &_renderedDialogueLines; }
 
-	void setRenderedDialogueLines();
+	void setRenderedDialogueLines(); //sets rendering dialogue lines dependig of iterator
 
 	void next() { std::advance(_firstRenderLine, std::min(5, static_cast<int>(std::distance(_firstRenderLine, _log.end())))); } //used for scroll
 
-	void previous() {std::advance(_firstRenderLine, -std::min(5, static_cast<int>(std::distance(_log.begin(), _firstRenderLine))));}
+	void previous() {std::advance(_firstRenderLine, -std::min(5, static_cast<int>(std::distance(_log.begin(), _firstRenderLine))));} //used for scroll
 };
