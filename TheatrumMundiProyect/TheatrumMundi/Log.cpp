@@ -26,6 +26,7 @@ using namespace std;
 
 Log::Log(): _textDialogueComp(nullptr)
 {
+	_firstRenderLine = _log.begin();
 }
 
 //adds one dialogueLine (with its author) on log registry
@@ -35,14 +36,41 @@ void Log::addDialogueLineLog(std::string author, std::string dialogueLine)
 	aux.Character = author;
 	aux.Text = dialogueLine;
 	_log.push_front(aux);
+	_firstRenderLine = _log.begin();
 }
 
 void Log::cleanLogList()
 {
+	_log.clear();
+	_firstRenderLine = _log.begin();
+}
+
+void Log::cleanRenderedList()
+{
+	_renderedDialogueLines.clear();
 }
 
 Log::~Log()
 {
+}
+
+void Log::setRenderedDialogueLines()
+{
+	//temporal iterator
+	auto logIt = _firstRenderLine;
+
+	if (logIt == _log.end()) { return;}
+	else
+	{
+		cleanRenderedList();
+
+		for (int i = 0; i < LINES_DISPLAYED; i++)
+		{
+			if (logIt == _log.end()) { return; }
+			_renderedDialogueLines.push_back(*logIt);
+			++logIt;
+		}
+	}
 }
 
 void Log::SetLogActive(bool logActive)
@@ -73,7 +101,7 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	Image* imTextLog = entityManager->addComponent<Image>(_textLog, &sdlutils().images().at("fondoPruebaLog"));
 	SDL_Color colorText = { 255, 255, 255, 255 };
 	WriteTextComponent<std::list<TextInfo>>* writeLog =
-		entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, &_log); //write text component
+		entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, &_renderedDialogueLines); //write text component
 	entityManager->setActive(_textLog, false);
 
 	// Put the dialog interaction area in front of the other interactables
@@ -95,7 +123,9 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	auto buttonCloseLog = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(50, 50), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
 
 	ClickComponent* buttonOpenLogClick = entityManager->getComponent<ClickComponent>(buttonOpenLog);
-	buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [buttonCloseLog, buttonOpenLog, entityManager]() {
+	buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [this, buttonCloseLog, buttonOpenLog, entityManager]() {
+		setRenderedDialogueLines();
+		
 		//activate log
 		entityManager->setActiveGroup(ecs::grp::LOG, true);
 		entityManager->setActive(buttonOpenLog, false); //close button

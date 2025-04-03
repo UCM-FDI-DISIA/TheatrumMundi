@@ -22,6 +22,8 @@ private:
 	std::list<TextInfo> _renderedDialogueLines; //list of current dialogue lines displayed on log menu
 	std::list<TextInfo>::iterator _firstRenderLine; //points to current first dialogue line to be displayed on log menu
 
+	const int LINES_DISPLAYED = 5;
+
 public:
 	
 	Log();
@@ -29,6 +31,7 @@ public:
 	//add new dialogue line to log registry
 	void addDialogueLineLog(std::string author, std::string dialogueLine);
 	void cleanLogList();
+	void cleanRenderedList();
 
 	void SetLogActive(bool logActive);
 	bool GetLogActive();
@@ -44,6 +47,9 @@ public:
 
 	std::list<TextInfo>* getRenderedDialogueLines() { return &_renderedDialogueLines; }
 
-	void next() {} //used for scroll
+	void setRenderedDialogueLines();
 
+	void next() { std::advance(_firstRenderLine, std::min(5, static_cast<int>(std::distance(_firstRenderLine, _log.end())))); } //used for scroll
+
+	void previous() {std::advance(_firstRenderLine, -std::min(5, static_cast<int>(std::distance(_log.begin(), _firstRenderLine))));}
 };
