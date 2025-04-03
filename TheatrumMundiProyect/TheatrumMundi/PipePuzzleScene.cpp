@@ -827,13 +827,9 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 				changeDirection(i); 
 				});
 		}
-
-		auto _backButton = entityManager->addEntity(ecs::grp::UI);
-		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
-		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
-
-		entityManager->addComponent<RectArea2D>(_backButton, areaLayerManager);
-
+		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager,
+			EntityFactory::NODRAG,
+			ecs::grp::DEFAULT);
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr]()
