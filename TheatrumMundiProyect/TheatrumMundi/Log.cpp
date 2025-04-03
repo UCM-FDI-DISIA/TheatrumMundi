@@ -78,27 +78,21 @@ void Log::setRenderedDialogueLines()
 
 void Log::next()
 {
-	// Calcular cuántos elementos hay hasta el final de la lista
+	//distance between _firstRenderLine and list end
 	int distanceToEnd = std::distance(_firstRenderLine, _log.end());
 
 	if (distanceToEnd <= 5) return;
 
-	// Avanzar hasta el mínimo entre 5 elementos y los elementos restantes
-	int steps = std::min(5, distanceToEnd);
-
-	// Avanzar el iterador
+	int steps = std::min(5, distanceToEnd); //calculate how many steps _firstRenderLine has to advance
 	std::advance(_firstRenderLine, steps);
 }
 
 void Log::previous()
 {
-	// Calcular cuántos elementos hay desde el principio de la lista hasta el iterador actual
+	//distance between _firstRenderLine and list beginning
 	int distanceToStart = std::distance(_log.begin(), _firstRenderLine);
 
-	// Retroceder hasta el mínimo entre 5 elementos y los elementos restantes
-	int steps = std::min(5, distanceToStart);
-
-	// Retroceder el iterador
+	int steps = std::min(5, distanceToStart); //calculate how many steps _firstRenderLine has to de-advance
 	std::advance(_firstRenderLine, -steps);
 }
 
@@ -136,7 +130,6 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	areaLayerManager->sendFront(LogArea->getLayerPos());
 
 	//scroll log buttons
-	
 	auto scrollDownLog = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1100, 80), Vector2D(0, 0), 80, 80, 270, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
 	auto scrollUpLog = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1100, 580), Vector2D(0, 0), 80, 80, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
 	
@@ -153,7 +146,6 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 		setRenderedDialogueLines();
 		});
 	entityManager->setActive(scrollUpLog, false);
-
 
 
 	//log buttons
@@ -180,37 +172,5 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 		entityManager->setActive(buttonOpenLog, true); //open button
 		});
 	entityManager->setActive(buttonCloseLog, false);
-
-
-	
-	/*
-	auto downScrollLogButton = entityManager->getComponent<ClickComponent>(scrollingLog);
-	downScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
-		std::cout << "A" << std::endl;
-		if (!ScrollComponentLog->isScrolling()) {
-			ScrollComponentLog->Scroll(ScrollComponent::DOWN);
-		}
-		});
-
-	auto upScrollLogButton = entityManager->getComponent<ClickComponent>(upScrollingLog);
-	upScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
-		if (!ScrollComponentLog->isScrolling()) {
-			ScrollComponentLog->Scroll(ScrollComponent::UP);
-		}
-		});
-	
-	buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
-		while (ScrollComponentLog->numPhases() < (_log.size() / 5)) {
-			ScrollComponentLog->addPhase();
-		}
-		});*/
-	
-	/*
-	_textDialogueComp->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
-		while (ScrollComponentLog->numPhases() < (_log.size() / 5)) {
-			ScrollComponentLog->addPhase();
-		}
-		});*/
-
 		
 }
