@@ -1,17 +1,32 @@
 Resumen de click en botones
 ID;Scene;Numero de click
-A;ROOM1;1
+B3;MIDDLE_ROOM;1
+TeaCupSprite;MIDDLE_ROOM;1
+B2;MIDDLE_ROOM;2
+Clock;MIDDLE_ROOM;1
+Shelf;MIDDLE_ROOM;1
+Corspe;MIDDLE_ROOM;1
+Tubes;MIDDLE_ROOM;1
+B1;MIDDLE_ROOM;1
 
 
 Tiempo en las escenas
 Scene;Tiempo;Veces en la escena;totalClicks
-ROOM1;0;1;1
+;0;0;9
 tiempo de juego total: ;;0;min
 
-Mov en x;0
-Mov en y;0
+Mov en x;5780
+Mov en y;2122
 
 
 Historial de click
 ID;Scene;Segundo Concreto
-A;ROOM1;4.131
+TeaCupSprite;MIDDLE_ROOM;12.704
+Clock;MIDDLE_ROOM;16.37
+Corspe;MIDDLE_ROOM;19.188
+B3;MIDDLE_ROOM;20.701
+B2;MIDDLE_ROOM;21.641
+B2;MIDDLE_ROOM;23.069
+B1;MIDDLE_ROOM;23.699
+Shelf;MIDDLE_ROOM;26.535
+Tubes;MIDDLE_ROOM;29.48
