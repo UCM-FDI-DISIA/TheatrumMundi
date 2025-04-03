@@ -12,6 +12,7 @@
 #include "SceneRoomTemplate.h"
 #include"DebugInventoryScene.h"
 #include "MosaicPuzzleScene.h"
+#include "RavenPuzzleScene.h"
 #include "MiddleRoomScene.h"
 #include "MusicPuzzleScene.h"
 #include "DragPuzzleScene.h"
@@ -30,6 +31,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
 	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
 	scenes[SceneName::MUSIC_PUZZLE] = new MusicPuzzleScene();
+	scenes[SceneName::RAVEN_SCENE] = new RavenPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();

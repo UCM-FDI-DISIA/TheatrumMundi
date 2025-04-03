@@ -52,8 +52,6 @@ void SceneTemplate::startDialogue(const string& _eventToRead)
 void SceneTemplate::endDialogue()
 {
 	dialogueManager->setdisplayOnProcess(false);
-	std::cout << "acabe";
-	
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
 }

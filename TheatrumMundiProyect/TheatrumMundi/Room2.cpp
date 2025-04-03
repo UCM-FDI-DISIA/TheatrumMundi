@@ -27,8 +27,7 @@ Room2Scene::Room2Scene()
 
 	};
 	roomEvent[RavenScene] = [this]{
-		std::cout << "Cuervo cuervito cuervón" << std::endl;
-		//Game::Instance()->getSceneManager()->loadScene(RAVEN_SCENE, this); IMPORTANT: Include Raven Scene when its finished
+		Game::Instance()->getSceneManager()->loadScene(RAVEN_SCENE, this);
 	};
 	roomEvent[RavenSceneRsv] = [this] {
 
@@ -194,7 +193,7 @@ void Room2Scene::init()
 			if (GetInventory()->getActive()) {
 				entityManager->setActive(InventoryBackground, true);
 
-				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(20);
+				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->setPosX(20);
 				entityManager->setActive(downButton, true);
 				entityManager->setActive(upButton, true);
 
@@ -207,7 +206,7 @@ void Room2Scene::init()
 				entityManager->setActive(InventoryBackground, false);
 				entityManager->setActive(downButton, false);
 				entityManager->setActive(upButton, false);
-				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(60 + 268 / 3);
+				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->setPosX(60 + 268 / 3);
 
 				// its okay to use the first item as the first item to show??
 				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) {
@@ -230,7 +229,8 @@ void Room2Scene::init()
 
 		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 
-		std::cout << finishallpuzzles << std::endl;
+		//startDialogue("Room2");
+
 
 #pragma endregion
 
@@ -310,7 +310,7 @@ void Room2Scene::init()
 		CementeryBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(raven));
 		entityManager->getComponent<ClickComponent>(raven)->connect(ClickComponent::JUST_CLICKED, [this]() {
 			roomEvent[RavenScene]();
-			resolvedPuzzle(3);
+			//resolvedPuzzle(3);
 		});
 
 #pragma endregion
@@ -413,7 +413,7 @@ void Room2Scene::resolvedPuzzle(int i)
 		bool aux = true;
 		for (bool a : puzzlesol) if (!a) aux = false;
 		finishallpuzzles = aux;
-		if (aux) entityManager->setActive(body, true);
+		if (aux) entityManager->setActive(characterCorpse, true);
 	}
 }
 

@@ -19,7 +19,7 @@ private:
 	ecs::entity_t secretEntryZoom; //Image of the ZoomEntry
 
 protected:
-	enum Room1Event
+	enum Room2Event
 	{
 		InitialDialogue = 0,
 		CorpseDialogue,
