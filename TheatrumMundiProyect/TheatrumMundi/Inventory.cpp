@@ -100,7 +100,6 @@ void Inventory::addItem(Hint* item)
 /// <param name="idToRemove"></param> -->Id of the item to is going to been removed
 void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& invEntityList, std::list<std::string>& invIdList)
 {
-	//The name don't have to be removed, if we have 2 entities of the same (imagine a BUG) then the inventory don't create the both of them
 	auto hintIt = hints.begin();
 	auto entityIt = invEntityList.begin();
 	auto IdIt = invIdList.begin();
@@ -135,11 +134,11 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 			// move the rest of the items up
 			for (auto it = entityIt; it != invEntityList.end(); ++it) {
 				auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
-				transform->getPos().setY(transform->getPos().getY() - 150);
+				transform->setPosY(transform->getPos().getY() - 150);
 			}
 			for (auto it = hintIt; it != hints.end(); ++it) {
 				auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
-				transform->getPos().setY(transform->getPos().getY() - 150);
+				transform->setPosY(transform->getPos().getY() - 150);
 			}
 
 			return;

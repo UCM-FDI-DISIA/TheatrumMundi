@@ -61,7 +61,7 @@ void ScenePuzzleTemplate::compareInv(SceneRoomTemplate* sr)
 		//change the position of the items
 		for (auto& hint : sr->GetInventory()->hints) {
 			auto transform = hint->getMngr()->getComponent<Transform>(hint);
-			transform->getPos().setY(transform->getPos().getY() - 150);
+			transform->setPosY(transform->getPos().getY() - 150);
 		}
 	}
 }
@@ -69,7 +69,7 @@ void ScenePuzzleTemplate::compareInv(SceneRoomTemplate* sr)
 void ScenePuzzleTemplate::reposInv(SceneRoomTemplate* sr)
 {
 	for (int i = 0; i < invObjects.size(); ++i) {
-		invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i])->getPos().set(sr->GetInventory()->GetPosition(i));
+		invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i])->setPos(sr->GetInventory()->GetPosition(i));
 	}
 
 	/*for (int i = 0; i < sr->GetInventory()->hints.size(); ++i) {
@@ -248,7 +248,7 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 
 			for (int i = 0; i < invObjects.size(); ++i) {
 				auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
-				transform->getPos().setY(transform->getPos().getY() + 150); // Ajustar la posición de los objetos visibles
+				transform->setPosY(transform->getPos().getY() + 150); // Ajustar la posición de los objetos visibles
 			}
 		}
 	}
@@ -267,7 +267,7 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 			// Ajustar las posiciones de los objetos
 			for (int i = 0; i < invObjects.size(); ++i) {
 				auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
-				transform->getPos().setY(transform->getPos().getY() - 150); // Ajustar la posición de los objetos visibles
+				transform->setPosY(transform->getPos().getY() - 150); // Ajustar la posición de los objetos visibles
 			}
 		}
 	}

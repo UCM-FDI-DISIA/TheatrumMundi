@@ -76,7 +76,7 @@ void SceneRoomTemplate::scrollInventory(int dir)
 void SceneRoomTemplate::reposInvRoom(SceneRoomTemplate* sr)
 {
     for (int i = 0; i < GetInventory()->hints.size(); ++i) {
-        GetInventory()->hints[i]->getMngr()->getComponent<Transform>(GetInventory()->hints[i])->getPos().set(GetInventory()->GetPosition(i));
+        GetInventory()->hints[i]->getMngr()->getComponent<Transform>(GetInventory()->hints[i])->setPos(GetInventory()->GetPosition(i));
     }
 }
 
