@@ -2,6 +2,7 @@
 #include "SceneRoomTemplate.h"
 #include "ClickComponent.h"
 #include "DialogueManager.h"
+#include "TriggerComponent.h"
 #include "Game.h"
 #include "Log.h"
 
@@ -15,9 +16,11 @@ RavenPuzzleScene::~RavenPuzzleScene()
 
 void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 {
-	if (!isStarted) {
+	if (!isStarted)
+	{
 		isStarted = true;
 		room = sr;
+		ravenHappy = false;
 
 #pragma region UI
 
@@ -33,6 +36,7 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 #pragma region Inventory
+
 		//INVENTORY
 		//Invntory Background
 		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1150, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
@@ -90,45 +94,66 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 			//AudioManager::Instance().playSound(buttonSound);
 			sr->scrollInventory(1);
 			});
+		//Log
 
 
-	}
 #pragma endregion
 
-	//Log
-	dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-	Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+		//Log
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 
-	//startDialogue("PuzzleCuervo");
-
+		//startDialogue("PuzzleCuervo");
 
 #pragma endregion
 
 #pragma region Background
 
+		auto RavenBackground = entityFactory->CreateImageEntity(entityManager, "FondoCuervo", Vector2D(0, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::UNDER);
+
 #pragma endregion
 
 #pragma region SceneEntities
 
+		auto raven = entityFactory->CreateInteractableEntity(entityManager, "CuervoPeligroso",EntityFactory::RECTAREA, Vector2D(200, 350), Vector2D(0, 0), 259, 200, 0,areaLayerManager,EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		entityManager->addComponent<TriggerComponent>(raven);
+		//Assigns the trigger bolean to true
+		entityManager->getComponent<TriggerComponent>(raven)->connect(TriggerComponent::AREA_ENTERED, [this]() {
+			SetplacedHand(true);
+			});
+		//Assigns the trigger bolean to false
+		entityManager->getComponent<TriggerComponent>(raven)->connect(TriggerComponent::AREA_LEFT, [this]() {
+			SetplacedHand(false);
+			});
+
+		//Creation of the key and their logic
+		auto key = entityFactory->CreateInteractableEntity(entityManager, "Llave", EntityFactory::RECTAREA, Vector2D(200, 400), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		entityManager->getComponent<ClickComponent>(key)->connect(ClickComponent::JUST_CLICKED, [this, sr,key]()
+			{
+				if (ravenHappy) { //If you give the jewel to the bird, the key is pickable
+
+					Vector2D position = sr->GetInventory()->setPosition();
+					AddInvItem("Llave", "La llave de una puerta, seguro que abre algo", position, sr);
+					entityManager->setActive(key, false);
+					Win();
+				}
+				//	else sound of angry bird
+			});
+
 #pragma endregion
+	//Esto lo da la escena de la tumba
+	AddInvItem("Joya", "EYYYY Lapislazuli", sr->GetInventory()->setPosition(), sr);
 
-
+	}
 	//IMPORTANT this need to be out of the isstarted!!!
+	
 	createInvEntities(sr);
-}
-
-
-
-
-bool RavenPuzzleScene::Check()
-{
-    return false;
 }
 
 bool RavenPuzzleScene::isItemHand(const std::string& itemId)
 {
-    if (itemId == "Llave") {
-        //Activar la llave (que sea recogible)
+    if (itemId == "Joya") {
+		ravenHappy = true;
 		return true;
     }
 	return false;

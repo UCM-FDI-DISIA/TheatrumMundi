@@ -564,6 +564,26 @@
     {
       "id": "Cadaver2",
       "file": "../resources/images/temporales/Room2/Cadaver.png"
+    },
+    {
+      "id": "CuervoPeligroso",
+      "file": "../resources/images/temporales/Room2/hinata.png"
+    },
+    {
+      "id": "FondoCuervo",
+      "file": "../resources/images/temporales/Room2/FondoCuervo.png"
+    },
+    {
+      "id": "Candado",
+      "file": "../resources/images/temporales/Room2/Candado.png"
+    },
+    {
+      "id": "Llave",
+      "file": "../resources/images/temporales/Room2/Llave.png"
+    },
+    {
+      "id": "Joya",
+      "file": "../resources/images/temporales/Room2/Joya.png"
     }
   ],
 

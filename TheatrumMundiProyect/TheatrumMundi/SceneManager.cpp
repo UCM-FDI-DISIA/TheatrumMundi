@@ -16,6 +16,7 @@
 #include "MiddleRoomScene.h"
 #include "MusicPuzzleScene.h"
 #include "DragPuzzleScene.h"
+#include "DoorPuzzleScene.h"
 #include "XOPuzzleScene.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 SceneManager::SceneManager()
@@ -35,7 +36,6 @@ SceneManager::SceneManager()
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
-
 	loadScene(SceneName::ROOM_2);
 }
 
@@ -86,7 +86,8 @@ void SceneManager::update()
 
 SceneManager::~SceneManager()
 {
-	for (auto a : scenes) if(a!=nullptr) delete a;
+	for (auto a : scenes) 
+		if(a!=nullptr) delete a;
 
 	currentscenes.clear();
 }

@@ -4,6 +4,7 @@
 #include "ClickComponent.h"
 #include "Game.h"
 #include "Log.h"
+#include "RectArea2D.h"
 Room2Scene::Room2Scene()
 {
 	//Creation of the DialogueManager of the room and creation of the events 
@@ -174,53 +175,57 @@ void Room2Scene::init()
 
 #pragma region Inventory
 
-		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
-		auto buttonInventory = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		//Inventory
+		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
+
+		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(InventoryBackground, false);
 
-		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-		entityManager->setActive(upButton, false);
+		auto InvArea = entityManager->addComponent<RectArea2D>(InventoryBackground, areaLayerManager);
 
-		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-		entityManager->setActive(downButton, false);
+		auto inventoryUpButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->setActive(inventoryUpButton, false);
 
-		ClickComponent* buttonInventoryClick = entityManager->getComponent<ClickComponent>(buttonInventory);
-		buttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, InventoryBackground, upButton, downButton, buttonInventory]() {
-			AudioManager::Instance().playSound(buttonSound);
-			GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
+		auto inventoryDownButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->setActive(inventoryDownButton, false);
 
-			// If the inventory is active, activate the items
-			if (GetInventory()->getActive()) {
-				entityManager->setActive(InventoryBackground, true);
+		entityManager->getComponent<ClickComponent>(inventoryButton)
+			->connect(ClickComponent::JUST_CLICKED, [this, InventoryBackground, inventoryUpButton, inventoryDownButton, InvArea,inventoryButton,buttonSound]()
+				{
+					AudioManager::Instance().playSound(buttonSound);
+					GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
 
-				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->setPosX(20);
-				entityManager->setActive(downButton, true);
-				entityManager->setActive(upButton, true);
+					if (GetInventory()->getActive()) // If the inventory is active, activate the items
+					{
+						entityManager->setActive(InventoryBackground, true);
 
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) {
-					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
-				}
-			}
+						entityManager->getComponent<Transform>(inventoryButton)->setPosX(925);
 
-			else {
-				entityManager->setActive(InventoryBackground, false);
-				entityManager->setActive(downButton, false);
-				entityManager->setActive(upButton, false);
-				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->setPosX(60 + 268 / 3);
+						//change the position of the log button
+						areaLayerManager->sendFront(InvArea->getLayerPos());
 
-				// its okay to use the first item as the first item to show??
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) {
-					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Desactivate the hints
-				}
-			}
-		});
+						areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inventoryUpButton)->getLayerPos());
+						areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inventoryDownButton)->getLayerPos());
 
-		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
-		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, downButton]() {
-			AudioManager::Instance().playSound(buttonSound);
-			scrollInventory(1);
-		});
+						entityManager->setActive(inventoryDownButton, true);
+						entityManager->setActive(inventoryUpButton, true);
 
+						for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i)
+							GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
+					}
+					else
+					{
+						entityManager->setActive(InventoryBackground, false);
+						entityManager->setActive(inventoryDownButton, false);
+						entityManager->setActive(inventoryUpButton, false);
+
+						inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+
+						// its okay to use the first item as the first item to show??
+						for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i)
+							GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Desactivate the hints
+					}
+				});
 #pragma endregion
 		
 		//Log
