@@ -118,8 +118,9 @@ void Game::start() {
 		checkCollisions();
 		render();
 
+		_mngr->refresh();
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
-
+		
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
 	}

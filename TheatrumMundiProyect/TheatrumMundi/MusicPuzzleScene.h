@@ -13,7 +13,6 @@ public:
 	MusicPuzzleScene(/*Room1Scene* room1*/);
 	~MusicPuzzleScene();
 	void init(SceneRoomTemplate* sr) override;
-	void refresh() override;
 	void unload() override;
 	bool Check() override;
 	void Win() override;

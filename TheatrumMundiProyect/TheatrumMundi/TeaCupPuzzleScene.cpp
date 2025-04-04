@@ -205,10 +205,6 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 	createInvEntities(sr);
 }
 
-void TeaCupPuzzleScene::refresh()
-{
-
-}
 
 void TeaCupPuzzleScene::unload()
 {

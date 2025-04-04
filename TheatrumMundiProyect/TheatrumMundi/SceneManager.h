@@ -42,7 +42,7 @@ public:
 	 void unloadScene();
 	 void render();
 	 //refrest the currect scene 
-	 void refrest();
+	 void refresh();
 	 //update of the currentscene
 	 void update();
 	 //Get the actSceneIndex ONLY USE FOR PLAYTESTING

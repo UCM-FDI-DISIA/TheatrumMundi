@@ -308,9 +308,6 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 }
 
 
-void ClockPuzzleScene::refresh()
-{
-}
 
 void ClockPuzzleScene::unload()
 {

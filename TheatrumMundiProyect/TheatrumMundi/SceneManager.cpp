@@ -37,7 +37,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
-	loadScene(SceneName::ROOM_2);
+	loadScene(SceneName::INITIAL_MENU);
 }
 
 void SceneManager::popScene()
@@ -68,12 +68,12 @@ void SceneManager::unloadScene()
 {
 	currentscenes.back()->unload();
 	currentscenes.pop_back();
-	refrest();
+	refresh();
 }
 void SceneManager::render() {
 	currentscenes.back()->render();
 }
-void SceneManager::refrest()
+void SceneManager::refresh()
 {
 	currentscenes.back()->refresh();
 }

@@ -320,10 +320,6 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 	createInvEntities(sr);
 }
 
-void BooksPuzzleScene::refresh()
-{
-}
-
 void BooksPuzzleScene::unload()
 {
 	

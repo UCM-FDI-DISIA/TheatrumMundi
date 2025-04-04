@@ -57,7 +57,8 @@ Room2Scene::Room2Scene()
 	};
 	roomEvent[Rope] = [this] {
 		//Remove rope
-		rope->getMngr()->removeEntity(this->rope);
+		rope->getMngr()->removeEntity(rope);
+		rope->getMngr()->setActive(rope, false);
 		// InventoryLogic
 		GetInventory()->addItem(new Hint("Palo", "Ta", &sdlutils().images().at("Palo")));
 		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "Palo", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
@@ -420,9 +421,6 @@ void Room2Scene::resolvedPuzzle(int i)
 	}
 }
 
-void Room2Scene::refresh()
-{
-}
 
 void Room2Scene::unload()
 {
