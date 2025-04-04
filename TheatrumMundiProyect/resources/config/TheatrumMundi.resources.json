@@ -466,6 +466,10 @@
       "file": "../resources/images/Finales/TelefonoZoom.png"
     },
     {
+      "id": "mobileBackgroundV2",
+      "file": "../resources/images/Finales/TelefonoZoomV2.png"
+    },
+    {
       "id": "AAA",
       "file": "../resources/images/veneno.png"
     },

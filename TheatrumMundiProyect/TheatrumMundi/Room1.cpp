@@ -178,9 +178,19 @@ void Room1Scene::_setRoomEvents()
 
 	roomEvent[MobileDialogue] = [this]()
 		{
-			// WIP
-			_eventToRead = Movil;
-			startDialogue("Movil");
+			int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
+
+			if (variant == 0 || variant == 2)
+			{
+				//_eventToRead = Movil;
+				startDialogue("Movil1");
+			}
+			if (variant == 1)
+			{
+				//_eventToRead = Movil;
+				startDialogue("Movil2");
+			}
+			
 		};
 
 	roomEvent[ResolveBottons] = [this]() //Resolve the case
@@ -483,6 +493,18 @@ void Room1Scene::_setInteractuables()
 
 	auto mobileZoom = entityFactory->CreateImageEntity(entityManager, "mobileBackground", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 
+
+	int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
+	entity_t tag;
+	if (variant == 0 || variant == 2) //call was missed
+	{
+		entityManager->getComponent<Image>(mobileZoom)->setTexture(&sdlutils().images().at("mobileBackground"));
+	}
+	else if (variant == 1) // call is answered
+	{
+		entityManager->getComponent<Image>(mobileZoom)->setTexture(&sdlutils().images().at("mobileBackgroundV2"));
+	}
+	
 	RectArea2D* mobileZoomArea = entityManager->addComponent<RectArea2D>(mobileZoom, areaLayerManager);
 	entityManager->setActive(mobileZoom, false);
 
