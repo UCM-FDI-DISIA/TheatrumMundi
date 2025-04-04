@@ -898,6 +898,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr]()
 			{
+				sr->GetInventory()->setFirstItem(0);
 				Game::Instance()->getSceneManager()->popScene();
 			});
 
@@ -906,6 +907,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
+	sr->GetInventory()->setFirstItem(0);
 	createInvEntities(sr);
 }
 

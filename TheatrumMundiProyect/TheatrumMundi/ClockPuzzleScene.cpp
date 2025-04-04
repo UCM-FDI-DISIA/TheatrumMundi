@@ -218,6 +218,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr]()
 			{
+				sr->GetInventory()->setFirstItem(0);
 				Game::Instance()->getSceneManager()->popScene();
 			});
 		
@@ -249,7 +250,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(downButton, true);
 					entityManager->setActive(upButton, true);
 
-					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], true);
 					}
 				}
@@ -260,7 +261,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(upButton, false);
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(60 + 268 / 3);
 
-					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], false);
 					}
 				}
@@ -270,18 +271,20 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ upButton, sr]() {
 
 			//AudioManager::Instance().playSound(buttonSound);
-			sr->scrollInventory(-1);
+			scrollInventoryPuzzle(-1, sr);
 			});
 
 		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
 		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ downButton, sr]() {
 
 			//AudioManager::Instance().playSound(buttonSound);
-			sr->scrollInventory(1);
+			scrollInventoryPuzzle(1,sr);
 			});
 
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
+
+	sr->GetInventory()->setFirstItem(0);
 	createInvEntities(sr);
 }
 

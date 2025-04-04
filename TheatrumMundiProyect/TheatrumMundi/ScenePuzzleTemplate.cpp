@@ -233,11 +233,9 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 			invObjects[sr->GetInventory()->getFirstItem()]->getMngr()->setActive(invObjects[sr->GetInventory()->getFirstItem()], true);
 
 
-			for (size_t i = 0; i < invObjects.size(); ++i) {
-				if (i >= sr->GetInventory()->getFirstItem() && i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber()) {
-					auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
-					transform->getPos().setY(transform->getPos().getY() + 150); // Ajustar la posición de los objetos visibles
-				}
+			for (int i = 0; i < invObjects.size(); ++i) {
+				auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
+				transform->getPos().setY(transform->getPos().getY() + 150); // Ajustar la posición de los objetos visibles
 			}
 		}
 	}
@@ -254,11 +252,9 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 			}
 
 			// Ajustar las posiciones de los objetos
-			for (size_t i = 0; i < invObjects.size(); ++i) {
-				if (i >= sr->GetInventory()->getFirstItem() && i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber()) {
-					auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
-					transform->getPos().setY(transform->getPos().getY() - 150); // Ajustar la posición de los objetos visibles
-				}
+			for (int i = 0; i < invObjects.size(); ++i) {
+				auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
+				transform->getPos().setY(transform->getPos().getY() - 150); // Ajustar la posición de los objetos visibles
 			}
 		}
 	}
