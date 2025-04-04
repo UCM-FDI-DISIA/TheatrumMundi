@@ -47,7 +47,7 @@ void Room1Scene::init()
 
 	_setRoomBackground();
 
-	_setCaseResolution();
+	
 
 	_setInteractuables();
 
@@ -64,13 +64,15 @@ void Room1Scene::init()
 
 void Room1Scene::resolvedPuzzle(int i)
 {
+	puzzlesol[i] = true;
+	//entityManager->removeComponent<ClickComponent>(puzzleptr[i]);
 	if (i <4) {
-		int auxevent = EVENTS_SIZE;
-		if (i == 0)  auxevent = PipePuzzleRsv;
-		else if (i == 1)  auxevent = BooksPuzzleRsv;
-		else if (i == 2)  auxevent = ClockPuzzleRsv;
-		else if (i == 3)  auxevent = TeaCupPuzzleRsv;
-		roomEvent[auxevent]();
+		//int auxevent = EVENTS_SIZE;
+		//if (i == 0)  auxevent = PipePuzzleRsv;
+		//else if (i == 1)  auxevent = BooksPuzzleRsv;
+		//else if (i == 2)  auxevent = ClockPuzzleRsv;
+		//else if (i == 3)  auxevent = TeaCupPuzzleRsv;
+		//roomEvent[auxevent]();
 		bool aux = true;
 		for (bool a : puzzlesol) if (!a) aux = false;
 		finishallpuzzles = aux;
@@ -80,6 +82,15 @@ void Room1Scene::resolvedPuzzle(int i)
 #ifdef _DEBUG
 		std::cout << i << " invalid index" << std::endl;
 #endif
+	}
+
+
+	if (finishallpuzzles)
+	{
+		//call to the final dialogue
+		roomEvent[ResolveCase]();
+		_setCaseResolution();
+		
 	}
 }
 
@@ -161,7 +172,7 @@ void Room1Scene::_setRoomEvents()
 			
 	roomEvent[ResolveCase] = [this]()
 		{
-			startDialogue("Sala1Intro"); //Poner el dialogo correspondiente
+			startDialogue("Sala1Final"); //Poner el dialogo correspondiente
 		};
 
 	roomEvent[GoodEnd] = [this]()
@@ -185,8 +196,10 @@ void Room1Scene::_setRoomEvents()
 
 	roomEvent[ResolveBottons] = [this]() //Resolve the case
 	{
-		entityManager->setActive(rmObjects.posibleCaseButton, true);
-		entityManager->setActive(rmObjects.imposibleCaseButton, true);
+			entityManager->setActive(rmObjects.readyToResolveBotton, true);
+		//entityManager->setActive(rmObjects.posibleCaseButton, true);
+		//entityManager->setActive(rmObjects.imposibleCaseButton, true);
+
 	};
 }
 
@@ -318,7 +331,7 @@ void Room1Scene::_setUI()
 			scrollInventory(1);
 		});
 
-	// Button that confirms the assesination
+/*	// Button that confirms the assesination
 	rmObjects.posibleCaseButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3) - 20), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 	
 	entityManager->getComponent<ClickComponent>(rmObjects.posibleCaseButton)
@@ -339,7 +352,7 @@ void Room1Scene::_setUI()
 		});
 
 	entityManager->setActive(rmObjects.imposibleCaseButton, false);
-
+	*/
 	Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 }
 
@@ -394,10 +407,14 @@ void Room1Scene::_setCaseResolution()
 			if (variantAct != 0) //if its the not correct variant one dies
 			{
 				Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
-				std::cout << "NO CORRECTA DE POS" << std::endl;
+				roomEvent[BadEnd];
+			}
+			else
+			{
+				roomEvent[GoodEnd];
 			}
 
-			//change to intermediate room
+			
 		});
 
 	auto noPossibleButton = entityFactory->CreateInteractableEntity(entityManager, "noPosible", EntityFactory::RECTAREA, Vector2D(600, 0), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
@@ -408,11 +425,15 @@ void Room1Scene::_setCaseResolution()
 		{
 			if (variantAct != 1 || 2) //if its the not correct variant one dies
 			{
-				std::cout << "NO CORRECTA DE NO POS" << std::endl;
 				Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
+				roomEvent[BadEnd];
+			}
+			else
+			{
+				roomEvent[GoodEnd];
 			}
 
-			//change to intermediate room
+			
 		});
 
 	auto resolveButton = entityFactory->CreateInteractableEntity(entityManager, "resolve", EntityFactory::RECTAREA, Vector2D(0, 500), Vector2D(0, 0), 500, 500, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
@@ -422,24 +443,24 @@ void Room1Scene::_setCaseResolution()
 	entityManager->setActive(noResolveButton, false);
 
 	//Button only appears when the 3 puzzles have been resolved
-	auto readyToResolveButton = entityFactory->CreateInteractableEntity(entityManager, "B5", EntityFactory::RECTAREA, Vector2D(400, 400), Vector2D(0, 0), 400, 400, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+	rmObjects.readyToResolveBotton = entityFactory->CreateInteractableEntity(entityManager, "B5", EntityFactory::RECTAREA, Vector2D(400, 400), Vector2D(0, 0), 400, 400, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 
-	entityManager->getComponent<ClickComponent>(readyToResolveButton)
-		->connect(ClickComponent::JUST_CLICKED, [this, noResolveButton, resolveButton, readyToResolveButton]() 
+	entityManager->getComponent<ClickComponent>(rmObjects.readyToResolveBotton)
+		->connect(ClickComponent::JUST_CLICKED, [this, noResolveButton, resolveButton]()
 		{
 			entityManager->setActive(noResolveButton, true);
 			entityManager->setActive(resolveButton, true);
-			entityManager->setActive(readyToResolveButton, false);
+			entityManager->setActive(rmObjects.readyToResolveBotton, false);
 		});
 
-	entityManager->setActive(readyToResolveButton, false);
+	entityManager->setActive(rmObjects.readyToResolveBotton, false);
 
 	entityManager->getComponent<ClickComponent>(resolveButton)
-		->connect(ClickComponent::JUST_CLICKED, [this, possibleButton, noPossibleButton, readyToResolveButton, resolveButton, noResolveButton]() 
+		->connect(ClickComponent::JUST_CLICKED, [this, possibleButton, noPossibleButton, resolveButton, noResolveButton]()
 		{
 			entityManager->setActive(noPossibleButton, true);
 
-			entityManager->setActive(readyToResolveButton, false);
+			entityManager->setActive(rmObjects.readyToResolveBotton, false);
 			entityManager->setActive(possibleButton, true);
 
 			entityManager->setActive(resolveButton, false);
@@ -447,11 +468,11 @@ void Room1Scene::_setCaseResolution()
 		});
 
 	entityManager->getComponent<ClickComponent>(noResolveButton)
-		->connect(ClickComponent::JUST_CLICKED, [this, noResolveButton, resolveButton, readyToResolveButton]() 
+		->connect(ClickComponent::JUST_CLICKED, [this, noResolveButton, resolveButton]()
 		{
 			entityManager->setActive(noResolveButton, false);
 			entityManager->setActive(resolveButton, false);
-			entityManager->setActive(readyToResolveButton, true);
+			entityManager->setActive(rmObjects.readyToResolveBotton, true);
 		});
 }
 

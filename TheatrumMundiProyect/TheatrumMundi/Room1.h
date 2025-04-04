@@ -43,6 +43,7 @@ public:
 	void resolvedPuzzle(int i) override;
 	void refresh() override;
 	void unload() override;
+	
 
 private:
 
@@ -65,8 +66,9 @@ private:
 		ecs::entity_t quitButton		  = nullptr;
 		ecs::entity_t pauseButton		  = nullptr;
 		ecs::entity_t inventoryButton	  = nullptr;
-		ecs::entity_t posibleCaseButton   = nullptr;
-		ecs::entity_t imposibleCaseButton = nullptr;
+		//ecs::entity_t posibleCaseButton   = nullptr;
+		//ecs::entity_t imposibleCaseButton = nullptr;
+		ecs::entity_t readyToResolveBotton = nullptr;
 
 		ScrollComponent* backgroundScroll = nullptr;
 	} rmObjects;
