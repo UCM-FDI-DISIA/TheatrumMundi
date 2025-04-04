@@ -509,7 +509,15 @@
     },
     {
         "id": "NewGameLocked",
-        "file":  "../resources/images/temporales/GameLocked.png"
+        "file": "../resources/images/temporales/GameLocked.png"
+    },
+    {
+        "id": "teleSinAntena",
+        "file": "../resources/images/temporales/teleSinAntena.png"
+    },
+    {
+        "id": "teleConAntena",
+        "file": "../resources/images/temporales/teleConAntena.png"
     }
   ],
 

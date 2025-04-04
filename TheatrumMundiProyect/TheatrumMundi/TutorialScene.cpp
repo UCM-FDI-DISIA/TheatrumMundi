@@ -43,6 +43,10 @@ TutorialScene::TutorialScene() : SceneRoomTemplate(), _eventToRead("SalaIntermed
 	roomEvent[ClockPuzzleRsv] = [this] {
 		// InventoryLogic
 		};
+	roomEvent[teleScene] = [this]
+		{
+			Game::Instance()->getSceneManager()->loadScene(TEA_CUP_PUZZLE, this);
+		};
 	roomEvent[Spoon] = [this] {
 		// InventoryLogic
 		GetInventory()->addItem(new Hint("TeaCupSpoon", "Es una cuchara, que no lo ves o que", &sdlutils().images().at("TeaCupSpoon")));
@@ -86,8 +90,34 @@ void TutorialScene::init()
 		dialogueManager->setScene(this);
 
 
+		//Background and Scene scroll
+		auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	
+		auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
+
+
+		auto startRoom = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+		
+		auto startRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
+		
+		startRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(startRoom));
+
+
+		auto secondRoom = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(-1349 - 6, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+		
+		startRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(secondRoom));
+
+		auto ChangeRoom1Button = entityManager->getComponent<ClickComponent>(ChangeRoom1);
+		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, startRoomScroll, ChangeRoomScroll]() {
+			if (!startRoomScroll->isScrolling()) {
+				//AudioManager::Instance().playSound(doorSound);
+				startRoomScroll->Scroll(ScrollComponent::RIGHT);
+			}
+			});
+
+		//test 
 		auto botonTest = entityManager->addEntity();
-		entityManager->addComponent<Transform>(botonTest, Vector2D(1348 / 2.8, 748 / 2), Vector2D(0, 0), 1470 / 4, 270 / 4, 0);
+		entityManager->addComponent<Transform>(botonTest, /*Vector2D(1348 / 2.8, 748 / 2)*/Vector2D(356 - 1349 - 6, 127), Vector2D(0, 0), 1470 / 4, 270 / 4, 0);
 		entityManager->addComponent<Image>(botonTest, &sdlutils().images().at("TutorialButtonTemp"));
 
 		entityManager->addComponent<RectArea2D>(botonTest);
@@ -100,11 +130,25 @@ void TutorialScene::init()
 			save.setTutoCompleted(true);
 			save.Write("savegame.dat");
 			});
+		
+		startRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(botonTest));
 
 
+		//Television
+		auto television = entityFactory->CreateInteractableEntity(entityManager, "teleSinAntena", EntityFactory::RECTAREA, Vector2D(170 - 1349, 400), Vector2D(0, 0), 750 / 3, 760 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		startRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(television));
+		entityManager->getComponent<ClickComponent>(television)->connect(ClickComponent::JUST_CLICKED, [this, puzzleButtonSound]() {
+			AudioManager::Instance().playSound(puzzleButtonSound);
+			roomEvent[teleScene]();
+			});
+
+
+
+
+		//quit button
 		auto botonBack = entityManager->addEntity();
-		entityManager->addComponent<Transform>(botonBack, Vector2D(1348 / 2.5, 748 / 4), Vector2D(0, 0), 1470 / 4, 270 / 4, 0);
-		entityManager->addComponent<Image>(botonBack, &sdlutils().images().at("Hanni"));
+		entityManager->addComponent<Transform>(botonBack, Vector2D(1349 - 110, 20), Vector2D(0, 0), 270 / 4, 270 / 4, 0);
+		entityManager->addComponent<Image>(botonBack, &sdlutils().images().at("B1"));
 
 		entityManager->addComponent<RectArea2D>(botonBack);
 
@@ -114,6 +158,8 @@ void TutorialScene::init()
 			AudioManager::Instance().playSound(buttonSound);
 			Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
 			});
+
+
 
 
 	}

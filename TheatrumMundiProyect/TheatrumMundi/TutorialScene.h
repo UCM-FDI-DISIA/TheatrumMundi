@@ -11,6 +11,7 @@ protected:
 		InitialDialogue = 0,
 		ClockPuzzleSnc,
 		ClockPuzzleRsv,
+		teleScene,
 		Spoon,
 		ResolveCase,
 		ResolveBottons,
