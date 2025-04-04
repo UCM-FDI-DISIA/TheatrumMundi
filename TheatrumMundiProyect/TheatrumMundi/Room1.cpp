@@ -176,29 +176,61 @@ void Room1Scene::_setRoomEvents()
 
 	roomEvent[GoodEnd] = [this]()
 		{
-			// WIP
-			//black background
+			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
-			//play sound
-			//when it ends change texture to "it will continue"
-			 Image* img = entityManager->getComponent<Image>(rmObjects.blackBackground);
-			img->setTexture(&sdlutils().images().at("continuar"));
-			//then pop
-			Game::Instance()->getSceneManager()->popScene();
-			
-		};
+		
+			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
+				auto* self = static_cast<decltype(this)>(param);
 
+				// change texture after 4 secs
+				if (self) {
+					Image* img = self->entityManager->getComponent<Image>(self->rmObjects.blackBackground);
+					if (img) {
+						img->setTexture(&sdlutils().images().at("continuar"));
+					}
+
+					// pop scene after 4 more secs
+					SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
+						auto* self = static_cast<decltype(this)>(param);
+						if (self) {
+							Game::Instance()->getSceneManager()->popScene();
+						}
+						return 0;
+						}, param);
+				}
+
+				return 0;
+				}, this);
+		};
 	roomEvent[BadEnd] = [this]()
 		{
-			// WIP
+			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
-			Image* img = entityManager->getComponent<Image>(rmObjects.blackBackground);
-			img->setTexture(&sdlutils().images().at("continuar"));
 
-			Game::Instance()->getSceneManager()->popScene();
-			
+			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
+				auto* self = static_cast<decltype(this)>(param);
+
+				// change texture after 4 secs
+				if (self) {
+					Image* img = self->entityManager->getComponent<Image>(self->rmObjects.blackBackground);
+					if (img) {
+						img->setTexture(&sdlutils().images().at("continuar"));
+					}
+
+					// pop scene after 4 more secs
+					SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
+						auto* self = static_cast<decltype(this)>(param);
+						if (self) {
+							Game::Instance()->getSceneManager()->popScene();
+						}
+						return 0;
+						}, param);
+				}
+
+				return 0;
+				}, this);
 		};
 
 	roomEvent[MobileDialogue] = [this]()
@@ -399,26 +431,26 @@ void Room1Scene::_setCaseResolution()
 		0, ecs::grp::DECISION);
 	entityManager->setActive(background, false);
 
-	auto backgroundRect = entityManager->getComponent<RectArea2D>(background);
-	areaLayerManager->sendFront(backgroundRect->getLayerPos());
+	//auto backgroundRect = entityManager->getComponent<RectArea2D>(background);
+	//areaLayerManager->sendFront(backgroundRect->getLayerPos());
 
 	auto readyToQuestion = entityFactory->CreateImageEntity(entityManager, "1stQuestion", Vector2D(350, 200), Vector2D(0, 0), 600, 200, 0, ecs::grp::DECISION);
 	entityManager->setActive(readyToQuestion, false);
 
-	auto readyToQuestionRect = entityManager->getComponent<RectArea2D>(readyToQuestion);
-	areaLayerManager->sendFront(readyToQuestionRect->getLayerPos());
+	//auto readyToQuestionRect = entityManager->getComponent<RectArea2D>(readyToQuestion);
+	//areaLayerManager->sendFront(readyToQuestionRect->getLayerPos());
 
 	auto finalQuestion = entityFactory->CreateImageEntity(entityManager, "2ndQuestion", Vector2D(350, 200), Vector2D(0, 0), 600, 200, 0, ecs::grp::DECISION);
 	entityManager->setActive(finalQuestion, false);
 
-	auto finalQuestionRect = entityManager->getComponent<RectArea2D>(finalQuestion);
-	areaLayerManager->sendFront(finalQuestionRect->getLayerPos());
+//	auto finalQuestionRect = entityManager->getComponent<RectArea2D>(finalQuestion);
+	//areaLayerManager->sendFront(finalQuestionRect->getLayerPos());
 	
 	auto possibleButton = entityFactory->CreateInteractableEntity(entityManager, "yes", EntityFactory::RECTAREA, Vector2D(400, 400), Vector2D(0, 0), 200, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DECISION);
 	entityManager->setActive(possibleButton, false);
 
 	entityManager->getComponent<ClickComponent>(possibleButton)
-		->connect(ClickComponent::JUST_CLICKED, [this, variantAct]() 
+		->connect(ClickComponent::JUST_CLICKED, [this, variantAct, background]()
 		{
 			if (variantAct != 0) //if its the not correct variant one dies
 			{
@@ -430,19 +462,20 @@ void Room1Scene::_setCaseResolution()
 			{
 				roomEvent[GoodEnd]();
 			}
-
+		
+			entityManager->setActive(background, false);
 			
 		});
 
-	auto possibleButtonRect = entityManager->getComponent<RectArea2D>(possibleButton);
-	areaLayerManager->sendFront(possibleButtonRect->getLayerPos());
+	//auto possibleButtonRect = entityManager->getComponent<RectArea2D>(possibleButton);
+	//areaLayerManager->sendFront(possibleButtonRect->getLayerPos());
 	
 
 	auto noPossibleButton = entityFactory->CreateInteractableEntity(entityManager, "no", EntityFactory::RECTAREA, Vector2D(700, 400), Vector2D(0, 0), 200, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DECISION);
 	entityManager->setActive(noPossibleButton, false);
 	
 	entityManager->getComponent<ClickComponent>(noPossibleButton)
-		->connect(ClickComponent::JUST_CLICKED, [this, variantAct]() 
+		->connect(ClickComponent::JUST_CLICKED, [this, variantAct, background]()
 		{
 			if (variantAct != 1 || 2) //if its the not correct variant one dies
 			{
@@ -455,24 +488,24 @@ void Room1Scene::_setCaseResolution()
 			{
 				roomEvent[GoodEnd]();
 			}
-
+			entityManager->setActive(background, false);
 			
 		});
 
-	auto noPossibleButtonRect = entityManager->getComponent<RectArea2D>(noPossibleButton);
-	areaLayerManager->sendFront(noPossibleButtonRect->getLayerPos());
+	//auto noPossibleButtonRect = entityManager->getComponent<RectArea2D>(noPossibleButton);
+	//areaLayerManager->sendFront(noPossibleButtonRect->getLayerPos());
 
 	auto resolveButton = entityFactory->CreateInteractableEntity(entityManager, "yes", EntityFactory::RECTAREA, Vector2D(400, 400), Vector2D(0, 0), 200, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DECISION);
 	entityManager->setActive(resolveButton, false);
 
-    auto resolveButtonRect = entityManager->getComponent<RectArea2D>(resolveButton);
-	areaLayerManager->sendFront(resolveButtonRect->getLayerPos());
+   // auto resolveButtonRect = entityManager->getComponent<RectArea2D>(resolveButton);
+	//areaLayerManager->sendFront(resolveButtonRect->getLayerPos());
 
 	auto noResolveButton = entityFactory->CreateInteractableEntity(entityManager, "no", EntityFactory::RECTAREA, Vector2D(700, 400), Vector2D(0, 0), 200, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DECISION);
 	entityManager->setActive(noResolveButton, false);
 
-	auto noResolveButtonRect = entityManager->getComponent<RectArea2D>(noResolveButton);
-	areaLayerManager->sendFront(noResolveButtonRect->getLayerPos());
+	//auto noResolveButtonRect = entityManager->getComponent<RectArea2D>(noResolveButton);
+	//areaLayerManager->sendFront(noResolveButtonRect->getLayerPos());
 
 
 	//Button only appears when the 3 puzzles have been resolved
@@ -518,7 +551,7 @@ void Room1Scene::_setCaseResolution()
 		Vector2D(0, 0),
 		4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
 		2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
-		0, ecs::grp::DEFAULT);
+		0, ecs::grp::DECISION);
 	entityManager->setActive(rmObjects.blackBackground, false);
 
 
