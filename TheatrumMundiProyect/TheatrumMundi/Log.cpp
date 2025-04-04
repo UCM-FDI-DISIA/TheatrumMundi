@@ -24,7 +24,7 @@
 
 using namespace std;
 
-Log::Log(): _textDialogueComp(nullptr)
+Log::Log()
 {
 	_firstRenderLine = _log.begin();
 }

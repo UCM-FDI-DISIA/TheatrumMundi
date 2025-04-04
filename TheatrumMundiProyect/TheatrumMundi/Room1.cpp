@@ -105,8 +105,6 @@ void Room1Scene::_setRoomEvents()
 	
 	roomEvent[CorpseDialogue] = [this]()
 		{
-			roomEvent[ResolveCase]();
-
 			_eventToRead = Cadaver;
 			startDialogue("Cadaver");
 		};

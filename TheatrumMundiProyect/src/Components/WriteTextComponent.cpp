@@ -179,6 +179,11 @@ void WriteTextComponent<TextInfo>::render()
 	}
 	else
 	{
+		// Author
+		Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
+		SDL_Rect nameRect = { 350, 465,nameText->width(),nameText->height() };
+		nameText->render(nameRect, 0);
+
 		// Text
 
 
