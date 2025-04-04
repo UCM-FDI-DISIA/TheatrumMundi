@@ -648,6 +648,10 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 				//AudioManager::Instance().playSound(buttonSound);
 				sr->GetInventory()->setActive(!sr->GetInventory()->getActive());  // Toggle the inventory
 
+				for (int i = 0; i < invObjects.size(); ++i) {
+					std::cout << "objetos antes y despues: " << sr->GetInventory()->hints[i]->getMngr()->getComponent<Transform>(sr->GetInventory()->hints[i])->getPos().getY() << std::endl;
+				}
+
 				// If the inventory is active, activate the items
 				if (sr->GetInventory()->getActive()) {
 					entityManager->setActive(InventoryBackground, true);

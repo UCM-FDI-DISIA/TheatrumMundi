@@ -70,6 +70,10 @@ void ScenePuzzleTemplate::reposInv(SceneRoomTemplate* sr)
 	for (int i = 0; i < invObjects.size(); ++i) {
 		invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i])->getPos().set(sr->GetInventory()->GetPosition(i));
 	}
+
+	/*for (int i = 0; i < sr->GetInventory()->hints.size(); ++i) {
+		sr->GetInventory()->hints[i]->getMngr()->getComponent<Transform>(sr->GetInventory()->hints[i])->getPos().set(sr->GetInventory()->GetPosition(i));
+	}*/
 }
 
 ScenePuzzleTemplate::ScenePuzzleTemplate(): SceneTemplate()

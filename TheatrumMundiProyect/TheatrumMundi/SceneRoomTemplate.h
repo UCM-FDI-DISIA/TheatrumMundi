@@ -38,6 +38,7 @@ protected:
 		/// </summary>
 		/// <param name="dir"></param>
 		void scrollInventory(int dir); //scroll room1
+		void reposInvRoom(SceneRoomTemplate* sr); //Reposition the inventory items
 
 	SceneRoomTemplate();
 	virtual ~SceneRoomTemplate();

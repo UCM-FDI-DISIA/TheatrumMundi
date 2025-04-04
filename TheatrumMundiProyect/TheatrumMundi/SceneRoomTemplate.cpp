@@ -73,6 +73,13 @@ void SceneRoomTemplate::scrollInventory(int dir)
     }
 }
 
+void SceneRoomTemplate::reposInvRoom(SceneRoomTemplate* sr)
+{
+    for (int i = 0; i < GetInventory()->hints.size(); ++i) {
+        GetInventory()->hints[i]->getMngr()->getComponent<Transform>(GetInventory()->hints[i])->getPos().set(GetInventory()->GetPosition(i));
+    }
+}
+
 SceneRoomTemplate::SceneRoomTemplate() : SceneTemplate()
 {
 	for (int i = 0; i < 3;i++)puzzlesol.push_back(false);

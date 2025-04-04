@@ -410,12 +410,15 @@ void Room1Scene::init()
 		buttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound,InventoryBackground, upButton, downButton, buttonInventory, InvArea]() {
 			AudioManager::Instance().playSound(buttonSound);
 			GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
+			reposInvRoom(this);
+
+			for (int i = 0; i < GetInventory()->getItemNumber(); ++i) {
+				std::cout << "objetos despues del repo: " << GetInventory()->hints[i]->getMngr()->getComponent<Transform>(GetInventory()->hints[i])->getPos().getY() << std::endl;
+			}
 
 			// If the inventory is active, activate the items
 			if (GetInventory()->getActive()) {
 				entityManager->setActive(InventoryBackground, true);
-
-				std::cout << "Numero de objetos: " << GetInventory()->getFirstItem() << std::endl;
 
 				buttonInventory->getMngr()->getComponent<Transform>(buttonInventory)->getPos().setX(925);
 				//change the position of the log button
