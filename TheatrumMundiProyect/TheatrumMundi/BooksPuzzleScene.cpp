@@ -177,7 +177,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//REWARD ENTITY
 		auto clock = entityFactory->CreateInteractableEntity(entityManager, "horaria", EntityFactory::RECTAREA,
-			Vector2D(700, 640), Vector2D(0, 0), 100, 150, 0,
+			Vector2D(680, 600), Vector2D(0, 0), 150, 250, 90,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);

@@ -446,7 +446,7 @@ void Room1Scene::_setCaseResolution()
 //	auto finalQuestionRect = entityManager->getComponent<RectArea2D>(finalQuestion);
 	//areaLayerManager->sendFront(finalQuestionRect->getLayerPos());
 	
-	auto possibleButton = entityFactory->CreateInteractableEntity(entityManager, "yes", EntityFactory::RECTAREA, Vector2D(400, 400), Vector2D(0, 0), 200, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DECISION);
+	auto possibleButton = entityFactory->CreateInteractableEntity(entityManager, "yes", EntityFactory::RECTAREA, Vector2D(400, 420), Vector2D(0, 0), 200, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DECISION);
 	entityManager->setActive(possibleButton, false);
 
 	entityManager->getComponent<ClickComponent>(possibleButton)
@@ -471,7 +471,7 @@ void Room1Scene::_setCaseResolution()
 	//areaLayerManager->sendFront(possibleButtonRect->getLayerPos());
 	
 
-	auto noPossibleButton = entityFactory->CreateInteractableEntity(entityManager, "no", EntityFactory::RECTAREA, Vector2D(700, 400), Vector2D(0, 0), 200, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DECISION);
+	auto noPossibleButton = entityFactory->CreateInteractableEntity(entityManager, "no", EntityFactory::RECTAREA, Vector2D(700, 420), Vector2D(0, 0), 200, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DECISION);
 	entityManager->setActive(noPossibleButton, false);
 	
 	entityManager->getComponent<ClickComponent>(noPossibleButton)
@@ -495,13 +495,13 @@ void Room1Scene::_setCaseResolution()
 	//auto noPossibleButtonRect = entityManager->getComponent<RectArea2D>(noPossibleButton);
 	//areaLayerManager->sendFront(noPossibleButtonRect->getLayerPos());
 
-	auto resolveButton = entityFactory->CreateInteractableEntity(entityManager, "yes", EntityFactory::RECTAREA, Vector2D(400, 400), Vector2D(0, 0), 200, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DECISION);
+	auto resolveButton = entityFactory->CreateInteractableEntity(entityManager, "yes", EntityFactory::RECTAREA, Vector2D(400, 420), Vector2D(0, 0), 200, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DECISION);
 	entityManager->setActive(resolveButton, false);
 
    // auto resolveButtonRect = entityManager->getComponent<RectArea2D>(resolveButton);
 	//areaLayerManager->sendFront(resolveButtonRect->getLayerPos());
 
-	auto noResolveButton = entityFactory->CreateInteractableEntity(entityManager, "no", EntityFactory::RECTAREA, Vector2D(700, 400), Vector2D(0, 0), 200, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DECISION);
+	auto noResolveButton = entityFactory->CreateInteractableEntity(entityManager, "no", EntityFactory::RECTAREA, Vector2D(700, 420), Vector2D(0, 0), 200, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DECISION);
 	entityManager->setActive(noResolveButton, false);
 
 	//auto noResolveButtonRect = entityManager->getComponent<RectArea2D>(noResolveButton);
