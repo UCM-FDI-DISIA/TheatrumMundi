@@ -11,6 +11,7 @@
 #include "SceneTemplate.h"
 #include "../src/components/Transform.h"
 #include "Area2DLayerManager.h"
+#include "ClickableSpriteComponent.h"
 
 
 using namespace std;
@@ -44,16 +45,15 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
 
     //Text Background
     //ENTIDADCONENTITYFACTORY
-    auto _textbackground = entityFactory->CreateImageEntity(entityManager, "Dialog", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DIALOGUE);
-    //auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
-    //entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
-    //entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
-    auto dialogInteractionArea = entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
+    auto _textbackground = entityFactory->CreateInteractableEntity(entityManager, "Dialog",EntityFactory::RECTAREA,Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, areaLayerManager,EntityFactory::NODRAG,ecs::grp::DIALOGUE);
+    //No need to modify his transform at select
+    entityManager->removeComponent<ClickableSpriteComponent>(_textbackground);
+    auto dialogInteractionArea = entityManager->getComponent<RectArea2D>(_textbackground);
     // Put the dialog interaction area in front of the other interactables
     areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
 
     //Pass dialog if clicked
-    auto clickTextDialgue = entityManager->addComponent<ClickComponent>(_textbackground);
+    auto clickTextDialgue = entityManager->getComponent<ClickComponent>(_textbackground);
     clickTextDialgue->connect(ClickComponent::JUST_CLICKED, [this, _textbackground]()
         {
             if (!(Game::Instance()->getLog()->GetLogActive())) {
@@ -71,14 +71,13 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     entityManager->addComponent<TriggerComponent>(_textbackground);
     entityManager->setActive(_textbackground, false);
 
-    //ENTIDADSINENTITYFACTORY
+    //ENTIDADCONENTITYFACTORY
     //if it isnt middle room character image is rendered last
     if(!isMiddleRoom) 
     {
         //Character (Image)
-        auto character = entityManager->addEntity(grp::DIALOGUE);
-        entityManager->addComponent<Transform>(character, Vector2D(50, 310), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
-        characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
+        auto character = entityFactory->CreateImageEntity(entityManager, "Dialog", Vector2D(50, 310), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0, ecs::grp::DIALOGUE);
+        characterimg = entityManager->getComponent<Image>(character);
 
         entityManager->setActive(character, false);
     }
