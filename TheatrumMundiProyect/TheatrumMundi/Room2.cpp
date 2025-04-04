@@ -53,15 +53,15 @@ Room2Scene::Room2Scene()
 		zoomOrgan->getMngr()->setActive(zoomOrgan, true);
 		_quitButton->getMngr()->setActive(_quitButton, true);
 		organ->getMngr()->setActive(organ, true);
-		rope->getMngr()->setActive(rope, true);
+		if(rope != nullptr) rope->getMngr()->setActive(rope, true);
 	};
 	roomEvent[Rope] = [this] {
+		//Remove rope
+		rope->getMngr()->removeEntity(this->rope);
 		// InventoryLogic
 		GetInventory()->addItem(new Hint("Palo", "Ta", &sdlutils().images().at("Palo")));
 		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "Palo", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
-		//Remove rope
-		rope->getMngr()->removeEntity(rope);
 	};
 	roomEvent[WindowScene] = [this] {
 		//Game::Instance()->getSceneManager()->loadScene(WINDOW_SCENE, this); IMPORTANT: Include Window Scene when its finished
@@ -77,11 +77,13 @@ Room2Scene::Room2Scene()
 		secretEntry->getMngr()->setActive(secretEntry, true);
 	};
 	roomEvent[Hook] = [this] {
+		//Remove Hook
+		hook->getMngr()->removeEntity(hook);
 		// InventoryLogic
 		GetInventory()->addItem(new Hint("Gancho", "Esto se enganchara en algun lado", &sdlutils().images().at("Gancho")));
 		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "Gancho", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
-		hook->getMngr()->removeEntity(hook);
+		
 	};
 	roomEvent[SecretEntry] = [this] {
 		//Depende de si es escena aparte o no
@@ -307,7 +309,7 @@ void Room2Scene::init()
 		entityManager->getComponent<ClickComponent>(tomb)->connect(ClickComponent::JUST_CLICKED, [this]() {
 			roomEvent[TombPuzzleScene]();
 		});
-
+		
 		auto raven = entityFactory->CreateInteractableEntity(entityManager, "Cuervo", EntityFactory::RECTAREA, Vector2D(700, 452), Vector2D(0, 0), 165 / 3, 176 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		CementeryBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(raven));
 		entityManager->getComponent<ClickComponent>(raven)->connect(ClickComponent::JUST_CLICKED, [this]() {
