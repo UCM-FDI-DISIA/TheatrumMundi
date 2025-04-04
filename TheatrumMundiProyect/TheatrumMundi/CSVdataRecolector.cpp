@@ -22,18 +22,22 @@ CSVdataRecolector::~CSVdataRecolector()
 
 void CSVdataRecolector::AddEntry(const std::string& _id, const std::string _scene)
 {
+	std::string aux_id = _id;
+	if (_id == "B1" || _id == "B2" || _id == "B3" || _id == "B4" || _id == "B5" || _id == "B6" || _id == "B7") {
+		aux_id = getUIBtn(_id);
+	}
 	//clickDataTimeLine
-	ClickDataTimeLine aux = { _id,_scene,sdlutils().currRealTime()};
+	ClickDataTimeLine aux = { aux_id,_scene,sdlutils().currRealTime()};
 	clickdataTimeList.push_back(aux);
 	//ClickDataSummary
-	 std::string const auxid = _id + _scene;
+	 std::string const auxid = aux_id + _scene;
 	 auto a = clicksSummaryMap.find(auxid);
 	 
 	 if (a != clicksSummaryMap.end()) {
 		 a.operator*().second.numclicks++;
 	}
 	 else {
-		 clicksSummaryMap.insert({ auxid,{_id,_scene,1}});
+		 clicksSummaryMap.insert({ auxid,{aux_id,_scene,1}});
 	 }
 	 //add the click to the sceneSummary
 	 SceneSummaryMap[_scene].totalclicks++;
@@ -99,4 +103,17 @@ void CSVdataRecolector::safeData()
 		archive << a.id << ";" << a.scene << ";" << a.currentTime / 1000.0 << "\n";
 	}
 	numtester++;
+}
+
+std::string CSVdataRecolector::getUIBtn(const std::string& id)
+{
+	std::string aux;
+	if (id == "B1") aux = "exitBtn";
+	else if (id == "B2") aux = "inventoryBtn";
+	else if (id == "B3") aux = "pauseBtn";
+	else if (id == "B4") aux = "arrowbtn";
+	else if (id == "B5") aux = "";
+	else if (id == "B6") aux = "arrowBtn";
+	else if (id == "B7") aux = "logBtn";
+	return aux;
 }
