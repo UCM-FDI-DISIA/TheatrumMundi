@@ -32,10 +32,12 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
 
     if (isMiddleRoom) {
         //Character (Image)
-        //ENTIDADSINENTITYFACTORY
-        auto character = entityManager->addEntity(grp::DIALOGUE);
-        entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
-        characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
+        //ENTIDADCONENTITYFACTORY
+        auto character = entityFactory->CreateImageEntity(entityManager, "Dialog", Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0, ecs::grp::DIALOGUE);
+        //auto character = entityManager->addEntity(grp::DIALOGUE);
+        //entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
+        //characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
+        characterimg = entityManager->getComponent<Image>(character);
 
         entityManager->setActive(character, false);
 
@@ -45,10 +47,12 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     else {
 
         //Character (Image)
-        //ENTIDADSINENTITYFACTORY
-        auto character = entityManager->addEntity(grp::DIALOGUE);
-        entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
-        characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
+        //ENTIDADCONENTITYFACTORY
+        auto character = entityFactory->CreateImageEntity(entityManager, "Dialog", Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0, ecs::grp::DIALOGUE);
+        //auto character = entityManager->addEntity(grp::DIALOGUE);
+        //entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
+        //characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
+        characterimg = entityManager->getComponent<Image>(character);
 
         entityManager->setActive(character, false);
        
@@ -56,10 +60,11 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     }
 
     //Text Background
-    //ENTIDADSINENTITYFACTORY
-    auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
-    entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
-    entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
+    //ENTIDADCONENTITYFACTORY
+    auto _textbackground = entityFactory->CreateImageEntity(entityManager, "Dialog", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DIALOGUE);
+    //auto _textbackground = entityManager->addEntity(grp::DIALOGUE);
+    //entityManager->addComponent<Transform>(_textbackground, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0);
+    //entityManager->addComponent<Image>(_textbackground, &sdlutils().images().at("Dialog"));
     auto dialogInteractionArea = entityManager->addComponent<RectArea2D>(_textbackground, areaLayerManager);
     // Put the dialog interaction area in front of the other interactables
     areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());

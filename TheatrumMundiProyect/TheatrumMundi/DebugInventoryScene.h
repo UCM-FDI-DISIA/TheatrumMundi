@@ -9,7 +9,7 @@ class DebugInventoryScene : public SceneRoomTemplate
 private:
 	//bool isClickingButton = false;
 protected:
-	Inventory* inv2;
+	//Inventory* inv2;
 public:
 	DebugInventoryScene();
 	~DebugInventoryScene();
