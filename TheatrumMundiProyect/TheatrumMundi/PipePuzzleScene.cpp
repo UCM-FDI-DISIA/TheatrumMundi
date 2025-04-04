@@ -19,6 +19,9 @@
 #include "DialogueManager.h"
 #include "../src/Components/ScrollComponent.h"
 
+#include "../src/game/Game.h"
+#include "Log.h"
+
 PipePuzzleScene::PipePuzzleScene()
 	:ScenePuzzleTemplate()
 {
@@ -693,7 +696,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			Vector2D(1200, 400), Vector2D(0, 0), 324 / 3, 893 / 3, 0, areaLayerManager,
 			2, 150, EntityFactory::SCROLLNORMAL, 1,
 			EntityFactory::NODRAG,
-			ecs::grp::INTERACTOBJ);
+			ecs::grp::DEFAULT);
 		//if clicked remove click comonent and start animation 
 		ClickComponent* clComponent = _rope->getMngr()->getComponent<ClickComponent>(_rope);
 
@@ -900,7 +903,8 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			sr->scrollInventory(1);
 			});
 
-		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 
 		startDialogue("PuzzleTuberias");
 	}
