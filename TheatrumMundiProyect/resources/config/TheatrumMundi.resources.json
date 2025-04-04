@@ -12,6 +12,10 @@
 
   "images": [
     {
+      "id": "EmptyImage",
+      "file": "../resources/images/Finales/ImagenVacia.png"
+    },
+    {
       "id": "ShelfButton",
       "file": "../resources/images/Finales/BotonEstante.PNG"
     },

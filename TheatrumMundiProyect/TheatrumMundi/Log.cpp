@@ -19,6 +19,7 @@
 #include "../src/components/WriteTextComponent.h"
 
 #include "../src/Components/ScrollComponent.h"
+#include "ClickableSpriteComponent.h"
 
 
 
@@ -52,6 +53,7 @@ void Log::cleanRenderedList()
 
 Log::~Log()
 {
+	_log.clear();
 }
 
 void Log::setRenderedDialogueLines()
@@ -111,14 +113,14 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	//CREATE SCENE ENTITIES OF LOG
 
 	//background log
-	auto _backgroundLog = entityManager->addEntity(ecs::grp::LOG);
-	entityManager->addComponent<Transform>(_backgroundLog, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
-	auto imBack = entityManager->addComponent<Image>(_backgroundLog, &sdlutils().images().at("fondoPruebaLog")); //background log
+	//ENTIDADCONENTITYFACTORY
+	auto _backgroundLog = entityFactory->CreateInteractableEntity(entityManager,"fondoPruebaLog",EntityFactory::RECTAREA,Vector2D(0,0),Vector2D(0,0),1346,748,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::LOG);
+	entityManager->removeComponent<ClickableSpriteComponent>(_backgroundLog);
 	entityManager->setActive(_backgroundLog, false);
-
-	auto LogArea = entityManager->addComponent<RectArea2D>(_backgroundLog, areaLayerManager);
+	auto LogArea = entityManager->getComponent<RectArea2D>(_backgroundLog);
 	
 	//text log
+	//ENTIDADCONENTITYFACTORY
 	auto _textLog = entityManager->addEntity(ecs::grp::LOG);
 	Transform* trTextLog = entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 800, 600, 0);
 	SDL_Color colorText = { 255, 255, 255, 255 };
