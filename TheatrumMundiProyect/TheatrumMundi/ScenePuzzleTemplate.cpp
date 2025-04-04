@@ -65,6 +65,13 @@ void ScenePuzzleTemplate::compareInv(SceneRoomTemplate* sr)
 	}
 }
 
+void ScenePuzzleTemplate::reposInv(SceneRoomTemplate* sr)
+{
+	for (int i = 0; i < invObjects.size(); ++i) {
+		invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i])->getPos().set(sr->GetInventory()->GetPosition(i));
+	}
+}
+
 ScenePuzzleTemplate::ScenePuzzleTemplate(): SceneTemplate()
 {
 	placeHand = false;
@@ -83,6 +90,9 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 	//REMOVE INVALID ENTITIES
 	compareInv(sr);
 	//CREATE DESCRIPTION ENTITIES
+
+	//REPOSITION THE INVENTORY ITEMS
+	reposInv(sr);
 	
 	//visual background for item description text
 	auto _backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::DEFAULT);
@@ -129,12 +139,8 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 					//Add the hand to the cloack
 					if (isItemHand(a->getID())) {
 
-						//remove the object from the inventory
-						sr->GetInventory()->removeItem(a->getID(), invObjects,invID);
-						
-						//change the position of the items
-						sr->scrollInventory(1);
-
+						//remove the object and pos from the inventory
+						sr->GetInventory()->removeItem(a->getID(), invObjects,invID);				
 					}
 					else it->getMngr()->getComponent<Transform>(it)->getPos().set(getOriginalPos());
 				}

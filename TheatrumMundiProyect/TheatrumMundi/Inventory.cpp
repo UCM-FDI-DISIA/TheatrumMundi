@@ -49,6 +49,14 @@ int Inventory::getItemNumber()
 
 }
 
+inline Vector2D Inventory::GetPosition(int i)
+{
+	if (i >= 0 && i < positions.size()) {
+		return positions[i];
+	}
+	return Vector2D(0, 0);
+}
+
 /// <summary>
 /// Changes text description displayed on screen
 /// </summary>
@@ -95,19 +103,51 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 	auto hintIt = hints.begin();
 	auto entityIt = invEntityList.begin();
 	auto IdIt = invIdList.begin();
-	for (auto it = items.begin(); it != items.end(); ++it) {
-		if (it[0]->getID() == idToRemove) {
-			items.erase(it);
-			hintIt[0]->getMngr()->setActive(hintIt[0], false);
-			hints.erase(hintIt);
-			entityIt[0]->getMngr()->setActive(entityIt[0], false);
-			invEntityList.erase(entityIt);
-			invIdList.erase(IdIt);
+	auto itemIt = items.begin();
+
+	while (itemIt != items.end()) {
+		if ((*itemIt)->getID() == idToRemove) {
+			//saves the position of the entity to be removed
+			float removedY = 0;
+			if (entityIt != invEntityList.end()) {
+				auto transform = (*entityIt)->getMngr()->getComponent<Transform>(*entityIt);
+				removedY = transform->getPos().getY();
+			}
+
+			// desactivate the item from the lists
+			if (hintIt != hints.end()) {
+				(*hintIt)->getMngr()->setActive(*hintIt, false);
+				hintIt = hints.erase(hintIt);
+			}
+
+			if (entityIt != invEntityList.end()) {
+				(*entityIt)->getMngr()->setActive(*entityIt, false);
+				entityIt = invEntityList.erase(entityIt);
+			}
+
+			if (IdIt != invIdList.end()) {
+				IdIt = invIdList.erase(IdIt);
+			}
+
+			itemIt = items.erase(itemIt);
+
+			// move the rest of the items up
+			for (auto it = entityIt; it != invEntityList.end(); ++it) {
+				auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
+				transform->getPos().setY(transform->getPos().getY() - 150);
+			}
+			for (auto it = hintIt; it != hints.end(); ++it) {
+				auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
+				transform->getPos().setY(transform->getPos().getY() - 150);
+			}
+
 			return;
 		}
+
 		++hintIt;
 		++entityIt;
 		++IdIt;
+		++itemIt;
 	}
 }
 

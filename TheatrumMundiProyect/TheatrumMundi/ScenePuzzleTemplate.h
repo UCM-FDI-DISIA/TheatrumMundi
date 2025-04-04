@@ -49,6 +49,8 @@ class ScenePuzzleTemplate: public SceneTemplate
 
 	void compareInv(SceneRoomTemplate* sr); //Compare the inventory of the room with the inventory of the puzzle
 
+	void reposInv(SceneRoomTemplate* sr); //Reposition the inventory items
+
 	void scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr); //scroll puzzle
 
 	ScenePuzzleTemplate();
