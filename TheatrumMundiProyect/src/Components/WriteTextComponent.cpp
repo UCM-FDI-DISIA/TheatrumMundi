@@ -157,12 +157,14 @@ void WriteTextComponent<TextInfo>::render()
 {
 	if (_currentText.empty()) return;
 
+	// Author
+	Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
+	SDL_Rect nameRect = { 325, 465,nameText->width(),nameText->height() };
+	nameText->render(nameRect, 0);
+
 	if (isMiddleRoom)
 	{
-		// Author
-		Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
-		SDL_Rect nameRect = { 325, 465,nameText->width(),nameText->height() };
-		nameText->render(nameRect, 0);
+		
 
 		// Text
 		std::vector<std::string> lines = splitTextByNewline(_currentText); //splits text into different lines
