@@ -27,13 +27,13 @@
 
 #include "GameSave.h"
 
-TutorialScene::TutorialScene() : SceneRoomTemplate(), _eventToRead("SalaIntermedia1")
+TutorialScene::TutorialScene() : SceneRoomTemplate(), _eventToRead("Tutorial")
 {
 	dialogueManager = new DialogueManager(1);
 	roomEvent.resize(event_size);
 	roomEvent[InitialDialogue] = [this]
 		{
-			startDialogue("SalaIntermedia1");
+			startDialogue("Tutorial0");
 
 		};
 	roomEvent[ClockPuzzleSnc] = [this]
@@ -43,9 +43,9 @@ TutorialScene::TutorialScene() : SceneRoomTemplate(), _eventToRead("SalaIntermed
 	roomEvent[ClockPuzzleRsv] = [this] {
 		// InventoryLogic
 		};
-	roomEvent[teleScene] = [this]
+	roomEvent[TeleScene] = [this]
 		{
-			Game::Instance()->getSceneManager()->loadScene(TEA_CUP_PUZZLE, this);
+			Game::Instance()->getSceneManager()->loadScene(TELE_PUZZLE, this);
 		};
 	roomEvent[Spoon] = [this] {
 		// InventoryLogic
@@ -88,7 +88,9 @@ void TutorialScene::init()
 
 		//Register scene in dialogue manager
 		dialogueManager->setScene(this);
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, _eventToRead);
 
+		
 
 		//Background and Scene scroll
 		auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -139,7 +141,7 @@ void TutorialScene::init()
 		startRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(television));
 		entityManager->getComponent<ClickComponent>(television)->connect(ClickComponent::JUST_CLICKED, [this, puzzleButtonSound]() {
 			AudioManager::Instance().playSound(puzzleButtonSound);
-			roomEvent[teleScene]();
+			roomEvent[TeleScene]();
 			});
 
 
@@ -160,11 +162,10 @@ void TutorialScene::init()
 			});
 
 
-
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 
 	}
 	SDL_Delay(1000);
-
 
 }
 

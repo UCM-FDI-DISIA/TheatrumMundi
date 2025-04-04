@@ -22,6 +22,7 @@ enum SceneName {
 	XO_PUZZLE,
 	ROOM_3,
 	TUTORIAL_SCENE,
+	TELE_PUZZLE,
 	SCENE_SIZE
 };
 class SceneManager

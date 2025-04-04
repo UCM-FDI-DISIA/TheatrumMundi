@@ -62,6 +62,7 @@
     <ClCompile Include="TutorialScene.cpp" />
     <ClCompile Include="GameSave.cpp" />
     <ClCompile Include="XOPuzzleScene.cpp" />
+    <ClCompile Include="TelePuzzleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -247,6 +248,7 @@
     <ClInclude Include="TutorialScene.h" />
     <ClInclude Include="GameSave.h" />
     <ClInclude Include="XOPuzzleScene.h" />
+    <ClInclude Include="TelePuzzleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />
