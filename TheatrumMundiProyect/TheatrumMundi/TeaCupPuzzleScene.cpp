@@ -123,15 +123,11 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		}*/
 
 		//BackButton
-		//ENTIDADSINENTITYFACTORY
-		auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
-		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
-
-		entityManager->addComponent<RectArea2D>(_backButton);
+		//ENTIDADCONENTITYFACTORY
+		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
 		//Click component Open log button
-		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		ClickComponent* clkOpen = entityManager->getComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
 			{
 				Game::Instance()->getSceneManager()->popScene();
