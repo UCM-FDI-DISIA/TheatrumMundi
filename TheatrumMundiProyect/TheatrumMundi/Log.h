@@ -15,12 +15,14 @@ class ClickComponent;
 class Log
 {
 private:
-	// a list of pairs to save all showed dialogue lines
-	// first: author
-	// second: dialogueLine
-	std::list<TextInfo> _log;
-	bool _logActive;
-	ClickComponent* _textDialogueComp;
+	std::list<TextInfo> _log; // complete log list: contains all already displayed dialogue lines
+	bool _logActive; //checks if log menu is active
+	ClickComponent* _textDialogueComp; //needed for log scroll
+
+	std::list<TextInfo> _renderedDialogueLines; //list of current dialogue lines displayed on log menu
+	std::list<TextInfo>::iterator _firstRenderLine; //points to current first dialogue line to be displayed on log menu
+
+	const int LINES_DISPLAYED = 5; //number of lines displayed on screen
 
 public:
 	
@@ -29,26 +31,25 @@ public:
 	//add new dialogue line to log registry
 	void addDialogueLineLog(std::string author, std::string dialogueLine);
 	void cleanLogList();
+	void cleanRenderedList();
 
 	void SetLogActive(bool logActive);
 	bool GetLogActive();
 
 	void Init(EntityFactory* entityFactory, ecs::EntityManager* entityManager, Area2DLayerManager* areaLayerManager);
 
-
 	//delete of enitities
 	~Log();
 
-	std::list<TextInfo>* getLogList()
-	{
-		return &_log;
-	}
+	std::list<TextInfo>* getLogList() {	return &_log;} //returns log list
 
-	void setTextDialogue(ClickComponent* textDialogue)
-	{
-		_textDialogueComp = textDialogue;
-	}
+	void setTextDialogue(ClickComponent* textDialogue) { _textDialogueComp = textDialogue;}
 
+	std::list<TextInfo>* getRenderedDialogueLines() { return &_renderedDialogueLines; }
 
+	void setRenderedDialogueLines(); //sets rendering dialogue lines dependig of iterator
 
+	void next(); //used for scroll
+
+	void previous(); //used for scroll
 };

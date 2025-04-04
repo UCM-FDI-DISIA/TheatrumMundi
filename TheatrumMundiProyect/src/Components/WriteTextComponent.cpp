@@ -11,6 +11,7 @@
 
 #include <list>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -50,6 +51,24 @@ void WriteTextComponent<TextInfo>::update()
 	_currentText = textStructure->Text.substr(0, charsToShow); //substr = returns a minor string with initial pos in 0 and end in charsToShow
 }
 
+/// <summary>
+/// Divides a string with \n
+/// </summary>
+/// <param name="text">string to divide</param>
+/// <returns>vector of divided dialogue lines</returns>
+vector<string> splitTextByNewline(const string& text) {
+	vector<string> dividedLines; //vector to return
+	stringstream ss(text); //stringstream detects \n
+	string line; //temporal line read with stringstream
+
+	// Reads all lines of text
+	while (getline(ss, line))
+	{
+		dividedLines.push_back(line);
+	}
+
+	return dividedLines;
+}
 
 //RENDER
 template <>
@@ -58,17 +77,7 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 	if (textStructure->empty()) return;
 	// Definir el tamaño total de la textura final
 	int totalWidth = 1000; // Ajusta según sea necesario
-	int totalHeight = 0;  // Se calculará dinámicamente
-
-	// Calcular la altura total sumando las alturas de cada elemento
-	for (const auto& it : *textStructure)
-	{
-		if (it.Character == "/") totalHeight += 100;
-		else totalHeight += 150;
-	}
-
-	_textTransform->setWidth(totalWidth);
-	_textTransform->setHeight(totalHeight);
+	int totalHeight = 800;  // Se calculará dinámicamente
 
 	// Crear la textura final con el tamaño adecuado
 	SDL_Texture* sdlFinalTexture = SDL_CreateTexture(
@@ -97,7 +106,7 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 			Texture divideLine(sdlutils().renderer(), "...--.-.-.-.-.--.-.-.-.-.-..-.--.-.-.-.---......-----...-----.....----....---...---..-.-.-.-.-.-.-.-.-.-.", _myFont, _color);
 			SDL_Rect dstVRect = { 350, y, divideLine.width(), divideLine.height() };
 			divideLine.render(dstVRect, 0.0);
-			y += 100;
+			y += 80;
 		}
 		else
 		{
@@ -106,12 +115,25 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 			SDL_Rect dstAuthorRect = { 400, y, authorTexture.width(), authorTexture.height() };
 			authorTexture.render(dstAuthorRect, 0.0);
 
-			// Texto
-			Texture textTexture(sdlutils().renderer(), it.Text, _myFont, _color);
-			SDL_Rect dstRect = { 400, y + 50, textTexture.width(), textTexture.height() };
-			textTexture.render(dstRect, 0.0);
+			if (it.Character == " ") { y += 25; }
+			else { y += 50; }
 
-			y += 150;
+			// Text:
+			std::vector<std::string> lines = splitTextByNewline(it.Text); //splits text into different lines
+
+			int currentY = y;
+
+			// render each split line
+			for (const auto& splitLine : lines)
+			{
+				Texture textTexture(sdlutils().renderer(), splitLine, _myFont, _color);
+				SDL_Rect dstRect = { 400, currentY, textTexture.width(), textTexture.height() };
+				textTexture.render(dstRect, 0.0);
+
+				currentY += textTexture.height() + 5; // space between split lines
+			}
+
+			y += 100;
 		}
 	}
 
@@ -120,58 +142,14 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 
 	// Convertir SDL_Texture* en Texture y asegurarse de que respete la transparencia
 	Texture* finalText = new Texture(sdlutils().renderer(), sdlFinalTexture);
-	_imageTextLog->setTexture(finalText);
-	_imageTextLog->setW(finalText->width());
-	_imageTextLog->setH(finalText->height());
-	
-
-
-	/*
-	//TITLE
-	Texture* titleText = new Texture(sdlutils().renderer(), "LOG",
-		sdlutils().fonts().at("TITLE"), _color); //convert text to texture
-	SDL_Rect dstTRect = { 500, 10, titleText->width(), titleText->height() }; //destiny rect
-	titleText->render(dstTRect, 0.0); //render
-
-
-	//RENDER LOG LIST
-	int y = 100;
-	for (const auto& it : *textStructure)
-	{
-		if (it.first == "/") //end of dialogue event
-		{
-			//Insert divide line (temporarly a string)
-			Texture* divideLine = new Texture(sdlutils().renderer(), "...--.-.-.-.-.--.-.-.-.-.-..-.--.-.-.-.---......-----...-----.....----....---...---..-.-.-.-.-.-.-.-.-.-.",
-				_myFont, _color); //convert text to texture
-			SDL_Rect dstVRect = { 10, y, divideLine->width(), divideLine->height() }; //destiny rect
-			divideLine->render(dstVRect, 0.0); //render
-			y += 100;
-		}
-		else
-		{
-			//author
-			Texture* authorTexture = new Texture(sdlutils().renderer(), it.first, _myFont, _color); //convert text to texture
-			SDL_Rect dstAuthorRect = { 500, y, authorTexture->width(), authorTexture->height() }; //destiny rect
-			authorTexture->render(dstAuthorRect, 0.0); //render
-
-			//text
-			Texture* textTexture = new Texture(sdlutils().renderer(), it.second, _myFont, _color); //convert text to texture
-			SDL_Rect dstRect = { 500, y + 100, textTexture->width(), textTexture->height() }; //destiny rect
-			textTexture->render(dstRect, 0.0); //render
-			y += 200;
-		}
-
-	}
-	*/
-	
+	SDL_Rect dstRect = { 0, 0, finalText->width(), finalText->height() };
+	finalText->render(dstRect, 0.0);
 }
 
 template<typename T>
 void WriteTextComponent<T>::initComponent()
 {
 	auto mngr = _ent->getMngr();
-	_textTransform = mngr->getComponent<Transform>(_ent);
-	_imageTextLog = mngr->getComponent<Image>(_ent);
 }
 
 template <>
@@ -179,13 +157,43 @@ void WriteTextComponent<TextInfo>::render()
 {
 	if (_currentText.empty()) return;
 
-	Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
-	SDL_Rect nameRect = { 350, 465,nameText->width(),nameText->height()};
-	nameText->render(nameRect, 0);
+	if (isMiddleRoom)
+	{
+		// Author
+		Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
+		SDL_Rect nameRect = { 350, 465,nameText->width(),nameText->height() };
+		nameText->render(nameRect, 0);
 
-	Texture* dialogText = new Texture(sdlutils().renderer(), _currentText, _myFont, _color);
-	SDL_Rect dialogRect = { 350, 550,dialogText->width(),dialogText->height() };
-	dialogText->render(dialogRect, 0);
+		// Text
+		std::vector<std::string> lines = splitTextByNewline(_currentText); //splits text into different lines
+
+		int y = 550;  // initial dialogue text
+
+		for (const auto& line : lines) {
+			Texture* dialogText = new Texture(sdlutils().renderer(), line, _myFont, _color);
+			SDL_Rect dialogRect = { 350, y, dialogText->width(), dialogText->height() };
+			dialogText->render(dialogRect, 0);
+
+			y += dialogText->height() + 5;  // space between split lines
+		}
+	}
+	else
+	{
+		// Text
+		std::vector<std::string> lines = splitTextByNewline(_currentText); //splits text into different lines
+
+		int y = 550;  // initial dialogue text
+
+		for (const auto& line : lines) {
+			Texture* dialogText = new Texture(sdlutils().renderer(), line, _myFont, _color);
+			SDL_Rect dialogRect = { 375, y, dialogText->width(), dialogText->height() };
+			dialogText->render(dialogRect, 0);
+
+			y += dialogText->height() + 5;  // space between split lines
+		}
+	}
+
+	
 	
 }
 
@@ -231,6 +239,12 @@ void WriteTextComponent<TextInfo>::finishTextLine()
 template<>
 void WriteTextComponent<std::list<TextInfo>>::startTextLine()
 {
+}
+
+template<typename T>
+void WriteTextComponent<T>::setMiddleRoom(bool state)
+{
+	isMiddleRoom = state;
 }
 
 template<>

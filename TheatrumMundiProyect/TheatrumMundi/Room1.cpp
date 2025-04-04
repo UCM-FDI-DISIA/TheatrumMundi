@@ -23,7 +23,7 @@
 #include "../src/components/WriteTextComponent.h"
 #include "DialogueManager.h"
 
-Room1Scene::Room1Scene() : SceneRoomTemplate(), _eventToRead("SalaIntermedia1")
+Room1Scene::Room1Scene() : SceneRoomTemplate(), _eventToRead("Sala1Intro")
 {
 	dialogueManager = new DialogueManager(1);
 	
@@ -54,6 +54,8 @@ void Room1Scene::init()
 	_setUI();
 
 	_setDialog();
+
+	roomEvent[InitialDialogue]();
 	
 	SDL_Delay(1000);
 }
@@ -98,7 +100,7 @@ void Room1Scene::_setRoomEvents()
 
 	roomEvent[InitialDialogue] = [this]()
 		{ 
-			startDialogue("SalaIntermedia1"); 
+			startDialogue("Sala1Intro"); 
 		};
 	
 	roomEvent[CorpseDialogue] = [this]()
@@ -159,7 +161,7 @@ void Room1Scene::_setRoomEvents()
 			
 	roomEvent[ResolveCase] = [this]()
 		{
-			startDialogue("SalaIntermedia1"); //Poner el dialogo correspondiente
+			startDialogue("Sala1Intro"); //Poner el dialogo correspondiente
 		};
 
 	roomEvent[GoodEnd] = [this]()
@@ -216,7 +218,7 @@ void Room1Scene::_setRoomAudio()
 void Room1Scene::_setDialog()
 {
 	// Dialog
-	dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, _eventToRead);
+	dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, _eventToRead);
 
 	assert(rmObjects.quitButton != nullptr); // UI must be Initialized First
 

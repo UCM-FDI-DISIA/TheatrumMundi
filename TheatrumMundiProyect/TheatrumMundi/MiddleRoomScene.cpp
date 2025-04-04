@@ -24,7 +24,7 @@
 #include "../src/components/WriteTextComponent.h"
 MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 {
-	dialogueManager = new DialogueManager(1);
+	dialogueManager = new DialogueManager(0);
 	roomEvent.resize(MIDDLEROOMEVENTSIZE);
 	roomEvent[FIRST_DIALOGUE] = [this]() {
 		startDialogue("SalaIntermedia1");

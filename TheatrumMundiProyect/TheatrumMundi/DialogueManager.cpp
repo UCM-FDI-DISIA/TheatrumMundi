@@ -16,7 +16,7 @@
 using namespace std;
 
 DialogueManager::DialogueManager(int numRooms) : _scene(nullptr), displayOnProcess(false), characterimg(nullptr), _writeTextComp(nullptr){
-    actualroom = 1;
+    actualroom = numRooms;
     room = "Sala" + to_string(actualroom);
     dialogueReader = new ReadDialog(numRooms);
     _showText = new TextInfo{ " ", " " };
@@ -29,7 +29,7 @@ DialogueManager::~DialogueManager() {
 
 void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, string event)
 {
-
+    //if its middle room, character image is rendered first
     if (isMiddleRoom) {
         //Character (Image)
         auto character = entityManager->addEntity(grp::DIALOGUE);
@@ -37,20 +37,6 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
         characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
 
         entityManager->setActive(character, false);
-
-        
-    }
-
-    else {
-
-        //Character (Image)
-        auto character = entityManager->addEntity(grp::DIALOGUE);
-        entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
-        characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
-
-        entityManager->setActive(character, false);
-       
-
     }
 
     //Text Background
@@ -81,6 +67,16 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     entityManager->addComponent<TriggerComponent>(_textbackground);
     entityManager->setActive(_textbackground, false);
 
+    //if it isnt middle room character image is rendered last
+    if(!isMiddleRoom) 
+    {
+        //Character (Image)
+        auto character = entityManager->addEntity(grp::DIALOGUE);
+        entityManager->addComponent<Transform>(character, Vector2D(50, 310), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
+        characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
+
+        entityManager->setActive(character, false);
+    }
 
     auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
     auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
@@ -89,7 +85,8 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     //Add writeText to dialogueManager
     SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
     WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, _showText);
-    
+    writeLogentityManager->setMiddleRoom(isMiddleRoom);
+
     _writeTextComp = writeLogentityManager;
 }
 
@@ -140,6 +137,7 @@ void DialogueManager::setCharacterImage(const string& Character) {
     if (Character == "Keisara") characterimg->setTexture(&sdlutils().images().at("KeisaraSprite"));
     else if (Character == "Lucy") characterimg->setTexture(&sdlutils().images().at("LucySprite"));
     else if (Character == "Sol") characterimg->setTexture(&sdlutils().images().at("SolSprite"));
+    else if (Character == " ") characterimg->setTexture(&sdlutils().images().at("Hanni")); //narrador
 }
 
 void DialogueManager::setEventToRead(std::string eventToRead)
