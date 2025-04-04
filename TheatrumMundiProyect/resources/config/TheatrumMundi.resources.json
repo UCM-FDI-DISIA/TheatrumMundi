@@ -263,6 +263,7 @@
     { "id" : "2ndQuestion", "file" : "../resources/images/Finales/2ndQuestionText.png" },
     { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
     { "id" : "continuar", "file" : "../resources/images/Finales/continuarBackground.png" },
+    { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"

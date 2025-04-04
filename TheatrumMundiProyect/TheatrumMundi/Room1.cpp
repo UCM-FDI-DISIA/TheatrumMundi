@@ -40,6 +40,7 @@ void Room1Scene::init()
 	
 	isStarted = true;
 	finishallpuzzles = false;
+	stopAnimation = false;
 
 	_setRoomAudio();
 
@@ -167,22 +168,51 @@ void Room1Scene::_setRoomEvents()
 			GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 		};
 			
-	roomEvent[ResolveCase] = [this]()
-		{
-			startDialogue("Sala1Final");
-			roomEvent[ResolveBottons]();
+	roomEvent[ResolveCase] = [this]() {
+		startDialogue("Sala1Final");
+		roomEvent[ResolveBottons]();
 
+		// cahnge image every 1 sec
+		SDL_AddTimer(1000, [](Uint32, void* param) -> Uint32 {
+			auto* self = static_cast<decltype(this)>(param);
+			if (!self) return 0;
+
+			// if stopped animation change to normal botton
+			if (self->stopAnimation) {
+				Image* img = self->entityManager->getComponent<Image>(self->rmObjects.readyToResolveBotton);
+				if (img) {
+					img->setTexture(&sdlutils().images().at("B5"));  
+				}
+				return 0;  // stop timer
+			}
+
+			// alternate between images
+			static bool toggle = false;
+			toggle = !toggle;
+			const std::string& textureId = toggle ? "5.2" : "B5";
+
+			// chnage botton texture
+			if (auto* img = self->entityManager->getComponent<Image>(self->rmObjects.readyToResolveBotton)) {
+				img->setTexture(&sdlutils().images().at(textureId));
+			}
+
+			// call timer again
+			return 1000; 
+			}, this);
 		};
+			
 
 	roomEvent[GoodEnd] = [this]()
 		{
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
-		
+
 			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
 				auto* self = static_cast<decltype(this)>(param);
 
+
+				//PUT SOUND
 				// change texture after 4 secs
 				if (self) {
 					Image* img = self->entityManager->getComponent<Image>(self->rmObjects.blackBackground);
@@ -212,6 +242,8 @@ void Room1Scene::_setRoomEvents()
 			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
 				auto* self = static_cast<decltype(this)>(param);
 
+
+				//PUT SOUND
 				// change texture after 4 secs
 				if (self) {
 					Image* img = self->entityManager->getComponent<Image>(self->rmObjects.blackBackground);
@@ -514,6 +546,7 @@ void Room1Scene::_setCaseResolution()
 	entityManager->getComponent<ClickComponent>(rmObjects.readyToResolveBotton)
 		->connect(ClickComponent::JUST_CLICKED, [this, noResolveButton, resolveButton, readyToQuestion,background]()
 		{
+			stopAnimation = true;
 			entityManager->setActive(noResolveButton, true);
 			entityManager->setActive(resolveButton, true);
 			entityManager->setActive(readyToQuestion, true);
