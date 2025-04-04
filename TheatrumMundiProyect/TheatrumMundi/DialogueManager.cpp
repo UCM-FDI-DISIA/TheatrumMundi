@@ -35,9 +35,6 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
         //Character (Image)
         //ENTIDADCONENTITYFACTORY
         auto character = entityFactory->CreateImageEntity(entityManager, "Dialog", Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0, ecs::grp::DIALOGUE);
-        //auto character = entityManager->addEntity(grp::DIALOGUE);
-        //entityManager->addComponent<Transform>(character, Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
-        //characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
         characterimg = entityManager->getComponent<Image>(character);
 
         entityManager->setActive(character, false);
