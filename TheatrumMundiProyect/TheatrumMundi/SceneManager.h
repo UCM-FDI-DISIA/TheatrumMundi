@@ -48,6 +48,6 @@ public:
 	 //delete of enitities
 	~SceneManager();
 
-	
+	void ResetSceneManager();
 };
 

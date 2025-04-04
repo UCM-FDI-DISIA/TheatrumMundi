@@ -44,5 +44,6 @@ public:
 
 	~DataManager();
 
+	void ResetDataManager();
 };
 

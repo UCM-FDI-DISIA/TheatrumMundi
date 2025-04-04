@@ -759,6 +759,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			//ENTIDADCONENTITYFACTORY
 			auto pipeit = entityFactory->CreateInteractableEntity(entityManager, "exit", EntityFactory::RECTAREA, pipePositions[i], Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 			_pipesEnt.push_back(pipeit);
+			entityManager->removeComponent<ClickableSpriteComponent>(pipeit);
 
 			Image* imageComponent = pipeit->getMngr()->getComponent<Image>(pipeit);
 
@@ -822,8 +823,12 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->getComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr]()
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr, _backButton]()
 			{
+				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+				_backButtonImage->setPosOffset(0, 0);
 				Game::Instance()->getSceneManager()->popScene();
 			});
 

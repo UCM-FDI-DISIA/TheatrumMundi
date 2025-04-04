@@ -286,6 +286,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			ImageBook->getMngr()->setActive(ImageBook, false);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, false);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, true);
+			auto _backButtonImage = backButton->getMngr()->getComponent<Image>(backButton);
+			_backButtonImage->setW(backButton->getMngr()->getComponent<Transform>(backButton)->getWidth());
+			_backButtonImage->setH(backButton->getMngr()->getComponent<Transform>(backButton)->getHeight());
+			_backButtonImage->setPosOffset(0, 0);
 			if (Check())
 			{
 				clock->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, false);
@@ -302,10 +306,14 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->getComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
-		{
-			Game::Instance()->getSceneManager()->popScene();
-		});
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr, _backButton]()
+			{
+				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+				_backButtonImage->setPosOffset(0, 0);
+				Game::Instance()->getSceneManager()->popScene();
+			});
 
 		dialogueManager->Init(1, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);

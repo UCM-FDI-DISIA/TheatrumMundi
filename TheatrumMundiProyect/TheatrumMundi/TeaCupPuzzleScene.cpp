@@ -128,8 +128,12 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->getComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr, _backButton]()
 			{
+				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+				_backButtonImage->setPosOffset(0, 0);
 				Game::Instance()->getSceneManager()->popScene();
 			});
 

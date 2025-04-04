@@ -98,6 +98,13 @@ void Log::previous()
 	std::advance(_firstRenderLine, -steps);
 }
 
+void Log::ResetLog()
+{
+	_log.clear();
+	_renderedDialogueLines.clear();
+	_firstRenderLine = _log.begin();
+}
+
 void Log::SetLogActive(bool logActive)
 {
 	_logActive = logActive;

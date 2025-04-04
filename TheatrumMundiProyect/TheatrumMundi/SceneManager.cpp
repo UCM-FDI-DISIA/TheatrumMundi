@@ -87,4 +87,25 @@ SceneManager::~SceneManager()
 	currentscenes.clear();
 }
 
+void SceneManager::ResetSceneManager()
+{
+
+	scenes.resize(SceneName::SCENE_SIZE);
+
+	scenes[SceneName::INITIAL_MENU] = new InitialScene();
+	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
+	scenes[SceneName::ROOM_1] = new Room1Scene();
+	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
+	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
+	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
+	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
+	scenes[SceneName::MUSIC_PUZZLE] = new MusicPuzzleScene();
+	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
+	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
+	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
+
+	loadScene(SceneName::INITIAL_MENU);
+
+}
+
 
