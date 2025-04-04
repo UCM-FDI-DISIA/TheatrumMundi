@@ -114,8 +114,9 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 
 	//background log
 	//ENTIDADCONENTITYFACTORY
+	
 	auto _backgroundLog = entityFactory->CreateInteractableEntity(entityManager,"fondoPruebaLog",EntityFactory::RECTAREA,Vector2D(0,0),Vector2D(0,0),1346,748,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::LOG);
-	entityManager->removeComponent<ClickableSpriteComponent>(_backgroundLog);
+	//entityManager->removeComponent<ClickableSpriteComponent>(_backgroundLog);
 	entityManager->setActive(_backgroundLog, false);
 	auto LogArea = entityManager->getComponent<RectArea2D>(_backgroundLog);
 	
