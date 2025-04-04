@@ -63,7 +63,6 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
                 }
             }
         });
-    Game::Instance()->getLog()->setTextDialogue(clickTextDialgue);
     entityManager->addComponent<TriggerComponent>(_textbackground);
     entityManager->setActive(_textbackground, false);
 
