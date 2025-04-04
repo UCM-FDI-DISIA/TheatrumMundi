@@ -19,6 +19,9 @@
 #include "DialogueManager.h"
 #include "../src/Components/ScrollComponent.h"
 
+#include "../src/game/Game.h"
+#include "Log.h"
+
 PipePuzzleScene::PipePuzzleScene()
 	:ScenePuzzleTemplate()
 {
@@ -900,7 +903,8 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			sr->scrollInventory(1);
 			});
 
-		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 
 		startDialogue("PuzzleTuberias");
 	}

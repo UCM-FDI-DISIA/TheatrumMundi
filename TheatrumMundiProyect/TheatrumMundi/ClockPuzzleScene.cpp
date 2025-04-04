@@ -297,7 +297,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			sr->scrollInventory(1);
 			});
 
-		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 	
 		startDialogue("PuzzleReloj");

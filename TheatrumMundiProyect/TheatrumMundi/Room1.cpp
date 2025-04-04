@@ -100,8 +100,6 @@ void Room1Scene::_setRoomEvents()
 	
 	roomEvent[CorpseDialogue] = [this]()
 		{
-			roomEvent[ResolveCase]();
-
 			_eventToRead = Cadaver;
 			startDialogue("Cadaver");
 		};
@@ -213,7 +211,7 @@ void Room1Scene::_setRoomAudio()
 void Room1Scene::_setDialog()
 {
 	// Dialog
-	dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, _eventToRead);
+	dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, _eventToRead);
 
 	assert(rmObjects.quitButton != nullptr); // UI must be Initialized First
 
