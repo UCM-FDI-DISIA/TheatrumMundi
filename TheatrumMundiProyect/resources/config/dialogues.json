@@ -1,4 +1,4 @@
-{   "Tutorial":{
+{   "Sala-1":{
     "Tutorial0":[
         {"Character":" ","Text":"..."},
         {"Character":" ","Text":"Oh?"},
@@ -196,7 +196,7 @@
                 
             ]
         },
-    "Parte2":{
+    "Sala2":{
             "SalaIntermediaEvento1":[
                 {"Character":" ","Text":"Bueno, bueno, bueno."},
                 {"Character":" ","Text":"Parece que el incentivo a funcionado."},
@@ -216,7 +216,7 @@
                 {"Character":" ","Text":"¿Cuál es vuestra respuesta?"}
             ]
         },
-    "Parte3":{
+    "Sala3":{
 
     }
 }

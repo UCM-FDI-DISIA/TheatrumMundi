@@ -50,7 +50,7 @@ void InitialScene::init()
 		//Tutorial room button
 		auto _tutobtn = entityManager->addEntity();
 		entityManager->addComponent<Transform>(_tutobtn, Vector2D(1348 / 2.8, 748 / 2), Vector2D(0, 0), 1470 / 4, 270 / 4, 0);
-		entityManager->addComponent<Image>(_tutobtn, &sdlutils().images().at("TutorialButtonTemp"));
+		entityManager->addComponent<Image>(_tutobtn, &sdlutils().images().at("TutorialButton"));
 
 		entityManager->addComponent<RectArea2D>(_tutobtn);
 

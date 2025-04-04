@@ -27,13 +27,53 @@
 
 #include "GameSave.h"
 
-TutorialScene::TutorialScene() : SceneRoomTemplate(), _eventToRead("Tutorial")
+TutorialScene::TutorialScene() : SceneRoomTemplate()
 {
-	dialogueManager = new DialogueManager(1);
+	dialogueManager = new DialogueManager(-1);
 	roomEvent.resize(event_size);
-	roomEvent[InitialDialogue] = [this]
+	roomEvent[Dialog0] = [this]
 		{
 			startDialogue("Tutorial0");
+
+		};
+	roomEvent[Dialog1] = [this]
+		{
+			startDialogue("Tutorial1");
+
+		};
+	roomEvent[Dialog2] = [this]
+		{
+			startDialogue("Tutorial2");
+
+		};
+	roomEvent[Dialog3] = [this]
+		{
+			startDialogue("Tutorial3");
+
+		};
+	roomEvent[Dialog4] = [this]
+		{
+			startDialogue("Tutorial4");
+
+		};
+	roomEvent[Dialog5] = [this]
+		{
+			startDialogue("Tutorial5");
+
+		};
+	roomEvent[Dialog6] = [this]
+		{
+			startDialogue("Tutorial6");
+
+		};
+	roomEvent[Dialog7] = [this]
+		{
+			startDialogue("Tutorial7");
+
+		};
+	roomEvent[Dialog8] = [this]
+		{
+			startDialogue("Tutorial8");
 
 		};
 	roomEvent[ClockPuzzleSnc] = [this]
@@ -88,9 +128,7 @@ void TutorialScene::init()
 
 		//Register scene in dialogue manager
 		dialogueManager->setScene(this);
-		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, _eventToRead);
 
-		
 
 		//Background and Scene scroll
 		auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -120,7 +158,7 @@ void TutorialScene::init()
 		//test 
 		auto botonTest = entityManager->addEntity();
 		entityManager->addComponent<Transform>(botonTest, /*Vector2D(1348 / 2.8, 748 / 2)*/Vector2D(356 - 1349 - 6, 127), Vector2D(0, 0), 1470 / 4, 270 / 4, 0);
-		entityManager->addComponent<Image>(botonTest, &sdlutils().images().at("TutorialButtonTemp"));
+		entityManager->addComponent<Image>(botonTest, &sdlutils().images().at("TutorialButton"));
 
 		entityManager->addComponent<RectArea2D>(botonTest);
 
@@ -148,7 +186,7 @@ void TutorialScene::init()
 
 
 		//quit button
-		auto botonBack = entityManager->addEntity();
+/*		auto botonBack = entityManager->addEntity();
 		entityManager->addComponent<Transform>(botonBack, Vector2D(1349 - 110, 20), Vector2D(0, 0), 270 / 4, 270 / 4, 0);
 		entityManager->addComponent<Image>(botonBack, &sdlutils().images().at("B1"));
 
@@ -160,9 +198,18 @@ void TutorialScene::init()
 			AudioManager::Instance().playSound(buttonSound);
 			Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
 			});
+*/
+		//setInteractable(botonBack);
 
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, _eventToRead);
 
 		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+		Game::Instance()->getLog()->addDialogueLineLog(" ", "3711");
+		//Game::Instance()->getLog()->SetLogActive(false);
+		entityManager->setActive(Game::Instance()->getLog(), true);
+
+		//roomEvent[Dialog0];
+		startDialogue("Tutorial0");
 
 	}
 	SDL_Delay(1000);
@@ -201,4 +248,33 @@ void TutorialScene::refresh()
 void TutorialScene::unload()
 {
 	entityManager->~EntityManager();
+}
+
+
+void TutorialScene::setInteractable(Entity* e) {
+	
+	e = entityManager->addEntity();
+	entityManager->addComponent<Transform>(e, Vector2D(1349 - 110, 20), Vector2D(0, 0), 270 / 4, 270 / 4, 0);
+	entityManager->addComponent<Image>(e, &sdlutils().images().at("B1"));
+
+	entityManager->addComponent<RectArea2D>(e);
+	
+	
+	ClickComponent* clkBack = entityManager->addComponent<ClickComponent>(e);
+	clkBack->connect(ClickComponent::JUST_CLICKED, [this]() {
+
+		//AudioManager::Instance().playSound(buttonSound);
+		Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
+		});
+}
+
+void TutorialScene::endDialogue()
+{
+	dialogueManager->setdisplayOnProcess(false);
+	std::cout << "acaboDialog";
+	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+	//Check the act room to load a specific room
+	setInteractable(botonBack);
+	
+	
 }

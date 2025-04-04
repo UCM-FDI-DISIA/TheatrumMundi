@@ -5,10 +5,20 @@ class TutorialScene : public SceneRoomTemplate
 {
 private:
 	std::string _eventToRead;
+
+	ecs::entity_t botonBack;
 protected:
 	enum TutorialEvent
 	{
-		InitialDialogue = 0,
+		Dialog0 = 0,
+		Dialog1,
+		Dialog2,
+		Dialog3,
+		Dialog4,
+		Dialog5,
+		Dialog6,
+		Dialog7,
+		Dialog8,
 		ClockPuzzleSnc,
 		ClockPuzzleRsv,
 		TeleScene,
@@ -27,6 +37,8 @@ public:
 	void resolvedPuzzle(int i) override;
 	void refresh() override;
 	void unload() override;
+	void endDialogue() override;
 
+	void setInteractable(Entity* e);
 };
 
