@@ -80,6 +80,7 @@
     <ClCompile Include="SceneTemplate.cpp" />
     <ClCompile Include="TeaCupPuzzleScene.cpp" />
     <ClCompile Include="TiledAreaComponent.cpp" />
+    <ClCompile Include="WindowPuzzleScene.cpp" />
     <ClCompile Include="XOPuzzleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +267,7 @@
     <ClInclude Include="TeaCupPuzzleScene.h" />
     <ClInclude Include="TextInfo.h" />
     <ClInclude Include="TiledAreaComponent.h" />
+    <ClInclude Include="WindowPuzzleScene.h" />
     <ClInclude Include="XOPuzzleScene.h" />
   </ItemGroup>
   <ItemGroup>

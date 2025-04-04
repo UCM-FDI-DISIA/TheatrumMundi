@@ -584,6 +584,18 @@
     {
       "id": "Joya",
       "file": "../resources/images/temporales/Room2/Joya.png"
+    },
+    {
+      "id": "patrisio",
+      "file": "../resources/images/temporales/Room2/patrisio.jpeg"
+    },
+    {
+      "id": "FondoPuzzleTumba",
+      "file": "../resources/images/temporales/Room2/FondoPuzzleTumba.png"
+    },
+    {
+      "id": "FondoOrgano",
+      "file": "../resources/images/temporales/Room2/FondoOrgano.png"
     }
   ],
 

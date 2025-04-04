@@ -63,6 +63,7 @@ public:
 			if (a == e)
 			{
 				_entsByGroup[e->_gId].erase(_entsByGroup[e->_gId].begin() + index);
+				break;
 			}
 			else
 			{

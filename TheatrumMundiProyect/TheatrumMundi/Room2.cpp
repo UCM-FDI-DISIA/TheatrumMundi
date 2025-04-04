@@ -61,7 +61,7 @@ Room2Scene::Room2Scene()
 		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "Palo", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 		//Remove rope
-		rope->getMngr()->setActive(rope, false);
+		rope->getMngr()->removeEntity(rope);
 	};
 	roomEvent[WindowScene] = [this] {
 		//Game::Instance()->getSceneManager()->loadScene(WINDOW_SCENE, this); IMPORTANT: Include Window Scene when its finished
@@ -81,7 +81,7 @@ Room2Scene::Room2Scene()
 		GetInventory()->addItem(new Hint("Gancho", "Esto se enganchara en algun lado", &sdlutils().images().at("Gancho")));
 		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "Gancho", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
-		hook->getMngr()->setActive(hook, false);
+		hook->getMngr()->removeEntity(hook);
 	};
 	roomEvent[SecretEntry] = [this] {
 		//Depende de si es escena aparte o no
@@ -299,7 +299,7 @@ void Room2Scene::init()
 			else roomEvent[ResolveButtons]();
 		});
 
-		zoomCorpse = entityFactory->CreateImageEntity(entityManager, "Ventana",Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
+		zoomCorpse = entityFactory->CreateImageEntity(entityManager, "patrisio",Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 		zoomCorpse->getMngr()->setActive(zoomCorpse, false);
 
 		auto tomb = entityFactory->CreateInteractableEntity(entityManager, "Tumba", EntityFactory::RECTAREA, Vector2D(400, 300), Vector2D(0, 0), 250 / 3, 225 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -312,7 +312,6 @@ void Room2Scene::init()
 		CementeryBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(raven));
 		entityManager->getComponent<ClickComponent>(raven)->connect(ClickComponent::JUST_CLICKED, [this]() {
 			roomEvent[RavenScene]();
-			//resolvedPuzzle(3);
 		});
 
 #pragma endregion
@@ -348,7 +347,7 @@ void Room2Scene::init()
 
 		//Zoomed Items
 
-		zoomOrgan = entityFactory->CreateImageEntity(entityManager, "Ventana", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
+		zoomOrgan = entityFactory->CreateImageEntity(entityManager, "FondoOrgano", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 		zoomOrgan->getMngr()->setActive(zoomOrgan, false);
 
 		organ = entityFactory->CreateInteractableEntity(entityManager, "Organo", EntityFactory::RECTAREA, Vector2D(600, 350), Vector2D(0, 0), 500, 400, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);

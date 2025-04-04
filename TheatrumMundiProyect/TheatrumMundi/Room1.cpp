@@ -563,7 +563,7 @@ void Room1Scene::_setInteractuables()
 	entityManager->getComponent<ClickComponent>(spoonObject)
 		->connect(ClickComponent::JUST_CLICKED, [this, spoonObject]()
 			{
-				entityManager->setActive(spoonObject, false);
+				spoonObject->getMngr()->removeEntity(spoonObject);
 				roomEvent[Spoon]();
 			});
 
