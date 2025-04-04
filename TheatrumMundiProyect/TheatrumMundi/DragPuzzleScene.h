@@ -8,7 +8,7 @@ private:
 	std::vector<std::vector<Vector2D>> posMat;
 	Vector2D _goalPos;
 	ecs::entity_t _triggerObj;
-	const int auxtiledsize = 64;
+	Vector2D auxtiledsize;
 
 protected:
 

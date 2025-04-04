@@ -5,12 +5,12 @@
 #include "Inventory.h"
 #include "Hint.h"
 #include <string>
-
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 
 class Area2DLayerManager;
 class SceneRoomTemplate;
 class DialogueManager;
+class PauseManager;
 
 class SceneTemplate
 {
@@ -21,6 +21,7 @@ protected:
 	 DialogueManager* dialogueManager;
 	// DialogueManager* dialogueManager;
 	 Area2DLayerManager* areaLayerManager;
+	 PauseManager* pauseManager;
 	/// <summary>
 	/// Control is the scene has been iniciated or not. If(!isStarted) create all entities of the scece (this conditions is OBLIGATORY IN THE SCENE INIT)
 	/// </summary>

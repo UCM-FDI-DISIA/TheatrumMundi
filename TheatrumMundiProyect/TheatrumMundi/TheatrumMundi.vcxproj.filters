@@ -54,6 +54,7 @@
     <ClCompile Include="SceneTemplate.cpp" />
     <ClCompile Include="TeaCupPuzzleScene.cpp" />
     <ClCompile Include="CSVdataRecolector.cpp" />
+    <ClCompile Include="PauseManager.cpp" />
     <ClCompile Include="MosaicPuzzleScene.cpp" />
     <ClCompile Include="DragPuzzleScene.cpp" />
     <ClCompile Include="TiledAreaComponent.cpp" />
@@ -237,6 +238,7 @@
     <ClInclude Include="TeaCupPuzzleScene.h" />
     <ClInclude Include="TextInfo.h" />
     <ClInclude Include="CSVdataRecolector.h" />
+    <ClInclude Include="PauseManager.h" />
     <ClInclude Include="MosaicPuzzleScene.h" />
     <ClInclude Include="DragPuzzleScene.h" />
     <ClInclude Include="TiledAreaComponent.h" />

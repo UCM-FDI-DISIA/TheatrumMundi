@@ -13,7 +13,6 @@ TiledAreaComponent::TiledAreaComponent(Area2DLayerManager* areaLayerMngr, Transf
     _objTransform = objTransform;
     _width = objTransform->getWidth();
     _height = objTransform->getHeight();
-
     matcol = std::vector(fil, std::vector(col, true));
     matcopos = std::vector(fil, std::vector(col, Vector2D(0,0)));
     //init the relative pos respect the object 0,0
@@ -113,19 +112,33 @@ bool TiledAreaComponent::_overlapsWith(TiledAreaComponent* area)
         _objTransform->getPos().getX() + _localPosition.getX(),
 
         _objTransform->getPos().getY() + _localPosition.getY(),
-        _width,
-        _height
+        _width-10,
+        _height-10  
     };
 
     SDL_Rect otherRect = {
         extrentTr->getPos().getX() + area->getLocalPos().getX(),
         extrentTr->getPos().getY() + area->getLocalPos().getY(),
-        area->getWidth(),
-        area->getHeight()
+        area->getWidth()-10,
+        area->getHeight()-10
     };
-
+   
     SDL_Rect rs;
-    if (SDL_IntersectRect(&thisRect, &otherRect, &rs)) { return( this->CheckCollisionInTiles(rs)&&area->CheckCollisionInTiles(rs)); }
+    if (SDL_IntersectRect(&thisRect, &otherRect, &rs)) {
+        bool flag = false;
+        if (this->CheckCollisionInTiles(rs)) {
+            area->CheckCollisionInTiles(rs);
+            std::vector<SDL_Rect> othertiledcol = area->getTilesCol();
+            for (SDL_Rect thidtiles : myTiledCol) {
+                for (SDL_Rect othertiles : othertiledcol) {
+                    //depurar los vectores de collisiones resultantes
+                    if (SDL_IntersectRect(&othertiles, &thidtiles, &rs)) flag = true;
+                }
+            }
+
+        }
+        else return flag;
+    }
     else
     {
         return false;
@@ -150,22 +163,24 @@ void TiledAreaComponent::setActiveTile(bool t, int i, int j)
 
 bool TiledAreaComponent::CheckCollisionInTiles(SDL_Rect& _collition)
 {
- 
     Vector2D auxpos = _objTransform->getPos();
-    
+    myTiledCol.clear();
     bool flag = false;
     for (int i = 0; i < matcol.size();i++) {
         for (int j = 0; j < matcol[i].size(); j++)
         {
             SDL_Rect auxRect = { auxpos.getX()+(i*unitw) ,auxpos.getY()+(unith*j),unitw,unith};
-            SDL_Rect* aaaa= new SDL_Rect();
-                if(SDL_IntersectRect(&auxRect,&_collition,aaaa)){
-                if (matcol[i][j]) {
-                    flag = true;
-                }
+            SDL_Rect auxcolrect;
+                if(SDL_IntersectRect(&auxRect,&_collition,&auxcolrect)){
+                    if (matcol[i][j]) {
+                        flag = true;
+                        myTiledCol.push_back(auxcolrect);
+                        std::cout << "flag " << i << j << endl;
+                    }  
             }
         }
     }
+    std::cout << "flag " << flag << endl;
     return flag;
 }
 
