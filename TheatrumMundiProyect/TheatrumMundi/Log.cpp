@@ -121,10 +121,15 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 
 	//background log
 	//ENTIDADCONENTITYFACTORY
-	auto _backgroundLog = entityFactory->CreateInteractableEntity(entityManager,"fondoPruebaLog",EntityFactory::RECTAREA,Vector2D(0,0),Vector2D(0,0),1346,748,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::LOG);
-	entityManager->removeComponent<ClickableSpriteComponent>(_backgroundLog);
+	//auto _backgroundLog = entityFactory->CreateInteractableEntity(entityManager,"fondoPruebaLog",EntityFactory::RECTAREA,Vector2D(0,0),Vector2D(0,0),1349,748,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::LOG);
+	//auto LogArea = entityManager->getComponent<RectArea2D>(_backgroundLog);
+	//entityManager->removeComponent<ClickableSpriteComponent>(_backgroundLog);
+	auto _backgroundLog = entityManager->addEntity(ecs::grp::LOG);
+	entityManager->addComponent<Transform>(_backgroundLog, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
+	auto imBack = entityManager->addComponent<Image>(_backgroundLog, &sdlutils().images().at("fondoPruebaLog")); //background log
+	auto LogArea = entityManager->addComponent<RectArea2D>(_backgroundLog, areaLayerManager);
 	entityManager->setActive(_backgroundLog, false);
-	auto LogArea = entityManager->getComponent<RectArea2D>(_backgroundLog);
+
 	
 	//text log
 	//ENTIDADCONENTITYFACTORY
@@ -177,6 +182,10 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [this, _backgroundLog, buttonCloseLog, buttonOpenLog, entityManager]() {
 		_firstRenderLine = _log.begin();
 		//disable log
+		auto _backButtonImage = buttonCloseLog->getMngr()->getComponent<Image>(buttonCloseLog);
+		_backButtonImage->setW(buttonCloseLog->getMngr()->getComponent<Transform>(buttonCloseLog)->getWidth());
+		_backButtonImage->setH(buttonCloseLog->getMngr()->getComponent<Transform>(buttonCloseLog)->getHeight());
+		_backButtonImage->setPosOffset(0, 0);
 		entityManager->setActiveGroup(ecs::grp::LOG, false);
 		entityManager->setActive(buttonOpenLog, true); //open button
 		});

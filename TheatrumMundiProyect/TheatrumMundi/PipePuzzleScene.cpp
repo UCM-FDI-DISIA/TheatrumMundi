@@ -757,9 +757,8 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 			// create entity
 			//ENTIDADCONENTITYFACTORY
-			auto pipeit = entityFactory->CreateInteractableEntity(entityManager, "exit", EntityFactory::RECTAREA, pipePositions[i], Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto pipeit = entityFactory->CreateInteractableEntityNotMoveSprite(entityManager, "exit", EntityFactory::RECTAREA, pipePositions[i], Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 			_pipesEnt.push_back(pipeit);
-			entityManager->removeComponent<ClickableSpriteComponent>(pipeit);
 
 			Image* imageComponent = pipeit->getMngr()->getComponent<Image>(pipeit);
 
@@ -793,9 +792,8 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 			// create entity
 			//ENTIDADCONENTITYFACTORY
-			auto moduleit = entityFactory->CreateInteractableEntity(entityManager, "module", EntityFactory::RECTAREA, modulePositions[i], Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto moduleit = entityFactory->CreateInteractableEntityNotMoveSprite(entityManager, "module", EntityFactory::RECTAREA, modulePositions[i], Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 			_modulesEnt.push_back(moduleit);
-			entityManager->removeComponent<ClickableSpriteComponent>(moduleit);
 
 			Transform* transformComponent = moduleit->getMngr()->getComponent<Transform>(moduleit);
 
