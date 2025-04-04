@@ -54,6 +54,24 @@ public:
 		return e;
 	}
 
+	void removeEntity(entity_t e) {
+		int index = 0;
+
+		//removes entity from
+		for (auto a : _entsByGroup[e->_gId])
+		{
+			if (a == e)
+			{
+				_entsByGroup[e->_gId].erase(_entsByGroup[e->_gId].begin() + index);
+			}
+			else
+			{
+				index++;
+			}
+		}
+		
+	}
+
 	// Setting the state of the entity (alive or dead)
 	//
 	inline void setActive(entity_t e, bool alive) {

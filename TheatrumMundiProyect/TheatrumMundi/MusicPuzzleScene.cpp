@@ -107,8 +107,7 @@ bool MusicPuzzleScene::Check()
     if (_phase == _correctCombinations.size() - 1)
     {
         //puzzle win
-        cout << "PUZZLE WIN" << endl;
-        solved = true;
+        Win();
         return true;
     }
     else
@@ -119,6 +118,9 @@ bool MusicPuzzleScene::Check()
 
 void MusicPuzzleScene::Win()
 {
+    solved = true;
+    // WIP active de respective part in room2 scene
+    cout << "PUZZLE WIN" << endl;
 }
 
 bool MusicPuzzleScene::checkPhaseCombination()
@@ -258,37 +260,65 @@ void MusicPuzzleScene::createPianoButtons()
 
     ClickComponent* clickButtDo = entityManager->getComponent<ClickComponent>(buttDo);
     clickButtDo->connect(ClickComponent::JUST_CLICKED, [this]() {
-        addNoteToComb(DO);
+        //play piano key sound
+        if (!solved)
+        {
+            addNoteToComb(DO);
+        }        
         });
 
     ClickComponent* clickButtRe = entityManager->getComponent<ClickComponent>(buttRe);
     clickButtRe->connect(ClickComponent::JUST_CLICKED, [this]() {
-        addNoteToComb(RE);
+        //play piano key sound
+        if (!solved)
+        {
+            addNoteToComb(RE);
+        }
         });
 
     ClickComponent* clickButtMi = entityManager->getComponent<ClickComponent>(buttMi);
     clickButtMi->connect(ClickComponent::JUST_CLICKED, [this]() {
-        addNoteToComb(MI);
+        //play piano key sound
+        if (!solved)
+        {
+            addNoteToComb(MI);
+        }
         });
 
     ClickComponent* clickButtFa = entityManager->getComponent<ClickComponent>(buttFa);
     clickButtFa->connect(ClickComponent::JUST_CLICKED, [this]() {
-        addNoteToComb(FA);
+        //play piano key sound
+        if (!solved)
+        {
+            addNoteToComb(FA);
+        }
         });
 
     ClickComponent* clickButtSol = entityManager->getComponent<ClickComponent>(buttSol);
     clickButtSol->connect(ClickComponent::JUST_CLICKED, [this]() {
-        addNoteToComb(SOL);
+        //play piano key sound
+        if (!solved)
+        {
+            addNoteToComb(SOL);
+        }
         });
 
     ClickComponent* clickButtLa = entityManager->getComponent<ClickComponent>(buttLa);
     clickButtLa->connect(ClickComponent::JUST_CLICKED, [this]() {
-        addNoteToComb(LA);
+        //play piano key sound
+        if (!solved)
+        {
+            addNoteToComb(LA);
+        }
         });
 
     ClickComponent* clickButtSi = entityManager->getComponent<ClickComponent>(buttSi);
     clickButtSi->connect(ClickComponent::JUST_CLICKED, [this]() {
-        addNoteToComb(SI);
+        //play piano key sound
+        if (!solved)
+        {
+            addNoteToComb(SI);
+        }
         });
 }
 

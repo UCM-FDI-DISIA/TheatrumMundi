@@ -31,6 +31,8 @@
 #include "SceneRoomTemplate.h"
 
 #include "DialogueManager.h"
+#include "../src/game/Game.h"
+#include "Log.h"
 
 
 
@@ -177,7 +179,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//REWARD ENTITY
 		auto clock = entityFactory->CreateInteractableEntity(entityManager, "horaria", EntityFactory::RECTAREA,
-			Vector2D(410, 548), Vector2D(0, 0), 340, 200, 0,
+			Vector2D(700, 640), Vector2D(0, 0), 100, 150, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
@@ -187,7 +189,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		entity_t tag;
 		if (variant <= 1) {
 			tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV1", EntityFactory::RECTAREA,
-				Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+				Vector2D(510, 548), Vector2D(0, 0), 150, 150, 0,
 				areaLayerManager,
 				EntityFactory::NODRAG,
 				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
@@ -195,7 +197,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		}
 		 else if (variant == 2) {
 			 tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV2", EntityFactory::RECTAREA,
-				 Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+				 Vector2D(510, 548), Vector2D(0, 0), 150, 150, 0,
 				 areaLayerManager,
 				 EntityFactory::NODRAG,
 				 ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
@@ -305,13 +307,16 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			Game::Instance()->getSceneManager()->popScene();
 		});
 
-		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-	
-		startDialogue("PuzzleLibros");
-}
+		dialogueManager->Init(1, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 
+		
+}
+	
 	//IMPORTANT this need to be out of the isstarted!!!
 	createInvEntities(sr);
+
+	startDialogue("PuzzleLibros");
 }
 
 void BooksPuzzleScene::refresh()
