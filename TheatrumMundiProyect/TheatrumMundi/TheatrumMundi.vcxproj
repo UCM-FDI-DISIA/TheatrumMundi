@@ -55,6 +55,7 @@
     <ClCompile Include="ClockPuzzleScene.cpp" />
     <ClCompile Include="DialogTestScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
+    <ClCompile Include="DoorPuzzleScene.cpp" />
     <ClCompile Include="DragPuzzleScene.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="Hint.cpp" />
@@ -63,19 +64,24 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="MiddleRoomScene.cpp" />
     <ClCompile Include="Module.cpp" />
+    <ClCompile Include="PauseManager.cpp" />
     <ClCompile Include="MusicPuzzleScene.cpp" />
     <ClCompile Include="MosaicPuzzleScene.cpp" />
     <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PipePuzzleScene.cpp" />
     <ClCompile Include="PhysicsBodyComponent.cpp" />
+    <ClCompile Include="RavenPuzzleScene.cpp" />
     <ClCompile Include="ReadDialog.cpp" />
     <ClCompile Include="Room1.cpp" />
+    <ClCompile Include="Room2.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScenePuzzleTemplate.cpp" />
     <ClCompile Include="SceneRoomTemplate.cpp" />
     <ClCompile Include="SceneTemplate.cpp" />
     <ClCompile Include="TeaCupPuzzleScene.cpp" />
     <ClCompile Include="TiledAreaComponent.cpp" />
+    <ClCompile Include="WindowPuzzleScene.cpp" />
+    <ClCompile Include="XOPuzzleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -234,6 +240,7 @@
     <ClInclude Include="DialogTestScene.h" />
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="Direction.h" />
+    <ClInclude Include="DoorPuzzleScene.h" />
     <ClInclude Include="DragPuzzleScene.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="EventsInfo.h" />
@@ -243,13 +250,16 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="MiddleRoomScene.h" />
     <ClInclude Include="Module.h" />
+    <ClInclude Include="PauseManager.h" />
     <ClInclude Include="MusicPuzzleScene.h" />
     <ClInclude Include="MosaicPuzzleScene.h" />
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="PipePuzzleScene.h" />
     <ClInclude Include="PhysicsBodyComponent.h" />
+    <ClInclude Include="RavenPuzzleScene.h" />
     <ClInclude Include="ReadDialog.h" />
     <ClInclude Include="Room1.h" />
+    <ClInclude Include="Room2.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScenePuzzleTemplate.h" />
     <ClInclude Include="SceneRoomTemplate.h" />
@@ -257,6 +267,8 @@
     <ClInclude Include="TeaCupPuzzleScene.h" />
     <ClInclude Include="TextInfo.h" />
     <ClInclude Include="TiledAreaComponent.h" />
+    <ClInclude Include="WindowPuzzleScene.h" />
+    <ClInclude Include="XOPuzzleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />

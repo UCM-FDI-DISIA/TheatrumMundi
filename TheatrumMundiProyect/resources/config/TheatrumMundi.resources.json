@@ -7,7 +7,7 @@
       "size": 24
     },
     { "id" : "TITLE", "file" : "../resources/fonts/PirataOne-Regular.ttf", "size": 40 },
-    { "id" : "BASE", "file" : "../resources/fonts/FeDPit2.ttf", "size": 20}
+    { "id" : "BASE", "file" : "../resources/fonts/FeDPit2.ttf", "size": 24}
   ],
 
   "images": [
@@ -248,9 +248,15 @@
     { "id" : "minutero", "file" : "../resources/images/Finales/minutero.png" },
     { "id" : "horaria", "file" : "../resources/images/Finales/horaria.png" },
     { "id" : "etiquetaV1", "file" : "../resources/images/Finales/etiquetaV1.png" },
+    { "id" : "etiquetaV2", "file" : "../resources/images/Finales/etiquetaV2.png" },
     { "id" : "estanteria2", "file" : "../resources/images/Finales/EstanteriaFondo2.PNG" },
     { "id" : "frascoV1", "file" : "../resources/images/Finales/frascoV1.png" },
     { "id" : "frascoV2", "file" : "../resources/images/Finales/frascoV2.PNG" },
+    { "id" : "RelojFondo1", "file" : "../resources/images/Finales/RelojFondo1.png" },
+    { "id" : "FondoReloj2", "file" : "../resources/images/Finales/RelojFondo2.png" },
+    { "id" : "BotonMinutero", "file" : "../resources/images/Finales/BotonMinutero.PNG" },
+    { "id" : "BotonHoraria", "file" : "../resources/images/Finales/BotonHoraria.PNG" },
+    { "id" : "BotonComprobarReloj", "file" : "../resources/images/Finales/BotonComprobarReloj.PNG" },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"
@@ -502,6 +508,94 @@
     {
       "id": "Hanni",
       "file": "../resources/images/asesinoDeHanni.png"
+    },
+    {
+      "id": "Cuervo",
+      "file": "../resources/images/temporales/Room2/Cuervo.jpeg"
+    },
+    {
+      "id": "FondoCementerio",
+      "file": "../resources/images/temporales/Room2/FondoCementerio.jpg"
+    },
+    {
+      "id": "FondoCripta",
+      "file": "../resources/images/temporales/Room2/FondoCripta.jpeg"
+    },
+    {
+      "id": "EntradaOculta",
+      "file": "../resources/images/temporales/Room2/Entrada oculta.jpeg"
+    },
+    {
+      "id": "Gancho",
+      "file": "../resources/images/temporales/Room2/Gancho.jpg"
+    },
+    {
+      "id": "Mosaico",
+      "file": "../resources/images/temporales/Room2//Mosaico.jpeg"
+    },
+    {
+      "id": "Organo",
+      "file": "../resources/images/temporales/Room2//Organo.jpeg"
+    },
+    {
+      "id": "Pala",
+      "file": "../resources/images/temporales/Room2/Pala.jpeg"
+    },
+    {
+      "id": "Palo",
+      "file": "../resources/images/temporales/Room2/Palo.jpeg"
+    },
+    {
+      "id": "PaasadizoSecretoEspejo",
+      "file": "../resources/images/temporales/Room2/PasadizoSecreto(Espejo).jpeg"
+    },
+    {
+      "id": "PuertaSantuario",
+      "file": "../resources/images/temporales/Room2/Puerta.jpg"
+    },
+    {
+      "id": "Ventana",
+      "file": "../resources/images/temporales/Room2/Ventana.jpeg"
+    },
+    {
+      "id": "Tumba",
+      "file": "../resources/images/temporales/Room2/Tumba.jpeg"
+    },
+    {
+      "id": "Cadaver2",
+      "file": "../resources/images/temporales/Room2/Cadaver.png"
+    },
+    {
+      "id": "CuervoPeligroso",
+      "file": "../resources/images/temporales/Room2/hinata.png"
+    },
+    {
+      "id": "FondoCuervo",
+      "file": "../resources/images/temporales/Room2/FondoCuervo.png"
+    },
+    {
+      "id": "Candado",
+      "file": "../resources/images/temporales/Room2/Candado.png"
+    },
+    {
+      "id": "Llave",
+      "file": "../resources/images/temporales/Room2/Llave.png"
+    },
+    {
+      "id": "Joya",
+      "file": "../resources/images/temporales/Room2/Joya.png"
+    },
+    {
+      "id": "patrisio",
+      "file": "../resources/images/temporales/Room2/patrisio.jpeg"
+    },
+    {
+      "id": "FondoPuzzleTumba",
+      "file": "../resources/images/temporales/Room2/FondoPuzzleTumba.png"
+    },
+    {
+      "id": "FondoOrgano",
+      "file": "../resources/images/temporales/Room2/FondoOrgano.png"
     }
   ],
 

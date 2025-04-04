@@ -1,31 +1,147 @@
-{   "Sala0":{
+{   "Tutorial":{
+    "Tutorial0":[
+        {"Character":" ","Text":"..."},
+        {"Character":" ","Text":"Oh?"},
+        {"Character":" ","Text":"No esperaba tener invitados tan pronto."},
+        {"Character":" ","Text":"Perdona el estado de la sala."},
+        {"Character":" ","Text":"Un poco vacía lo sé."},
+        {"Character":" ","Text":"Te puedo ayudar a llegar a un lugar más divertido."},
+        {"Character":" ","Text":"¿No sabrás por casualidad la contraseña?"},
+        {"Character":" ","Text":"No me mires así, solo quiero hacer \nesto más entretenido para ti."},
+        {"Character":" ","Text":"¿Por qué no me haces un favor y lo miras en mis anotaciones?"},
+        {"Character":" ","Text":"Luego me dicen que no hace falta apuntarlo todo."}
+        
+    ],
+    "Tutorial1":[
+        {"Character":" ","Text":"¿Y bien?"},
+        {"Character":" ","Text":"¿La encontraste?"}
+    ],
+    "Tutorial2":[
+        {"Character":" ","Text":"¡Perfecto!"},
+        {"Character":" ","Text":"Ahora hay una puerta"},
+        {"Character":" ","Text":"Venga no tengas miedo, pasa por ella."}
+        
+    ],
+    "Tutorial3":[
+        {"Character":" ","Text":"¿Ves? ¡Una televisión!"},
+        {"Character":" ","Text":"A todo el mundo le gusta la televisión."},
+        {"Character":" ","Text":"Bueno, puede que eso fuese verdad hace 20 años."},
+        {"Character":" ","Text":"Por eso la tenemos en el almacén."},
+        {"Character":" ","Text":"Tengo que dejar de irme por las ramas."},
+        {"Character":" ","Text":"¿Por qué me sigues mirando así?"},
+        {"Character":" ","Text":"Sé que la sala sigue ligeramente cochambrosa,\n pero tengo que educarte antes de nada.Por eso la tenemos en el almacén."},
+        {"Character":" ","Text":"Tengo que asegurarme de que vas a consumir mi trabajo de manera correcta."},
+        {"Character":" ","Text":"¡Se acabó la charla!"},
+        {"Character":" ","Text":"¿Ves como se mueve el televisor cuando lo señalas?"},
+        {"Character":" ","Text":"Eso significa que puedes interactuar con él."},
+        {"Character":" ","Text":"Adelante."}
+        
+    ],
+    "Tutorial4":[
+        {"Character":" ","Text":"Vaya."},
+        {"Character":" ","Text":"No tiene señal."},
+        {"Character":" ","Text":"¿Me pregunto por qué será?"},
+        {"Character":" ","Text":"Probablemente no tenga nada que ver con \nla antena en el suelo al lado de la televisión."}
+        
+    ],
+    "Tutorial5":[
+        {"Character":" ","Text":"¡Muy bien hecho!"},
+        {"Character":" ","Text":"Sabía que quedaban personas funcionales en este mundo."},
+        {"Character":" ","Text":"¡Y mira! Se ha añadido a tus objetos."}
+        
+    ],
+    "Tutorial6":[
+        {"Character":" ","Text":"Pues solo queda poner la antena en el televisor."}
+    ],
+    "Tutorial7":[
+        {"Character":" ","Text":"Venga este paso es sencillo."},
+        {"Character":" ","Text":"Agarra la antena de tus objetos y arrastrala a su lugar."}
+    ],
+    "Tutorial8":[
+        {"Character":" ","Text":"Fantástico"}
+    ]
+    },
+    "Sala0":{
     "SalaIntermedia1":[
-        {"Character":"Sol","Text":"Esto es una prueba"},
-        {"Character":"Keisara","Text":"Yo se supone que estoy muerto"},
-        {"Character":"Lucy","Text":"uiiiai uiiiai"}
+        {"Character":" ","Text":"..."},
+        {"Character":" ","Text":"Un nuevo día, una nueva ventana de oportunidad."},
+        {"Character":" ","Text":"Qué divertido es ver la vida de alguien pasar."},
+        {"Character":" ","Text":"¿Qué podría ser aún mejor?"},
+        {"Character":" ","Text":"¿Ver sus últimos momentos?"},
+        {"Character":" ","Text":"No."},
+        {"Character":" ","Text":"Eso le quitaría la gracia a todo."},
+        {"Character":" ","Text":"No hay espacio para lo seguro,"},
+        {"Character":" ","Text":"ya sea un drama o totalmente absurdo."},
+        {"Character":" ","Text":"Lo realmente entretenido, sería decidir por uno mismo"},
+        {"Character":" ","Text":"si la escena ante nuestros ojos."},
+        {"Character":"Lucy","Text":" Arte ha aprendido a abrir puertas, \nno te puedes imaginar lo insoportable que se está volviendo."},
+        {"Character":"Keisara","Text":"No hables así de nuestra niña, la pobre solo quiere compañía."},
+        {"Character":"Sol","Text":"No se si preocuparme de que hables de tu gata como si fuese tu hija."},
+        {"Character":"Keisara","Text":"Podría decir lo mismo sobre cómo hablas de tu piano y no me ves\n incordiando con ello constantemente."},
+        {"Character":"Sol","Text":"Eso es un golpe bajo Kei."},
+        {"Character":" ","Text":"Y como siempre, mis queridos sujetos,"},
+        {"Character":" ","Text":"ignoran mi saludo sin ningún tipo de respeto."},
+        {"Character":"Sol","Text":"Puede que te hiciésemos caso si dejaras de hablar como un juglar de la Edad Media."},
+        {"Character":"Lucy","Text":"No se te entiende."},
+        {"Character":" ","Text":"Que poco aprecio por el arte."},
+        {"Character":"Keisara","Text":"A mi me hace gracia como hablas."},
+        {"Character":"Keisara","Text":"Pero debes de admitir que tu monólogo era todo menos un saludo."},
+        {"Character":" ","Text":"Falta de respeto, tras falta de respeto..."},
+        {"Character":" ","Text":"Como veo que no se valora mi estilo, voy a explicar vuestro cometido."},
+        {"Character":"Sol","Text":" Para, por favor."},
+        {"Character":"Lucy","Text":" ¿Nos vas a decir ya para qué estamos aquí entonces?"},
+        {"Character":" ","Text":"Os voy a enseñar uno de mis pasatiempos favoritos:"},
+        {"Character":" ","Text":"¡Las adivinanzas!"},
+        {"Character":" ","Text":"Abrid bien los ojos y los oídos."}
     ]
     },
     "Sala1":{
-            "SalaIntermedia1":[
-                {"Character":"Sol","Text":"Esto es una prueba"},
-                {"Character":"Keisara","Text":"Yo se supone que estoy muerto"},
-                {"Character":"Lucy","Text":"uiiiai uiiiai"},
-                {"Character":"Lucy","Text":"aaaaaaa"},
-                {"Character":"Lucy","Text":"lalalalaalal"},
-                {"Character":"Lucy","Text":"uyuyuyuyuyui"},
-                {"Character":"Keisara","Text":"Yo se supone que "},
-                {"Character":"Keisara","Text":"Yo se "},
-                {"Character":"Keisara","Text":"Yo"}
-            ],
             "Sala1Intro":[
-                {"Character":"Personaje3","Text":"Why we still here... Just to suffer"}
+                {"Character":"Sol","Text":"¡Qué cojones!"},
+                {"Character":"Lucy","Text":"¿Qué es…?"},
+                {"Character":"Lucy","Text":"¡Keisara!"},
+                {"Character":"Sol","Text":"Está..."},
+                {"Character":" ","Text":"¡Muerta!"},
+                {"Character":" ","Text":"Pero, por supuesto,amigos."},
+                {"Character":" ","Text":"Hay que darle algo de riesgo a la situación."},
+                {"Character":"Lucy","Text":"¿Riesgo? ¡¿Riesgo?!"},
+                {"Character":"Sol","Text":"No lo creía posible, pero tu sentido del humor ha empeorado."},
+                {"Character":" ","Text":"Tranquilos, tranquilos."},
+                {"Character":" ","Text":"No es permanente."},
+                {"Character":" ","Text":"Bueno, puede que sí."},
+                {"Character":" ","Text":"Depende de vosotros para ser honestos."},
+                {"Character":" ","Text":"Os recomiendo que miréis alrededor e investigueis\n todo a vuestro alrededor."},
+                {"Character":" ","Text":"¡Todo esto es parte de mi adivinanza al fin y al cabo!"},
+                {"Character":"Sol","Text":"Estás enfermo."},
+                {"Character":" ","Text":"Jajaja..."},
+                {"Character":" ","Text":"¡Hasta ahora!"},
+                {"Character":"Sol","Text":"Capullo."},
+                {"Character":"Lucy","Text":"Y ahora no responde."},
+                {"Character":"Lucy","Text":"Que desgraciado."},
+                {"Character":"Sol","Text":"¿Crees que deberíamos..."},
+                {"Character":"Sol","Text":"Uh..."},
+                {"Character":"Lucy","Text":"¿Inspeccionar la sala?"},
+                {"Character":"Sol","Text":"Iba a decir mirar el cadáver."},
+                {"Character":"Sol","Text":"Pero también."},
+                {"Character":"Lucy","Text":"Ha."},
+                {"Character":"Lucy","Text":"No tenemos muchas otras opciones."},
+                {"Character":"Lucy","Text":"Odio que ese lugar se parezca tanto a mi casa."}
             ],
             "Cadaver":[
-                {"Character":"Lucy","Text":"Ostia, se me ha muerto la novia"},
-                {"Character":"Sol","Text":"Pues vaya mala suerte."},
-                {"Character":"Lucy","Text":"Por los síntomas parece que podría haber sido veneno."},
-                {"Character":"Sol","Text":"¿Y tú como sabes eso?"},
-                {"Character":"Lucy","Text":"Es conocimiento genérico de la academia."}
+                {"Character":"Sol","Text":"De verdad es Kei."},
+                {"Character":"Sol","Text":"Joder, esto es horrible."},
+                {"Character":"Lucy","Text":"..."},
+                {"Character":"Lucy","Text":"Por el color de sus labios y la falta de heridas externas,\n parece un envenamiento."},
+                {"Character":"Sol","Text":"Lucy, ¿estás bien?"},
+                {"Character":"Sol","Text":"Keisara está..."},
+                {"Character":"Sol","Text":"No se cómo mantienes la calma con tu novia muerta."},
+                {"Character":"Lucy","Text":"No estoy calmada."},
+                {"Character":"Lucy","Text":"Y esa cosa ha dicho que puede no ser permanente."},
+                {"Character":"Lucy","Text":"Si tengo que resolver su asquerosa para que vuelva, que así sea."},
+                {"Character":"Lucy","Text":"Ya tendré tiempo para lamentar más tarde si fallamos."},
+                {"Character":"Sol","Text":"..."},
+                {"Character":"Sol","Text":"Entonces,¿veneno?"},
+                {"Character":"Lucy","Text":"Probablemente."}
             ],
             "PuzzleTuberias":[
                 {"Character":"Sol","Text":"Se que has dicho que te recuerda a tu casa..."},
@@ -71,11 +187,33 @@
                 {"Character":"Sol","Text":"Ni una llamada perdida."},
                 {"Character":"Sol","Text":"No se cómo lo hace, ojalá tener su energía para contestar a la gente"}
                 
+            ],
+            "Sala1Final":[
+                {"Character":"Lucy","Text":"Mira es el móvil de Keisara"},
+                {"Character":"Lucy","Text":"Su última llamada es con su editorial."},
+                {"Character":"Sol","Text":"Ni una llamada perdida."},
+                {"Character":"Sol","Text":"No se cómo lo hace, ojalá tener su energía para contestar a la gente"}
+                
             ]
         },
     "Parte2":{
             "SalaIntermediaEvento1":[
-                {"Character":"Personaje1","Text":"Aqui pa ver si se actualiza el valor"}
+                {"Character":" ","Text":"Bueno, bueno, bueno."},
+                {"Character":" ","Text":"Parece que el incentivo a funcionado."},
+                {"Character":" ","Text":"¡Me habéis hecho caso!"},
+                {"Character":"Sol","Text":"Tienes un problema."},
+                {"Character":"Lucy","Text":"Creo que eso es quedarse corto."},
+                {"Character":" ","Text":"¡Oh no! Desprecio hacia mi persona."},
+                {"Character":" ","Text":"¿Qué podré hacer contra eso?"},
+                {"Character":" ","Text":"Jajaja"},
+                {"Character":"Sol","Text":"Si, si, todo muy gracioso."},
+                {"Character":"Sol","Text":"Ha muerto por veneno, ¿es eso lo que querías oír?"},
+                {"Character":" ","Text":"¡Claro que no! Eso era obvio."},
+                {"Character":" ","Text":"Mi adivinanza es otra:"},
+                {"Character":" ","Text":"¿Es posible que vuestra querida amiga haya sido asesinada?"},
+                {"Character":"Lucy","Text":"¿Qué?"},
+                {"Character":" ","Text":"Venga, con toda la información que tenéis deberíais de poder responder a eso."},
+                {"Character":" ","Text":"¿Cuál es vuestra respuesta?"}
             ]
         },
     "Parte3":{

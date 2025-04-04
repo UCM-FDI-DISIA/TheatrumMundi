@@ -7,7 +7,6 @@ public:
 	CalendearMobileTestScene();
 	~CalendearMobileTestScene();
 	void init() override;
-	void virtual refresh() override;
 	void virtual unload() override;
 
 };

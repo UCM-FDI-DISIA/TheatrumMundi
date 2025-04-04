@@ -1,6 +1,10 @@
 #pragma once
 #include "SceneRoomTemplate.h"
 
+#include "../TheatrumMundi/AudioManager.h"
+
+class ScrollComponent;
+
 class Room1Scene : public SceneRoomTemplate
 {
 private:
@@ -19,10 +23,6 @@ protected:
 		TeaCupPuzzleSnc,
 		TeaCupPuzzleRsv,
 		Spoon,
-		Boa1,
-		Boa2,
-		Hanni,
-		//Doku,
 		ResolveCase,
 		ResolveBottons,
 		GoodEnd,
@@ -30,16 +30,44 @@ protected:
 		MobileDialogue,
 		LOGENABLE,
 		LOGDESABLE,
-		event_size,
+		EVENTS_SIZE,
 	};
+
 public:
+
 	//friend PipePuzzleScene;
 	Room1Scene();
 	~Room1Scene();
+
 	void init() override;
 	void resolvedPuzzle(int i) override;
-	void refresh() override;
 	void unload() override;
 
+private:
+
+	void _setRoomEvents();
+	void _setRoomAudio();
+	void _setGlobalFeatures();
+
+	void _setRoomBackground();
+	void _setCaseResolution();
+	void _setInteractuables();
+	void _setDialog();
+	void _setUI();
+	
+	struct roomSounds {
+		Sound uiButton;
+		Sound puzzleButton;
+	} rmSounds;
+
+	struct roomObjects {
+		ecs::entity_t quitButton		  = nullptr;
+		ecs::entity_t pauseButton		  = nullptr;
+		ecs::entity_t inventoryButton	  = nullptr;
+		ecs::entity_t posibleCaseButton   = nullptr;
+		ecs::entity_t imposibleCaseButton = nullptr;
+
+		ScrollComponent* backgroundScroll = nullptr;
+	} rmObjects;
 };
 

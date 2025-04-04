@@ -54,6 +54,25 @@ public:
 		return e;
 	}
 
+	void removeEntity(entity_t e) {
+		int index = 0;
+
+		//removes entity from
+		for (auto a : _entsByGroup[e->_gId])
+		{
+			if (a == e)
+			{
+				a->_alive = false;
+				break;
+			}
+			else
+			{
+				index++;
+			}
+		}
+		
+	}
+
 	// Setting the state of the entity (alive or dead)
 	//
 	inline void setActive(entity_t e, bool alive) {
@@ -64,6 +83,9 @@ public:
 	//
 	inline bool isActive(entity_t e) {
 		return e->_active;
+	}
+	inline bool isAlive(entity_t e) {
+		return e->_alive;
 	}
 	void setActiveGroup(grpId_t gId, bool active);
 

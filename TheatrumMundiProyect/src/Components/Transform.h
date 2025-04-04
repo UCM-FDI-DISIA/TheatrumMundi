@@ -38,11 +38,40 @@ public:
 		_rot = r;
 	}
 
-	Vector2D& getPos() {
+	const Vector2D& getPos() {
 		return _pos;
 	}
-	Vector2D& getVel() {
+	void addPos(Vector2D vec) {
+		int auxX = _pos.getX() + (vec.getX() * Game::Instance()->wscreenScale);
+		int auxY = _pos.getY() + (vec.getY() * Game::Instance()->hscreenScale);
+		_pos =  Vector2D(auxX,auxY);
+	}
+	void addPos(int _x=0, int _y =0) {
+		_pos.setX(_pos.getX() + (_x* Game::Instance()->wscreenScale));
+		_pos.setY(_pos.getY() + (_y * Game::Instance()->hscreenScale));
+	}
+	void setPosPure(Vector2D vec){
+		_pos = vec;
+	}
+
+	void setPosX(int _x) {
+		_pos.setX(_x * Game::Instance()->wscreenScale);
+	}
+	void setPosY(int _y) {
+		_pos.setY(_y * Game::Instance()->hscreenScale);
+	}
+	void setPos(Vector2D vec) {
+		int auxX =(vec.getX() * Game::Instance()->wscreenScale);
+		int auxY = (vec.getY() * Game::Instance()->hscreenScale);
+		_pos = Vector2D(auxX, auxY);
+	}
+	const Vector2D& getVel() {
 		return _vel;
+	}
+	void setVel(Vector2D vec) {
+		int auxX = (vec.getX() * Game::Instance()->wscreenScale);
+		int auxY = (vec.getY() * Game::Instance()->hscreenScale);
+		_vel = Vector2D(auxX, auxY);
 	}
 
 	float getWidth() {
@@ -50,7 +79,7 @@ public:
 	}
 
 	void setWidth(float w) {
-		_width = w;
+		_width = w* Game::Instance()->wscreenScale;
 	}
 
 	float getHeight() {
@@ -58,7 +87,7 @@ public:
 	}
 
 	void setHeight(float h) {
-		_height = h;
+		_height = h* Game::Instance()->hscreenScale;
 	}
 
 	float getRot() {

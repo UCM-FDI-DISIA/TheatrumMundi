@@ -17,8 +17,11 @@ enum SceneName {
 	TEA_CUP_PUZZLE,
 	ROOM_2,
 	MUSIC_PUZZLE,
+	RAVEN_SCENE,
+	DOOR_SCENE,
 	MOSAIC_SCENE,
 	DRAG_PUZZLE,
+	XO_PUZZLE,
 	ROOM_3,
 	SCENE_SIZE
 };
@@ -39,7 +42,7 @@ public:
 	 void unloadScene();
 	 void render();
 	 //refrest the currect scene 
-	 void refrest();
+	 void refresh();
 	 //update of the currentscene
 	 void update();
 	 //Get the actSceneIndex ONLY USE FOR PLAYTESTING

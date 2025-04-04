@@ -49,7 +49,7 @@ void SceneRoomTemplate::scrollInventory(int dir)
 
             for (auto& hint : GetInventory()->hints) {
                 auto transform = hint->getMngr()->getComponent<Transform>(hint);
-                transform->getPos().setY(transform->getPos().getY() + 150);
+                transform->setPosY(transform->getPos().getY() + 150);
             }
         }
     }
@@ -67,7 +67,7 @@ void SceneRoomTemplate::scrollInventory(int dir)
 
             for (auto& hint : GetInventory()->hints) {
                 auto transform = hint->getMngr()->getComponent<Transform>(hint);
-                transform->getPos().setY(transform->getPos().getY() - 150);
+                transform->setPosY(transform->getPos().getY() - 150);
             }
         }
     }

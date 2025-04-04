@@ -5,13 +5,12 @@
 
 #include"../src/sdlutils/SDLUtils.h"
 #include "../src/Components/Image.h"
-#include "../src/ecs/Manager.h"
-#include "EntityFactory.h"
+
 #include "RectArea2D.h"
 #include "ClickComponent.h"
 #include "TriggerComponent.h"
 #include "../src/components/LogComponent.h"
-#include "Log.h"
+
 #include "SceneTemplate.h"
 #include "../src/components/Transform.h"
 #include "Area2DLayerManager.h"
@@ -21,14 +20,13 @@
 
 #include "../src/Components/ScrollComponent.h"
 
-#include "../src/components/ClickComponent.h"
 
-#include "Area2DLayerManager.h"
 
 using namespace std;
 
-Log::Log(): _textDialogueComp(nullptr)
+Log::Log()
 {
+	_firstRenderLine = _log.begin();
 }
 
 //adds one dialogueLine (with its author) on log registry
@@ -38,14 +36,64 @@ void Log::addDialogueLineLog(std::string author, std::string dialogueLine)
 	aux.Character = author;
 	aux.Text = dialogueLine;
 	_log.push_front(aux);
+	_firstRenderLine = _log.begin();
 }
 
 void Log::cleanLogList()
 {
+	_log.clear();
+	_firstRenderLine = _log.begin();
+}
+
+void Log::cleanRenderedList()
+{
+	_renderedDialogueLines.clear();
 }
 
 Log::~Log()
 {
+}
+
+void Log::setRenderedDialogueLines()
+{
+	//temporal iterator
+	auto logIt = _firstRenderLine;
+
+	//verifies if iterator is at end
+	if (logIt == _log.end()) { return;}
+	else
+	{
+		//cleans list of rendering dialogue lines
+		cleanRenderedList();
+
+		//stores iterator's following 5 lines
+		for (int i = 0; i < LINES_DISPLAYED; i++)
+		{
+			if (logIt == _log.end()) { return; }
+			_renderedDialogueLines.push_back(*logIt);
+			++logIt;
+		}
+	}
+}
+
+void Log::next()
+{
+	//distance between _firstRenderLine and list end
+	int distanceToEnd = std::distance(_firstRenderLine, _log.end());
+
+	if (distanceToEnd <= 5) return;
+
+	int steps = std::min(5, distanceToEnd); //calculate how many steps _firstRenderLine has to advance
+	std::advance(_firstRenderLine, steps);
+}
+
+void Log::previous()
+{
+	//distance between _firstRenderLine and list beginning
+	int distanceToStart = std::distance(_log.begin(), _firstRenderLine);
+
+	int steps = std::min(5, distanceToStart); //calculate how many steps _firstRenderLine has to de-advance
+	std::advance(_firstRenderLine, -steps);
 }
 
 void Log::SetLogActive(bool logActive)
@@ -70,42 +118,44 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 
 	auto LogArea = entityManager->addComponent<RectArea2D>(_backgroundLog, areaLayerManager);
 	
-
-	//title log
-	auto _titleLog = entityManager->addEntity(ecs::grp::LOG);
-	entityManager->addComponent<Transform>(_titleLog, Vector2D(50, 50), Vector2D(0, 0), 100, 100, 0);
-	entityManager->addComponent<Image>(_titleLog, &sdlutils().images().at("B7"));
-	entityManager->setActive(_titleLog, false);
-
 	//text log
 	auto _textLog = entityManager->addEntity(ecs::grp::LOG);
-	Transform* trTextLog = entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 800, 748, 0);
-	Image* imTextLog = entityManager->addComponent<Image>(_textLog, &sdlutils().images().at("fondoPruebaLog"));
+	Transform* trTextLog = entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 800, 600, 0);
 	SDL_Color colorText = { 255, 255, 255, 255 };
 	WriteTextComponent<std::list<TextInfo>>* writeLog =
-		entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, &_log); //write text component
+		entityManager->addComponent<WriteTextComponent<std::list<TextInfo>>>(_textLog, sdlutils().fonts().at("BASE"), colorText, &_renderedDialogueLines); //write text component
 	entityManager->setActive(_textLog, false);
 
 	// Put the dialog interaction area in front of the other interactables
 	areaLayerManager->sendFront(LogArea->getLayerPos());
 
 	//scroll log buttons
+	auto scrollDownLog = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1100, 80), Vector2D(0, 0), 80, 80, 270, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
+	auto scrollUpLog = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1100, 580), Vector2D(0, 0), 80, 80, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
 	
-	auto scrollingLog = entityFactory->CreateInteractableEntityScroll(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1200, 100), Vector2D(0, 0), 50, 50, 270, areaLayerManager, sdlutils().height() / 50, 50, EntityFactory::SCROLLINVERSE, 0, EntityFactory::NODRAG, ecs::grp::LOG);
-	auto upScrollingLog = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1200, 600), Vector2D(0, 0), 50, 50, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
-	auto ScrollComponentLog = entityManager->getComponent<ScrollComponent>(scrollingLog);
-	entityManager->setActive(scrollingLog, false);
-	entityManager->setActive(upScrollingLog, false);
+	ClickComponent* buttonScrollUpClick = entityManager->getComponent<ClickComponent>(scrollDownLog);
+	buttonScrollUpClick->connect(ClickComponent::JUST_CLICKED, [this]() {
+		previous();
+		setRenderedDialogueLines();
+		});
+	entityManager->setActive(scrollDownLog, false);
 
+	ClickComponent* buttonScrollDownClick = entityManager->getComponent<ClickComponent>(scrollUpLog);
+	buttonScrollDownClick->connect(ClickComponent::JUST_CLICKED, [this]() {
+		next();
+		setRenderedDialogueLines();
+		});
+	entityManager->setActive(scrollUpLog, false);
 
-	ScrollComponentLog->addElementToScroll(entityManager->getComponent<Transform>(_textLog));
 
 	//log buttons
-	auto buttonOpenLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(1200, 748 - (268 / 3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DIALOGUE);
-	auto buttonCloseLog = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 500), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
+	auto buttonOpenLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(1200, 748 - (268 / 3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	auto buttonCloseLog = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(50, 50), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
 
 	ClickComponent* buttonOpenLogClick = entityManager->getComponent<ClickComponent>(buttonOpenLog);
-	buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [_titleLog, buttonCloseLog, buttonOpenLog, entityManager]() {
+	buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [this, buttonCloseLog, buttonOpenLog, entityManager]() {
+		setRenderedDialogueLines();
+		
 		//activate log
 		entityManager->setActiveGroup(ecs::grp::LOG, true);
 		entityManager->setActive(buttonOpenLog, false); //close button
@@ -115,40 +165,12 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	entityManager->setActive(buttonOpenLog, true);
 
 	ClickComponent* buttonCloseLogClick = entityManager->getComponent<ClickComponent>(buttonCloseLog);
-	buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [_backgroundLog, _titleLog, buttonCloseLog, buttonOpenLog, entityManager]() {
+	buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [this, _backgroundLog, buttonCloseLog, buttonOpenLog, entityManager]() {
+		_firstRenderLine = _log.begin();
 		//disable log
 		entityManager->setActiveGroup(ecs::grp::LOG, false);
 		entityManager->setActive(buttonOpenLog, true); //open button
 		});
 	entityManager->setActive(buttonCloseLog, false);
-
-	
-	auto downScrollLogButton = entityManager->getComponent<ClickComponent>(scrollingLog);
-	downScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
-		std::cout << "A" << std::endl;
-		if (!ScrollComponentLog->isScrolling()) {
-			ScrollComponentLog->Scroll(ScrollComponent::DOWN);
-		}
-		});
-
-	auto upScrollLogButton = entityManager->getComponent<ClickComponent>(upScrollingLog);
-	upScrollLogButton->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
-		if (!ScrollComponentLog->isScrolling()) {
-			ScrollComponentLog->Scroll(ScrollComponent::UP);
-		}
-		});
-	
-	buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
-		while (ScrollComponentLog->numPhases() < (_log.size() / 5)) {
-			ScrollComponentLog->addPhase();
-		}
-		});
-	
-	_textDialogueComp->connect(ClickComponent::JUST_CLICKED, [this, ScrollComponentLog]() {
-		while (ScrollComponentLog->numPhases() < (_log.size() / 5)) {
-			ScrollComponentLog->addPhase();
-		}
-		});
-
 		
 }

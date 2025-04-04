@@ -19,10 +19,13 @@
 #include "DialogueManager.h"
 #include "../src/Components/ScrollComponent.h"
 
+#include "../src/game/Game.h"
+#include "Log.h"
+
 PipePuzzleScene::PipePuzzleScene()
 	:ScenePuzzleTemplate()
 {
-	
+	dialogueManager = new DialogueManager(1);
 }
 
 void PipePuzzleScene::pipeCreation()
@@ -49,12 +52,12 @@ void PipePuzzleScene::moduleCreation()
 	//if N 0 never going to have water(null direction)
 	 int nextId = 0;
 	
-	_modules.push_back(new Module({ nextId, RIGHT, {'P', 1}, {'N', 1}, {'N', 0}, {'P', 0}, true }));
-	_modules.push_back(new Module({ nextId++,  RIGHT, {'P', 0}, {'N', 1}, {'N', 0}, {'P', 3}, true }));
-	_modules.push_back(new Module({ nextId++,  DOWN,  {'P', 7}, {'P', 1}, {'N', 0}, {'P', 6}, true }));
-	_modules.push_back(new Module({ nextId++,  RIGHT,  {'P', 6}, {'P', 2}, {'N', 0}, {'P', 4}, false }));
-	_modules.push_back(new Module({ nextId++,  RIGHT, {'P', 5}, {'N', 0}, {'P', 3}, {'N', 1}, true }));
-	_modules.push_back(new Module({ nextId++,  UP, {'P', 4}, {'N', 0}, {'P', 5}, {'N', 1}, true }));
+	_modules.push_back(new Module({ nextId, RIGHT, {'P', 0}, true }));
+	_modules.push_back(new Module({ nextId++,  RIGHT, {'P', 2}, true }));
+	_modules.push_back(new Module({ nextId++,  DOWN,  {'P', 5}, true }));
+	_modules.push_back(new Module({ nextId++,  RIGHT,  {'P', 10}, false }));
+	_modules.push_back(new Module({ nextId++,  RIGHT, {'P', 18}, true }));
+	_modules.push_back(new Module({ nextId++,  UP, {'P', 19}, true }));
 }
 
 void PipePuzzleScene::pathCreation()
@@ -725,7 +728,12 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		
 
 		// create entity
-		auto clock = entityFactory->CreateInteractableEntity(entityManager, "minutero", EntityFactory::RECTAREA, Vector2D(950, 770), Vector2D(0, 0), 150,150, 0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::INTERACTOBJ);
+		auto clock = entityFactory->CreateInteractableEntity(entityManager, "minutero", EntityFactory::RECTAREA,
+			Vector2D(1000, 880), Vector2D(0, 0), 150,180, 0,
+			areaLayerManager,
+			EntityFactory::NODRAG,
+			ecs::grp::DEFAULT);
+
 		//add click component
 		entityManager->getComponent<ClickComponent>(clock)->connect(ClickComponent::JUST_CLICKED, [this, clock,sr]() {
 			clock->getMngr()->setActive(clock, false);
@@ -905,6 +913,10 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		
 		
 
+		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+
+		startDialogue("PuzzleTuberias");
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
 	sr->GetInventory()->setFirstItem(0);
@@ -976,56 +988,15 @@ void PipePuzzleScene::waterPassPipe(int pipe) {
 void PipePuzzleScene::waterPassModule(int module) {
 	Module::moduleInfo modInfo = _modules[module]->getModuleInfo();
 
-	//checks if the four neightbourds the module has, carries water
 	bool receivesWater = false;
-	//std::cout << _waterPipes[modInfo.right.second]<< _waterPipes[modInfo.right.second]->getPipeInfo().result << endl;
-	if (modInfo.right.first == 'P' && _waterPipes[modInfo.right.second]->getPipeInfo().result) {
+	
+	if (_waterPath[modInfo.whoToCheck.second]._withWater) {
 		receivesWater = true;
 	}
-	else if (modInfo.right.first == 'M' && _modules[modInfo.right.second]->getModuleInfo().result) {
-		receivesWater = true;
-	}
-	else if (modInfo.right.first == 'N' && modInfo.right.second == 1) {
-		receivesWater = true;
-	}
-
-
-	if (modInfo.left.first == 'P' && _waterPipes[modInfo.left.second]->getPipeInfo().result) {
-		receivesWater = true;
-	}
-	else if (modInfo.left.first == 'M' && _modules[modInfo.left.second]->getModuleInfo().result) {
-		receivesWater = true;
-	}
-	else if (modInfo.left.first == 'N' && modInfo.left.second == 1) {
-		receivesWater = true;
-	}
-
-	if (modInfo.up.first == 'P' && _waterPipes[modInfo.up.second]->getPipeInfo().result) {
-		receivesWater = true;
-	}
-	else if (modInfo.up.first == 'M' && _modules[modInfo.up.second]->getModuleInfo().result) {
-		receivesWater = true;
-	}
-	else if (modInfo.up.first == 'N' && modInfo.up.second == 1) {
-		receivesWater = true;
-	}
-
-	if (modInfo.down.first == 'P' && _waterPipes[modInfo.down.second]->getPipeInfo().result) {
-		receivesWater = true;
-	}
-	else if (modInfo.down.first == 'M' && _modules[modInfo.down.second]->getModuleInfo().result) {
-		receivesWater = true;
-	}
-	else if (modInfo.down.first == 'N' && modInfo.down.second == 1) {
-		receivesWater = true;
-	}
-
-
+	
 	_modules[module]->changeModuleInfo().result = receivesWater;
 	//std::cout << "Module " << module << " checking if it receives water: " << receivesWater << std::endl;
 
-
-	
 }
 
 

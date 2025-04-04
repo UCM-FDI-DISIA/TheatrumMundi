@@ -31,6 +31,9 @@
 #include "SceneRoomTemplate.h"
 
 #include "DialogueManager.h"
+#include "../src/game/Game.h"
+#include "Log.h"
+
 
 
 
@@ -47,6 +50,8 @@ BooksPuzzleScene::BooksPuzzleScene()
 	for (int i = 0; i < myComb.size(); ++i) {
 		myComb[i] = 0;
 	}
+
+	dialogueManager = new DialogueManager(1);
 }
 
 BooksPuzzleScene::~BooksPuzzleScene()
@@ -89,7 +94,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 				if (sr->GetInventory()->getActive()) {
 					entityManager->setActive(InventoryBackground, true);
 
-					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(925);
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(925);
 					entityManager->setActive(downButton, true);
 					entityManager->setActive(upButton, true);
 
@@ -103,7 +108,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(InventoryBackground, false);
 					entityManager->setActive(downButton, false);
 					entityManager->setActive(upButton, false);
-					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->getPos().setX(60 + 268 / 3);
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 
 					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], false);
@@ -175,7 +180,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//REWARD ENTITY
 		auto clock = entityFactory->CreateInteractableEntity(entityManager, "horaria", EntityFactory::RECTAREA,
-			Vector2D(410, 548), Vector2D(0, 0), 340, 200, 0,
+			Vector2D(700, 640), Vector2D(0, 0), 100, 150, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
@@ -185,7 +190,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		entity_t tag;
 		if (variant <= 1) {
 			tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV1", EntityFactory::RECTAREA,
-				Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+				Vector2D(510, 548), Vector2D(0, 0), 150, 150, 0,
 				areaLayerManager,
 				EntityFactory::NODRAG,
 				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
@@ -193,7 +198,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		}
 		 else if (variant == 2) {
 			 tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV2", EntityFactory::RECTAREA,
-				 Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+				 Vector2D(510, 548), Vector2D(0, 0), 150, 150, 0,
 				 areaLayerManager,
 				 EntityFactory::NODRAG,
 				 ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
@@ -310,15 +315,17 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			Game::Instance()->getSceneManager()->popScene();
 		});
 
+		dialogueManager->Init(1, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 
-	}
+		
+}
+	
 	//IMPORTANT this need to be out of the isstarted!!!
 	sr->GetInventory()->setFirstItem(0);
 	createInvEntities(sr);
-}
 
-void BooksPuzzleScene::refresh()
-{
+	startDialogue("PuzzleLibros");
 }
 
 void BooksPuzzleScene::unload()

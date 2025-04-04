@@ -36,7 +36,7 @@ void EntityManager::refresh() {
 		groupEntities.erase(
 				std::remove_if(groupEntities.begin(), groupEntities.end(),
 						[this](Entity *e) {
-							if (!isActive(e)) {
+							if (isAlive(e)) {
 								return false;
 							} else {
 								delete e;

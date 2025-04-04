@@ -6,6 +6,8 @@
 #include "ClickableSpriteComponent.h"
 #include "SDLUtils.h"
 #include "Image.h"
+#include "DialogueManager.h"
+#include "Log.h"
 #include "TriggerComponent.h"
 #include "DragComponent.h"
 
@@ -112,11 +114,11 @@ MosaicPuzzleScene::~MosaicPuzzleScene()
 
 }
 
-void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
+void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted) {
 		isStarted = true;
-	//	room = sr;
+		room = sr;
 
 #pragma region SpecificEntitiesOfTheScene
 		//Background
@@ -143,8 +145,92 @@ void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
 #pragma endregion
 
 		
+#pragma region UI
+
+		//BackButton
+		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+
+		//Click component Open log button
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
+			{
+				Game::Instance()->getSceneManager()->popScene();
+			});
+
+#pragma region Inventory
+
+		//INVENTORY
+		//Invntory Background
+		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1150, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
+		entityManager->setActive(InventoryBackground, false);
+
+		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->setActive(upButton, false);
+
+		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		entityManager->setActive(downButton, false);
+
+		//InventoryButton
+		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
+		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton]() //Lamda function
+			{
+				//AudioManager::Instance().playSound(buttonSound);
+				sr->GetInventory()->setActive(!sr->GetInventory()->getActive());  // Toggle the inventory
+
+				// If the inventory is active, activate the items
+				if (sr->GetInventory()->getActive()) {
+					entityManager->setActive(InventoryBackground, true);
+
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(925);
+					entityManager->setActive(downButton, true);
+					entityManager->setActive(upButton, true);
+
+					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+						invObjects[i]->getMngr()->setActive(invObjects[i], true);
+					}
+				}
+				else {
+					entityManager->setActive(InventoryBackground, false);
+					entityManager->setActive(InventoryBackground, false);
+					entityManager->setActive(downButton, false);
+					entityManager->setActive(upButton, false);
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+
+					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+						invObjects[i]->getMngr()->setActive(invObjects[i], false);
+					}
+				}
+			});
+
+		ClickComponent* UPbuttonInventoryClick = entityManager->getComponent<ClickComponent>(upButton);
+		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ upButton, sr]() {
+
+			//AudioManager::Instance().playSound(buttonSound);
+			sr->scrollInventory(-1);
+			});
+
+		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
+		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ downButton, sr]() {
+
+			//AudioManager::Instance().playSound(buttonSound);
+			sr->scrollInventory(1);
+			});
+		//Log
+
+
+#pragma endregion
+
+		//Log
+		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+
+		//startDialogue("PuzzleCuervo");
+
+#pragma endregion
+
 	}
-//	createInvEntities(sr);
+	createInvEntities(sr);
 }
 
 /// <summary>
@@ -153,33 +239,33 @@ void MosaicPuzzleScene::init(/*SceneRoomTemplate* sr*/)
 /// <param name="square"></param>
 void MosaicPuzzleScene::CorrectPositions(entity_t square)
 {
-	auto& actPosition = entityManager->getComponent<Transform>(square)->getPos();
+	Transform* actPosition = entityManager->getComponent<Transform>(square);
 
 	//Compare X
-	int diff = actPosition.getX() - firstPos.getX(); //What is the difference between the actual spot to the future spot
+	int diff = actPosition->getPos().getX() - firstPos.getX(); //What is the difference between the actual spot to the future spot
 	if (diff > 0 && diff >= SQUAREWIDTH / 2) { //if the square is closed to the right than to the left and player wants to go to the right sets the position to the right 
-		actPosition.setX(firstPos.getX() + SQUAREWIDTH);
+		actPosition->setPosX(firstPos.getX() + SQUAREWIDTH);
 	}
 	else if (diff < 0 && -diff >= SQUAREWIDTH / 2) { //if the square is closed to the left than to the right and player wants to go to the left sets the position to the left 
-		actPosition.setX(firstPos.getX() - SQUAREWIDTH);
+		actPosition->setPosX(firstPos.getX() - SQUAREWIDTH);
 	}
-	else actPosition.setX(firstPos.getX());
+	else actPosition->setPosX(firstPos.getX());
 
 	//Compare Y
-	diff = actPosition.getY() - firstPos.getY();
+	diff = actPosition->getPos().getY() - firstPos.getY();
 	if (diff > 0 && diff >= SQUAREWIDTH / 2) { //if the square is closed to the Top than to the Bottom  and player wants to go to the top sets the position to the top
-		actPosition.setY(firstPos.getY() + SQUAREWIDTH);
+		actPosition->setPosY(firstPos.getY() + SQUAREWIDTH);
 	}
 	else if (diff < 0 && -diff >= SQUAREWIDTH / 2) { //if the square is closed to the Bottom than to the Top  and player wants to go to the bottom sets the position to the bottom
-		actPosition.setY(firstPos.getY() - SQUAREWIDTH);
+		actPosition->setPosY(firstPos.getY() - SQUAREWIDTH);
 	}
-	else actPosition.setY(firstPos.getY());
+	else actPosition->setPosY(firstPos.getY());
 }
 
 void MosaicPuzzleScene::ResetPuzzle()
 {
 	for (int i = 0; i < TOTALSQUARES; ++i) {
-		squares[i]->getMngr()->getComponent<Transform>(squares[i])->getPos().set(positions[indexPositions[i]]);
+		squares[i]->getMngr()->getComponent<Transform>(squares[i])->setPos(positions[indexPositions[i]]);
 	}
 }
 
@@ -206,7 +292,7 @@ bool MosaicPuzzleScene::Check()
 /// </summary>
 void MosaicPuzzleScene::Win()
 {
-	room->resolvedPuzzle(2);
+	room->resolvedPuzzle(3);
 	setSolved(true);
 }
 

@@ -72,11 +72,11 @@ void Game::init() {
 	sdlutils().hideCursor();
 
 	// Create the manager
-	_mngr = new SceneManager();
+
 	_log = new Log();
-	
 	_dataManager = new DataManager();
 	_csvdata = new CSVdataRecolector();
+	_mngr = new SceneManager();
 }
 
 void Game::render() const
@@ -118,8 +118,9 @@ void Game::start() {
 		checkCollisions();
 		render();
 
+		_mngr->refresh();
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
-
+		
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
 	}
