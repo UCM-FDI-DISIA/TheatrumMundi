@@ -187,7 +187,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		entity_t tag;
 		if (variant <= 1) {
 			tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV1", EntityFactory::RECTAREA,
-				Vector2D(510, 548), Vector2D(0, 0), 150, 150, 0,
+				Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
 				areaLayerManager,
 				EntityFactory::NODRAG,
 				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
@@ -195,7 +195,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		}
 		 else if (variant == 2) {
 			 tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV2", EntityFactory::RECTAREA,
-				 Vector2D(510, 548), Vector2D(0, 0), 150, 150, 0,
+				 Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
 				 areaLayerManager,
 				 EntityFactory::NODRAG,
 				 ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);

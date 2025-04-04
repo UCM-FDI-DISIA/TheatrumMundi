@@ -70,7 +70,7 @@ void SceneRoomTemplate::scrollInventory(int dir)
 
 SceneRoomTemplate::SceneRoomTemplate() : SceneTemplate()
 {
-	for (int i = 0; i < 3;i++)puzzlesol.push_back(false);
+	for (int i = 0; i < 3;i++)puzzlesol.push_back(true);
 	inv = new Inventory();
 }
 

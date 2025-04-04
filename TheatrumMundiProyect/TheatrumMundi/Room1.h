@@ -42,7 +42,7 @@ public:
 	
 
 private:
-
+	void endDialogue()override;
 	void _setRoomEvents();
 	void _setRoomAudio();
 	void _setGlobalFeatures();
@@ -63,7 +63,7 @@ private:
 		ecs::entity_t pauseButton		  = nullptr;
 		ecs::entity_t inventoryButton	  = nullptr;
 		ecs::entity_t readyToResolveBotton = nullptr;
-
+		ecs::entity_t blackBackground = nullptr;
 		ScrollComponent* backgroundScroll = nullptr;
 	} rmObjects;
 };
