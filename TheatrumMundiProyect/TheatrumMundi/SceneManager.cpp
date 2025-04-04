@@ -33,6 +33,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
 	scenes[SceneName::MUSIC_PUZZLE] = new MusicPuzzleScene();
 	scenes[SceneName::RAVEN_SCENE] = new RavenPuzzleScene();
+	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();

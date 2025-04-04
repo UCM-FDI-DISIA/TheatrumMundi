@@ -128,7 +128,7 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Creation of the key and their logic
 		auto key = entityFactory->CreateInteractableEntity(entityManager, "Llave", EntityFactory::RECTAREA, Vector2D(200, 400), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		entityManager->getComponent<ClickComponent>(key)->connect(ClickComponent::JUST_CLICKED, [this, sr,key]()
+		entityManager->getComponent<ClickComponent>(key)->connect(ClickComponent::JUST_CLICKED, [this, sr,key, InventoryBackground, downButton, upButton, inventoryButton]()
 			{
 				if (ravenHappy) { //If you give the jewel to the bird, the key is pickable
 
@@ -136,6 +136,19 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 					AddInvItem("Llave", "La llave de una puerta, seguro que abre algo", position, sr);
 					entityManager->setActive(key, false);
 					Win();
+
+					//IMPORTANT CLOSE INVENTORY 
+
+					sr->GetInventory()->setActive(false);
+					entityManager->setActive(InventoryBackground, false);
+					entityManager->setActive(InventoryBackground, false);
+					entityManager->setActive(downButton, false);
+					entityManager->setActive(upButton, false);
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+
+					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+						invObjects[i]->getMngr()->setActive(invObjects[i], false);
+					}
 				}
 				//	else sound of angry bird
 			});

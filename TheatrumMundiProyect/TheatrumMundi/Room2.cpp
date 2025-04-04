@@ -34,11 +34,9 @@ Room2Scene::Room2Scene()
 
 	};
 	roomEvent[DoorScene] = [this] {
-		std::cout << "Puerta!!!!!" << std::endl;
-		//Game::Instance()->getSceneManager()->loadScene(DOOR_SCENE, this); IMPORTANT: Include Door Scene when its finished
+		Game::Instance()->getSceneManager()->loadScene(DOOR_SCENE, this);
 	};
 	roomEvent[DoorSceneRsv] = [this] {
-		std::cout << "Abrete Sésamo" << std::endl;
 		isOpen = true;
 	};
 	roomEvent[MosaciZoom] = [this] {
@@ -268,7 +266,6 @@ void Room2Scene::init()
 			}
 			else if (!isOpen) {
 				roomEvent[DoorScene]();
-				resolvedPuzzle(2);
 			}
 		});
 #pragma endregion
