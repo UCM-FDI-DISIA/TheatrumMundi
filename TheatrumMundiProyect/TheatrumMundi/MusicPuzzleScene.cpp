@@ -94,9 +94,6 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
     }
 }
 
-void MusicPuzzleScene::refresh()
-{
-}
 
 void MusicPuzzleScene::unload()
 {

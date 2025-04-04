@@ -157,12 +157,14 @@ void WriteTextComponent<TextInfo>::render()
 {
 	if (_currentText.empty()) return;
 
+	// Author
+	Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
+	SDL_Rect nameRect = { 325, 465,nameText->width(),nameText->height() };
+	nameText->render(nameRect, 0);
+
 	if (isMiddleRoom)
 	{
-		// Author
-		Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
-		SDL_Rect nameRect = { 350, 465,nameText->width(),nameText->height() };
-		nameText->render(nameRect, 0);
+		
 
 		// Text
 		std::vector<std::string> lines = splitTextByNewline(_currentText); //splits text into different lines
@@ -171,7 +173,7 @@ void WriteTextComponent<TextInfo>::render()
 
 		for (const auto& line : lines) {
 			Texture* dialogText = new Texture(sdlutils().renderer(), line, _myFont, _color);
-			SDL_Rect dialogRect = { 350, y, dialogText->width(), dialogText->height() };
+			SDL_Rect dialogRect = { 325, y, dialogText->width(), dialogText->height() };
 			dialogText->render(dialogRect, 0);
 
 			y += dialogText->height() + 5;  // space between split lines
@@ -185,6 +187,8 @@ void WriteTextComponent<TextInfo>::render()
 		nameText->render(nameRect, 0);
 
 		// Text
+
+
 		std::vector<std::string> lines = splitTextByNewline(_currentText); //splits text into different lines
 
 		int y = 550;  // initial dialogue text

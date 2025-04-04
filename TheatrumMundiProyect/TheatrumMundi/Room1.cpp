@@ -84,11 +84,6 @@ void Room1Scene::resolvedPuzzle(int i)
 #endif
 	}
 }
-
-void Room1Scene::refresh()
-{
-}
-
 void Room1Scene::unload()
 {
 	entityManager->~EntityManager();
@@ -585,7 +580,8 @@ void Room1Scene::_setInteractuables()
 	entityManager->getComponent<ClickComponent>(spoonObject)
 		->connect(ClickComponent::JUST_CLICKED, [this, spoonObject]()
 			{
-				entityManager->setActive(spoonObject, false);
+				spoonObject->getMngr()->removeEntity(spoonObject);
+				spoonObject->getMngr()->setActive(spoonObject, false);
 				roomEvent[Spoon]();
 			});
 

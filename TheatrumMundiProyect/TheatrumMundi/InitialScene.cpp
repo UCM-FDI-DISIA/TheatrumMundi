@@ -75,6 +75,3 @@ void InitialScene::init()
 	_loadimg->getMngr()->setActive(_loadimg, false);
 }
 
-void InitialScene::refresh()
-{
-}

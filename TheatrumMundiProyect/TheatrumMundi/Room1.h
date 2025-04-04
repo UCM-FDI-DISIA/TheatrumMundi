@@ -41,7 +41,6 @@ public:
 
 	void init() override;
 	void resolvedPuzzle(int i) override;
-	void refresh() override;
 	void unload() override;
 
 private:

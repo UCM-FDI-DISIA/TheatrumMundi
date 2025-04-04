@@ -327,10 +327,6 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 	startDialogue("PuzzleLibros");
 }
 
-void BooksPuzzleScene::refresh()
-{
-}
-
 void BooksPuzzleScene::unload()
 {
 	
