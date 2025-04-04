@@ -53,7 +53,6 @@ void Log::cleanRenderedList()
 Log::~Log()
 {
 	_log.clear();
-	delete _textDialogueComp;
 }
 
 void Log::setRenderedDialogueLines()
