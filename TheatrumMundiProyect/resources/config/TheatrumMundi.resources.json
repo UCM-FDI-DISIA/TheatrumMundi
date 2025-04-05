@@ -160,6 +160,18 @@
       "file": "../resources/images/Finales/RectangleEmptyButton.PNG"
     },
     {
+      "id": "Continue",
+      "file": "../resources/images/Finales/RectangleContinueButton.png"
+    },
+    {
+      "id": "ExitToMenu",
+      "file": "../resources/images/Finales/RectangleExitToMenuButton.png"
+    },
+    {
+      "id": "MenuBackground",
+      "file": "../resources/images/Finales/MenuBackground.png"
+    },
+    {
       "id": "prueba",
       "file": "../resources/images/socrates.png"
     },

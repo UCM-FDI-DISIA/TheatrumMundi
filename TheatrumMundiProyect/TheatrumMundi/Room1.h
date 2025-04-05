@@ -59,7 +59,6 @@ private:
 
 	struct roomObjects {
 		ecs::entity_t quitButton		  = nullptr;
-		ecs::entity_t pauseButton		  = nullptr;
 		ecs::entity_t inventoryButton	  = nullptr;
 		ecs::entity_t readyToResolveBotton = nullptr;
 		ecs::entity_t blackBackground = nullptr;

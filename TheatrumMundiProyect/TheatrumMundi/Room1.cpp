@@ -351,15 +351,6 @@ void Room1Scene::_setUI()
 
 	entityManager->setActive(rmObjects.quitButton, false);
 
-	// Pause Button
-	rmObjects.pauseButton = entityFactory->CreateInteractableEntity(entityManager, "B3", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-	
-	entityManager->getComponent<ClickComponent>(rmObjects.pauseButton)
-		->connect(ClickComponent::JUST_CLICKED, [this]() 
-		{
-			AudioManager::Instance().playSound(rmSounds.uiButton);
-		});
-
 
 	//Inventory
 	auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
