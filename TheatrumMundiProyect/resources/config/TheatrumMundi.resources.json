@@ -707,18 +707,22 @@
         {
           "id": "cuerda",
           "file": "../resources/sound/sfx/cuerda.wav"
-      }
+        },
+        {
+          "id": "correcto",
+          "file": "../resources/sound/sfx/correcto.wav"
+        },
+        {
+          "id": "incorrecto",
+          "file": "../resources/sound/sfx/incorrecto.wav"
+        }
     ],
 
   "musics" : [
     {
         "id": "sala1",
         "file":  "../resources/sound/music/sala1.wav"
-    },
-    {
-      "id": "marcha",
-      "file":  "../resources/sound/music/imperial_march.wav"
-  }
+    }
   ]
 
 }
