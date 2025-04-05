@@ -19,6 +19,7 @@
 #include "../src/components/WriteTextComponent.h"
 
 #include "../src/Components/ScrollComponent.h"
+#include "ClickableSpriteComponent.h"
 
 
 
@@ -52,6 +53,7 @@ void Log::cleanRenderedList()
 
 Log::~Log()
 {
+	_log.clear();
 }
 
 void Log::setRenderedDialogueLines()
@@ -96,6 +98,13 @@ void Log::previous()
 	std::advance(_firstRenderLine, -steps);
 }
 
+void Log::ResetLog()
+{
+	_log.clear();
+	_renderedDialogueLines.clear();
+	_firstRenderLine = _log.begin();
+}
+
 void Log::SetLogActive(bool logActive)
 {
 	_logActive = logActive;
@@ -111,14 +120,19 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	//CREATE SCENE ENTITIES OF LOG
 
 	//background log
+	//ENTIDADCONENTITYFACTORY
+	//auto _backgroundLog = entityFactory->CreateInteractableEntity(entityManager,"fondoPruebaLog",EntityFactory::RECTAREA,Vector2D(0,0),Vector2D(0,0),1349,748,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::LOG);
+	//auto LogArea = entityManager->getComponent<RectArea2D>(_backgroundLog);
+	//entityManager->removeComponent<ClickableSpriteComponent>(_backgroundLog);
 	auto _backgroundLog = entityManager->addEntity(ecs::grp::LOG);
 	entityManager->addComponent<Transform>(_backgroundLog, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
 	auto imBack = entityManager->addComponent<Image>(_backgroundLog, &sdlutils().images().at("fondoPruebaLog")); //background log
+	auto LogArea = entityManager->addComponent<RectArea2D>(_backgroundLog, areaLayerManager);
 	entityManager->setActive(_backgroundLog, false);
 
-	auto LogArea = entityManager->addComponent<RectArea2D>(_backgroundLog, areaLayerManager);
 	
 	//text log
+	//ENTIDADCONENTITYFACTORY
 	auto _textLog = entityManager->addEntity(ecs::grp::LOG);
 	Transform* trTextLog = entityManager->addComponent<Transform>(_textLog, Vector2D(0, 0), Vector2D(0, 0), 800, 600, 0);
 	SDL_Color colorText = { 255, 255, 255, 255 };
@@ -157,6 +171,10 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 		setRenderedDialogueLines();
 		
 		//activate log
+		auto _openButtonImage = entityManager->getComponent<Image>(buttonOpenLog);
+		_openButtonImage->setW(entityManager->getComponent<Transform>(buttonOpenLog)->getWidth());
+		_openButtonImage->setH(entityManager->getComponent<Transform>(buttonOpenLog)->getHeight());
+		_openButtonImage->setPosOffset(0, 0);
 		entityManager->setActiveGroup(ecs::grp::LOG, true);
 		entityManager->setActive(buttonOpenLog, false); //close button
 
@@ -168,6 +186,10 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [this, _backgroundLog, buttonCloseLog, buttonOpenLog, entityManager]() {
 		_firstRenderLine = _log.begin();
 		//disable log
+		auto _backButtonImage = buttonCloseLog->getMngr()->getComponent<Image>(buttonCloseLog);
+		_backButtonImage->setW(buttonCloseLog->getMngr()->getComponent<Transform>(buttonCloseLog)->getWidth());
+		_backButtonImage->setH(buttonCloseLog->getMngr()->getComponent<Transform>(buttonCloseLog)->getHeight());
+		_backButtonImage->setPosOffset(0, 0);
 		entityManager->setActiveGroup(ecs::grp::LOG, false);
 		entityManager->setActive(buttonOpenLog, true); //open button
 		});

@@ -15,13 +15,9 @@ protected:
 		InitialDialogue = 0,
 		CorpseDialogue,
 		PipePuzzleSnc,
-		PipePuzzleRsv,
 		BooksPuzzleScn,
-		BooksPuzzleRsv,
 		ClockPuzzleSnc,
-		ClockPuzzleRsv,
 		TeaCupPuzzleSnc,
-		TeaCupPuzzleRsv,
 		Spoon,
 		ResolveCase,
 		ResolveBottons,
@@ -42,9 +38,10 @@ public:
 	void init() override;
 	void resolvedPuzzle(int i) override;
 	void unload() override;
+	
 
 private:
-
+	void endDialogue()override;
 	void _setRoomEvents();
 	void _setRoomAudio();
 	void _setGlobalFeatures();
@@ -62,12 +59,13 @@ private:
 
 	struct roomObjects {
 		ecs::entity_t quitButton		  = nullptr;
-		ecs::entity_t pauseButton		  = nullptr;
 		ecs::entity_t inventoryButton	  = nullptr;
-		ecs::entity_t posibleCaseButton   = nullptr;
-		ecs::entity_t imposibleCaseButton = nullptr;
-
+		ecs::entity_t readyToResolveBotton = nullptr;
+		ecs::entity_t blackBackground = nullptr;
 		ScrollComponent* backgroundScroll = nullptr;
 	} rmObjects;
+
+	bool stopAnimation;
+	bool alternate;
 };
 

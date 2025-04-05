@@ -9,15 +9,6 @@
 using namespace ecs;
 
 
-
-
-void SceneRoomTemplate::resolvedPuzzle(int i)
-{
-	puzzlesol[i] = true;
-	entityManager->removeComponent<ClickComponent>(puzzleptr[i]);
-	
-}
-
 void SceneRoomTemplate::setActiveBottons(bool active)
 {
 	entityManager->setActiveGroup(grp::UI,active);

@@ -126,6 +126,16 @@ void Game::start() {
 	}
 }
 
+void Game::reset()
+{
+
+	//Reset instances
+	Game::Instance()->getLog()->ResetLog();
+	Game::Instance()->getDataManager()->ResetDataManager();
+	Game::Instance()->getSceneManager()->ResetSceneManager();
+
+}
+
 SceneManager* Game::getSceneManager()
 {
 	assert(_mngr != nullptr);

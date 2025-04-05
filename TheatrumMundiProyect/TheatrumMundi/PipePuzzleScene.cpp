@@ -21,6 +21,7 @@
 
 #include "../src/game/Game.h"
 #include "Log.h"
+#include "ClickableSpriteComponent.h"
 
 PipePuzzleScene::PipePuzzleScene()
 	:ScenePuzzleTemplate()
@@ -622,14 +623,9 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 		
 		//Create cube without water
-		_cubeWithoutWater = entityFactory->CreateImageEntity(entityManager, "cubeWithoutWater",
-
-		Vector2D((1349 - (4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0))) / 2.0,
-		(748 - (2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0))) / 2.0),
-		Vector2D(0, 0),
-		4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
-		2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
-		0, ecs::grp::UNDER);
+		_cubeWithoutWater = entityFactory->CreateImageEntity(
+			entityManager,"cubeWithoutWater",Vector2D(2, 0),Vector2D(0, 0),1346,748,0,ecs::grp::UNDER
+		);
 		
 
 		//INVENTORY
@@ -721,11 +717,9 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		}
 
 
-		
-
 		// create entity
 		auto clock = entityFactory->CreateInteractableEntity(entityManager, "minutero", EntityFactory::RECTAREA,
-			Vector2D(1000, 880), Vector2D(0, 0), 150,180, 0,
+			Vector2D(980, 820), Vector2D(0, 0), 150, 250, 90,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
@@ -744,13 +738,8 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			});*/
 
 		//Create background
-		auto background = entityFactory->CreateImageEntity(entityManager, "Pared",
-		Vector2D((1349 - (4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0))) / 2.0,
-		(748 - (2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0))) / 2.0),
-		Vector2D(0, 0),
-		4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
-		2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
-		0, ecs::grp::DEFAULT);
+		auto background = entityFactory->CreateImageEntity(
+			entityManager, "Pared", Vector2D(2, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
 	
 
 		//Create string segnment sprite
@@ -816,20 +805,11 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		for (int i = 0; i < pipePositions.size(); i++) {
 
 			// create entity
-			_pipesEnt.push_back(entityManager->addEntity());
-			
-			// add transfomr
-			auto pipeTransform = entityManager->addComponent<Transform>(
-				_pipesEnt[i], pipePositions[i], Vector2D(0, 0), 70, 70, 0
-			);
+			//ENTIDADCONENTITYFACTORY
+			auto pipeit = entityFactory->CreateInteractableEntityNotMoveSprite(entityManager, "exit", EntityFactory::RECTAREA, pipePositions[i], Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			_pipesEnt.push_back(pipeit);
 
-			// add image
-			entityManager->addComponent<Image>(_pipesEnt[i], &sdlutils().images().at("exit"));
-
-			// add area of visualization of the image
-			entityManager->addComponent<RectArea2D>(_pipesEnt[i], areaLayerManager);
-
-			Image* imageComponent = _pipesEnt[i]->getMngr()->getComponent<Image>(_pipesEnt[i]);
+			Image* imageComponent = pipeit->getMngr()->getComponent<Image>(pipeit);
 
 			if (_waterPipes[i]->getPipeInfo().type==Pipe::ONE)
 			{
@@ -860,18 +840,11 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		for (int i = 0; i < modulePositions.size(); i++) {
 
 			// create entity
+			//ENTIDADCONENTITYFACTORY
+			auto moduleit = entityFactory->CreateInteractableEntityNotMoveSprite(entityManager, "module", EntityFactory::RECTAREA, modulePositions[i], Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			_modulesEnt.push_back(moduleit);
 
-			_modulesEnt.push_back(entityManager->addEntity());
-
-			// add transfomr
-			auto moduleTransform = entityManager->addComponent<Transform>(
-				_modulesEnt[i], modulePositions[i], Vector2D(0, 0), 70, 70, 0
-			);
-
-			// add image
-			entityManager->addComponent<Image>(_modulesEnt[i], &sdlutils().images().at("module"));
-
-			Transform* transformComponent = _modulesEnt[i]->getMngr()->getComponent<Transform>(_modulesEnt[i]);
+			Transform* transformComponent = moduleit->getMngr()->getComponent<Transform>(moduleit);
 
 			if (i == 2)
 			{
@@ -882,21 +855,18 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 				transformComponent->setRot(transformComponent->getRot() + 270.0f);
 			}
 			
-			// add area of visualization of the image
-			entityManager->addComponent<RectArea2D>(_modulesEnt[i], areaLayerManager);
+			//// add area of visualization of the image
+			//entityManager->addComponent<RectArea2D>(_modulesEnt[i], areaLayerManager);
 
 			//add click component
-			ClickComponent* clk = entityManager->addComponent<ClickComponent>(_modulesEnt[i]);
+			ClickComponent* clk = entityManager->getComponent<ClickComponent>(moduleit);
 			clk->connect(ClickComponent::JUST_CLICKED, [this, i]() {
 				changeDirection(i); 
 				});
 		}
 
-		auto _backButton = entityManager->addEntity(ecs::grp::UI);
-		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
-		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
-
-		entityManager->addComponent<RectArea2D>(_backButton, areaLayerManager);
+		//ENTIDADCONENTITYFACTORY
+		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
@@ -904,7 +874,11 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		{
 			inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 			HideInventoryItems(InventoryBackground, downButton, upButton, sr);
-			sr->GetInventory()->setFirstItem(0);
+			sr->GetInventory()->setFirstItem(0);´
+			auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+			_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+			_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+			_backButtonImage->setPosOffset(0, 0);
 			Game::Instance()->getSceneManager()->popScene();
 
 		});

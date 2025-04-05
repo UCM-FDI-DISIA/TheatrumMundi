@@ -12,6 +12,10 @@
 
   "images": [
     {
+      "id": "EmptyImage",
+      "file": "../resources/images/Finales/ImagenVacia.png"
+    },
+    {
       "id": "ShelfButton",
       "file": "../resources/images/Finales/BotonEstante.PNG"
     },
@@ -156,6 +160,18 @@
       "file": "../resources/images/Finales/RectangleEmptyButton.PNG"
     },
     {
+      "id": "Continue",
+      "file": "../resources/images/Finales/RectangleContinueButton.png"
+    },
+    {
+      "id": "ExitToMenu",
+      "file": "../resources/images/Finales/RectangleExitToMenuButton.png"
+    },
+    {
+      "id": "MenuBackground",
+      "file": "../resources/images/Finales/MenuBackground.png"
+    },
+    {
       "id": "prueba",
       "file": "../resources/images/socrates.png"
     },
@@ -257,6 +273,13 @@
     { "id" : "BotonMinutero", "file" : "../resources/images/Finales/BotonMinutero.PNG" },
     { "id" : "BotonHoraria", "file" : "../resources/images/Finales/BotonHoraria.PNG" },
     { "id" : "BotonComprobarReloj", "file" : "../resources/images/Finales/BotonComprobarReloj.PNG" },
+    { "id" : "no", "file" : "../resources/images/Finales/noButton.png" },
+    { "id" : "yes", "file" : "../resources/images/Finales/yesButton.png" },
+    { "id" : "1stQuestion", "file" : "../resources/images/Finales/1stQuestionText.png" },
+    { "id" : "2ndQuestion", "file" : "../resources/images/Finales/2ndQuestionText.png" },
+    { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
+    { "id" : "continuar", "file" : "../resources/images/Finales/continuarBackground.png" },
+    { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"
@@ -371,47 +394,47 @@
     },
     {
       "id": "backButton",
-      "file": "../resources/images/BackButton.png"
+      "file": "../resources/images/Finales/BotonEstante.png"
     },
     {
       "id": "bookComb0",
-      "file": "../resources/images/BookComb0.png"
+      "file": "../resources/images/Finales/BookComb0.png"
     },
     {
       "id": "bookComb1",
-      "file": "../resources/images/BookComb1.png"
+      "file": "../resources/images/Finales/BookComb1.png"
     },
     {
       "id": "bookComb2",
-      "file": "../resources/images/BookComb2.png"
+      "file": "../resources/images/Finales/BookComb2.png"
     },
     {
       "id": "bookComb3",
-      "file": "../resources/images/BookComb3.png"
+      "file": "../resources/images/Finales/BookComb3.png"
     },
     {
       "id": "bookComb4",
-      "file": "../resources/images/BookComb4.png"
+      "file": "../resources/images/Finales/BookComb4.png"
     },
     {
       "id": "bookComb5",
-      "file": "../resources/images/BookComb5.png"
+      "file": "../resources/images/Finales/BookComb5.png"
     },
     {
       "id": "bookComb6",
-      "file": "../resources/images/BookComb6.png"
+      "file": "../resources/images/Finales/BookComb6.png"
     },
     {
       "id": "bookComb7",
-      "file": "../resources/images/BookComb7.png"
+      "file": "../resources/images/Finales/BookComb7.png"
     },
     {
       "id": "bookComb8",
-      "file": "../resources/images/BookComb8.png"
+      "file": "../resources/images/Finales/BookComb8.png"
     },
     {
       "id": "bookComb9",
-      "file": "../resources/images/BookComb9.png"
+      "file": "../resources/images/Finales/BookComb9.png"
     },
     {
       "id": "incrementButtonSelected",
@@ -460,6 +483,10 @@
     {
       "id": "mobileBackground",
       "file": "../resources/images/Finales/TelefonoZoom.png"
+    },
+    {
+      "id": "mobileBackgroundV2",
+      "file": "../resources/images/Finales/TelefonoZoomV2.png"
     },
     {
       "id": "AAA",

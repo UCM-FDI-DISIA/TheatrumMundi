@@ -18,6 +18,7 @@ void MosaicPuzzleScene::createSquares(const entity_t& mosaicBorderLeft, const en
 {
 	for (int i = 0; i < TOTALSQUARES; ++i) { //Creation of the squares and assignation in the different possitions
 
+		//ENTIDADSINENTITYFACTORY
 		squares.push_back(entityManager->addEntity()); //Add the entity to the list
 		auto& it = squares.back(); //Reference to the entity
 
@@ -79,7 +80,7 @@ void MosaicPuzzleScene::createSquares(const entity_t& mosaicBorderLeft, const en
 /// <returns></returns>
 entity_t MosaicPuzzleScene::createBorder(const Vector2D& position, float width, float height)
 {
-
+	//ENTIDADSINENTITYFACTORY
 	entity_t newBorder = entityManager->addEntity();
 	newBorder->getMngr()->addComponent<Transform>(newBorder, position, Vector2D(0, 0), width, height, 0);
 	newBorder->getMngr()->addComponent<Image>(newBorder, &sdlutils().images().at("B1"));
