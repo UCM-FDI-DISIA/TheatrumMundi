@@ -305,6 +305,7 @@ void SceneManager::ResetSceneManager()
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
 
 	loadScene(SceneName::INITIAL_MENU);
+}
 
 void SceneManager::ResolveActScene()
 {
