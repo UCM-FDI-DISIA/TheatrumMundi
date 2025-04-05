@@ -21,7 +21,7 @@ public:
 
 	MosaicPuzzleScene();
 	~MosaicPuzzleScene();
-	void init(/*SceneRoomTemplate* sr*/);
+	void init(SceneRoomTemplate* sr);
 	void CorrectPositions(entity_t square);
 	void ResetPuzzle();
 	bool Check() override;

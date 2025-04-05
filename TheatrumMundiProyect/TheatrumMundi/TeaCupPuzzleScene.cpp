@@ -123,22 +123,17 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		}*/
 
 		//BackButton
-
-		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager,
-			EntityFactory::NODRAG,
-			ecs::grp::DEFAULT);
-
-
-		/*auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
-		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
-
-		entityManager->addComponent<RectArea2D>(_backButton);*/
+		//ENTIDADCONENTITYFACTORY
+		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
 		//Click component Open log button
-		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
+		ClickComponent* clkOpen = entityManager->getComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr, _backButton]()
 			{
+				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+				_backButtonImage->setPosOffset(0, 0);
 				Game::Instance()->getSceneManager()->popScene();
 			});
 
@@ -203,7 +198,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 			sr->scrollInventory(1);
 			});
 
-		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 
 		startDialogue("PuzzleTaza1");
 	}
@@ -211,10 +206,6 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 	createInvEntities(sr);
 }
 
-void TeaCupPuzzleScene::refresh()
-{
-
-}
 
 void TeaCupPuzzleScene::unload()
 {

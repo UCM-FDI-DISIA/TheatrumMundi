@@ -29,6 +29,7 @@ public:
 	void init();
 	void render()const;
 	void start();
+	void reset(); //Reset the progress of the game and creates one new
 	SceneManager* getSceneManager();
 	DataManager* getDataManager();
 	CSVdataRecolector* getCSVDataColector();

@@ -30,6 +30,11 @@ void SceneTemplate::render() const
 	entityManager->render();
 }
 
+void SceneTemplate::refresh()
+{
+	entityManager->refresh();
+}
+
 SceneTemplate::~SceneTemplate()
 {
 	unload();

@@ -47,7 +47,7 @@ public:
 	/// <summary>
 	/// Update de logic data of a scene
 	/// </summary>
-	void virtual refresh() {};
+	void virtual refresh();
 	/// <summary>
 	/// DDEstroy all the entities of this scene
 	/// </summary>

@@ -21,13 +21,13 @@ private:
 	// If it is log list, there is no Dynamic memory to destroy
 	// If it is TextInfo, DialogueManager already destroys that memory.
 
-	Image* _imageTextLog;
-	Transform* _textTransform;
 
 	const int TEXT_SPEED = 35; //20 ms
 	int lastUpdate;
 	std::string _currentText;
 	int charsToShow;
+
+	bool isMiddleRoom;
 
 public:
 	//ID
@@ -44,6 +44,8 @@ public:
 	bool isFinished(); //checks if current TextLine has been displayed entirely on screen
 	void finishTextLine(); //finishes display of current TextLine
 	void startTextLine(); //resets values to start displaying new TextLine
+
+	void setMiddleRoom(bool state);
 
 	~WriteTextComponent();
 	

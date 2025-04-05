@@ -31,6 +31,8 @@
 #include "SceneRoomTemplate.h"
 
 #include "DialogueManager.h"
+#include "../src/game/Game.h"
+#include "Log.h"
 
 
 
@@ -132,9 +134,9 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		room = sr;
 		auto StudyBackground = entityFactory->CreateImageEntity(entityManager, "ShelfBackground1", Vector2D(0, 0), Vector2D(0, 0),1349, 748, 0, ecs::grp::DEFAULT);
 
-		auto number1 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), /*109, 115*/ 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		auto number2 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(562, 430), Vector2D(0, 0), /*63, 127*/40, 40, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		auto number3 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(606, 430), Vector2D(0, 0),/* 743, 280*/40, 40, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto number1 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(555, 415), Vector2D(0, 0), /*109, 115*/ 60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto number2 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(555, 455), Vector2D(0, 0), /*63, 127*/60, 40, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto number3 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(555, 495), Vector2D(0, 0),/* 743, 280*/60, 40, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
 		ClickComponent* clickNumber1 = entityManager->getComponent<ClickComponent>(number1);
 		clickNumber1->connect(ClickComponent::JUST_CLICKED, [this, number1]() {
@@ -205,7 +207,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		//CHECK COMBINATION
-		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(700,480), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(690,493), Vector2D(0, 0), 70, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		ClickComponent* clickcheckButton = entityManager->getComponent<ClickComponent>(checkButton);
 		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, tag,clock,sr, StudyBackground,this]() {
 			std::cout << "CLICK" << std::endl;
@@ -234,8 +236,8 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		clk->connect(ClickComponent::JUST_CLICKED, [variant,this, tag, sr]() {
 
 			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-			if(variant <= 1)AddInvItem("etiquetaV1", "Etiqueta de alguna clase de químico.", position, sr);
-			else if(variant == 2) AddInvItem("etiquetaV2", "Etiqueta de alguna clase de químico.", position, sr);
+			if(variant <= 1)AddInvItem("etiquetaV1", "Etiqueta de alguna clase de quï¿½mico.", position, sr);
+			else if(variant == 2) AddInvItem("etiquetaV2", "Etiqueta de alguna clase de quï¿½mico.", position, sr);
 			tag->getMngr()->setActive(tag, false);
 			});
 
@@ -284,6 +286,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			ImageBook->getMngr()->setActive(ImageBook, false);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, false);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, true);
+			auto _backButtonImage = backButton->getMngr()->getComponent<Image>(backButton);
+			_backButtonImage->setW(backButton->getMngr()->getComponent<Transform>(backButton)->getWidth());
+			_backButtonImage->setH(backButton->getMngr()->getComponent<Transform>(backButton)->getHeight());
+			_backButtonImage->setPosOffset(0, 0);
 			if (Check())
 			{
 				clock->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, false);
@@ -296,30 +302,29 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		//areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
 
 		//BackButton
-		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager,
-			EntityFactory::NODRAG,
-			ecs::grp::DEFAULT);
-
-		
+		auto _backButton = entityFactory->CreateInteractableEntity(entityManager,"B1",EntityFactory::RECTAREA,Vector2D(20,20),Vector2D(0,0),90,90,0,areaLayerManager,EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
 		//Click component Open log button
-		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
-		{
-			Game::Instance()->getSceneManager()->popScene();
-		});
+		ClickComponent* clkOpen = entityManager->getComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr, _backButton]()
+			{
+				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+				_backButtonImage->setPosOffset(0, 0);
+				Game::Instance()->getSceneManager()->popScene();
+			});
 
-		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-	
-		startDialogue("PuzzleLibros");
+		dialogueManager->Init(1, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+
+		
 }
-
+	
 	//IMPORTANT this need to be out of the isstarted!!!
 	createInvEntities(sr);
-}
 
-void BooksPuzzleScene::refresh()
-{
+	startDialogue("PuzzleLibros");
 }
 
 void BooksPuzzleScene::unload()
