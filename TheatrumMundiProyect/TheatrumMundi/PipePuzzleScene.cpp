@@ -666,10 +666,6 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], true);
 					}
-
-					/*for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
-						sr->GetInventory()->hints[i]->getMngr()->setActive(sr->GetInventory()->hints[i], true);
-					}*/
 				}
 				else {
 					entityManager->setActive(InventoryBackground, false);
