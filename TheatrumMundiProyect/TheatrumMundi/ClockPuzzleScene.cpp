@@ -278,7 +278,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 	
 		startDialogue("PuzzleReloj");
 
@@ -346,4 +346,9 @@ void ClockPuzzleScene::Win()
 	room->resolvedPuzzle(2);
 	//setSolved(true);
 }
+void ClockPuzzleScene::ResolveScene()
+{
+	Win();
+}
+
 

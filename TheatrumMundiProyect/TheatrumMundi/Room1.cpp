@@ -1,5 +1,6 @@
   #include "Room1.h"
 #include <list>
+#include "DataManager.h"
 #include "../src/utils/Vector2D.h"
 #include "../src/components/Transform.h"
 #include "../src/components/Image.h"
@@ -430,15 +431,21 @@ void Room1Scene::_setUI()
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getreanudePauseButton())->getLayerPos());
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getexitPauseButton())->getLayerPos());
 
-	Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+	Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 }
 
 void Room1Scene::_setRoomBackground()
 {
 	auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 	auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1160 - 1349, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	
+	
 	auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
 	ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(ChangeRoom2));
+
+	ChangeRoomScroll->setEndScrollCallback([]() { });
+
+
 
 	auto StudyRoomBackground = entityFactory->CreateImageEntity(entityManager, "StudyBackground", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 	rmObjects.backgroundScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);

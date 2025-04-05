@@ -744,8 +744,14 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Create string segnment sprite
 		
+		/*
+		* auto ChangeRoom1 = 
+		sentityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0,
+		areaLayerManager, 12, ((sdlutils().width()) / 12) , EntityFactory::SCROLLNORMAL, 1, 
+		EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		*/
 		_rope = entityFactory->CreateInteractableEntityScroll(entityManager, "rope", EntityFactory::RECTAREA,
-			Vector2D(1200, 400), Vector2D(0, 0), 324 / 3, 893 / 3, 0, areaLayerManager,
+			Vector2D(1200, 400), Vector2D(0, 0), 324 / 3, 893 / 3, 1, areaLayerManager,
 			2, 150, EntityFactory::SCROLLNORMAL, 1,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
@@ -887,7 +893,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		
 
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 
 		startDialogue("PuzzleTuberias");
 	}
@@ -1036,6 +1042,7 @@ void PipePuzzleScene::unload()
 {
 	for (auto a : _waterPipes) delete a;
 	for (auto a : _modules) delete a;
+	
 }
 void PipePuzzleScene::updatePuzzle() {
     bool stateChanged = true;
@@ -1097,9 +1104,15 @@ void PipePuzzleScene::Win()
 	img->setTexture(&sdlutils().images().at("cubeWithWater"));
 	if (!entityManager->getComponent<ScrollComponent>(_rope)->isScrolling()) {
 		auto ScrollCube = entityManager->getComponent<ScrollComponent>(_rope);
+		ScrollCube->setEndScrollCallback([]() {});
 		ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_cubeWithoutWater));
 		entityManager->getComponent<ScrollComponent>(_rope)->Scroll(ScrollComponent::DOWN);
 	}
+}
+
+void PipePuzzleScene::ResolveScene()
+{
+	Win();
 }
 
 PipePuzzleScene::~PipePuzzleScene()

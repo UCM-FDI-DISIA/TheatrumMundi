@@ -28,6 +28,7 @@ using namespace std;
 Log::Log()
 {
 	_firstRenderLine = _log.begin();
+	sceneTemplate = nullptr;
 }
 
 //adds one dialogueLine (with its author) on log registry
@@ -115,8 +116,10 @@ bool Log::GetLogActive()
 	return _logActive;
 }
 
-void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2DLayerManager* areaLayerManager)
+void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2DLayerManager* areaLayerManager, SceneTemplate* scTp)
 {
+
+	sceneTemplate = scTp;
 	//CREATE SCENE ENTITIES OF LOG
 
 	//background log
@@ -177,7 +180,7 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 		_openButtonImage->setPosOffset(0, 0);
 		entityManager->setActiveGroup(ecs::grp::LOG, true);
 		entityManager->setActive(buttonOpenLog, false); //close button
-
+		_logActive = true;
 
 		});
 	entityManager->setActive(buttonOpenLog, true);
@@ -192,6 +195,8 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 		_backButtonImage->setPosOffset(0, 0);
 		entityManager->setActiveGroup(ecs::grp::LOG, false);
 		entityManager->setActive(buttonOpenLog, true); //open button
+		_logActive = false;
+		sceneTemplate->closedLog();
 		});
 	entityManager->setActive(buttonCloseLog, false);
 		

@@ -7,7 +7,7 @@
       "size": 24
     },
     { "id" : "TITLE", "file" : "../resources/fonts/PirataOne-Regular.ttf", "size": 40 },
-    { "id" : "BASE", "file" : "../resources/fonts/FeDPit2.ttf", "size": 24}
+    { "id" : "BASE", "file" : "../resources/fonts/FeFCrm2.ttf", "size": 24}
   ],
 
   "images": [
@@ -533,8 +533,36 @@
       "file": "../resources/images/temporales/piezadeZ.png"
     },
     {
-      "id": "Hanni",
-      "file": "../resources/images/asesinoDeHanni.png"
+        "id": "Hanni",
+        "file": "../resources/images/asesinoDeHanni.png"
+    },
+    {
+        "id": "TutorialButtonTemp",
+        "file": "../resources/images/temporales/RectangleTutorialButton.png"
+    },
+    {
+        "id": "NewGameLocked",
+        "file": "../resources/images/temporales/GameLocked.png"
+    },
+    {
+        "id": "teleSinAntena",
+        "file": "../resources/images/temporales/teleSinAntena.png"
+    },
+    {
+        "id": "teleConAntena",
+        "file": "../resources/images/temporales/teleConAntena.png"
+    },
+    {
+      "id": "antena",
+        "file": "../resources/images/temporales/antena.png"
+    },
+    {
+        "id": "TutorialButton",
+        "file": "../resources/images/Finales/tutorialButton.png"
+    },
+    {
+        "id": "botonNumero",
+        "file": "../resources/images/Finales/button3711.png"
     },
     {
       "id": "Cuervo",
