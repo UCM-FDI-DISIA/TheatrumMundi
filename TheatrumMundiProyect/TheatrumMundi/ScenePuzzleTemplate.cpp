@@ -47,22 +47,16 @@ void ScenePuzzleTemplate::compareInv(SceneRoomTemplate* sr)
 			invObjects.erase(entityIt);
 			IdToErase.push_back(IdIt);
 			entityIt = invObjects.begin();
-			IdIt = invID.begin();
 		}
 		else {
 			++entityIt;
-			++IdIt;
 		}
+		++IdIt;
 		isItemInRoom = false;
 	}
 	while (!IdToErase.empty()) {
 		invID.erase(IdToErase.front());
 		IdToErase.pop_front();
-		//change the position of the items
-		for (auto& hint : sr->GetInventory()->hints) {
-			auto transform = hint->getMngr()->getComponent<Transform>(hint);
-			transform->setPosY(transform->getPos().getY() - 150);
-		}
 	}
 }
 
@@ -270,5 +264,17 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 				transform->setPosY(transform->getPos().getY() - 150); // Ajustar la posición de los objetos visibles
 			}
 		}
+	}
+}
+
+void ScenePuzzleTemplate::HideInventoryItems(const ecs::entity_t& InventoryBackground, const ecs::entity_t& downButton, const ecs::entity_t& upButton,SceneRoomTemplate* sr)
+{
+	sr->GetInventory()->setActive(false);
+	entityManager->setActive(InventoryBackground, false);
+	entityManager->setActive(downButton, false);
+	entityManager->setActive(upButton, false);
+	
+	for (int i = 0; i < sr->GetInventory()->getItems().size(); ++i) {
+		invObjects[i]->getMngr()->setActive(invObjects[i], false);
 	}
 }

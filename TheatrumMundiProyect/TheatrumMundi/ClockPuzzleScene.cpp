@@ -231,13 +231,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		entityManager->addComponent<RectArea2D>(_backButton, areaLayerManager);
 
-		//Click component Open log button
-		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr]()
-			{
-				sr->GetInventory()->setFirstItem(0);
-				Game::Instance()->getSceneManager()->popScene();
-			});
+
 		
 
 		//INVENTORY
@@ -273,7 +267,6 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 				}
 				else {
 					entityManager->setActive(InventoryBackground, false);
-					entityManager->setActive(InventoryBackground, false);
 					entityManager->setActive(downButton, false);
 					entityManager->setActive(upButton, false);
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
@@ -302,6 +295,16 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
 	
 		startDialogue("PuzzleReloj");
+
+		//Click component Open log button
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this,sr,InventoryBackground,downButton,upButton,inventoryButton]()
+			{
+				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+				HideInventoryItems(InventoryBackground, downButton, upButton, sr);
+				sr->GetInventory()->setFirstItem(0);
+				Game::Instance()->getSceneManager()->popScene();
+			});
 	}
 
 	//IMPORTANT this need to be out of the isstarted!!!

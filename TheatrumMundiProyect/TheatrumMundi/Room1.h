@@ -1,6 +1,6 @@
 #pragma once
 #include "SceneRoomTemplate.h"
-
+#include "RectArea2D.h"
 #include "../TheatrumMundi/AudioManager.h"
 
 class ScrollComponent;

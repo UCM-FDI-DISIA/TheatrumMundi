@@ -106,6 +106,8 @@ void Room1Scene::_setRoomEvents()
 
 	roomEvent[PipePuzzleSnc] = [this]()
 		{
+			HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
+			rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
 			Game::Instance()->getSceneManager()->loadScene(PIPE_PUZZLE, this);
 		};
 
@@ -116,6 +118,8 @@ void Room1Scene::_setRoomEvents()
 
 	roomEvent[BooksPuzzleScn] = [this]()
 		{
+			HideAllInvetoryItems(invObjects.InventoryBackground,invObjects.inventoryUpButton,invObjects.inventoryDownButton);
+			rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
 			Game::Instance()->getSceneManager()->loadScene(BOOKS_PUZZLE, this);
 		};
 
@@ -126,6 +130,8 @@ void Room1Scene::_setRoomEvents()
 
 	roomEvent[ClockPuzzleSnc] = [this]()
 		{
+			HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
+			rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
 			Game::Instance()->getSceneManager()->loadScene(CLOCK_PUZZLE, this);
 		};
 
@@ -136,6 +142,8 @@ void Room1Scene::_setRoomEvents()
 
 	roomEvent[TeaCupPuzzleSnc] = [this]()
 		{
+			HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
+			rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
 			Game::Instance()->getSceneManager()->loadScene(TEA_CUP_PUZZLE, this);
 		};
 
@@ -253,48 +261,49 @@ void Room1Scene::_setUI()
 		});
 
 	//Inventory
-	auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
+
+	invObjects.InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
 	
 	rmObjects.inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-	entityManager->setActive(InventoryBackground, false);
+	entityManager->setActive(invObjects.InventoryBackground, false);
 
-	auto InvArea = entityManager->addComponent<RectArea2D>(InventoryBackground, areaLayerManager);
+	invObjects.InvArea = entityManager->addComponent<RectArea2D>(invObjects.InventoryBackground, areaLayerManager);
 
-	auto inventoryUpButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-	entityManager->setActive(inventoryUpButton, false);
+	invObjects.inventoryUpButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	entityManager->setActive(invObjects.inventoryUpButton, false);
 
-	auto inventoryDownButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-	entityManager->setActive(inventoryDownButton, false);
+	invObjects.inventoryDownButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	entityManager->setActive(invObjects.inventoryDownButton, false);
 
 	entityManager->getComponent<ClickComponent>(rmObjects.inventoryButton)
-		->connect(ClickComponent::JUST_CLICKED, [this, InventoryBackground, inventoryUpButton, inventoryDownButton, InvArea]()
+		->connect(ClickComponent::JUST_CLICKED, [this]()
 		{
 			AudioManager::Instance().playSound(rmSounds.uiButton);
 			GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
 
 			if (GetInventory()->getActive()) // If the inventory is active, activate the items
 			{
-				entityManager->setActive(InventoryBackground, true);
+				entityManager->setActive(invObjects.InventoryBackground, true);
 
 				entityManager->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(925);
 
 				//change the position of the log button
-				areaLayerManager->sendFront(InvArea->getLayerPos());
+				areaLayerManager->sendFront(invObjects.InvArea->getLayerPos());
 
-				areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inventoryUpButton)->getLayerPos());
-				areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inventoryDownButton)->getLayerPos());
+				areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(invObjects.inventoryUpButton)->getLayerPos());
+				areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(invObjects.inventoryDownButton)->getLayerPos());
 
-				entityManager->setActive(inventoryDownButton, true);
-				entityManager->setActive(inventoryUpButton,   true);
+				entityManager->setActive(invObjects.inventoryDownButton, true);
+				entityManager->setActive(invObjects.inventoryUpButton,   true);
 
 				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i)
 					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
 			}
 			else 
 			{
-				entityManager->setActive(InventoryBackground, false);
-				entityManager->setActive(inventoryDownButton, false);
-				entityManager->setActive(inventoryUpButton,   false);
+				entityManager->setActive(invObjects.InventoryBackground, false);
+				entityManager->setActive(invObjects.inventoryDownButton, false);
+				entityManager->setActive(invObjects.inventoryUpButton,   false);
 
 				rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
 
@@ -304,13 +313,13 @@ void Room1Scene::_setUI()
 			}
 		});
 
-	entityManager->getComponent<ClickComponent>(inventoryUpButton)
+	entityManager->getComponent<ClickComponent>(invObjects.inventoryUpButton)
 		->connect(ClickComponent::JUST_CLICKED, [this]()
 		{
 				AudioManager::Instance().playSound(rmSounds.uiButton);
 				scrollInventory(-1);
 		});
-	entityManager->getComponent<ClickComponent>(inventoryDownButton)
+	entityManager->getComponent<ClickComponent>(invObjects.inventoryDownButton)
 		->connect(ClickComponent::JUST_CLICKED, [this]() 
 		{
 			AudioManager::Instance().playSound(rmSounds.uiButton);

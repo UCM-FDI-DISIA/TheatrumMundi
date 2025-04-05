@@ -53,6 +53,8 @@ class ScenePuzzleTemplate: public SceneTemplate
 
 	void scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr); //scroll puzzle
 
+	void HideInventoryItems(const ecs::entity_t& InventoryBackground, const ecs::entity_t& downButton, const ecs::entity_t& upButton, SceneRoomTemplate* sr);
+
 	ScenePuzzleTemplate();
 
 	~ScenePuzzleTemplate();

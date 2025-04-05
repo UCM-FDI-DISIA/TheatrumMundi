@@ -73,11 +73,21 @@ void SceneRoomTemplate::scrollInventory(int dir)
     }
 }
 
-void SceneRoomTemplate::reposInvRoom(SceneRoomTemplate* sr)
+
+/// <summary>
+/// Hide the invnentory when a scene is called
+/// </summary>
+/// <param name="invBack"></param>
+/// <param name="UpButton"></param>
+/// <param name="DownButt"></param>
+void SceneRoomTemplate::HideAllInvetoryItems(const ecs::entity_t& invBack, const ecs::entity_t& UpButton, const ecs::entity_t& DownButt)
 {
-    for (int i = 0; i < GetInventory()->hints.size(); ++i) {
-        GetInventory()->hints[i]->getMngr()->getComponent<Transform>(GetInventory()->hints[i])->setPos(GetInventory()->GetPosition(i));
-    }
+    GetInventory()->setActive(false);
+    invBack->getMngr()->setActive(invBack, false);
+    UpButton->getMngr()->setActive(UpButton, false);
+    DownButt->getMngr()->setActive(DownButt, false);
+    for (int i = 0; i < GetInventory()->getItems().size(); ++i)
+        GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Desactivate the hints
 }
 
 SceneRoomTemplate::SceneRoomTemplate() : SceneTemplate()

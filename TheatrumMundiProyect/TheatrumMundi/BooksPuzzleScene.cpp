@@ -309,8 +309,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr]()
-		{
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, downButton, upButton, inventoryButton]()
+		{	
+			inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+			HideInventoryItems(InventoryBackground, downButton, upButton, sr);
 			sr->GetInventory()->setFirstItem(0);
 			Game::Instance()->getSceneManager()->popScene();
 		});

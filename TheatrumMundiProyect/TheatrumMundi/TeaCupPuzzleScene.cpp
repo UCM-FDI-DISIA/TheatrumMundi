@@ -129,13 +129,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 
 		entityManager->addComponent<RectArea2D>(_backButton);
 
-		//Click component Open log button
-		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr]()
-			{
-				sr->GetInventory()->setFirstItem(0);
-				Game::Instance()->getSceneManager()->popScene();
-			});
+
 
 		//INVENTORY
 		//Invntory Background
@@ -197,7 +191,15 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 			//AudioManager::Instance().playSound(buttonSound);
 			scrollInventoryPuzzle(1, sr);
 			});
-
+		//Click component Open log button
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, downButton, upButton, inventoryButton]()
+		{
+			inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+			HideInventoryItems(InventoryBackground, downButton, upButton, sr);
+			sr->GetInventory()->setFirstItem(0);
+			Game::Instance()->getSceneManager()->popScene();
+		});
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 
 		startDialogue("PuzzleTaza1");
