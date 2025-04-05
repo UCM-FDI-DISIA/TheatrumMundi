@@ -71,7 +71,7 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     {
         //Character (Image)
         auto character = entityManager->addEntity(grp::DIALOGUE);
-        entityManager->addComponent<Transform>(character, Vector2D(50, 310), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0);
+        entityManager->addComponent<Transform>(character, Vector2D(50, 310), Vector2D(0, 0), 390, 600, 0);
         characterimg = entityManager->addComponent<Image>(character, &sdlutils().images().at("Dialog"));
 
         entityManager->setActive(character, false);
