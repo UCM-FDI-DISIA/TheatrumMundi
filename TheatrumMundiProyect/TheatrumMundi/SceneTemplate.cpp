@@ -39,10 +39,11 @@ SceneTemplate::~SceneTemplate()
 {
 	unload();
 	
-	delete entityManager;
-	delete areaLayerManager;
+	
 	delete entityFactory;
 	delete dialogueManager;
+	delete entityManager;
+	delete areaLayerManager;
 }
 void SceneTemplate::startDialogue(const string& _eventToRead)
 {

@@ -1,5 +1,6 @@
   #include "Room1.h"
 #include <list>
+#include "DataManager.h"
 #include "../src/utils/Vector2D.h"
 #include "../src/components/Transform.h"
 #include "../src/components/Image.h"

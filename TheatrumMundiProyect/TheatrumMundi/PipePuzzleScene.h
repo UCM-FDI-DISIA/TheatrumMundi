@@ -72,6 +72,7 @@ public:
 	 void unload() override;
 	 void updatePuzzle();
 	 void Win() override;
+	 void ResolveScene() override;
 	 ~PipePuzzleScene();
 };
 

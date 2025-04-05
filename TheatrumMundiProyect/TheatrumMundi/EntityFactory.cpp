@@ -16,6 +16,7 @@
 #include "TiledAreaComponent.h"
 #include "../TheatrumMundi/PhysicsBodyComponent.h"
 #include "Area2DLayerManager.h"
+#include "CSVdataRecolector.h"
 
 EntityFactory::EntityFactory(ecs::EntityManager* entityManager,Area2DLayerManager* areaLayerManager){
 	_myEntityManager = entityManager;
@@ -47,10 +48,40 @@ ecs::entity_t EntityFactory::CreateInteractableEntity(ecs::EntityManager* _entit
 	_entityManager->addComponent<Image>(newElement, &sdlutils().images().at(_idImage));
 	if (_typeRect == RECTAREA)_entityManager->addComponent<RectArea2D>(newElement, _myLayer);
 	else if (_typeRect == CIRCLEAREA) _entityManager->addComponent<CircleArea2D>(newElement, _myLayer)->setLocalPos(Vector2D(_width/2,_height/2));
-	_entityManager->addComponent<ClickComponent>(newElement);
+	ClickComponent* aux =_entityManager->addComponent<ClickComponent>(newElement);
 	_entityManager->addComponent<TriggerComponent>(newElement);
 	_entityManager->addComponent<ClickableSpriteComponent>(newElement,_idImage);
 	if (_drag == DRAG) _entityManager->addComponent<DragComponent>(newElement);
+	std::string scene = "NONE_SCENE";
+	int sceneindex = Game::Instance()->getSceneManager()->getSceneIndex();
+	switch (sceneindex)
+	{
+	case SceneName::INITIAL_MENU:
+		scene = "INITIAL MENU";
+		break;
+	case SceneName::MIDDLE_ROOM:
+		scene = "MIDDLE_ROOM";
+		break;
+	case SceneName::ROOM_1:
+		scene = "ROOM_1";
+		break;
+	case SceneName::PIPE_PUZZLE:
+		scene = "PIPE_PUZZLE";
+		break;
+	case SceneName::BOOKS_PUZZLE:
+		scene = "MIDDLE_ROOM";
+		break;
+	case SceneName::CLOCK_PUZZLE:
+		scene = "CLOCK_PUZZLE";
+		break;
+	
+	case -1:
+		scene = "TUTORIAL";
+		break;
+	default:
+		break;
+	}
+	aux->connect(ClickComponent::JUST_CLICKED, [_idImage,scene] {Game::Instance()->getCSVDataColector()->AddEntry(_idImage, scene);});
 	return newElement;
 }
 
@@ -85,7 +116,7 @@ ecs::entity_t  EntityFactory::CreateInteractableEntityTiledCollider(ecs::EntityM
 	
 	_entityManager->addComponent<Image>(newElement, &sdlutils().images().at(_idImage));
 	
-	_entityManager->addComponent<ClickComponent>(newElement);
+	ClickComponent* aux = _entityManager->addComponent<ClickComponent>(newElement);
 	
 	_entityManager->addComponent<TiledAreaComponent>(newElement, _myLayer, trans, col, fil);
 
@@ -94,6 +125,37 @@ ecs::entity_t  EntityFactory::CreateInteractableEntityTiledCollider(ecs::EntityM
 	_entityManager->addComponent<DragComponent>(newElement);
 
 	_entityManager->addComponent<PhysicsBodyComponent>(newElement);
+
+	std::string scene = "NONE_SCENE";
+	int sceneindex = Game::Instance()->getSceneManager()->getSceneIndex();
+	switch (sceneindex)
+	{
+	case SceneName::INITIAL_MENU:
+		scene = "INITIAL MENU";
+		break;
+	case SceneName::MIDDLE_ROOM:
+		scene = "MIDDLE_ROOM";
+		break;
+	case SceneName::ROOM_1:
+		scene = "ROOM_1";
+		break;
+	case SceneName::PIPE_PUZZLE:
+		scene = "PIPE_PUZZLE";
+		break;
+	case SceneName::BOOKS_PUZZLE:
+		scene = "MIDDLE_ROOM";
+		break;
+	case SceneName::CLOCK_PUZZLE:
+		scene = "CLOCK_PUZZLE";
+		break;
+
+	case -1:
+		scene = "TUTORIAL";
+		break;
+	default:
+		break;
+	}
+	aux->connect(ClickComponent::JUST_CLICKED, [_idImage, scene] {Game::Instance()->getCSVDataColector()->AddEntry(_idImage, scene);});
 	return newElement;
 }
 
@@ -128,10 +190,40 @@ ecs::entity_t EntityFactory::CreateInteractableEntityScroll(ecs::EntityManager* 
 	else if (_typeRect == CIRCLEAREA) _entityManager->addComponent<CircleArea2D>(newElement, _myLayer)->setLocalPos(Vector2D(_width/2,_height/2));
 	if (_isInverted == SCROLLNORMAL) _entityManager->addComponent<ScrollComponent>(newElement, _velocityScroll, _time, ScrollComponent::NORMAL, _numPhasesScrolling);
 	else if (_isInverted == SCROLLINVERSE) _entityManager->addComponent<ScrollComponent>(newElement, _velocityScroll, _time, ScrollComponent::INVERSE, _numPhasesScrolling);
-	_entityManager->addComponent<ClickComponent>(newElement);
+	ClickComponent* aux =_entityManager->addComponent<ClickComponent>(newElement);
 	_entityManager->addComponent<TriggerComponent>(newElement);
 	_entityManager->addComponent<ClickableSpriteComponent>(newElement,_idImage);
 	if (_drag == DRAG) _entityManager->addComponent<DragComponent>(newElement);
+	std::string scene = "NONE_SCENE";
+	int sceneindex = Game::Instance()->getSceneManager()->getSceneIndex();
+	switch (sceneindex)
+	{
+	case SceneName::INITIAL_MENU:
+		scene = "INITIAL MENU";
+		break;
+	case SceneName::MIDDLE_ROOM:
+		scene = "MIDDLE_ROOM";
+		break;
+	case SceneName::ROOM_1:
+		scene = "ROOM_1";
+		break;
+	case SceneName::PIPE_PUZZLE:
+		scene = "PIPE_PUZZLE";
+		break;
+	case SceneName::BOOKS_PUZZLE:
+		scene = "MIDDLE_ROOM";
+		break;
+	case SceneName::CLOCK_PUZZLE:
+		scene = "CLOCK_PUZZLE";
+		break;
+	case -1:
+		scene = "TUTORIAL";
+		break;
+	default:
+		break;
+	}
+	aux->connect(ClickComponent::JUST_CLICKED, [_idImage, scene] {Game::Instance()->getCSVDataColector()->AddEntry(_idImage, scene);});
+
 	return newElement;
 }
 
