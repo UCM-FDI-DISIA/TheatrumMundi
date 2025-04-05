@@ -100,11 +100,11 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 	reposInv(sr);
 	
 	//visual background for item description text
-	auto _backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::DEFAULT);
+	auto _backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::INVENTORY);
 	entityManager->setActive(_backgroundTextDescription, false);
 
 	//description text entity
-	auto textDescriptionEnt = entityManager->addEntity(ecs::grp::DEFAULT);
+	auto textDescriptionEnt = entityManager->addEntity(ecs::grp::INVENTORY);
 	auto _testTextTranform = entityManager->addComponent<Transform>(textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
 	entityManager->setActive(textDescriptionEnt, false);
 	SDL_Color colorDialog = { 255, 255, 255, 255 };
@@ -120,7 +120,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 
 			invID.push_back(a->getID());
 			//Add the entitie to the array
-			invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, a->getID(), EntityFactory::RECTAREA, sr->GetInventory()->GetPosition(index), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
+			invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, a->getID(), EntityFactory::RECTAREA, sr->GetInventory()->GetPosition(index), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::INVENTORY));
 
 			auto it = invObjects.back();
 
@@ -164,6 +164,8 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 					entityManager->setActive(_backgroundTextDescription, true);
 					entityManager->setActive(textDescriptionEnt, true);
 
+					std::cout << "Muestra descripcion de ID: " << a->getID() << std::endl;
+
 					//change text description
 					sr->GetInventory()->setTextDescription(a->getID(), invObjects, _backgroundTextDescription->getMngr()->getComponent<Transform>(_backgroundTextDescription));
 
@@ -200,7 +202,7 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 		sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
 		invID.push_back(id);
-		invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
+		invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::INVENTORY));
 		auto it = invObjects.back();
 		it->getMngr()->setActive(it, false);
 
