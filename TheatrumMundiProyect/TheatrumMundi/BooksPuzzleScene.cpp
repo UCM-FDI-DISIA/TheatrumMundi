@@ -258,8 +258,8 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		clk->connect(ClickComponent::JUST_CLICKED, [variant,this, tag, sr]() {
 
 			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-			if(variant <= 1)AddInvItem("etiquetaV1", "Etiqueta de alguna clase de qu�mico.", position, sr);
-			else if(variant == 2) AddInvItem("etiquetaV2", "Etiqueta de alguna clase de qu�mico.", position, sr);
+			if(variant <= 1)AddInvItem("etiquetaV1", "Etiqueta de alguna clase de químico.", position, sr);
+			else if(variant == 2) AddInvItem("etiquetaV2", "Etiqueta de alguna clase de químico.", position, sr);
 			tag->getMngr()->setActive(tag, false);
 			});
 

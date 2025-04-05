@@ -198,7 +198,7 @@ void WriteTextComponent<DescriptionInfo>::render()
 
 	Texture* dialogText = new Texture(sdlutils().renderer(), textStructure->Description, _myFont, _color);
 	SDL_Rect dialogRect = { 680* Game::Instance()->wscreenScale, (textStructure->posY + 60)* Game::Instance()->hscreenScale,
-		dialogText->width()* Game::Instance()->wscreenScale,dialogText->height()* Game::Instance()->wscreenScale };
+		dialogText->width()* Game::Instance()->wscreenScale,dialogText->height()* Game::Instance()->hscreenScale };
 	dialogText->render(dialogRect, 0);
 
 }
