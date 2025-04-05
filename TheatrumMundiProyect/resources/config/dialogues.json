@@ -190,10 +190,22 @@
                 
             ],
             "Sala1Final":[
-                {"Character":"Lucy","Text":"Mira es el móvil de Keisara"},
-                {"Character":"Lucy","Text":"Su última llamada es con su editorial."},
-                {"Character":"Sol","Text":"Ni una llamada perdida."},
-                {"Character":"Sol","Text":"No se cómo lo hace, ojalá tener su energía para contestar a la gente"}
+                {"Character":" ","Text":"Bueno, bueno, bueno."},
+                {"Character":" ","Text":"Parece que el incentivo a funcionado."},
+                {"Character":" ","Text":"¡Me habéis hecho caso!"},
+                {"Character":"Sol","Text":"Tienes un problema."},
+                {"Character":"Lucy","Text":"Creo que eso es quedarse corto."},
+                {"Character":" ","Text":"¡Oh no! Desprecio hacia mi persona."},
+                {"Character":" ","Text":"¿Qué podré hacer contra eso?"},
+                {"Character":" ","Text":"Jajaja"},
+                {"Character":"Sol","Text":"Si, si, todo muy gracioso."},
+                {"Character":"Sol","Text":"Ha muerto por veneno, ¿es eso lo que querías oír?"},
+                {"Character":" ","Text":"¡Claro que no! Eso era obvio."},
+                {"Character":" ","Text":"Mi adivinanza es otra."},
+                {"Character":" ","Text":"¿Es posible que vuestra querida amiga haya sido asesinada?"},
+                {"Character":"Lucy","Text":"¿Qué?"},
+                {"Character":" ","Text":"Venga, con toda la información que tenéis deberíais\n de poder responder a eso."},
+                {"Character":" ","Text":"¿Cuál es vuestra respuesta?"}
                 
             ]
         },
