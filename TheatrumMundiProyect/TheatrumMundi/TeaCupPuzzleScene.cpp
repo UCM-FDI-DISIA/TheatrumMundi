@@ -189,7 +189,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, downButton, upButton, inventoryButton]()
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, downButton, upButton, inventoryButton, _backButton]()
 		{
 			inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 			HideInventoryItems(InventoryBackground, downButton, upButton, sr);

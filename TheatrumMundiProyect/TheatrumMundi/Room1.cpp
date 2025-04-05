@@ -384,13 +384,9 @@ void Room1Scene::_setUI()
 			if (GetInventory()->getActive()) // If the inventory is active, activate the items
 			{
 				entityManager->setActive(invObjects.InventoryBackground, true);
-
-				if (GetInventory()->getActive()) // If the inventory is active, activate the items
-				{
-					entityManager->setActive(InventoryBackground, true);
-
 				//change the position of the log button
 				areaLayerManager->sendFront(invObjects.InvArea->getLayerPos());
+				entityManager->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(925);
 
 				areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(invObjects.inventoryUpButton)->getLayerPos());
 				areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(invObjects.inventoryDownButton)->getLayerPos());
@@ -398,27 +394,16 @@ void Room1Scene::_setUI()
 				entityManager->setActive(invObjects.inventoryDownButton, true);
 				entityManager->setActive(invObjects.inventoryUpButton,   true);
 
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i)
-					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
+				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
 			}
 			else 
 			{
 				entityManager->setActive(invObjects.InventoryBackground, false);
 				entityManager->setActive(invObjects.inventoryDownButton, false);
 				entityManager->setActive(invObjects.inventoryUpButton,   false);
-
-					for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i)
-						GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
-				}
-				else
-				{
-					entityManager->setActive(InventoryBackground, false);
-					entityManager->setActive(inventoryDownButton, false);
-					entityManager->setActive(inventoryUpButton, false);
-
-				// its okay to use the first item as the first item to show??
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i)
-					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Desactivate the hints
+				rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
+				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the items
+				
 			}
 		});
 
