@@ -169,7 +169,7 @@ void Room1Scene::_setRoomEvents()
 	roomEvent[Spoon] = [this]()
 		{
 			// InventoryLogic
-			GetInventory()->addItem(new Hint("TeaCupSpoon", "Es una cuchara, que no lo ves o que", &sdlutils().images().at("TeaCupSpoon")));
+			GetInventory()->addItem(new Hint("TeaCupSpoon", "Una cuchara de plata.", &sdlutils().images().at("TeaCupSpoon")));
 			GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 			GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 
@@ -216,12 +216,16 @@ void Room1Scene::_setRoomEvents()
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
+			Sound correctSound = sdlutils().soundEffects().at("correcto");
+			AudioManager::Instance().playSound(correctSound);
 
 			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
 				auto* self = static_cast<decltype(this)>(param);
 
 
 				//PUT SOUND
+				
+				
 				// change texture after 4 secs
 				if (self) {
 					Image* img = self->entityManager->getComponent<Image>(self->rmObjects.blackBackground);
@@ -247,12 +251,15 @@ void Room1Scene::_setRoomEvents()
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
+			Sound incorrectSound = sdlutils().soundEffects().at("incorrecto");
+			AudioManager::Instance().playSound(incorrectSound);
 
 			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
 				auto* self = static_cast<decltype(this)>(param);
 
 
 				//PUT SOUND
+				
 				// change texture after 4 secs
 				if (self) {
 					Image* img = self->entityManager->getComponent<Image>(self->rmObjects.blackBackground);
@@ -316,10 +323,11 @@ void Room1Scene::_setRoomAudio()
 	rmSounds.puzzleButton = sdlutils().soundEffects().at("puzzle");
 	audioMngr.setVolume(rmSounds.puzzleButton, 0.3);
 
-	Sound doorSound = sdlutils().soundEffects().at("puerta");
+	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
+
 
 	//Audio music
-	Sound room1music = sdlutils().musics().at("room1music");
+	Sound room1music = sdlutils().musics().at("sala1");
 	audioMngr.setLooping(room1music, true);
 	audioMngr.playSound(room1music);
 }
@@ -475,7 +483,7 @@ void Room1Scene::_setRoomBackground()
 		->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll]() 
 		{
 			if (!rmObjects.backgroundScroll->isScrolling()) {
-				AudioManager::Instance().playSound(rmSounds.puzzleButton);
+				AudioManager::Instance().playSound(rmSounds.doorSound);
 				rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
 			}
 		});
@@ -484,7 +492,7 @@ void Room1Scene::_setRoomBackground()
 		->connect(ClickComponent::JUST_CLICKED, [this]() 
 		{
 			if (!rmObjects.backgroundScroll->isScrolling()) {
-				AudioManager::Instance().playSound(rmSounds.puzzleButton);
+				AudioManager::Instance().playSound(rmSounds.doorSound);
 				rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
 			}
 		});
@@ -625,7 +633,7 @@ void Room1Scene::_setCaseResolution()
 		});
 
 	rmObjects.blackBackground = entityFactory->CreateImageEntity(
-		entityManager, "FondoNegro", Vector2D(2, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+		entityManager, "FondoNegro", Vector2D(2, 0), Vector2D(0, 0), 1356, 758, 0, ecs::grp::DECISION);
 	entityManager->setActive(rmObjects.blackBackground, false);
 
 

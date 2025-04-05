@@ -55,6 +55,7 @@ private:
 	struct roomSounds {
 		Sound uiButton;
 		Sound puzzleButton;
+		Sound doorSound;
 	} rmSounds;
 
 	struct roomObjects {
