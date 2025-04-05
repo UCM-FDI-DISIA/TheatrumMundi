@@ -617,7 +617,7 @@ void Room1Scene::_setCaseResolution()
 		});
 
 	rmObjects.blackBackground = entityFactory->CreateImageEntity(
-		entityManager, "FondoNegro", Vector2D(2, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+		entityManager, "FondoNegro", Vector2D(2, 0), Vector2D(0, 0), 1356, 758, 0, ecs::grp::DECISION);
 	entityManager->setActive(rmObjects.blackBackground, false);
 
 
