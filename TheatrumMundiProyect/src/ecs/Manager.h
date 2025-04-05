@@ -62,7 +62,8 @@ public:
 		{
 			if (a == e)
 			{
-				_entsByGroup[e->_gId].erase(_entsByGroup[e->_gId].begin() + index);
+				a->_alive = false;
+				break;
 			}
 			else
 			{
@@ -82,6 +83,9 @@ public:
 	//
 	inline bool isActive(entity_t e) {
 		return e->_active;
+	}
+	inline bool isAlive(entity_t e) {
+		return e->_alive;
 	}
 	void setActiveGroup(grpId_t gId, bool active);
 

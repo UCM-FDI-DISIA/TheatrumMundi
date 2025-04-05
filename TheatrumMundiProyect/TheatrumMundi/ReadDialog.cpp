@@ -10,6 +10,11 @@ ReadDialog::ReadDialog(int rooms) : numRooms(rooms) {
     ReadJson();
 }
 
+ReadDialog::~ReadDialog()
+{
+	mRoom.clear();
+}
+
 void ReadDialog::ReadJson() {
 	//Open de json path
 

@@ -79,9 +79,6 @@ void CalendearMobileTestScene::init()
 
 }
 
-void CalendearMobileTestScene::refresh()
-{
-}
 
 void CalendearMobileTestScene::unload()
 {

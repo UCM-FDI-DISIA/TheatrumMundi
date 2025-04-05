@@ -26,6 +26,12 @@ public:
 	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer,
 	Dragging _drag, //DRAG ENTITY
 	ecs::grpId_t gId); //GROUP OF ENTITIES
+
+	ecs::entity_t CreateInteractableEntityNotMoveSprite(ecs::EntityManager* _entityManager, const std::string& _idImage, AreaType _typeRect,
+	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer,
+	Dragging _drag,
+	ecs::grpId_t gId);
+
 	//Create a Image with rectCollider.
 	ecs::entity_t CreateRectImageWithCollider(ecs::EntityManager* _entityManager, const std::string& _idImage,
 		Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer,

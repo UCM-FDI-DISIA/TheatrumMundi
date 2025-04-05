@@ -98,9 +98,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(downButton, true);
 					entityManager->setActive(upButton, true);
 
-					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], true);
 					}
+
 				}
 				else {
 					entityManager->setActive(InventoryBackground, false);
@@ -109,7 +110,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(upButton, false);
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 
-					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], false);
 					}
 				}
@@ -119,14 +120,14 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ upButton, sr]() {
 
 			//AudioManager::Instance().playSound(buttonSound);
-			sr->scrollInventory(-1);
+			scrollInventoryPuzzle(-1,sr);
 			});
 
 		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
 		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ downButton, sr]() {
 
 			//AudioManager::Instance().playSound(buttonSound);
-			sr->scrollInventory(1);
+			scrollInventoryPuzzle(1, sr);
 			});
 
 
@@ -134,9 +135,9 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		room = sr;
 		auto StudyBackground = entityFactory->CreateImageEntity(entityManager, "ShelfBackground1", Vector2D(0, 0), Vector2D(0, 0),1349, 748, 0, ecs::grp::DEFAULT);
 
-		auto number1 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), /*109, 115*/ 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		auto number2 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(562, 430), Vector2D(0, 0), /*63, 127*/40, 40, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		auto number3 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(606, 430), Vector2D(0, 0),/* 743, 280*/40, 40, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto number1 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(555, 415), Vector2D(0, 0), /*109, 115*/ 60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto number2 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(555, 455), Vector2D(0, 0), /*63, 127*/60, 40, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto number3 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(555, 495), Vector2D(0, 0),/* 743, 280*/60, 40, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
 		ClickComponent* clickNumber1 = entityManager->getComponent<ClickComponent>(number1);
 		clickNumber1->connect(ClickComponent::JUST_CLICKED, [this, number1]() {
@@ -179,7 +180,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//REWARD ENTITY
 		auto clock = entityFactory->CreateInteractableEntity(entityManager, "horaria", EntityFactory::RECTAREA,
-			Vector2D(700, 640), Vector2D(0, 0), 100, 150, 0,
+			Vector2D(680, 600), Vector2D(0, 0), 150, 250, 90,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
@@ -189,7 +190,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		entity_t tag;
 		if (variant <= 1) {
 			tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV1", EntityFactory::RECTAREA,
-				Vector2D(510, 548), Vector2D(0, 0), 150, 150, 0,
+				Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
 				areaLayerManager,
 				EntityFactory::NODRAG,
 				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
@@ -197,7 +198,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		}
 		 else if (variant == 2) {
 			 tag = entityFactory->CreateInteractableEntity(entityManager, "etiquetaV2", EntityFactory::RECTAREA,
-				 Vector2D(510, 548), Vector2D(0, 0), 150, 150, 0,
+				 Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
 				 areaLayerManager,
 				 EntityFactory::NODRAG,
 				 ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
@@ -207,7 +208,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		//CHECK COMBINATION
-		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(700,480), Vector2D(0, 0), 50, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(690,493), Vector2D(0, 0), 70, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		ClickComponent* clickcheckButton = entityManager->getComponent<ClickComponent>(checkButton);
 		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, tag,clock,sr, StudyBackground,this]() {
 			std::cout << "CLICK" << std::endl;
@@ -228,7 +229,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		clk->connect(ClickComponent::JUST_CLICKED, [this, clock, sr]() {
 
 			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-			AddInvItem("horaria", "La manecilla de las horas de un reloj.", position, sr);
+			AddInvItem("horaria", "La manecilla de las horas de un reloj", position, sr);
 			clock->getMngr()->setActive(clock, false);
 			});
 
@@ -236,8 +237,8 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		clk->connect(ClickComponent::JUST_CLICKED, [variant,this, tag, sr]() {
 
 			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-			if(variant <= 1)AddInvItem("etiquetaV1", "Etiqueta de alguna clase de químico.", position, sr);
-			else if(variant == 2) AddInvItem("etiquetaV2", "Etiqueta de alguna clase de químico.", position, sr);
+			if(variant <= 1)AddInvItem("etiquetaV1", "Etiqueta de alguna clase de quï¿½mico.", position, sr);
+			else if(variant == 2) AddInvItem("etiquetaV2", "Etiqueta de alguna clase de quï¿½mico.", position, sr);
 			tag->getMngr()->setActive(tag, false);
 			});
 
@@ -286,6 +287,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			ImageBook->getMngr()->setActive(ImageBook, false);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, false);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, true);
+			auto _backButtonImage = backButton->getMngr()->getComponent<Image>(backButton);
+			_backButtonImage->setW(backButton->getMngr()->getComponent<Transform>(backButton)->getWidth());
+			_backButtonImage->setH(backButton->getMngr()->getComponent<Transform>(backButton)->getHeight());
+			_backButtonImage->setPosOffset(0, 0);
 			if (Check())
 			{
 				clock->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, false);
@@ -298,18 +303,19 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		//areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
 
 		//BackButton
-		auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
-		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
-
-		entityManager->addComponent<RectArea2D>(_backButton);
-
-		
+		auto _backButton = entityFactory->CreateInteractableEntity(entityManager,"B1",EntityFactory::RECTAREA,Vector2D(20,20),Vector2D(0,0),90,90,0,areaLayerManager,EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
-		{
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, downButton, upButton, inventoryButton, _backButton]()
+		{	
+			inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+			HideInventoryItems(InventoryBackground, downButton, upButton, sr);
+			sr->GetInventory()->setFirstItem(0);
+			auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+			_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+			_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+			_backButtonImage->setPosOffset(0, 0);
 			Game::Instance()->getSceneManager()->popScene();
 		});
 
@@ -320,13 +326,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 }
 	
 	//IMPORTANT this need to be out of the isstarted!!!
+	sr->GetInventory()->setFirstItem(0);
 	createInvEntities(sr);
 
 	startDialogue("PuzzleLibros");
-}
-
-void BooksPuzzleScene::refresh()
-{
 }
 
 void BooksPuzzleScene::unload()
@@ -356,6 +359,11 @@ void BooksPuzzleScene::Win()
 {
 	room->resolvedPuzzle(1);
 	//Game::Instance()->getSceneManager()->popScene();
+}
+
+void BooksPuzzleScene::ResolveScene()
+{
+	Win();
 }
 
 

@@ -8,6 +8,8 @@ DataManager::DataManager()
     variants = { getRandomVariant(),getRandomVariant(),getRandomVariant() };
 }
 
+
+
 int DataManager::getRandomVariant()
 
 {
@@ -59,4 +61,11 @@ int DataManager::GetActualScene()
 
 DataManager::~DataManager()
 {
+}
+
+void DataManager::ResetDataManager()
+{
+    ActualScene = MIDDLEROOM1;
+    charactersAlive = { true,true,true };
+    variants = { getRandomVariant(),getRandomVariant(),getRandomVariant() };
 }
