@@ -161,7 +161,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 					entityManager->setActive(textDescriptionEnt, true);
 
 					//change text description
-					sr->GetInventory()->setTextDescription(a->getID(), invObjects, _backgroundTextDescription->getMngr()->getComponent<Transform>(_backgroundTextDescription));
+					sr->GetInventory()->setTextDescription(a, entityManager->getComponent<Transform>(it), _backgroundTextDescription->getMngr()->getComponent<Transform>(_backgroundTextDescription));
 
 				}
 				
@@ -246,6 +246,7 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 				auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
 				transform->setPosY(transform->getPos().getY() + 150); // Ajustar la posición de los objetos visibles
 			}
+			sr->GetInventory()->setFirstItem(sr->GetInventory()->getFirstItem() + 1);
 			sr->scrollInventory(-1);
 		}
 	}
@@ -266,6 +267,7 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 				auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
 				transform->setPosY(transform->getPos().getY() - 150); // Ajustar la posición de los objetos visibles
 			}
+			sr->GetInventory()->setFirstItem(sr->GetInventory()->getFirstItem() - 1);
 			sr->scrollInventory(1);
 		}
 	}

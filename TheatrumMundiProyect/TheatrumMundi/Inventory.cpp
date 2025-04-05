@@ -49,13 +49,7 @@ int Inventory::getItemNumber()
 
 }
 
-inline Vector2D Inventory::GetPosition(int i)
-{
-	if (i >= 0 && i < positions.size()) {
-		return positions[i];
-	}
-	return Vector2D(0, 0);
-}
+
 
 /// <summary>
 /// Changes text description displayed on screen
@@ -63,28 +57,20 @@ inline Vector2D Inventory::GetPosition(int i)
 /// <param name="_id">Item id</param>
 /// <param name="invEntityList">Iventory item entities</param>
 /// <param name="backgroundTextTransform">Visual item description background's transform</param>
-void Inventory::setTextDescription(std::string _id, std::vector<Entity*>& invEntityList, Transform* backgroundTextTransform)
+void Inventory::setTextDescription(Hint* a, Transform* trEntity, Transform* backgroundTextTransform)
 {
-	int index = 0;
+	//set text description
+	_textDescription->Description = a->getDescription();
 
-	//Searches item with desired id
-	for (auto it = items.begin(); it != items.end(); ++it)
-	{
-		if (it[0]->getID() == _id)
-		{
-			//set text description
-			_textDescription->Description = it[0]->getDescription();
+	//set background position
+	backgroundTextTransform->setPosY(trEntity->getPos().getY() + 40);
+	backgroundTextTransform->setPosX(535);
+	backgroundTextTransform->setWidth(100);
 
-			//set background position
-			backgroundTextTransform->setPosY(GetPosition(index).getY() + 40);
-			backgroundTextTransform->setPosX(535);
-			backgroundTextTransform->setWidth(100);
-
-			//set text description position
-			_textDescription->posY = GetPosition(index).getY();
-		}
-		index++;
-	}
+	//set text description position
+	_textDescription->posY = trEntity->getPos().getY();
+		
+	
 }
 /// <summary>
 /// Add a new Hint to the inventory
