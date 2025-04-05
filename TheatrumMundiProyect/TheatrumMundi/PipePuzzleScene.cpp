@@ -712,7 +712,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 				Vector2D(1150, 840), Vector2D(0, 0), 150, 150, 0,
 				areaLayerManager,
 				EntityFactory::NODRAG,
-				ecs::grp::INTERACTOBJ);
+				ecs::grp::DEFAULT);
 			//add click component
 			entityManager->getComponent<ClickComponent>(gloveEntity)->connect(ClickComponent::JUST_CLICKED, [this, gloveEntity, sr]() {
 				gloveEntity->getMngr()->setActive(gloveEntity, false);
