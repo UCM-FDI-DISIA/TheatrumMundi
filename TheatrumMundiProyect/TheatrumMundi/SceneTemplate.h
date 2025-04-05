@@ -69,5 +69,7 @@ public:
 	virtual void endDialogue();
 	inline ecs::EntityManager* GetEntityManager() { return entityManager; }
 
+	virtual void closedLog() {};
+
 };
 

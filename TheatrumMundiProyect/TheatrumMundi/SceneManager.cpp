@@ -40,12 +40,13 @@ SceneManager::SceneManager()
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
-	
+	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
+	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::ROOM_1);
+	loadScene(SceneName::INITIAL_MENU);
 }
 
 void SceneManager::popScene()

@@ -6,7 +6,21 @@ class TutorialScene : public SceneRoomTemplate
 private:
 	std::string _eventToRead;
 
+	ecs::entity_t ChangeRoom1;
+
+	ecs::entity_t doorImage;
+
+	ecs::entity_t passwordButton;
+
 	ecs::entity_t botonBack;
+
+	ecs::entity_t television;
+
+	ecs::entity_t antenna;
+
+	ecs::entity_t inventoryButton;
+
+	int dialogCount;
 protected:
 	enum TutorialEvent
 	{
@@ -14,18 +28,13 @@ protected:
 		Dialog1,
 		Dialog2,
 		Dialog3,
-		Dialog4,
+		
 		Dialog5,
 		Dialog6,
-		Dialog7,
-		Dialog8,
-		ClockPuzzleSnc,
-		ClockPuzzleRsv,
+		
 		TeleScene,
-		Spoon,
-		ResolveCase,
-		ResolveBottons,
-		MobileDialogue,
+		Antenna,
+		
 		LOGENABLE,
 		LOGDESABLE,
 		event_size,
@@ -38,7 +47,7 @@ public:
 	void refresh() override;
 	void unload() override;
 	void endDialogue() override;
+	void closedLog() override;
 
-	void setInteractable(Entity* e);
 };
 

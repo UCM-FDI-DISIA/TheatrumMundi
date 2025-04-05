@@ -320,7 +320,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		});
 
 		dialogueManager->Init(1, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 
 		
 }

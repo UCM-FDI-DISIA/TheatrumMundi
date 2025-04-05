@@ -47,6 +47,7 @@ void GameSave::Load(const std::string& filename)
         SaveData data;
         file.read(reinterpret_cast<char*>(&data), sizeof(SaveData));
         TutorialCompleted = data.TutorialCompleted;
+        if(TutorialCompleted)
         // Load more data
         file.close();
     }

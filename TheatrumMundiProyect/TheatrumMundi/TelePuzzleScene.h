@@ -20,4 +20,7 @@ protected:
 	bool _poisonIsChecked;
 	Entity* spoon;
 	Entity* teaCupBackground;
+
+private:
+	ecs::entity_t inventoryButton;
 };

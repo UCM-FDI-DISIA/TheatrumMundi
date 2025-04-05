@@ -431,7 +431,7 @@ void Room1Scene::_setUI()
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getreanudePauseButton())->getLayerPos());
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getexitPauseButton())->getLayerPos());
 
-	Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+	Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 }
 
 void Room1Scene::_setRoomBackground()

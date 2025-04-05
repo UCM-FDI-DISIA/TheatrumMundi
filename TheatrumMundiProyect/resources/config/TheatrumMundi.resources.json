@@ -553,6 +553,10 @@
         "file": "../resources/images/temporales/teleConAntena.png"
     },
     {
+      "id": "antena",
+        "file": "../resources/images/temporales/antena.png"
+    },
+    {
         "id": "TutorialButton",
         "file": "../resources/images/Finales/tutorialButton.png"
     },
