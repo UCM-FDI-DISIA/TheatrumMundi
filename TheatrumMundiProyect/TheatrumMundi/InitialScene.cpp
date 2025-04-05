@@ -32,9 +32,18 @@ void InitialScene::init()
 		bool tutorialCompleted = save.isTutoCompleted();
 
 		AudioManager& a = AudioManager::Instance();
+
+		a.setListenerPosition(0, 0, 0);
+
 		Sound buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
+		Sound music = sdlutils().musics().at("sala1");
+		a.setVolume(music, 0.4);
+		
+	//	a.setVolume(music, 1);
+		a.setLooping(music, true);
+		a.playSound(music);
 
 		//clear the log
 		Game::Instance()->getLog()->cleanLogList();

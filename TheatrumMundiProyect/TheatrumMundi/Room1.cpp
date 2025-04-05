@@ -213,12 +213,16 @@ void Room1Scene::_setRoomEvents()
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
+			Sound correctSound = sdlutils().soundEffects().at("correcto");
+			AudioManager::Instance().playSound(correctSound);
 
 			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
 				auto* self = static_cast<decltype(this)>(param);
 
 
 				//PUT SOUND
+				
+				
 				// change texture after 4 secs
 				if (self) {
 					Image* img = self->entityManager->getComponent<Image>(self->rmObjects.blackBackground);
@@ -244,12 +248,15 @@ void Room1Scene::_setRoomEvents()
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
+			Sound incorrectSound = sdlutils().soundEffects().at("incorrecto");
+			AudioManager::Instance().playSound(incorrectSound);
 
 			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
 				auto* self = static_cast<decltype(this)>(param);
 
 
 				//PUT SOUND
+				
 				// change texture after 4 secs
 				if (self) {
 					Image* img = self->entityManager->getComponent<Image>(self->rmObjects.blackBackground);
@@ -313,10 +320,11 @@ void Room1Scene::_setRoomAudio()
 	rmSounds.puzzleButton = sdlutils().soundEffects().at("puzzle");
 	audioMngr.setVolume(rmSounds.puzzleButton, 0.3);
 
-	Sound doorSound = sdlutils().soundEffects().at("puerta");
+	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
+
 
 	//Audio music
-	Sound room1music = sdlutils().musics().at("room1music");
+	Sound room1music = sdlutils().musics().at("sala1");
 	audioMngr.setLooping(room1music, true);
 	audioMngr.playSound(room1music);
 }
@@ -459,7 +467,7 @@ void Room1Scene::_setRoomBackground()
 		->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll]() 
 		{
 			if (!rmObjects.backgroundScroll->isScrolling()) {
-				AudioManager::Instance().playSound(rmSounds.puzzleButton);
+				AudioManager::Instance().playSound(rmSounds.doorSound);
 				rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
 			}
 		});
@@ -468,7 +476,7 @@ void Room1Scene::_setRoomBackground()
 		->connect(ClickComponent::JUST_CLICKED, [this]() 
 		{
 			if (!rmObjects.backgroundScroll->isScrolling()) {
-				AudioManager::Instance().playSound(rmSounds.puzzleButton);
+				AudioManager::Instance().playSound(rmSounds.doorSound);
 				rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
 			}
 		});

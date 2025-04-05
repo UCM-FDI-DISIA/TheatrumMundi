@@ -703,13 +703,25 @@
         {
             "id": "puerta",
             "file": "../resources/sound/sfx/puerta.wav"
+        },
+        {
+          "id": "cuerda",
+          "file": "../resources/sound/sfx/cuerda.wav"
+        },
+        {
+          "id": "correcto",
+          "file": "../resources/sound/sfx/correcto.wav"
+        },
+        {
+          "id": "incorrecto",
+          "file": "../resources/sound/sfx/incorrecto.wav"
         }
     ],
 
   "musics" : [
     {
-        "id": "room1music",
-        "file":  "../resources/sound/ost/P2Room1.wav"
+        "id": "sala1",
+        "file":  "../resources/sound/music/sala1.wav"
     }
   ]
 

@@ -176,8 +176,10 @@ void AudioManager::setPitch(Sound sound, ALfloat pitch) {
 // Play a sound (default, once)
 void 
 AudioManager::playSound(Sound sound) {
-    alSourcei(sound.getSource(), AL_BUFFER, sound.getBuffer());
-    alSourcePlay(sound.getSource());
+    if (!isPlaying(sound)) {
+        alSourcei(sound.getSource(), AL_BUFFER, sound.getBuffer());
+        alSourcePlay(sound.getSource());
+    }
 }
 
 // Stop a sound
@@ -202,4 +204,11 @@ AudioManager::resumeSound(Sound sound) {
 void AudioManager::setLooping(Sound sound,bool loop)
 {
     alSourcei(sound.getSource(), AL_LOOPING, loop ? AL_TRUE : AL_FALSE);
+}
+
+//Check if a sound is already playing
+bool AudioManager::isPlaying(Sound sound) {
+    ALint state;
+    alGetSourcei(sound.getSource(), AL_SOURCE_STATE, &state);
+    return (state == AL_PLAYING);
 }

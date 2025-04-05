@@ -46,7 +46,7 @@ public:
 
     void setLooping(Sound source, bool loop);
 
-
+    bool isPlaying(Sound sound);
 
 private:
 
