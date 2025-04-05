@@ -703,14 +703,22 @@
         {
             "id": "puerta",
             "file": "../resources/sound/sfx/puerta.wav"
-        }
+        },
+        {
+          "id": "cuerda",
+          "file": "../resources/sound/sfx/cuerda.wav"
+      }
     ],
 
   "musics" : [
     {
-        "id": "room1music",
-        "file":  "../resources/sound/ost/P2Room1.wav"
-    }
+        "id": "sala1",
+        "file":  "../resources/sound/music/sala1.wav"
+    },
+    {
+      "id": "marcha",
+      "file":  "../resources/sound/music/imperial_march.wav"
+  }
   ]
 
 }

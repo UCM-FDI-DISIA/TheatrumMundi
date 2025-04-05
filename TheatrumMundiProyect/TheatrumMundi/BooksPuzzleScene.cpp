@@ -70,6 +70,13 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		//Game::Instance()->getDialogueManager()->ReadDialogue(Puzzle2);
 		//startDialogue("Puzzle2");
 
+		AudioManager& a = AudioManager::Instance();
+
+		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		a.setVolume(buttonSound, 0.2);
+
+		Sound bookSound = sdlutils().soundEffects().at("libro");
+
 
 		//INVENTORY
 		//Invntory Background
@@ -85,9 +92,9 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		//InventoryButton
 		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
-		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton]() //Lamda function
+		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton, buttonSound]() //Lamda function
 			{
-				//AudioManager::Instance().playSound(buttonSound);
+				AudioManager::Instance().playSound(buttonSound);
 				sr->GetInventory()->setActive(!sr->GetInventory()->getActive());  // Toggle the inventory
 
 				// If the inventory is active, activate the items
@@ -117,16 +124,16 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		ClickComponent* UPbuttonInventoryClick = entityManager->getComponent<ClickComponent>(upButton);
-		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ upButton, sr]() {
+		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, upButton, sr]() {
 
-			//AudioManager::Instance().playSound(buttonSound);
+			AudioManager::Instance().playSound(buttonSound);
 			scrollInventoryPuzzle(-1,sr);
 			});
 
 		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
-		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ downButton, sr]() {
+		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, downButton, sr]() {
 
-			//AudioManager::Instance().playSound(buttonSound);
+			AudioManager::Instance().playSound(buttonSound);
 			scrollInventoryPuzzle(1, sr);
 			});
 
@@ -140,7 +147,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		auto number3 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(555, 495), Vector2D(0, 0),/* 743, 280*/60, 40, 0, areaLayerManager, EntityFactory::NODRAG,ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
 		ClickComponent* clickNumber1 = entityManager->getComponent<ClickComponent>(number1);
-		clickNumber1->connect(ClickComponent::JUST_CLICKED, [this, number1]() {
+		clickNumber1->connect(ClickComponent::JUST_CLICKED, [this, number1, buttonSound]() {
+			
+			AudioManager::Instance().playSound(buttonSound);
+
 			if (myComb[0] < 9) {
 				myComb[0]++;
 				cout << "NUM1: " << myComb[0] << endl;
@@ -153,7 +163,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		ClickComponent* clickNumber2 = entityManager->getComponent<ClickComponent>(number2);
-		clickNumber2->connect(ClickComponent::JUST_CLICKED, [this, number2]() {
+		clickNumber2->connect(ClickComponent::JUST_CLICKED, [this, number2, buttonSound]() {
+			
+			AudioManager::Instance().playSound(buttonSound);
+
 			if (myComb[1] < 9) {
 				myComb[1]++;
 				cout << "NUM2: " << myComb[1] << endl;
@@ -166,7 +179,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		ClickComponent* clickNumber3 = entityManager->getComponent<ClickComponent>(number3);
-		clickNumber3->connect(ClickComponent::JUST_CLICKED, [this, number3]() {
+		clickNumber3->connect(ClickComponent::JUST_CLICKED, [this, number3, buttonSound]() {
+			
+			AudioManager::Instance().playSound(buttonSound);
+			
 			if (myComb[2] < 9) {
 				myComb[2]++;
 				cout << "NUM3: " << myComb[2] << endl;
@@ -210,8 +226,13 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		//CHECK COMBINATION
 		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(690,493), Vector2D(0, 0), 70, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		ClickComponent* clickcheckButton = entityManager->getComponent<ClickComponent>(checkButton);
-		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, tag,clock,sr, StudyBackground,this]() {
-			std::cout << "CLICK" << std::endl;
+		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, tag,clock,sr, StudyBackground,this, buttonSound]() {
+
+			#ifdef DEBUG
+				std::cout << "CLICK" << std::endl;
+			#endif // DEBUG
+			
+			AudioManager::Instance().playSound(buttonSound);
 			if (Check()) {
 				Win();
 				Image* img = entityManager->getComponent<Image>(StudyBackground);
@@ -256,7 +277,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		ImageBook->getMngr()->setActive(ImageBook, false);
 
 		ClickComponent* ButtonBook1Click = entityManager->getComponent<ClickComponent>(ButtonBookFirst);
-		ButtonBook1Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock,tag, this]() {
+		ButtonBook1Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock,tag, this, bookSound]() {
+			
+			AudioManager::Instance().playSound(bookSound);
+			
 			ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookA"));
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, true);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, false);
@@ -265,7 +289,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		ClickComponent* ButtonBook2Click = entityManager->getComponent<ClickComponent>(ButtonBookSecond);
-		ButtonBook2Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock, tag, this]() {
+		ButtonBook2Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock, tag, this, bookSound]() {
+			
+			AudioManager::Instance().playSound(bookSound);
+			
 			ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookB"));
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, true);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, false);
@@ -274,7 +301,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		ClickComponent* ButtonBook3Click = entityManager->getComponent<ClickComponent>(ButtonBookThird);
-		ButtonBook3Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock, tag, this]() {
+		ButtonBook3Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock, tag, this, bookSound]() {
+			
+			AudioManager::Instance().playSound(bookSound);
+			
 			ImageBook->getMngr()->getComponent<Image>(ImageBook)->setTexture(&sdlutils().images().at("bookC"));
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, true);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, false);
@@ -283,7 +313,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		ClickComponent* clickbackButton = entityManager->getComponent<ClickComponent>(backButton);
-		clickbackButton->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock, tag, this]() {
+		clickbackButton->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock, tag, this, buttonSound]() {
+			
+			AudioManager::Instance().playSound(buttonSound);
+			
 			ImageBook->getMngr()->setActive(ImageBook, false);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK, false);
 			ImageBook->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL, true);
@@ -307,8 +340,9 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, downButton, upButton, inventoryButton, _backButton]()
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, downButton, upButton, inventoryButton, _backButton, buttonSound]()
 		{	
+				AudioManager::Instance().playSound(buttonSound);
 			inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 			HideInventoryItems(InventoryBackground, downButton, upButton, sr);
 			sr->GetInventory()->setFirstItem(0);

@@ -117,12 +117,8 @@ void TutorialScene::init()
 		a.setVolume(puzzleButtonSound, 0.3);
 
 		Sound doorSound = sdlutils().soundEffects().at("puerta");
-		a.setVolume(doorSound, 0.3);
-
-		//Audio music
-		Sound room1music = sdlutils().musics().at("room1music");
-		a.setLooping(room1music, true);
-		a.playSound(room1music);
+		a.setVolume(doorSound, 0.6);
+		a.setSourcePosition(doorSound, -500, 0, 0);
 
 		//Register scene in dialogue manager
 		dialogueManager->setScene(this);
