@@ -65,11 +65,10 @@ Room2Scene::Room2Scene()
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 	};
 	roomEvent[WindowScene] = [this] {
-		//Game::Instance()->getSceneManager()->loadScene(WINDOW_SCENE, this); IMPORTANT: Include Window Scene when its finished
+		Game::Instance()->getSceneManager()->loadScene(WINDOW_SCENE, this); 
 	};
 	roomEvent[OrganPuzzleScene] = [this] {
-		std::cout << "Tremenda trompeta digo organo" << std::endl;
-		//Game::Instance()->getSceneManager()->loadScene(ORGAN_SCENE, this); IMPORTANT: Include Organ Scene when its finished
+	//	Game::Instance()->getSceneManager()->loadScene(MUSIC_PUZZLE, this);
 	};
 	roomEvent[OrganPuzzleSceneRsv] = [this] {
 
@@ -356,8 +355,7 @@ void Room2Scene::init()
 		organ = entityFactory->CreateInteractableEntity(entityManager, "Organo", EntityFactory::RECTAREA, Vector2D(600, 350), Vector2D(0, 0), 500, 400, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 		entityManager->getComponent<ClickComponent>(organ)->connect(ClickComponent::JUST_CLICKED, [this]() {
 			roomEvent[OrganPuzzleScene]();
-			resolvedPuzzle(4);
-			puzzlesol[2] = true;
+			roomEvent[OrganPuzzleSceneRsv](); //ONLY FOR DEBUGGING
 		});
 		organ->getMngr()->setActive(organ, false);
 

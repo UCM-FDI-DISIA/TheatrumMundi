@@ -13,6 +13,7 @@
 #include"DebugInventoryScene.h"
 #include "MosaicPuzzleScene.h"
 #include "RavenPuzzleScene.h"
+#include "WindowPuzzleScene.h"
 #include "MiddleRoomScene.h"
 #include "MusicPuzzleScene.h"
 #include "DragPuzzleScene.h"
@@ -34,10 +35,11 @@ SceneManager::SceneManager()
 	scenes[SceneName::MUSIC_PUZZLE] = new MusicPuzzleScene();
 	scenes[SceneName::RAVEN_SCENE] = new RavenPuzzleScene();
 	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
+	scenes[SceneName::WINDOW_SCENE] = new WindowPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
-	loadScene(SceneName::INITIAL_MENU);
+	loadScene(SceneName::ROOM_2);
 }
 
 void SceneManager::popScene()
