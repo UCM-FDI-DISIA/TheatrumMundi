@@ -75,78 +75,67 @@ template <>
 void WriteTextComponent<std::list<TextInfo>>::render()
 {
 	if (textStructure->empty()) return;
-	// Definir el tama�o total de la textura final
-	int totalWidth = 1000*Game::Instance()->wscreenScale; // Ajusta seg�n sea necesario
-	int totalHeight = 800*Game::Instance()->hscreenScale;  // Se calcular� din�micamente
 
-	// Crear la textura final con el tama�o adecuado
-	SDL_Texture* sdlFinalTexture = SDL_CreateTexture(
-		sdlutils().renderer(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, totalWidth, totalHeight);
+	// Scale
+	float scaleX = Game::Instance()->wscreenScale;
+	float scaleY = Game::Instance()->hscreenScale;
 
-	// Habilitar mezcla alfa en la textura final
-	SDL_SetTextureBlendMode(sdlFinalTexture, SDL_BLENDMODE_BLEND); //Habilita transparencia
+	int y = 50 * scaleY;
 
-	// Guardar el render target actual
-	SDL_Texture* prevTarget = SDL_GetRenderTarget(sdlutils().renderer());
-
-	// Establecer la nueva textura como el render target
-	SDL_SetRenderTarget(sdlutils().renderer(), sdlFinalTexture);
-
-	// Limpiar la textura con transparencia (alpha = 0)
-	SDL_SetRenderDrawColor(sdlutils().renderer(), 0, 0, 0, 0); //Fondo completamente transparente
-	SDL_RenderClear(sdlutils().renderer());
-
-	// Renderizar cada elemento en la textura final
-	int y = 50;
 	for (const auto& it : *textStructure)
 	{
 		if (it.Character == "/")
 		{
-			// L�nea divisoria
-			Texture divideLine(sdlutils().renderer(), "...--.-.-.-.-.--.-.-.-.-.-..-.--.-.-.-.---......-----...-----.....----....---...---..-.-.-.-.-.-.-.-.-.-.", _myFont, _color);
-			SDL_Rect dstVRect = { 350, y,
-				divideLine.width(), divideLine.height() };
-			divideLine.render(dstVRect, 0.0);
-			y += 80;
+			Texture* divideLine = new Texture(sdlutils().renderer(),
+				"...--.-.-.-.-.--.-.-.-.-.-..-.--.-.-.-.---......-----...-----.....----....---...---..-.-.-.-.-.-.-.-.-.-.",
+				_myFont, _color);
+
+			SDL_Rect dstVRect = { static_cast<int>(350 * scaleX), y,
+				divideLine->width(), divideLine->height() };
+
+			divideLine->render(dstVRect, 0.0);
+			y += 80 * scaleY;
+
+			delete divideLine;
 		}
 		else
 		{
-			// Autor
-			Texture authorTexture(sdlutils().renderer(), it.Character, _myFont, _color);
-			SDL_Rect dstAuthorRect = { 400, y, 
-				authorTexture.width(), authorTexture.height()};
-			authorTexture.render(dstAuthorRect, 0.0);
+			// Author
+			Texture* authorTexture = new Texture(sdlutils().renderer(), it.Character, _myFont, _color);
+			SDL_Rect dstAuthorRect = {
+				static_cast<int>(400 * scaleX),
+				y,
+				authorTexture->width(), authorTexture->height()
+			};
+			authorTexture->render(dstAuthorRect, 0.0);
 
-			if (it.Character == " ") { y += 25; }
-			else { y += 50; }
+			if (it.Character == " ") y += static_cast<int>(25 * scaleY);
+			else y += static_cast<int>(50 * scaleY);
 
-			// Text:
-			std::vector<std::string> lines = splitTextByNewline(it.Text); //splits text into different lines
-
+			// Split text
+			std::vector<std::string> lines = splitTextByNewline(it.Text);
 			int currentY = y;
 
-			// render each split line
-			for (const auto& splitLine : lines)
+			for (const auto& line : lines)
 			{
-				Texture textTexture(sdlutils().renderer(), splitLine, _myFont, _color);
-				SDL_Rect dstRect = { 400, currentY, textTexture.
-					width(), textTexture.height()};
-				textTexture.render(dstRect, 0.0);
+				Texture* textTexture = new Texture(sdlutils().renderer(), line, _myFont, _color);
+				SDL_Rect dstRect = {
+					static_cast<int>(400 * scaleX),
+					currentY,
+					textTexture->width(), textTexture->height()
+				};
+				textTexture->render(dstRect, 0.0);
+				currentY += textTexture->height() + 5;
 
-				currentY += textTexture.height() + 5; // space between split lines
+				delete textTexture;
 			}
 
-			y += 100;
+			y += static_cast<int>(100 * scaleY); // Space between split lines
+			delete authorTexture;
 		}
 	}
 
-	// Restaurar el render target original
-	SDL_SetRenderTarget(sdlutils().renderer(), prevTarget);
-
-	// Convertir SDL_Texture* en Texture y asegurarse de que respete la transparencia
-	Texture* finalText = new Texture(sdlutils().renderer(), sdlFinalTexture);
-	SDL_Rect dstRect = { 0, 0, finalText->width()* Game::Instance()->wscreenScale, finalText->height()* Game::Instance()->hscreenScale };
-	finalText->render(dstRect, 0.0);
+	
 }
 
 template<typename T>
