@@ -75,7 +75,6 @@ enum grpId : cmpId_t {
 	DIALOGUE,
 	UI,
 	LOG,
-	INVENTORY,
 	BACKGROUNDPAUSE,
 	INTERACTPAUSE,
 	_GRPS_LIST_, /* taken from ../game/ecs_defs */
