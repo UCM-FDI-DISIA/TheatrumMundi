@@ -221,7 +221,7 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 			}
 			});
 
-		sr->createDescriptions(sr->GetInventory()->hints.back(), sr->GetInventory()->getItems().back(), nullptr, nullptr);
+		sr->createDescription(sr->GetInventory()->hints.back(), sr->GetInventory()->getItems().back());
 	}
 }
 

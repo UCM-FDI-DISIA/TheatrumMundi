@@ -173,7 +173,7 @@ void Room1Scene::_setRoomEvents()
 			GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT));
 			GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 
-			createDescriptions(GetInventory()->hints.back(), GetInventory()->getItems().back(), rmObjects.backgroundTextDescription, rmObjects.textDescriptionEnt);
+			createDescription(GetInventory()->hints.back(), GetInventory()->getItems().back());
 		};
 			
 	roomEvent[ResolveCase] = [this]() {
@@ -365,15 +365,15 @@ void Room1Scene::_setUI()
 	//inventory descriptions
 	
 	//visual background for item description text
-	rmObjects.backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::DEFAULT);
-	entityManager->setActive(rmObjects.backgroundTextDescription, false);
+	invObjects.backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::UI);
+	entityManager->setActive(invObjects.backgroundTextDescription, false);
 
 	//description text entity
-	rmObjects.textDescriptionEnt = entityManager->addEntity(ecs::grp::DEFAULT);
-	auto _testTextTranform = entityManager->addComponent<Transform>(rmObjects.textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
-	entityManager->setActive(rmObjects.textDescriptionEnt, false);
+	invObjects.textDescriptionEnt = entityManager->addEntity(ecs::grp::UI);
+	auto _testTextTranform = entityManager->addComponent<Transform>(invObjects.textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
+	entityManager->setActive(invObjects.textDescriptionEnt, false);
 	SDL_Color colorDialog = { 255, 255, 255, 255 };
-	entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(rmObjects.textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, GetInventory()->getTextDescription());
+	entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(invObjects.textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, GetInventory()->getTextDescription());
 
 
 	//Inventory

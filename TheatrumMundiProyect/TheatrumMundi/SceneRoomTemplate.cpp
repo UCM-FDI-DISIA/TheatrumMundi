@@ -83,12 +83,12 @@ void SceneRoomTemplate::HideAllInvetoryItems(const ecs::entity_t& invBack, const
         GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Desactivate the hints
 }
 
-void SceneRoomTemplate::createDescriptions(Entity* hintEntity, Hint* hintItem, Entity* backgroundTextDescription, Entity* textDescriptionEnt)
+void SceneRoomTemplate::createDescription(Entity* hintEntity, Hint* hintItem)
 {
-    
+    /*
     //visual background for item description text
-    auto _backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::UI);
-    entityManager->setActive(_backgroundTextDescription, false);
+    invObjects.backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::UI);
+    entityManager->setActive(invObjects.backgroundTextDescription, false);
 
     //description text entity
     auto _textDescriptionEnt = entityManager->addEntity(ecs::grp::UI);
@@ -96,26 +96,26 @@ void SceneRoomTemplate::createDescriptions(Entity* hintEntity, Hint* hintItem, E
     entityManager->setActive(_textDescriptionEnt, false);
     SDL_Color colorDialog = { 255, 255, 255, 255 };
     entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(_textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, GetInventory()->getTextDescription());
-    
+    */
     
         //meter trigger en todas las entidades
         //auto a = GetInventory()->hints[index];
 
         //if mouse is on item, show item description
-        hintEntity->getMngr()->getComponent<TriggerComponent>(hintEntity)->connect(TriggerComponent::CURSOR_ENTERED, [this, hintEntity, _backgroundTextDescription, _textDescriptionEnt, hintItem]() {
+        hintEntity->getMngr()->getComponent<TriggerComponent>(hintEntity)->connect(TriggerComponent::CURSOR_ENTERED, [this, hintEntity, hintItem]() {
             //show item description entities
-            entityManager->setActive(_backgroundTextDescription, true);
-            entityManager->setActive(_textDescriptionEnt, true);
+            entityManager->setActive(invObjects.backgroundTextDescription, true);
+            entityManager->setActive(invObjects.textDescriptionEnt, true);
 
             //change text description
-            GetInventory()->setTextDescription(hintItem, entityManager->getComponent<Transform>(hintEntity), entityManager->getComponent<Transform>(_backgroundTextDescription));
+            GetInventory()->setTextDescription(hintItem, entityManager->getComponent<Transform>(hintEntity), entityManager->getComponent<Transform>(invObjects.backgroundTextDescription));
             });
 
         //if mouse leaves item, hide item description
-        hintEntity->getMngr()->getComponent<TriggerComponent>(hintEntity)->connect(TriggerComponent::CURSOR_LEFT, [this, hintEntity, _backgroundTextDescription, _textDescriptionEnt]() {
+        hintEntity->getMngr()->getComponent<TriggerComponent>(hintEntity)->connect(TriggerComponent::CURSOR_LEFT, [this]() {
             //hide item description entities
-            entityManager->setActive(_backgroundTextDescription, false);
-            entityManager->setActive(_textDescriptionEnt, false);
+            entityManager->setActive(invObjects.backgroundTextDescription, false);
+            entityManager->setActive(invObjects.textDescriptionEnt, false);
             });
 
     
