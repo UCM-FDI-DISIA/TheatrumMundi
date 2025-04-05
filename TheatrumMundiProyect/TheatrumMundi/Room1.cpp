@@ -169,7 +169,7 @@ void Room1Scene::_setRoomEvents()
 	roomEvent[Spoon] = [this]()
 		{
 			// InventoryLogic
-			GetInventory()->addItem(new Hint("TeaCupSpoon", "Es una cuchara, que no lo ves o que", &sdlutils().images().at("TeaCupSpoon")));
+			GetInventory()->addItem(new Hint("TeaCupSpoon", "Una cuchara de plata.", &sdlutils().images().at("TeaCupSpoon")));
 			GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 			GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 		};

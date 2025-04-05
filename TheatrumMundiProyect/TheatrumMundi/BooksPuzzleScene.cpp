@@ -229,7 +229,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		clk->connect(ClickComponent::JUST_CLICKED, [this, clock, sr]() {
 
 			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-			AddInvItem("horaria", "La manecilla de las horas de un reloj", position, sr);
+			AddInvItem("horaria", "La manecilla de las horas de un reloj.", position, sr);
 			clock->getMngr()->setActive(clock, false);
 			});
 
@@ -237,8 +237,8 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		clk->connect(ClickComponent::JUST_CLICKED, [variant,this, tag, sr]() {
 
 			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-			if(variant <= 1)AddInvItem("etiquetaV1", "Etiqueta de alguna clase de qu�mico.", position, sr);
-			else if(variant == 2) AddInvItem("etiquetaV2", "Etiqueta de alguna clase de qu�mico.", position, sr);
+			if(variant <= 1)AddInvItem("etiquetaV1", "Etiqueta de algún químico. Indica una cantidad de 200mg.", position, sr);
+			else if(variant == 2) AddInvItem("etiquetaV2", "Etiqueta de algún químico.¿Solo 10 mg?", position, sr);
 			tag->getMngr()->setActive(tag, false);
 			});
 
