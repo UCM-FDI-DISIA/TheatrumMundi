@@ -97,28 +97,28 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 	SDL_RenderClear(sdlutils().renderer());
 
 	// Renderizar cada elemento en la textura final
-	int y = 50* Game::Instance()->hscreenScale;
+	int y = 50;
 	for (const auto& it : *textStructure)
 	{
 		if (it.Character == "/")
 		{
 			// Línea divisoria
 			Texture divideLine(sdlutils().renderer(), "...--.-.-.-.-.--.-.-.-.-.-..-.--.-.-.-.---......-----...-----.....----....---...---..-.-.-.-.-.-.-.-.-.-.", _myFont, _color);
-			SDL_Rect dstVRect = { 350* Game::Instance()->wscreenScale, y,
-				divideLine.width()*Game::Instance()->wscreenScale, divideLine.height()* Game::Instance()->hscreenScale };
+			SDL_Rect dstVRect = { 350, y,
+				divideLine.width(), divideLine.height() };
 			divideLine.render(dstVRect, 0.0);
-			y += 80* Game::Instance()->hscreenScale;
+			y += 80;
 		}
 		else
 		{
 			// Autor
 			Texture authorTexture(sdlutils().renderer(), it.Character, _myFont, _color);
-			SDL_Rect dstAuthorRect = { 400* Game::Instance()->wscreenScale, y, 
-				authorTexture.width()* Game::Instance()->wscreenScale, authorTexture.height()* Game::Instance()->hscreenScale };
+			SDL_Rect dstAuthorRect = { 400, y, 
+				authorTexture.width(), authorTexture.height()};
 			authorTexture.render(dstAuthorRect, 0.0);
 
-			if (it.Character == " ") { y += 25* Game::Instance()->hscreenScale; }
-			else { y += 50* Game::Instance()->hscreenScale; }
+			if (it.Character == " ") { y += 25; }
+			else { y += 50; }
 
 			// Text:
 			std::vector<std::string> lines = splitTextByNewline(it.Text); //splits text into different lines
@@ -129,14 +129,14 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 			for (const auto& splitLine : lines)
 			{
 				Texture textTexture(sdlutils().renderer(), splitLine, _myFont, _color);
-				SDL_Rect dstRect = { 400* Game::Instance()->wscreenScale, currentY, textTexture.
-					width()* Game::Instance()->wscreenScale, textTexture.height()* Game::Instance()->hscreenScale };
+				SDL_Rect dstRect = { 400, currentY, textTexture.
+					width(), textTexture.height()};
 				textTexture.render(dstRect, 0.0);
 
-				currentY += textTexture.height() + 5* Game::Instance()->hscreenScale; // space between split lines
+				currentY += textTexture.height() + 5; // space between split lines
 			}
 
-			y += 100* Game::Instance()->hscreenScale;
+			y += 100;
 		}
 	}
 
