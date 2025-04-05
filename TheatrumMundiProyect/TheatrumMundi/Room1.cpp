@@ -304,6 +304,12 @@ void Room1Scene::_setUI()
 			}
 		});
 
+	entityManager->getComponent<ClickComponent>(inventoryUpButton)
+		->connect(ClickComponent::JUST_CLICKED, [this]()
+		{
+				AudioManager::Instance().playSound(rmSounds.uiButton);
+				scrollInventory(-1);
+		});
 	entityManager->getComponent<ClickComponent>(inventoryDownButton)
 		->connect(ClickComponent::JUST_CLICKED, [this]() 
 		{

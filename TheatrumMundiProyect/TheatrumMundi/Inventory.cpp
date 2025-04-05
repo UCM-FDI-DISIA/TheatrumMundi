@@ -109,6 +109,17 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 		if ((*itemIt)->getID() == idToRemove) {
 			//saves the position of the entity to be removed
 			float removedY = 0;
+
+			// move the rest of the items up
+			for (auto it = entityIt; it != invEntityList.end(); ++it) {
+				auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
+				transform->setPosY(transform->getPos().getY() - 150);
+			}
+			for (auto it = hintIt; it != hints.end(); ++it) {
+				auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
+				transform->setPosY(transform->getPos().getY() - 150);
+			}
+
 			if (entityIt != invEntityList.end()) {
 				auto transform = (*entityIt)->getMngr()->getComponent<Transform>(*entityIt);
 				removedY = transform->getPos().getY();
@@ -130,17 +141,6 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 			}
 
 			itemIt = items.erase(itemIt);
-
-			// move the rest of the items up
-			for (auto it = entityIt; it != invEntityList.end(); ++it) {
-				auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
-				transform->setPosY(transform->getPos().getY() - 150);
-			}
-			for (auto it = hintIt; it != hints.end(); ++it) {
-				auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
-				transform->setPosY(transform->getPos().getY() - 150);
-			}
-
 			return;
 		}
 
