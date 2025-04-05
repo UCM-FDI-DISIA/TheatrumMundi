@@ -75,11 +75,11 @@ template <>
 void WriteTextComponent<std::list<TextInfo>>::render()
 {
 	if (textStructure->empty()) return;
-	// Definir el tamaño total de la textura final
-	int totalWidth = 1000*Game::Instance()->wscreenScale; // Ajusta según sea necesario
-	int totalHeight = 800*Game::Instance()->hscreenScale;  // Se calculará dinámicamente
+	// Definir el tamaï¿½o total de la textura final
+	int totalWidth = 1000*Game::Instance()->wscreenScale; // Ajusta segï¿½n sea necesario
+	int totalHeight = 800*Game::Instance()->hscreenScale;  // Se calcularï¿½ dinï¿½micamente
 
-	// Crear la textura final con el tamaño adecuado
+	// Crear la textura final con el tamaï¿½o adecuado
 	SDL_Texture* sdlFinalTexture = SDL_CreateTexture(
 		sdlutils().renderer(), SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, totalWidth, totalHeight);
 
@@ -102,7 +102,7 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 	{
 		if (it.Character == "/")
 		{
-			// Línea divisoria
+			// Lï¿½nea divisoria
 			Texture divideLine(sdlutils().renderer(), "...--.-.-.-.-.--.-.-.-.-.-..-.--.-.-.-.---......-----...-----.....----....---...---..-.-.-.-.-.-.-.-.-.-.", _myFont, _color);
 			SDL_Rect dstVRect = { 350, y,
 				divideLine.width(), divideLine.height() };
@@ -168,8 +168,6 @@ void WriteTextComponent<TextInfo>::render()
 
 	if (isMiddleRoom)
 	{
-		
-
 		// Text
 		std::vector<std::string> lines = splitTextByNewline(_currentText); //splits text into different lines
 
@@ -186,15 +184,7 @@ void WriteTextComponent<TextInfo>::render()
 	}
 	else
 	{
-		// Author
-		Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
-		SDL_Rect nameRect = { 350* Game::Instance()->wscreenScale, 465* Game::Instance()->hscreenScale,
-			nameText->width()* Game::Instance()->wscreenScale,nameText->height()* Game::Instance()->hscreenScale };
-		nameText->render(nameRect, 0);
-
 		// Text
-
-
 		std::vector<std::string> lines = splitTextByNewline(_currentText); //splits text into different lines
 
 		int y = 550* Game::Instance()->hscreenScale;  // initial dialogue text

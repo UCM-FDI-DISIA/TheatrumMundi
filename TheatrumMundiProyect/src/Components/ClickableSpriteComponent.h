@@ -17,6 +17,7 @@ public:
 
 
     ClickableSpriteComponent(std::string _idImageToPass);
+    ~ClickableSpriteComponent();
     void initComponent() override;
 
 

@@ -13,7 +13,6 @@ public:
 	BooksPuzzleScene(/*Room1Scene* room1*/);
 	~BooksPuzzleScene();
 	void init(SceneRoomTemplate* sr) override;
-	void refresh() override;
 	void unload() override;
 	bool Check() override; //HERE WE PUT THE CORRECT COMBINATION
 	void Win() override;

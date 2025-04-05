@@ -49,4 +49,6 @@ public:
 	void next(); //used for scroll
 
 	void previous(); //used for scroll
+
+	void ResetLog();
 };

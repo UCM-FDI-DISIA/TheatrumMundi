@@ -49,6 +49,14 @@ int Inventory::getItemNumber()
 
 }
 
+inline Vector2D Inventory::GetPosition(int i)
+{
+	if (i >= 0 && i < positions.size()) {
+		return positions[i];
+	}
+	return Vector2D(0, 0);
+}
+
 /// <summary>
 /// Changes text description displayed on screen
 /// </summary>
@@ -90,23 +98,105 @@ void Inventory::addItem(Hint* item)
 /// Remove the id item from the inventory
 /// </summary>
 /// <param name="idToRemove"></param> -->Id of the item to is going to been removed
-void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& invEntityList)
+void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& invEntityList, std::list<std::string>& invIdList)
 {
-	//The name don't have to be removed, if we have 2 entities of the same (imagine a BUG) then the inventory don't create the both of them
 	auto hintIt = hints.begin();
 	auto entityIt = invEntityList.begin();
-	for (auto it = items.begin(); it != items.end(); ++it) {
-		if (it[0]->getID() == idToRemove) {
-			items.erase(it);
-			hintIt[0]->getMngr()->setActive(hintIt[0], false);
-			hints.erase(hintIt);
-			entityIt[0]->getMngr()->setActive(entityIt[0], false);
-			invEntityList.erase(entityIt);
+	auto IdIt = invIdList.begin();
+	auto itemIt = items.begin();
+
+	while (itemIt != items.end()) {
+		if ((*itemIt)->getID() == idToRemove) {
+			// move the rest of the items up only if the items that are shown are between 0 and 2
+			
+		    
+			//saves the position of the entity to be removed
+			float removedY = 0;
+			if (entityIt != invEntityList.end()) {
+				auto transform = (*entityIt)->getMngr()->getComponent<Transform>(*entityIt);
+				removedY = transform->getPos().getY();
+			}
+
+			// desactivate the item from the lists
+			if (hintIt != hints.end()) {
+				(*hintIt)->getMngr()->setActive(*hintIt, false);
+				hintIt = hints.erase(hintIt);
+			}
+
+			if (entityIt != invEntityList.end()) {
+				(*entityIt)->getMngr()->setActive(*entityIt, false);
+				entityIt = invEntityList.erase(entityIt);
+			}
+
+			if (IdIt != invIdList.end()) {
+				IdIt = invIdList.erase(IdIt);
+			}
+
+			itemIt = items.erase(itemIt);
+			
+			
+			if (firstItem == 0) {
+				int i = 0;
+				int posE = std::distance(invEntityList.begin(), entityIt);
+				// move the rest of the items up
+				for (auto it = entityIt; it != invEntityList.end(); ++it, i++) {
+					auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
+					transform->setPosY(transform->getPos().getY() - 150);
+
+					if (i == 2 - posE) {
+						(*it)->getMngr()->setActive(*it, true);
+					}
+				}
+
+				int j = 0;
+				int posH = std::distance(hints.begin(), hintIt);
+				for (auto it = hintIt; it != hints.end(); ++it) {
+					auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
+					transform->setPosY(transform->getPos().getY() - 150);
+
+					if (j == 2 - posH) {
+						(*it)->getMngr()->setActive(*it, true);
+					}
+				}
+			}
+			else //if the first item is not 0, we have to move the rest of the items up
+			{
+				int i = 0;
+				int posE = std::distance(invEntityList.begin(), entityIt);
+				// move the rest of the items up
+				for (auto it = entityIt; it != invEntityList.begin(); --it, i++) {
+					auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
+					transform->setPosY(transform->getPos().getY() + 150);
+
+					if (i == posE) {
+						(*it)->getMngr()->setActive(*it, true);
+					}
+				}
+
+				int j = 0;
+				int posH = std::distance(hints.begin(), hintIt);
+				for (auto it = hintIt; it != hints.begin(); --it, j++) {
+					auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
+					transform->setPosY(transform->getPos().getY() + 150);
+					if (j == posH) {
+						(*it)->getMngr()->setActive(*it, true);
+					}
+				}
+			}
+			
+
 			return;
 		}
+
 		++hintIt;
 		++entityIt;
+		++IdIt;
+		++itemIt;
 	}
+}
+
+void Inventory::eraseNotRoomItems()
+{
 }
 
 /// <summary>

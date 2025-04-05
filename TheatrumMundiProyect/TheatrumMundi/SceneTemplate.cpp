@@ -30,6 +30,11 @@ void SceneTemplate::render() const
 	entityManager->render();
 }
 
+void SceneTemplate::refresh()
+{
+	entityManager->refresh();
+}
+
 SceneTemplate::~SceneTemplate()
 {
 	unload();
@@ -53,10 +58,9 @@ void SceneTemplate::startDialogue(const string& _eventToRead)
 void SceneTemplate::endDialogue()
 {
 	dialogueManager->setdisplayOnProcess(false);
-	std::cout << "acabe";
-	
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
+
 }
 
 //metodo global inv flechas

@@ -75,9 +75,8 @@ void Game::init() {
 	sdlutils().hideCursor();
 
 	// Create the manager
-	
+
 	_log = new Log();
-	
 	_dataManager = new DataManager();
 	_csvdata = new CSVdataRecolector();
 	_mngr = new SceneManager();
@@ -97,7 +96,7 @@ void Game::start() {
 	bool _exit = false;
 
 	auto &ihdlr = ih();
-
+	_mngr->init();
 	// reset the time before starting - so we calculate correct
 	// delta-time in the first iteration
 	//
@@ -123,8 +122,9 @@ void Game::start() {
 		checkCollisions();
 		render();
 
+		_mngr->refresh();
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
-
+		
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
 
@@ -144,6 +144,16 @@ void Game::start() {
 #endif // _DEBUG
 
 	}
+}
+
+void Game::reset()
+{
+
+	//Reset instances
+	Game::Instance()->getLog()->ResetLog();
+	Game::Instance()->getDataManager()->ResetDataManager();
+	Game::Instance()->getSceneManager()->ResetSceneManager();
+
 }
 
 SceneManager* Game::getSceneManager()

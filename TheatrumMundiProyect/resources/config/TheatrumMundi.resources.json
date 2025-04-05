@@ -12,6 +12,10 @@
 
   "images": [
     {
+      "id": "EmptyImage",
+      "file": "../resources/images/Finales/ImagenVacia.png"
+    },
+    {
       "id": "ShelfButton",
       "file": "../resources/images/Finales/BotonEstante.PNG"
     },
@@ -156,6 +160,18 @@
       "file": "../resources/images/Finales/RectangleEmptyButton.PNG"
     },
     {
+      "id": "Continue",
+      "file": "../resources/images/Finales/RectangleContinueButton.png"
+    },
+    {
+      "id": "ExitToMenu",
+      "file": "../resources/images/Finales/RectangleExitToMenuButton.png"
+    },
+    {
+      "id": "MenuBackground",
+      "file": "../resources/images/Finales/MenuBackground.png"
+    },
+    {
       "id": "prueba",
       "file": "../resources/images/socrates.png"
     },
@@ -257,6 +273,13 @@
     { "id" : "BotonMinutero", "file" : "../resources/images/Finales/BotonMinutero.PNG" },
     { "id" : "BotonHoraria", "file" : "../resources/images/Finales/BotonHoraria.PNG" },
     { "id" : "BotonComprobarReloj", "file" : "../resources/images/Finales/BotonComprobarReloj.PNG" },
+    { "id" : "no", "file" : "../resources/images/Finales/noButton.png" },
+    { "id" : "yes", "file" : "../resources/images/Finales/yesButton.png" },
+    { "id" : "1stQuestion", "file" : "../resources/images/Finales/1stQuestionText.png" },
+    { "id" : "2ndQuestion", "file" : "../resources/images/Finales/2ndQuestionText.png" },
+    { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
+    { "id" : "continuar", "file" : "../resources/images/Finales/continuarBackground.png" },
+    { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"
@@ -371,47 +394,47 @@
     },
     {
       "id": "backButton",
-      "file": "../resources/images/BackButton.png"
+      "file": "../resources/images/Finales/BotonEstante.png"
     },
     {
       "id": "bookComb0",
-      "file": "../resources/images/BookComb0.png"
+      "file": "../resources/images/Finales/BookComb0.png"
     },
     {
       "id": "bookComb1",
-      "file": "../resources/images/BookComb1.png"
+      "file": "../resources/images/Finales/BookComb1.png"
     },
     {
       "id": "bookComb2",
-      "file": "../resources/images/BookComb2.png"
+      "file": "../resources/images/Finales/BookComb2.png"
     },
     {
       "id": "bookComb3",
-      "file": "../resources/images/BookComb3.png"
+      "file": "../resources/images/Finales/BookComb3.png"
     },
     {
       "id": "bookComb4",
-      "file": "../resources/images/BookComb4.png"
+      "file": "../resources/images/Finales/BookComb4.png"
     },
     {
       "id": "bookComb5",
-      "file": "../resources/images/BookComb5.png"
+      "file": "../resources/images/Finales/BookComb5.png"
     },
     {
       "id": "bookComb6",
-      "file": "../resources/images/BookComb6.png"
+      "file": "../resources/images/Finales/BookComb6.png"
     },
     {
       "id": "bookComb7",
-      "file": "../resources/images/BookComb7.png"
+      "file": "../resources/images/Finales/BookComb7.png"
     },
     {
       "id": "bookComb8",
-      "file": "../resources/images/BookComb8.png"
+      "file": "../resources/images/Finales/BookComb8.png"
     },
     {
       "id": "bookComb9",
-      "file": "../resources/images/BookComb9.png"
+      "file": "../resources/images/Finales/BookComb9.png"
     },
     {
       "id": "incrementButtonSelected",
@@ -462,6 +485,10 @@
       "file": "../resources/images/Finales/TelefonoZoom.png"
     },
     {
+      "id": "mobileBackgroundV2",
+      "file": "../resources/images/Finales/TelefonoZoomV2.png"
+    },
+    {
       "id": "AAA",
       "file": "../resources/images/veneno.png"
     },
@@ -508,6 +535,94 @@
     {
       "id": "Hanni",
       "file": "../resources/images/asesinoDeHanni.png"
+    },
+    {
+      "id": "Cuervo",
+      "file": "../resources/images/temporales/Room2/Cuervo.jpeg"
+    },
+    {
+      "id": "FondoCementerio",
+      "file": "../resources/images/temporales/Room2/FondoCementerio.jpg"
+    },
+    {
+      "id": "FondoCripta",
+      "file": "../resources/images/temporales/Room2/FondoCripta.jpeg"
+    },
+    {
+      "id": "EntradaOculta",
+      "file": "../resources/images/temporales/Room2/Entrada oculta.jpeg"
+    },
+    {
+      "id": "Gancho",
+      "file": "../resources/images/temporales/Room2/Gancho.jpg"
+    },
+    {
+      "id": "Mosaico",
+      "file": "../resources/images/temporales/Room2//Mosaico.jpeg"
+    },
+    {
+      "id": "Organo",
+      "file": "../resources/images/temporales/Room2//Organo.jpeg"
+    },
+    {
+      "id": "Pala",
+      "file": "../resources/images/temporales/Room2/Pala.jpeg"
+    },
+    {
+      "id": "Palo",
+      "file": "../resources/images/temporales/Room2/Palo.jpeg"
+    },
+    {
+      "id": "PaasadizoSecretoEspejo",
+      "file": "../resources/images/temporales/Room2/PasadizoSecreto(Espejo).jpeg"
+    },
+    {
+      "id": "PuertaSantuario",
+      "file": "../resources/images/temporales/Room2/Puerta.jpg"
+    },
+    {
+      "id": "Ventana",
+      "file": "../resources/images/temporales/Room2/Ventana.jpeg"
+    },
+    {
+      "id": "Tumba",
+      "file": "../resources/images/temporales/Room2/Tumba.jpeg"
+    },
+    {
+      "id": "Cadaver2",
+      "file": "../resources/images/temporales/Room2/Cadaver.png"
+    },
+    {
+      "id": "CuervoPeligroso",
+      "file": "../resources/images/temporales/Room2/hinata.png"
+    },
+    {
+      "id": "FondoCuervo",
+      "file": "../resources/images/temporales/Room2/FondoCuervo.png"
+    },
+    {
+      "id": "Candado",
+      "file": "../resources/images/temporales/Room2/Candado.png"
+    },
+    {
+      "id": "Llave",
+      "file": "../resources/images/temporales/Room2/Llave.png"
+    },
+    {
+      "id": "Joya",
+      "file": "../resources/images/temporales/Room2/Joya.png"
+    },
+    {
+      "id": "patrisio",
+      "file": "../resources/images/temporales/Room2/patrisio.jpeg"
+    },
+    {
+      "id": "FondoPuzzleTumba",
+      "file": "../resources/images/temporales/Room2/FondoPuzzleTumba.png"
+    },
+    {
+      "id": "FondoOrgano",
+      "file": "../resources/images/temporales/Room2/FondoOrgano.png"
     }
   ],
 
