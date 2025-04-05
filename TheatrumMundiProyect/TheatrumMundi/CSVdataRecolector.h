@@ -32,6 +32,7 @@ class CSVdataRecolector
 	Vector2D lastmousepos;
 	Vector2D totalmouseMovement;
 	int numtester;
+	std::string getUIBtn(const std::string& id);
 public:
 	CSVdataRecolector();
 	~CSVdataRecolector();
@@ -39,5 +40,6 @@ public:
 	void enterScene(const std::string scene);
 	void exitScene(const std::string scene);
 	void safeData();
+	
 };
 

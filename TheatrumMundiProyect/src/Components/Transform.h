@@ -69,8 +69,8 @@ public:
 		return _vel;
 	}
 	void setVel(Vector2D vec) {
-		int auxX = (vec.getX() * Game::Instance()->wscreenScale);
-		int auxY = (vec.getY() * Game::Instance()->hscreenScale);
+		float auxX = (vec.getX() * Game::Instance()->wscreenScale);
+		float auxY = (vec.getY()*Game::Instance()->hscreenScale);
 		_vel = Vector2D(auxX, auxY);
 	}
 

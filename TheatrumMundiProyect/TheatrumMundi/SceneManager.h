@@ -8,7 +8,6 @@ class SceneRoomTemplate;
 using namespace ecs;
 enum SceneName {
 	INITIAL_MENU = 0,
-	MIDDLE_ROOM_LOG,
 	MIDDLE_ROOM,
 	ROOM_1,
 	PIPE_PUZZLE,
@@ -17,10 +16,15 @@ enum SceneName {
 	TEA_CUP_PUZZLE,
 	ROOM_2,
 	MUSIC_PUZZLE,
+	RAVEN_SCENE,
+	DOOR_SCENE,
 	MOSAIC_SCENE,
+	WINDOW_SCENE,
 	DRAG_PUZZLE,
 	XO_PUZZLE,
 	ROOM_3,
+	TUTORIAL_SCENE,
+	TELE_PUZZLE,
 	SCENE_SIZE
 };
 class SceneManager
@@ -40,14 +44,15 @@ public:
 	 void unloadScene();
 	 void render();
 	 //refrest the currect scene 
-	 void refrest();
+	 void refresh();
 	 //update of the currentscene
 	 void update();
 	 //Get the actSceneIndex ONLY USE FOR PLAYTESTING
-	 inline int getSceneIndex() { return actsceneindex; };
+	 int getSceneIndex(); 
 	 //delete of enitities
 	~SceneManager();
-
-	
+	void ResolveActScene();
+	void init();
+	void ResetSceneManager();
 };
 

@@ -85,6 +85,7 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
 
         //UI (back button + inventory + log...)
         //BackButton
+        //ENTIDADSINENTITYFACTORY
         auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
         entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
         entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
@@ -93,9 +94,6 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
     }
 }
 
-void MusicPuzzleScene::refresh()
-{
-}
 
 void MusicPuzzleScene::unload()
 {
@@ -118,8 +116,7 @@ bool MusicPuzzleScene::Check()
 void MusicPuzzleScene::Win()
 {
     solved = true;
-    // WIP active de respective part in room2 scene
-    cout << "PUZZLE WIN" << endl;
+    room->resolvedPuzzle(4);
 }
 
 bool MusicPuzzleScene::checkPhaseCombination()

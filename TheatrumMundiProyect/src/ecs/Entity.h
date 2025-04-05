@@ -29,6 +29,7 @@ public:
 		// components. This way we avoid resizing the vector.
 		//
 		_active = true;
+		_alive = true;
 		_currCmps.reserve(ecs::maxComponentId);
 	}
 
@@ -66,6 +67,7 @@ private:
 	std::array<Component*, maxComponentId> _cmps;
 	std::vector<Component*> _currCmps;
 	bool _active;
+	bool _alive;
 	grpId_t _gId;
 };
 

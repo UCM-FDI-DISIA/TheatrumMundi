@@ -7,11 +7,11 @@ public:
 	ClockPuzzleScene();
 	~ClockPuzzleScene();
 	void init(SceneRoomTemplate* sr) override;
-	void refresh() override;
 	void unload() override;
 	bool isItemHand(const std::string& itemId) override;
 	bool Check() override;
 	void Win() override;
+	void ResolveScene() override;
 private:
 	int _actualHour;
 	int _actualMinute;

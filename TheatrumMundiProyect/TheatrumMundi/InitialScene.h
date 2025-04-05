@@ -10,6 +10,5 @@ public:
 	InitialScene();
 	~InitialScene();
 	void init() override;
-	void refresh()override;
 };
 

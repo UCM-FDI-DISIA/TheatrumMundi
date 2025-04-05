@@ -17,12 +17,13 @@ class Log
 private:
 	std::list<TextInfo> _log; // complete log list: contains all already displayed dialogue lines
 	bool _logActive; //checks if log menu is active
-	ClickComponent* _textDialogueComp; //needed for log scroll
 
 	std::list<TextInfo> _renderedDialogueLines; //list of current dialogue lines displayed on log menu
 	std::list<TextInfo>::iterator _firstRenderLine; //points to current first dialogue line to be displayed on log menu
 
 	const int LINES_DISPLAYED = 5; //number of lines displayed on screen
+
+	SceneTemplate* sceneTemplate;
 
 public:
 	
@@ -36,14 +37,12 @@ public:
 	void SetLogActive(bool logActive);
 	bool GetLogActive();
 
-	void Init(EntityFactory* entityFactory, ecs::EntityManager* entityManager, Area2DLayerManager* areaLayerManager);
+	void Init(EntityFactory* entityFactory, ecs::EntityManager* entityManager, Area2DLayerManager* areaLayerManager, SceneTemplate* scTp);
 
 	//delete of enitities
 	~Log();
 
 	std::list<TextInfo>* getLogList() {	return &_log;} //returns log list
-
-	void setTextDialogue(ClickComponent* textDialogue) { _textDialogueComp = textDialogue;}
 
 	std::list<TextInfo>* getRenderedDialogueLines() { return &_renderedDialogueLines; }
 
@@ -52,4 +51,6 @@ public:
 	void next(); //used for scroll
 
 	void previous(); //used for scroll
+
+	void ResetLog();
 };

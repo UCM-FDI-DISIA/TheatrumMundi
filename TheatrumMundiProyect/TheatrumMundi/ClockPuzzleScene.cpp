@@ -17,6 +17,7 @@
 #include "Log.h"
 
 #include "SceneRoomTemplate.h"
+#include "ClickableSpriteComponent.h"
 
 ClockPuzzleScene::ClockPuzzleScene() : ScenePuzzleTemplate()
 {
@@ -76,26 +77,22 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		//create the clock hands : minute
-		longClockHand = entityFactory->CreateInteractableEntity(entityManager, "minutero", EntityFactory::RECTAREA, Vector2D(475, 40), Vector2D(0, 0), 100, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
+		longClockHand = entityFactory->CreateInteractableEntity(entityManager, "minutero", EntityFactory::RECTAREA, Vector2D(447, 23), Vector2D(0, 0), 150, 250, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
 		auto _clockMinTransform = longClockHand->getMngr()->getComponent<Transform>(longClockHand);
 		if (!hasLongClockHand) longClockHand->getMngr()->setActive(longClockHand, false);
 
 		//create the clock hands : hour
-		shortClockHand = entityFactory->CreateInteractableEntity(entityManager, "horaria", EntityFactory::RECTAREA, Vector2D(470,75), Vector2D(0, 0), 100, 150, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
+		shortClockHand = entityFactory->CreateInteractableEntity(entityManager, "horaria", EntityFactory::RECTAREA, Vector2D(447,23), Vector2D(0, 0), 150, 250, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
 		auto _clockHorTransform = shortClockHand->getMngr()->getComponent<Transform>(shortClockHand);
 		if (!hasShortClockHand) shortClockHand->getMngr()->setActive(shortClockHand, false);
 
 		//create the buttons: min
-		auto _buttonMin = entityManager->addEntity();
-		auto _buttonMinTransform = entityManager->addComponent<Transform>(_buttonMin, Vector2D(400, 345), Vector2D(0, 0), 120, 120, 0);
-
-		entityManager->addComponent<Image>(_buttonMin, &sdlutils().images().at("BotonMinutero"));
-
-		entityManager->addComponent<RectArea2D>(_buttonMin, areaLayerManager);
+		//ENTIDADCONENTITYFACTORY
+		auto _buttonMin = entityFactory->CreateInteractableEntity(entityManager, "BotonMinutero", EntityFactory::RECTAREA, Vector2D(400, 345), Vector2D(0, 0), 120, 120, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 		_actualMinute;
 
-		ClickComponent* clockMinClick = entityManager->addComponent<ClickComponent>(_buttonMin);
+		ClickComponent* clockMinClick = entityManager->getComponent<ClickComponent>(_buttonMin);
 		clockMinClick->connect(ClickComponent::JUST_CLICKED, [_clockMinTransform, clockMinSound, this]()
 			{
 				if (!getSolved()) {
@@ -115,15 +112,10 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		//create the buttons: hor
-		auto _buttonHor = entityManager->addEntity();
-		auto _buttonHorTransform = entityManager->addComponent<Transform>(_buttonHor, Vector2D(310,345), Vector2D(0, 0), 120, 120, 0);
+		//ENTIDADCONENTITYFACTORY
+		auto _buttonHor = entityFactory->CreateInteractableEntity(entityManager, "BotonHoraria", EntityFactory::RECTAREA, Vector2D(310, 345), Vector2D(0, 0), 120, 120, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
-		entityManager->addComponent<Image>(_buttonHor, &sdlutils().images().at("BotonHoraria"));
-
-		entityManager->addComponent<RectArea2D>(_buttonHor, areaLayerManager);
-
-
-		ClickComponent* clockHorClick = entityManager->addComponent<ClickComponent>(_buttonHor);
+		ClickComponent* clockHorClick = entityManager->getComponent<ClickComponent>(_buttonHor);
 		clockHorClick->connect(ClickComponent::JUST_CLICKED, [_clockHorTransform, clockHorSound, this]()
 			{
 				if (!getSolved()) {
@@ -142,6 +134,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 
+		//ENTIDADCONENTITYFACTORY
 		/*//create the buttons: reset button
 		auto _buttonResetPuzzle = entityManager->addEntity();
 		auto _buttonRessetPuzzleTransform =
@@ -152,7 +145,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->addComponent<RectArea2D>(_buttonResetPuzzle);
 
 
-		ClickComponent* clockResetClick = entityManager->addComponent<ClickComponent>(_buttonResetPuzzle);
+		ClickComponent* clockResetClick = entityManager->getComponent<ClickComponent>(_buttonResetPuzzle);
 		clockResetClick->connect(ClickComponent::JUST_CLICKED, [_clockHorTransform, _clockMinTransform, this]()
 			{
 				if (!getSolved()) {
@@ -169,19 +162,16 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 			*/
 		//create the buttons: check
-		auto _buttonCheck = entityManager->addEntity();
-		auto _buttonCheckTransform = entityManager->addComponent<Transform>(_buttonCheck, Vector2D(600, 345), Vector2D(0, 0), 120, 120, 0);
-
-		entityManager->addComponent<Image>(_buttonCheck, &sdlutils().images().at("BotonComprobarReloj"));
-
-		entityManager->addComponent<RectArea2D>(_buttonCheck, areaLayerManager);
+		//ENTIDADCONENTITYFACTORY
+		auto _buttonCheck = entityFactory->CreateInteractableEntity(entityManager, "BotonComprobarReloj", EntityFactory::RECTAREA, Vector2D(600, 345), Vector2D(0, 0), 120, 120, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto _buttonCheckTransform = entityManager->getComponent<Transform>(_buttonCheck);
 
 		//room variant logic
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
 		entity_t container;
 		if (variant <= 1) {
 			container = entityFactory->CreateInteractableEntity(entityManager, "frascoV2", EntityFactory::RECTAREA,
-				Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+				Vector2D(500, 600), Vector2D(0, 0), 75, 125, 0,
 				areaLayerManager,
 				EntityFactory::NODRAG,
 				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
@@ -189,13 +179,13 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		}
 		else if (variant == 2) {
 			container = entityFactory->CreateInteractableEntity(entityManager, "frascoV1", EntityFactory::RECTAREA,
-				Vector2D(510, 548), Vector2D(0, 0), 340, 200, 0,
+				Vector2D(500, 600), Vector2D(0, 0), 75, 125, 0,
 				areaLayerManager,
 				EntityFactory::NODRAG,
 				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
 			container->getMngr()->setActive(container, false);
 		}
-		ClickComponent* clockCheckClick = entityManager->addComponent<ClickComponent>(_buttonCheck);
+		ClickComponent* clockCheckClick = entityManager->getComponent<ClickComponent>(_buttonCheck);
 		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [variant,_buttonCheckTransform, sr, this,_buttonCheck,_buttonHor,_buttonMin,container,background]()
 			{
 				if (Check() && getSolved()) {
@@ -225,18 +215,9 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		//BackButton
-		auto _backButton = entityManager->addEntity(ecs::grp::UI);
-		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
-		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
+		//ENTIDADCONENTITYFACTORY
+		entity_t _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 
-		entityManager->addComponent<RectArea2D>(_backButton, areaLayerManager);
-
-		//Click component Open log button
-		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [sr]()
-			{
-				Game::Instance()->getSceneManager()->popScene();
-			});
 		
 
 		//INVENTORY
@@ -266,18 +247,17 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(downButton, true);
 					entityManager->setActive(upButton, true);
 
-					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], true);
 					}
 				}
 				else {
 					entityManager->setActive(InventoryBackground, false);
-					entityManager->setActive(InventoryBackground, false);
 					entityManager->setActive(downButton, false);
 					entityManager->setActive(upButton, false);
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 
-					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
+					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], false);
 					}
 				}
@@ -287,30 +267,43 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ upButton, sr]() {
 
 			//AudioManager::Instance().playSound(buttonSound);
-			sr->scrollInventory(-1);
+			scrollInventoryPuzzle(-1, sr);
 			});
 
 		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
 		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ downButton, sr]() {
 
 			//AudioManager::Instance().playSound(buttonSound);
-			sr->scrollInventory(1);
+			scrollInventoryPuzzle(1,sr);
 			});
 
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 	
 		startDialogue("PuzzleReloj");
+
+		//Click component Open log button
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this,sr,InventoryBackground,downButton,upButton,inventoryButton, _backButton]()
+			{
+				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+				HideInventoryItems(InventoryBackground, downButton, upButton, sr);
+				sr->GetInventory()->setFirstItem(0);
+				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+				_backButtonImage->setPosOffset(0, 0);
+				Game::Instance()->getSceneManager()->popScene();
+			});
 	}
 
 	//IMPORTANT this need to be out of the isstarted!!!
+
+	sr->GetInventory()->setFirstItem(0);
 	createInvEntities(sr);
 }
 
 
-void ClockPuzzleScene::refresh()
-{
-}
 
 void ClockPuzzleScene::unload()
 {
@@ -353,4 +346,9 @@ void ClockPuzzleScene::Win()
 	room->resolvedPuzzle(2);
 	//setSolved(true);
 }
+void ClockPuzzleScene::ResolveScene()
+{
+	Win();
+}
+
 

@@ -59,7 +59,14 @@
     <ClCompile Include="DragPuzzleScene.cpp" />
     <ClCompile Include="TiledAreaComponent.cpp" />
     <ClCompile Include="MusicPuzzleScene.cpp" />
+    <ClCompile Include="TutorialScene.cpp" />
+    <ClCompile Include="GameSave.cpp" />
     <ClCompile Include="XOPuzzleScene.cpp" />
+    <ClCompile Include="TelePuzzleScene.cpp" />
+    <ClCompile Include="Room2.cpp" />
+    <ClCompile Include="RavenPuzzleScene.cpp" />
+    <ClCompile Include="DoorPuzzleScene.cpp" />
+    <ClCompile Include="WindowPuzzleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -242,7 +249,14 @@
     <ClInclude Include="TiledAreaComponent.h" />
     <ClInclude Include="DescriptionInfo.h" />
     <ClInclude Include="MusicPuzzleScene.h" />
+    <ClInclude Include="TutorialScene.h" />
+    <ClInclude Include="GameSave.h" />
     <ClInclude Include="XOPuzzleScene.h" />
+    <ClInclude Include="TelePuzzleScene.h" />
+    <ClInclude Include="Room2.h" />
+    <ClInclude Include="RavenPuzzleScene.h" />
+    <ClInclude Include="DoorPuzzleScene.h" />
+    <ClInclude Include="WindowPuzzleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />

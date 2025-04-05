@@ -29,7 +29,8 @@ public:
 	virtual ~Inventory(); //Dest
 
 	void addItem(Hint* item); //Adds a new object to the inventory
-	void removeItem(const std::string& idToRemove, std::vector<Entity*>& invEntityList); //remove the item from the inventory in all his aspects
+	void removeItem(const std::string& idToRemove, std::vector<Entity*>& invEntityList,std::list<std::string>& invIdList); //remove the item from the inventory in all his aspects
+	void eraseNotRoomItems(); //Remove the entities which were created in this puzzle scene but there were removed in other puzzle scene
 	bool hasItem(const std::string& _id) const; //Check if the hint is in the inventory
 
 	inline Vector2D setPosition() { return positions[hints.size()]; } //Sets the position of the item to the inventory using the array of Positions
@@ -41,7 +42,7 @@ public:
 	int getFirstItem() const { return firstItem; } //Get the first hint
 
 	inline std::vector<Hint*> getItems() { return items; } //Get all the hintss
-	inline Vector2D GetPosition(int i) { return hints[i]->getMngr()->getComponent<Transform>(hints[i])->getPos(); } //Return the position of the item in the inventory USING IN THE CREATION OF THE INVENTITIES IN THE PUZZLESCENES
+	inline Vector2D GetPosition(int i); //Return the position of the item in the inventory USING IN THE CREATION OF THE INVENTITIES IN THE PUZZLESCENES
 	
 	void setTextDescription(std::string _id, std::vector<Entity*>& invEntityList, Transform* backgroundTextTransform); //Sets item description on screen
 	DescriptionInfo* getTextDescription() { return _textDescription; } //Gets item description
