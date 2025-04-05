@@ -36,6 +36,10 @@ void InitialScene::init()
 		a.setVolume(buttonSound, 0.2);
 
 
+		//clear the log
+		Game::Instance()->getLog()->cleanLogList();
+		Game::Instance()->getLog()->cleanRenderedList();
+
 		//Background
 		//ENTIDADCONENTITYFACTORY
 		auto _background = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);

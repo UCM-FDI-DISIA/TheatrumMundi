@@ -1104,6 +1104,7 @@ void PipePuzzleScene::Win()
 	img->setTexture(&sdlutils().images().at("cubeWithWater"));
 	if (!entityManager->getComponent<ScrollComponent>(_rope)->isScrolling()) {
 		auto ScrollCube = entityManager->getComponent<ScrollComponent>(_rope);
+		ScrollCube->setEndScrollCallback([]() {});
 		ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_cubeWithoutWater));
 		entityManager->getComponent<ScrollComponent>(_rope)->Scroll(ScrollComponent::DOWN);
 	}

@@ -115,6 +115,10 @@ void TutorialScene::init()
 		a.setVolume(buttonSound, 0.2);
 		Sound puzzleButtonSound = sdlutils().soundEffects().at("puzzle");
 		a.setVolume(puzzleButtonSound, 0.3);
+
+		Sound doorSound = sdlutils().soundEffects().at("puerta");
+		a.setVolume(doorSound, 0.3);
+
 		//Audio music
 		Sound room1music = sdlutils().musics().at("room1music");
 		a.setLooping(room1music, true);
@@ -144,9 +148,9 @@ void TutorialScene::init()
 		startRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(secondRoom));
 
 		auto ChangeRoom1Button = entityManager->getComponent<ClickComponent>(ChangeRoom1);
-		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, startRoomScroll, ChangeRoomScroll]() {
+		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, startRoomScroll, ChangeRoomScroll, doorSound]() {
 			if (!startRoomScroll->isScrolling()) {
-				//AudioManager::Instance().playSound(doorSound);
+				AudioManager::Instance().playSound(doorSound);
 				startRoomScroll->Scroll(ScrollComponent::RIGHT);
 				entityManager->setActive(doorImage, false);
 			
@@ -171,14 +175,6 @@ void TutorialScene::init()
 
 		entityManager->setActive(passwordButton, false);
 
-		//test 
-		auto botonTest = entityManager->addEntity();
-		entityManager->addComponent<Transform>(botonTest, /*Vector2D(1348 / 2.8, 748 / 2)*/Vector2D(356 - 1349 - 6, 127), Vector2D(0, 0), 1470 / 4, 270 / 4, 0);
-		entityManager->addComponent<Image>(botonTest, &sdlutils().images().at("TutorialButton"));
-
-		entityManager->addComponent<RectArea2D>(botonTest);
-		
-		startRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(botonTest));
 
 		//Antenna
 		antenna = entityFactory->CreateInteractableEntity(entityManager, "antena", EntityFactory::RECTAREA, Vector2D(900, 400), Vector2D(0, 0), 350 / 3, 360 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -218,7 +214,6 @@ void TutorialScene::init()
 
 
 		//INVENTORY
-//Inventory
 
 		invObjects.InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
 
@@ -234,9 +229,9 @@ void TutorialScene::init()
 		entityManager->setActive(invObjects.inventoryDownButton, false);
 
 		entityManager->getComponent<ClickComponent>(inventoryButton)
-			->connect(ClickComponent::JUST_CLICKED, [this]()
+			->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]()
 				{
-					//AudioManager::Instance().playSound(uiButton);
+					AudioManager::Instance().playSound(buttonSound);
 					GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
 
 					if (GetInventory()->getActive()) // If the inventory is active, activate the items
@@ -275,24 +270,21 @@ void TutorialScene::init()
 		entityManager->setActive(inventoryButton, false);
 
 		entityManager->getComponent<ClickComponent>(invObjects.inventoryUpButton)
-			->connect(ClickComponent::JUST_CLICKED, [this]()
+			->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]()
 				{
-					//AudioManager::Instance().playSound(rmSounds.uiButton);
+					AudioManager::Instance().playSound(buttonSound);
 					scrollInventory(-1);
 				});
 		entityManager->getComponent<ClickComponent>(invObjects.inventoryDownButton)
-			->connect(ClickComponent::JUST_CLICKED, [this]()
+			->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]()
 				{
-					//AudioManager::Instance().playSound(rmSounds.uiButton);
+					AudioManager::Instance().playSound(buttonSound);
 					scrollInventory(1);
 				});
 
 		
 		//INIT DIALOG MANAGER
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, _eventToRead);
-
-		//Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
-		//Game::Instance()->getLog()->addDialogueLineLog(" ", "3711");
 
 		
 		roomEvent[Dialog0]();
@@ -304,32 +296,12 @@ void TutorialScene::init()
 
 void TutorialScene::resolvedPuzzle(int i)
 {
-	/*
-	if (i < 4) {
-		int auxevent = event_size;
-		if (i == 0)  auxevent = PipePuzzleRsv;
-		else if (i == 1)  auxevent = BooksPuzzleRsv;
-		else if (i == 2)  auxevent = ClockPuzzleRsv;
-		else if (i == 3)  auxevent = TeaCupPuzzleRsv;
-		roomEvent[auxevent]();
-		puzzlesol[i] = true;
-		//std::cout << "Puzle resuelto" << i << std::endl;
-		bool aux = true;
-		for (bool a : puzzlesol) if (!a) aux = false;
-		finishallpuzzles = aux;
-		//if (aux) entityManager->setActive(body, true);
-	}
-	else {
-#ifdef _DEBUG
-		std::cout << i << " invalid index" << std::endl;
-#endif
-	}
-	*/
 }
 
 void TutorialScene::refresh()
 {
 }
+
 
 void TutorialScene::unload()
 {
@@ -340,7 +312,10 @@ void TutorialScene::unload()
 void TutorialScene::endDialogue()
 {
 	dialogCount += 1;
-	std::cout << "acabo dialogo numero: " << dialogCount << std::endl;
+	#ifdef DEBUG
+		std::cout << "acabo dialogo numero: " << dialogCount << std::endl;
+	#endif // DEBUG
+
 	switch (dialogCount) {
 		case 0:
 			dialogueManager->setdisplayOnProcess(false);
@@ -349,7 +324,7 @@ void TutorialScene::endDialogue()
 			
 			Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 
-			Game::Instance()->getLog()->addDialogueLineLog("Contraseña: ", "3711");
+			Game::Instance()->getLog()->addDialogueLineLog(" ", "PIN: 3711");
 
 			entityManager->setActive(botonBack, true);
 			
@@ -376,12 +351,6 @@ void TutorialScene::endDialogue()
 			dialogueManager->setdisplayOnProcess(false);
 			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 			
-			std::cout << "AYUDA ESTOY LOCO CASO 3 ANTENA" << std::endl;
-			
-			break;
-
-		case 4:
-
 			break;
 
 		case 5:
@@ -395,23 +364,14 @@ void TutorialScene::endDialogue()
 			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 			break;
 
-		case 7:
 
-			break;
-
-		case 8:
-
-			break;
 	}
 	
 }
 
 void TutorialScene::closedLog()
 {
-	//cuando se cierra el log
-	std::cout << "closed log" << std::endl;
 	if (dialogCount == 0) {
 		roomEvent[Dialog1]();
 	}
-
 }
