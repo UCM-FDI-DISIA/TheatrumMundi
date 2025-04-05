@@ -133,7 +133,7 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 	//auto LogArea = entityManager->getComponent<RectArea2D>(_backgroundLog);
 	//entityManager->removeComponent<ClickableSpriteComponent>(_backgroundLog);
 	auto _backgroundLog = entityManager->addEntity(ecs::grp::LOG);
-	entityManager->addComponent<Transform>(_backgroundLog, Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0); //transform
+	entityManager->addComponent<Transform>(_backgroundLog, Vector2D(0, 0), Vector2D(0, 0), 1446, 768, 0); //transform
 	auto imBack = entityManager->addComponent<Image>(_backgroundLog, &sdlutils().images().at("fondoPruebaLog")); //background log
 	auto LogArea = entityManager->addComponent<RectArea2D>(_backgroundLog, areaLayerManager);
 	entityManager->setActive(_backgroundLog, false);
