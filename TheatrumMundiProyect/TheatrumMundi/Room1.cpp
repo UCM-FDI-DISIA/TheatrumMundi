@@ -126,7 +126,7 @@ void Room1Scene::_setRoomEvents()
 
 	roomEvent[InitialDialogue] = [this]()
 		{ 
-			startDialogue("Sala1Intro"); 
+			//startDialogue("Sala1Intro"); 
 		};
 	
 	roomEvent[CorpseDialogue] = [this]()
