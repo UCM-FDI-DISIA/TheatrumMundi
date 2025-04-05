@@ -9,15 +9,6 @@
 using namespace ecs;
 
 
-
-
-void SceneRoomTemplate::resolvedPuzzle(int i)
-{
-	puzzlesol[i] = true;
-	entityManager->removeComponent<ClickComponent>(puzzleptr[i]);
-	
-}
-
 void SceneRoomTemplate::setActiveBottons(bool active)
 {
 	entityManager->setActiveGroup(grp::UI,active);
@@ -54,13 +45,10 @@ void SceneRoomTemplate::scrollInventory(int dir)
         }
     }
     else if (dir == 1) { // Scroll DOWN
-        if (GetInventory()->getFirstItem() + GetInventory()->getItemNumber() < GetInventory()->hints.size()) {
-
+		if (GetInventory()->getFirstItem() + GetInventory()->getItemNumber() < GetInventory()->hints.size()) //take care of the case when we are at the end of the inventory
+        {
             GetInventory()->hints[GetInventory()->getFirstItem()]->getMngr()->setActive(GetInventory()->hints[GetInventory()->getFirstItem()], false);
-
-
             GetInventory()->setFirstItem(GetInventory()->getFirstItem() + 1);
-
 
             int newLastVisibleIndex = GetInventory()->getFirstItem() + GetInventory()->getItemNumber() - 1;
             if (newLastVisibleIndex < GetInventory()->hints.size()) {
@@ -76,6 +64,22 @@ void SceneRoomTemplate::scrollInventory(int dir)
     }
 }
 
+
+/// <summary>
+/// Hide the invnentory when a scene is called
+/// </summary>
+/// <param name="invBack"></param>
+/// <param name="UpButton"></param>
+/// <param name="DownButt"></param>
+void SceneRoomTemplate::HideAllInvetoryItems(const ecs::entity_t& invBack, const ecs::entity_t& UpButton, const ecs::entity_t& DownButt)
+{
+    GetInventory()->setActive(false);
+    invBack->getMngr()->setActive(invBack, false);
+    UpButton->getMngr()->setActive(UpButton, false);
+    DownButt->getMngr()->setActive(DownButt, false);
+    for (int i = 0; i < GetInventory()->getItems().size(); ++i)
+        GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Desactivate the hints
+}
 
 SceneRoomTemplate::SceneRoomTemplate() : SceneTemplate()
 {

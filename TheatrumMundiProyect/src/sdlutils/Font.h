@@ -42,8 +42,13 @@ public:
 	inline SDL_Surface* renderText(const std::string &text,
 			SDL_Color fgColor) const {
 		assert(_font != nullptr);
-		return TTF_RenderUTF8_Solid(_font, text.c_str(), fgColor);
+		SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
+		//TTF_RenderUTF8_Blended
+		SDL_Surface* surf = TTF_RenderUTF8_Blended(_font, text.c_str(), fgColor);
+		
+		return surf;
 	}
+
 
 	inline SDL_Surface* renderText(const std::string &text, SDL_Color fgColor,
 			SDL_Color bgColor) const {

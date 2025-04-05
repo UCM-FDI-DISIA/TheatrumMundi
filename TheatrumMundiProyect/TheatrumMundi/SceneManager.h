@@ -19,9 +19,12 @@ enum SceneName {
 	RAVEN_SCENE,
 	DOOR_SCENE,
 	MOSAIC_SCENE,
+	WINDOW_SCENE,
 	DRAG_PUZZLE,
 	XO_PUZZLE,
 	ROOM_3,
+	TUTORIAL_SCENE,
+	TELE_PUZZLE,
 	SCENE_SIZE
 };
 class SceneManager
@@ -49,7 +52,7 @@ public:
 	 //delete of enitities
 	~SceneManager();
 	void ResolveActScene();
-
+	void init();
 	void ResetSceneManager();
 };
 

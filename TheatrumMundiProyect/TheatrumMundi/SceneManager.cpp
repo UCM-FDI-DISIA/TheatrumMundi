@@ -13,9 +13,12 @@
 #include"DebugInventoryScene.h"
 #include "MosaicPuzzleScene.h"
 #include "RavenPuzzleScene.h"
+#include "WindowPuzzleScene.h"
 #include "MiddleRoomScene.h"
 #include "MusicPuzzleScene.h"
 #include "DragPuzzleScene.h"
+#include "TutorialScene.h"
+#include "TelePuzzleScene.h"
 #include "DoorPuzzleScene.h"
 #include "XOPuzzleScene.h"
 #include "CSVdataRecolector.h"
@@ -35,11 +38,17 @@ SceneManager::SceneManager()
 	scenes[SceneName::MUSIC_PUZZLE] = new MusicPuzzleScene();
 	scenes[SceneName::RAVEN_SCENE] = new RavenPuzzleScene();
 	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
+	scenes[SceneName::WINDOW_SCENE] = new WindowPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
-	loadScene(SceneName::INITIAL_MENU);
+	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
+	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 
+}
+void SceneManager::init()
+{
+	loadScene(SceneName::INITIAL_MENU);
 }
 
 void SceneManager::popScene()
@@ -287,6 +296,12 @@ SceneManager::~SceneManager()
 	currentscenes.clear();
 }
 
+void SceneManager::ResolveActScene()
+{
+}
+
+
+
 void SceneManager::ResetSceneManager()
 {
 
@@ -302,14 +317,13 @@ void SceneManager::ResetSceneManager()
 	scenes[SceneName::MUSIC_PUZZLE] = new MusicPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
+	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
+	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 
 	loadScene(SceneName::INITIAL_MENU);
 }
 
-void SceneManager::ResolveActScene()
-{
-	currentscenes.back()->ResolveScene();
-}
+
 
 

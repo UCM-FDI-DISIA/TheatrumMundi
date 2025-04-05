@@ -58,6 +58,7 @@
     <ClCompile Include="DoorPuzzleScene.cpp" />
     <ClCompile Include="DragPuzzleScene.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
+    <ClCompile Include="GameSave.cpp" />
     <ClCompile Include="Hint.cpp" />
     <ClCompile Include="InitialScene.cpp" />
     <ClCompile Include="Inventory.cpp" />
@@ -79,7 +80,9 @@
     <ClCompile Include="SceneRoomTemplate.cpp" />
     <ClCompile Include="SceneTemplate.cpp" />
     <ClCompile Include="TeaCupPuzzleScene.cpp" />
+    <ClCompile Include="TelePuzzleScene.cpp" />
     <ClCompile Include="TiledAreaComponent.cpp" />
+    <ClCompile Include="TutorialScene.cpp" />
     <ClCompile Include="WindowPuzzleScene.cpp" />
     <ClCompile Include="XOPuzzleScene.cpp" />
   </ItemGroup>
@@ -244,6 +247,7 @@
     <ClInclude Include="DragPuzzleScene.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="EventsInfo.h" />
+    <ClInclude Include="GameSave.h" />
     <ClInclude Include="Hint.h" />
     <ClInclude Include="InitialScene.h" />
     <ClInclude Include="Inventory.h" />
@@ -265,8 +269,10 @@
     <ClInclude Include="SceneRoomTemplate.h" />
     <ClInclude Include="SceneTemplate.h" />
     <ClInclude Include="TeaCupPuzzleScene.h" />
+    <ClInclude Include="TelePuzzleScene.h" />
     <ClInclude Include="TextInfo.h" />
     <ClInclude Include="TiledAreaComponent.h" />
+    <ClInclude Include="TutorialScene.h" />
     <ClInclude Include="WindowPuzzleScene.h" />
     <ClInclude Include="XOPuzzleScene.h" />
   </ItemGroup>

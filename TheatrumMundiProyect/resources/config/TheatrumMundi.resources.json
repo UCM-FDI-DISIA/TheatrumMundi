@@ -7,7 +7,7 @@
       "size": 24
     },
     { "id" : "TITLE", "file" : "../resources/fonts/PirataOne-Regular.ttf", "size": 40 },
-    { "id" : "BASE", "file" : "../resources/fonts/FeDPit2.ttf", "size": 24}
+    { "id" : "BASE", "file" : "../resources/fonts/FeFCrm2.ttf", "size": 24}
   ],
 
   "images": [
@@ -160,6 +160,18 @@
       "file": "../resources/images/Finales/RectangleEmptyButton.PNG"
     },
     {
+      "id": "Continue",
+      "file": "../resources/images/Finales/RectangleContinueButton.png"
+    },
+    {
+      "id": "ExitToMenu",
+      "file": "../resources/images/Finales/RectangleExitToMenuButton.png"
+    },
+    {
+      "id": "MenuBackground",
+      "file": "../resources/images/Finales/MenuBackground.png"
+    },
+    {
       "id": "prueba",
       "file": "../resources/images/socrates.png"
     },
@@ -261,6 +273,13 @@
     { "id" : "BotonMinutero", "file" : "../resources/images/Finales/BotonMinutero.PNG" },
     { "id" : "BotonHoraria", "file" : "../resources/images/Finales/BotonHoraria.PNG" },
     { "id" : "BotonComprobarReloj", "file" : "../resources/images/Finales/BotonComprobarReloj.PNG" },
+    { "id" : "no", "file" : "../resources/images/Finales/noButton.png" },
+    { "id" : "yes", "file" : "../resources/images/Finales/yesButton.png" },
+    { "id" : "1stQuestion", "file" : "../resources/images/Finales/1stQuestionText.png" },
+    { "id" : "2ndQuestion", "file" : "../resources/images/Finales/2ndQuestionText.png" },
+    { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
+    { "id" : "continuar", "file" : "../resources/images/Finales/continuarBackground.png" },
+    { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"
@@ -514,8 +533,36 @@
       "file": "../resources/images/temporales/piezadeZ.png"
     },
     {
-      "id": "Hanni",
-      "file": "../resources/images/asesinoDeHanni.png"
+        "id": "Hanni",
+        "file": "../resources/images/asesinoDeHanni.png"
+    },
+    {
+        "id": "TutorialButtonTemp",
+        "file": "../resources/images/temporales/RectangleTutorialButton.png"
+    },
+    {
+        "id": "NewGameLocked",
+        "file": "../resources/images/temporales/GameLocked.png"
+    },
+    {
+        "id": "teleSinAntena",
+        "file": "../resources/images/temporales/teleSinAntena.png"
+    },
+    {
+        "id": "teleConAntena",
+        "file": "../resources/images/temporales/teleConAntena.png"
+    },
+    {
+      "id": "antena",
+        "file": "../resources/images/temporales/antena.png"
+    },
+    {
+        "id": "TutorialButton",
+        "file": "../resources/images/Finales/tutorialButton.png"
+    },
+    {
+        "id": "botonNumero",
+        "file": "../resources/images/Finales/button3711.png"
     },
     {
       "id": "Cuervo",
@@ -656,13 +703,25 @@
         {
             "id": "puerta",
             "file": "../resources/sound/sfx/puerta.wav"
+        },
+        {
+          "id": "cuerda",
+          "file": "../resources/sound/sfx/cuerda.wav"
+        },
+        {
+          "id": "correcto",
+          "file": "../resources/sound/sfx/correcto.wav"
+        },
+        {
+          "id": "incorrecto",
+          "file": "../resources/sound/sfx/incorrecto.wav"
         }
     ],
 
   "musics" : [
     {
-        "id": "room1music",
-        "file":  "../resources/sound/ost/P2Room1.wav"
+        "id": "sala1",
+        "file":  "../resources/sound/music/sala1.wav"
     }
   ]
 

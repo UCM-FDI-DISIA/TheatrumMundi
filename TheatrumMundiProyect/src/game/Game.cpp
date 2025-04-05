@@ -95,7 +95,7 @@ void Game::start() {
 	bool _exit = false;
 
 	auto &ihdlr = ih();
-
+	_mngr->init();
 	// reset the time before starting - so we calculate correct
 	// delta-time in the first iteration
 	//

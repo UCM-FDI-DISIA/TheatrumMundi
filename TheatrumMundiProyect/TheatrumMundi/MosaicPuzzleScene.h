@@ -24,6 +24,7 @@ public:
 	void init(SceneRoomTemplate* sr);
 	void CorrectPositions(entity_t square);
 	void ResetPuzzle();
+	void Resolve(); //Resolve the puzzle
 	bool Check() override;
 	void Win() override;
 	void Exit() override;
