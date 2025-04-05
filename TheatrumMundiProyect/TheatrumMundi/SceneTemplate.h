@@ -61,8 +61,15 @@ public:
 	/// <summary>
 	/// Desactive de dialogue entities in scene
 	/// </summary>
+	/// 
+	/// Only for debug to resolve de puzzle or room
+	virtual void ResolveScene() {
+		
+	}
 	virtual void endDialogue();
 	inline ecs::EntityManager* GetEntityManager() { return entityManager; }
+
+	virtual void closedLog() {};
 
 };
 

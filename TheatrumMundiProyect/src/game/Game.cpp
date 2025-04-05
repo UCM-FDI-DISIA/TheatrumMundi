@@ -25,9 +25,12 @@ Game* Game::Instance()
 		return _instance;
 }
 Game::~Game() {
+	
 
 	delete _mngr;
 	delete _dataManager;
+	delete _log;
+	delete _csvdata;
 	// release InputHandler if the instance was created correctly.
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
@@ -93,7 +96,7 @@ void Game::start() {
 	bool _exit = false;
 
 	auto &ihdlr = ih();
-
+	_mngr->init();
 	// reset the time before starting - so we calculate correct
 	// delta-time in the first iteration
 	//
@@ -110,6 +113,7 @@ void Game::start() {
 
 		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
 			_exitGame = true;
+			_csvdata->safeData();
 			continue;
 		}
 
@@ -123,7 +127,33 @@ void Game::start() {
 		
 		if (frameTime < 10)
 			SDL_Delay(10 - frameTime);
+
+		//cheats
+#ifdef _DEBUG
+		//load room1
+		if (ihdlr.isKeyDown(SDL_SCANCODE_1)) {
+			std::cout << "Load Room1Scene"<<std::endl;
+			_mngr->loadScene(SceneName::ROOM_1);
+		}
+		if (ihdlr.isKeyDown(SDL_SCANCODE_2)) {
+			std::cout << "Load Room1Scene" << std::endl;
+		}
+		if (ihdlr.isKeyDown(SDL_SCANCODE_S)) {
+			_mngr->ResolveActScene();
+		}
+#endif // _DEBUG
+
 	}
+}
+
+void Game::reset()
+{
+
+	//Reset instances
+	Game::Instance()->getLog()->ResetLog();
+	Game::Instance()->getDataManager()->ResetDataManager();
+	Game::Instance()->getSceneManager()->ResetSceneManager();
+
 }
 
 SceneManager* Game::getSceneManager()

@@ -47,6 +47,14 @@ class ScenePuzzleTemplate: public SceneTemplate
 
 	bool ItemAlreadyCreated(const std::string& id); //Search if the item is in the list, this is to evitate duplications of an item
 
+	void compareInv(SceneRoomTemplate* sr); //Compare the inventory of the room with the inventory of the puzzle
+
+	void reposInv(SceneRoomTemplate* sr); //Reposition the inventory items
+
+	void scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr); //scroll puzzle
+
+	void HideInventoryItems(const ecs::entity_t& InventoryBackground, const ecs::entity_t& downButton, const ecs::entity_t& upButton, SceneRoomTemplate* sr);
+
 	ScenePuzzleTemplate();
 
 	~ScenePuzzleTemplate();

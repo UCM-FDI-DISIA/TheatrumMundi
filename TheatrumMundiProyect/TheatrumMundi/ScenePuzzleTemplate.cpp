@@ -29,6 +29,50 @@ bool ScenePuzzleTemplate::ItemAlreadyCreated(const std::string& id)
 	return false;
 }
 
+void ScenePuzzleTemplate::compareInv(SceneRoomTemplate* sr)
+{
+	bool isItemInRoom = false;
+	auto entityIt = invObjects.begin();
+	auto IdIt = invID.begin();
+	int index = 0;
+	std::list<std::list<std::string>::iterator>IdToErase;
+	for (auto id : invID) {
+		for (auto srId : sr->GetInventory()->getItems()) {
+			if (id == srId->getID()) {
+				isItemInRoom = true;
+				break;
+			}
+		}
+	
+		if (!isItemInRoom) {
+			IdToErase.push_back(IdIt);
+			invObjects.erase(entityIt);
+			entityIt = invObjects.begin() + index;		
+		}
+		else {
+			++entityIt;
+			++index;
+		}
+		++IdIt;
+		isItemInRoom = false;
+	}
+	while (!IdToErase.empty()) {
+		invID.erase(IdToErase.front());
+		IdToErase.pop_front();
+	}
+}
+
+void ScenePuzzleTemplate::reposInv(SceneRoomTemplate* sr)
+{
+	for (int i = 0; i < invObjects.size(); ++i) {
+		invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i])->setPos(sr->GetInventory()->GetPosition(i));
+	}
+
+	/*for (int i = 0; i < sr->GetInventory()->hints.size(); ++i) {
+		sr->GetInventory()->hints[i]->getMngr()->getComponent<Transform>(sr->GetInventory()->hints[i])->getPos().set(sr->GetInventory()->GetPosition(i));
+	}*/
+}
+
 ScenePuzzleTemplate::ScenePuzzleTemplate(): SceneTemplate()
 {
 	placeHand = false;
@@ -44,7 +88,12 @@ ScenePuzzleTemplate::~ScenePuzzleTemplate()
 /// <param name="sr"></param> --> Referebce to thee SceneRoomTemplate
 void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 {
+	//REMOVE INVALID ENTITIES
+	compareInv(sr);
 	//CREATE DESCRIPTION ENTITIES
+
+	//REPOSITION THE INVENTORY ITEMS
+	reposInv(sr);
 	
 	//visual background for item description text
 	auto _backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::DEFAULT);
@@ -64,6 +113,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 		if (!ItemAlreadyCreated(a->getID())) {
 
 			//Add the item name to the array names
+
 			invID.push_back(a->getID());
 			//Add the entitie to the array
 			invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, a->getID(), EntityFactory::RECTAREA, sr->GetInventory()->GetPosition(index), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
@@ -90,9 +140,8 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 					//Add the hand to the cloack
 					if (isItemHand(a->getID())) {
 
-						//remove the object from the inventory
-						sr->GetInventory()->removeItem(a->getID(), invObjects);
-
+						//remove the object and pos from the inventory
+						sr->GetInventory()->removeItem(a->getID(), invObjects,invID);				
 					}
 					else it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
 				}
@@ -166,10 +215,70 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 				if (isItemHand(id)) {
 
 					//remove the object from the inventory
-					sr->GetInventory()->removeItem(id, invObjects);
+					sr->GetInventory()->removeItem(id, invObjects, invID);
 				}
 				else it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
 			}
 			});
+	}
+}
+
+void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
+{
+	if (!sr->GetInventory() || invObjects.empty()) return;
+
+	if (dir == -1) { // Scroll UP
+		if (sr->GetInventory()->getFirstItem() > 0) {
+
+			int lastVisibleIndex = sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber() - 1;
+			if (lastVisibleIndex < invObjects.size()) {
+				invObjects[lastVisibleIndex]->getMngr()->setActive(invObjects[lastVisibleIndex], false);
+			}
+
+
+			sr->GetInventory()->setFirstItem(sr->GetInventory()->getFirstItem() - 1);
+
+
+			invObjects[sr->GetInventory()->getFirstItem()]->getMngr()->setActive(invObjects[sr->GetInventory()->getFirstItem()], true);
+
+
+			for (int i = 0; i < invObjects.size(); ++i) {
+				auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
+				transform->setPosY(transform->getPos().getY() + 150); // Ajustar la posición de los objetos visibles
+			}
+			sr->scrollInventory(-1);
+		}
+	}
+	else if (dir == 1) { // Scroll DOWN
+		if (sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber() < invObjects.size()) {
+			// Desactivar el primer objeto visible
+			invObjects[sr->GetInventory()->getFirstItem()]->getMngr()->setActive(invObjects[sr->GetInventory()->getFirstItem()], false);
+			sr->GetInventory()->setFirstItem(sr->GetInventory()->getFirstItem() + 1);
+
+			int newLastVisibleIndex = sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber() - 1;
+			if (newLastVisibleIndex < invObjects.size()) {
+				// Activar el nuevo último objeto visible
+				invObjects[newLastVisibleIndex]->getMngr()->setActive(invObjects[newLastVisibleIndex], true);
+			}
+
+			// Ajustar las posiciones de los objetos
+			for (int i = 0; i < invObjects.size(); ++i) {
+				auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
+				transform->setPosY(transform->getPos().getY() - 150); // Ajustar la posición de los objetos visibles
+			}
+			sr->scrollInventory(1);
+		}
+	}
+}
+
+void ScenePuzzleTemplate::HideInventoryItems(const ecs::entity_t& InventoryBackground, const ecs::entity_t& downButton, const ecs::entity_t& upButton,SceneRoomTemplate* sr)
+{
+	sr->GetInventory()->setActive(false);
+	entityManager->setActive(InventoryBackground, false);
+	entityManager->setActive(downButton, false);
+	entityManager->setActive(upButton, false);
+	
+	for (int i = 0; i < sr->GetInventory()->getItems().size(); ++i) {
+		invObjects[i]->getMngr()->setActive(invObjects[i], false);
 	}
 }

@@ -23,6 +23,8 @@ private:
 
 	const int LINES_DISPLAYED = 5; //number of lines displayed on screen
 
+	SceneTemplate* sceneTemplate;
+
 public:
 	
 	Log();
@@ -35,7 +37,7 @@ public:
 	void SetLogActive(bool logActive);
 	bool GetLogActive();
 
-	void Init(EntityFactory* entityFactory, ecs::EntityManager* entityManager, Area2DLayerManager* areaLayerManager);
+	void Init(EntityFactory* entityFactory, ecs::EntityManager* entityManager, Area2DLayerManager* areaLayerManager, SceneTemplate* scTp);
 
 	//delete of enitities
 	~Log();
@@ -49,4 +51,6 @@ public:
 	void next(); //used for scroll
 
 	void previous(); //used for scroll
+
+	void ResetLog();
 };

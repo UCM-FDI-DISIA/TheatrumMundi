@@ -39,10 +39,11 @@ SceneTemplate::~SceneTemplate()
 {
 	unload();
 	
-	delete entityManager;
-	delete areaLayerManager;
+	
 	delete entityFactory;
 	delete dialogueManager;
+	delete entityManager;
+	delete areaLayerManager;
 }
 void SceneTemplate::startDialogue(const string& _eventToRead)
 {
@@ -59,6 +60,7 @@ void SceneTemplate::endDialogue()
 	dialogueManager->setdisplayOnProcess(false);
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
+
 }
 
 //metodo global inv flechas

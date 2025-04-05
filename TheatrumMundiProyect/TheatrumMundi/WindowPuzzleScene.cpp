@@ -100,7 +100,7 @@ void WindowPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Log
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 
 		//startDialogue("Ventana");
 
