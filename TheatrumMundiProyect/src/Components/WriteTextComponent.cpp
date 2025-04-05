@@ -76,7 +76,7 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 {
 	if (textStructure->empty()) return;
 
-	// Escalado de resolución
+	// Scale
 	float scaleX = Game::Instance()->wscreenScale;
 	float scaleY = Game::Instance()->hscreenScale;
 
@@ -86,7 +86,6 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 	{
 		if (it.Character == "/")
 		{
-			// Línea divisoria
 			Texture* divideLine = new Texture(sdlutils().renderer(),
 				"...--.-.-.-.-.--.-.-.-.-.-..-.--.-.-.-.---......-----...-----.....----....---...---..-.-.-.-.-.-.-.-.-.-.",
 				_myFont, _color);
@@ -101,7 +100,7 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 		}
 		else
 		{
-			// Autor
+			// Author
 			Texture* authorTexture = new Texture(sdlutils().renderer(), it.Character, _myFont, _color);
 			SDL_Rect dstAuthorRect = {
 				static_cast<int>(400 * scaleX),
@@ -113,7 +112,7 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 			if (it.Character == " ") y += static_cast<int>(25 * scaleY);
 			else y += static_cast<int>(50 * scaleY);
 
-			// Texto separado en líneas
+			// Split text
 			std::vector<std::string> lines = splitTextByNewline(it.Text);
 			int currentY = y;
 
@@ -131,7 +130,7 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 				delete textTexture;
 			}
 
-			y += static_cast<int>(100 * scaleY); // Espacio entre bloques
+			y += static_cast<int>(100 * scaleY); // Space between split lines
 			delete authorTexture;
 		}
 	}
