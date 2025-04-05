@@ -225,9 +225,9 @@ void Room1Scene::_setDialog()
 	// Dialog
 	dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, _eventToRead);
 
-	assert(rmObjects.quitButton != nullptr); // UI must be Initialized First
+	assert(rmObjects.inventoryButton != nullptr); // UI must be Initialized First
 
-	Area2D* quitButtonArea = entityManager->getComponent<Area2D>(rmObjects.quitButton);
+	Area2D* inventoryButtonArea = entityManager->getComponent<Area2D>(rmObjects.inventoryButton);
 
 	auto dialogEnts = entityManager->getEntities(ecs::grp::DIALOGUE);
 
@@ -235,7 +235,7 @@ void Room1Scene::_setDialog()
 	{
 		Area2D* dialogArea = entityManager->getComponent<Area2D>(dialogEnt);
 		if(dialogArea != nullptr)
-			areaLayerManager->sendAfter(quitButtonArea->getLayerPos(), dialogArea->getLayerPos());
+			areaLayerManager->sendAfter(inventoryButtonArea->getLayerPos(), dialogArea->getLayerPos());
 	}
 }
 
@@ -253,20 +253,9 @@ void Room1Scene::_setUI()
 			entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, true);
 		});
 
-	entityManager->setActive(rmObjects.quitButton, false);
-
-
-	// Pause Logic
-	pauseManager->setScene(this);
-	pauseManager->Init(entityFactory,entityManager,areaLayerManager);
-
-	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getbackgroundNotInteractable())->getLayerPos());
-	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getreanudePauseButton())->getLayerPos());
-	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getexitPauseButton())->getLayerPos());
-
 	//Inventory
 	auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
-	
+
 	rmObjects.inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 	entityManager->setActive(InventoryBackground, false);
 
@@ -280,48 +269,58 @@ void Room1Scene::_setUI()
 
 	entityManager->getComponent<ClickComponent>(rmObjects.inventoryButton)
 		->connect(ClickComponent::JUST_CLICKED, [this, InventoryBackground, inventoryUpButton, inventoryDownButton, InvArea]()
-		{
-			AudioManager::Instance().playSound(rmSounds.uiButton);
-			GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
-
-			if (GetInventory()->getActive()) // If the inventory is active, activate the items
 			{
-				entityManager->setActive(InventoryBackground, true);
+				AudioManager::Instance().playSound(rmSounds.uiButton);
+				GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
 
-				entityManager->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(925);
+				if (GetInventory()->getActive()) // If the inventory is active, activate the items
+				{
+					entityManager->setActive(InventoryBackground, true);
 
-				//change the position of the log button
-				areaLayerManager->sendFront(InvArea->getLayerPos());
+					entityManager->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(925);
 
-				areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inventoryUpButton)->getLayerPos());
-				areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inventoryDownButton)->getLayerPos());
+					//change the position of the log button
+					areaLayerManager->sendFront(InvArea->getLayerPos());
 
-				entityManager->setActive(inventoryDownButton, true);
-				entityManager->setActive(inventoryUpButton,   true);
+					areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inventoryUpButton)->getLayerPos());
+					areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inventoryDownButton)->getLayerPos());
 
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i)
-					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
-			}
-			else 
-			{
-				entityManager->setActive(InventoryBackground, false);
-				entityManager->setActive(inventoryDownButton, false);
-				entityManager->setActive(inventoryUpButton,   false);
+					entityManager->setActive(inventoryDownButton, true);
+					entityManager->setActive(inventoryUpButton, true);
 
-				rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
+					for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i)
+						GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
+				}
+				else
+				{
+					entityManager->setActive(InventoryBackground, false);
+					entityManager->setActive(inventoryDownButton, false);
+					entityManager->setActive(inventoryUpButton, false);
 
-				// its okay to use the first item as the first item to show??
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i)
-					GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Desactivate the hints
-			}
-		});
+					rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
+
+					// its okay to use the first item as the first item to show??
+					for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i)
+						GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Desactivate the hints
+				}
+			});
 
 	entityManager->getComponent<ClickComponent>(inventoryDownButton)
-		->connect(ClickComponent::JUST_CLICKED, [this]() 
-		{
-			AudioManager::Instance().playSound(rmSounds.uiButton);
-			scrollInventory(1);
-		});
+		->connect(ClickComponent::JUST_CLICKED, [this]()
+			{
+				AudioManager::Instance().playSound(rmSounds.uiButton);
+				scrollInventory(1);
+			});
+
+	entityManager->setActive(rmObjects.quitButton, false);
+
+	// Pause Logic
+	pauseManager->setScene(this);
+	pauseManager->Init(entityFactory,entityManager,areaLayerManager);
+
+	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getbackgroundNotInteractable())->getLayerPos());
+	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getreanudePauseButton())->getLayerPos());
+	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getexitPauseButton())->getLayerPos());
 
 	// Button that confirms the assesination
 	rmObjects.posibleCaseButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(750, 748 - (268 / 3) - 20), Vector2D(0, 0), 268 / 3, 268 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
