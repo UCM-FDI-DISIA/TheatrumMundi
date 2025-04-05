@@ -717,7 +717,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			entityManager->getComponent<ClickComponent>(gloveEntity)->connect(ClickComponent::JUST_CLICKED, [this, gloveEntity, sr]() {
 				gloveEntity->getMngr()->setActive(gloveEntity, false);
 				Vector2D position = sr->GetInventory()->setPosition();
-				AddInvItem("guantes", "Unos guantes aaaa", position, sr);
+				AddInvItem("guantes", "Unos guantes. Ya está. Son unos guantes.", position, sr);
 				});
 		}
 		else if (variant == 2) {
