@@ -346,4 +346,9 @@ void ClockPuzzleScene::Win()
 	room->resolvedPuzzle(2);
 	//setSolved(true);
 }
+void ClockPuzzleScene::ResolveScene()
+{
+	Win();
+}
+
 

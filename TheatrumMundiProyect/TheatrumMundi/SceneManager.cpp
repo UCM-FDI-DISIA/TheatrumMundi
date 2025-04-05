@@ -18,6 +18,7 @@
 #include "DragPuzzleScene.h"
 #include "DoorPuzzleScene.h"
 #include "XOPuzzleScene.h"
+#include "CSVdataRecolector.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 SceneManager::SceneManager()
 {
@@ -37,6 +38,11 @@ SceneManager::SceneManager()
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
+	
+
+}
+void SceneManager::init()
+{
 	loadScene(SceneName::INITIAL_MENU);
 }
 
@@ -44,23 +50,210 @@ void SceneManager::popScene()
 {
 	std::cout << "pop scene" << endl;
 	assert(!currentscenes.empty());
+	std::string scene = "NONE";
+	switch (actsceneindex)
+	{
+	case SceneName::INITIAL_MENU:
+		scene = "INITIAL MENU";
+		break;
+	case SceneName::ROOM_1:
+		scene = "ROOM_1";
+		break;
+	case SceneName::MIDDLE_ROOM:
+		scene = "MIDDLE_ROOM";
+		break;
+	case SceneName::PIPE_PUZZLE:
+		scene = "PIPE_PUZZLE";
+		break;
+	case SceneName::CLOCK_PUZZLE:
+		scene = "CLOCK_PUZZLE";
+		break;
+	case SceneName::BOOKS_PUZZLE:
+		scene = "MIDDLE_ROOM";
+		break;
+	case -1:
+		scene = "TUTORIAL";
+		break;
+	default:
+		break;
+	}
+	Game::Instance()->getCSVDataColector()->exitScene(scene);
+
 	currentscenes.pop_back();
+	int aux;
+	for (int i = 0;i < scenes.size();i++){
+		if (currentscenes.back() == scenes[i]) aux = i;
+	}
+	switch (actsceneindex)
+	{
+	case SceneName::INITIAL_MENU:
+		scene = "INITIAL MENU";
+		break;
+	case SceneName::ROOM_1:
+		scene = "ROOM_1";
+		break;
+	case SceneName::MIDDLE_ROOM:
+		scene = "MIDDLE_ROOM";
+		break;
+	case SceneName::PIPE_PUZZLE:
+		scene = "PIPE_PUZZLE";
+		break;
+	case SceneName::CLOCK_PUZZLE:
+		scene = "CLOCK_PUZZLE";
+		break;
+	case SceneName::BOOKS_PUZZLE:
+		scene = "MIDDLE_ROOM";
+		break;
+	case -1:
+		scene = "TUTORIAL";
+		break;
+	default:
+		break;
+	}
+	Game::Instance()->getCSVDataColector()->enterScene(scene);
+
+
 }
 
 
 
 void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 {
+	std::string scene = "NONE";
+	int aux;
+	for (int i = 0;i < scenes.size();i++) {
+		if (currentscenes.back() == scenes[i]) aux = i;
+	}
+	switch (actsceneindex)
+	{
+	case SceneName::INITIAL_MENU:
+		scene = "INITIAL MENU";
+		break;
+	case SceneName::ROOM_1:
+		scene = "ROOM_1";
+		break;
+	case SceneName::MIDDLE_ROOM:
+		scene = "MIDDLE_ROOM";
+		break;
+	case SceneName::PIPE_PUZZLE:
+		scene = "PIPE_PUZZLE";
+		break;
+	case SceneName::CLOCK_PUZZLE:
+		scene = "CLOCK_PUZZLE";
+		break;
+	case SceneName::BOOKS_PUZZLE:
+		scene = "MIDDLE_ROOM";
+		break;
+	case -1:
+		scene = "TUTORIAL";
+		break;
+	default:
+		break;
+	}
+	Game::Instance()->getCSVDataColector()->exitScene(scene);
+
 	scenes[index]->init(room);
+	
 	actsceneindex = index;
+
+	switch (actsceneindex)
+	{
+	case SceneName::INITIAL_MENU:
+		scene = "INITIAL MENU";
+		break;
+	case SceneName::ROOM_1:
+		scene = "ROOM_1";
+		break;
+	case SceneName::MIDDLE_ROOM:
+		scene = "MIDDLE_ROOM";
+		break;
+	case SceneName::PIPE_PUZZLE:
+		scene = "PIPE_PUZZLE";
+		break;
+	case SceneName::CLOCK_PUZZLE:
+		scene = "CLOCK_PUZZLE";
+		break;
+	case SceneName::BOOKS_PUZZLE:
+		scene = "MIDDLE_ROOM";
+		break;
+	case -1:
+		scene = "TUTORIAL";
+		break;
+	default:
+		break;
+	}
+	Game::Instance()->getCSVDataColector()->enterScene(scene);
 	currentscenes.push_back(scenes[index]);
 	
 }
 
 void SceneManager::loadScene(int index)
 {
+	std::string scene = "NONE";
+	if (!currentscenes.empty()) {
+		int aux;
+		for (int i = 0;i < scenes.size();i++) {
+			if (currentscenes.back() == scenes[i]) aux = i;
+		}
+		switch (actsceneindex)
+		{
+		case SceneName::INITIAL_MENU:
+			scene = "INITIAL MENU";
+			break;
+		case SceneName::ROOM_1:
+			scene = "ROOM_1";
+			break;
+		case SceneName::MIDDLE_ROOM:
+			scene = "MIDDLE_ROOM";
+			break;
+		case SceneName::PIPE_PUZZLE:
+			scene = "PIPE_PUZZLE";
+			break;
+		case SceneName::CLOCK_PUZZLE:
+			scene = "CLOCK_PUZZLE";
+			break;
+		case SceneName::BOOKS_PUZZLE:
+			scene = "MIDDLE_ROOM";
+			break;
+		case -1:
+			scene = "TUTORIAL";
+			break;
+		default:
+			break;
+		}
+		Game::Instance()->getCSVDataColector()->exitScene(scene);
+	}
 	scenes[index]->init();
+	
 	actsceneindex = index;
+
+	switch (actsceneindex)
+	{
+	case SceneName::INITIAL_MENU:
+		scene = "INITIAL MENU";
+		break;
+	case SceneName::ROOM_1:
+		scene = "ROOM_1";
+		break;
+	case SceneName::MIDDLE_ROOM:
+		scene = "MIDDLE_ROOM";
+		break;
+	case SceneName::PIPE_PUZZLE:
+		scene = "PIPE_PUZZLE";
+		break;
+	case SceneName::CLOCK_PUZZLE:
+		scene = "CLOCK_PUZZLE";
+		break;
+	case SceneName::BOOKS_PUZZLE:
+		scene = "MIDDLE_ROOM";
+		break;
+	case -1:
+		scene = "TUTORIAL";
+		break;
+	default:
+		break;
+	}
+	Game::Instance()->getCSVDataColector()->enterScene(scene);
 	currentscenes.push_back(scenes[index]);
 }
 
@@ -83,6 +276,11 @@ void SceneManager::update()
 	currentscenes.back()->update();
 }
 
+int SceneManager::getSceneIndex()
+{
+	return actsceneindex+1;
+}
+
 
 
 SceneManager::~SceneManager()
@@ -92,6 +290,12 @@ SceneManager::~SceneManager()
 
 	currentscenes.clear();
 }
+
+void SceneManager::ResolveActScene()
+{
+}
+
+
 
 void SceneManager::ResetSceneManager()
 {
