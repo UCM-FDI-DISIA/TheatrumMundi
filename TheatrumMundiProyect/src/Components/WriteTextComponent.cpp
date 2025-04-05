@@ -97,22 +97,24 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 	SDL_RenderClear(sdlutils().renderer());
 
 	// Renderizar cada elemento en la textura final
-	int y = 50;
+	int y = 50* Game::Instance()->hscreenScale;
 	for (const auto& it : *textStructure)
 	{
 		if (it.Character == "/")
 		{
 			// Línea divisoria
 			Texture divideLine(sdlutils().renderer(), "...--.-.-.-.-.--.-.-.-.-.-..-.--.-.-.-.---......-----...-----.....----....---...---..-.-.-.-.-.-.-.-.-.-.", _myFont, _color);
-			SDL_Rect dstVRect = { 350* Game::Instance()->wscreenScale, y, divideLine.width(), divideLine.height() };
+			SDL_Rect dstVRect = { 350* Game::Instance()->wscreenScale, y,
+				divideLine.width()*Game::Instance()->wscreenScale, divideLine.height()* Game::Instance()->hscreenScale };
 			divideLine.render(dstVRect, 0.0);
-			y += 80;
+			y += 80* Game::Instance()->hscreenScale;
 		}
 		else
 		{
 			// Autor
 			Texture authorTexture(sdlutils().renderer(), it.Character, _myFont, _color);
-			SDL_Rect dstAuthorRect = { 400* Game::Instance()->wscreenScale, y, authorTexture.width(), authorTexture.height() };
+			SDL_Rect dstAuthorRect = { 400* Game::Instance()->wscreenScale, y, 
+				authorTexture.width()* Game::Instance()->wscreenScale, authorTexture.height()* Game::Instance()->hscreenScale };
 			authorTexture.render(dstAuthorRect, 0.0);
 
 			if (it.Character == " ") { y += 25* Game::Instance()->hscreenScale; }
@@ -127,7 +129,8 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 			for (const auto& splitLine : lines)
 			{
 				Texture textTexture(sdlutils().renderer(), splitLine, _myFont, _color);
-				SDL_Rect dstRect = { 400, currentY, textTexture.width(), textTexture.height() };
+				SDL_Rect dstRect = { 400* Game::Instance()->wscreenScale, currentY, textTexture.
+					width()* Game::Instance()->wscreenScale, textTexture.height()* Game::Instance()->hscreenScale };
 				textTexture.render(dstRect, 0.0);
 
 				currentY += textTexture.height() + 5* Game::Instance()->hscreenScale; // space between split lines
@@ -142,7 +145,7 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 
 	// Convertir SDL_Texture* en Texture y asegurarse de que respete la transparencia
 	Texture* finalText = new Texture(sdlutils().renderer(), sdlFinalTexture);
-	SDL_Rect dstRect = { 0, 0, finalText->width(), finalText->height() };
+	SDL_Rect dstRect = { 0, 0, finalText->width()* Game::Instance()->wscreenScale, finalText->height()* Game::Instance()->hscreenScale };
 	finalText->render(dstRect, 0.0);
 }
 
@@ -159,7 +162,8 @@ void WriteTextComponent<TextInfo>::render()
 
 	// Author
 	Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
-	SDL_Rect nameRect = { 325* Game::Instance()->wscreenScale, 465* Game::Instance()->hscreenScale,nameText->width(),nameText->height() };
+	SDL_Rect nameRect = { 325* Game::Instance()->wscreenScale, 465* Game::Instance()->hscreenScale,
+		nameText->width()* Game::Instance()->wscreenScale,nameText->height()* Game::Instance()->hscreenScale };
 	nameText->render(nameRect, 0);
 
 	if (isMiddleRoom)
@@ -173,7 +177,8 @@ void WriteTextComponent<TextInfo>::render()
 
 		for (const auto& line : lines) {
 			Texture* dialogText = new Texture(sdlutils().renderer(), line, _myFont, _color);
-			SDL_Rect dialogRect = { 325* Game::Instance()->wscreenScale, y, dialogText->width(), dialogText->height() };
+			SDL_Rect dialogRect = { 325* Game::Instance()->wscreenScale, y,
+				dialogText->width()* Game::Instance()->wscreenScale, dialogText->height()* Game::Instance()->hscreenScale };
 			dialogText->render(dialogRect, 0);
 
 			y += dialogText->height() + 5*Game::Instance()->hscreenScale;  // space between split lines
@@ -183,7 +188,8 @@ void WriteTextComponent<TextInfo>::render()
 	{
 		// Author
 		Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
-		SDL_Rect nameRect = { 350* Game::Instance()->wscreenScale, 465* Game::Instance()->hscreenScale,nameText->width(),nameText->height() };
+		SDL_Rect nameRect = { 350* Game::Instance()->wscreenScale, 465* Game::Instance()->hscreenScale,
+			nameText->width()* Game::Instance()->wscreenScale,nameText->height()* Game::Instance()->hscreenScale };
 		nameText->render(nameRect, 0);
 
 		// Text
@@ -195,7 +201,7 @@ void WriteTextComponent<TextInfo>::render()
 
 		for (const auto& line : lines) {
 			Texture* dialogText = new Texture(sdlutils().renderer(), line, _myFont, _color);
-			SDL_Rect dialogRect = { 375* Game::Instance()->wscreenScale, y, dialogText->width(), dialogText->height() };
+			SDL_Rect dialogRect = { 375* Game::Instance()->wscreenScale, y, dialogText->width()* Game::Instance()->wscreenScale, dialogText->height()* Game::Instance()->hscreenScale };
 			dialogText->render(dialogRect, 0);
 
 			y += dialogText->height() + 5* Game::Instance()->hscreenScale;  // space between split lines
@@ -212,7 +218,8 @@ void WriteTextComponent<DescriptionInfo>::render()
 	if (textStructure->Description.empty()) return;
 
 	Texture* dialogText = new Texture(sdlutils().renderer(), textStructure->Description, _myFont, _color);
-	SDL_Rect dialogRect = { 680, textStructure->posY + 60, dialogText->width(),dialogText->height() };
+	SDL_Rect dialogRect = { 680* Game::Instance()->wscreenScale, (textStructure->posY + 60)* Game::Instance()->hscreenScale,
+		dialogText->width()* Game::Instance()->wscreenScale,dialogText->height()* Game::Instance()->wscreenScale };
 	dialogText->render(dialogRect, 0);
 
 }
