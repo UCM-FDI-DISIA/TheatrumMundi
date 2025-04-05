@@ -34,6 +34,7 @@ void ScenePuzzleTemplate::compareInv(SceneRoomTemplate* sr)
 	bool isItemInRoom = false;
 	auto entityIt = invObjects.begin();
 	auto IdIt = invID.begin();
+	int index = 0;
 	std::list<std::list<std::string>::iterator>IdToErase;
 	for (auto id : invID) {
 		for (auto srId : sr->GetInventory()->getItems()) {
@@ -42,14 +43,15 @@ void ScenePuzzleTemplate::compareInv(SceneRoomTemplate* sr)
 				break;
 			}
 		}
+	
 		if (!isItemInRoom) {
-			//Maybe should setActivefalse first
-			invObjects.erase(entityIt);
 			IdToErase.push_back(IdIt);
-			entityIt = invObjects.begin();
+			invObjects.erase(entityIt);
+			entityIt = invObjects.begin() + index;		
 		}
 		else {
 			++entityIt;
+			++index;
 		}
 		++IdIt;
 		isItemInRoom = false;
