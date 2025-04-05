@@ -56,14 +56,14 @@ void Area2DLayerManager::sendFront(Area2DLayerManager::iterator layerIt)
 	_areaLayerOrderList.splice(_areaLayerOrderList.begin(), _areaLayerOrderList, layerIt);
 }
 
-void Area2DLayerManager::sendBehind(Area2DLayerManager::iterator otherAreaLayerIt, Area2DLayerManager::iterator layerIt)
+void Area2DLayerManager::sendAfter(Area2DLayerManager::iterator otherAreaLayerIt, Area2DLayerManager::iterator layerIt)
 {
 	if (layerIt == _areaLayerOrderList.end()) return;
 
 	_areaLayerOrderList.splice(otherAreaLayerIt, _areaLayerOrderList, layerIt);
 }
 
-void Area2DLayerManager::sendAfter(Area2DLayerManager::iterator otherAreaLayerIt, Area2DLayerManager::iterator layerIt)
+void Area2DLayerManager::sendBehind(Area2DLayerManager::iterator otherAreaLayerIt, Area2DLayerManager::iterator layerIt)
 {
 	if (otherAreaLayerIt == _areaLayerOrderList.end()) return;
 	if (layerIt == _areaLayerOrderList.end()) return;

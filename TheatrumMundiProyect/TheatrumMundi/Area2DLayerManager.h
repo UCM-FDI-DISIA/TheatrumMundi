@@ -36,10 +36,10 @@ public:
 	// Sends the Area2D to the first collision layer
 	void sendFront(Area2DLayerManager::iterator layerIt);
 
-	// Sends the Area2D to the layer behind the iterator
+	// Sends the Area2D to the layer behind the iterator (on below the other area)
 	void sendBehind(Area2DLayerManager::iterator otherAreaLayerIt, Area2DLayerManager::iterator layerIt);
 
-	// Sends the Area2D to the layer after the iterator
+	// Sends the Area2D to the layer after the iterator (on top of the other area)
 	void sendAfter(Area2DLayerManager::iterator otherAreaLayerIt, Area2DLayerManager::iterator layerIt);
 
 	// Erases the Area2D from the collision list
