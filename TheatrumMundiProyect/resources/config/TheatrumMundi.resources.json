@@ -7,7 +7,7 @@
       "size": 24
     },
     { "id" : "TITLE", "file" : "../resources/fonts/PirataOne-Regular.ttf", "size": 40 },
-    { "id" : "BASE", "file" : "../resources/fonts/FeDPit2.ttf", "size": 24}
+    { "id" : "BASE", "file" : "../resources/fonts/FeFCrm2.ttf", "size": 24}
   ],
 
   "images": [
