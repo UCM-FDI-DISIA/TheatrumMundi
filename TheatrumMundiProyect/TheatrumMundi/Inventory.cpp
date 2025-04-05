@@ -107,6 +107,9 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 
 	while (itemIt != items.end()) {
 		if ((*itemIt)->getID() == idToRemove) {
+			// move the rest of the items up only if the items that are shown are between 0 and 2
+			
+		    
 			//saves the position of the entity to be removed
 			float removedY = 0;
 			if (entityIt != invEntityList.end()) {
@@ -130,16 +133,57 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 			}
 
 			itemIt = items.erase(itemIt);
+			
+			
+			if (firstItem == 0) {
+				int i = 0;
+				int posE = std::distance(invEntityList.begin(), entityIt);
+				// move the rest of the items up
+				for (auto it = entityIt; it != invEntityList.end(); ++it, i++) {
+					auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
+					transform->setPosY(transform->getPos().getY() - 150);
 
-			// move the rest of the items up
-			for (auto it = entityIt; it != invEntityList.end(); ++it) {
-				auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
-				transform->setPosY(transform->getPos().getY() - 150);
+					if (i == 2 - posE) {
+						(*it)->getMngr()->setActive(*it, true);
+					}
+				}
+
+				int j = 0;
+				int posH = std::distance(hints.begin(), hintIt);
+				for (auto it = hintIt; it != hints.end(); ++it) {
+					auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
+					transform->setPosY(transform->getPos().getY() - 150);
+
+					if (j == 2 - posH) {
+						(*it)->getMngr()->setActive(*it, true);
+					}
+				}
 			}
-			for (auto it = hintIt; it != hints.end(); ++it) {
-				auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
-				transform->setPosY(transform->getPos().getY() - 150);
+			else //if the first item is not 0, we have to move the rest of the items up
+			{
+				int i = 0;
+				int posE = std::distance(invEntityList.begin(), entityIt);
+				// move the rest of the items up
+				for (auto it = entityIt; it != invEntityList.begin(); --it, i++) {
+					auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
+					transform->setPosY(transform->getPos().getY() + 150);
+
+					if (i == posE) {
+						(*it)->getMngr()->setActive(*it, true);
+					}
+				}
+
+				int j = 0;
+				int posH = std::distance(hints.begin(), hintIt);
+				for (auto it = hintIt; it != hints.begin(); --it, j++) {
+					auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
+					transform->setPosY(transform->getPos().getY() + 150);
+					if (j == posH) {
+						(*it)->getMngr()->setActive(*it, true);
+					}
+				}
 			}
+			
 
 			return;
 		}
