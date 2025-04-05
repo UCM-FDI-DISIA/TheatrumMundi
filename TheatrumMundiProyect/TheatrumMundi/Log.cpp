@@ -171,6 +171,10 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 		setRenderedDialogueLines();
 		
 		//activate log
+		auto _openButtonImage = entityManager->getComponent<Image>(buttonOpenLog);
+		_openButtonImage->setW(entityManager->getComponent<Transform>(buttonOpenLog)->getWidth());
+		_openButtonImage->setH(entityManager->getComponent<Transform>(buttonOpenLog)->getHeight());
+		_openButtonImage->setPosOffset(0, 0);
 		entityManager->setActiveGroup(ecs::grp::LOG, true);
 		entityManager->setActive(buttonOpenLog, false); //close button
 
