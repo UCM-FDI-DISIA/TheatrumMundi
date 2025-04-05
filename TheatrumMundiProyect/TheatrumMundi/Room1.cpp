@@ -170,8 +170,10 @@ void Room1Scene::_setRoomEvents()
 		{
 			// InventoryLogic
 			GetInventory()->addItem(new Hint("TeaCupSpoon", "Es una cuchara, que no lo ves o que", &sdlutils().images().at("TeaCupSpoon")));
-			GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+			GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT));
 			GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+
+			createDescriptions(GetInventory()->hints.back(), GetInventory()->getItems().back(), rmObjects.backgroundTextDescription, rmObjects.textDescriptionEnt);
 		};
 			
 	roomEvent[ResolveCase] = [this]() {
@@ -359,6 +361,19 @@ void Room1Scene::_setUI()
 		});
 
 	entityManager->setActive(rmObjects.quitButton, false);
+
+	//inventory descriptions
+	
+	//visual background for item description text
+	rmObjects.backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::DEFAULT);
+	entityManager->setActive(rmObjects.backgroundTextDescription, false);
+
+	//description text entity
+	rmObjects.textDescriptionEnt = entityManager->addEntity(ecs::grp::DEFAULT);
+	auto _testTextTranform = entityManager->addComponent<Transform>(rmObjects.textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
+	entityManager->setActive(rmObjects.textDescriptionEnt, false);
+	SDL_Color colorDialog = { 255, 255, 255, 255 };
+	entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(rmObjects.textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, GetInventory()->getTextDescription());
 
 
 	//Inventory

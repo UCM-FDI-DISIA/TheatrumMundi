@@ -220,6 +220,8 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 				else it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
 			}
 			});
+
+		sr->createDescriptions(sr->GetInventory()->hints.back(), sr->GetInventory()->getItems().back(), nullptr, nullptr);
 	}
 }
 

@@ -62,6 +62,8 @@ private:
 		ecs::entity_t inventoryButton	  = nullptr;
 		ecs::entity_t readyToResolveBotton = nullptr;
 		ecs::entity_t blackBackground = nullptr;
+		ecs::entity_t backgroundTextDescription = nullptr;
+		ecs::entity_t textDescriptionEnt = nullptr;
 		ScrollComponent* backgroundScroll = nullptr;
 	} rmObjects;
 
