@@ -246,6 +246,7 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 				auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
 				transform->setPosY(transform->getPos().getY() + 150); // Ajustar la posición de los objetos visibles
 			}
+			sr->scrollInventory(-1);
 		}
 	}
 	else if (dir == 1) { // Scroll DOWN
@@ -265,6 +266,7 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 				auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
 				transform->setPosY(transform->getPos().getY() - 150); // Ajustar la posición de los objetos visibles
 			}
+			sr->scrollInventory(1);
 		}
 	}
 }

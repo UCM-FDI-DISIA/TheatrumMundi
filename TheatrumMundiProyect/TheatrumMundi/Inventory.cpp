@@ -162,26 +162,25 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 			else //if the first item is not 0, we have to move the rest of the items up
 			{
 				int i = 0;
-				int posE = std::distance(invEntityList.begin(), entityIt);
+				//int posE = std::distance(invEntityList.begin(), entityIt);
 				// move the rest of the items up
-				for (auto it = entityIt; it != invEntityList.begin(); --it, i++) {
+				for (auto it = invEntityList.begin(); it != entityIt; ++it, i++) {
 					auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
 					transform->setPosY(transform->getPos().getY() + 150);
 
-					if (i == posE) {
+					if (i == firstItem - 1) {
 						(*it)->getMngr()->setActive(*it, true);
 					}
 				}
-
 				int j = 0;
-				int posH = std::distance(hints.begin(), hintIt);
-				for (auto it = hintIt; it != hints.begin(); --it, j++) {
+				for (auto it = hints.begin(); it != hintIt; ++it, j++) {
 					auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
 					transform->setPosY(transform->getPos().getY() + 150);
-					if (j == posH) {
+					if (j == firstItem - 1) {
 						(*it)->getMngr()->setActive(*it, true);
 					}
 				}
+			firstItem = firstItem - 1;
 			}
 			
 
