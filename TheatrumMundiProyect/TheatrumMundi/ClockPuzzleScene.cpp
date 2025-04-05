@@ -201,8 +201,8 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 					Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
 					//Assign to this inventory the hint;
-					if(variant <=1)AddInvItem("frascoV2", "Un frasco totalmente limpio, que raro.",position, sr);
-					else if (variant ==2)AddInvItem("frascoV1", "Un frasco con restos de algo. Tiene huellas de dedos", position, sr);
+					if(variant <=1)AddInvItem("frascoV2", "Un frasco totalmente limpio, \nque raro.",position, sr);
+					else if (variant ==2)AddInvItem("frascoV1", "Un frasco con restos de algo. \nTiene huellas de dedos", position, sr);
 
 #ifdef DEBUG
 					std::cout << "wii";
