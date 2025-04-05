@@ -619,14 +619,9 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 		
 		//Create cube without water
-		_cubeWithoutWater = entityFactory->CreateImageEntity(entityManager, "cubeWithoutWater",
-
-		Vector2D((1349 - (4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0))) / 2.0,
-		(748 - (2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0))) / 2.0),
-		Vector2D(0, 0),
-		4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
-		2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
-		0, ecs::grp::UNDER);
+		_cubeWithoutWater = entityFactory->CreateImageEntity(
+			entityManager,"cubeWithoutWater",Vector2D(2, 0),Vector2D(0, 0),1346,748,0,ecs::grp::UNDER
+		);
 		
 		
 		//Viriant logic
@@ -657,8 +652,6 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		}
 
 
-		
-
 		// create entity
 		auto clock = entityFactory->CreateInteractableEntity(entityManager, "minutero", EntityFactory::RECTAREA,
 			Vector2D(980, 820), Vector2D(0, 0), 150, 250, 90,
@@ -678,13 +671,8 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		
 
 		//Create background
-		auto background = entityFactory->CreateImageEntity(entityManager, "Pared",
-		Vector2D((1349 - (4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0))) / 2.0,
-		(748 - (2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0))) / 2.0),
-		Vector2D(0, 0),
-		4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
-		2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
-		0, ecs::grp::DEFAULT);
+		auto background = entityFactory->CreateImageEntity(
+			entityManager, "Pared", Vector2D(2, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
 	
 
 		//Create string segnment sprite

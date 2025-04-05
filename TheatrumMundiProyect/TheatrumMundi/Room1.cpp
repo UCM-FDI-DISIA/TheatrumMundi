@@ -126,7 +126,7 @@ void Room1Scene::_setRoomEvents()
 
 	roomEvent[InitialDialogue] = [this]()
 		{ 
-			//startDialogue("Sala1Intro"); 
+			startDialogue("Sala1Intro"); 
 		};
 	
 	roomEvent[CorpseDialogue] = [this]()
@@ -456,12 +456,9 @@ void Room1Scene::_setCaseResolution()
 	int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(ROOM1);
 	
 
-	auto background = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D((1349 - (4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0))) / 2.0,
-		(748 - (2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0))) / 2.0),
-		Vector2D(0, 0),
-		4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
-		2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
-		0, ecs::grp::DECISION);
+	auto background = entityFactory->CreateImageEntity(
+		entityManager,"fondoPruebaLog",Vector2D(2, 0),Vector2D(0, 0),1346,748,0,ecs::grp::DECISION);
+
 	entityManager->setActive(background, false);
 
 	entityManager->addComponent<RectArea2D>(background, areaLayerManager);
@@ -583,12 +580,8 @@ void Room1Scene::_setCaseResolution()
 			entityManager->setActive(rmObjects.readyToResolveBotton, true);
 		});
 
-	rmObjects.blackBackground = entityFactory->CreateImageEntity(entityManager, "FondoNegro", Vector2D((1349 - (4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0))) / 2.0,
-			(748 - (2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0))) / 2.0),
-		Vector2D(0, 0),
-		4038 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
-		2244 * std::min(1349.0 / 4038.0, 748.0 / 2244.0),
-		0, ecs::grp::DECISION);
+	rmObjects.blackBackground = entityFactory->CreateImageEntity(
+		entityManager, "FondoNegro", Vector2D(2, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
 	entityManager->setActive(rmObjects.blackBackground, false);
 
 
