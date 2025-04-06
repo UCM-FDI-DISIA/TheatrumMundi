@@ -130,7 +130,11 @@ void TutorialScene::init()
 
 		auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
 
-		ChangeRoomScroll->setEndScrollCallback([this](){ roomEvent[Dialog3](); });
+		ChangeRoomScroll->setEndScrollCallback([this](){ 
+			entityManager->setActive(doorImage, false);
+			roomEvent[Dialog3](); 
+			
+			});
 
 		auto startRoom = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 		
@@ -148,7 +152,7 @@ void TutorialScene::init()
 			if (!startRoomScroll->isScrolling()) {
 				AudioManager::Instance().playSound(doorSound);
 				startRoomScroll->Scroll(ScrollComponent::RIGHT);
-				entityManager->setActive(doorImage, false);
+				
 			
 				
 			}
@@ -158,7 +162,7 @@ void TutorialScene::init()
 
 		//door image
 		doorImage = entityFactory->CreateImageEntity(entityManager, "TutorialPuerta", Vector2D(34, 215), Vector2D(0, 0), 136, 495, 0, ecs::grp::DEFAULT);
-
+		startRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(doorImage));
 		entityManager->setActive(doorImage, false);
 
 		//password button
