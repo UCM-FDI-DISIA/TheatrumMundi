@@ -509,7 +509,7 @@ void Room1Scene::_setCaseResolution()
 	Game::Instance()->getDataManager()->SetSceneCount(ROOM1);
 	
 	//get actual variant
-	int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(ROOM1);
+	int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(0);
 	
 
 	auto background = entityFactory->CreateImageEntity(
@@ -566,7 +566,7 @@ void Room1Scene::_setCaseResolution()
 	entityManager->getComponent<ClickComponent>(noPossibleButton)
 		->connect(ClickComponent::JUST_CLICKED, [this, variantAct, background]()
 		{
-			if (variantAct != 1 || 2) //if its the not correct variant one dies
+			if (variantAct == 0) //if its the not correct variant one dies
 			{
 				
 				Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
@@ -677,6 +677,7 @@ void Room1Scene::_setInteractuables()
 
 
 	int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
+	std::cout << "variant: " << variant << std::endl;
 	entity_t tag;
 	if (variant == 0 || variant == 2) //call was missed
 	{
