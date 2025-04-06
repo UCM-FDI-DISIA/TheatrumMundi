@@ -35,6 +35,8 @@ protected:
 		RectArea2D* InvArea = nullptr;
 		ecs::entity_t inventoryUpButton = nullptr;
 		ecs::entity_t inventoryDownButton = nullptr;
+		ecs::entity_t backgroundTextDescription = nullptr;
+		ecs::entity_t textDescriptionEnt = nullptr;
 
 	}invObjects;
 
@@ -50,6 +52,7 @@ protected:
 		/// <param name="dir"></param>
 		void scrollInventory(int dir); //scroll room1
 		void HideAllInvetoryItems(const ecs::entity_t& invBack, const ecs::entity_t& UpButton, const ecs::entity_t& DownButt); //Hide the inventory things
+		void createDescription(Entity* hintEntity, Hint* hintItem);
 
 	SceneRoomTemplate();
 	virtual ~SceneRoomTemplate();

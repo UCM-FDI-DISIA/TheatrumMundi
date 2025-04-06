@@ -546,19 +546,55 @@
     },
     {
         "id": "teleSinAntena",
-        "file": "../resources/images/temporales/teleSinAntena.png"
+        "file": "../resources/images/Finales/TutorialTele1.png"
     },
     {
         "id": "teleConAntena",
-        "file": "../resources/images/temporales/teleConAntena.png"
+        "file": "../resources/images/Finales/TutorialTele2.png"
     },
     {
       "id": "antena",
-        "file": "../resources/images/temporales/antena.png"
+        "file": "../resources/images/Finales/TutorialAntenas.png"
     },
     {
         "id": "TutorialButton",
         "file": "../resources/images/Finales/tutorialButton.png"
+    },
+    {
+      "id": "TutorialZoom1",
+      "file": "../resources/images/Finales/TutorialZoom1.png"
+    },
+    {
+      "id": "TutorialZoom2",
+      "file": "../resources/images/Finales/TutorialZoom2.png"
+    },
+    {
+      "id": "TutorialZoom3",
+      "file": "../resources/images/Finales/TutorialZoom3.png"
+    },
+    {
+      "id": "TutorialZoom4",
+      "file": "../resources/images/Finales/TutorialZoom4.png"
+    },
+    {
+      "id": "TutorialZoom5",
+      "file": "../resources/images/Finales/TutorialZoom5.png"
+    },
+    {
+      "id": "TutorialZoomKei",
+      "file": "../resources/images/Finales/TutorialZoomKei.png"
+    },
+    {
+      "id": "TutorialZoomSol",
+      "file": "../resources/images/Finales/TutorialZoomSol.png"
+    },
+    {
+      "id": "TutorialZoomLucy",
+      "file": "../resources/images/Finales/TutorialZoomLucy.png"
+    },
+    {
+      "id": "TutorialPuerta",
+      "file": "../resources/images/Finales/TutorialPuerta.png"
     },
     {
         "id": "botonNumero",

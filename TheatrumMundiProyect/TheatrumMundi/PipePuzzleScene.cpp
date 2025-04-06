@@ -668,7 +668,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(925);
 					entityManager->setActive(downButton, true);
 					entityManager->setActive(upButton, true);
-
+					entityManager->setActive(logbtn, false);
 					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
 						invObjects[i]->getMngr()->setActive(invObjects[i], true);
 					}
@@ -678,6 +678,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(InventoryBackground, false);
 					entityManager->setActive(downButton, false);
 					entityManager->setActive(upButton, false);
+					entityManager->setActive(logbtn, true);
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 
 					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
@@ -712,7 +713,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 				Vector2D(1150, 840), Vector2D(0, 0), 150, 150, 0,
 				areaLayerManager,
 				EntityFactory::NODRAG,
-				ecs::grp::INTERACTOBJ);
+				ecs::grp::DEFAULT);
 			//add click component
 			entityManager->getComponent<ClickComponent>(gloveEntity)->connect(ClickComponent::JUST_CLICKED, [this, gloveEntity, sr]() {
 				gloveEntity->getMngr()->setActive(gloveEntity, false);
@@ -906,7 +907,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		
 
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
+		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 
 		startDialogue("PuzzleTuberias");
 	}

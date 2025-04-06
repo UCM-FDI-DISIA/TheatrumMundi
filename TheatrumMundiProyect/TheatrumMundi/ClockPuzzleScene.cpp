@@ -248,7 +248,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 				// If the inventory is active, activate the items
 				if (sr->GetInventory()->getActive()) {
 					entityManager->setActive(InventoryBackground, true);
-
+					entityManager->setActive(logbtn, false);
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(925);
 					entityManager->setActive(downButton, true);
 					entityManager->setActive(upButton, true);
@@ -261,6 +261,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(InventoryBackground, false);
 					entityManager->setActive(downButton, false);
 					entityManager->setActive(upButton, false);
+					entityManager->setActive(logbtn, true);
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 
 					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
@@ -284,7 +285,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
+		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 	
 		startDialogue("PuzzleReloj");
 

@@ -63,9 +63,10 @@ private:
 		ecs::entity_t inventoryButton	  = nullptr;
 		ecs::entity_t readyToResolveBotton = nullptr;
 		ecs::entity_t blackBackground = nullptr;
+		ecs::entity_t logbtn = nullptr;
 		ScrollComponent* backgroundScroll = nullptr;
 	} rmObjects;
-
+	bool scrolling = false;
 	bool stopAnimation;
 	bool alternate;
 };

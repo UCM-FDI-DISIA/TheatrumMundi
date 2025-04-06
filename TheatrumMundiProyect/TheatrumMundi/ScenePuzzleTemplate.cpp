@@ -134,7 +134,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 			//if you drop the item, compares if it was drop in or out tge cloack
 			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this, sr, a, it, _backgroundTextDescription, textDescriptionEnt]() {
 				//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
-				if (!placeHand) it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
+				if (!placeHand) it->getMngr()->getComponent<Transform>(it)->setPosPure(getOriginalPos());
 				//in other case remove the item from this inventory and the inventory of Room1
 				else {
 					//Add the hand to the cloack
@@ -161,7 +161,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 					entityManager->setActive(textDescriptionEnt, true);
 
 					//change text description
-					sr->GetInventory()->setTextDescription(a->getID(), invObjects, _backgroundTextDescription->getMngr()->getComponent<Transform>(_backgroundTextDescription));
+					sr->GetInventory()->setTextDescription(a, entityManager->getComponent<Transform>(it), _backgroundTextDescription->getMngr()->getComponent<Transform>(_backgroundTextDescription));
 
 				}
 				
@@ -220,6 +220,8 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 				else it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
 			}
 			});
+
+		sr->createDescription(sr->GetInventory()->hints.back(), sr->GetInventory()->getItems().back());
 	}
 }
 
@@ -246,6 +248,7 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 				auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
 				transform->setPosY(transform->getPos().getY() + 150); // Ajustar la posición de los objetos visibles
 			}
+			sr->GetInventory()->setFirstItem(sr->GetInventory()->getFirstItem() + 1);
 			sr->scrollInventory(-1);
 		}
 	}
@@ -266,6 +269,7 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 				auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
 				transform->setPosY(transform->getPos().getY() - 150); // Ajustar la posición de los objetos visibles
 			}
+			sr->GetInventory()->setFirstItem(sr->GetInventory()->getFirstItem() - 1);
 			sr->scrollInventory(1);
 		}
 	}

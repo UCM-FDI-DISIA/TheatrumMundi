@@ -172,6 +172,9 @@ void Room1Scene::_setRoomEvents()
 			GetInventory()->addItem(new Hint("TeaCupSpoon", "Una cuchara de plata.", &sdlutils().images().at("TeaCupSpoon")));
 			GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 			GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+
+
+			createDescription(GetInventory()->hints.back(), GetInventory()->getItems().back());
 		};
 			
 	roomEvent[ResolveCase] = [this]() {
@@ -368,6 +371,19 @@ void Room1Scene::_setUI()
 
 	entityManager->setActive(rmObjects.quitButton, false);
 
+	//inventory descriptions
+	
+	//visual background for item description text
+	invObjects.backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::UI);
+	entityManager->setActive(invObjects.backgroundTextDescription, false);
+
+	//description text entity
+	invObjects.textDescriptionEnt = entityManager->addEntity(ecs::grp::UI);
+	auto _testTextTranform = entityManager->addComponent<Transform>(invObjects.textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
+	entityManager->setActive(invObjects.textDescriptionEnt, false);
+	SDL_Color colorDialog = { 255, 255, 255, 255 };
+	entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(invObjects.textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, GetInventory()->getTextDescription());
+
 
 	//Inventory
 
@@ -393,6 +409,7 @@ void Room1Scene::_setUI()
 			if (GetInventory()->getActive()) // If the inventory is active, activate the items
 			{
 				entityManager->setActive(invObjects.InventoryBackground, true);
+				entityManager->setActive(rmObjects.logbtn, false);
 				//change the position of the log button
 				areaLayerManager->sendFront(invObjects.InvArea->getLayerPos());
 				entityManager->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(925);
@@ -410,6 +427,7 @@ void Room1Scene::_setUI()
 				entityManager->setActive(invObjects.InventoryBackground, false);
 				entityManager->setActive(invObjects.inventoryDownButton, false);
 				entityManager->setActive(invObjects.inventoryUpButton,   false);
+				entityManager->setActive(rmObjects.logbtn, true);
 				rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
 				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the items
 				
@@ -439,7 +457,7 @@ void Room1Scene::_setUI()
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getreanudePauseButton())->getLayerPos());
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getexitPauseButton())->getLayerPos());
 
-	Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
+	rmObjects.logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 }
 
 void Room1Scene::_setRoomBackground()
@@ -451,7 +469,7 @@ void Room1Scene::_setRoomBackground()
 	auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
 	ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(ChangeRoom2));
 
-	ChangeRoomScroll->setEndScrollCallback([]() { });
+	ChangeRoomScroll->setEndScrollCallback([this]() {scrolling = false; });
 
 
 
@@ -469,6 +487,7 @@ void Room1Scene::_setRoomBackground()
 			if (!rmObjects.backgroundScroll->isScrolling()) {
 				AudioManager::Instance().playSound(rmSounds.doorSound);
 				rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
+				scrolling = true;
 			}
 		});
 
@@ -477,6 +496,7 @@ void Room1Scene::_setRoomBackground()
 		{
 			if (!rmObjects.backgroundScroll->isScrolling()) {
 				AudioManager::Instance().playSound(rmSounds.doorSound);
+				scrolling = true;
 				rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
 			}
 		});
@@ -578,7 +598,7 @@ void Room1Scene::_setCaseResolution()
 
 
 	//Button only appears when the 3 puzzles have been resolved
-	rmObjects.readyToResolveBotton = entityFactory->CreateInteractableEntity(entityManager, "B5", EntityFactory::RECTAREA, Vector2D(150+ 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	rmObjects.readyToResolveBotton = entityFactory->CreateInteractableEntity(entityManager, "B5", EntityFactory::RECTAREA, Vector2D(190+ 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 
 	entityManager->getComponent<ClickComponent>(rmObjects.readyToResolveBotton)
 		->connect(ClickComponent::JUST_CLICKED, [this, noResolveButton, resolveButton, readyToQuestion,background]()
@@ -672,17 +692,19 @@ void Room1Scene::_setInteractuables()
 	entityManager->getComponent<ClickComponent>(Mobile)
 		->connect(ClickComponent::JUST_CLICKED, [this, mobileZoom, Mobile]()
 			{
-				auto ImageMobile = entityManager->getComponent<Image>(Mobile);
-				ImageMobile->setW(entityManager->getComponent<Transform>(Mobile)->getWidth());
-				ImageMobile->setH(entityManager->getComponent<Transform>(Mobile)->getHeight());
-				ImageMobile->setPosOffset(0, 0);
-				entityManager->setActive(mobileZoom, true);
-				entityManager->setActive(rmObjects.quitButton, true);
-				auto ImagequitButton = entityManager->getComponent<Image>(rmObjects.quitButton);
-				ImagequitButton->setW(entityManager->getComponent<Transform>(rmObjects.quitButton)->getWidth());
-				ImagequitButton->setH(entityManager->getComponent<Transform>(rmObjects.quitButton)->getHeight());
-				ImagequitButton->setPosOffset(0, 0);
-				roomEvent[MobileDialogue]();
+				if (!scrolling) {
+					auto ImageMobile = entityManager->getComponent<Image>(Mobile);
+					ImageMobile->setW(entityManager->getComponent<Transform>(Mobile)->getWidth());
+					ImageMobile->setH(entityManager->getComponent<Transform>(Mobile)->getHeight());
+					ImageMobile->setPosOffset(0, 0);
+					entityManager->setActive(mobileZoom, true);
+					entityManager->setActive(rmObjects.quitButton, true);
+					auto ImagequitButton = entityManager->getComponent<Image>(rmObjects.quitButton);
+					ImagequitButton->setW(entityManager->getComponent<Transform>(rmObjects.quitButton)->getWidth());
+					ImagequitButton->setH(entityManager->getComponent<Transform>(rmObjects.quitButton)->getHeight());
+					ImagequitButton->setPosOffset(0, 0);
+					roomEvent[MobileDialogue]();
+				}
 			});
 
 	// Timetable Clue
@@ -694,20 +716,21 @@ void Room1Scene::_setInteractuables()
 
 	entityManager->getComponent<ClickComponent>(Timetable)
 		->connect(ClickComponent::JUST_CLICKED, [this, Timetable, _calendearZoom]()
-			{
-				//this->startDialogue(Calendario);
-				auto ImageTimeTable = entityManager->getComponent<Image>(Timetable);
-				ImageTimeTable->setW(entityManager->getComponent<Transform>(Timetable)->getWidth());
-				ImageTimeTable->setH(entityManager->getComponent<Transform>(Timetable)->getHeight());
-				ImageTimeTable->setPosOffset(0, 0);
-				entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
-				Timetable->getMngr()->setActive(Timetable, false);
-				entityManager->setActive(_calendearZoom, true);
-				entityManager->setActive(rmObjects.quitButton, true);
-				auto ImagequitButton = entityManager->getComponent<Image>(rmObjects.quitButton);
-				ImagequitButton->setW(entityManager->getComponent<Transform>(rmObjects.quitButton)->getWidth());
-				ImagequitButton->setH(entityManager->getComponent<Transform>(rmObjects.quitButton)->getHeight());
-				ImagequitButton->setPosOffset(0, 0);
+			{		if (!scrolling) {
+		//this->startDialogue(Calendario);
+		auto ImageTimeTable = entityManager->getComponent<Image>(Timetable);
+		ImageTimeTable->setW(entityManager->getComponent<Transform>(Timetable)->getWidth());
+		ImageTimeTable->setH(entityManager->getComponent<Transform>(Timetable)->getHeight());
+		ImageTimeTable->setPosOffset(0, 0);
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
+		Timetable->getMngr()->setActive(Timetable, false);
+		entityManager->setActive(_calendearZoom, true);
+		entityManager->setActive(rmObjects.quitButton, true);
+		auto ImagequitButton = entityManager->getComponent<Image>(rmObjects.quitButton);
+		ImagequitButton->setW(entityManager->getComponent<Transform>(rmObjects.quitButton)->getWidth());
+		ImagequitButton->setH(entityManager->getComponent<Transform>(rmObjects.quitButton)->getHeight());
+		ImagequitButton->setPosOffset(0, 0);
+			}
 			});
 
 	// Puzzles

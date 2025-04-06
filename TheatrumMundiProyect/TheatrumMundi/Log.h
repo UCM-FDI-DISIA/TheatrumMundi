@@ -37,7 +37,7 @@ public:
 	void SetLogActive(bool logActive);
 	bool GetLogActive();
 
-	void Init(EntityFactory* entityFactory, ecs::EntityManager* entityManager, Area2DLayerManager* areaLayerManager, SceneTemplate* scTp);
+	ecs::entity_t Init(EntityFactory* entityFactory, ecs::EntityManager* entityManager, Area2DLayerManager* areaLayerManager, SceneTemplate* scTp);
 
 	//delete of enitities
 	~Log();
