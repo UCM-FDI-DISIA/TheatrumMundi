@@ -75,6 +75,7 @@ TutorialScene::TutorialScene() : SceneRoomTemplate()
 			if (dialogCount == 3) {
 				dialogCount += 1;
 				entityManager->setActive(antenna, true);
+				HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
 				Game::Instance()->getSceneManager()->loadScene(TELE_PUZZLE, this);
 			}
 			else if (dialogCount == 4) {
