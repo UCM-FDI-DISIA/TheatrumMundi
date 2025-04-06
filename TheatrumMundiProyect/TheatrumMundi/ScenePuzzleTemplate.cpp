@@ -195,7 +195,9 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 		invID.push_back(id);
 		invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
 		auto it = invObjects.back();
-		it->getMngr()->setActive(it, false);
+
+		if(sr->GetInventory()->getActive() == true && sr->GetInventory()->getItems().size() < 4) it->getMngr()->setActive(it, true); //If inventory is showing and we have less than 2 items, set the AddedItem to True
+		else it->getMngr()->setActive(it, false);
 
 		//Assign the lamda functions to the inventory item
 		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this,it]() {

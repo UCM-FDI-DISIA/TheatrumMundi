@@ -198,12 +198,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 					Image* img = entityManager->getComponent<Image>(background);
 					img->setTexture(&sdlutils().images().at("FondoReloj2"));
 					container->getMngr()->setActive(container, true);
-
-					Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
 					//Assign to this inventory the hint;
-					if(variant ==0)AddInvItem("frascoV2", "Un frasco con restos de algo.",position, sr);
-					else if(variant ==1)AddInvItem("frascoV2", "Un frasco totalmente limpio, que raro.",position, sr);
-					else if (variant ==2)AddInvItem("frascoV1", " Un frasco con huellas de dedos, ¿no habían guantes?", position, sr);
 
 #ifdef DEBUG
 					std::cout << "wii";
@@ -215,11 +210,15 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//REWARD
 		ClickComponent* clk = entityManager->getComponent<ClickComponent>(container);
-		clk->connect(ClickComponent::JUST_CLICKED, [this, container, sr]() {
+		clk->connect(ClickComponent::JUST_CLICKED, [this, container,variant, sr]() {
 
-		
+			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+			if (variant == 0)AddInvItem("frascoV2", "Un frasco con restos de algo.", position, sr);
+			else if (variant == 1)AddInvItem("frascoV2", "Un frasco totalmente limpio, que raro.", position, sr);
+			else if (variant == 2)AddInvItem("frascoV1", " Un frasco con huellas de dedos, ¿no habían guantes?", position, sr);
 			container->getMngr()->setActive(container, false);
-			});
+
+		});
 
 		//BackButton
 		//ENTIDADCONENTITYFACTORY
