@@ -172,7 +172,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		//room variant logic
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
 		entity_t container;
-		if (variant == 1) {
+		if (variant  <=1) {
 			container = entityFactory->CreateInteractableEntity(entityManager, "frascoV2", EntityFactory::RECTAREA,
 				Vector2D(500, 600), Vector2D(0, 0), 75, 125, 0,
 				areaLayerManager,
@@ -180,7 +180,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
 			container->getMngr()->setActive(container, false);
 		}
-		else {
+		else if (variant == 2) {
 			container = entityFactory->CreateInteractableEntity(entityManager, "frascoV1", EntityFactory::RECTAREA,
 				Vector2D(500, 600), Vector2D(0, 0), 75, 125, 0,
 				areaLayerManager,
@@ -201,8 +201,9 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 					Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
 					//Assign to this inventory the hint;
-					if(variant ==1)AddInvItem("frascoV2", "Un frasco totalmente limpio, que raro.",position, sr);
-					else AddInvItem("frascoV1", "Un frasco con restos de algo. Tiene huellas de dedos", position, sr);
+					if(variant ==0)AddInvItem("frascoV2", "Un frasco con restos de algo.",position, sr);
+					else if(variant ==1)AddInvItem("frascoV2", "Un frasco totalmente limpio, que raro.",position, sr);
+					else if (variant ==2)AddInvItem("frascoV1", " Un frasco con huellas de dedos, ¿no habían guantes?", position, sr);
 
 #ifdef DEBUG
 					std::cout << "wii";
