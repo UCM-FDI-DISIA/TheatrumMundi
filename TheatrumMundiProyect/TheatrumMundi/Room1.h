@@ -65,7 +65,7 @@ private:
 		ecs::entity_t blackBackground = nullptr;
 		ScrollComponent* backgroundScroll = nullptr;
 	} rmObjects;
-
+	bool scrolling = false;
 	bool stopAnimation;
 	bool alternate;
 };
