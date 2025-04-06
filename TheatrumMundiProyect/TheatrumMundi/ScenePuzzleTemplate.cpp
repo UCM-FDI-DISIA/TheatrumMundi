@@ -134,7 +134,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 			//if you drop the item, compares if it was drop in or out tge cloack
 			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this, sr, a, it, _backgroundTextDescription, textDescriptionEnt]() {
 				//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
-				if (!placeHand) it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
+				if (!placeHand) it->getMngr()->getComponent<Transform>(it)->setPosPure(getOriginalPos());
 				//in other case remove the item from this inventory and the inventory of Room1
 				else {
 					//Add the hand to the cloack

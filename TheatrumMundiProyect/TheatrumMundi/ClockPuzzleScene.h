@@ -20,5 +20,6 @@ private:
 	Entity* clock;
 	Entity* longClockHand;
 	Entity* shortClockHand;
+	ecs::entity_t logbtn;
 };
 

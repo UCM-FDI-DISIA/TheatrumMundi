@@ -409,6 +409,7 @@ void Room1Scene::_setUI()
 			if (GetInventory()->getActive()) // If the inventory is active, activate the items
 			{
 				entityManager->setActive(invObjects.InventoryBackground, true);
+				entityManager->setActive(rmObjects.logbtn, false);
 				//change the position of the log button
 				areaLayerManager->sendFront(invObjects.InvArea->getLayerPos());
 				entityManager->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(925);
@@ -426,6 +427,7 @@ void Room1Scene::_setUI()
 				entityManager->setActive(invObjects.InventoryBackground, false);
 				entityManager->setActive(invObjects.inventoryDownButton, false);
 				entityManager->setActive(invObjects.inventoryUpButton,   false);
+				entityManager->setActive(rmObjects.logbtn, true);
 				rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
 				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the items
 				
@@ -455,7 +457,7 @@ void Room1Scene::_setUI()
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getreanudePauseButton())->getLayerPos());
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getexitPauseButton())->getLayerPos());
 
-	Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
+	rmObjects.logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 }
 
 void Room1Scene::_setRoomBackground()
@@ -596,7 +598,7 @@ void Room1Scene::_setCaseResolution()
 
 
 	//Button only appears when the 3 puzzles have been resolved
-	rmObjects.readyToResolveBotton = entityFactory->CreateInteractableEntity(entityManager, "B5", EntityFactory::RECTAREA, Vector2D(150+ 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	rmObjects.readyToResolveBotton = entityFactory->CreateInteractableEntity(entityManager, "B5", EntityFactory::RECTAREA, Vector2D(190+ 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 
 	entityManager->getComponent<ClickComponent>(rmObjects.readyToResolveBotton)
 		->connect(ClickComponent::JUST_CLICKED, [this, noResolveButton, resolveButton, readyToQuestion,background]()

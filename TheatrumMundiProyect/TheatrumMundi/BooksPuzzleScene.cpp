@@ -100,7 +100,8 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 				// If the inventory is active, activate the items
 				if (sr->GetInventory()->getActive()) {
 					entityManager->setActive(InventoryBackground, true);
-
+					entityManager->setActive(logbtn, false);
+					
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(925);
 					entityManager->setActive(downButton, true);
 					entityManager->setActive(upButton, true);
@@ -112,7 +113,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 				}
 				else {
 					entityManager->setActive(InventoryBackground, false);
-					entityManager->setActive(InventoryBackground, false);
+					entityManager->setActive(logbtn, true);
 					entityManager->setActive(downButton, false);
 					entityManager->setActive(upButton, false);
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
@@ -354,7 +355,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		});
 
 		dialogueManager->Init(1, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
+		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 
 		
 }
