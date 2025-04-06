@@ -59,7 +59,7 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 
 		dialogueManager->setScene(this);
 
-		teaCupBackground = entityFactory->CreateImageEntity(entityManager, "TutorialZoom1", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+		teaCupBackground = entityFactory->CreateImageEntity(entityManager, "TeaCupBackgroundWithoutSpoon", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		teaCupBackground->getMngr()->removeComponent<Area2D>(teaCupBackground);
 
 		ecs::entity_t teaCup = entityFactory->CreateInteractableEntity( // Cup entity
