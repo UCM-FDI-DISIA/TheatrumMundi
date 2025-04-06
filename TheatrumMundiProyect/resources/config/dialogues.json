@@ -192,15 +192,15 @@
             ],
             "RecogerVeneno1":[
                 {"Character":"Lucy","Text":"200mg, eso es bastante veneno."},
-                {"Character":"Lucy","Text":"¿De verdad?"},
-                {"Character":"Sol","Text":"Te mataría en unos 20 minutos."},
-                {"Character":"Sol","Text":"Por suerte para nosotros, no tengo intención de consumirlo."}
+                {"Character":"Sol","Text":"¿De verdad?"},
+                {"Character":"Lucy","Text":"Te mataría en unos 20 minutos."},
+                {"Character":"Sol","Text":"Por suerte para nosotros, no tengo intención\n de consumirlo."}
                 
             ],
             "RecogerVeneno2":[
                 {"Character":"Lucy","Text":"10mg, eso no mataría ni a un bebe"},
-                {"Character":"Lucy","Text":"¿De verdad?"},
-                {"Character":"Sol","Text":"Una dosis adecuada mataría a un\n adulto en unos 20 minutos"},
+                {"Character":"Sol","Text":"¿De verdad?"},
+                {"Character":"Lucy","Text":"Una dosis adecuada mataría a un\n adulto en unos 20 minutos"},
                 {"Character":"Sol","Text":"Prefiero que no haya ningún veneno en primer lugar. "}
                 
             ],
