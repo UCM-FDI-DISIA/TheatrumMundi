@@ -52,9 +52,14 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 		isStarted = true;
 		room = sr;
 
+		//Audio sfx 
+		AudioManager& a = AudioManager::Instance();
+		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		a.setVolume(buttonSound, 0.2);
+
 		dialogueManager->setScene(this);
 
-		teaCupBackground = entityFactory->CreateImageEntity(entityManager, "TeaCupBackgroundWithoutSpoon", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+		teaCupBackground = entityFactory->CreateImageEntity(entityManager, "TutorialZoom1", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		teaCupBackground->getMngr()->removeComponent<Area2D>(teaCupBackground);
 
 		ecs::entity_t teaCup = entityFactory->CreateInteractableEntity( // Cup entity
@@ -100,8 +105,9 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [buttonSound]()
 			{
+				AudioManager::Instance().playSound(buttonSound);
 				Game::Instance()->getSceneManager()->popScene();
 			});
 
@@ -119,9 +125,9 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 		//InventoryButton
 		inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
-		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton]() //Lamda function
+		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, buttonSound]() //Lamda function
 			{
-				//AudioManager::Instance().playSound(buttonSound);
+				AudioManager::Instance().playSound(buttonSound);
 				sr->GetInventory()->setActive(!sr->GetInventory()->getActive());  // Toggle the inventory
 
 				// If the inventory is active, activate the items
@@ -150,16 +156,16 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		ClickComponent* UPbuttonInventoryClick = entityManager->getComponent<ClickComponent>(upButton);
-		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ upButton, sr]() {
+		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, upButton, sr]() {
 
-			//AudioManager::Instance().playSound(buttonSound);
+			AudioManager::Instance().playSound(buttonSound);
 			sr->scrollInventory(-1);
 			});
 
 		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
-		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ downButton, sr]() {
+		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, downButton, sr]() {
 
-			//AudioManager::Instance().playSound(buttonSound);
+			AudioManager::Instance().playSound(buttonSound);
 			sr->scrollInventory(1);
 			});
 

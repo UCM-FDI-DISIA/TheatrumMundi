@@ -55,6 +55,7 @@ private:
 	struct roomSounds {
 		Sound uiButton;
 		Sound puzzleButton;
+		Sound doorSound;
 	} rmSounds;
 
 	struct roomObjects {
@@ -64,7 +65,7 @@ private:
 		ecs::entity_t blackBackground = nullptr;
 		ScrollComponent* backgroundScroll = nullptr;
 	} rmObjects;
-
+	bool scrolling = false;
 	bool stopAnimation;
 	bool alternate;
 };

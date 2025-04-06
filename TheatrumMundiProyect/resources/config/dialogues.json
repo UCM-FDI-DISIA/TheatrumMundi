@@ -29,7 +29,7 @@
         {"Character":" ","Text":"Por eso la tenemos en el almacén."},
         {"Character":" ","Text":"Tengo que dejar de irme por las ramas."},
         {"Character":" ","Text":"¿Por qué me sigues mirando así?"},
-        {"Character":" ","Text":"Sé que la sala sigue ligeramente cochambrosa,\npero tengo que educarte antes de nada. \nPor eso la tenemos en el almacén."},
+        {"Character":" ","Text":"Sé que la sala sigue ligeramente cochambrosa,\npero tengo que educarte antes de nada."},
         {"Character":" ","Text":"Tengo que asegurarme de que vas a consumir \nmi trabajo de manera correcta."},
         {"Character":" ","Text":"¡Se acabó la charla!"},
         {"Character":" ","Text":"¿Ves como se mueve el televisor cuando lo señalas?"},
@@ -73,8 +73,9 @@
         {"Character":" ","Text":"No hay espacio para lo seguro,"},
         {"Character":" ","Text":"ya sea un drama o totalmente absurdo."},
         {"Character":" ","Text":"Lo realmente entretenido, sería decidir por uno mismo"},
-        {"Character":" ","Text":"si la escena ante nuestros ojos."},
-        {"Character":"Lucy","Text":"Arte ha aprendido a abrir puertas, \nno te puedes imaginar lo insoportable que se está volviendo."},
+        {"Character":" ","Text":"si la escena ante nuestros ojos,"},
+        {"Character":" ","Text":"es algo plausible o totalmente ficticio."},
+        {"Character":"Lucy","Text":" Arte ha aprendido a abrir puertas, \nno te puedes imaginar lo insoportable que se está volviendo."},
         {"Character":"Keisara","Text":"No hables así de nuestra niña, la pobre solo quiere compañía."},
         {"Character":"Sol","Text":"No se si preocuparme de que hables de tu gata \ncomo si fuese tu hija."},
         {"Character":"Keisara","Text":"Podría decir lo mismo sobre cómo hablas de tu piano \ny no me ves incordiando con ello constantemente."},
@@ -189,10 +190,22 @@
                 
             ],
             "Sala1Final":[
-                {"Character":"Lucy","Text":"FINAL"},
-                {"Character":"Lucy","Text":"FINAL"},
-                {"Character":"Sol","Text":"FINAL"},
-                {"Character":"Sol","Text":"FINAL"}
+                {"Character":" ","Text":"Bueno, bueno, bueno."},
+                {"Character":" ","Text":"Parece que el incentivo a funcionado."},
+                {"Character":" ","Text":"¡Me habéis hecho caso!"},
+                {"Character":"Sol","Text":"Tienes un problema."},
+                {"Character":"Lucy","Text":"Creo que eso es quedarse corto."},
+                {"Character":" ","Text":"¡Oh no! Desprecio hacia mi persona."},
+                {"Character":" ","Text":"¿Qué podré hacer contra eso?"},
+                {"Character":" ","Text":"Jajaja"},
+                {"Character":"Sol","Text":"Si, si, todo muy gracioso."},
+                {"Character":"Sol","Text":"Ha muerto por veneno, ¿es eso lo que querías oír?"},
+                {"Character":" ","Text":"¡Claro que no! Eso era obvio."},
+                {"Character":" ","Text":"Mi adivinanza es otra."},
+                {"Character":" ","Text":"¿Es posible que vuestra querida amiga haya sido asesinada?"},
+                {"Character":"Lucy","Text":"¿Qué?"},
+                {"Character":" ","Text":"Venga, con toda la información que tenéis deberíais\n de poder responder a eso."},
+                {"Character":" ","Text":"¿Cuál es vuestra respuesta?"}
                 
             ]
         },

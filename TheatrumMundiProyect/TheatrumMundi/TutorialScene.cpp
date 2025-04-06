@@ -91,8 +91,8 @@ TutorialScene::TutorialScene() : SceneRoomTemplate()
 		};
 	roomEvent[Antenna] = [this] {
 		// InventoryLogic
-		GetInventory()->addItem(new Hint("TeaCupSpoon", "Es una cuchara, que no lo ves o que", &sdlutils().images().at("TeaCupSpoon")));
-		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		GetInventory()->addItem(new Hint("antena", "Antena de un televisor. ¿Esto sigue existiendo?", &sdlutils().images().at("antena")));
+		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "antena", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 		roomEvent[Dialog5]();
 		};
@@ -117,12 +117,8 @@ void TutorialScene::init()
 		a.setVolume(puzzleButtonSound, 0.3);
 
 		Sound doorSound = sdlutils().soundEffects().at("puerta");
-		a.setVolume(doorSound, 0.3);
-
-		//Audio music
-		Sound room1music = sdlutils().musics().at("room1music");
-		a.setLooping(room1music, true);
-		a.playSound(room1music);
+		a.setVolume(doorSound, 0.6);
+		a.setSourcePosition(doorSound, -500, 0, 0);
 
 		//Register scene in dialogue manager
 		dialogueManager->setScene(this);
@@ -161,12 +157,12 @@ void TutorialScene::init()
 		entityManager->setActive(ChangeRoom1, false);
 
 		//door image
-		doorImage = entityFactory->CreateImageEntity(entityManager, "TutorialButton", Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, ecs::grp::DEFAULT);
+		doorImage = entityFactory->CreateImageEntity(entityManager, "TutorialPuerta", Vector2D(34, 215), Vector2D(0, 0), 136, 495, 0, ecs::grp::DEFAULT);
 
 		entityManager->setActive(doorImage, false);
 
 		//password button
-		passwordButton = entityFactory->CreateInteractableEntity(entityManager, "botonNumero", EntityFactory::RECTAREA, Vector2D(600, 400), Vector2D(0, 0), 750 / 3, 760 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		passwordButton = entityFactory->CreateInteractableEntity(entityManager, "botonNumero", EntityFactory::RECTAREA, Vector2D(550, 300), Vector2D(0, 0), 200, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		entityManager->getComponent<ClickComponent>(passwordButton)->connect(ClickComponent::JUST_CLICKED, [this, puzzleButtonSound]() {
 			AudioManager::Instance().playSound(puzzleButtonSound);
 			roomEvent[Dialog2]();
@@ -177,7 +173,7 @@ void TutorialScene::init()
 
 
 		//Antenna
-		antenna = entityFactory->CreateInteractableEntity(entityManager, "antena", EntityFactory::RECTAREA, Vector2D(900, 400), Vector2D(0, 0), 350 / 3, 360 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		antenna = entityFactory->CreateInteractableEntity(entityManager, "antena", EntityFactory::RECTAREA, Vector2D(900, 630), Vector2D(0, 0), 133, 85, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		//startRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(antenna));
 		entityManager->getComponent<ClickComponent>(antenna)->connect(ClickComponent::JUST_CLICKED, [this, puzzleButtonSound]() {
 			AudioManager::Instance().playSound(puzzleButtonSound);
@@ -189,7 +185,7 @@ void TutorialScene::init()
 		
 
 		//Television
-		television = entityFactory->CreateInteractableEntity(entityManager, "teleSinAntena", EntityFactory::RECTAREA, Vector2D(170 - 1349, 400), Vector2D(0, 0), 750 / 3, 760 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		television = entityFactory->CreateInteractableEntity(entityManager, "teleSinAntena", EntityFactory::RECTAREA, Vector2D(480 - 1349, 200), Vector2D(0, 0), 385, 498, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		startRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(television));
 		entityManager->getComponent<ClickComponent>(television)->connect(ClickComponent::JUST_CLICKED, [this, puzzleButtonSound]() {
 			AudioManager::Instance().playSound(puzzleButtonSound);
@@ -202,7 +198,7 @@ void TutorialScene::init()
 
 
 		//quit button
-
+		/*
 		botonBack = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(1349 - 110, 20), Vector2D(0, 0), 270 / 4, 270 / 4, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		entityManager->getComponent<ClickComponent>(botonBack)->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
 
@@ -211,7 +207,7 @@ void TutorialScene::init()
 			});
 
 		entityManager->setActive(botonBack, false);
-
+		*/
 
 		//INVENTORY
 
@@ -324,9 +320,9 @@ void TutorialScene::endDialogue()
 			
 			Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 
-			Game::Instance()->getLog()->addDialogueLineLog(" ", "PIN: 3711");
+			Game::Instance()->getLog()->addDialogueLineLog(" ", "PW: 3711");
 
-			entityManager->setActive(botonBack, true);
+			//entityManager->setActive(botonBack, true);
 			
 
 			break;
