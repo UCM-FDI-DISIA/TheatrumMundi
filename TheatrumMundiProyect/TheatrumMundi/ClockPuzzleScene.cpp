@@ -172,7 +172,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		//room variant logic
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
 		entity_t container;
-		if (variant <= 1) {
+		if (variant == 1) {
 			container = entityFactory->CreateInteractableEntity(entityManager, "frascoV2", EntityFactory::RECTAREA,
 				Vector2D(500, 600), Vector2D(0, 0), 75, 125, 0,
 				areaLayerManager,
@@ -180,7 +180,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
 			container->getMngr()->setActive(container, false);
 		}
-		else if (variant == 2) {
+		else {
 			container = entityFactory->CreateInteractableEntity(entityManager, "frascoV1", EntityFactory::RECTAREA,
 				Vector2D(500, 600), Vector2D(0, 0), 75, 125, 0,
 				areaLayerManager,
