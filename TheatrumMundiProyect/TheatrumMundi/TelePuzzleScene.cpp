@@ -215,7 +215,7 @@ bool TelePuzzleScene::isItemHand(const std::string& itemId)
 		tvAnimationFrames.push_back(&sdlutils().images().at("TutorialZoomLucy"));
 		tvAnimationFrames.push_back(&sdlutils().images().at("TutorialZoom5"));
 		tvAnimationFrames.push_back(&sdlutils().images().at("FondoNegro"));
-		
+		tvAnimationFrames.push_back(&sdlutils().images().at("FondoNegro"));
 		
 
 		currentFrameIndex = 0;
@@ -252,6 +252,7 @@ void TelePuzzleScene::refresh()
 			
 			isAnimating = false;
 			Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
+			Game::Instance()->reset();
 			return;
 		}
 
@@ -270,6 +271,7 @@ void TelePuzzleScene::refresh()
 
 			isAnimating = false;
 			Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
+			Game::Instance()->reset();
 			return;
 		}
 

@@ -171,6 +171,7 @@ void TutorialScene::init()
 			AudioManager::Instance().playSound(puzzleButtonSound);
 			roomEvent[Dialog2]();
 			entityManager->setActive(passwordButton, false);
+			entityManager->setActive(doorImage, true);
 			});
 
 		entityManager->setActive(passwordButton, false);
@@ -344,7 +345,7 @@ void TutorialScene::endDialogue()
 
 			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 			entityManager->setActive(ChangeRoom1, true);
-			entityManager->setActive(doorImage, true);
+			
 			break;
 
 		case 3:
