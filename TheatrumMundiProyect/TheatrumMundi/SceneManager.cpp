@@ -43,7 +43,7 @@ SceneManager::SceneManager()
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::INITIAL_MENU);
+	loadScene(SceneName::DRAG_PUZZLE);
 }
 
 void SceneManager::popScene()
