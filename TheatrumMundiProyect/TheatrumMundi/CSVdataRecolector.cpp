@@ -20,27 +20,61 @@ CSVdataRecolector::~CSVdataRecolector()
 {
 }
 
-void CSVdataRecolector::AddEntry(const std::string& _id, const std::string _scene)
+void CSVdataRecolector::AddEntry(const std::string& _id, int sceneindex)
 {
+	std::cout << sceneindex << std::endl;
+	std:: string scene;
+	switch (Game::Instance()->getSceneManager()->getSceneIndex())
+	{
+	case 0:
+		scene = "INITIAL MENU";
+		break;
+	case 1:
+		scene = "MIDDLE_ROOM";
+		break;
+	case 2:
+		scene = "ROOM_1";
+		break;
+	case 3:
+		scene = "PIPE_PUZZLE";
+		break;
+	case 4:
+		scene = "MIDDLE_ROOM";
+		break;
+	case 5:
+		scene = "CLOCK_PUZZLE";
+		break;
+	case 16:
+		scene = "TUTORIAL";
+		break;
+	case 17:
+		scene = "TELE_PUZZLE";
+		break;
+	case 6:
+		scene = "TEA_CUP_PUZZLE";
+		break;
+	default:
+		break;
+	}
 	std::string aux_id = _id;
 	if (_id == "B1" || _id == "B2" || _id == "B3" || _id == "B4" || _id == "B5" || _id == "B6" || _id == "B7") {
 		aux_id = getUIBtn(_id);
 	}
 	//clickDataTimeLine
-	ClickDataTimeLine aux = { aux_id,_scene,sdlutils().currRealTime()};
+	ClickDataTimeLine aux = { aux_id,scene,sdlutils().currRealTime()};
 	clickdataTimeList.push_back(aux);
 	//ClickDataSummary
-	 std::string const auxid = aux_id + _scene;
+	 std::string const auxid = aux_id + scene;
 	 auto a = clicksSummaryMap.find(auxid);
 	 
 	 if (a != clicksSummaryMap.end()) {
 		 a.operator*().second.numclicks++;
 	}
 	 else {
-		 clicksSummaryMap.insert({ auxid,{aux_id,_scene,1}});
+		 clicksSummaryMap.insert({ auxid,{aux_id,scene,1}});
 	 }
 	 //add the click to the sceneSummary
-	 SceneSummaryMap[_scene].totalclicks++;
+	 SceneSummaryMap[scene].totalclicks++;
 
 	 //Add de movement of the mosue
 	 Vector2D auxvec = Vector2D(ih().getMousePos().first*Game::Instance()->wscreenScale, ih().getMousePos().second*Game::Instance()->hscreenScale);
@@ -79,7 +113,7 @@ void CSVdataRecolector::safeData()
 	
 	
 	archive<< "Resumen de click en botones"<<"\n";
-	archive << "ID" << ";" << "Scene" << ";" << "Numero de click" << "\n";
+	archive << "ID" << ";" << "Scene" << ";" << "Numero de clicks" << "\n";
 	for (auto a : clicksSummaryMap) {
 		archive << a.second.id << ";" << a.second.scene << ";" << a.second.numclicks << "\n";
 	}
@@ -103,6 +137,17 @@ void CSVdataRecolector::safeData()
 		archive << a.id << ";" << a.scene << ";" << a.currentTime / 1000.0 << "\n";
 	}
 	numtester++;
+	reset();
+}
+
+void CSVdataRecolector::reset()
+{
+	clickdataTimeList.clear();
+	clicksSummaryMap.clear();
+	SceneSummaryMap.clear();
+	iniSceneTime = 0;
+	lastmousepos = Vector2D(0, 0);
+	totalmouseMovement = Vector2D(0, 0);
 }
 
 std::string CSVdataRecolector::getUIBtn(const std::string& id)

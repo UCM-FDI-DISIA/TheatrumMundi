@@ -37,7 +37,7 @@ TutorialScene::TutorialScene() : SceneRoomTemplate()
 	antenna = nullptr;
 	dialogCount = -1;
 
-	dialogueManager = new DialogueManager(-1);
+	
 	roomEvent.resize(event_size);
 	roomEvent[Dialog0] = [this]
 		{
@@ -108,6 +108,7 @@ void TutorialScene::init()
 {
 
 	if (!isStarted) {
+		dialogueManager = new DialogueManager(-1);
 		isStarted = true;
 		finishallpuzzles = false;
 		//Audio sfx 

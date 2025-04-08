@@ -112,8 +112,14 @@ void Game::start() {
 		ihdlr.refresh();
 
 		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
-			_exitGame = true;
+			//_exitGame = true;
+			//_csvdata->safeData();
+			continue;
+		}
+		if (ihdlr.isKeyDown(SDL_SCANCODE_G)) {
 			_csvdata->safeData();
+			SDL_Delay(1000);
+			ihdlr.refresh();
 			continue;
 		}
 

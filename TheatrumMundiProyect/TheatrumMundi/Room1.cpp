@@ -28,7 +28,7 @@
 
 Room1Scene::Room1Scene() : SceneRoomTemplate(), _eventToRead("Sala1Intro")
 {
-	dialogueManager = new DialogueManager(1);
+	
 	
 	_setRoomEvents();
 }
@@ -40,7 +40,7 @@ Room1Scene::~Room1Scene()
 void Room1Scene::init()
 {
 	if (isStarted) return;
-	
+	dialogueManager = new DialogueManager(1);
 	isStarted = true;
 	finishallpuzzles = false;
 	stopAnimation = false;

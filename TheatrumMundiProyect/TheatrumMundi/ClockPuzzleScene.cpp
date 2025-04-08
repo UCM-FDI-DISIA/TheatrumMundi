@@ -25,7 +25,7 @@ ClockPuzzleScene::ClockPuzzleScene() : ScenePuzzleTemplate()
 	_actualMinute = 0;
 	hasLongClockHand = false;
 	hasShortClockHand = false;
-	dialogueManager = new DialogueManager(1);
+	
 
 }
 
@@ -36,7 +36,7 @@ ClockPuzzleScene::~ClockPuzzleScene()
 void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted) {
-
+		dialogueManager = new DialogueManager(1);
 
 		isStarted = true;
 		//Register scene in dialogue manager

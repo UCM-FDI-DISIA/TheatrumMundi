@@ -48,7 +48,7 @@ SceneManager::SceneManager()
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::DRAG_PUZZLE);
+	loadScene(SceneName::INITIAL_MENU);
 }
 
 void SceneManager::popScene()
@@ -76,8 +76,14 @@ void SceneManager::popScene()
 	case SceneName::BOOKS_PUZZLE:
 		scene = "MIDDLE_ROOM";
 		break;
-	case -1:
+	case SceneName::TUTORIAL_SCENE:
 		scene = "TUTORIAL";
+		break;
+	case SceneName::TELE_PUZZLE:
+		scene = "TELE_PUZZLE";
+		break;
+	case SceneName::TEA_CUP_PUZZLE:
+		scene = "TEA_CUP_PUZZLE";
 		break;
 	default:
 		break;
@@ -109,8 +115,14 @@ void SceneManager::popScene()
 	case SceneName::BOOKS_PUZZLE:
 		scene = "MIDDLE_ROOM";
 		break;
-	case -1:
+	case SceneName::TUTORIAL_SCENE:
 		scene = "TUTORIAL";
+		break;
+	case SceneName::TELE_PUZZLE:
+		scene = "TELE_PUZZLE";
+		break;
+	case SceneName::TEA_CUP_PUZZLE:
+		scene = "TEA_CUP_PUZZLE";
 		break;
 	default:
 		break;
@@ -149,8 +161,14 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 	case SceneName::BOOKS_PUZZLE:
 		scene = "MIDDLE_ROOM";
 		break;
-	case -1:
+	case SceneName::TUTORIAL_SCENE:
 		scene = "TUTORIAL";
+		break;
+	case SceneName::TELE_PUZZLE:
+		scene = "TELE_PUZZLE";
+		break;
+	case SceneName::TEA_CUP_PUZZLE:
+		scene = "TEA_CUP_PUZZLE";
 		break;
 	default:
 		break;
@@ -181,8 +199,14 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 	case SceneName::BOOKS_PUZZLE:
 		scene = "MIDDLE_ROOM";
 		break;
-	case -1:
+	case SceneName::TUTORIAL_SCENE:
 		scene = "TUTORIAL";
+		break;
+	case SceneName::TELE_PUZZLE:
+		scene = "TELE_PUZZLE";
+		break;
+	case SceneName::TEA_CUP_PUZZLE:
+		scene = "TEA_CUP_PUZZLE";
 		break;
 	default:
 		break;
@@ -220,8 +244,14 @@ void SceneManager::loadScene(int index)
 		case SceneName::BOOKS_PUZZLE:
 			scene = "MIDDLE_ROOM";
 			break;
-		case -1:
+		case SceneName::TUTORIAL_SCENE:
 			scene = "TUTORIAL";
+			break;
+		case SceneName::TELE_PUZZLE:
+			scene = "TELE_PUZZLE";
+			break;
+		case SceneName::TEA_CUP_PUZZLE:
+			scene = "TEA_CUP_PUZZLE";
 			break;
 		default:
 			break;
@@ -252,8 +282,14 @@ void SceneManager::loadScene(int index)
 	case SceneName::BOOKS_PUZZLE:
 		scene = "MIDDLE_ROOM";
 		break;
-	case -1:
+	case SceneName::TUTORIAL_SCENE:
 		scene = "TUTORIAL";
+		break;
+	case SceneName::TELE_PUZZLE:
+		scene = "TELE_PUZZLE";
+		break;
+	case SceneName::TEA_CUP_PUZZLE:
+		scene = "TEA_CUP_PUZZLE";
 		break;
 	default:
 		break;
@@ -283,7 +319,8 @@ void SceneManager::update()
 
 int SceneManager::getSceneIndex()
 {
-	return actsceneindex+1;
+	std::cout << actsceneindex << endl;
+	return actsceneindex;
 }
 
 

@@ -37,7 +37,7 @@ TelePuzzleScene::TelePuzzleScene()
 	_spoonIsInCup = false;
 	_poisonIsChecked = false;
 
-	dialogueManager = new DialogueManager(-1);
+	
 }
 
 TelePuzzleScene::~TelePuzzleScene()
@@ -48,7 +48,7 @@ TelePuzzleScene::~TelePuzzleScene()
 void TelePuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted) {
-
+		dialogueManager = new DialogueManager(-1);
 		isStarted = true;
 		room = sr;
 

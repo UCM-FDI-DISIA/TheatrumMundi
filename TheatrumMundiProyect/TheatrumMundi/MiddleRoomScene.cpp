@@ -24,7 +24,7 @@
 #include "../src/components/WriteTextComponent.h"
 MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaIntermedia1)
 {
-	dialogueManager = new DialogueManager(0);
+	
 	roomEvent.resize(MIDDLEROOMEVENTSIZE);
 	roomEvent[FIRST_DIALOGUE] = [this]() {
 		startDialogue("SalaIntermedia1");
@@ -80,6 +80,7 @@ MiddleRoomScene::~MiddleRoomScene()
 void MiddleRoomScene::init()
 {
 	if (!isStarted) {
+		dialogueManager = new DialogueManager(0);
 		isStarted = true;
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();

@@ -34,7 +34,7 @@ TeaCupPuzzleScene::TeaCupPuzzleScene()
 	_spoonIsInCup = false;
 	_poisonIsChecked = false;
 
-	dialogueManager = new DialogueManager(1);
+	
 }
 
 TeaCupPuzzleScene::~TeaCupPuzzleScene()
@@ -45,7 +45,7 @@ TeaCupPuzzleScene::~TeaCupPuzzleScene()
 void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted) {
-		
+		dialogueManager = new DialogueManager(1);
 		isStarted = true;
 		room = sr;
 		
@@ -78,7 +78,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 
 		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
-			std::cout << "pasa por el triger de la taza" << std::endl;
+			
 			});
 		//Assigns the trigger bolean to false
 		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_LEFT, [this]() {

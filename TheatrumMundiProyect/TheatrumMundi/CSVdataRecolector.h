@@ -36,10 +36,12 @@ class CSVdataRecolector
 public:
 	CSVdataRecolector();
 	~CSVdataRecolector();
-	void AddEntry(const std::string& _id,const std::string _scene);
+	void AddEntry(const std::string& _id, int sceneindex);
 	void enterScene(const std::string scene);
 	void exitScene(const std::string scene);
 	void safeData();
+	void reset();
+
 	
 };
 

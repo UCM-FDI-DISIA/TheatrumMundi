@@ -26,7 +26,7 @@
 PipePuzzleScene::PipePuzzleScene()
 	:ScenePuzzleTemplate()
 {
-	dialogueManager = new DialogueManager(1);
+	
 }
 
 void PipePuzzleScene::pipeCreation()
@@ -618,6 +618,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 {
 	
 	if (!isStarted) {
+		dialogueManager = new DialogueManager(1);
 		_updatePuzzle = false;
 		solved = false;
 		isStarted = true;
