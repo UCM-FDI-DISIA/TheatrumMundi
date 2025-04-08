@@ -65,12 +65,9 @@ void ScenePuzzleTemplate::compareInv(SceneRoomTemplate* sr)
 void ScenePuzzleTemplate::reposInv(SceneRoomTemplate* sr)
 {
 	for (int i = 0; i < invObjects.size(); ++i) {
+		invObjects[i]->getMngr()->setActive(invObjects[i], false);
 		invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i])->setPos(sr->GetInventory()->GetPosition(i));
 	}
-
-	/*for (int i = 0; i < sr->GetInventory()->hints.size(); ++i) {
-		sr->GetInventory()->hints[i]->getMngr()->getComponent<Transform>(sr->GetInventory()->hints[i])->getPos().set(sr->GetInventory()->GetPosition(i));
-	}*/
 }
 
 ScenePuzzleTemplate::ScenePuzzleTemplate(): SceneTemplate()
@@ -134,7 +131,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 			//if you drop the item, compares if it was drop in or out tge cloack
 			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this, sr, a, it, _backgroundTextDescription, textDescriptionEnt]() {
 				//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
-				if (!placeHand) it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
+				if (!placeHand) it->getMngr()->getComponent<Transform>(it)->setPosPure(getOriginalPos());
 				//in other case remove the item from this inventory and the inventory of Room1
 				else {
 					//Add the hand to the cloack
@@ -143,7 +140,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 						//remove the object and pos from the inventory
 						sr->GetInventory()->removeItem(a->getID(), invObjects,invID);				
 					}
-					else it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
+					else it->getMngr()->getComponent<Transform>(it)->setPosPure(getOriginalPos());
 				}
 
 				entityManager->setActive(_backgroundTextDescription, false);
@@ -161,7 +158,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 					entityManager->setActive(textDescriptionEnt, true);
 
 					//change text description
-					sr->GetInventory()->setTextDescription(a->getID(), invObjects, _backgroundTextDescription->getMngr()->getComponent<Transform>(_backgroundTextDescription));
+					sr->GetInventory()->setTextDescription(a, entityManager->getComponent<Transform>(it), _backgroundTextDescription->getMngr()->getComponent<Transform>(_backgroundTextDescription));
 
 				}
 				
@@ -198,7 +195,9 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 		invID.push_back(id);
 		invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
 		auto it = invObjects.back();
-		it->getMngr()->setActive(it, false);
+
+		if(sr->GetInventory()->getActive() == true && sr->GetInventory()->getItems().size() < 4) it->getMngr()->setActive(it, true); //If inventory is showing and we have less than 2 items, set the AddedItem to True
+		else it->getMngr()->setActive(it, false);
 
 		//Assign the lamda functions to the inventory item
 		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this,it]() {
@@ -208,7 +207,7 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 		//if you drop the item, compares if it was drop in or out tge cloack
 		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this,id,sr,it]() {
 			//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
-			if (!placeHand) it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
+			if (!placeHand) it->getMngr()->getComponent<Transform>(it)->setPosPure(getOriginalPos());
 			//in other case remove the item from this inventory and the inventory of Room1
 			else {
 				//Add the hand to the cloack
@@ -217,9 +216,11 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 					//remove the object from the inventory
 					sr->GetInventory()->removeItem(id, invObjects, invID);
 				}
-				else it->getMngr()->getComponent<Transform>(it)->setPos(getOriginalPos());
+				else it->getMngr()->getComponent<Transform>(it)->setPosPure(getOriginalPos());
 			}
 			});
+
+		sr->createDescription(sr->GetInventory()->hints.back(), sr->GetInventory()->getItems().back());
 	}
 }
 
@@ -244,8 +245,10 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 
 			for (int i = 0; i < invObjects.size(); ++i) {
 				auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
-				transform->setPosY(transform->getPos().getY() + 150); // Ajustar la posición de los objetos visibles
+				Vector2D auxVector = Vector2D(transform->getPos().getX(), transform->getPos().getY() + (150 * Game::Instance()->hscreenScale));
+				transform->setPosPure(auxVector); // Ajustar la posición de los objetos visibles
 			}
+			//sr->scrollInventory(-1);
 		}
 	}
 	else if (dir == 1) { // Scroll DOWN
@@ -263,8 +266,10 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 			// Ajustar las posiciones de los objetos
 			for (int i = 0; i < invObjects.size(); ++i) {
 				auto transform = invObjects[i]->getMngr()->getComponent<Transform>(invObjects[i]);
-				transform->setPosY(transform->getPos().getY() - 150); // Ajustar la posición de los objetos visibles
+				Vector2D auxVector = Vector2D(transform->getPos().getX(), transform->getPos().getY() - (150 * Game::Instance()->hscreenScale));
+				transform->setPosPure(auxVector); // Ajustar la posición de los objetos visibles
 			}
+			//sr->scrollInventory(1);
 		}
 	}
 }
@@ -272,6 +277,7 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 void ScenePuzzleTemplate::HideInventoryItems(const ecs::entity_t& InventoryBackground, const ecs::entity_t& downButton, const ecs::entity_t& upButton,SceneRoomTemplate* sr)
 {
 	sr->GetInventory()->setActive(false);
+	sr->reposAllInventoryItems();
 	entityManager->setActive(InventoryBackground, false);
 	entityManager->setActive(downButton, false);
 	entityManager->setActive(upButton, false);

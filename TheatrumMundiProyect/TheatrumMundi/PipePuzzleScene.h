@@ -53,6 +53,7 @@ private:
 	ecs::Entity* _rope;
 	ecs::Entity* _cubeWithoutWater;
 	ecs::Entity* _exit;
+	ecs::entity_t logbtn;
 	ClickComponent* clComponent;
 
 protected:

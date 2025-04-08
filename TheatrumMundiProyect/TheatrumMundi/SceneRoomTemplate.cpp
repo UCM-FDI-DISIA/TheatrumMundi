@@ -4,6 +4,8 @@
 #include "Manager.h"
 #include "DialogueManager.h"
 #include "ClickComponent.h"
+#include "Transform.h"
+#include "TriggerComponent.h"
 #include "../src/game/Game.h"
 #include <iostream>
 using namespace ecs;
@@ -40,7 +42,8 @@ void SceneRoomTemplate::scrollInventory(int dir)
 
             for (auto& hint : GetInventory()->hints) {
                 auto transform = hint->getMngr()->getComponent<Transform>(hint);
-                transform->setPosY(transform->getPos().getY() + 150);
+                Vector2D auxVector = Vector2D(transform->getPos().getX(), transform->getPos().getY() + (150 * Game::Instance()->hscreenScale));
+                transform->setPosPure(auxVector);
             }
         }
     }
@@ -58,7 +61,8 @@ void SceneRoomTemplate::scrollInventory(int dir)
 
             for (auto& hint : GetInventory()->hints) {
                 auto transform = hint->getMngr()->getComponent<Transform>(hint);
-                transform->setPosY(transform->getPos().getY() - 150);
+                Vector2D auxVector = Vector2D(transform->getPos().getX(), transform->getPos().getY() - (150 * Game::Instance()->hscreenScale));
+                transform->setPosPure(auxVector);
             }
         }
     }
@@ -79,6 +83,52 @@ void SceneRoomTemplate::HideAllInvetoryItems(const ecs::entity_t& invBack, const
     DownButt->getMngr()->setActive(DownButt, false);
     for (int i = 0; i < GetInventory()->getItems().size(); ++i)
         GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Desactivate the hints
+}
+
+void SceneRoomTemplate::createDescription(Entity* hintEntity, Hint* hintItem)
+{
+    /*
+    //visual background for item description text
+    invObjects.backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::UI);
+    entityManager->setActive(invObjects.backgroundTextDescription, false);
+
+    //description text entity
+    auto _textDescriptionEnt = entityManager->addEntity(ecs::grp::UI);
+    auto _testTextTranform = entityManager->addComponent<Transform>(_textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
+    entityManager->setActive(_textDescriptionEnt, false);
+    SDL_Color colorDialog = { 255, 255, 255, 255 };
+    entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(_textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, GetInventory()->getTextDescription());
+    */
+    
+        //meter trigger en todas las entidades
+        //auto a = GetInventory()->hints[index];
+
+        //if mouse is on item, show item description
+        hintEntity->getMngr()->getComponent<TriggerComponent>(hintEntity)->connect(TriggerComponent::CURSOR_ENTERED, [this, hintEntity, hintItem]() {
+            //show item description entities
+            entityManager->setActive(invObjects.backgroundTextDescription, true);
+            entityManager->setActive(invObjects.textDescriptionEnt, true);
+
+            //change text description
+            GetInventory()->setTextDescription(hintItem, entityManager->getComponent<Transform>(hintEntity), entityManager->getComponent<Transform>(invObjects.backgroundTextDescription));
+            });
+
+        //if mouse leaves item, hide item description
+        hintEntity->getMngr()->getComponent<TriggerComponent>(hintEntity)->connect(TriggerComponent::CURSOR_LEFT, [this]() {
+            //hide item description entities
+            entityManager->setActive(invObjects.backgroundTextDescription, false);
+            entityManager->setActive(invObjects.textDescriptionEnt, false);
+            });
+
+    
+}
+
+void SceneRoomTemplate::reposAllInventoryItems()
+{
+    for (int i = 0; i < GetInventory()->hints.size(); ++i) {
+        GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);
+        GetInventory()->hints[i]->getMngr()->getComponent<Transform>(GetInventory()->hints[i])->setPos(GetInventory()->GetPosition(i));
+    }
 }
 
 SceneRoomTemplate::SceneRoomTemplate() : SceneTemplate()

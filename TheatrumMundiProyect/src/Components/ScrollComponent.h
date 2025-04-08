@@ -17,6 +17,7 @@ private:
 	float _initialTimeScroll; //Activates if this time > 0
 	//bool _isRight;
 	//bool _isScrolling = false;
+	std::function<void()> endScrollCallback;
 	
 public:
 
@@ -56,6 +57,12 @@ public:
 	void resetPhase() {
 		phase = startPhase;
 	}
+
+
+	inline void setEndScrollCallback(std::function<void()> f) {
+		endScrollCallback = f;
+	}
+
 
 private:
 	//Transform *_myTransform;
