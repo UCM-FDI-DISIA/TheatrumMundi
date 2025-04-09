@@ -3,7 +3,11 @@
 Duración total 30-40min
 Duración por puzzle 5-10min
 Duración del tutorial 3-6 min
-Duración sala 5-10 min
+Duración sala1 5-10 min
+
+## Estimaciones iniciales:
+
+Nuestro juegos es narrativo y de puzzles. Se juega con ratón, NO toques el teclado. Primero juega al tutorial una sola vez y después dale a Nueva Partida.
 
 ## Cosas a testear
 
@@ -51,6 +55,11 @@ Con estos datos queremos saber cuanto tiempo pasa un jugador en la sala y cuanta
 Esto son  los datos que recogeremos a partir de la observación de los testers. Estos datos serán los mismos para todos los observadores (obviamente siempre hay lugar a poner algo de información extra si fuera necesario). 
 #### Observaciones de cada escena
 
+
+##### Tutorial
+
+-El jugador avanza en cada etapa del tutorial en menos de 1 minutos.
+
 ##### RoomScene
 - El jugador comprende que tiene que el cadáver es un punto de interés. (El jugador pulsa al cadáver.)
 - El jugador es capaz de navegar entre las dos habitaciones. (El juador entiende que la puerta cambia de sala.)
@@ -97,6 +106,12 @@ Puntos a tener en cuenta para las preguntas:
 
 (Apuntad cualquier tipo de cometario que haga en voz alta durante el testeo que sea del estilo: "Ahh esto no lo entendi por...").
 
+##### General
+
+-¿Cuánto sueles jugar a videojuegos y que tipo?
+-Dame tu razonamiento a la hora de responder
+-*Condicionales*
+
 ## Información que se puede dar
 
 La única cosa que se puede decir inmediatamente si se nota confusión es la posición de la cuchara (ya que esto está mal y no lo podemos testear igualmente)
@@ -119,7 +134,7 @@ Explicar el funcionamiento de las puertas de paso
 Señalar que los libros tienen números 
 Señalar que las estanterías tienen un orden
 
-(Si hay que dar ambas dejar un espacio de 3 min entre ellas)
+(Si hay que dar ambas dejar un espacio de 2 min entre ellas)
 
 ##### Tempus Fugit
 
@@ -127,8 +142,5 @@ Señalar al calendario si no se ha pulsado aún
 Señalar el log si no se han leido / acuerdan del diálogo cuando se recoge la etiqueta.
 Señalar que se pueden arrastrar objetos del inventario a la escena.
 
-(Si hay que dar varias dejar un espacio de 3 min entre ellas)
+(Si hay que dar varias dejar un espacio de  min entre ellas)
 
-##### Tempus Fugit
-
-Señalar que se pueden arrastrar objetos del inventario a la escena.
