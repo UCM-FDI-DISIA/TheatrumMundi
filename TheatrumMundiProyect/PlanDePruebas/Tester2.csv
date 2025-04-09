@@ -1,0 +1,31 @@
+Resumen de click en botones
+ID;Scene;Numero de clicks
+TutorialButton;INITIAL MENU;1
+Dialog;TUTORIAL;12
+
+
+Tiempo en las escenas
+Scene;Tiempo;Veces en la escena;totalClicks
+;55.715;0;1
+TUTORIAL;0;1;12
+tiempo de juego total: ;;0.928583;min
+
+Mov en x;20204.8
+Mov en y;8240.05
+
+
+Historial de click
+ID;Scene;Segundo Concreto
+TutorialButton;INITIAL MENU;55.715
+Dialog;TUTORIAL;56.102
+Dialog;TUTORIAL;56.242
+Dialog;TUTORIAL;56.381
+Dialog;TUTORIAL;56.495
+Dialog;TUTORIAL;56.621
+Dialog;TUTORIAL;56.757
+Dialog;TUTORIAL;56.886
+Dialog;TUTORIAL;57.013
+Dialog;TUTORIAL;57.12
+Dialog;TUTORIAL;57.253
+Dialog;TUTORIAL;57.38
+Dialog;TUTORIAL;57.507

@@ -132,6 +132,7 @@ void MiddleRoomScene::refresh()
 		#ifdef _DEBUG
 			std::cout << "INVALID CHARACTERS STATE";
 		#endif // DEBUG
+			
 		}
 		break;
 	case SceneCount::MIDDLEROOM3:

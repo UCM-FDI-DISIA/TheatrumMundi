@@ -111,9 +111,9 @@ void Game::start() {
 		// refresh the input handler
 		ihdlr.refresh();
 
-		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
+		if (ihdlr.isKeyDown(SDL_SCANCODE_R)) {
 			//_exitGame = true;
-			//_csvdata->safeData();
+			reset();
 			continue;
 		}
 		if (ihdlr.isKeyDown(SDL_SCANCODE_G)) {
@@ -154,6 +154,7 @@ void Game::start() {
 
 void Game::reset()
 {
+	
 
 	//Reset instances
 	Game::Instance()->getLog()->ResetLog();
