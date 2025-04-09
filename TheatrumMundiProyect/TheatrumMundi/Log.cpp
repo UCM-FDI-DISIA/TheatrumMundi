@@ -116,7 +116,7 @@ bool Log::GetLogActive()
 	return _logActive;
 }
 
-void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2DLayerManager* areaLayerManager, SceneTemplate* scTp)
+ecs::entity_t Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2DLayerManager* areaLayerManager, SceneTemplate* scTp)
 {
 
 	//Audio sfx
@@ -173,7 +173,7 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 
 
 	//log buttons
-	auto buttonOpenLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(1200, 748 - (268 / 3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	entity_t buttonOpenLog = entityFactory->CreateInteractableEntity(entityManager, "B7", EntityFactory::RECTAREA, Vector2D(1200, 748 - (268 / 3) - 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 	auto buttonCloseLog = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(50, 50), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
 
 	ClickComponent* buttonOpenLogClick = entityManager->getComponent<ClickComponent>(buttonOpenLog);
@@ -207,5 +207,5 @@ void Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2
 		sceneTemplate->closedLog();
 		});
 	entityManager->setActive(buttonCloseLog, false);
-		
+	return buttonOpenLog;
 }

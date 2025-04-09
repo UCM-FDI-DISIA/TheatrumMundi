@@ -100,7 +100,8 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 				// If the inventory is active, activate the items
 				if (sr->GetInventory()->getActive()) {
 					entityManager->setActive(InventoryBackground, true);
-
+					entityManager->setActive(logbtn, false);
+					
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(925);
 					entityManager->setActive(downButton, true);
 					entityManager->setActive(upButton, true);
@@ -112,7 +113,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 				}
 				else {
 					entityManager->setActive(InventoryBackground, false);
-					entityManager->setActive(InventoryBackground, false);
+					entityManager->setActive(logbtn, true);
 					entityManager->setActive(downButton, false);
 					entityManager->setActive(upButton, false);
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
@@ -258,10 +259,22 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		clk->connect(ClickComponent::JUST_CLICKED, [variant,this, tag, sr]() {
 
 			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-			if(variant <= 1)AddInvItem("etiquetaV1", "Etiqueta de algún químico. Indica una cantidad de 200mg.", position, sr);
-			else if(variant == 2) AddInvItem("etiquetaV2", "Etiqueta de algún químico.¿Solo 10 mg?", position, sr);
+			if (variant <= 1) {
+				AddInvItem("etiquetaV1", "Etiqueta de algún químico. Indica una cantidad de 200mg.", position, sr);
+				startDialogue("RecogerVeneno1");
+			}
+			else if (variant == 2) {
+				AddInvItem("etiquetaV2", "Etiqueta de algún químico.¿Solo 10 mg?", position, sr);
+				startDialogue("RecogerVeneno2");
+			}
 			tag->getMngr()->setActive(tag, false);
+
+
+			
+			
+
 			});
+
 
 
 
@@ -354,7 +367,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		});
 
 		dialogueManager->Init(1, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
+		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 
 		
 }

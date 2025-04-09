@@ -7,7 +7,7 @@
 #include "../src/Components/DragComponent.h"
 #include "../src/Components/Area2D.h"
 #include "../src/Components/Image.h"
-#include "../src/sdlutils/VirtualTimer.h"
+
 #include "../src/sdlutils/SDLUtils.h"
 
 #include "../src/components/Transform.h"
@@ -59,40 +59,40 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 
 		dialogueManager->setScene(this);
 
-		teaCupBackground = entityFactory->CreateImageEntity(entityManager, "TeaCupBackgroundWithoutSpoon", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
-		teaCupBackground->getMngr()->removeComponent<Area2D>(teaCupBackground);
+		tvBackground = entityFactory->CreateImageEntity(entityManager, "TutorialZoom1", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+		tvBackground->getMngr()->removeComponent<Area2D>(tvBackground);
 
-		ecs::entity_t teaCup = entityFactory->CreateInteractableEntity( // Cup entity
+		ecs::entity_t tv = entityFactory->CreateInteractableEntityNotMoveSprite( // Cup entity
 			entityManager, "clockShape", EntityFactory::RECTAREA,
-			Vector2D(400, 100), Vector2D(), 460, 280, 0,
+			Vector2D(400, 150), Vector2D(), 1000, 500, 0,
 			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 	
 
-		teaCup->getMngr()->removeComponent<Image>(teaCup);
+		tv->getMngr()->removeComponent<Image>(tv);
 
-		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_ENTERED, [this]() {
+		tv->getMngr()->getComponent<TriggerComponent>(tv)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
 			std::cout << "pasa por el triger de la taza" << std::endl;
 			});
 		//Assigns the trigger bolean to false
-		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_LEFT, [this]() {
+		tv->getMngr()->getComponent<TriggerComponent>(tv)->connect(TriggerComponent::AREA_LEFT, [this]() {
 			SetplacedHand(false);
 			});
 
 		//create the spoon
 	
 
-		entityManager->getComponent<ClickComponent>(teaCup) // The cup is clicked after introducing the spoon
-			->connect(ClickComponent::JUST_CLICKED, [teaCup, this]()
+		entityManager->getComponent<ClickComponent>(tv) // The cup is clicked after introducing the spoon
+			->connect(ClickComponent::JUST_CLICKED, [tv, this]()
 				{
 					if (_spoonIsInCup == false) return;
 					_poisonIsChecked = true;
 
 					// ... Change image revealing poinson or whatever  <-- TODO
-					Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithPoison");
-					teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
-					startDialogue("PuzzleTaza2");
+					//Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithPoison");
+					//tvBackground->getMngr()->getComponent<Image>(tvBackground)->setTexture(tx);
+					//startDialogue("PuzzleTaza2");
 				});
 
 
@@ -181,13 +181,10 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 		startDialogue("Tutorial7");
 	}
 
+	
+
 
 	createInvEntities(sr);
-}
-
-void TelePuzzleScene::refresh()
-{
-
 }
 
 void TelePuzzleScene::unload()
@@ -202,16 +199,87 @@ bool TelePuzzleScene::Check()
 
 bool TelePuzzleScene::isItemHand(const std::string& itemId)
 {
-	if (itemId == "TeaCupSpoon") {
-		_spoonIsInCup = true; //???
-		Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithSpoon");
-		teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
-		//spoon->getMngr()->setActive(spoon, true); 
-		startDialogue("Tutorial8");
+	if (itemId == "antena") {
+		_spoonIsInCup = true;
+
+		// AnimationFrames
+		tvAnimationFrames.clear();
+		tvAnimationFrames.push_back(&sdlutils().images().at("TutorialZoom2"));
+		tvAnimationFrames.push_back(&sdlutils().images().at("TutorialZoom3"));
+		tvAnimationFrames.push_back(&sdlutils().images().at("TutorialZoom4"));
+		tvAnimationFrames.push_back(&sdlutils().images().at("TutorialZoom5"));
+		tvAnimationFrames.push_back(&sdlutils().images().at("TutorialZoomKei"));
+		tvAnimationFrames.push_back(&sdlutils().images().at("TutorialZoom5"));
+		tvAnimationFrames.push_back(&sdlutils().images().at("TutorialZoomSol"));
+		tvAnimationFrames.push_back(&sdlutils().images().at("TutorialZoom5"));
+		tvAnimationFrames.push_back(&sdlutils().images().at("TutorialZoomLucy"));
+		tvAnimationFrames.push_back(&sdlutils().images().at("TutorialZoom5"));
+		tvAnimationFrames.push_back(&sdlutils().images().at("FondoNegro"));
+		tvAnimationFrames.push_back(&sdlutils().images().at("FondoNegro"));
+		
+
+		currentFrameIndex = 0;
+		
+		frameTimer.resetTime(); 
+		//startDialogue("Tutorial8");
+		isAnimating = true;
+		// Change to first texture
+		tvBackground->getMngr()->getComponent<Image>(tvBackground)->setTexture(tvAnimationFrames[0]);
+
+
+		
+
 		GameSave save;
 		save.setTutoCompleted(true);
 		save.Write("savegame.dat");
+		
+		
 		return true;
+		
 	}
 	return false;
+}
+void TelePuzzleScene::refresh()
+{
+
+	
+	if (isAnimating && frameTimer.currRealTime() > 400 && (currentFrameIndex==4 || currentFrameIndex == 6 || currentFrameIndex == 8)) // 0.4 sec
+	{
+		currentFrameIndex++;
+		
+
+		if (currentFrameIndex >= tvAnimationFrames.size()) {
+			
+			isAnimating = false;
+			Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
+			Game::Instance()->reset();
+			return;
+		}
+
+		
+		tvBackground->getMngr()->getComponent<Image>(tvBackground)->setTexture(tvAnimationFrames[currentFrameIndex]);
+
+		
+		frameTimer.resetTime();
+	}
+	else if (isAnimating && frameTimer.currRealTime() > 1000) {
+		
+		currentFrameIndex++;
+
+
+		if (currentFrameIndex >= tvAnimationFrames.size()) {
+
+			isAnimating = false;
+			Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
+			Game::Instance()->reset();
+			return;
+		}
+
+
+		tvBackground->getMngr()->getComponent<Image>(tvBackground)->setTexture(tvAnimationFrames[currentFrameIndex]);
+
+
+		frameTimer.resetTime();
+
+	}
 }

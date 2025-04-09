@@ -19,7 +19,6 @@ protected:
 	 ecs::EntityManager* entityManager;
 	 EntityFactory* entityFactory;
 	 DialogueManager* dialogueManager;
-	// DialogueManager* dialogueManager;
 	 Area2DLayerManager* areaLayerManager;
 	 PauseManager* pauseManager;
 	/// <summary>
