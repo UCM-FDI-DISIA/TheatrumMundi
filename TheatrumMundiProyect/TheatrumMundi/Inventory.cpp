@@ -68,7 +68,7 @@ void Inventory::setTextDescription(Hint* a, Transform* trEntity, Transform* back
 	backgroundTextTransform->setWidth(100);
 
 	//set text description position
-	_textDescription->posY = trEntity->getPos().getY();
+	_textDescription->posY = trEntity->getPos().getY()/Game::Instance()->hscreenScale;
 		
 	
 }
