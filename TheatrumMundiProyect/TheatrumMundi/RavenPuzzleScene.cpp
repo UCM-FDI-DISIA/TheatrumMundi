@@ -3,6 +3,7 @@
 #include "ClickComponent.h"
 #include "DialogueManager.h"
 #include "TriggerComponent.h"
+#include "Transform.h"
 #include "Game.h"
 #include "Log.h"
 
@@ -23,17 +24,6 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 		ravenHappy = false;
 
 #pragma region UI
-
-
-		//BackButton
-		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-
-		//Click component Open log button
-		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
-			{
-				Game::Instance()->getSceneManager()->popScene();
-			});
 
 #pragma region Inventory
 
@@ -105,6 +95,21 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//startDialogue("PuzzleCuervo");
 
+		
+		//BackButton
+		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+
+		//Click component Open log button
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this,InventoryBackground,inventoryButton, downButton, upButton, sr]()
+			{
+				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+				HideInventoryItems(InventoryBackground, downButton, upButton, sr);
+				sr->GetInventory()->setFirstItem(0);
+				Game::Instance()->getSceneManager()->popScene();
+			});
+
+
 #pragma endregion
 
 #pragma region Background
@@ -136,19 +141,6 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 					AddInvItem("Llave", "La llave de una puerta, seguro que abre algo", position, sr);
 					entityManager->setActive(key, false);
 					Win();
-
-					//IMPORTANT CLOSE INVENTORY 
-
-					sr->GetInventory()->setActive(false);
-					entityManager->setActive(InventoryBackground, false);
-					entityManager->setActive(InventoryBackground, false);
-					entityManager->setActive(downButton, false);
-					entityManager->setActive(upButton, false);
-					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
-
-					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
-						invObjects[i]->getMngr()->setActive(invObjects[i], false);
-					}
 				}
 				//	else sound of angry bird
 			});

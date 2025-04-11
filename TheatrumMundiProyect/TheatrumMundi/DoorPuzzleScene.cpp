@@ -24,16 +24,6 @@ void DoorPuzzleScene::init(SceneRoomTemplate* sr)
 #pragma region UI
 
 
-		//BackButton
-		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-
-		//Click component Open log button
-		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
-			{
-				Game::Instance()->getSceneManager()->popScene();
-			});
-
 #pragma region Inventory
 
 		//INVENTORY
@@ -98,11 +88,23 @@ void DoorPuzzleScene::init(SceneRoomTemplate* sr)
 
 #pragma endregion
 
+		//BackButton
+		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+
+		//Click component Open log button
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, InventoryBackground, inventoryButton, downButton, upButton, sr]()
+			{
+				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+				HideInventoryItems(InventoryBackground, downButton, upButton, sr);
+				sr->GetInventory()->setFirstItem(0);
+				Game::Instance()->getSceneManager()->popScene();
+			});
+
 		//Log
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
-
-		//startDialogue("PuzzleCuervo");
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
+		//startDialogue("Puerta");
 
 #pragma endregion
 

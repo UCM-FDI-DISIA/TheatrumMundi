@@ -44,6 +44,7 @@ private:
 	std::string _eventToRead;
 	bool isOpen; //Boolean which function is to permite player to enter the mausoleum or not (if the key is on the door or not)
 	bool stopAnimation = false;
+	bool scrolling = false;
 
 	void endDialogue() override;
 	void _setRoomEvents();
