@@ -1,23 +1,11 @@
 #pragma once
 #include "SceneRoomTemplate.h"
+#include "RectArea2D.h"
+#include "../TheatrumMundi/AudioManager.h"
+
+class ScrollComponent;
 class Room2Scene : public SceneRoomTemplate
 {
-private:
-	std::string _eventToRead;
-	bool isOpen; //Boolean which function is to permite player to enter the mausoleum or not (if the key is on the door or not)
-
-	//Reference to entities which appear and dissapear
-	ecs::entity_t _quitButton; //Reference to the zoomed Quit Button
-	ecs::entity_t zoomCorpse; //Image of the zoomed Corpse
-	ecs::entity_t organMosaic; //Image of the entry to the organ room
-	ecs::entity_t zoomOrgan; //Image of the zoomed Organ
-	ecs::entity_t organ; //Image of the organ
-	ecs::entity_t rope; // Image of the rope
-	ecs::entity_t hook; //Image of the hook
-	ecs::entity_t mirror; //Image which reflects information
-	ecs::entity_t secretEntry; //Image reflected
-	ecs::entity_t secretEntryZoom; //Image of the ZoomEntry
-
 protected:
 	enum Room2Event
 	{
@@ -51,5 +39,45 @@ public:
 	void init() override;
 	void resolvedPuzzle(int i) override;
 	void unload() override;
+private:
+
+	std::string _eventToRead;
+	bool isOpen; //Boolean which function is to permite player to enter the mausoleum or not (if the key is on the door or not)
+	bool stopAnimation = false;
+
+	void endDialogue() override;
+	void _setRoomEvents();
+	void _setRoomAudio();
+	void _setGlobalFeatures();
+
+	void _setRoomBackground();
+	void _setCaseResolution();
+	void _setInteractuables();
+	void _setDialog();
+	void _setUI();
+
+	struct roomSounds {
+		Sound uiButton;
+		Sound puzzleButton;
+		Sound doorSound;
+	} rmSounds;
+
+	struct roomObjects {
+		ecs::entity_t inventoryButton = nullptr;
+		ecs::entity_t readyToResolveBotton = nullptr;
+		ecs::entity_t blackBackground = nullptr;
+		ecs::entity_t logbtn = nullptr;
+		ecs::entity_t _quitButton = nullptr; //Reference to the zoomed Quit Button
+		ecs::entity_t zoomCorpse = nullptr; //Image of the zoomed Corpse
+		ecs::entity_t organMosaic = nullptr; //Image of the entry to the organ room
+		ecs::entity_t zoomOrgan = nullptr; //Image of the zoomed Organ
+		ecs::entity_t organ = nullptr; //Image of the organ
+		ecs::entity_t rope = nullptr; // Image of the rope
+		ecs::entity_t hook = nullptr; //Image of the hook
+		ecs::entity_t mirror = nullptr; //Image which reflects information
+		ecs::entity_t secretEntry = nullptr; //Image reflected
+		ecs::entity_t secretEntryZoom = nullptr; //Image of the ZoomEntry
+		ScrollComponent* backgroundScroll = nullptr;
+	} rmObjects;
 };
 
