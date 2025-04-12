@@ -470,7 +470,6 @@ void Room2Scene::_setInteractuables()
 		->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
 				if (!finishallpuzzles)roomEvent[CorpseDialogue]();
-				//else roomEvent[ResolveBottons]();
 			});
 
 	auto tomb = entityFactory->CreateInteractableEntity(entityManager, "Tumba", EntityFactory::RECTAREA, Vector2D(400, 300), Vector2D(0, 0), 250 / 3, 225 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -703,12 +702,6 @@ void Room2Scene::_setUI()
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getexitPauseButton())->getLayerPos());
 
 	rmObjects.logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
-#pragma endregion
-
-#pragma region Log
-	//Log
-	dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-	Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 #pragma endregion
 
 }
