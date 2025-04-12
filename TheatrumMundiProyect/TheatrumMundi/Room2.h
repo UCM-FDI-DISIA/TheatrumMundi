@@ -58,27 +58,36 @@ private:
 	void _setUI();
 
 	struct roomSounds {
+
 		Sound uiButton;
 		Sound puzzleButton;
 		Sound doorSound;
+
 	} rmSounds;
 
 	struct roomObjects {
+
+		//Entitites without special conditions
 		ecs::entity_t inventoryButton = nullptr;
 		ecs::entity_t readyToResolveBotton = nullptr;
 		ecs::entity_t blackBackground = nullptr;
 		ecs::entity_t logbtn = nullptr;
-		ecs::entity_t _quitButton = nullptr; //Reference to the zoomed Quit Button
-		ecs::entity_t zoomCorpse = nullptr; //Image of the zoomed Corpse
-		ecs::entity_t organMosaic = nullptr; //Image of the entry to the organ room
+		ecs::entity_t zoomCorpse = nullptr;
+		ecs::entity_t quitButton = nullptr; //Reference to the zoomed Quit Button
 		ecs::entity_t zoomOrgan = nullptr; //Image of the zoomed Organ
 		ecs::entity_t organ = nullptr; //Image of the organ
 		ecs::entity_t rope = nullptr; // Image of the rope
 		ecs::entity_t hook = nullptr; //Image of the hook
-		ecs::entity_t mirror = nullptr; //Image which reflects information
-		ecs::entity_t secretEntry = nullptr; //Image reflected
 		ecs::entity_t secretEntryZoom = nullptr; //Image of the ZoomEntry
+
+		//Entities with special conditions (only appear with one specific event)
+		std::pair<ecs::entity_t, bool>organMosaic; //Image of the entry to the organ room
+		std::pair<ecs::entity_t, bool> mirror; //Image which reflects information
+		std::pair<ecs::entity_t, bool> secretEntry; //Image reflected
+
+		//ScrollComponent
 		ScrollComponent* backgroundScroll = nullptr;
+
 	} rmObjects;
 };
 

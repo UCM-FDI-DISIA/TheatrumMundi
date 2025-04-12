@@ -98,7 +98,7 @@ void DoorPuzzleScene::init(SceneRoomTemplate* sr)
 				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 				HideInventoryItems(InventoryBackground, downButton, upButton, sr);
 				sr->GetInventory()->setFirstItem(0);
-				Game::Instance()->getSceneManager()->popScene();
+				Exit();
 			});
 
 		//Log
@@ -149,5 +149,7 @@ bool DoorPuzzleScene::isItemHand(const std::string& itemId)
 
 void DoorPuzzleScene::Win()
 {
+	room->GetInventory()->setActive(false);
+	room->GetInventory()->setFirstItem(0);
 	room->resolvedPuzzle(2);
 }

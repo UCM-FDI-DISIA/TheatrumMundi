@@ -308,7 +308,3 @@ void MosaicPuzzleScene::Win()
 	room->resolvedPuzzle(3);
 	setSolved(true);
 }
-
-void MosaicPuzzleScene::Exit()
-{
-}

@@ -27,7 +27,5 @@ public:
 	void Resolve(); //Resolve the puzzle
 	bool Check() override;
 	void Win() override;
-	void Exit() override;
-
 };
 
