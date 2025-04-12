@@ -6,7 +6,8 @@
 #include "Transform.h"
 #include "Game.h"
 #include "Log.h"
-
+#include "Image.h"
+#include "Transform.h"
 RavenPuzzleScene::RavenPuzzleScene()
 {
 }
@@ -39,7 +40,7 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->setActive(downButton, false);
 
 		//InventoryButton
-		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(60 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
 		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton]() //Lamda function
 			{
@@ -101,11 +102,15 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [this,InventoryBackground,inventoryButton, downButton, upButton, sr]()
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, inventoryButton, InventoryBackground, downButton, upButton, _backButton]()
 			{
 				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
-				HideInventoryItems(InventoryBackground, downButton, upButton, sr);
-				sr->GetInventory()->setFirstItem(0);
+				HideInventoryItems(InventoryBackground, downButton, upButton, room);
+				room->GetInventory()->setFirstItem(0);
+				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+				_backButtonImage->setPosOffset(0, 0);
 				Game::Instance()->getSceneManager()->popScene();
 			});
 
@@ -146,8 +151,6 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 #pragma endregion
-	//Esto lo da la escena de la tumba
-	AddInvItem("Joya", "EYYYY Lapislazuli", sr->GetInventory()->setPosition(), sr);
 
 	}
 	//IMPORTANT this need to be out of the isstarted!!!

@@ -687,6 +687,10 @@
     {
       "id": "FondoOrgano",
       "file": "../resources/images/temporales/Room2/FondoOrgano.png"
+    },
+    {
+      "id": "Cadena",
+      "file": "../resources/images/temporales/Room2/Cadena.jpeg"
     }
   ],
 

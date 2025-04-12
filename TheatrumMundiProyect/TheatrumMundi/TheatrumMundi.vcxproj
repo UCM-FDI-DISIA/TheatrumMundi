@@ -82,6 +82,7 @@
     <ClCompile Include="TeaCupPuzzleScene.cpp" />
     <ClCompile Include="TelePuzzleScene.cpp" />
     <ClCompile Include="TiledAreaComponent.cpp" />
+    <ClCompile Include="TombPuzzleScene.cpp" />
     <ClCompile Include="TutorialScene.cpp" />
     <ClCompile Include="WindowPuzzleScene.cpp" />
     <ClCompile Include="XOPuzzleScene.cpp" />
@@ -272,6 +273,7 @@
     <ClInclude Include="TelePuzzleScene.h" />
     <ClInclude Include="TextInfo.h" />
     <ClInclude Include="TiledAreaComponent.h" />
+    <ClInclude Include="TombPuzzleScene.h" />
     <ClInclude Include="TutorialScene.h" />
     <ClInclude Include="WindowPuzzleScene.h" />
     <ClInclude Include="XOPuzzleScene.h" />

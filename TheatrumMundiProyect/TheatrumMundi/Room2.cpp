@@ -102,11 +102,9 @@ void Room2Scene::_setRoomEvents()
 		startDialogue("Cadaver");
 		};
 	roomEvent[TombPuzzleScene] = [this] {
-		std::cout << "Se supone que entro en una escena btw" << std::endl;
-		//Game::Instance()->getSceneManager()->loadScene(TOMB_SCENE, this); IMPORTANT: Include Tomb Scene when its finished
+		Game::Instance()->getSceneManager()->loadScene(TOMB_SCENE, this); 
 		};
 	roomEvent[TombPuzzleSceneRsv] = [this] {
-
 
 		};
 	roomEvent[RavenScene] = [this] {
