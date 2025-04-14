@@ -184,6 +184,7 @@ void Room2Scene::_setRoomEvents()
 		};
 	roomEvent[SecretEntry] = [this] {
 		rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, true);
+		rmObjects.secretEntryInTheZoomed->getMngr()->setActive(rmObjects.secretEntryInTheZoomed, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);
 		};
 	roomEvent[ResolveCase] = [this] {
@@ -560,6 +561,18 @@ void Room2Scene::_setInteractuables()
 
 	rmObjects.secretEntryZoom = entityFactory->CreateImageEntity(entityManager, "EntradaOculta", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 	rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, false);
+	rmObjects.secretEntryInTheZoomed = entityFactory->CreateInteractableEntity(entityManager, "PaasadizoSecretoEspejo", EntityFactory::RECTAREA, Vector2D(800, 390), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+	rmObjects.secretEntryInTheZoomed->getMngr()->setActive(rmObjects.secretEntryInTheZoomed, false);
+	auto secretEntryOpen = entityFactory->CreateImageEntity(entityManager, "EntradaSecretaAbierta", Vector2D(800, 390), Vector2D(0, 0), 500 / 3, 500 / 3, 0, ecs::grp::ZOOMOBJ);
+	secretEntryOpen->getMngr()->setActive(secretEntryOpen, false);
+
+	rmObjects.secretEntryInTheZoomed->getMngr()->getComponent<ClickComponent>(rmObjects.secretEntryInTheZoomed)->connect(ClickComponent::JUST_CLICKED, [this, secretEntryOpen]() {
+		//if variant Y
+		secretEntryOpen->getMngr()->setActive(secretEntryOpen, true);
+		rmObjects.secretEntryInTheZoomed->getMngr()->removeEntity(rmObjects.secretEntryInTheZoomed);
+
+		//else SONIDO/SOUND un sonidito de algo metálico que no ceda a abrirse
+	});
 
 #pragma endregion
 

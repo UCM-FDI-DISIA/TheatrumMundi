@@ -80,6 +80,7 @@ private:
 		ecs::entity_t rope = nullptr; // Image of the rope
 		ecs::entity_t hook = nullptr; //Image of the hook
 		ecs::entity_t secretEntryZoom = nullptr; //Image of the ZoomEntry
+		ecs::entity_t secretEntryInTheZoomed = nullptr; //Image of the ZoomEntry
 
 		//Entities with special conditions (only appear with one specific event)
 		std::pair<ecs::entity_t, bool>organMosaic; //Image of the entry to the organ room

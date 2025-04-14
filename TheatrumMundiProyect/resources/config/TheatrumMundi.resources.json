@@ -705,9 +705,14 @@
       "file": "../resources/images/temporales/Room2/VentanaAbierta.png"
     },
     {
+      "id": "EntradaSecretaAbierta",
+      "file": "../resources/images/temporales/Room2/EntradaSecretaAbierta.png"
+    },
+    {
       "id": "FondoVentana",
       "file": "../resources/images/temporales/Room2/FondoVentana.png"
     }
+
   ],
 
   "messages": [
