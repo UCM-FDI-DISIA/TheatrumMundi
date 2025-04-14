@@ -21,6 +21,7 @@ protected:
 		MosaicPuzzleScene,
 		MosaicPuzzleSceneRsv,
 		WindowScene,
+		WindowSceneResolved,
 		Rope,
 		OrganZoom,
 		OrganPuzzleScene,

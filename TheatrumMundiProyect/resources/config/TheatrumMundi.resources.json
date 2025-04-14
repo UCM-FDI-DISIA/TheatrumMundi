@@ -633,7 +633,11 @@
       "file": "../resources/images/temporales/Room2/Pala.jpeg"
     },
     {
-      "id": "Palo",
+      "id": "CuerdaLarga",
+      "file": "../resources/images/temporales/Room2/Palo.jpeg"
+    },
+    {
+      "id": "CuerdaCorta",
       "file": "../resources/images/temporales/Room2/Palo.jpeg"
     },
     {
@@ -691,6 +695,18 @@
     {
       "id": "Cadena",
       "file": "../resources/images/temporales/Room2/Cadena.jpeg"
+    },
+    {
+      "id": "cuerdaVentana",
+      "file": "../resources/images/temporales/Room2/Cuerda.png"
+    },
+    {
+      "id": "VentanaAbierta",
+      "file": "../resources/images/temporales/Room2/VentanaAbierta.png"
+    },
+    {
+      "id": "FondoVentana",
+      "file": "../resources/images/temporales/Room2/FondoVentana.png"
     }
   ],
 

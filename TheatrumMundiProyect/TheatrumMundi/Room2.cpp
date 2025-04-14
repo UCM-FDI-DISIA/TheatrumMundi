@@ -56,13 +56,14 @@ void Room2Scene::init()
 }
 void Room2Scene::resolvedPuzzle(int i)
 {
-	if (i < 5) {
+	if (i < 6) {
 		int auxevent = event_size;
 		if (i == 0)  auxevent = TombPuzzleSceneRsv;
 		else if (i == 1)  auxevent = RavenSceneRsv;
 		else if (i == 2)  auxevent = DoorSceneRsv;
 		else if (i == 3)  auxevent = MosaicPuzzleSceneRsv;
 		else if (i == 4)  auxevent = OrganPuzzleSceneRsv;
+		else if (i == 5)  auxevent = WindowSceneResolved;
 		roomEvent[auxevent]();
 		bool aux = true;
 		for (bool a : puzzlesol) if (!a) aux = false;
@@ -147,8 +148,8 @@ void Room2Scene::_setRoomEvents()
 		rmObjects.rope->getMngr()->removeEntity(rmObjects.rope);
 		rmObjects.rope->getMngr()->setActive(rmObjects.rope, false);
 		// InventoryLogic
-		GetInventory()->addItem(new Hint("Palo", "Ta", &sdlutils().images().at("Palo")));
-		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "Palo", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		GetInventory()->addItem(new Hint("CuerdaLarga", "Ta", &sdlutils().images().at("CuerdaLarga")));
+		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "CuerdaLarga", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 		};
 	roomEvent[WindowScene] = [this] {
@@ -156,10 +157,13 @@ void Room2Scene::_setRoomEvents()
 		rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
 		Game::Instance()->getSceneManager()->loadScene(WINDOW_SCENE, this);
 		};
+	roomEvent[WindowSceneResolved] = [this] {
+		roomEvent[ResolveCase]();
+		};
 	roomEvent[OrganPuzzleScene] = [this] {
 		HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
 		rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
-		//Game::Instance()->getSceneManager()->loadScene(MUSIC_PUZZLE, this);
+		Game::Instance()->getSceneManager()->loadScene(MUSIC_PUZZLE, this);
 		};
 	roomEvent[OrganPuzzleSceneRsv] = [this] {
 
@@ -179,7 +183,6 @@ void Room2Scene::_setRoomEvents()
 
 		};
 	roomEvent[SecretEntry] = [this] {
-		//Depende de si es escena aparte o no
 		rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);
 		};
@@ -216,7 +219,7 @@ void Room2Scene::_setRoomEvents()
 			}, this);
 		};
 	roomEvent[ResolveButtons] = [this] {
-		//Activar los botones o inclusive crearlos aquí directamente dependiendo de si puedes salir o no
+		entityManager->setActive(rmObjects.readyToResolveBotton, true);
 		};
 	roomEvent[GoodEnd] = [this] {
 		// WIP
@@ -525,7 +528,7 @@ void Room2Scene::_setInteractuables()
 		});
 	rmObjects.organ->getMngr()->setActive(rmObjects.organ, false);
 
-	rmObjects.rope = entityFactory->CreateInteractableEntity(entityManager, "Palo", EntityFactory::RECTAREA, Vector2D(200, 350), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+	rmObjects.rope = entityFactory->CreateInteractableEntity(entityManager, "CuerdaLarga", EntityFactory::RECTAREA, Vector2D(200, 350), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 	entityManager->getComponent<ClickComponent>(rmObjects.rope)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[Rope]();
 		});
