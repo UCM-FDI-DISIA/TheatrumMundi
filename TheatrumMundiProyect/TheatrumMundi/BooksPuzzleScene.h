@@ -22,6 +22,7 @@ private:
 	//std::array<int, 3> myComb;
 
 	//Room1Scene* room;
+	ecs::entity_t logbtn;
 	std::vector<int> comb;
 	std::vector<int> myComb;
 };

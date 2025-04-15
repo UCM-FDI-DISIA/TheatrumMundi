@@ -2,6 +2,11 @@
 #include "ScenePuzzleTemplate.h"
 class WindowPuzzleScene : public ScenePuzzleTemplate
 {
+private:
+	//Rope and OpenWindow
+	bool isRopped; //If the window has the rope
+	ecs::entity_t rope;
+	ecs::entity_t openWindow;
 public:
 	WindowPuzzleScene();
 	~WindowPuzzleScene();

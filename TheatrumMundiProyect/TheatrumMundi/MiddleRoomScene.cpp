@@ -85,9 +85,9 @@ void MiddleRoomScene::init()
 		AudioManager& a = AudioManager::Instance();
 		Sound buttonSound = sdlutils().soundEffects().at("boton");
 		//Audio music
-		Sound room1music = sdlutils().musics().at("room1music");
-		a.setLooping(room1music, true);
-		a.playSound(room1music);
+		//Sound room1music = sdlutils().musics().at("sala1");
+		//a.setLooping(room1music, true);
+		//a.playSound(room1music);
 
 		//Register scene in dialogue manager
 		dialogueManager->setScene(this);
@@ -97,15 +97,15 @@ void MiddleRoomScene::init()
 
 		//UI
 		//Pause
-		auto buttonPause = entityFactory->CreateInteractableEntity(entityManager, "B3", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	/*	auto buttonPause = entityFactory->CreateInteractableEntity(entityManager, "B3", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		ClickComponent* buttonPauseClick = entityManager->getComponent<ClickComponent>(buttonPause);
 		buttonPauseClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
 			AudioManager::Instance().playSound(buttonSound);
 			});
-
+*/
 		
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 	}
 	SDL_Delay(1000);
 

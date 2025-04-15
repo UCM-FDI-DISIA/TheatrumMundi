@@ -116,8 +116,7 @@ bool MusicPuzzleScene::Check()
 void MusicPuzzleScene::Win()
 {
     solved = true;
-    // WIP active de respective part in room2 scene
-    cout << "PUZZLE WIN" << endl;
+    room->resolvedPuzzle(4);
 }
 
 bool MusicPuzzleScene::checkPhaseCombination()

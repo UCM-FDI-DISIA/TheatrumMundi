@@ -42,9 +42,14 @@ public:
 	int getFirstItem() const { return firstItem; } //Get the first hint
 
 	inline std::vector<Hint*> getItems() { return items; } //Get all the hintss
-	inline Vector2D GetPosition(int i); //Return the position of the item in the inventory USING IN THE CREATION OF THE INVENTITIES IN THE PUZZLESCENES
+	inline Vector2D GetPosition(int i) {
+		if (i >= 0 && i < positions.size()) {
+			return positions[i];
+		}
+		return Vector2D(0, 0);
+	}; //Return the position of the item in the inventory USING IN THE CREATION OF THE INVENTITIES IN THE PUZZLESCENES
 	
-	void setTextDescription(std::string _id, std::vector<Entity*>& invEntityList, Transform* backgroundTextTransform); //Sets item description on screen
+	void setTextDescription(Hint* a, Transform* trEntity, Transform* backgroundTextTransform); //Sets item description on screen
 	DescriptionInfo* getTextDescription() { return _textDescription; } //Gets item description
 
 private:

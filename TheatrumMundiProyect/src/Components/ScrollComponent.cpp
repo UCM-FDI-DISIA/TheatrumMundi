@@ -96,69 +96,15 @@ void ScrollComponent::update()
 	if (_timeScroll > 0) { //Scroll() activates this
 		//cout << _timeScroll << endl;
 		_timeScroll--;
-		//if (!_isRight) { //The elements are in the left
-		//
-		//	//See if the direction is inverted to set it correctly and apply correct direction
-		//	//HORIZONTALLY
-		//	if (_dir.getX() < 0) {
-		//		_dir.setX(_dir.getX() * -1);
-		//		for (Transform* e : _objectsTransform) {
-		//			e->getVel().set(_dir);
-		//		}
-		//	}
-		//	//VERTICALLY
-		//	if (_dir.getY() < 0) {
-		//		_dir.setY(_dir.getY() * -1);
-		//		for (Transform* e : _objectsTransform) {
-		//			e->getVel().set(_dir);
-		//		}
-		//	}
-		//
-		//	//put the elements to the right at the end
-		//	if (_timeScroll == 0) {
-		//		cout << "RIGHT-DOWN" << endl;
-		//		_isRight = !_isRight; 
-		//
-		//		for (Transform* e : _objectsTransform) { 
-		//			e->getVel().set(0, 0);
-		//		}
-		//	}
-		//}
-		//else { //the elements are in the right
-		//
-		//	//See if the direction is inverted to set it correctly and apply correct direction
-		//	//HORIZONTALLY
-		//	if (_dir.getX() > 0) {
-		//		_dir.setX(_dir.getX() * -1);
-		//
-		//		for (Transform* e : _objectsTransform) {
-		//			e->getVel().set(_dir);
-		//		}
-		//	}
-		//	//VERTICALLY
-		//	if (_dir.getY() > 0) {
-		//		_dir.setY(_dir.getY() * -1);
-		//		for (Transform* e : _objectsTransform) {
-		//			e->getVel().set(_dir);
-		//		}
-		//	}
-		//
-		//	//put the elements to the left at the end
-		//	if (_timeScroll == 0) {
-		//		cout << "LEFT-UP" << endl;
-		//		_isRight = !_isRight; 
-		//
-		//		for (Transform* e : _objectsTransform) {
-		//			e->getVel().set(0, 0);
-		//		}
-		//	}
-		//}
+
 		if (_timeScroll == 0) {
 
 			auto& callbacks = _eventConnectionsScroll.at(ScrollComponent::ENDEDSCROLLING);
-
+			///funcion x
 			for (CALLBACK callback : callbacks)
 				callback();
+
+			endScrollCallback();
 		}
 	} 
 	else 

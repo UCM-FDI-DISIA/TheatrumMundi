@@ -19,7 +19,6 @@ protected:
 	 ecs::EntityManager* entityManager;
 	 EntityFactory* entityFactory;
 	 DialogueManager* dialogueManager;
-	// DialogueManager* dialogueManager;
 	 Area2DLayerManager* areaLayerManager;
 	 PauseManager* pauseManager;
 	/// <summary>
@@ -68,6 +67,8 @@ public:
 	}
 	virtual void endDialogue();
 	inline ecs::EntityManager* GetEntityManager() { return entityManager; }
+
+	virtual void closedLog() {};
 
 };
 

@@ -52,6 +52,9 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		a.setVolume(clockMinSound, 0.2);
 		a.setVolume(clockHorSound, 0.2);
 
+		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		a.setVolume(buttonSound, 0.2);
+
 
 		//Create background
 		auto background = entityFactory->CreateImageEntity(entityManager, "RelojFondo1",
@@ -169,7 +172,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		//room variant logic
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
 		entity_t container;
-		if (variant <= 1) {
+		if (variant  <=1) {
 			container = entityFactory->CreateInteractableEntity(entityManager, "frascoV2", EntityFactory::RECTAREA,
 				Vector2D(500, 600), Vector2D(0, 0), 75, 125, 0,
 				areaLayerManager,
@@ -186,17 +189,16 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			container->getMngr()->setActive(container, false);
 		}
 		ClickComponent* clockCheckClick = entityManager->getComponent<ClickComponent>(_buttonCheck);
-		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [variant,_buttonCheckTransform, sr, this,_buttonCheck,_buttonHor,_buttonMin,container,background]()
+		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [variant,_buttonCheckTransform, sr, this,_buttonCheck,_buttonHor,_buttonMin,container,background, buttonSound]()
 			{
+
+				AudioManager::Instance().playSound(buttonSound);
+
 				if (Check() && getSolved()) {
 					Image* img = entityManager->getComponent<Image>(background);
 					img->setTexture(&sdlutils().images().at("FondoReloj2"));
 					container->getMngr()->setActive(container, true);
-
-					Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
 					//Assign to this inventory the hint;
-					if(variant <=1)AddInvItem("frascoV2", "Un frasco vacio.",position, sr);
-					else if (variant ==2)AddInvItem("frascoV1", "Contiene restos de algo.", position, sr);
 
 #ifdef DEBUG
 					std::cout << "wii";
@@ -208,11 +210,15 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//REWARD
 		ClickComponent* clk = entityManager->getComponent<ClickComponent>(container);
-		clk->connect(ClickComponent::JUST_CLICKED, [this, container, sr]() {
+		clk->connect(ClickComponent::JUST_CLICKED, [this, container,variant, sr]() {
 
-		
+			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+			if (variant == 0)AddInvItem("frascoV2", "Un frasco con restos de algo.", position, sr);
+			else if (variant == 1)AddInvItem("frascoV2", "Un frasco totalmente limpio, que raro.", position, sr);
+			else if (variant == 2)AddInvItem("frascoV1", " Un frasco con huellas de dedos, ¿no habían guantes?", position, sr);
 			container->getMngr()->setActive(container, false);
-			});
+
+		});
 
 		//BackButton
 		//ENTIDADCONENTITYFACTORY
@@ -234,15 +240,15 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		//InventoryButton
 		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
-		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton]() //Lamda function
+		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton, buttonSound]() //Lamda function
 			{
-				//AudioManager::Instance().playSound(buttonSound);
+				AudioManager::Instance().playSound(buttonSound);
 				sr->GetInventory()->setActive(!sr->GetInventory()->getActive());  // Toggle the inventory
 
 				// If the inventory is active, activate the items
 				if (sr->GetInventory()->getActive()) {
 					entityManager->setActive(InventoryBackground, true);
-
+					entityManager->setActive(logbtn, false);
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(925);
 					entityManager->setActive(downButton, true);
 					entityManager->setActive(upButton, true);
@@ -255,6 +261,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(InventoryBackground, false);
 					entityManager->setActive(downButton, false);
 					entityManager->setActive(upButton, false);
+					entityManager->setActive(logbtn, true);
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 
 					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
@@ -264,28 +271,30 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		ClickComponent* UPbuttonInventoryClick = entityManager->getComponent<ClickComponent>(upButton);
-		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ upButton, sr]() {
+		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, upButton, sr]() {
 
-			//AudioManager::Instance().playSound(buttonSound);
+			AudioManager::Instance().playSound(buttonSound);
 			scrollInventoryPuzzle(-1, sr);
 			});
 
 		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
-		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ downButton, sr]() {
+		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, downButton, sr]() {
 
-			//AudioManager::Instance().playSound(buttonSound);
+			AudioManager::Instance().playSound(buttonSound);
 			scrollInventoryPuzzle(1,sr);
 			});
 
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager);
+		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 	
 		startDialogue("PuzzleReloj");
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [this,sr,InventoryBackground,downButton,upButton,inventoryButton, _backButton]()
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this,sr,InventoryBackground,downButton,upButton,inventoryButton, _backButton, buttonSound]()
 			{
+				AudioManager::Instance().playSound(buttonSound);
+
 				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 				HideInventoryItems(InventoryBackground, downButton, upButton, sr);
 				sr->GetInventory()->setFirstItem(0);

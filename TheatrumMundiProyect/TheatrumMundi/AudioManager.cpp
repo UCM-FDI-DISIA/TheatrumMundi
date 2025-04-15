@@ -144,26 +144,42 @@ AudioManager::createSource() {
     return source;
 }
 
+//Move the sound source position in the scene
 void 
 AudioManager::setSourcePosition(Sound sound, float x, float y, float z) {
     alSource3f(sound.getSource(), AL_POSITION, x, y, z);
 }
 
+//Move the listener position in the scene
 void 
 AudioManager::setListenerPosition(float x, float y, float z) {
     alListener3f(AL_POSITION, x, y, z);
 }
 
 
-void AudioManager::setVolume(Sound sound, ALfloat volume) {
+//Modify the track volume
+void 
+AudioManager::setVolume(Sound sound, ALfloat volume) {
     alSourcef(sound.getSource(), AL_GAIN, volume);
+}
+
+//Modify the track speed
+void AudioManager::setSpeed(Sound sound, ALfloat speed) {
+    alSourcef(sound.getSource(), AL_VELOCITY, speed);
+}
+
+//Modify the track pitch
+void AudioManager::setPitch(Sound sound, ALfloat pitch) {
+    alSourcef(sound.getSource(), AL_PITCH, pitch);
 }
 
 // Play a sound (default, once)
 void 
 AudioManager::playSound(Sound sound) {
-    alSourcei(sound.getSource(), AL_BUFFER, sound.getBuffer());
-    alSourcePlay(sound.getSource());
+    if (!isPlaying(sound)) {
+        alSourcei(sound.getSource(), AL_BUFFER, sound.getBuffer());
+        alSourcePlay(sound.getSource());
+    }
 }
 
 // Stop a sound
@@ -188,4 +204,11 @@ AudioManager::resumeSound(Sound sound) {
 void AudioManager::setLooping(Sound sound,bool loop)
 {
     alSourcei(sound.getSource(), AL_LOOPING, loop ? AL_TRUE : AL_FALSE);
+}
+
+//Check if a sound is already playing
+bool AudioManager::isPlaying(Sound sound) {
+    ALint state;
+    alGetSourcei(sound.getSource(), AL_SOURCE_STATE, &state);
+    return (state == AL_PLAYING);
 }
