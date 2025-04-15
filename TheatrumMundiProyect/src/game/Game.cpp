@@ -26,7 +26,7 @@ Game* Game::Instance()
 }
 Game::~Game() {
 	
-
+	
 	delete _mngr;
 	delete _dataManager;
 	delete _log;
@@ -36,34 +36,44 @@ Game::~Game() {
 		InputHandler::Release();
 
 	// release SLDUtil if the instance was created correctly.
-	if (SDLUtils::HasInstance())
+	if (SDLUtils::HasInstance()) {
 		SDLUtils::Release();
+	}
 }
 
 void Game::init() {
-	float w ;
-	float h  ;
-	wscreenScale ;
-	hscreenScale ;
-//In debug the resolution is const
+	float w;
+	float h;
+	wscreenScale;
+	hscreenScale;
+	//In debug the resolution is const
 #ifdef _DEBUG
-		w = 1349.0;
-		h = 748.0;
-		wscreenScale = 1;
-		hscreenScale = 1;	
+	w = 1349.0;
+	h = 748.0;
+	wscreenScale = 1;
+	hscreenScale = 1;
 #else
 	w = GetSystemMetrics(SM_CXSCREEN);
 	h = GetSystemMetrics(SM_CYSCREEN);
 	wscreenScale = GetSystemMetrics(SM_CXSCREEN) / 1349.0;
 	hscreenScale = GetSystemMetrics(SM_CYSCREEN) / 748.0;
 #endif
-
+#ifdef _LOADALLRESOURCES
+	//Load all thee game resources in the global json else the resources have been loaded in scenes 
 	// initialize the SDL singleton
-	if (!SDLUtils::Init("TheatrumMundi",w ,h, "../resources/config/TheatrumMundi.resources.json")) {
+	if (!SDLUtils::Init("TheatrumMundi", w, h, "../resources/config/TheatrumMundi.resources.json")) {
 		std::cerr << "Something went wrong while initializing SDLUtils"
-				<< std::endl;
+			<< std::endl;
 		return;
 	}
+#else
+	if (!SDLUtils::Init("TheatrumMundi", w, h, "../resources/config/TheatrumMundiInitialMenu.resources.json")) {
+		std::cerr << "Something went wrong while initializing SDLUtils"
+			<< std::endl;
+		return;
+	}
+#endif // 
+
 
 	// initialize the InputHandler singleton
 	if (!InputHandler::Init()) {

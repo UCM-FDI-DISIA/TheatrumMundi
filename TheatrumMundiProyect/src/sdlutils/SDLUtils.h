@@ -111,7 +111,7 @@ public:
 	inline void toggleFullScreen() {
 		auto flags = SDL_GetWindowFlags(_window);
 		if (flags & SDL_WINDOW_FULLSCREEN) {
-			SDL_SetWindowFullscreen(_window, 0);
+		SDL_SetWindowFullscreen(_window, 0);
 		} else {
 			SDL_SetWindowFullscreen(_window, SDL_WINDOW_FULLSCREEN);
 		}
@@ -149,7 +149,7 @@ public:
 	inline auto& soundEffects() {
 		return _soundsAccessWrapper;
 	}
-
+	void ClearMaps();
 	// musics maps
 	inline auto& musics() {
 		return _musicsAccessWrapper;

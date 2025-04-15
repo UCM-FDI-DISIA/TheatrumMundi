@@ -4,7 +4,7 @@
 #include <vector>
 #include "../../TheatrumMundi/SceneManager.h"
 #include "../../TheatrumMundi/DataManager.h"
-
+//#define _LOADALLRESOURCES
 class Transform;
 class GameState;
 class Log;

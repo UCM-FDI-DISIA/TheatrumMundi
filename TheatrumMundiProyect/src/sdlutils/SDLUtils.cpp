@@ -7,6 +7,8 @@
 
 #include "../json/JSON.h"
 
+
+
 SDLUtils::SDLUtils() :
 		_windowTitle("TheatrumMundi"), //
 		_width(600), //
@@ -289,6 +291,14 @@ void SDLUtils::loadReasources(std::string filename) {
 		}
 	}
 
+}
+void SDLUtils::ClearMaps()
+{
+	_musics.clear();
+	_sounds.clear();
+	_msgs.clear();
+	_images.clear();
+	_fonts.clear();
 }
 
 void SDLUtils::closeSDLExtensions() {
