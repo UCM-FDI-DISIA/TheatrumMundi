@@ -1,6 +1,8 @@
 #include "SceneManager.h"
 #include <assert.h>
 #include "SceneTemplate.h"
+#include "../game/Game.h"
+#include "../sdlutils/SDLUtils.h"
 #include "Room1.h"
 #include "Room2.h"
 #include "InitialScene.h"
@@ -63,13 +65,52 @@ void SceneManager::popScene()
 
 void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 {
+	
+	//loadResouces
+#ifndef _LOADALLRESOURCES
+	sdlutils().ClearMaps();
+	switch (index)
+	{
+	case INITIAL_MENU:
+		sdlutils().loadReasources("../resources/config/TheatrumMundiInitialMenu.resources.json");
+		break;
+	case TUTORIAL_SCENE:
+		sdlutils().loadReasources("../resources/config/TheatrumMundiTutorial.resources.json");
+		break;
+	case ROOM1:
+		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom1.resources.json");
+		break;
+	default:
+		break;
+	}
+#endif // !_LOADALLRESOURCES
 	scenes[index]->init(room);
 	actsceneindex = index;
 	currentscenes.push_back(scenes[index]);
+	
 }
 
 void SceneManager::loadScene(int index)
 {
+	//loadResouces
+#ifndef _LOADALLRESOURCES
+	sdlutils().ClearMaps();
+	switch (index)
+	{
+	case INITIAL_MENU:
+		sdlutils().loadReasources("../resources/config/TheatrumMundiInitialMenu.resources.json");
+		break;
+	case TUTORIAL_SCENE:
+		sdlutils().loadReasources("../resources/config/TheatrumMundiTutorial.resources.json");
+		break;
+	case ROOM1:
+		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom1.resources.json");
+		break;
+	default:
+		break;
+	}
+#endif // !_LOADALLRESOURCES
+
 	scenes[index]->init();
 	actsceneindex = index;
 	currentscenes.push_back(scenes[index]);

@@ -4,7 +4,7 @@
 
 #include <cassert>
 #include <memory>
-
+#include "../game/Game.h"
 #include "../json/JSON.h"
 
 
@@ -44,8 +44,9 @@ bool SDLUtils::init(std::string windowTitle, int width, int height) {
 bool SDLUtils::init(std::string windowTitle, int width, int height,
 		std::string filename) {
 	init(windowTitle, width, height);
+#ifdef _LOADALLRESOURCES
 	loadReasources(filename);
-
+#endif
 	// we always return true, because this class either exit or throws an
 	// exception on error. If you want to avoid using exceptions you should
 	// find a workaround using booleans.

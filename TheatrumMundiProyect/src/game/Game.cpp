@@ -58,7 +58,7 @@ void Game::init() {
 	wscreenScale = GetSystemMetrics(SM_CXSCREEN) / 1349.0;
 	hscreenScale = GetSystemMetrics(SM_CYSCREEN) / 748.0;
 #endif
-#ifdef _LOADALLRESOURCES
+
 	//Load all thee game resources in the global json else the resources have been loaded in scenes 
 	// initialize the SDL singleton
 	if (!SDLUtils::Init("TheatrumMundi", w, h, "../resources/config/TheatrumMundi.resources.json")) {
@@ -66,13 +66,7 @@ void Game::init() {
 			<< std::endl;
 		return;
 	}
-#else
-	if (!SDLUtils::Init("TheatrumMundi", w, h, "../resources/config/TheatrumMundiInitialMenu.resources.json")) {
-		std::cerr << "Something went wrong while initializing SDLUtils"
-			<< std::endl;
-		return;
-	}
-#endif // 
+
 
 
 	// initialize the InputHandler singleton
