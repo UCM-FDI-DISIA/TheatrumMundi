@@ -30,7 +30,7 @@ Game::~Game() {
 	delete _mngr;
 	delete _dataManager;
 	delete _log;
-	delete _csvdata;
+
 	// release InputHandler if the instance was created correctly.
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
@@ -78,7 +78,6 @@ void Game::init() {
 
 	_log = new Log();
 	_dataManager = new DataManager();
-	_csvdata = new CSVdataRecolector();
 	_mngr = new SceneManager();
 }
 
@@ -113,7 +112,6 @@ void Game::start() {
 
 		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
 			_exitGame = true;
-			_csvdata->safeData();
 			continue;
 		}
 
@@ -175,10 +173,6 @@ DataManager* Game::getDataManager()
 	return _dataManager;
 }
 
-CSVdataRecolector* Game::getCSVDataColector()
-{
-	return _csvdata;
-}
 Log* Game::getLog()
 {
 	return _log;
