@@ -12,8 +12,9 @@ private:
 	std::vector<Vector2D> positions; //Positions of the 
 	std::vector<int> indexPositions = {5,3,6,0,2,1,4,7}; //Sets the positions of 
 	Vector2D firstPos; //First Position of the square
+	Vector2D freePos; //Saves the free spot Position
 
-	void createSquares(const entity_t& mosaicBorderLeft, const entity_t& mosaicBorderTop, const entity_t& mosaicBorderRight, const entity_t& mosaicBorderBottom);
+	void createSquares();
 	entity_t createBorder(const Vector2D& position, float Width, float height);
 protected:
 	std::vector<entity_t> squares; //Array of the squares
@@ -22,7 +23,7 @@ public:
 	MosaicPuzzleScene();
 	~MosaicPuzzleScene();
 	void init(SceneRoomTemplate* sr);
-	void CorrectPositions(entity_t square);
+	void CheckPositions(Transform&);
 	void ResetPuzzle();
 	void Resolve(); //Resolve the puzzle
 	bool Check() override;
