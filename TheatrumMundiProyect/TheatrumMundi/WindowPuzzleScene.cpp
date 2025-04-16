@@ -125,7 +125,6 @@ void WindowPuzzleScene::init(SceneRoomTemplate* sr)
 #pragma region SceneEntities
 
 		auto window = entityFactory->CreateInteractableEntity(entityManager, "Ventana", EntityFactory::RECTAREA, Vector2D(550, 300), Vector2D(0, 0), 259, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		entityManager->addComponent<TriggerComponent>(window);
 		//Assigns the trigger bolean to true
 		entityManager->getComponent<TriggerComponent>(window)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);

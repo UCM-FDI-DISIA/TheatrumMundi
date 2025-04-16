@@ -126,7 +126,8 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 #pragma region SceneEntities
 
 		auto raven = entityFactory->CreateInteractableEntity(entityManager, "CuervoPeligroso",EntityFactory::RECTAREA, Vector2D(200, 350), Vector2D(0, 0), 259, 200, 0,areaLayerManager,EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		entityManager->addComponent<TriggerComponent>(raven);
+		auto trag = entityManager->getComponent<TriggerComponent>(raven);
+		trag->setTargetGroup(ecs::grp::DEFAULT);
 		//Assigns the trigger bolean to true
 		entityManager->getComponent<TriggerComponent>(raven)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
@@ -137,7 +138,7 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		//Creation of the key and their logic
-		auto key = entityFactory->CreateInteractableEntity(entityManager, "Llave", EntityFactory::RECTAREA, Vector2D(200, 400), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto key = entityFactory->CreateInteractableEntity(entityManager, "Llave", EntityFactory::RECTAREA, Vector2D(200, 400), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		entityManager->getComponent<ClickComponent>(key)->connect(ClickComponent::JUST_CLICKED, [this, sr,key, InventoryBackground, downButton, upButton, inventoryButton]()
 			{
 				if (ravenHappy) { //If you give the jewel to the bird, the key is pickable
