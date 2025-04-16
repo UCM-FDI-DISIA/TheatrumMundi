@@ -21,7 +21,10 @@ void MosaicPuzzleScene::createSquares()
 		squares.push_back(it);
 		//it->getMngr()->removeComponent<ClickableSpriteComponent>(squares.back());
 		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED,[this,it]() {
-			CheckPositions(*it->getMngr()->getComponent<Transform>(it));
+			if (!squareMoving) {
+				square = it->getMngr()->getComponent<Transform>(it);
+				MoveSquare();
+			}
 		});
 		
 	}
@@ -69,6 +72,7 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 	if (!isStarted) {
 		isStarted = true;
 		room = sr;
+		squareMoving = false;
 
 #pragma region SpecificEntitiesOfTheScene
 		//Background
@@ -193,32 +197,125 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 }
 
 /// <summary>
-/// Checks if the square which was clicked is next to the free position
+/// Checks if the square which was clicked is next to the free position in case is true, move the square with an animation
 /// </summary>
 /// <param name="square"></param>
-void MosaicPuzzleScene::CheckPositions(Transform& square)
+void MosaicPuzzleScene::MoveSquare()
 {
+	//Saves the originalPos of the square to change the freePos into this
+	originalPos = square->getPos();
+
 	//Compare if is in the same X
-	Vector2D aux = square.getPos();
-	if (square.getPos().getX() == freePos.getX()) {
-		if (square.getPos().getY() + SQUAREWIDTH == freePos.getY()) { //compare if the freePosition is on the right
-			square.setPosY(freePos.getY());
-			freePos.set(aux);
+	if (square->getPos().getX() == freePos.getX()) {
+
+		//If free position is under the square position, move square down
+		if (square->getPos().getY() + SQUAREWIDTH == freePos.getY()) { 
+
+			//Evitate to clcik in another square during the animation
+			squareMoving = true;
+
+			//Moving Square Animation into Bot
+			SDL_AddTimer(30, [](Uint32, void* param) -> Uint32 {
+				auto* self = static_cast<decltype(this)>(param);
+
+				// if position is bigger or the same ends animation
+				if (self->square->getPos().getY() >= self->freePos.getY()) {
+					self->squareMoving = false;
+					self->square->setPosPure(self->freePos);
+					self->freePos.set(self->originalPos);
+					return 0;  // stop timer
+				}
+
+				//add position in each iteration
+				self->square->setPosY(self->square->getPos().getY() + (self->SQUAREWIDTH / 5));
+
+				// call timer again
+				return 30;
+				}, this);
 		}
-		else if (square.getPos().getY() - SQUAREWIDTH == freePos.getY()) {//compare if the freePosition is on the left
-			square.setPosY(freePos.getY());
-			freePos.set(aux);
+
+		//If free position is over the square position, move square up
+		else if (square->getPos().getY() - SQUAREWIDTH == freePos.getY()) {
+
+			//Evitate to clcik in another square during the animation
+			squareMoving = true;
+
+			//Moving Square Animation into top
+			SDL_AddTimer(30, [](Uint32, void* param) -> Uint32 {
+				auto* self = static_cast<decltype(this)>(param);
+
+				// if position is smaller or the same ends animation
+				if (self->square->getPos().getY() <= self->freePos.getY()) {
+					self->squareMoving = false;
+					self->square->setPosPure(self->freePos);
+					self->freePos.set(self->originalPos);
+					return 0;  // stop timer
+				}
+
+				//add position in each iteration
+				self->square->setPosY(self->square->getPos().getY() - (self->SQUAREWIDTH / 5));
+
+				// call timer again
+				return 30;
+				}, this);
 		}
 	}
+
+//END IF
+
 	//Compare if is in the same Y
-	else if (square.getPos().getY() == freePos.getY()) {
-		if (square.getPos().getX() + SQUAREWIDTH == freePos.getX()) { //compare if the freePosition is on the top
-			square.setPosX(freePos.getX());
-			freePos.set(aux);
+	else if (square->getPos().getY() == freePos.getY()) {
+
+		//If free position is on the right of the square position, move square right
+		if (square->getPos().getX() + SQUAREWIDTH == freePos.getX()) { 
+
+			//Evitate to clcik in another square during the animation
+			squareMoving = true;
+
+			//Moving Square Animation into the right
+			SDL_AddTimer(30, [](Uint32, void* param) -> Uint32 {
+				auto* self = static_cast<decltype(this)>(param);
+
+				// if position is bigger or the same
+				if (self->square->getPos().getX() >= self->freePos.getX()) {
+					self->squareMoving = false;
+					self->square->setPosPure(self->freePos);
+					self->freePos.set(self->originalPos);
+					return 0;  // stop timer
+				}
+
+				//add position in each iteration
+				self->square->setPosX(self->square->getPos().getX() + (self->SQUAREWIDTH / 5));
+
+				// call timer again
+				return 30;
+				}, this);
 		}
-		else if (square.getPos().getX() - SQUAREWIDTH == freePos.getX()) {//compare if the freePosition is on the bot
-			square.setPosX(freePos.getX());
-			freePos.set(aux);
+
+		//If free position is on the left of the square position, move square left
+		else if (square->getPos().getX() - SQUAREWIDTH == freePos.getX()) {
+
+			//Evitate to clcik in another square during the animation
+			squareMoving = true;
+
+			//Moving Square Animation into the left
+			SDL_AddTimer(30, [](Uint32, void* param) -> Uint32 {
+				auto* self = static_cast<decltype(this)>(param);
+
+				// if position is smaller or the same
+				if (self->square->getPos().getX() <= self->freePos.getX()) {
+					self->squareMoving = false;
+					self->square->setPosPure(self->freePos);
+					self->freePos.set(self->originalPos);
+					return 0;  // stop timer
+				}
+
+				//add position in each iteration
+				self->square->setPosX(self->square->getPos().getX() - (self->SQUAREWIDTH / 5));
+
+				// call timer again
+				return 30;
+				}, this);
 		}
 	}
 }
