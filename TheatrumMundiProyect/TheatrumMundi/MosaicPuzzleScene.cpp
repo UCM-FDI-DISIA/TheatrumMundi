@@ -207,11 +207,14 @@ void MosaicPuzzleScene::MoveSquare()
 	originalPos = square->getPos();
 
 	//Compare if is in the same X
-	if (square->getPos().getX() == freePos.getX()) {
-
+	if (round(square->getPos().getX()) == round(freePos.getX())) {
 		//If free position is under the square position, move square down
-		if (square->getPos().getY() + SQUAREWIDTH == freePos.getY()) { 
+		std::cout << "AAAAAAAAAaa" << std::endl;
 
+		if (round(square->getPos().getY()) + round((SQUAREWIDTH * Game::Instance()->hscreenScale)) == round(freePos.getY())) {
+
+
+			std::cout << "PPPPPPPPPPPP" << std::endl;
 			//Evitate to clcik in another square during the animation
 			squareMoving = true;
 
@@ -228,7 +231,8 @@ void MosaicPuzzleScene::MoveSquare()
 				}
 
 				//add position in each iteration
-				self->square->setPosY(self->square->getPos().getY() + (self->SQUAREWIDTH / 5));
+				Vector2D aux = Vector2D(self->square->getPos().getX(), self->square->getPos().getY() + (self->square->getPos().getY() / 5));
+				self->square->setPosPure(aux);
 
 				// call timer again
 				return 30;
@@ -236,8 +240,9 @@ void MosaicPuzzleScene::MoveSquare()
 		}
 
 		//If free position is over the square position, move square up
-		else if (square->getPos().getY() - SQUAREWIDTH == freePos.getY()) {
+		else if (round(square->getPos().getY()) - round((SQUAREWIDTH * Game::Instance()->hscreenScale)) == round(freePos.getY())) {
 
+			std::cout << "XXXXXXXXXXXXXXX" << std::endl;
 			//Evitate to clcik in another square during the animation
 			squareMoving = true;
 
@@ -254,7 +259,8 @@ void MosaicPuzzleScene::MoveSquare()
 				}
 
 				//add position in each iteration
-				self->square->setPosY(self->square->getPos().getY() - (self->SQUAREWIDTH / 5));
+				Vector2D aux = Vector2D(round(self->square->getPos().getX()), round(self->square->getPos().getY() - (self->square->getPos().getY() / 5)));
+				self->square->setPosPure(aux);
 
 				// call timer again
 				return 30;
@@ -265,11 +271,12 @@ void MosaicPuzzleScene::MoveSquare()
 //END IF
 
 	//Compare if is in the same Y
-	else if (square->getPos().getY() == freePos.getY()) {
+	else if (round(square->getPos().getY()) == round(freePos.getY())) {
 
 		//If free position is on the right of the square position, move square right
-		if (square->getPos().getX() + SQUAREWIDTH == freePos.getX()) { 
+		if (round(square->getPos().getX()) + round((SQUAREWIDTH * Game::Instance()->wscreenScale)) == round(freePos.getX())) {
 
+			std::cout << "HHHHHHHHHHH" << std::endl;
 			//Evitate to clcik in another square during the animation
 			squareMoving = true;
 
@@ -286,7 +293,8 @@ void MosaicPuzzleScene::MoveSquare()
 				}
 
 				//add position in each iteration
-				self->square->setPosX(self->square->getPos().getX() + (self->SQUAREWIDTH / 5));
+				Vector2D aux = Vector2D(self->square->getPos().getX() + (self->square->getPos().getX() / 5), self->square->getPos().getY());
+				self->square->setPosPure(aux);
 
 				// call timer again
 				return 30;
@@ -294,8 +302,10 @@ void MosaicPuzzleScene::MoveSquare()
 		}
 
 		//If free position is on the left of the square position, move square left
-		else if (square->getPos().getX() - SQUAREWIDTH == freePos.getX()) {
+		else if (round(square->getPos().getX()) - round((SQUAREWIDTH * Game::Instance()->wscreenScale)) == round(freePos.getX())) {
 
+
+			std::cout << "IIIIIIIIIIIII" << std::endl;
 			//Evitate to clcik in another square during the animation
 			squareMoving = true;
 
@@ -312,7 +322,8 @@ void MosaicPuzzleScene::MoveSquare()
 				}
 
 				//add position in each iteration
-				self->square->setPosX(self->square->getPos().getX() - (self->SQUAREWIDTH / 5));
+				Vector2D aux = Vector2D(self->square->getPos().getX() - round(self->square->getPos().getX() / 5), self->square->getPos().getY());
+				self->square->setPosPure(aux);
 
 				// call timer again
 				return 30;
@@ -326,7 +337,7 @@ void MosaicPuzzleScene::ResetPuzzle()
 	for (int i = 0; i < TOTALSQUARES; ++i) {
 		squares[i]->getMngr()->getComponent<Transform>(squares[i])->setPosPure(positions[indexPositions[i]]);
 	}
-	freePos = Vector2D(750,475);
+	freePos = Vector2D(750 * Game::Instance()->wscreenScale, 475 * Game::Instance()->hscreenScale);
 }
 
 void MosaicPuzzleScene::Resolve()
@@ -334,7 +345,7 @@ void MosaicPuzzleScene::Resolve()
 	for (int i = 0; i < TOTALSQUARES; ++i) {
 		squares[i]->getMngr()->getComponent<Transform>(squares[i])->setPosPure(positions[i]);
 	}
-	freePos = Vector2D(750, 475);
+	freePos = Vector2D(750 * Game::Instance()->wscreenScale, 475 * Game::Instance()->hscreenScale);
 	if (Check()) Win();
 }
 

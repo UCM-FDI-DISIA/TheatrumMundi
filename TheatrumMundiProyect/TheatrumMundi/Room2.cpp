@@ -291,18 +291,18 @@ void Room2Scene::_setRoomBackground()
 #pragma region Scroll
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom2)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+		if (!isOpen && !rmObjects.backgroundScroll->isScrolling()) {
 			AudioManager::Instance().playSound(rmSounds.doorSound);
 			rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
 			scrolling = true;
 		}
-		else if (!isOpen) {
+		else if (isOpen) {
 			roomEvent[DoorScene]();
 		}
 		});
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom1)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll]() {
-		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+		if (!isOpen && !rmObjects.backgroundScroll->isScrolling()) {
 			AudioManager::Instance().playSound(rmSounds.doorSound);
 			rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
 			scrolling = true;
