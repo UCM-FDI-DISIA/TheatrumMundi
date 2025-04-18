@@ -3,6 +3,7 @@
 #include "SceneTemplate.h"
 #include "Room1.h"
 #include "Room2.h"
+#include "roomprueba.h"
 #include "InitialScene.h"
 #include "PipePuzzleScene.h"
 #include "ClockPuzzleScene.h"
@@ -31,6 +32,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::ROOM_2] = new Room2Scene();
+	scenes[SceneName::ROOM_3] = new roomprueba();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
@@ -48,7 +50,7 @@ SceneManager::SceneManager()
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::INITIAL_MENU);
+	loadScene(SceneName::ROOM_3);
 }
 
 void SceneManager::popScene()
@@ -220,6 +222,9 @@ void SceneManager::loadScene(int index)
 		case SceneName::BOOKS_PUZZLE:
 			scene = "MIDDLE_ROOM";
 			break;
+		case SceneName::ROOM_3:
+			scene = "ROOM_3";
+			break;
 		case -1:
 			scene = "TUTORIAL";
 			break;
@@ -251,6 +256,9 @@ void SceneManager::loadScene(int index)
 		break;
 	case SceneName::BOOKS_PUZZLE:
 		scene = "MIDDLE_ROOM";
+		break;
+	case SceneName::ROOM_3:
+		scene = "ROOM_3";
 		break;
 	case -1:
 		scene = "TUTORIAL";

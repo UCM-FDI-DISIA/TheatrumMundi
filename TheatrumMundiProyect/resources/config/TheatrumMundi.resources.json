@@ -280,6 +280,9 @@
     { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
     { "id" : "continuar", "file" : "../resources/images/Finales/continuarBackground.png" },
     { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
+    { "id" : "balance", "file" : "../resources/images/temporales/balanza.png" },
+    { "id" : "heart", "file" : "../resources/images/temporales/corazon.png" },
+    { "id" : "feather", "file" : "../resources/images/temporales/pluma.png" },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"
