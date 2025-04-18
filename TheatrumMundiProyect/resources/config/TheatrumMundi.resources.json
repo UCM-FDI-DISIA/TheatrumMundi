@@ -282,7 +282,9 @@
     { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
     { "id" : "balance", "file" : "../resources/images/temporales/balanza.png" },
     { "id" : "heart", "file" : "../resources/images/temporales/corazon.png" },
-    { "id" : "feather", "file" : "../resources/images/temporales/pluma.png" },
+    { "id" : "pluma", "file" : "../resources/images/temporales/pluma.png" },
+    { "id" : "juzgado", "file" : "../resources/images/temporales/juzgado.png" },
+    { "id" : "salaEspera", "file" : "../resources/images/temporales/salaEspera.png" },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"

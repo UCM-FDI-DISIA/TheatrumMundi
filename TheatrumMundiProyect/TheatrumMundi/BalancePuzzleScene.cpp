@@ -65,20 +65,23 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 			Vector2D(100, 400), Vector2D(), 600, 400, 0,
 			areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);*/
 
-		auto balance = entityFactory->CreateInteractableEntity( // balance entity
+		auto balance = entityFactory->
+			CreateImageEntity(entityManager, "balance", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+
+
+
+		auto balanceArea = entityFactory->CreateInteractableEntity( // balance entity
 			entityManager, "balance", EntityFactory::RECTAREA,
 			Vector2D(400, 100), Vector2D(), 460, 280, 0,
 			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
+		//balanceArea->getMngr()->removeComponent<Image>(balanceArea);
 
-		auto heart = entityFactory->CreateInteractableEntity( // heart entity
-			entityManager, "balance", EntityFactory::RECTAREA,
-			Vector2D(250, 100), Vector2D(), 460, 280, 0,
-			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	auto heart = entityFactory->CreateImageEntity(entityManager, "heart", Vector2D(250, 100), Vector2D(0, 0), 460, 280, 0, ecs::grp::DEFAULT);
 
 
 		auto feather = entityFactory->CreateInteractableEntity( // feather entity
-			entityManager, "feather", EntityFactory::RECTAREA,
+			entityManager, "pluma", EntityFactory::RECTAREA,
 			Vector2D(400, 300), Vector2D(), 460, 280, 0,
 			areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);
 
@@ -89,14 +92,14 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 
-		balance->getMngr()->getComponent<TriggerComponent>(balance)->connect(TriggerComponent::AREA_ENTERED, [this]() {
+		balanceArea->getMngr()->getComponent<TriggerComponent>(balanceArea)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
 			std::cout << "pasa por el triger de la balanza" << std::endl;
 			});
 
 
 		//Assigns the trigger bolean to false
-		balance->getMngr()->getComponent<TriggerComponent>(balance)->connect(TriggerComponent::AREA_LEFT, [this]() {
+		balanceArea->getMngr()->getComponent<TriggerComponent>(balanceArea)->connect(TriggerComponent::AREA_LEFT, [this]() {
 			SetplacedHand(false);
 			});
 

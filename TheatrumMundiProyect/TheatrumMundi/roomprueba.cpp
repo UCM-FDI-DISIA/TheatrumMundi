@@ -157,11 +157,11 @@ void roomprueba::init()
 #pragma region Background
 
 		//LeftBackground
-		auto CementeryBackground = entityFactory->CreateImageEntity(entityManager, "FondoCementerio", Vector2D(-10, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::DEFAULT);
-		CementeryBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(CementeryBackground));
+		auto WaitRoomBackground = entityFactory->CreateImageEntity(entityManager, "salaEspera", Vector2D(-10, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::DEFAULT);
+		CementeryBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(WaitRoomBackground));
 
 		//RightBackground
-		auto MausoleumBackground = entityFactory->CreateImageEntity(entityManager, "FondoCripta", Vector2D(1349 - 6, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+		auto MausoleumBackground = entityFactory->CreateImageEntity(entityManager, "juzgado", Vector2D(1349 - 6, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 		CementeryBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(MausoleumBackground));
 
 
