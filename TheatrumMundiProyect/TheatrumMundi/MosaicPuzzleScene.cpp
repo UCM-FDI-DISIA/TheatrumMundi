@@ -11,6 +11,7 @@
 #include "TriggerComponent.h"
 #include "DragComponent.h"
 
+
 /// <summary>
 /// Create the dragSquares
 /// </summary>
@@ -45,6 +46,18 @@ MosaicPuzzleScene::MosaicPuzzleScene()
 {
 	//Assignation of the possitions 
 
+	int onlyRelease = 2;
+
+//HACER QUE ESTO FUNCIONE Y YA DEBERÍA ESTAR PARA TANTO DEBUG COMO RELEASE
+#ifdef DEBUG
+	onlyRelease = 0;
+#endif // DEBUG
+
+#ifdef RELEASE
+	onlyRelease = 1;
+#endif // RELEASE
+
+
 	int index = 0; //Aux index to set the Y position
 	for (int i = 0; i < TOTALSQUARES; ++i) { //Initializate the list of positions
 
@@ -54,7 +67,7 @@ MosaicPuzzleScene::MosaicPuzzleScene()
 		}
 
 		//Assign the positions of the different rows
-		if(i < 3) positions.push_back(Vector2D((350 * Game::Instance()->wscreenScale) - 1, (75 * Game::Instance()->hscreenScale) + (index * SQUAREWIDTH * Game::Instance()->hscreenScale))); //First row possitions (0-2)
+		if(i < 3) positions.push_back(Vector2D((350 * Game::Instance()->wscreenScale) - onlyRelease, (75 * Game::Instance()->hscreenScale) + (index * SQUAREWIDTH * Game::Instance()->hscreenScale))); //First row possitions (0-2)
 		else if(i < 6) positions.push_back(Vector2D((350 * Game::Instance()->wscreenScale) + (SQUAREWIDTH * Game::Instance()->wscreenScale), (75 * Game::Instance()->hscreenScale) + (index * SQUAREWIDTH * Game::Instance()->hscreenScale))); //Second row possitions (3-5)
 		else positions.push_back(Vector2D((350 * Game::Instance()->wscreenScale) + (2 * SQUAREWIDTH * Game::Instance()->wscreenScale), (75 * Game::Instance()->hscreenScale) + (index * SQUAREWIDTH * Game::Instance()->hscreenScale))); //Third row possitions (6-8)
 		++index;
