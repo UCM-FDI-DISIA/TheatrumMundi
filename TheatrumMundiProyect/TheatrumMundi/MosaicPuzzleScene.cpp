@@ -46,17 +46,11 @@ MosaicPuzzleScene::MosaicPuzzleScene()
 {
 	//Assignation of the possitions 
 
-	int onlyRelease = 2;
+	int onlyRelease = 1;
 
-//HACER QUE ESTO FUNCIONE Y YA DEBERÍA ESTAR PARA TANTO DEBUG COMO RELEASE
-#ifdef DEBUG
+#ifdef _DEBUG
 	onlyRelease = 0;
 #endif // DEBUG
-
-#ifdef RELEASE
-	onlyRelease = 1;
-#endif // RELEASE
-
 
 	int index = 0; //Aux index to set the Y position
 	for (int i = 0; i < TOTALSQUARES; ++i) { //Initializate the list of positions
