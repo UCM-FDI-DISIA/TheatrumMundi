@@ -25,6 +25,7 @@ enum SceneName {
 	ROOM_3,
 	TUTORIAL_SCENE,
 	TELE_PUZZLE,
+	WIRES_PUZZLE,
 	SCENE_SIZE
 };
 class SceneManager

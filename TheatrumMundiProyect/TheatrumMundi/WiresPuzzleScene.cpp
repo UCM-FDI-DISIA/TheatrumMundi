@@ -119,20 +119,26 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		//Puzzle scene
 		room = sr;
 
+		//are in where the wires are going to be connected
 		auto port1 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(555, 415), Vector2D(0, 0), /*109, 115*/ 60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		auto port2 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(555, 455), Vector2D(0, 0), /*63, 127*/60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		auto port3 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(555, 495), Vector2D(0, 0),/* 743, 280*/60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		auto port4 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(555, 535), Vector2D(0, 0),/* 743, 280*/60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		auto port5 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(555, 575), Vector2D(0, 0),/* 743, 280*/60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
-
+		//wires
 		auto firstWire = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook1", EntityFactory::RECTAREA, Vector2D(500, 415), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		auto secondWire = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook2", EntityFactory::RECTAREA, Vector2D(500, 455), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		auto thirdWire = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook3", EntityFactory::RECTAREA, Vector2D(500, 495), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		auto fourthWire = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook4", EntityFactory::RECTAREA, Vector2D(500, 535), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		auto fifthWire = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook5", EntityFactory::RECTAREA, Vector2D(500, 575), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
-
+		//lights
+		auto light1 = entityFactory->CreateInteractableEntity(entityManager, "light1", EntityFactory::RECTAREA, Vector2D(400, 300), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto light2 = entityFactory->CreateInteractableEntity(entityManager, "light2", EntityFactory::RECTAREA, Vector2D(440, 300), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto light3 = entityFactory->CreateInteractableEntity(entityManager, "light3", EntityFactory::RECTAREA, Vector2D(480, 300), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto light4 = entityFactory->CreateInteractableEntity(entityManager, "light4", EntityFactory::RECTAREA, Vector2D(520, 300), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		auto light5 = entityFactory->CreateInteractableEntity(entityManager, "light5", EntityFactory::RECTAREA, Vector2D(560, 300), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
 		//CHECK COMBINATION
 		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "backButton", EntityFactory::RECTAREA, Vector2D(690, 493), Vector2D(0, 0), 70, 50, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
