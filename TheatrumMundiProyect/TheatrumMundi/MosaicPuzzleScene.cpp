@@ -104,10 +104,13 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 		reset->getMngr()->getComponent<ClickComponent>(reset)->connect(ClickComponent::JUST_CLICKED, [this] {
 			ResetPuzzle();
 		});
+#ifdef _DEBUG
 		auto resolve = entityFactory->CreateInteractableEntity(entityManager, "clockHorButton", EntityFactory::RECTAREA, Vector2D(400, 0), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		resolve->getMngr()->getComponent<ClickComponent>(resolve)->connect(ClickComponent::JUST_CLICKED, [this] {
 			Resolve();
 		});
+#endif // _DEBUG
+
 #pragma endregion
 
 		
@@ -226,6 +229,10 @@ void MosaicPuzzleScene::MoveSquare()
 			SDL_AddTimer(30, [](Uint32, void* param) -> Uint32 {
 				auto* self = static_cast<decltype(this)>(param);
 
+				//add position in each iteration
+				Vector2D aux = Vector2D(self->square->getPos().getX(), self->square->getPos().getY() + round(self->square->getHeight() / 5));
+				self->square->setPosPure(aux);
+
 				// if position is bigger or the same ends animation
 				if (self->square->getPos().getY() >= self->freePos.getY()) {
 					self->squareMoving = false;
@@ -233,10 +240,6 @@ void MosaicPuzzleScene::MoveSquare()
 					self->freePos.set(self->originalPos);
 					return 0;  // stop timer
 				}
-
-				//add position in each iteration
-				Vector2D aux = Vector2D(self->square->getPos().getX(), self->square->getPos().getY() + round(self->square->getPos().getY() / 5));
-				self->square->setPosPure(aux);
 
 				// call timer again
 				return 30;
@@ -253,6 +256,10 @@ void MosaicPuzzleScene::MoveSquare()
 			SDL_AddTimer(30, [](Uint32, void* param) -> Uint32 {
 				auto* self = static_cast<decltype(this)>(param);
 
+				//add position in each iteration
+				Vector2D aux = Vector2D(round(self->square->getPos().getX()), round(self->square->getPos().getY() - round(self->square->getHeight() / 5)));
+				self->square->setPosPure(aux);
+
 				// if position is smaller or the same ends animation
 				if (self->square->getPos().getY() <= self->freePos.getY()) {
 					self->squareMoving = false;
@@ -260,10 +267,6 @@ void MosaicPuzzleScene::MoveSquare()
 					self->freePos.set(self->originalPos);
 					return 0;  // stop timer
 				}
-
-				//add position in each iteration
-				Vector2D aux = Vector2D(round(self->square->getPos().getX()), round(self->square->getPos().getY() - round(self->square->getPos().getY() / 5)));
-				self->square->setPosPure(aux);
 
 				// call timer again
 				return 30;
@@ -276,8 +279,6 @@ void MosaicPuzzleScene::MoveSquare()
 	//Compare if is in the same Y
 	else if (round(square->getPos().getY()) == round(freePos.getY())) {
 
-		std::cout << "REDONDEO" << round(square->getPos().getX()) + round((SQUAREWIDTH * Game::Instance()->wscreenScale)) << std::endl;
-		std::cout << "FREEPOS" << round(freePos.getX()) << std::endl;
 		//If free position is on the right of the square position, move square right
 		if (round(square->getPos().getX()) + round((SQUAREWIDTH * Game::Instance()->wscreenScale)) == round(freePos.getX())) {
 
@@ -288,6 +289,10 @@ void MosaicPuzzleScene::MoveSquare()
 			SDL_AddTimer(30, [](Uint32, void* param) -> Uint32 {
 				auto* self = static_cast<decltype(this)>(param);
 
+				//add position in each iteration
+				Vector2D aux = Vector2D(round(self->square->getPos().getX()) + round(self->square->getWidth() / 5), round(self->square->getPos().getY()));
+				self->square->setPosPure(aux);
+
 				// if position is bigger or the same
 				if (self->square->getPos().getX() >= self->freePos.getX()) {
 					self->squareMoving = false;
@@ -295,10 +300,6 @@ void MosaicPuzzleScene::MoveSquare()
 					self->freePos.set(self->originalPos);
 					return 0;  // stop timer
 				}
-
-				//add position in each iteration
-				Vector2D aux = Vector2D(round(self->square->getPos().getX()) + round(self->square->getPos().getX() / 5), round(self->square->getPos().getY()));
-				self->square->setPosPure(aux);
 
 				// call timer again
 				return 30;
@@ -315,6 +316,11 @@ void MosaicPuzzleScene::MoveSquare()
 			SDL_AddTimer(30, [](Uint32, void* param) -> Uint32 {
 				auto* self = static_cast<decltype(this)>(param);
 
+
+				//add position in each iteration
+				Vector2D aux = Vector2D(round(self->square->getPos().getX()) - round(self->square->getWidth() / 5), self->square->getPos().getY());
+				self->square->setPosPure(aux);
+
 				// if position is smaller or the same
 				if (self->square->getPos().getX() <= self->freePos.getX()) {
 					self->squareMoving = false;
@@ -322,10 +328,6 @@ void MosaicPuzzleScene::MoveSquare()
 					self->freePos.set(self->originalPos);
 					return 0;  // stop timer
 				}
-
-				//add position in each iteration
-				Vector2D aux = Vector2D(round(self->square->getPos().getX()) - round(self->square->getPos().getX() / 5), self->square->getPos().getY());
-				self->square->setPosPure(aux);
 
 				// call timer again
 				return 30;
