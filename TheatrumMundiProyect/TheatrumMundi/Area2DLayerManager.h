@@ -11,6 +11,7 @@ public:
 	using reverse_iterator = std::list<Area2D*>::reverse_iterator;
 
 	Area2DLayerManager();
+	~Area2DLayerManager();
 
 	// Reference to the Area2D list
 	std::list<Area2D*> const& list();

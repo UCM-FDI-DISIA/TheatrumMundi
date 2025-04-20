@@ -19,13 +19,12 @@ using namespace std;
 DialogueManager::DialogueManager(int numRooms) : _scene(nullptr), displayOnProcess(false), characterimg(nullptr), _writeTextComp(nullptr){
     actualroom = numRooms;
     room = "Sala" + to_string(actualroom);
-    dialogueReader = new ReadDialog(numRooms);
+    dialogueReader = Game::Instance()->getReadDialogue();
     _showText = new TextInfo{ " ", " " };
 }
 
 DialogueManager::~DialogueManager() {
     delete _showText;
-    delete dialogueReader;
 }
 
 void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, string event)

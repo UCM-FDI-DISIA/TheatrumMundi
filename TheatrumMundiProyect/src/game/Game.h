@@ -4,6 +4,7 @@
 #include <vector>
 #include "../../TheatrumMundi/SceneManager.h"
 #include "../../TheatrumMundi/DataManager.h"
+#include "../../TheatrumMundi/ReadDialog.h"
 
 class Transform;
 class GameState;
@@ -16,7 +17,7 @@ private:
 	
 	 SceneManager* _mngr;
 	 Log* _log;
-	 
+	 ReadDialog* dialogueReader;
 	 DataManager* _dataManager;
 	 CSVdataRecolector* _csvdata;
 	 Game();
@@ -33,6 +34,7 @@ public:
 	SceneManager* getSceneManager();
 	DataManager* getDataManager();
 	CSVdataRecolector* getCSVDataColector();
+	ReadDialog* getReadDialogue();
 	Log* getLog();
 	Game& operator=(const Game& o) = delete;
 	Game(const Game& o) = delete;

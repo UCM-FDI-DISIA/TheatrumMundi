@@ -12,13 +12,14 @@ ReadDialog::ReadDialog(int rooms) : numRooms(rooms) {
 
 ReadDialog::~ReadDialog()
 {
-	mRoom.clear();
+
 }
+
 
 void ReadDialog::ReadJson() {
 	//Open de json path
 
-	ifstream mJson("../resources/config/dialogues.json");
+/*	ifstream mJson("../resources/config/dialogues.json");
 	assert(mJson);
 	json dialogues;
 	mJson >> dialogues;
@@ -39,13 +40,16 @@ void ReadDialog::ReadJson() {
 
 				string character = elem2["Character"];
 				string text = elem2["Text"];
-				r[elem.key()].push_back(TextInfo{ character,text });
+				r[elem.key()].emplace_back(TextInfo{ character, text });
 			}
 		}
 
 		//Upload Map
 		mRoom[room] = r;
 	}
+	dialogues.clear();  // Vacía su contenido
+	dialogues = json();    // Libera la memoria
+	mJson.close();*/
 }
 
 RoomDialogues& ReadDialog::getRoomDialogues(const string& room) {

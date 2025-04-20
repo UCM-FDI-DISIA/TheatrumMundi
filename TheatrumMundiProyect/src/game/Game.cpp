@@ -7,6 +7,8 @@
 #include "../utils/Vector2D.h"
 #include "../utils/Collisions.h"
 
+
+
 #include "../../TheatrumMundi/Log.h"
 
 #include "../../TheatrumMundi/CSVdataRecolector.h"
@@ -31,6 +33,7 @@ Game::~Game() {
 	delete _dataManager;
 	delete _log;
 	delete _csvdata;
+	delete dialogueReader;
 	// release InputHandler if the instance was created correctly.
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
@@ -78,6 +81,7 @@ void Game::init() {
 
 	_log = new Log();
 	_dataManager = new DataManager();
+	dialogueReader = new ReadDialog(3);
 	_csvdata = new CSVdataRecolector();
 	_mngr = new SceneManager();
 }
@@ -178,6 +182,10 @@ DataManager* Game::getDataManager()
 CSVdataRecolector* Game::getCSVDataColector()
 {
 	return _csvdata;
+}
+ReadDialog* Game::getReadDialogue()
+{
+	return dialogueReader;
 }
 Log* Game::getLog()
 {
