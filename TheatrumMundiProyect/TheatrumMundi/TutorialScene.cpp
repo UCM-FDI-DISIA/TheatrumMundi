@@ -324,7 +324,7 @@ void TutorialScene::endDialogue()
 			
 			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 			
-			Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
+			logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 
 			Game::Instance()->getLog()->addDialogueLineLog(" ", "PW: 3711");
 

@@ -22,7 +22,6 @@ private:
 	std::list<TextInfo>::iterator _firstRenderLine; //points to current first dialogue line to be displayed on log menu
 
 	const int LINES_DISPLAYED = 5; //number of lines displayed on screen
-
 	SceneTemplate* sceneTemplate;
 
 public:
