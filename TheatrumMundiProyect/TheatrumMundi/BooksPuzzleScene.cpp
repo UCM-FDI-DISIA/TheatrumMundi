@@ -56,7 +56,7 @@ BooksPuzzleScene::BooksPuzzleScene()
 
 BooksPuzzleScene::~BooksPuzzleScene()
 {
-
+	
 }
 
 void BooksPuzzleScene::init(SceneRoomTemplate* sr)

@@ -31,6 +31,7 @@ Room2Scene::Room2Scene()
 
 Room2Scene::~Room2Scene()
 {
+
 }
 
 void Room2Scene::init()

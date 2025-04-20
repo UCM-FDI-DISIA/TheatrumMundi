@@ -35,6 +35,7 @@ Room1Scene::Room1Scene() : SceneRoomTemplate(), _eventToRead("Sala1Intro")
 
 Room1Scene::~Room1Scene()
 {
+	
 }
 
 void Room1Scene::init()

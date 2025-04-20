@@ -28,6 +28,7 @@ Inventory::~Inventory()
 	{
 		delete item;
 	}
+	delete _textDescription;
 }
 /// <summary>
 /// Sets the first item to show in the inventory

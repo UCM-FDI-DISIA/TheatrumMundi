@@ -23,7 +23,9 @@ EntityFactory::EntityFactory(ecs::EntityManager* entityManager,Area2DLayerManage
 	_myAreaLayerManager = areaLayerManager;
 }
 
-EntityFactory::~EntityFactory(){}
+EntityFactory::~EntityFactory(){
+
+}
 
 //CREATES IMAGE ENTITY
 ecs::entity_t EntityFactory::CreateImageEntity(ecs::EntityManager* _entityManager, const std::string& _idImage,

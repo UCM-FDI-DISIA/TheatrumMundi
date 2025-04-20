@@ -10,7 +10,6 @@
 #include "TeaCupPuzzleScene.h"
 #include "checkML.h"
 #include "SceneRoomTemplate.h"
-#include"DebugInventoryScene.h"
 #include "MosaicPuzzleScene.h"
 #include "RavenPuzzleScene.h"
 #include "WindowPuzzleScene.h"

@@ -19,7 +19,7 @@ ReadDialog::~ReadDialog()
 void ReadDialog::ReadJson() {
 	//Open de json path
 
-/*	ifstream mJson("../resources/config/dialogues.json");
+	ifstream mJson("../resources/config/dialogues.json");
 	assert(mJson);
 	json dialogues;
 	mJson >> dialogues;
@@ -49,7 +49,12 @@ void ReadDialog::ReadJson() {
 	}
 	dialogues.clear();  // Vacía su contenido
 	dialogues = json();    // Libera la memoria
-	mJson.close();*/
+	mJson.close();
+}
+
+void ReadDialog::ResetReader()
+{
+	ReadJson();
 }
 
 RoomDialogues& ReadDialog::getRoomDialogues(const string& room) {

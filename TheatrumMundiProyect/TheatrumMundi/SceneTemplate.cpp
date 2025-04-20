@@ -39,7 +39,7 @@ SceneTemplate::~SceneTemplate()
 {
 	unload();
 	
-	
+	delete pauseManager;
 	delete entityFactory;
 	delete dialogueManager;
 	delete entityManager;

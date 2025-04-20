@@ -75,6 +75,7 @@ MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaInterm
 
 MiddleRoomScene::~MiddleRoomScene()
 {
+
 }
 
 void MiddleRoomScene::init()

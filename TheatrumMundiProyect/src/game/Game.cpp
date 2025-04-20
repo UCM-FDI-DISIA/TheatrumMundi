@@ -30,10 +30,10 @@ Game::~Game() {
 	
 
 	delete _mngr;
-	delete _dataManager;
-	delete _log;
 	delete _csvdata;
 	delete dialogueReader;
+	delete _dataManager;
+	delete _log;
 	// release InputHandler if the instance was created correctly.
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
@@ -157,6 +157,7 @@ void Game::reset()
 	Game::Instance()->getLog()->ResetLog();
 	Game::Instance()->getDataManager()->ResetDataManager();
 	Game::Instance()->getSceneManager()->ResetSceneManager();
+	Game::Instance()->getReadDialogue()->ResetReader();
 
 }
 
