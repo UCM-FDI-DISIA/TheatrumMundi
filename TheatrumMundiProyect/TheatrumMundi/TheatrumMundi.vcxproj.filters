@@ -67,6 +67,7 @@
     <ClCompile Include="RavenPuzzleScene.cpp" />
     <ClCompile Include="DoorPuzzleScene.cpp" />
     <ClCompile Include="WindowPuzzleScene.cpp" />
+    <ClCompile Include="..\src\Components\BehaviorStateComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -257,6 +258,7 @@
     <ClInclude Include="RavenPuzzleScene.h" />
     <ClInclude Include="DoorPuzzleScene.h" />
     <ClInclude Include="WindowPuzzleScene.h" />
+    <ClInclude Include="..\src\Components\BehaviorStateComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />
