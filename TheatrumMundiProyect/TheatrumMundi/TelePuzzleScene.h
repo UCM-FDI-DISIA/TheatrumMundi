@@ -1,5 +1,7 @@
 #pragma once
 #include "ScenePuzzleTemplate.h"
+#include "vector"
+#include "../src/sdlutils/VirtualTimer.h"
 
 class TelePuzzleScene : public ScenePuzzleTemplate
 {
@@ -19,8 +21,13 @@ protected:
 	bool _spoonIsInCup;
 	bool _poisonIsChecked;
 	Entity* spoon;
-	Entity* teaCupBackground;
+	Entity* tvBackground;
 
 private:
 	ecs::entity_t inventoryButton;
+
+	std::vector<Texture*> tvAnimationFrames;
+	int currentFrameIndex = 0;
+	VirtualTimer frameTimer;
+	bool isAnimating = false;
 };

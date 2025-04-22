@@ -707,7 +707,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		entity_t gloveEntity;
 		ClickComponent* clk;
 		std::cout << "variant:" << variant << endl;
-		if (variant <= 1) {
+		
 			// create entity
 			gloveEntity = entityFactory->CreateInteractableEntity(entityManager, "guantes", EntityFactory::RECTAREA,
 				Vector2D(1150, 840), Vector2D(0, 0), 150, 150, 0,
@@ -720,12 +720,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 				Vector2D position = sr->GetInventory()->setPosition();
 				AddInvItem("guantes", "Unos guantes. Ya está. Son unos guantes.", position, sr);
 				});
-		}
-		else if (variant == 2) {
-			//Mage variant 2
-			// create entity
-			
-		}
+		
 
 
 		// create entity

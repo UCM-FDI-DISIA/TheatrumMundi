@@ -429,7 +429,7 @@ void Room1Scene::_setUI()
 				entityManager->setActive(invObjects.inventoryUpButton,   false);
 				entityManager->setActive(rmObjects.logbtn, true);
 				rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the items
+				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the items
 				
 			}
 		});
@@ -457,7 +457,7 @@ void Room1Scene::_setUI()
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getreanudePauseButton())->getLayerPos());
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getexitPauseButton())->getLayerPos());
 
-	rmObjects.logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
+	logbtn = rmObjects.logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 }
 
 void Room1Scene::_setRoomBackground()
@@ -509,7 +509,7 @@ void Room1Scene::_setCaseResolution()
 	Game::Instance()->getDataManager()->SetSceneCount(ROOM1);
 	
 	//get actual variant
-	int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(ROOM1);
+	int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(0);
 	
 
 	auto background = entityFactory->CreateImageEntity(
@@ -566,7 +566,7 @@ void Room1Scene::_setCaseResolution()
 	entityManager->getComponent<ClickComponent>(noPossibleButton)
 		->connect(ClickComponent::JUST_CLICKED, [this, variantAct, background]()
 		{
-			if (variantAct != 1 || 2) //if its the not correct variant one dies
+			if (variantAct == 0) //if its the not correct variant one dies
 			{
 				
 				Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
@@ -672,19 +672,23 @@ void Room1Scene::_setInteractuables()
 	auto Mobile = entityFactory->CreateInteractableEntity(entityManager, "mobileSprite", EntityFactory::RECTAREA, Vector2D(1250, 500), Vector2D(0, 0), 245 / 3, 123 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(Mobile));
 
+
 	auto mobileZoom = entityFactory->CreateImageEntity(entityManager, "mobileBackground", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 
 
 	int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
+	std::cout << "variant: " << variant << std::endl;
 	entity_t tag;
 	if (variant == 0 || variant == 2) //call was missed
 	{
+
 		entityManager->getComponent<Image>(mobileZoom)->setTexture(&sdlutils().images().at("mobileBackground"));
 	}
 	else if (variant == 1) // call is answered
 	{
 		entityManager->getComponent<Image>(mobileZoom)->setTexture(&sdlutils().images().at("mobileBackgroundV2"));
 	}
+
 	
 	RectArea2D* mobileZoomArea = entityManager->addComponent<RectArea2D>(mobileZoom, areaLayerManager);
 	entityManager->setActive(mobileZoom, false);

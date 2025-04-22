@@ -1,0 +1,109 @@
+{
+
+  "fonts" : [
+    {
+      "id": "ARIAL24",
+      "file": "../resources/fonts/ARIAL.ttf",
+      "size": 24
+    },
+    { "id" : "TITLE", "file" : "../resources/fonts/PirataOne-Regular.ttf", "size": 40 },
+    { "id" : "BASE", "file" : "../resources/fonts/FeFCrm2.ttf", "size": 24}
+  ],
+
+  "images": [
+    {
+      "id": "EmptyImage",
+      "file": "../resources/images/Finales/ImagenVacia.png"
+    },
+    {
+      "id": "SolSprite",
+      "file": "../resources/images/Finales/Sol.PNG"
+    },
+    {
+      "id": "LucySprite",
+      "file": "../resources/images/Finales/Lucy.PNG"
+    },
+    {
+      "id": "KeisaraSprite",
+      "file": "../resources/images/Finales/Keisara.PNG"
+    },
+    {
+      "id": "Dialog",
+      "file": "../resources/images/Finales/Dialogo.PNG"
+    },
+    {
+      "id": "B6",
+      "file": "../resources/images/Finales/6.PNG"
+    },
+    {
+      "id": "B2",
+      "file": "../resources/images/Finales/2.PNG"
+    },
+    {
+      "id": "fondoPruebaLog",
+      "file": "../resources/images/fondoLogPrueba.png"
+    },
+    {
+      "id": "teleSinAntena",
+      "file": "../resources/images/Finales/TutorialTele1.png"
+  },
+  {
+      "id": "teleConAntena",
+      "file": "../resources/images/Finales/TutorialTele2.png"
+  },
+  {
+    "id": "antena",
+      "file": "../resources/images/Finales/TutorialAntenas.png"
+  },
+    {
+      "id": "botonNumero",
+      "file": "../resources/images/Finales/button3711.png"
+  },
+    {
+      "id": "TutorialPuerta",
+      "file": "../resources/images/Finales/TutorialPuerta.png"
+    },
+    {
+      "id": "Room",
+      "file": "../resources/images/Finales/SalaIntermedia.PNG"
+    },
+    {
+      "id": "ChangeRoom",
+      "file": "../resources/images/Finales/CambiarSala.PNG"
+    }
+     ],
+
+  "messages": [
+    {
+      "id": "start",
+      "text": "Press space to start",
+      "font": "ARIAL24",
+      "color": "0x441155ff"
+    }
+  ],
+
+    "sounds": [
+      {
+        "id": "puzzle",
+        "file": "../resources/sound/sfx/click_puzzle.wav"
+    },
+    {
+      "id": "puerta",
+      "file": "../resources/sound/sfx/puerta.wav"
+  },
+    
+      {
+            "id": "boton",
+            "file": "../resources/sound/sfx/click_boton.wav"
+        }
+       
+    ],
+
+  "musics" : [
+    {
+        "id": "sala1",
+        "file":  "../resources/sound/music/sala1.wav"
+    }
+  ]
+
+}

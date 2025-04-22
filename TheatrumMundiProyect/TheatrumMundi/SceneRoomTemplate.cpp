@@ -42,7 +42,8 @@ void SceneRoomTemplate::scrollInventory(int dir)
 
             for (auto& hint : GetInventory()->hints) {
                 auto transform = hint->getMngr()->getComponent<Transform>(hint);
-                transform->setPosY(transform->getPos().getY() + 150);
+                Vector2D auxVector = Vector2D(transform->getPos().getX(), transform->getPos().getY() + (150 * Game::Instance()->hscreenScale));
+                transform->setPosPure(auxVector);
             }
         }
     }
@@ -60,7 +61,8 @@ void SceneRoomTemplate::scrollInventory(int dir)
 
             for (auto& hint : GetInventory()->hints) {
                 auto transform = hint->getMngr()->getComponent<Transform>(hint);
-                transform->setPosY(transform->getPos().getY() - 150);
+                Vector2D auxVector = Vector2D(transform->getPos().getX(), transform->getPos().getY() - (150 * Game::Instance()->hscreenScale));
+                transform->setPosPure(auxVector);
             }
         }
     }
@@ -119,6 +121,14 @@ void SceneRoomTemplate::createDescription(Entity* hintEntity, Hint* hintItem)
             });
 
     
+}
+
+void SceneRoomTemplate::reposAllInventoryItems()
+{
+    for (int i = 0; i < GetInventory()->hints.size(); ++i) {
+        GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);
+        GetInventory()->hints[i]->getMngr()->getComponent<Transform>(GetInventory()->hints[i])->setPos(GetInventory()->GetPosition(i));
+    }
 }
 
 SceneRoomTemplate::SceneRoomTemplate() : SceneTemplate()

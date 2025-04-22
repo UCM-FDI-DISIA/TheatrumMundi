@@ -75,6 +75,7 @@ TutorialScene::TutorialScene() : SceneRoomTemplate()
 			if (dialogCount == 3) {
 				dialogCount += 1;
 				entityManager->setActive(antenna, true);
+				HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
 				Game::Instance()->getSceneManager()->loadScene(TELE_PUZZLE, this);
 			}
 			else if (dialogCount == 4) {
@@ -130,7 +131,11 @@ void TutorialScene::init()
 
 		auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
 
-		ChangeRoomScroll->setEndScrollCallback([this](){ roomEvent[Dialog3](); });
+		ChangeRoomScroll->setEndScrollCallback([this](){ 
+			entityManager->setActive(doorImage, false);
+			roomEvent[Dialog3](); 
+			
+			});
 
 		auto startRoom = entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 		
@@ -148,7 +153,7 @@ void TutorialScene::init()
 			if (!startRoomScroll->isScrolling()) {
 				AudioManager::Instance().playSound(doorSound);
 				startRoomScroll->Scroll(ScrollComponent::RIGHT);
-				entityManager->setActive(doorImage, false);
+				
 			
 				
 			}
@@ -158,7 +163,7 @@ void TutorialScene::init()
 
 		//door image
 		doorImage = entityFactory->CreateImageEntity(entityManager, "TutorialPuerta", Vector2D(34, 215), Vector2D(0, 0), 136, 495, 0, ecs::grp::DEFAULT);
-
+		startRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(doorImage));
 		entityManager->setActive(doorImage, false);
 
 		//password button
@@ -167,6 +172,7 @@ void TutorialScene::init()
 			AudioManager::Instance().playSound(puzzleButtonSound);
 			roomEvent[Dialog2]();
 			entityManager->setActive(passwordButton, false);
+			entityManager->setActive(doorImage, true);
 			});
 
 		entityManager->setActive(passwordButton, false);
@@ -318,7 +324,7 @@ void TutorialScene::endDialogue()
 			
 			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 			
-			Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
+			logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 
 			Game::Instance()->getLog()->addDialogueLineLog(" ", "PW: 3711");
 
@@ -340,7 +346,7 @@ void TutorialScene::endDialogue()
 
 			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 			entityManager->setActive(ChangeRoom1, true);
-			entityManager->setActive(doorImage, true);
+			
 			break;
 
 		case 3:

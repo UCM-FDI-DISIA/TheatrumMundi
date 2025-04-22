@@ -63,8 +63,8 @@ void Inventory::setTextDescription(Hint* a, Transform* trEntity, Transform* back
 	_textDescription->Description = a->getDescription();
 
 	//set background position
-	backgroundTextTransform->setPosY(trEntity->getPos().getY() + 40);
-	backgroundTextTransform->setPosX(535);
+	Vector2D auxVector = Vector2D(535, trEntity->getPos().getY() + 40);
+	backgroundTextTransform->setPosPure(auxVector);
 	backgroundTextTransform->setWidth(100);
 
 	//set text description position
@@ -127,7 +127,8 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 				// move the rest of the items up
 				for (auto it = entityIt; it != invEntityList.end(); ++it, i++) {
 					auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
-					transform->setPosY(transform->getPos().getY() - 150);
+					Vector2D auxVector = Vector2D(transform->getPos().getX(), transform->getPos().getY() - 150);
+					transform->setPosPure(auxVector);
 
 					if (i == 2 - posE) {
 						(*it)->getMngr()->setActive(*it, true);
@@ -138,7 +139,8 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 				int posH = std::distance(hints.begin(), hintIt);
 				for (auto it = hintIt; it != hints.end(); ++it) {
 					auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
-					transform->setPosY(transform->getPos().getY() - 150);
+					Vector2D auxVector = Vector2D(transform->getPos().getX(), transform->getPos().getY() - 150);
+					transform->setPosPure(auxVector);
 
 					if (j == 2 - posH) {
 						(*it)->getMngr()->setActive(*it, true);
@@ -152,7 +154,8 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 				// move the rest of the items up
 				for (auto it = invEntityList.begin(); it != entityIt; ++it, i++) {
 					auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
-					transform->setPosY(transform->getPos().getY() + 150);
+					Vector2D auxVector = Vector2D(transform->getPos().getX(), transform->getPos().getY() + 150);
+					transform->setPosPure(auxVector);
 
 					if (i == firstItem - 1) {
 						(*it)->getMngr()->setActive(*it, true);
@@ -161,7 +164,8 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 				int j = 0;
 				for (auto it = hints.begin(); it != hintIt; ++it, j++) {
 					auto transform = (*it)->getMngr()->getComponent<Transform>(*it);
-					transform->setPosY(transform->getPos().getY() + 150);
+					Vector2D auxVector = Vector2D(transform->getPos().getX(), transform->getPos().getY() + 150);
+					transform->setPosPure(auxVector);
 					if (j == firstItem - 1) {
 						(*it)->getMngr()->setActive(*it, true);
 					}

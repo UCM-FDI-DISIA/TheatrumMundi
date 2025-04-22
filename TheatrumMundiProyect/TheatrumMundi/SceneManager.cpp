@@ -1,6 +1,8 @@
 #include "SceneManager.h"
 #include <assert.h>
 #include "SceneTemplate.h"
+#include "../game/Game.h"
+#include "../sdlutils/SDLUtils.h"
 #include "Room1.h"
 #include "Room2.h"
 #include "InitialScene.h"
@@ -55,68 +57,8 @@ void SceneManager::popScene()
 {
 	std::cout << "pop scene" << endl;
 	assert(!currentscenes.empty());
-	std::string scene = "NONE";
-	switch (actsceneindex)
-	{
-	case SceneName::INITIAL_MENU:
-		scene = "INITIAL MENU";
-		break;
-	case SceneName::ROOM_1:
-		scene = "ROOM_1";
-		break;
-	case SceneName::MIDDLE_ROOM:
-		scene = "MIDDLE_ROOM";
-		break;
-	case SceneName::PIPE_PUZZLE:
-		scene = "PIPE_PUZZLE";
-		break;
-	case SceneName::CLOCK_PUZZLE:
-		scene = "CLOCK_PUZZLE";
-		break;
-	case SceneName::BOOKS_PUZZLE:
-		scene = "MIDDLE_ROOM";
-		break;
-	case -1:
-		scene = "TUTORIAL";
-		break;
-	default:
-		break;
-	}
-	Game::Instance()->getCSVDataColector()->exitScene(scene);
-
 	currentscenes.pop_back();
-	int aux;
-	for (int i = 0;i < scenes.size();i++){
-		if (currentscenes.back() == scenes[i]) aux = i;
-	}
-	switch (actsceneindex)
-	{
-	case SceneName::INITIAL_MENU:
-		scene = "INITIAL MENU";
-		break;
-	case SceneName::ROOM_1:
-		scene = "ROOM_1";
-		break;
-	case SceneName::MIDDLE_ROOM:
-		scene = "MIDDLE_ROOM";
-		break;
-	case SceneName::PIPE_PUZZLE:
-		scene = "PIPE_PUZZLE";
-		break;
-	case SceneName::CLOCK_PUZZLE:
-		scene = "CLOCK_PUZZLE";
-		break;
-	case SceneName::BOOKS_PUZZLE:
-		scene = "MIDDLE_ROOM";
-		break;
-	case -1:
-		scene = "TUTORIAL";
-		break;
-	default:
-		break;
-	}
-	Game::Instance()->getCSVDataColector()->enterScene(scene);
-
+	currentscenes.back()->closedMenus();
 
 }
 
@@ -124,142 +66,57 @@ void SceneManager::popScene()
 
 void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 {
-	std::string scene = "NONE";
-	int aux;
-	for (int i = 0;i < scenes.size();i++) {
-		if (currentscenes.back() == scenes[i]) aux = i;
-	}
-	switch (actsceneindex)
-	{
-	case SceneName::INITIAL_MENU:
-		scene = "INITIAL MENU";
-		break;
-	case SceneName::ROOM_1:
-		scene = "ROOM_1";
-		break;
-	case SceneName::MIDDLE_ROOM:
-		scene = "MIDDLE_ROOM";
-		break;
-	case SceneName::PIPE_PUZZLE:
-		scene = "PIPE_PUZZLE";
-		break;
-	case SceneName::CLOCK_PUZZLE:
-		scene = "CLOCK_PUZZLE";
-		break;
-	case SceneName::BOOKS_PUZZLE:
-		scene = "MIDDLE_ROOM";
-		break;
-	case -1:
-		scene = "TUTORIAL";
-		break;
-	default:
-		break;
-	}
-	Game::Instance()->getCSVDataColector()->exitScene(scene);
-
-	scenes[index]->init(room);
 	
-	actsceneindex = index;
-
-	switch (actsceneindex)
+	//loadResouces
+#ifndef _LOADALLRESOURCES
+	sdlutils().ClearMaps();
+	switch (index)
 	{
-	case SceneName::INITIAL_MENU:
-		scene = "INITIAL MENU";
+	case INITIAL_MENU:
+		sdlutils().loadReasources("../resources/config/TheatrumMundiInitialMenu.resources.json");
 		break;
-	case SceneName::ROOM_1:
-		scene = "ROOM_1";
+	case TUTORIAL_SCENE:
+		sdlutils().loadReasources("../resources/config/TheatrumMundiTutorial.resources.json");
 		break;
-	case SceneName::MIDDLE_ROOM:
-		scene = "MIDDLE_ROOM";
-		break;
-	case SceneName::PIPE_PUZZLE:
-		scene = "PIPE_PUZZLE";
-		break;
-	case SceneName::CLOCK_PUZZLE:
-		scene = "CLOCK_PUZZLE";
-		break;
-	case SceneName::BOOKS_PUZZLE:
-		scene = "MIDDLE_ROOM";
-		break;
-	case -1:
-		scene = "TUTORIAL";
+	case ROOM1:
+		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom1.resources.json");
 		break;
 	default:
 		break;
 	}
-	Game::Instance()->getCSVDataColector()->enterScene(scene);
+#endif // !_LOADALLRESOURCES
+	scenes[index]->init(room);
+	actsceneindex = index;
 	currentscenes.push_back(scenes[index]);
+	currentscenes.back()->closedMenus();
 	
 }
 
 void SceneManager::loadScene(int index)
 {
-	std::string scene = "NONE";
-	if (!currentscenes.empty()) {
-		int aux;
-		for (int i = 0;i < scenes.size();i++) {
-			if (currentscenes.back() == scenes[i]) aux = i;
-		}
-		switch (actsceneindex)
-		{
-		case SceneName::INITIAL_MENU:
-			scene = "INITIAL MENU";
-			break;
-		case SceneName::ROOM_1:
-			scene = "ROOM_1";
-			break;
-		case SceneName::MIDDLE_ROOM:
-			scene = "MIDDLE_ROOM";
-			break;
-		case SceneName::PIPE_PUZZLE:
-			scene = "PIPE_PUZZLE";
-			break;
-		case SceneName::CLOCK_PUZZLE:
-			scene = "CLOCK_PUZZLE";
-			break;
-		case SceneName::BOOKS_PUZZLE:
-			scene = "MIDDLE_ROOM";
-			break;
-		case -1:
-			scene = "TUTORIAL";
-			break;
-		default:
-			break;
-		}
-		Game::Instance()->getCSVDataColector()->exitScene(scene);
-	}
-	scenes[index]->init();
-	
-	actsceneindex = index;
-
-	switch (actsceneindex)
+	//loadResouces
+#ifndef _LOADALLRESOURCES
+	sdlutils().ClearMaps();
+	switch (index)
 	{
-	case SceneName::INITIAL_MENU:
-		scene = "INITIAL MENU";
+	case INITIAL_MENU:
+		sdlutils().loadReasources("../resources/config/TheatrumMundiInitialMenu.resources.json");
 		break;
-	case SceneName::ROOM_1:
-		scene = "ROOM_1";
+	case TUTORIAL_SCENE:
+		sdlutils().loadReasources("../resources/config/TheatrumMundiTutorial.resources.json");
 		break;
-	case SceneName::MIDDLE_ROOM:
-		scene = "MIDDLE_ROOM";
-		break;
-	case SceneName::PIPE_PUZZLE:
-		scene = "PIPE_PUZZLE";
-		break;
-	case SceneName::CLOCK_PUZZLE:
-		scene = "CLOCK_PUZZLE";
-		break;
-	case SceneName::BOOKS_PUZZLE:
-		scene = "MIDDLE_ROOM";
-		break;
-	case -1:
-		scene = "TUTORIAL";
+	case ROOM1:
+		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom1.resources.json");
 		break;
 	default:
 		break;
 	}
-	Game::Instance()->getCSVDataColector()->enterScene(scene);
+#endif // !_LOADALLRESOURCES
+
+	scenes[index]->init();
+	actsceneindex = index;
 	currentscenes.push_back(scenes[index]);
+	currentscenes.back()->closedMenus();
 }
 
 void SceneManager::unloadScene()

@@ -19,7 +19,7 @@ public:
 
 	~DragPuzzleScene();
 	
-	void init() override;
+	void init(SceneRoomTemplate* sr) override;
 
 	void unload();
 

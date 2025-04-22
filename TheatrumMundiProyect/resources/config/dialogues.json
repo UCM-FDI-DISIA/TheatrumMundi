@@ -29,7 +29,7 @@
         {"Character":" ","Text":"Por eso la tenemos en el almacén."},
         {"Character":" ","Text":"Tengo que dejar de irme por las ramas."},
         {"Character":" ","Text":"¿Por qué me sigues mirando así?"},
-        {"Character":" ","Text":"Sé que la sala sigue ligeramente cochambrosa,\npero tengo que educarte antes de nada."},
+        {"Character":" ","Text":"Sé que la sala sigue ligeramente cochambrosa,\npero tengo que educarte antes de nada. \nPor eso la tenemos en el almacén."},
         {"Character":" ","Text":"Tengo que asegurarme de que vas a consumir \nmi trabajo de manera correcta."},
         {"Character":" ","Text":"¡Se acabó la charla!"},
         {"Character":" ","Text":"¿Ves como se mueve el televisor cuando lo señalas?"},
@@ -154,8 +154,9 @@
                 {"Character":"Sol","Text":"Déjalo."}
             ],
             "PuzzleReloj":[
-                {"Character":"Sol","Text":"Qué reloj mas bonito..."},
-                {"Character":"Lucy","Text":"Que casualidad, hay mucha temática de tiempo."}
+                {"Character":"Sol","Text":"Un reloj sin agujas."},
+                {"Character":"Sol","Text":"Muy útil."}
+                
             ],
             "PuzzleTaza1":[
                 {"Character":"Sol","Text":"Queda algo de té en esta taza."},
@@ -186,9 +187,24 @@
                 {"Character":"Lucy","Text":"Mira, es el móvil de Keisara."},
                 {"Character":"Lucy","Text":"Su última llamada es con su editorial."},
                 {"Character":"Sol","Text":"Ni una llamada perdida."},
-                {"Character":"Sol","Text":"No se cómo lo hace, ojalá tener su energía para contestar a la gente"}
+                {"Character":"Sol","Text":"No se cómo lo hace, ojalá tener su energía\n para contestar a la gente"}
                 
             ],
+            "RecogerVeneno1":[
+                {"Character":"Lucy","Text":"200mg, eso es bastante veneno."},
+                {"Character":"Sol","Text":"¿De verdad?"},
+                {"Character":"Lucy","Text":"Te mataría en unos 20 minutos."},
+                {"Character":"Sol","Text":"Por suerte para nosotros, no tengo intención\n de consumirlo."}
+                
+            ],
+            "RecogerVeneno2":[
+                {"Character":"Lucy","Text":"10mg, eso no mataría ni a un bebe"},
+                {"Character":"Sol","Text":"¿De verdad?"},
+                {"Character":"Lucy","Text":"Una dosis adecuada mataría a un\n adulto en unos 20 minutos"},
+                {"Character":"Sol","Text":"Prefiero que no haya ningún veneno en primer lugar. "}
+                
+            ],
+
             "Sala1Final":[
                 {"Character":" ","Text":"Bueno, bueno, bueno."},
                 {"Character":" ","Text":"Parece que el incentivo a funcionado."},
