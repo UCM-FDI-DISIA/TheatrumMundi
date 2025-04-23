@@ -373,11 +373,6 @@ void Room1Scene::_setUI()
 	entityManager->setActive(rmObjects.quitButton, false);
 
 	//inventory descriptions
-	
-	//visual background for item description text
-	invObjects.backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::UI);
-	entityManager->setActive(invObjects.backgroundTextDescription, false);
-
 	//description text entity
 	invObjects.textDescriptionEnt = entityManager->addEntity(ecs::grp::UI);
 	auto _testTextTranform = entityManager->addComponent<Transform>(invObjects.textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
@@ -458,7 +453,7 @@ void Room1Scene::_setUI()
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getreanudePauseButton())->getLayerPos());
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getexitPauseButton())->getLayerPos());
 
-	rmObjects.logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
+	logbtn = rmObjects.logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 }
 
 void Room1Scene::_setRoomBackground()

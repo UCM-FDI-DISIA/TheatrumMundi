@@ -49,7 +49,7 @@ public:
 		return Vector2D(0, 0);
 	}; //Return the position of the item in the inventory USING IN THE CREATION OF THE INVENTITIES IN THE PUZZLESCENES
 	
-	void setTextDescription(Hint* a, Transform* trEntity, Transform* backgroundTextTransform); //Sets item description on screen
+	void setTextDescription(Hint* a, Transform* trEntity); //Sets item description on screen
 	DescriptionInfo* getTextDescription() { return _textDescription; } //Gets item description
 
 private:

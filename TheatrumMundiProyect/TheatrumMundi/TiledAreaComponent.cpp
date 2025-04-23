@@ -112,37 +112,35 @@ bool TiledAreaComponent::_overlapsWith(TiledAreaComponent* area)
         _objTransform->getPos().getX() + _localPosition.getX(),
 
         _objTransform->getPos().getY() + _localPosition.getY(),
-        _width-10,
-        _height-10  
+        _width-1,
+        _height-1  
     };
 
     SDL_Rect otherRect = {
         extrentTr->getPos().getX() + area->getLocalPos().getX(),
         extrentTr->getPos().getY() + area->getLocalPos().getY(),
-        area->getWidth()-10,
-        area->getHeight()-10
+        area->getWidth()-1,
+        area->getHeight()-1
     };
    
     SDL_Rect rs;
     if (SDL_IntersectRect(&thisRect, &otherRect, &rs)) {
         bool flag = false;
         if (this->CheckCollisionInTiles(rs)) {
-            area->CheckCollisionInTiles(rs);
+          //  area->CheckCollisionInTiles(rs);
             std::vector<SDL_Rect> othertiledcol = area->getTilesCol();
             for (SDL_Rect thidtiles : myTiledCol) {
-                for (SDL_Rect othertiles : othertiledcol) {
-                    //depurar los vectores de collisiones resultantes
-                    if (SDL_IntersectRect(&othertiles, &thidtiles, &rs)) flag = true;
-                }
+                    if (area->CheckCollisionInTiles(thidtiles)) flag = true;  
             }
 
         }
-        else return flag;
+        return flag;
     }
     else
     {
         return false;
     }
+ 
 }
 
 
@@ -171,16 +169,17 @@ bool TiledAreaComponent::CheckCollisionInTiles(SDL_Rect& _collition)
         {
             SDL_Rect auxRect = { auxpos.getX()+(i*unitw) ,auxpos.getY()+(unith*j),unitw,unith};
             SDL_Rect auxcolrect;
+            if (matcol[i][j]) {
                 if(SDL_IntersectRect(&auxRect,&_collition,&auxcolrect)){
-                    if (matcol[i][j]) {
+                    
                         flag = true;
                         myTiledCol.push_back(auxcolrect);
-                        std::cout << "flag " << i << j << endl;
+                 
                     }  
             }
         }
     }
-    std::cout << "flag " << flag << endl;
+   
     return flag;
 }
 

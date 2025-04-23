@@ -111,8 +111,9 @@ void WindowPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Log
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
-		//startDialogue("Puerta");
+		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
+
+		//startDialogue("Ventana");
 
 #pragma endregion
 
@@ -154,7 +155,7 @@ bool WindowPuzzleScene::isItemHand(const std::string& itemId)
 		return true;
 	}
 	else if (itemId == "CuerdaCorta") {
-		//Diálogo que dice que no se puede
+		//Diï¿½logo que dice que no se puede
 		Win();
 	}
 	else if (itemId == "Gancho") {

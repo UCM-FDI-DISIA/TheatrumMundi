@@ -113,11 +113,12 @@ void DialogueManager::ReadDialogue(const string& event) {
             setCharacterImage(elem.Character);
 
             roomDialogues[event].pop_front();
+
+            //Indicate log the dialogue Event has ended
+            if(roomDialogues[event].empty()) Game::Instance()->getLog()->addDialogueLineLog("/", "/");
         }
         else {
-            //Indicate log the dialogue Event has ended
-            Game::Instance()->getLog()->addDialogueLineLog("/", "/");
-
+           
             _scene->endDialogue();
             displayOnProcess = false;
 

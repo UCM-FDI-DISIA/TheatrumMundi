@@ -6,11 +6,11 @@
 #include "../../TheatrumMundi/DataManager.h"
 #include "../../TheatrumMundi/ReadDialog.h"
 
+#define _LOADALLRESOURCES
 class Transform;
 class GameState;
 class Log;
 
-class CSVdataRecolector;
 class Game {
 	
 private:
@@ -19,7 +19,6 @@ private:
 	 Log* _log;
 	 ReadDialog* dialogueReader;
 	 DataManager* _dataManager;
-	 CSVdataRecolector* _csvdata;
 	 Game();
 	
 	 void checkCollisions();

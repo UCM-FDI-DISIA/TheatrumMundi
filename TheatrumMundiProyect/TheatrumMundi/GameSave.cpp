@@ -55,4 +55,8 @@ void GameSave::Load(const std::string& filename)
         // Load more data
         file.close();
     }
+    else {
+
+        TutorialCompleted = false;
+    }
 }

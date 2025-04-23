@@ -572,7 +572,7 @@ void Room2Scene::_setInteractuables()
 		secretEntryOpen->getMngr()->setActive(secretEntryOpen, true);
 		rmObjects.secretEntryInTheZoomed->getMngr()->removeEntity(rmObjects.secretEntryInTheZoomed);
 
-		//else SONIDO/SOUND un sonidito de algo metálico que no ceda a abrirse
+		//else SONIDO/SOUND un sonidito de algo metï¿½lico que no ceda a abrirse
 	});
 
 #pragma endregion

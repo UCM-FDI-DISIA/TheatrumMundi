@@ -35,7 +35,6 @@ protected:
 		RectArea2D* InvArea = nullptr;
 		ecs::entity_t inventoryUpButton = nullptr;
 		ecs::entity_t inventoryDownButton = nullptr;
-		ecs::entity_t backgroundTextDescription = nullptr;
 		ecs::entity_t textDescriptionEnt = nullptr;
 
 	}invObjects;

@@ -15,7 +15,7 @@ SceneTemplate::SceneTemplate()
 	entityFactory = new EntityFactory(entityManager, areaLayerManager);
 	dialogueManager = new DialogueManager(0);
 	pauseManager = new PauseManager();
-
+	logbtn = nullptr;
 	isStarted = false;
 	//sceneLog = new Log();
 }
@@ -61,6 +61,12 @@ void SceneTemplate::endDialogue()
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
 
+}
+
+void SceneTemplate::closedMenus()
+{
+	closedLog();
+	if(logbtn != nullptr) entityManager->setActive(logbtn, true);
 }
 
 //metodo global inv flechas
