@@ -13,8 +13,8 @@ SceneTemplate::SceneTemplate()
 	entityManager = new ecs::EntityManager();
 	areaLayerManager = new Area2DLayerManager();
 	entityFactory = new EntityFactory(entityManager, areaLayerManager);
-	dialogueManager = new DialogueManager(0);
 	pauseManager = new PauseManager();
+	dialogueManager = nullptr;
 	logbtn = nullptr;
 	isStarted = false;
 	//sceneLog = new Log();
@@ -41,7 +41,7 @@ SceneTemplate::~SceneTemplate()
 	
 	delete pauseManager;
 	delete entityFactory;
-	delete dialogueManager;
+	if(dialogueManager)delete dialogueManager;
 	delete entityManager;
 	delete areaLayerManager;
 }

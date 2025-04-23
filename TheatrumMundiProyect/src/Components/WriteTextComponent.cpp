@@ -216,6 +216,7 @@ void WriteTextComponent<DescriptionInfo>::render()
 
 		totalHeight += dialogText->height() + (5 * Game::Instance()->hscreenScale); // split lines space
 		maxWidth = std::max(maxWidth, dialogText->width());
+		delete dialogText;
 	}
 
 	// Background
@@ -230,8 +231,6 @@ void WriteTextComponent<DescriptionInfo>::render()
 		dialogText->render(dialogRect, 0);
 		y += dialogText->height() + 5 * Game::Instance()->hscreenScale;
 	}
-
-	
 }
 
 //IS FINISHED

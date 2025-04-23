@@ -1,11 +1,11 @@
 #pragma once
 #include <iostream>
-#include <string>
-
+#include <cstring> 
 	struct TextInfo {
 	public:
 		std::string Character;
 		std::string Text;
+		
 	};
 
 

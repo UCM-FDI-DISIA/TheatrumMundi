@@ -115,7 +115,7 @@ void SceneRoomTemplate::reposAllInventoryItems()
 
 void SceneRoomTemplate::unload()
 {
-    delete inv;
+    
 }
 
 SceneRoomTemplate::SceneRoomTemplate() : SceneTemplate()
@@ -127,6 +127,7 @@ SceneRoomTemplate::SceneRoomTemplate() : SceneTemplate()
 SceneRoomTemplate::~SceneRoomTemplate()
 {
 	unload();
+    delete inv;
 }
 
 
