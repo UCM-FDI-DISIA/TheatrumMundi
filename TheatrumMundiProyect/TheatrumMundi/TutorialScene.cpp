@@ -198,6 +198,8 @@ void TutorialScene::init()
 			roomEvent[TeleScene]();
 			});
 
+		television->getMngr()->getComponent<ClickComponent>(television)->setActive(false);
+
 		//entityManager->setActive(television,false);
 
 		
@@ -352,6 +354,7 @@ void TutorialScene::endDialogue()
 		case 3:
 			dialogueManager->setdisplayOnProcess(false);
 			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+			television->getMngr()->getComponent<ClickComponent>(television)->setActive(true);
 			
 			break;
 
