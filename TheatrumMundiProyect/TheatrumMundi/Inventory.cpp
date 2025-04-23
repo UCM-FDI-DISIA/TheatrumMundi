@@ -57,16 +57,10 @@ int Inventory::getItemNumber()
 /// <param name="_id">Item id</param>
 /// <param name="invEntityList">Iventory item entities</param>
 /// <param name="backgroundTextTransform">Visual item description background's transform</param>
-void Inventory::setTextDescription(Hint* a, Transform* trEntity, Transform* backgroundTextTransform)
+void Inventory::setTextDescription(Hint* a, Transform* trEntity)
 {
 	//set text description
 	_textDescription->Description = a->getDescription();
-
-	//set background position
-	Vector2D auxVector = Vector2D(535, trEntity->getPos().getY() + 40);
-	backgroundTextTransform->setPosPure(auxVector);
-	backgroundTextTransform->setWidth(100);
-
 	//set text description position
 	_textDescription->posY = trEntity->getPos().getY();
 		
