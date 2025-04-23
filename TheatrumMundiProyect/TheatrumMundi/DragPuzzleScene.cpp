@@ -15,7 +15,7 @@
 #include "Image.h"
 #include "SceneRoomTemplate.h"
 #include "Log.h"
-DragPuzzleScene::DragPuzzleScene() : ScenePuzzleTemplate()
+DragPuzzleScene::DragPuzzleScene(TombPuzzleScene* _tomb) : ScenePuzzleTemplate()
 {
 	isStarted = false;
     auxtiledsize = Vector2D(64, 64);

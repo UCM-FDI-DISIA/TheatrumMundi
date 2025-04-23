@@ -628,11 +628,6 @@ void Room2Scene::_setUI()
 #pragma endregion
 
 #pragma region Inventory
-	//inventory descriptions
-
-//visual background for item description text
-	invObjects.backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::UI);
-	entityManager->setActive(invObjects.backgroundTextDescription, false);
 
 	//description text entity
 	invObjects.textDescriptionEnt = entityManager->addEntity(ecs::grp::UI);

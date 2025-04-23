@@ -32,7 +32,6 @@ public:
 	void reset(); //Reset the progress of the game and creates one new
 	SceneManager* getSceneManager();
 	DataManager* getDataManager();
-	CSVdataRecolector* getCSVDataColector();
 	ReadDialog* getReadDialogue();
 	Log* getLog();
 	Game& operator=(const Game& o) = delete;

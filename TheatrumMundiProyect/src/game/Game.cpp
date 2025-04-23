@@ -30,7 +30,6 @@ Game::~Game() {
 	
 	
 	delete _mngr;
-	delete _csvdata;
 	delete dialogueReader;
 	delete _dataManager;
 	delete _log;
@@ -86,7 +85,6 @@ void Game::init() {
 	_log = new Log();
 	_dataManager = new DataManager();
 	dialogueReader = new ReadDialog(3);
-	_csvdata = new CSVdataRecolector();
 	_mngr = new SceneManager();
 }
 
@@ -181,11 +179,6 @@ void Game::exit()
 DataManager* Game::getDataManager()
 {
 	return _dataManager;
-}
-
-CSVdataRecolector* Game::getCSVDataColector()
-{
-	return _csvdata;
 }
 ReadDialog* Game::getReadDialogue()
 {

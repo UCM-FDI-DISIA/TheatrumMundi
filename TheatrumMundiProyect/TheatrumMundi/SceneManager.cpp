@@ -27,11 +27,12 @@
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 SceneManager::SceneManager()
 {
-	scenes.resize(SceneName::SCENE_SIZE);
+	//scenes.resize(SceneName::SCENE_SIZE);
+	scenes.resize(1);
 	auto tombScene = new TombPuzzleScene(); //For the chain Puzzle, to take the reference
 
 	scenes[SceneName::INITIAL_MENU] = new InitialScene();
-	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
+	/*scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::ROOM_2] = new Room2Scene();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
@@ -47,7 +48,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene(tombScene);
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene(tombScene);
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
-	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
+	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();*/
 
 }
 void SceneManager::init()
