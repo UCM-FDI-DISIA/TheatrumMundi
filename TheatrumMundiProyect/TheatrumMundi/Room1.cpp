@@ -371,6 +371,7 @@ void Room1Scene::_setUI()
 
 	entityManager->setActive(rmObjects.quitButton, false);
 
+	
 	//inventory descriptions
 	//description text entity
 	invObjects.textDescriptionEnt = entityManager->addEntity(ecs::grp::UI);
