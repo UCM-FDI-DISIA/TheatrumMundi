@@ -16,6 +16,22 @@
       "file": "../resources/images/Finales/ImagenVacia.png"
     },
     {
+      "id": "Clock",
+      "file": "../resources/images/Finales/Reloj.PNG"
+    },
+    {
+      "id": "Tubes",
+      "file": "../resources/images/Finales/Tuberias.PNG"
+    },
+    {
+      "id": "Room",
+      "file": "../resources/images/Finales/SalaIntermedia.PNG"
+    },
+    {
+      "id": "Shelf",
+      "file": "../resources/images/Finales/Estanteria.PNG"
+    },
+    {
       "id": "SolSprite",
       "file": "../resources/images/Finales/Sol.PNG"
     },
@@ -180,6 +196,18 @@
       "file": "../resources/images/Finales/BookComb1.png"
     },
     {
+      "id": "StudyBackground",
+      "file": "../resources/images/Finales/EstudioFondo.PNG"
+    },
+    {
+      "id": "B1",
+      "file": "../resources/images/Finales/1.PNG"
+    },
+    {
+      "id": "ChangeRoom",
+      "file": "../resources/images/Finales/CambiarSala.PNG"
+    },
+    {
       "id": "bookComb2",
       "file": "../resources/images/Finales/BookComb2.png"
     },
@@ -202,6 +230,10 @@
     {
       "id": "bookComb7",
       "file": "../resources/images/Finales/BookComb7.png"
+    },
+    {
+      "id": "B7",
+      "file": "../resources/images/Finales/7.PNG"
     },
     {
       "id": "bookComb8",
@@ -252,8 +284,72 @@
       "file": "../resources/images/Finales/Telefono.png"
     },
     {
+      "id": "CorspeBackground",
+      "file": "../resources/images/Finales/CadaverFondo.PNG"
+    },
+    {
+      "id": "Corspe",
+      "file": "../resources/images/Finales/Cadaver.PNG"
+    },
+    {
+      "id": "ShelfBackground1",
+      "file": "../resources/images/Finales/EstanteriaFondo1.PNG"
+    },
+    {
+      "id": "ShelfBackground2",
+      "file": "../resources/images/Finales/EstanteriaFondo2.PNG"
+    },
+    {
+      "id": "clockShape",
+      "file": "../resources/images/clock_shape.png"
+    },
+    {
+      "id": "ShelfBook1",
+      "file": "../resources/images/Finales/Libro1Estanteria.PNG"
+    },
+    {
+      "id": "ShelfBook2",
+      "file": "../resources/images/Finales/Libro2Estanteria.PNG"
+    },
+    {
+      "id": "ShelfBook3",
+      "file": "../resources/images/Finales/Libro3Estanteria.PNG"
+    },
+    {
+      "id": "guantes",
+      "file": "../resources/images/Finales/Guantes.PNG"
+    },
+    {
+      "id": "ExitToMenu",
+      "file": "../resources/images/Finales/RectangleExitToMenuButton.png"
+    },
+    {
+      "id": "B3",
+      "file": "../resources/images/Finales/3.PNG"
+    },
+    {
+      "id": "Continue",
+      "file": "../resources/images/Finales/RectangleContinueButton.png"
+    },
+    {
+      "id": "MenuBackground",
+      "file": "../resources/images/Finales/MenuBackground.png"
+    },
+    {
       "id": "mobileBackground",
       "file": "../resources/images/Finales/TelefonoZoom.png"
+    },
+    {
+      "id": "LivingroomBackground",
+      "file": "../resources/images/Finales/SalonFondo.PNG"
+    },
+    {
+      "id": "Timetable",
+      "file": "../resources/images/Finales/Horario.PNG"
+    },
+    {
+      "id": "TimetableZoom",
+      "file": "../resources/images/Finales/horarioZoom.png"
     },
     {
       "id": "fondoPruebaLog",
@@ -291,6 +387,7 @@
         "id": "puzzle",
         "file": "../resources/sound/sfx/click_puzzle.wav"
     },
+    
     {
         "id": "aguja_horario",
         "file": "../resources/sound/sfx/horario.wav"
