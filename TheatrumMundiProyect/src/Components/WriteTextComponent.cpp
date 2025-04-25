@@ -154,6 +154,7 @@ void WriteTextComponent<TextInfo>::render()
 	SDL_Rect nameRect = { 325* Game::Instance()->wscreenScale, 465* Game::Instance()->hscreenScale,
 		nameText->width()* Game::Instance()->wscreenScale,nameText->height()* Game::Instance()->hscreenScale };
 	nameText->render(nameRect, 0);
+	delete nameText;
 
 	if (isMiddleRoom)
 	{
@@ -169,6 +170,7 @@ void WriteTextComponent<TextInfo>::render()
 			dialogText->render(dialogRect, 0);
 
 			y += dialogText->height() + 5*Game::Instance()->hscreenScale;  // space between split lines
+			delete dialogText;
 		}
 	}
 	else
@@ -184,6 +186,7 @@ void WriteTextComponent<TextInfo>::render()
 			dialogText->render(dialogRect, 0);
 
 			y += dialogText->height() + 5* Game::Instance()->hscreenScale;  // space between split lines
+			delete dialogText;
 		}
 	}
 
@@ -213,6 +216,7 @@ void WriteTextComponent<DescriptionInfo>::render()
 
 		totalHeight += dialogText->height() + (5 * Game::Instance()->hscreenScale); // split lines space
 		maxWidth = std::max(maxWidth, dialogText->width());
+		delete dialogText;
 	}
 
 	// Background
@@ -227,8 +231,6 @@ void WriteTextComponent<DescriptionInfo>::render()
 		dialogText->render(dialogRect, 0);
 		y += dialogText->height() + 5 * Game::Instance()->hscreenScale;
 	}
-
-	
 }
 
 //IS FINISHED
@@ -281,6 +283,7 @@ void WriteTextComponent<TextInfo>::startTextLine()
 template <typename T>
 WriteTextComponent<T>::~WriteTextComponent()
 {
+	
 }
 
 

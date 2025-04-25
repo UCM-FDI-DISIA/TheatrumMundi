@@ -28,6 +28,12 @@ Inventory::~Inventory()
 	{
 		delete item;
 	}
+	items.clear();
+	for (auto& hint : hints) {
+		delete hint;
+	}
+	hints.clear();
+	delete _textDescription;
 }
 /// <summary>
 /// Sets the first item to show in the inventory

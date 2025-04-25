@@ -53,6 +53,7 @@ protected:
 		void HideAllInvetoryItems(const ecs::entity_t& invBack, const ecs::entity_t& UpButton, const ecs::entity_t& DownButt); //Hide the inventory things
 		void createDescription(Entity* hintEntity, Hint* hintItem);
 		void reposAllInventoryItems();
+		void unload() override;
 
 	SceneRoomTemplate();
 	virtual ~SceneRoomTemplate();

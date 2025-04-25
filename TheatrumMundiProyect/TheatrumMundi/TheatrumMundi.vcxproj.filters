@@ -17,7 +17,6 @@
     <ClCompile Include="..\src\game\Game.cpp" />
     <ClCompile Include="..\SRC\json\JSON.cpp" />
     <ClCompile Include="..\SRC\json\JSONValue.cpp" />
-    <ClCompile Include="..\SRC\json\json_demo.cpp" />
     <ClCompile Include="..\SRC\main.cpp" />
     <ClCompile Include="..\SRC\sdlutils\SDLNetUtils.cpp" />
     <ClCompile Include="..\SRC\sdlutils\SDLUtils.cpp" />
@@ -32,9 +31,7 @@
     <ClCompile Include="Area2DLayerManager.cpp" />
     <ClCompile Include="CalendearMobileTestScene.cpp" />
     <ClCompile Include="DataManager.cpp" />
-    <ClCompile Include="DebugInventoryScene.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
-    <ClCompile Include="DialogTestScene.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="Hint.cpp" />
@@ -67,6 +64,7 @@
     <ClCompile Include="RavenPuzzleScene.cpp" />
     <ClCompile Include="DoorPuzzleScene.cpp" />
     <ClCompile Include="WindowPuzzleScene.cpp" />
+    <ClCompile Include="TombPuzzleScene.cpp" />
     <ClCompile Include="..\src\Components\BehaviorStateComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -194,7 +192,6 @@
     <ClInclude Include="..\SRC\json\JSON.h" />
     <ClInclude Include="..\src\json\json.hpp" />
     <ClInclude Include="..\SRC\json\JSONValue.h" />
-    <ClInclude Include="..\SRC\json\json_demo.h" />
     <ClInclude Include="..\SRC\sdlutils\Font.h" />
     <ClInclude Include="..\SRC\sdlutils\InputHandler.h" />
     <ClInclude Include="..\SRC\sdlutils\macros.h" />
@@ -219,9 +216,7 @@
     <ClInclude Include="Area2DLayerManager.h" />
     <ClInclude Include="CalendearMobileTestScene.h" />
     <ClInclude Include="DataManager.h" />
-    <ClInclude Include="DebugInventoryScene.h" />
     <ClInclude Include="ClockPuzzleScene.h" />
-    <ClInclude Include="DialogTestScene.h" />
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="EntityFactory.h" />
@@ -258,6 +253,7 @@
     <ClInclude Include="RavenPuzzleScene.h" />
     <ClInclude Include="DoorPuzzleScene.h" />
     <ClInclude Include="WindowPuzzleScene.h" />
+    <ClInclude Include="TombPuzzleScene.h" />
     <ClInclude Include="..\src\Components\BehaviorStateComponent.h" />
   </ItemGroup>
   <ItemGroup>

@@ -11,65 +11,24 @@
 #include "TriggerComponent.h"
 #include "DragComponent.h"
 
+
 /// <summary>
 /// Create the dragSquares
 /// </summary>
-void MosaicPuzzleScene::createSquares(const entity_t& mosaicBorderLeft, const entity_t& mosaicBorderTop, const entity_t& mosaicBorderRight, const entity_t& mosaicBorderBottom)
+void MosaicPuzzleScene::createSquares()
 {
-	for (int i = 0; i < TOTALSQUARES; ++i) { //Creation of the squares and assignation in the different possitions
-
-		//ENTIDADSINENTITYFACTORY
-		squares.push_back(entityManager->addEntity()); //Add the entity to the list
-		auto& it = squares.back(); //Reference to the entity
-
-		//Component asignation
-		it->getMngr()->addComponent<Transform>(it, positions[indexPositions[i]], Vector2D(0, 0), SQUAREWIDTH, SQUAREWIDTH, 0); //Assign the position
-		it->getMngr()->addComponent<Image>(it, &sdlutils().images().at(imgId[i])); //Assign the image
-		it->getMngr()->addComponent<RectArea2D>(it, areaLayerManager); //Assign the area
-		//Logic Componentes
-		it->getMngr()->addComponent<ClickComponent>(it); 
-		it->getMngr()->addComponent<TriggerComponent>(it);
-		it->getMngr()->addComponent<DragComponent>(it);
-
-		//Add collisions to the square
-		auto physicis = it->getMngr()->addComponent<PhysicsBodyComponent>(it);
-		physicis->AddObjectToList(mosaicBorderLeft->getMngr()->getComponent<RectArea2D>(mosaicBorderLeft)); //Adds the collision to the MosaicBorder (LEFT)
-		physicis->AddObjectToList(mosaicBorderTop->getMngr()->getComponent<RectArea2D>(mosaicBorderTop)); //Adds the collision to the MosaicBorder (TOP)
-		physicis->AddObjectToList(mosaicBorderRight->getMngr()->getComponent<RectArea2D>(mosaicBorderRight)); //Adds the collision to the MosaicBorder (RIGHT)
-		physicis->AddObjectToList(mosaicBorderBottom->getMngr()->getComponent<RectArea2D>(mosaicBorderBottom)); //Adds the collision to the MosaicBorder (BOTTOM)
-
-		//When tou clicked in the square, keeps the original position of the square
-
-		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this, it]() {
-			firstPos = it->getMngr()->getComponent<Transform>(it)->getPos();
-			});
-
-		//When the square got released, checks if the puzzle was solved correctly
-		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this,it]() {
-			CorrectPositions(it);
-			if (Check()) { //If the puzzle is solved correctly, calls Win
-				Win();
+	for (int i = 0; i < TOTALSQUARES; ++i) {
+		auto it = entityFactory->CreateInteractableEntity(entityManager, imgId[i], EntityFactory::RECTAREA, positions[indexPositions[i]], Vector2D(0, 0), SQUAREWIDTH, SQUAREWIDTH, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		squares.push_back(it);
+		it->getMngr()->getComponent<Transform>(it)->setPosPure(positions[indexPositions[i]]);
+		//it->getMngr()->removeComponent<ClickableSpriteComponent>(squares.back());
+		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED,[this,it]() {
+			if (!squareMoving) {
+				square = it->getMngr()->getComponent<Transform>(it);
+				MoveSquare();
 			}
-			});
-	}
-	//Add collisions between the sqaures
-	for (auto actualSquare : squares) {
-
-#ifdef DEBUG
-		assert(actualSquare->getMngr()->getComponent<PhysicsBodyComponent>(actualSquare) != nullptr);
-#endif // DEBUG
-
-		auto physyicComponent = actualSquare->getMngr()->getComponent<PhysicsBodyComponent>(actualSquare); //Reference to the physics component of the ActualSquare
-
-		for (auto SquareToAdd : squares) { //For each Square, add collision with them
-			if (actualSquare != SquareToAdd) {
-
-#ifdef DEBUG
-				assert(SquareToAdd->getMngr()->getComponent<PhysicsBodyComponent>(SquareToAdd) != nullptr);
-#endif // DEBUG
-				physyicComponent->AddObjectToList(SquareToAdd->getMngr()->getComponent<RectArea2D>(SquareToAdd));
-			}
-		}
+		});
+		
 	}
 }
 /// <summary>
@@ -80,18 +39,18 @@ void MosaicPuzzleScene::createSquares(const entity_t& mosaicBorderLeft, const en
 /// <returns></returns>
 entity_t MosaicPuzzleScene::createBorder(const Vector2D& position, float width, float height)
 {
-	//ENTIDADSINENTITYFACTORY
-	entity_t newBorder = entityManager->addEntity();
-	newBorder->getMngr()->addComponent<Transform>(newBorder, position, Vector2D(0, 0), width, height, 0);
-	newBorder->getMngr()->addComponent<Image>(newBorder, &sdlutils().images().at("B1"));
-	newBorder->getMngr()->addComponent<RectArea2D>(newBorder,areaLayerManager);
-	newBorder->getMngr()->addComponent<TriggerComponent>(newBorder);
+	entity_t newBorder = entityFactory->CreateImageEntity(entityManager,"B1", position, Vector2D(0, 0), width, height, 0,ecs::grp::DEFAULT);
 	return newBorder;
-
 }
 MosaicPuzzleScene::MosaicPuzzleScene()
 {
 	//Assignation of the possitions 
+
+	int onlyRelease = 1;
+
+#ifdef _DEBUG
+	onlyRelease = 0;
+#endif // DEBUG
 
 	int index = 0; //Aux index to set the Y position
 	for (int i = 0; i < TOTALSQUARES; ++i) { //Initializate the list of positions
@@ -102,12 +61,13 @@ MosaicPuzzleScene::MosaicPuzzleScene()
 		}
 
 		//Assign the positions of the different rows
-		if(i < 3) positions.push_back(Vector2D(350 ,75 + (index * SQUAREWIDTH))); //First row possitions (0-2)
-		else if(i < 6) positions.push_back(Vector2D(350 + SQUAREWIDTH, 75 + (index * SQUAREWIDTH))); //Second row possitions (3-5)
-		else positions.push_back(Vector2D(350 + (2 * SQUAREWIDTH), 75 + (index * SQUAREWIDTH))); //Third row possitions (6-8)
+		if(i < 3) positions.push_back(Vector2D((350 * Game::Instance()->wscreenScale) - onlyRelease, (75 * Game::Instance()->hscreenScale) + (index * SQUAREWIDTH * Game::Instance()->hscreenScale))); //First row possitions (0-2)
+		else if(i < 6) positions.push_back(Vector2D((350 * Game::Instance()->wscreenScale) + (SQUAREWIDTH * Game::Instance()->wscreenScale), (75 * Game::Instance()->hscreenScale) + (index * SQUAREWIDTH * Game::Instance()->hscreenScale))); //Second row possitions (3-5)
+		else positions.push_back(Vector2D((350 * Game::Instance()->wscreenScale) + (2 * SQUAREWIDTH * Game::Instance()->wscreenScale), (75 * Game::Instance()->hscreenScale) + (index * SQUAREWIDTH * Game::Instance()->hscreenScale))); //Third row possitions (6-8)
 		++index;
 
 	}
+	freePos = Vector2D(750 * Game::Instance()->wscreenScale, 475 * Game::Instance()->hscreenScale);
 }
 
 MosaicPuzzleScene::~MosaicPuzzleScene()
@@ -120,6 +80,7 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 	if (!isStarted) {
 		isStarted = true;
 		room = sr;
+		squareMoving = false;
 
 #pragma region SpecificEntitiesOfTheScene
 		//Background
@@ -132,7 +93,7 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 		auto mosaicBorderBottom = createBorder(Vector2D(350, 675),600, 20);
 		
 		//SquareEntities
-		createSquares(mosaicBorderLeft, mosaicBorderTop, mosaicBorderRight, mosaicBorderBottom);
+		createSquares();
 #pragma endregion
 
 
@@ -143,25 +104,17 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 		reset->getMngr()->getComponent<ClickComponent>(reset)->connect(ClickComponent::JUST_CLICKED, [this] {
 			ResetPuzzle();
 		});
+#ifdef _DEBUG
 		auto resolve = entityFactory->CreateInteractableEntity(entityManager, "clockHorButton", EntityFactory::RECTAREA, Vector2D(400, 0), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		resolve->getMngr()->getComponent<ClickComponent>(resolve)->connect(ClickComponent::JUST_CLICKED, [this] {
 			Resolve();
 		});
+#endif // _DEBUG
+
 #pragma endregion
 
 		
 #pragma region UI
-
-		//BackButton
-		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-
-		//Click component Open log button
-		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
-			{
-				Game::Instance()->getSceneManager()->popScene();
-			});
-
 #pragma region Inventory
 
 		//INVENTORY
@@ -176,7 +129,7 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->setActive(downButton, false);
 
 		//InventoryButton
-		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(60 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
 		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton]() //Lamda function
 			{
@@ -226,6 +179,22 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 
 #pragma endregion
 
+		//BackButton
+		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+
+		//Click component Open log button
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, inventoryButton, InventoryBackground, downButton, upButton, _backButton]()
+			{
+				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+				HideInventoryItems(InventoryBackground, downButton, upButton, room);
+				room->GetInventory()->setFirstItem(0);
+				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+				_backButtonImage->setPosOffset(0, 0);
+				Game::Instance()->getSceneManager()->popScene();
+			});
 		//Log
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
@@ -239,46 +208,148 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 }
 
 /// <summary>
-/// Corrects the position of the square in case is not in the correct place
+/// Checks if the square which was clicked is next to the free position in case is true, move the square with an animation
 /// </summary>
 /// <param name="square"></param>
-void MosaicPuzzleScene::CorrectPositions(entity_t square)
+void MosaicPuzzleScene::MoveSquare()
 {
-	Transform* actPosition = entityManager->getComponent<Transform>(square);
+	//Saves the originalPos of the square to change the freePos into this
+	originalPos = square->getPos();
 
-	//Compare X
-	int diff = actPosition->getPos().getX() - firstPos.getX(); //What is the difference between the actual spot to the future spot
-	if (diff > 0 && diff >= SQUAREWIDTH / 2) { //if the square is closed to the right than to the left and player wants to go to the right sets the position to the right 
-		actPosition->setPosX(firstPos.getX() + SQUAREWIDTH);
-	}
-	else if (diff < 0 && -diff >= SQUAREWIDTH / 2) { //if the square is closed to the left than to the right and player wants to go to the left sets the position to the left 
-		actPosition->setPosX(firstPos.getX() - SQUAREWIDTH);
-	}
-	else actPosition->setPosX(firstPos.getX());
+	//Compare if is in the same X
+	if (round(square->getPos().getX()) == round(freePos.getX())) {
+		//If free position is under the square position, move square down
 
-	//Compare Y
-	diff = actPosition->getPos().getY() - firstPos.getY();
-	if (diff > 0 && diff >= SQUAREWIDTH / 2) { //if the square is closed to the Top than to the Bottom  and player wants to go to the top sets the position to the top
-		actPosition->setPosY(firstPos.getY() + SQUAREWIDTH);
+		if (round(square->getPos().getY()) + round((SQUAREWIDTH * Game::Instance()->hscreenScale)) == round(freePos.getY())) {
+
+			//Evitate to clcik in another square during the animation
+			squareMoving = true;
+
+			//Moving Square Animation into Bot
+			SDL_AddTimer(30, [](Uint32, void* param) -> Uint32 {
+				auto* self = static_cast<decltype(this)>(param);
+
+				//add position in each iteration
+				Vector2D aux = Vector2D(self->square->getPos().getX(), self->square->getPos().getY() + round(self->square->getHeight() / 5));
+				self->square->setPosPure(aux);
+
+				// if position is bigger or the same ends animation
+				if (self->square->getPos().getY() >= self->freePos.getY()) {
+					self->squareMoving = false;
+					self->square->setPosPure(self->freePos);
+					self->freePos.set(self->originalPos);
+					return 0;  // stop timer
+				}
+
+				// call timer again
+				return 30;
+				}, this);
+		}
+
+		//If free position is over the square position, move square up
+		else if (round(square->getPos().getY()) - round((SQUAREWIDTH * Game::Instance()->hscreenScale)) == round(freePos.getY())) {
+
+			//Evitate to clcik in another square during the animation
+			squareMoving = true;
+
+			//Moving Square Animation into top
+			SDL_AddTimer(30, [](Uint32, void* param) -> Uint32 {
+				auto* self = static_cast<decltype(this)>(param);
+
+				//add position in each iteration
+				Vector2D aux = Vector2D(round(self->square->getPos().getX()), round(self->square->getPos().getY() - round(self->square->getHeight() / 5)));
+				self->square->setPosPure(aux);
+
+				// if position is smaller or the same ends animation
+				if (self->square->getPos().getY() <= self->freePos.getY()) {
+					self->squareMoving = false;
+					self->square->setPosPure(self->freePos);
+					self->freePos.set(self->originalPos);
+					return 0;  // stop timer
+				}
+
+				// call timer again
+				return 30;
+				}, this);
+		}
 	}
-	else if (diff < 0 && -diff >= SQUAREWIDTH / 2) { //if the square is closed to the Bottom than to the Top  and player wants to go to the bottom sets the position to the bottom
-		actPosition->setPosY(firstPos.getY() - SQUAREWIDTH);
+
+//END IF
+
+	//Compare if is in the same Y
+	else if (round(square->getPos().getY()) == round(freePos.getY())) {
+
+		//If free position is on the right of the square position, move square right
+		if (round(square->getPos().getX()) + round((SQUAREWIDTH * Game::Instance()->wscreenScale)) == round(freePos.getX())) {
+
+			//Evitate to clcik in another square during the animation
+			squareMoving = true;
+
+			//Moving Square Animation into the right
+			SDL_AddTimer(30, [](Uint32, void* param) -> Uint32 {
+				auto* self = static_cast<decltype(this)>(param);
+
+				//add position in each iteration
+				Vector2D aux = Vector2D(round(self->square->getPos().getX()) + round(self->square->getWidth() / 5), round(self->square->getPos().getY()));
+				self->square->setPosPure(aux);
+
+				// if position is bigger or the same
+				if (self->square->getPos().getX() >= self->freePos.getX()) {
+					self->squareMoving = false;
+					self->square->setPosPure(self->freePos);
+					self->freePos.set(self->originalPos);
+					return 0;  // stop timer
+				}
+
+				// call timer again
+				return 30;
+				}, this);
+		}
+
+		//If free position is on the left of the square position, move square left
+		else if (round(square->getPos().getX()) - round((SQUAREWIDTH * Game::Instance()->wscreenScale)) == round(freePos.getX())) {
+
+			//Evitate to clcik in another square during the animation
+			squareMoving = true;
+
+			//Moving Square Animation into the left
+			SDL_AddTimer(30, [](Uint32, void* param) -> Uint32 {
+				auto* self = static_cast<decltype(this)>(param);
+
+
+				//add position in each iteration
+				Vector2D aux = Vector2D(round(self->square->getPos().getX()) - round(self->square->getWidth() / 5), self->square->getPos().getY());
+				self->square->setPosPure(aux);
+
+				// if position is smaller or the same
+				if (self->square->getPos().getX() <= self->freePos.getX()) {
+					self->squareMoving = false;
+					self->square->setPosPure(self->freePos);
+					self->freePos.set(self->originalPos);
+					return 0;  // stop timer
+				}
+
+				// call timer again
+				return 30;
+				}, this);
+		}
 	}
-	else actPosition->setPosY(firstPos.getY());
 }
 
 void MosaicPuzzleScene::ResetPuzzle()
 {
 	for (int i = 0; i < TOTALSQUARES; ++i) {
-		squares[i]->getMngr()->getComponent<Transform>(squares[i])->setPos(positions[indexPositions[i]]);
+		squares[i]->getMngr()->getComponent<Transform>(squares[i])->setPosPure(positions[indexPositions[i]]);
 	}
+	freePos = Vector2D(750 * Game::Instance()->wscreenScale, 475 * Game::Instance()->hscreenScale);
 }
 
 void MosaicPuzzleScene::Resolve()
 {
 	for (int i = 0; i < TOTALSQUARES; ++i) {
-		squares[i]->getMngr()->getComponent<Transform>(squares[i])->setPos(positions[i]);
+		squares[i]->getMngr()->getComponent<Transform>(squares[i])->setPosPure(positions[i]);
 	}
+	freePos = Vector2D(750 * Game::Instance()->wscreenScale, 475 * Game::Instance()->hscreenScale);
 	if (Check()) Win();
 }
 
@@ -307,8 +378,4 @@ void MosaicPuzzleScene::Win()
 {
 	room->resolvedPuzzle(3);
 	setSolved(true);
-}
-
-void MosaicPuzzleScene::Exit()
-{
 }

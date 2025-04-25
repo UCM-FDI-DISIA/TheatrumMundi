@@ -12,22 +12,22 @@
 #include "TeaCupPuzzleScene.h"
 #include "checkML.h"
 #include "SceneRoomTemplate.h"
-#include"DebugInventoryScene.h"
 #include "MosaicPuzzleScene.h"
 #include "RavenPuzzleScene.h"
 #include "WindowPuzzleScene.h"
 #include "MiddleRoomScene.h"
 #include "MusicPuzzleScene.h"
+#include "TombPuzzleScene.h"
 #include "DragPuzzleScene.h"
 #include "TutorialScene.h"
 #include "TelePuzzleScene.h"
 #include "DoorPuzzleScene.h"
 #include "XOPuzzleScene.h"
 #include "CSVdataRecolector.h"
-#include "../../TheatrumMundiProyect/src/game/Game.h"
 SceneManager::SceneManager()
 {
 	scenes.resize(SceneName::SCENE_SIZE);
+	auto tombScene = new TombPuzzleScene(); //For the chain Puzzle, to take the reference
 
 	scenes[SceneName::INITIAL_MENU] = new InitialScene();
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
@@ -42,8 +42,9 @@ SceneManager::SceneManager()
 	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
 	scenes[SceneName::WINDOW_SCENE] = new WindowPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
-	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
-	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
+	scenes[SceneName::TOMB_SCENE] = tombScene;
+	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene(tombScene);
+	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene(tombScene);
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 
@@ -170,19 +171,25 @@ void SceneManager::ResetSceneManager()
 {
 
 	scenes.resize(SceneName::SCENE_SIZE);
+	auto tombScene = new TombPuzzleScene(); //For the chain Puzzle, to take the reference
 
 	scenes[SceneName::INITIAL_MENU] = new InitialScene();
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
+	scenes[SceneName::ROOM_2] = new Room2Scene();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
 	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
 	scenes[SceneName::MUSIC_PUZZLE] = new MusicPuzzleScene();
+	scenes[SceneName::RAVEN_SCENE] = new RavenPuzzleScene();
+	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
+	scenes[SceneName::WINDOW_SCENE] = new WindowPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
-	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
+	scenes[SceneName::TOMB_SCENE] = tombScene;
+	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene(tombScene);
+	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene(tombScene);
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
-	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 
 	loadScene(SceneName::INITIAL_MENU);
