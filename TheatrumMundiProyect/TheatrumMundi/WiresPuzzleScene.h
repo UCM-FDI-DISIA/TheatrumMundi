@@ -25,5 +25,6 @@ private:
 	std::array<Entity*, 5> lights = { nullptr, nullptr, nullptr, nullptr, nullptr };
 
 	int lightsOn;
+	bool pressed[5] = { false, false, false, false, false };
 };
 

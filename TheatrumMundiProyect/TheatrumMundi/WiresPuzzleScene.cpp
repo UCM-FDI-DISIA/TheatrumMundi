@@ -120,55 +120,67 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		room = sr;
 
 		//where the wires are going to be connected
-		ports[0] = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(415, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		ports[1] = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(465, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		ports[2] = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(515, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		ports[3] = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(565, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		ports[4] = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(615, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		ports[0] = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(415, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		ports[1] = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(465, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		ports[2] = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(515, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		ports[3] = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(565, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		ports[4] = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(615, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 		//wires
-		wires[0] = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook1", EntityFactory::RECTAREA, Vector2D(415, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		wires[1] = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook2", EntityFactory::RECTAREA, Vector2D(465, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		wires[2] = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook3", EntityFactory::RECTAREA, Vector2D(515, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		wires[3] = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook1", EntityFactory::RECTAREA, Vector2D(565, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		wires[4] = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook2", EntityFactory::RECTAREA, Vector2D(615, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		wires[0] = entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, Vector2D(415, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		wires[1] = entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, Vector2D(465, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		wires[2] = entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, Vector2D(515, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		wires[3] = entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, Vector2D(565, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		wires[4] = entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, Vector2D(615, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 		//lights
-		lights[0] = entityFactory->CreateInteractableEntity(entityManager, "boa2", EntityFactory::RECTAREA, Vector2D(300, 295), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		lights[1] = entityFactory->CreateInteractableEntity(entityManager, "boa2", EntityFactory::RECTAREA, Vector2D(300, 360), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		lights[2] = entityFactory->CreateInteractableEntity(entityManager, "boa2", EntityFactory::RECTAREA, Vector2D(300, 425), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		lights[3] = entityFactory->CreateInteractableEntity(entityManager, "boa2", EntityFactory::RECTAREA, Vector2D(300, 490), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		lights[4] = entityFactory->CreateInteractableEntity(entityManager, "boa2", EntityFactory::RECTAREA, Vector2D(300, 555), Vector2D(0, 0), 60, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[0] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 295), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[1] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 360), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[2] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 425), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[3] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 480), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[4] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 545), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		//check the wires
 		//trigger
+
+		ClickComponent* clk = entityManager->addComponent<ClickComponent>(wires[0]);
+		clk->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
+			AudioManager::Instance().playSound(buttonSound);
+			std::cout << "CLICK" << std::endl;
+			});
+
+		/*for (int i = 0; i < wires.size(); i++)
+		{
+			entityManager->addComponent<ClickComponent>(ports[i]);
+
+			ports[i]->getMngr()->getComponent<ClickComponent>(ports[i])->connect(ClickComponent::JUST_CLICKED, [this, i]() {
+				auto wireEntity = ports[i];
+				std::cout << "CLICK" << std::endl;
+
+				if (pressed[i] == false) {
+					pressed[i] = true;
+					//logica de borde del sprite
+				}
+				else {
+					pressed[i] = false;
+					actualPos[i] = -1;
+				}
+			});
+		} */
+
 		for (int i = 0; i < ports.size(); i++)
 		{
-			entityManager->addComponent<TriggerComponent>(ports[i]);
+			entityManager->addComponent<ClickComponent>(ports[i]);
+			ports[i]->getMngr()->getComponent<ClickComponent>(ports[i])->connect(ClickComponent::JUST_CLICKED, [this, i]() {
+				auto portsEntity = ports[i];
 
-			ports[i]->getMngr()->getComponent<TriggerComponent>(ports[i])->connect(TriggerComponent::AREA_ENTERED, [this, i]() {
-				auto portEntity = ports[i];
-				auto portPos = entityManager->getComponent<Transform>(portEntity)->getPos();
-
-				//look if the wire is in the same position as the port
-				for (int j = 0; j < wires.size(); j++)
+				if (pressed[i] == true)
 				{
-					std::cout << "entra a segundo for" << std::endl;
-					auto wireEntity = wires[j];
-					auto wirePos = entityManager->getComponent<Transform>(wireEntity)->getPos();
-
-					float distance = (wirePos - portPos).magnitude();
-					if (distance < 20) {
-						//if the wire is in the same position as the port, set the wire to the port position
-						entityManager->getComponent<Transform>(wireEntity)->setPos(portPos);
-						std::cout << "Wire " << j << " connected to port " << i << std::endl;
-					}
-					else
-					{
-						//if the wire is not in the same position as the port, set the wire to its original position
-						entityManager->getComponent<Transform>(wireEntity)->setPos(wirePos);
-					}
+					//logica del sprite final
+					pressed[i] = false;
+					wires[i]->getMngr()->setActive(wires[i], false);
 				}
-				});
+
+			});
 		}
 
 
@@ -245,7 +257,6 @@ bool WiresPuzzleScene::Check()
 	}
 	
 }
-
 void WiresPuzzleScene::Win()
 {
 	

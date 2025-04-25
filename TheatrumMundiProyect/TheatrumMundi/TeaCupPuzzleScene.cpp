@@ -85,10 +85,6 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 			SetplacedHand(false);
 			});
 
-		//create the spoon
-		//spoon = entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(100, 400), Vector2D(0, 0), 600, 400, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);
-
-
 		entityManager->getComponent<ClickComponent>(teaCup) // The cup is clicked after introducing the spoon
 			->connect(ClickComponent::JUST_CLICKED, [teaCup, this]()
 				{
@@ -111,9 +107,6 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		//Invntory Background
 		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
 		entityManager->setActive(InventoryBackground, false);
-
-		
-		
 
 		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(upButton, false);
