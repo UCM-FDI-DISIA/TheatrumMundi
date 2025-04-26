@@ -1,32 +1,28 @@
-#include "WindowPuzzleScene.h"
-#include "SceneRoomTemplate.h"
+#include "TombPuzzleScene.h"
 #include "ClickComponent.h"
+#include "SceneRoomTemplate.h"
+#include "Log.h"
 #include "DialogueManager.h"
-#include "TriggerComponent.h"
 #include "Image.h"
 #include "Transform.h"
-#include "Game.h"
-#include "Log.h"
-
-WindowPuzzleScene::WindowPuzzleScene()
+TombPuzzleScene::TombPuzzleScene()
 {
-	isStarted = false;
+
 }
 
-WindowPuzzleScene::~WindowPuzzleScene()
+TombPuzzleScene::~TombPuzzleScene()
 {
 }
 
-void WindowPuzzleScene::init(SceneRoomTemplate* sr)
+void TombPuzzleScene::init(SceneRoomTemplate* sr)
 {
-	if (!isStarted)
-	{
+	if (!isStarted) {
 		isStarted = true;
-		hasRope = false;
+		XOpuzzleResolve = false;
+		dragPuzzleResolve = false;
 		room = sr;
-
+		dialogueManager->setScene(this);
 #pragma region UI
-
 
 #pragma region Inventory
 
@@ -92,6 +88,7 @@ void WindowPuzzleScene::init(SceneRoomTemplate* sr)
 
 #pragma endregion
 
+
 		//BackButton
 		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 
@@ -111,71 +108,83 @@ void WindowPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Log
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
+		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 
-		//startDialogue("Ventana");
+		//startDialogue("PuzzleCuervo");
+
+#pragma endregion
+#pragma region BackGround
+
+		auto TombBackGround = entityFactory->CreateImageEntity(entityManager, "FondoPuzzleTumba", Vector2D(0, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::UNDER);
 
 #pragma endregion
 
-#pragma region Background
+#pragma region Entities
 
-		auto WindowBackGround = entityFactory->CreateImageEntity(entityManager, "FondoVentana", Vector2D(0, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::UNDER);
+		//Left Chain, gives access to the XOPuzzle
+		auto XOAccess = entityFactory->CreateInteractableEntity(entityManager, "Cadena", EntityFactory::RECTAREA, Vector2D(100, 250), Vector2D(0,0), 128, 128, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		entityManager->getComponent<ClickComponent>(XOAccess)->connect(ClickComponent::JUST_CLICKED, [this, inventoryButton, InventoryBackground, downButton, upButton, _backButton]()
+			{
+				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+				HideInventoryItems(InventoryBackground, downButton, upButton, room);
+				room->GetInventory()->setFirstItem(0);
+				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+				_backButtonImage->setPosOffset(0, 0);
+				Game::Instance()->getSceneManager()->loadScene(XO_PUZZLE, room);
+			});
 
+		//Right Chain, gives access to the DragPuzzle
+		auto dragAccess = entityFactory->CreateInteractableEntity(entityManager, "Cadena", EntityFactory::RECTAREA, Vector2D(1000,250), Vector2D(0, 0), 128, 128, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		entityManager->getComponent<ClickComponent>(dragAccess)->connect(ClickComponent::JUST_CLICKED, [this, inventoryButton, InventoryBackground, downButton, upButton, _backButton]()
+			{
+				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+				HideInventoryItems(InventoryBackground, downButton, upButton, room);
+				room->GetInventory()->setFirstItem(0);
+				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+				_backButtonImage->setPosOffset(0, 0);
+				Game::Instance()->getSceneManager()->loadScene(DRAG_PUZZLE, room);
+			});
+
+		//Lock in the middle of the scene
+		auto lock = entityFactory->CreateInteractableEntity(entityManager, "Candado", EntityFactory::RECTAREA, Vector2D(550, 300), Vector2D(0, 0), 259, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		entityManager->getComponent<ClickComponent>(lock)->connect(ClickComponent::JUST_CLICKED, [this,lock]()
+			{
+				if (Check()) { //If the puzzle is resolved 
+					auto jewel = entityFactory->CreateInteractableEntity(entityManager, "Joya", EntityFactory::RECTAREA, Vector2D(600, 300), Vector2D(0, 0), 120, 120, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+					entityManager->getComponent<ClickComponent>(jewel)->connect(ClickComponent::JUST_CLICKED, [this,jewel]()
+						{
+							AddInvItem("Joya", "EYYYY Lapislazuli", room->GetInventory()->setPosition(), room);
+							entityManager->setActive(jewel,false);
+						});
+
+					auto shovel = entityFactory->CreateInteractableEntity(entityManager, "Pala", EntityFactory::RECTAREA, Vector2D(500, 300), Vector2D(0, 0), 120, 120, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+					entityManager->getComponent<ClickComponent>(shovel)->connect(ClickComponent::JUST_CLICKED, [this, shovel]()
+						{
+							AddInvItem("Pala", "No era la pala que esperaba", room->GetInventory()->setPosition(), room);
+							entityManager->setActive(shovel, false);
+						});
+					lock->getMngr()->setActive(lock, false);
+					Win();
+				}
+			});
 #pragma endregion
 
-#pragma region SceneEntities
-
-		auto window = entityFactory->CreateInteractableEntity(entityManager, "Ventana", EntityFactory::RECTAREA, Vector2D(550, 300), Vector2D(0, 0), 259, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		//Assigns the trigger bolean to true
-		entityManager->getComponent<TriggerComponent>(window)->connect(TriggerComponent::AREA_ENTERED, [this]() {
-			SetplacedHand(true);
-		});
-		//Assigns the trigger bolean to false
-		entityManager->getComponent<TriggerComponent>(window)->connect(TriggerComponent::AREA_LEFT, [this]() {
-			SetplacedHand(false);
-		});
-		rope = entityFactory->CreateImageEntity(entityManager, "cuerdaVentana", Vector2D(250, 200), Vector2D(0, 0), 259, 200, 0, ecs::grp::DEFAULT);
-		rope->getMngr()->setActive(rope, false);
-		openWindow = entityFactory->CreateImageEntity(entityManager, "VentanaAbierta", Vector2D(550, 300), Vector2D(0, 0), 259, 200, 0, ecs::grp::DEFAULT);
-		openWindow->getMngr()->setActive(openWindow, false);
-
-#pragma endregion
 
 	}
-
 	createInvEntities(sr);
 }
 
-bool WindowPuzzleScene::isItemHand(const std::string& itemId)
+bool TombPuzzleScene::Check()
 {
-	if (itemId == "CuerdaLarga") {
-
-		rope->getMngr()->setActive(rope, true);
-		hasRope = true;
-		return true;
-	}
-	else if (itemId == "CuerdaCorta") {
-		//Di�logo que dice que no se puede
-		Win();
-	}
-	else if (itemId == "Gancho") {
-		
-		if (hasRope) {
-			rope->getMngr()->setActive(rope, false);
-			openWindow->getMngr()->setActive(openWindow, true);
-			Win();
-			return true;
-		}
-		else {
-			//APLICAR SONIDO DE QUE NO SE LLEGA O IGUAL UN DIALOGO
-			return false;
-		}
-		return false;
-	}
-	return false;
+    return XOpuzzleResolve && dragPuzzleResolve;
 }
 
-void WindowPuzzleScene::Win()
+void TombPuzzleScene::Win()
 {
-	room->resolvedPuzzle(5);
+	room->resolvedPuzzle(0);
+	setSolved(true);
 }

@@ -11,6 +11,10 @@ ClickComponent::ClickComponent()
 	_eventConnections.insert({ JUST_RELEASED, {} });
 }
 
+ClickComponent::~ClickComponent()
+{
+}
+
 void ClickComponent::handleMouseInput()
 {
 	if (ih().mouseButtonDownEvent())

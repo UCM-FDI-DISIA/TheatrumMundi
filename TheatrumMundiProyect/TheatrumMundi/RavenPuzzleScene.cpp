@@ -3,9 +3,11 @@
 #include "ClickComponent.h"
 #include "DialogueManager.h"
 #include "TriggerComponent.h"
+#include "Transform.h"
 #include "Game.h"
 #include "Log.h"
-
+#include "Image.h"
+#include "Transform.h"
 RavenPuzzleScene::RavenPuzzleScene()
 {
 }
@@ -24,17 +26,6 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 
 #pragma region UI
 
-
-		//BackButton
-		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-
-		//Click component Open log button
-		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
-			{
-				Game::Instance()->getSceneManager()->popScene();
-			});
-
 #pragma region Inventory
 
 		//INVENTORY
@@ -49,7 +40,7 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->setActive(downButton, false);
 
 		//InventoryButton
-		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(60 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
 		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton]() //Lamda function
 			{
@@ -105,6 +96,25 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//startDialogue("PuzzleCuervo");
 
+		
+		//BackButton
+		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+
+		//Click component Open log button
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, inventoryButton, InventoryBackground, downButton, upButton, _backButton]()
+			{
+				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+				HideInventoryItems(InventoryBackground, downButton, upButton, room);
+				room->GetInventory()->setFirstItem(0);
+				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+				_backButtonImage->setPosOffset(0, 0);
+				Game::Instance()->getSceneManager()->popScene();
+			});
+
+
 #pragma endregion
 
 #pragma region Background
@@ -116,7 +126,8 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 #pragma region SceneEntities
 
 		auto raven = entityFactory->CreateInteractableEntity(entityManager, "CuervoPeligroso",EntityFactory::RECTAREA, Vector2D(200, 350), Vector2D(0, 0), 259, 200, 0,areaLayerManager,EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		entityManager->addComponent<TriggerComponent>(raven);
+		auto trag = entityManager->getComponent<TriggerComponent>(raven);
+		trag->setTargetGroup(ecs::grp::DEFAULT);
 		//Assigns the trigger bolean to true
 		entityManager->getComponent<TriggerComponent>(raven)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
@@ -127,7 +138,7 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		//Creation of the key and their logic
-		auto key = entityFactory->CreateInteractableEntity(entityManager, "Llave", EntityFactory::RECTAREA, Vector2D(200, 400), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto key = entityFactory->CreateInteractableEntity(entityManager, "Llave", EntityFactory::RECTAREA, Vector2D(200, 400), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		entityManager->getComponent<ClickComponent>(key)->connect(ClickComponent::JUST_CLICKED, [this, sr,key, InventoryBackground, downButton, upButton, inventoryButton]()
 			{
 				if (ravenHappy) { //If you give the jewel to the bird, the key is pickable
@@ -136,26 +147,11 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 					AddInvItem("Llave", "La llave de una puerta, seguro que abre algo", position, sr);
 					entityManager->setActive(key, false);
 					Win();
-
-					//IMPORTANT CLOSE INVENTORY 
-
-					sr->GetInventory()->setActive(false);
-					entityManager->setActive(InventoryBackground, false);
-					entityManager->setActive(InventoryBackground, false);
-					entityManager->setActive(downButton, false);
-					entityManager->setActive(upButton, false);
-					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
-
-					for (int i = 0; i < sr->GetInventory()->getItemNumber(); ++i) {
-						invObjects[i]->getMngr()->setActive(invObjects[i], false);
-					}
 				}
 				//	else sound of angry bird
 			});
 
 #pragma endregion
-	//Esto lo da la escena de la tumba
-	AddInvItem("Joya", "EYYYY Lapislazuli", sr->GetInventory()->setPosition(), sr);
 
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
