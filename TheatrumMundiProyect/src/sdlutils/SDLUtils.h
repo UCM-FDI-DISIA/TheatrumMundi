@@ -111,7 +111,7 @@ public:
 	inline void toggleFullScreen() {
 		auto flags = SDL_GetWindowFlags(_window);
 		if (flags & SDL_WINDOW_FULLSCREEN) {
-			SDL_SetWindowFullscreen(_window, 0);
+		SDL_SetWindowFullscreen(_window, 0);
 		} else {
 			SDL_SetWindowFullscreen(_window, SDL_WINDOW_FULLSCREEN);
 		}
@@ -149,7 +149,7 @@ public:
 	inline auto& soundEffects() {
 		return _soundsAccessWrapper;
 	}
-
+	void ClearMaps();
 	// musics maps
 	inline auto& musics() {
 		return _musicsAccessWrapper;
@@ -203,19 +203,18 @@ public:
 	inline Uint32 deltaTime() const {
 		return _deltaTime;
 	}
-
+	void loadReasources(std::string filename); // load resources from the json file
 private:
 
 	SDLUtils();
 	bool init(std::string windowTitle, int width, int height);
-	bool init(std::string windowTitle, int width, int height,
-			std::string filename);
+	bool init(std::string windowTitle, int width, int height,std::string filename);
 
 	void initWindow();
 	void closeWindow();
 	void initSDLExtensions(); // initialize resources (fonts, textures, audio, etc.)
 	void closeSDLExtensions(); // free resources the
-	void loadReasources(std::string filename); // load resources from the json file
+	
 
 	std::string _windowTitle; // window title
 	int _width; // window width

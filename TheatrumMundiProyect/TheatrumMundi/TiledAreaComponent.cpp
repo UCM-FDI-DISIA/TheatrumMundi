@@ -128,7 +128,6 @@ bool TiledAreaComponent::_overlapsWith(TiledAreaComponent* area)
         bool flag = false;
         if (this->CheckCollisionInTiles(rs)) {
           //  area->CheckCollisionInTiles(rs);
-            std::cout << "size del mio" << myTiledCol.size() << endl;
             std::vector<SDL_Rect> othertiledcol = area->getTilesCol();
             for (SDL_Rect thidtiles : myTiledCol) {
                     if (area->CheckCollisionInTiles(thidtiles)) flag = true;  
@@ -175,12 +174,12 @@ bool TiledAreaComponent::CheckCollisionInTiles(SDL_Rect& _collition)
                     
                         flag = true;
                         myTiledCol.push_back(auxcolrect);
-                        std::cout << "flag " << i << j << endl;
+                 
                     }  
             }
         }
     }
-    std::cout << "flag " << flag << endl;
+   
     return flag;
 }
 

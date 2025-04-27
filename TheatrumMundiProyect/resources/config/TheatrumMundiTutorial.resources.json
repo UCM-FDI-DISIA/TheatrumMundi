@@ -1,0 +1,153 @@
+{
+
+  "fonts" : [
+    {
+      "id": "ARIAL24",
+      "file": "../resources/fonts/ARIAL.ttf",
+      "size": 24
+    },
+    { "id" : "TITLE", "file" : "../resources/fonts/PirataOne-Regular.ttf", "size": 40 },
+    { "id" : "BASE", "file" : "../resources/fonts/FeFCrm2.ttf", "size": 24}
+  ],
+
+  "images": [
+    {
+      "id": "EmptyImage",
+      "file": "../resources/images/Finales/ImagenVacia.png"
+    },
+    { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
+    {
+      "id": "clockShape",
+      "file": "../resources/images/clock_shape.png"
+    },
+    {
+      "id": "B1",
+      "file": "../resources/images/Finales/1.PNG"
+    },
+    {
+      "id": "B7",
+      "file": "../resources/images/Finales/7.PNG"
+    },
+    {
+      "id": "SolSprite",
+      "file": "../resources/images/Finales/Sol.PNG"
+    },
+    {
+      "id": "LucySprite",
+      "file": "../resources/images/Finales/Lucy.PNG"
+    },
+    {
+      "id": "KeisaraSprite",
+      "file": "../resources/images/Finales/Keisara.PNG"
+    },
+    {
+      "id": "Dialog",
+      "file": "../resources/images/Finales/Dialogo.PNG"
+    },
+    {
+      "id": "B6",
+      "file": "../resources/images/Finales/6.PNG"
+    },
+    {
+      "id": "B2",
+      "file": "../resources/images/Finales/2.PNG"
+    },
+    {
+      "id": "fondoPruebaLog",
+      "file": "../resources/images/fondoLogPrueba.png"
+    },
+    {
+      "id": "teleSinAntena",
+      "file": "../resources/images/Finales/TutorialTele1.png"
+  },
+  {
+      "id": "teleConAntena",
+      "file": "../resources/images/Finales/TutorialTele2.png"
+  },
+  {
+    "id": "antena",
+      "file": "../resources/images/Finales/TutorialAntenas.png"
+  },
+    {
+      "id": "botonNumero",
+      "file": "../resources/images/Finales/button3711.png"
+  },
+    {
+      "id": "TutorialPuerta",
+      "file": "../resources/images/Finales/TutorialPuerta.png"
+    },
+    {
+      "id": "Room",
+      "file": "../resources/images/Finales/SalaIntermedia.PNG"
+    },
+    {
+      "id": "TutorialZoom1",
+      "file": "../resources/images/Finales/TutorialZoom1.png"
+    },
+    {
+      "id": "TutorialZoom2",
+      "file": "../resources/images/Finales/TutorialZoom2.png"
+    },
+    {
+      "id": "TutorialZoom3",
+      "file": "../resources/images/Finales/TutorialZoom3.png"
+    },
+    {
+      "id": "TutorialZoom4",
+      "file": "../resources/images/Finales/TutorialZoom4.png"
+    },
+    {
+      "id": "TutorialZoom5",
+      "file": "../resources/images/Finales/TutorialZoom5.png"
+    },
+    {
+      "id": "TutorialZoomKei",
+      "file": "../resources/images/Finales/TutorialZoomKei.png"
+    },
+    {
+      "id": "TutorialZoomSol",
+      "file": "../resources/images/Finales/TutorialZoomSol.png"
+    },
+    {
+      "id": "TutorialZoomLucy",
+      "file": "../resources/images/Finales/TutorialZoomLucy.png"
+    },
+    {
+      "id": "ChangeRoom",
+      "file": "../resources/images/Finales/CambiarSala.PNG"
+    }
+     ],
+
+  "messages": [
+    {
+      "id": "start",
+      "text": "Press space to start",
+      "font": "ARIAL24",
+      "color": "0x441155ff"
+    }
+  ],
+
+    "sounds": [
+      {
+        "id": "puzzle",
+        "file": "../resources/sound/sfx/click_puzzle.wav"
+    },
+    {
+      "id": "puerta",
+      "file": "../resources/sound/sfx/puerta.wav"
+  },
+  {
+      "id": "boton",
+      "file": "../resources/sound/sfx/click_boton.wav"
+        }
+       
+    ],
+
+  "musics" : [
+    {
+        "id": "sala1",
+        "file":  "../resources/sound/music/sala1.wav"
+    }
+  ]
+
+}
