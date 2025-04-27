@@ -70,16 +70,19 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 	
 	//loadResouces
 #ifndef _LOADALLRESOURCES
-	sdlutils().ClearMaps();
+	
 	switch (index)
 	{
 	case INITIAL_MENU:
+		sdlutils().ClearMaps();
 		sdlutils().loadReasources("../resources/config/TheatrumMundiInitialMenu.resources.json");
 		break;
 	case TUTORIAL_SCENE:
+		sdlutils().ClearMaps();
 		sdlutils().loadReasources("../resources/config/TheatrumMundiTutorial.resources.json");
 		break;
 	case ROOM1:
+		sdlutils().ClearMaps();
 		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom1.resources.json");
 		break;
 	default:
@@ -97,16 +100,20 @@ void SceneManager::loadScene(int index)
 {
 	//loadResouces
 #ifndef _LOADALLRESOURCES
-	sdlutils().ClearMaps();
+	
 	switch (index)
 	{
 	case INITIAL_MENU:
+		sdlutils().ClearMaps();
 		sdlutils().loadReasources("../resources/config/TheatrumMundiInitialMenu.resources.json");
 		break;
 	case TUTORIAL_SCENE:
+		sdlutils().ClearMaps();
 		sdlutils().loadReasources("../resources/config/TheatrumMundiTutorial.resources.json");
 		break;
 	case ROOM1:
+		sdlutils().ClearMaps();
+
 		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom1.resources.json");
 		break;
 	default:
