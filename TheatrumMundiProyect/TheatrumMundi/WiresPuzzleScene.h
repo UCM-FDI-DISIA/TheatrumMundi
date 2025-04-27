@@ -29,8 +29,8 @@ private:
 	int lightsOn;
 	bool pressed[5] = { false, false, false, false, false };
 
-	std::vector<int> cableToPort;  // cableToPort[i] = índice del puerto al que está conectado el cable i, -1 si no está conectado
-	std::vector<int> portToCable;  // portToCable[i] = índice del cable conectado al puerto i, -1 si libre
+	std::vector<int> cableToPort;  // index of the port connected to cable i, -1 if free
+	std::vector<int> portToCable;  // index of the cable connected to port i, -1 if free
 	int selectedWireIndex;
 };
 

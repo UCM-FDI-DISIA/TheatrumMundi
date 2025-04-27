@@ -174,30 +174,30 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 					if (portToCable[i] != -1) {
 						int otherWire = portToCable[i];
 						cableToPort[otherWire] = -1;
-						entityManager->setActive(wires[otherWire], true); // Mueve el cable de nuevo a su posición original
+						entityManager->setActive(wires[otherWire], true); // move the old cable to its original position
 						std::cout << "Cable " << otherWire << " desconectado del puerto " << i << std::endl;
 					}
 
-					// Conectar el cable seleccionado al puerto clicado
+					//conect the cable to the port selected
 					cableToPort[wireIndex] = i;
 					portToCable[i] = wireIndex;
 
-					// Mover físicamente el cable al puerto
+					//deactivate the cable
 					entityManager->setActive(wires[wireIndex], false);
 
 					std::cout << "Cable " << wireIndex << " conectado al puerto " << i << std::endl;
 
-					// Deseleccionar después de conectar
+					//unselect the wire
 					selectedWireIndex = -1;
 
-					// Puedes encender una luz, cambiar color, animación...
+					//light
 				}
 				else if (selectedWireIndex == -1 && portToCable[i] != -1)
 				{
 					int otherWire = portToCable[i];
 					cableToPort[otherWire] = -1; //desconnect the cable
 					portToCable[i] = -1; //desconnect the port
-					entityManager->setActive(wires[otherWire], true); // Mover cable viejo a su sitio original
+					entityManager->setActive(wires[otherWire], true); // move the cable to its original position
 					std::cout << "Cable " << otherWire << " desconectado del puerto " << i << std::endl;
 				}
 			});
