@@ -5,6 +5,7 @@
 #include "../sdlutils/SDLUtils.h"
 #include "Room1.h"
 #include "Room2.h"
+#include "Room3.h"
 #include "InitialScene.h"
 #include "PipePuzzleScene.h"
 #include "ClockPuzzleScene.h"
@@ -26,6 +27,7 @@
 #include "CSVdataRecolector.h"
 SceneManager::SceneManager()
 {
+	//If this content is edited, please put the same code in ResetSceneManager
 	scenes.resize(SceneName::SCENE_SIZE);
 	auto tombScene = new TombPuzzleScene(); //For the chain Puzzle, to take the reference
 
@@ -33,6 +35,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::ROOM_2] = new Room2Scene();
+	scenes[SceneName::ROOM_3] = new Room3Scene();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
@@ -170,6 +173,7 @@ void SceneManager::ResetSceneManager()
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::ROOM_2] = new Room2Scene();
+	scenes[SceneName::ROOM_3] = new Room3Scene();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
