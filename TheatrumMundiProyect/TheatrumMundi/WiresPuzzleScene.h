@@ -1,5 +1,6 @@
 #pragma once
 #include "ScenePuzzleTemplate.h"
+#include <vector>
 
 class array;
 class vector;
@@ -15,6 +16,7 @@ public:
 	bool Check() override; //HERE WE PUT THE CORRECT COMBINATION
 	void Win() override;
 	void ResolveScene() override;
+
 private:
 	ecs::entity_t logbtn;
 	std::vector<int> actualPos = { -1, -1, -1, -1, -1 };
@@ -26,5 +28,9 @@ private:
 
 	int lightsOn;
 	bool pressed[5] = { false, false, false, false, false };
+
+	std::vector<int> cableToPort;  // cableToPort[i] = índice del puerto al que está conectado el cable i, -1 si no está conectado
+	std::vector<int> portToCable;  // portToCable[i] = índice del cable conectado al puerto i, -1 si libre
+	int selectedWireIndex;
 };
 

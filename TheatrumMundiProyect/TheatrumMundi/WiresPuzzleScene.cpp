@@ -35,9 +35,8 @@
 
 using namespace std;
 
-WiresPuzzleScene::WiresPuzzleScene() : lightsOn(0)
+WiresPuzzleScene::WiresPuzzleScene() : lightsOn(0), selectedWireIndex(-1)
 {
-	
 }
 
 WiresPuzzleScene::~WiresPuzzleScene()
@@ -51,6 +50,10 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 	{
 		isStarted = true;
 		dialogueManager->setScene(this);
+
+		//inicialize the vector with -1 and the size of wires and ports
+		cableToPort.resize(wires.size(), -1); 
+		portToCable.resize(ports.size(), -1);
 
 		AudioManager& a = AudioManager::Instance();
 		Sound buttonSound = sdlutils().soundEffects().at("boton");
@@ -139,47 +142,64 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		lights[2] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 425), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		lights[3] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 480), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		lights[4] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 545), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		//check the wires
-		//trigger
 
-		ClickComponent* clk = entityManager->addComponent<ClickComponent>(wires[0]);
-		clk->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
-			AudioManager::Instance().playSound(buttonSound);
-			std::cout << "CLICK" << std::endl;
-			});
+		//pressed wires
+		for (int i = 0; i < wires.size(); i++) {
+			entityManager->addComponent<ClickComponent>(wires[i]);
 
-		/*for (int i = 0; i < wires.size(); i++)
-		{
-			entityManager->addComponent<ClickComponent>(ports[i]);
-
-			ports[i]->getMngr()->getComponent<ClickComponent>(ports[i])->connect(ClickComponent::JUST_CLICKED, [this, i]() {
-				auto wireEntity = ports[i];
-				std::cout << "CLICK" << std::endl;
-
-				if (pressed[i] == false) {
-					pressed[i] = true;
-					//logica de borde del sprite
+			wires[i]->getMngr()->getComponent<ClickComponent>(wires[i])->connect(ClickComponent::JUST_CLICKED, [this, i]() {
+				if (selectedWireIndex == i) {		
+					// unselect the wire
+					selectedWireIndex = -1;
+					std::cout << "Cable " << i << " deseleccionado" << std::endl;
+					// quitar borde visual
 				}
 				else {
-					pressed[i] = false;
-					actualPos[i] = -1;
+					selectedWireIndex = i;
+					std::cout << "Cable " << i << " seleccionado" << std::endl;
+					// borde visual
 				}
-			});
-		} */
+				});
+		}
 
-		for (int i = 0; i < ports.size(); i++)
-		{
+		//pressed ports
+		for (int i = 0; i < ports.size(); i++) {
 			entityManager->addComponent<ClickComponent>(ports[i]);
+
 			ports[i]->getMngr()->getComponent<ClickComponent>(ports[i])->connect(ClickComponent::JUST_CLICKED, [this, i]() {
-				auto portsEntity = ports[i];
+				if (selectedWireIndex != -1) {
+					int wireIndex = selectedWireIndex;
 
-				if (pressed[i] == true)
-				{
-					//logica del sprite final
-					pressed[i] = false;
-					wires[i]->getMngr()->setActive(wires[i], false);
+					// if the cable is already connected to another port, we need to disconnect it first
+					if (portToCable[i] != -1) {
+						int otherWire = portToCable[i];
+						cableToPort[otherWire] = -1;
+						entityManager->setActive(wires[otherWire], true); // Mueve el cable de nuevo a su posición original
+						std::cout << "Cable " << otherWire << " desconectado del puerto " << i << std::endl;
+					}
+
+					// Conectar el cable seleccionado al puerto clicado
+					cableToPort[wireIndex] = i;
+					portToCable[i] = wireIndex;
+
+					// Mover físicamente el cable al puerto
+					entityManager->setActive(wires[wireIndex], false);
+
+					std::cout << "Cable " << wireIndex << " conectado al puerto " << i << std::endl;
+
+					// Deseleccionar después de conectar
+					selectedWireIndex = -1;
+
+					// Puedes encender una luz, cambiar color, animación...
 				}
-
+				else if (selectedWireIndex == -1 && portToCable[i] != -1)
+				{
+					int otherWire = portToCable[i];
+					cableToPort[otherWire] = -1; //desconnect the cable
+					portToCable[i] = -1; //desconnect the port
+					entityManager->setActive(wires[otherWire], true); // Mover cable viejo a su sitio original
+					std::cout << "Cable " << otherWire << " desconectado del puerto " << i << std::endl;
+				}
 			});
 		}
 
