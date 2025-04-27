@@ -43,26 +43,34 @@ void StrongBoxPuzzle::init()
 
 
         //strongBox 
-        auto big = entityFactory->CreateInteractableEntity(entityManager, "CosaQueArrastras", EntityFactory::CIRCLEAREA, Vector2D(387, 86.5), Vector2D(0, 0), 575, 575, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        auto big = entityFactory->CreateInteractableEntity(entityManager, "StrongBoxWheel", EntityFactory::CIRCLEAREA, Vector2D(387, 86.5), Vector2D(0, 0), 575, 575, 60, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux3 = entityManager->addComponent<SlowRotateComponent>(big, entityManager->getComponent<Transform>(big));
         entityManager->getComponent<ClickComponent>(big)->connect(ClickComponent::JUST_CLICKED, [this, aux3]() {
             aux3->startRotate(60);
             });
-
-        auto medium = entityFactory->CreateInteractableEntity(entityManager, "CosaQueArrastras", EntityFactory::CIRCLEAREA, Vector2D(449.5, 149), Vector2D(0, 0), 450, 450, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        wheelstr.push_back(entityManager->getComponent<Transform>(big));
+        auto medium = entityFactory->CreateInteractableEntity(entityManager, "StrongBoxWheel", EntityFactory::CIRCLEAREA, Vector2D(449.5, 149), Vector2D(0, 0), 450, 450, 288, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux2 = entityManager->addComponent<SlowRotateComponent>(medium, entityManager->getComponent<Transform>(medium));
         entityManager->getComponent<ClickComponent>(medium)->connect(ClickComponent::JUST_CLICKED, [this, aux2]() {
             aux2->startRotate(72);
             });
-        auto small = entityFactory->CreateInteractableEntity(entityManager, "CosaQueArrastras", EntityFactory::CIRCLEAREA, Vector2D(512, 211.5), Vector2D(0, 0), 325, 325, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        wheelstr.push_back(entityManager->getComponent<Transform>(medium));
+        auto small = entityFactory->CreateInteractableEntity(entityManager, "StrongBoxWheel", EntityFactory::CIRCLEAREA, Vector2D(512, 211.5), Vector2D(0, 0), 325, 325, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux = entityManager->addComponent<SlowRotateComponent>(small,entityManager->getComponent<Transform>(small));
         entityManager->getComponent<ClickComponent>(small)->connect(ClickComponent::JUST_CLICKED, [this,aux](){
             aux->startRotate(90);
             });
-        auto smallest = entityFactory->CreateInteractableEntity(entityManager, "CosaQueArrastras", EntityFactory::CIRCLEAREA, Vector2D(574.5, 274), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        wheelstr.push_back(entityManager->getComponent<Transform>(small));
+        auto smallest = entityFactory->CreateInteractableEntity(entityManager, "StrongBoxWheel", EntityFactory::CIRCLEAREA, Vector2D(574.5, 274), Vector2D(0, 0), 200, 200, 240, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux1 = entityManager->addComponent<SlowRotateComponent>(smallest, entityManager->getComponent<Transform>(smallest));
         entityManager->getComponent<ClickComponent>(smallest)->connect(ClickComponent::JUST_CLICKED, [this, aux1]() {
             aux1->startRotate(120);
+            });
+        wheelstr.push_back(entityManager->getComponent<Transform>(smallest));
+
+        auto checkbtn = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(10, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        entityManager->getComponent<ClickComponent>(checkbtn)->connect(ClickComponent::JUST_CLICKED, [this]() {
+            std::cout <<Check();
             });
 /*
         //INVENTORY
@@ -162,7 +170,9 @@ void StrongBoxPuzzle::unload()
 
 bool StrongBoxPuzzle::Check()
 {
-    return false;
+    bool flag = true;
+    for (int i = 0; i < rotSol.size();i++) if (rotSol[i] != wheelstr[i]->getRot()) flag = false;
+    return flag;
 }
 
 void StrongBoxPuzzle::Win()

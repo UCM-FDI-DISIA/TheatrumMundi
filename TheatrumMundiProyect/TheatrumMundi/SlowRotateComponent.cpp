@@ -16,6 +16,10 @@ void SlowRotateComponent::update()
 	if (inrotate) {
 		if (_myObjTransform->getRot() > goalangle-1) {
 			inrotate = false;
+			if (_myObjTransform->getRot() >= 360) {
+				_myObjTransform->setRot(_myObjTransform->getRot() - 360);
+				goalangle -= 360;
+			}
 		}else 
 		_myObjTransform->setRot(_myObjTransform->getRot()+angletorotatate);
 		

@@ -107,20 +107,8 @@
       "file": "../resources/images/Finales/MenuBackground.png"
     },
     {
-      "id": "mobileBackground",
-      "file": "../resources/images/Finales/TelefonoZoom.png"
-    },
-    {
-      "id": "LivingroomBackground",
-      "file": "../resources/images/Finales/SalonFondo.PNG"
-    },
-    {
-      "id": "Timetable",
-      "file": "../resources/images/Finales/Horario.PNG"
-    },
-    {
-      "id": "TimetableZoom",
-      "file": "../resources/images/Finales/horarioZoom.png"
+      "id": "StrongBoxWheel",
+      "file": "../resources/images/temporales/CajafuerteRueda.png"
     },
     {
       "id": "fondoPruebaLog",
