@@ -7,17 +7,32 @@
 #include "TriggerComponent.h"
 #include "TiledAreaComponent.h"
 #include "SceneRoomTemplate.h"
+#include "../ecs/Manager.h"
 #include "Log.h"
 #include <list>
 #include "Area2D.h"
+#include "SlowRotateComponent.h"
 #include "RectArea2D.h"
 #include "../TheatrumMundi/PhysicsBodyComponent.h"
 #include "Image.h"
-//void StrongBoxPuzzle::init()
-void StrongBoxPuzzle::init(SceneRoomTemplate* sr)
+StrongBoxPuzzle::StrongBoxPuzzle()
 {
+   dialogueManager = new DialogueManager(1);
+   rotSol.push_back(0);
+   rotSol.push_back(0);
+   rotSol.push_back(0);
+   rotSol.push_back(0);
+}
+StrongBoxPuzzle::~StrongBoxPuzzle()
+{
+}
+void StrongBoxPuzzle::init()
+//void StrongBoxPuzzle::init(SceneRoomTemplate* sr)
+{
+    SceneRoomTemplate* sr = nullptr;
     if (!isStarted) {
-        room = sr;
+        room = nullptr;
+        
         isStarted = true;
         //sound and music
         AudioManager& a = AudioManager::Instance();
@@ -27,10 +42,29 @@ void StrongBoxPuzzle::init(SceneRoomTemplate* sr)
 
 
 
+        //strongBox 
+        auto big = entityFactory->CreateInteractableEntity(entityManager, "CosaQueArrastras", EntityFactory::CIRCLEAREA, Vector2D(387, 86.5), Vector2D(0, 0), 575, 575, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        SlowRotateComponent* aux3 = entityManager->addComponent<SlowRotateComponent>(big, entityManager->getComponent<Transform>(big));
+        entityManager->getComponent<ClickComponent>(big)->connect(ClickComponent::JUST_CLICKED, [this, aux3]() {
+            aux3->startRotate(60);
+            });
 
-
-
-
+        auto medium = entityFactory->CreateInteractableEntity(entityManager, "CosaQueArrastras", EntityFactory::CIRCLEAREA, Vector2D(449.5, 149), Vector2D(0, 0), 450, 450, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        SlowRotateComponent* aux2 = entityManager->addComponent<SlowRotateComponent>(medium, entityManager->getComponent<Transform>(medium));
+        entityManager->getComponent<ClickComponent>(medium)->connect(ClickComponent::JUST_CLICKED, [this, aux2]() {
+            aux2->startRotate(72);
+            });
+        auto small = entityFactory->CreateInteractableEntity(entityManager, "CosaQueArrastras", EntityFactory::CIRCLEAREA, Vector2D(512, 211.5), Vector2D(0, 0), 325, 325, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        SlowRotateComponent* aux = entityManager->addComponent<SlowRotateComponent>(small,entityManager->getComponent<Transform>(small));
+        entityManager->getComponent<ClickComponent>(small)->connect(ClickComponent::JUST_CLICKED, [this,aux](){
+            aux->startRotate(90);
+            });
+        auto smallest = entityFactory->CreateInteractableEntity(entityManager, "CosaQueArrastras", EntityFactory::CIRCLEAREA, Vector2D(574.5, 274), Vector2D(0, 0), 200, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        SlowRotateComponent* aux1 = entityManager->addComponent<SlowRotateComponent>(smallest, entityManager->getComponent<Transform>(smallest));
+        entityManager->getComponent<ClickComponent>(smallest)->connect(ClickComponent::JUST_CLICKED, [this, aux1]() {
+            aux1->startRotate(120);
+            });
+/*
         //INVENTORY
        //Invntory Background
         auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
@@ -117,9 +151,9 @@ void StrongBoxPuzzle::init(SceneRoomTemplate* sr)
         createInvEntities(sr);
         dialogueManager->setScene(this);
         startDialogue("PuzzleLibros");
-
+        */
     }
-    createInvEntities(sr);
+   // createInvEntities(sr);
 }
 
 void StrongBoxPuzzle::unload()

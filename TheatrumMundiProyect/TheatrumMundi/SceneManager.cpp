@@ -23,6 +23,7 @@
 #include "TelePuzzleScene.h"
 #include "DoorPuzzleScene.h"
 #include "XOPuzzleScene.h"
+#include "StrongBoxPuzzle.h"
 #include "CSVdataRecolector.h"
 SceneManager::SceneManager()
 {
@@ -45,13 +46,14 @@ SceneManager::SceneManager()
 	scenes[SceneName::TOMB_SCENE] = tombScene;
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene(tombScene);
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene(tombScene);
+	scenes[SceneName::STRONGBOX_PUZZLE] = new StrongBoxPuzzle();
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::INITIAL_MENU);
+	loadScene(SceneName::STRONGBOX_PUZZLE);
 }
 
 void SceneManager::popScene()

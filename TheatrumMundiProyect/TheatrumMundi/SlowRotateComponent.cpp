@@ -4,6 +4,7 @@
 SlowRotateComponent::SlowRotateComponent(Transform* tr)
 {
 	_myObjTransform = tr;
+	goalangle = _myObjTransform->getRot();
 }
 
 SlowRotateComponent::~SlowRotateComponent()
@@ -13,15 +14,18 @@ SlowRotateComponent::~SlowRotateComponent()
 void SlowRotateComponent::update()
 {
 	if (inrotate) {
-		_myObjTransform->setRot(_myObjTransform->getRot()+angletorotatate);
-		if (_myObjTransform->getRot()-1 >goalangle) {
+		if (_myObjTransform->getRot() > goalangle-1) {
 			inrotate = false;
-		}
+		}else 
+		_myObjTransform->setRot(_myObjTransform->getRot()+angletorotatate);
+		
 	}
 }
 
 void SlowRotateComponent::startRotate(int angle)
 {
-	inrotate = true;
-	goalangle += angle;
+	if (!inrotate) {
+		inrotate = true;
+		goalangle += angle;
+	}
 }

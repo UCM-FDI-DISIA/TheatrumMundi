@@ -4,9 +4,12 @@
 class StrongBoxPuzzle: public ScenePuzzleTemplate
 {
 private:
+	std::vector<int> rotSol;
 protected:
 public:
-	void init(SceneRoomTemplate* sr) override;
+	StrongBoxPuzzle();
+	~StrongBoxPuzzle();
+	void init() override;
 	void unload() override;
 	bool Check() override;
 	void Win() override;
