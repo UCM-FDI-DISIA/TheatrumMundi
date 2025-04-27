@@ -143,6 +143,12 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		lights[3] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 480), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		lights[4] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 545), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
+		//deactivate the lights
+		for (int i = 0; i < lights.size(); i++) {
+			entityManager->setActive(lights[i], false);
+		}
+
+
 		//pressed wires
 		for (int i = 0; i < wires.size(); i++) {
 			entityManager->addComponent<ClickComponent>(wires[i]);
@@ -185,6 +191,9 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 					//deactivate the cable
 					entityManager->setActive(wires[wireIndex], false);
 
+					//asign the position of the cable
+					actualPos[wireIndex] = i;
+
 					std::cout << "Cable " << wireIndex << " conectado al puerto " << i << std::endl;
 
 					//unselect the wire
@@ -200,6 +209,10 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(wires[otherWire], true); // move the cable to its original position
 					std::cout << "Cable " << otherWire << " desconectado del puerto " << i << std::endl;
 				}
+				else {
+					actualPos[i] = -1; // if the port is not connected to any cable, set the position to -1
+				}
+				
 			});
 		}
 
@@ -209,15 +222,30 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clickcheckButton = entityManager->getComponent<ClickComponent>(checkButton);
 		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, sr, this, buttonSound]() {
 
-			#ifdef DEBUG
 			std::cout << "CLICK" << std::endl;
-			#endif // DEBUG
 
 			AudioManager::Instance().playSound(buttonSound);
+			//aqui cambiamos el sprite del boton
 			if (Check()) {
-				Win();
-				
+				for (int i = 0; i < lights.size(); i++)
+				{
+					entityManager->setActive(lights[i], true);
+				}
+				std::cout << "Correct combination" << std::endl;
+				//Win();
+
 			}
+			else
+			{
+				std::cout << "Incorrect combination" << std::endl;
+				std::cout << actualPos[0] << actualPos[1] << actualPos[2] << actualPos[3] << actualPos[4] << std::endl;
+
+				for (int i = 0; i < lightsOn; i++)
+				{
+					entityManager->setActive(lights[i], true);
+				}
+			}
+			
 		});
 
 		//BackButton
@@ -252,17 +280,15 @@ void WiresPuzzleScene::unload()
 }
 
 bool WiresPuzzleScene::Check()
-{ 	//CORRECT ACTUAL COMBINATION: 3 - 1 - 5 - 2 - 4
+{ 	//CORRECT ACTUAL COMBINATION: 2 - 0 - 4 - 1 - 3
 
 	lightsOn = 0;
 	for (int i = 0; i < actualPos.size(); i++)
 	{
-		if (actualPos[i] != -1) //verify that the wires are connected
+		entityManager->setActive(lights[i], false);
+		if (actualPos[i] == winPos[i]) //verify that the wires are in the correct position
 		{
-			if (actualPos[i] == winPos[i]) //verify that the wires are in the correct position
-			{
-				lightsOn++;
-			}
+			lightsOn++;
 		}
 	}
 
