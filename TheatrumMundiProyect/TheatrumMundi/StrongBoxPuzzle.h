@@ -6,6 +6,8 @@ class StrongBoxPuzzle: public ScenePuzzleTemplate
 private:
 	std::vector<int> rotSol;
 	std::vector<Transform*> wheelstr;
+	std::vector<ecs::entity_t> doorEntities;
+	std::vector<ecs::entity_t> rewardEntities;
 protected:
 public:
 	StrongBoxPuzzle();

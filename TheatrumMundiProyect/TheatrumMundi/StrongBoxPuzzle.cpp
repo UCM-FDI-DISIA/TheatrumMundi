@@ -1,4 +1,4 @@
-#include "StrongBoxPuzzle.h"
+﻿#include "StrongBoxPuzzle.h"
 #include "Vector2D.h"
 #include "SDLUtils.h"
 #include "DialogueManager.h"
@@ -42,36 +42,51 @@ void StrongBoxPuzzle::init()
 
 
 
-        //strongBox 
+        //strongBox door
+        //Big wheel 
         auto big = entityFactory->CreateInteractableEntity(entityManager, "StrongBoxWheel", EntityFactory::CIRCLEAREA, Vector2D(387, 86.5), Vector2D(0, 0), 575, 575, 60, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux3 = entityManager->addComponent<SlowRotateComponent>(big, entityManager->getComponent<Transform>(big));
         entityManager->getComponent<ClickComponent>(big)->connect(ClickComponent::JUST_CLICKED, [this, aux3]() {
             aux3->startRotate(60);
             });
         wheelstr.push_back(entityManager->getComponent<Transform>(big));
+        doorEntities.push_back(big);
+        
+        //medium wheel 
         auto medium = entityFactory->CreateInteractableEntity(entityManager, "StrongBoxWheel", EntityFactory::CIRCLEAREA, Vector2D(449.5, 149), Vector2D(0, 0), 450, 450, 288, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux2 = entityManager->addComponent<SlowRotateComponent>(medium, entityManager->getComponent<Transform>(medium));
         entityManager->getComponent<ClickComponent>(medium)->connect(ClickComponent::JUST_CLICKED, [this, aux2]() {
             aux2->startRotate(72);
             });
         wheelstr.push_back(entityManager->getComponent<Transform>(medium));
+        doorEntities.push_back(medium);
+        
+        //small wheel
         auto small = entityFactory->CreateInteractableEntity(entityManager, "StrongBoxWheel", EntityFactory::CIRCLEAREA, Vector2D(512, 211.5), Vector2D(0, 0), 325, 325, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux = entityManager->addComponent<SlowRotateComponent>(small,entityManager->getComponent<Transform>(small));
         entityManager->getComponent<ClickComponent>(small)->connect(ClickComponent::JUST_CLICKED, [this,aux](){
             aux->startRotate(90);
             });
         wheelstr.push_back(entityManager->getComponent<Transform>(small));
+        doorEntities.push_back(small);
+       
+        //smallest wheel
         auto smallest = entityFactory->CreateInteractableEntity(entityManager, "StrongBoxWheel", EntityFactory::CIRCLEAREA, Vector2D(574.5, 274), Vector2D(0, 0), 200, 200, 240, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux1 = entityManager->addComponent<SlowRotateComponent>(smallest, entityManager->getComponent<Transform>(smallest));
         entityManager->getComponent<ClickComponent>(smallest)->connect(ClickComponent::JUST_CLICKED, [this, aux1]() {
             aux1->startRotate(120);
             });
         wheelstr.push_back(entityManager->getComponent<Transform>(smallest));
+        doorEntities.push_back(smallest);
+       
 
         auto checkbtn = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(10, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         entityManager->getComponent<ClickComponent>(checkbtn)->connect(ClickComponent::JUST_CLICKED, [this]() {
-            std::cout <<Check();
+            if (Check()) {
+                Win();
+            }
             });
+        doorEntities.push_back(checkbtn);
 /*
         //INVENTORY
        //Invntory Background
@@ -160,6 +175,46 @@ void StrongBoxPuzzle::init()
         dialogueManager->setScene(this);
         startDialogue("PuzzleLibros");
         */
+        //Puzzle rewards
+        //feather
+        ecs::entity_t rewardFeather = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA,
+            Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
+            areaLayerManager,
+            EntityFactory::NODRAG,
+            ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+        int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
+        ClickComponent* clk = entityManager->getComponent<ClickComponent>(rewardFeather);
+        clk->connect(ClickComponent::JUST_CLICKED, [this, rewardFeather, variant, sr]() {
+
+            Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+            if (variant == 0)AddInvItem("frascoV2", "Un frasco con restos de algo.", position, sr);
+            else if (variant == 1)AddInvItem("frascoV2", "Un frasco totalmente limpio, \nque raro.", position, sr);
+            else if (variant == 2)AddInvItem("frascoV1", " Un frasco con huellas de dedos,  \n�no hab�an guantes?", position, sr);
+            rewardFeather->getMngr()->setActive(rewardFeather, false);
+
+            });
+        rewardEntities.push_back(rewardFeather);
+        entityManager->setActive(rewardFeather, false);
+        //morse book
+        ecs::entity_t rewardMorse = entityFactory->CreateInteractableEntity(entityManager, "B5", EntityFactory::RECTAREA,
+            Vector2D(660, 630), Vector2D(0, 0), 110, 110, 0,
+            areaLayerManager,
+            EntityFactory::NODRAG,
+            ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+        clk = entityManager->getComponent<ClickComponent>(rewardMorse);
+        clk->connect(ClickComponent::JUST_CLICKED, [this, rewardMorse, variant, sr]() {
+
+            Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+            if (variant == 0)AddInvItem("frascoV2", "Un frasco con restos de algo.", position, sr);
+            else if (variant == 1)AddInvItem("frascoV2", "Un frasco totalmente limpio, \nque raro.", position, sr);
+            else if (variant == 2)AddInvItem("frascoV1", " Un frasco con huellas de dedos,  \n�no hab�an guantes?", position, sr);
+            rewardMorse->getMngr()->setActive(rewardMorse, false);
+
+            });
+        rewardEntities.push_back(rewardMorse);
+        entityManager->setActive(rewardMorse, false);
+
+
     }
    // createInvEntities(sr);
 }
@@ -177,6 +232,8 @@ bool StrongBoxPuzzle::Check()
 
 void StrongBoxPuzzle::Win()
 {
+    for (auto a : doorEntities)entityManager->setActive(a, false);
+    for (auto a : rewardEntities)entityManager->setActive(a, true);
 }
 
 void StrongBoxPuzzle::ResolveScene()
