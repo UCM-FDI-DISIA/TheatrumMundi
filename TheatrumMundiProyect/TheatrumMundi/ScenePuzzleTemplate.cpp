@@ -77,11 +77,7 @@ ScenePuzzleTemplate::ScenePuzzleTemplate(): SceneTemplate()
 
 ScenePuzzleTemplate::~ScenePuzzleTemplate()
 {
-	//if memory leak delete the vector of entities
-	for (auto a : invObjects) {
-		delete a;
-	}
-	invObjects.clear();
+
 }
 /// <summary>
 /// For all the Inventory itmes in the SceneRoomTemplate, we created a new Entity in the puzzle Scenes

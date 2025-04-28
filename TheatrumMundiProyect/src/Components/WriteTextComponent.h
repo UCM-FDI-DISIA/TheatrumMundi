@@ -21,6 +21,7 @@ private:
 	// If it is log list, there is no Dynamic memory to destroy
 	// If it is TextInfo, DialogueManager already destroys that memory.
 
+	Texture* dialogText; //Description dialogueText
 
 	const int TEXT_SPEED = 35; //20 ms
 	int lastUpdate;
