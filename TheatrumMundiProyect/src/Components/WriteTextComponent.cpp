@@ -207,7 +207,7 @@ void WriteTextComponent<DescriptionInfo>::render()
 	// calculate background scale
 	std::vector<Texture*> renderedLines;
 	for (const auto& line : lines) {
-		dialogText = new Texture(sdlutils().renderer(), line, _myFont, _color);
+		auto dialogText = new Texture(sdlutils().renderer(), line, _myFont, _color);
 		renderedLines.push_back(dialogText);
 
 		totalHeight += dialogText->height() + (5 * Game::Instance()->hscreenScale); // split lines space
@@ -224,9 +224,10 @@ void WriteTextComponent<DescriptionInfo>::render()
 	{
 		SDL_Rect dialogRect = {	x, y, dialogText->width() * Game::Instance()->wscreenScale,	dialogText->height() * Game::Instance()->hscreenScale};
 		dialogText->render(dialogRect, 0);
-		y += dialogText->height() + 5 * Game::Instance()->hscreenScale;
+		y += dialogText->height() + 5 * Game::Instance()->hscreenScale; 
+		delete dialogText;
 	}
-	delete dialogText;
+
 }
 
 //IS FINISHED

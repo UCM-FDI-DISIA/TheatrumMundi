@@ -70,14 +70,30 @@ void ScenePuzzleTemplate::reposInv(SceneRoomTemplate* sr)
 	}
 }
 
+void ScenePuzzleTemplate::CreateDescriptions(SceneRoomTemplate* sr)
+{
+	if (firstEntry) {
+
+		//description text entity
+		textDescriptionEnt = entityManager->addEntity(ecs::grp::UI);
+		_testTextTranform = entityManager->addComponent<Transform>(textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
+		entityManager->setActive(textDescriptionEnt, false);
+		SDL_Color colorDialog = { 255, 255, 255, 255 };
+		entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, sr->GetInventory()->getTextDescription());
+		firstEntry = false;
+	}
+}
+
 ScenePuzzleTemplate::ScenePuzzleTemplate(): SceneTemplate()
 {
 	placeHand = false;
+	firstEntry = true;
+
 }
 
 ScenePuzzleTemplate::~ScenePuzzleTemplate()
 {
-
+	
 }
 /// <summary>
 /// For all the Inventory itmes in the SceneRoomTemplate, we created a new Entity in the puzzle Scenes
@@ -87,19 +103,11 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 {
 	//REMOVE INVALID ENTITIES
 	compareInv(sr);
-	//CREATE DESCRIPTION ENTITIES
-
+	//CREATE DESCRIPTION ENTITIES ONLY FITST TIME
+	CreateDescriptions(sr);
 	//REPOSITION THE INVENTORY ITEMS
 	reposInv(sr);
 	
-	//description text entity
-	auto textDescriptionEnt = entityManager->addEntity(ecs::grp::DEFAULT);
-	auto _testTextTranform = entityManager->addComponent<Transform>(textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
-	entityManager->setActive(textDescriptionEnt, false);
-	SDL_Color colorDialog = { 255, 255, 255, 255 };
-	entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, sr->GetInventory()->getTextDescription());
-
-
 	int index = 0; // Need to search for the respective position of the item
 	for (auto a : sr->GetInventory()->getItems()) {
 		//if the array of names hasn't have the name of this entity then it means that is new and has to be created again
@@ -116,7 +124,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 			//Assign lamda functions
 
 			//if you click in one item, assign the original position to the position of the object clicked
-			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this, sr, it, a, textDescriptionEnt]() {
+			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this, sr, it, a]() {
 				setOriginalPos(it->getMngr()->getComponent<Transform>(it)->getPos());
 				
 				//hide item description when item has been clicked
@@ -124,7 +132,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 				});
 
 			//if you drop the item, compares if it was drop in or out tge cloack
-			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this, sr, a, it, textDescriptionEnt]() {
+			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this, sr, a, it]() {
 				//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
 				if (!placeHand) it->getMngr()->getComponent<Transform>(it)->setPosPure(getOriginalPos());
 				//in other case remove the item from this inventory and the inventory of Room1
@@ -143,7 +151,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 				});
 
 			//if mouse is on item, show item description
-			it->getMngr()->getComponent<TriggerComponent>(it)->connect(TriggerComponent::CURSOR_ENTERED, [this, sr, a, textDescriptionEnt, it]() {
+			it->getMngr()->getComponent<TriggerComponent>(it)->connect(TriggerComponent::CURSOR_ENTERED, [this, sr, a, it]() {
 				if (!entityManager->getComponent<DragComponent>(it)->isBeingClicked())
 				{
 					//show item description entities
@@ -159,7 +167,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 				});
 
 			//if mouse leaves item, hide item description
-			it->getMngr()->getComponent<TriggerComponent>(it)->connect(TriggerComponent::CURSOR_LEFT, [this, sr, a, textDescriptionEnt]() {
+			it->getMngr()->getComponent<TriggerComponent>(it)->connect(TriggerComponent::CURSOR_LEFT, [this, sr, a]() {
 				//hide item description entities
 				entityManager->setActive(textDescriptionEnt, false);
 				});
@@ -179,20 +187,30 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 /// <param name="sr"></param> --> Reference to the SceneRoom
 void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& description, const Vector2D& position, SceneRoomTemplate* sr)
 {
+
 	if (!ItemAlreadyCreated(id)) {
+		//Add Items to the room inventory
 		sr->GetInventory()->addItem(new Hint(id, description, &sdlutils().images().at(id)));
 		sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
+
+		//description text entity
+		entityManager->setActive(textDescriptionEnt, false);
+
+		//Add to the puzzle Lists
 		invID.push_back(id);
 		invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT));
 		auto it = invObjects.back();
+		auto item = sr->GetInventory()->getItems().back();
 
+		//Entities Logic
 		if(sr->GetInventory()->getActive() == true && sr->GetInventory()->getItems().size() < 4) it->getMngr()->setActive(it, true); //If inventory is showing and we have less than 2 items, set the AddedItem to True
 		else it->getMngr()->setActive(it, false);
 
 		//Assign the lamda functions to the inventory item
 		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED, [this,it]() {
 			setOriginalPos(it->getMngr()->getComponent<Transform>(it)->getPos());
+			entityManager->setActive(textDescriptionEnt, false);
 			});
 
 		//if you drop the item, compares if it was drop in or out tge cloack
@@ -209,8 +227,25 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 				}
 				else it->getMngr()->getComponent<Transform>(it)->setPosPure(getOriginalPos());
 			}
+			entityManager->setActive(textDescriptionEnt, false);
 			});
 
+		//if mouse is on item, show item description
+		it->getMngr()->getComponent<TriggerComponent>(it)->connect(TriggerComponent::CURSOR_ENTERED, [this, sr,item, it]() {
+			if (!entityManager->getComponent<DragComponent>(it)->isBeingClicked())
+			{
+				//show item description entities
+				entityManager->setActive(textDescriptionEnt, true);
+				//change text description
+				sr->GetInventory()->setTextDescription(item, entityManager->getComponent<Transform>(it));
+
+			}
+		});
+		//if mouse leaves item, hide item description
+		it->getMngr()->getComponent<TriggerComponent>(it)->connect(TriggerComponent::CURSOR_LEFT, [this, sr]() {
+			//hide item description entities
+			entityManager->setActive(textDescriptionEnt, false);
+		});
 		sr->createDescription(sr->GetInventory()->hints.back(), sr->GetInventory()->getItems().back());
 	}
 }

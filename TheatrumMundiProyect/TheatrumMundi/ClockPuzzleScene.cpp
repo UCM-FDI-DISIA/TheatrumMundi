@@ -93,7 +93,6 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		//ENTIDADCONENTITYFACTORY
 		auto _buttonMin = entityFactory->CreateInteractableEntity(entityManager, "BotonMinutero", EntityFactory::RECTAREA, Vector2D(400, 345), Vector2D(0, 0), 120, 120, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
-		_actualMinute;
 
 		ClickComponent* clockMinClick = entityManager->getComponent<ClickComponent>(_buttonMin);
 		clockMinClick->connect(ClickComponent::JUST_CLICKED, [_clockMinTransform, clockMinSound, this]()
