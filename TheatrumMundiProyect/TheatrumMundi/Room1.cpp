@@ -175,7 +175,7 @@ void Room1Scene::_setRoomEvents()
 			GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 
 
-			createDescription(GetInventory()->hints.back(), GetInventory()->getItems().back());
+			createDescription();
 		};
 			
 	roomEvent[ResolveCase] = [this]() {

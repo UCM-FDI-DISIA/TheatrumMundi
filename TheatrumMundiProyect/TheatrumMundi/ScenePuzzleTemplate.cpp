@@ -246,7 +246,7 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 			//hide item description entities
 			entityManager->setActive(textDescriptionEnt, false);
 		});
-		sr->createDescription(sr->GetInventory()->hints.back(), sr->GetInventory()->getItems().back());
+		sr->createDescription();
 	}
 }
 
