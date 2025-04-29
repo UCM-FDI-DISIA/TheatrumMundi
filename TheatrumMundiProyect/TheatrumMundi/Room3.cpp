@@ -37,6 +37,7 @@ void Room3Scene::init()
 {
 	if (isStarted) return;
 	isStarted = true;
+	isOpen = false;
 	finishallpuzzles = false;
 	_setRoomAudio();
 	_setGlobalFeatures();
@@ -45,7 +46,7 @@ void Room3Scene::init()
 	_setUI();
 	_setDialog();
 	_setCaseResolution();
-	roomEvent[InitialDialogue]();
+	//roomEvent[InitialDialogue]();
 	SDL_Delay(1000);
 }
 
