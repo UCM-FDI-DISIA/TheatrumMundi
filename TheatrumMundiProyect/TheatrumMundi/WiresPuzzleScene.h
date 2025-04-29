@@ -27,7 +27,6 @@ private:
 	std::array<Entity*, 5> lights = { nullptr, nullptr, nullptr, nullptr, nullptr }; //lights entities
 
 	int lightsOn;
-	bool pressed[5] = { false, false, false, false, false };
 
 	std::vector<int> cableToPort;  //index of the port connected to cable i, -1 if free
 	std::vector<int> portToCable;  //index of the cable connected to port i, -1 if free

@@ -182,6 +182,8 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 						cableToPort[otherWire] = -1;
 						entityManager->setActive(wires[otherWire], true); // move the old cable to its original position
 						std::cout << "Cable " << otherWire << " desconectado del puerto " << i << std::endl;
+
+						actualPos[otherWire] = -1; // set the position of the old cable to -1
 					}
 
 					//conect the cable to the port selected
@@ -208,6 +210,8 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 					portToCable[i] = -1; //desconnect the port
 					entityManager->setActive(wires[otherWire], true); // move the cable to its original position
 					std::cout << "Cable " << otherWire << " desconectado del puerto " << i << std::endl;
+
+					actualPos[otherWire] = -1; // set the position of the old cable to -1
 				}
 				else {
 					actualPos[i] = -1; // if the port is not connected to any cable, set the position to -1
@@ -223,9 +227,20 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, sr, this, buttonSound]() {
 
 			std::cout << "CLICK" << std::endl;
-
 			AudioManager::Instance().playSound(buttonSound);
-			//aqui cambiamos el sprite del boton
+
+			bool allConnected = std::all_of(actualPos.begin(), actualPos.end(), [](int pos) { return pos != -1; });
+
+			if (!allConnected) {
+				std::cout << "No todos los cables están conectados. El botón no hace nada." << std::endl;
+				for (int i = 0; i < lights.size(); i++) {
+					entityManager->setActive(lights[i], false);
+				}
+				lightsOn = 0;
+				return; // button does nothing if not all cables are connected
+			}
+
+			// Check if the combination is correct
 			if (Check()) {
 				for (int i = 0; i < lights.size(); i++)
 				{
@@ -283,9 +298,13 @@ bool WiresPuzzleScene::Check()
 { 	//CORRECT ACTUAL COMBINATION: 2 - 0 - 4 - 1 - 3
 
 	lightsOn = 0;
+
+	for (auto light : lights) {
+		entityManager->setActive(light, false);
+	}
+
 	for (int i = 0; i < actualPos.size(); i++)
 	{
-		entityManager->setActive(lights[i], false);
 		if (actualPos[i] == winPos[i]) //verify that the wires are in the correct position
 		{
 			lightsOn++;
