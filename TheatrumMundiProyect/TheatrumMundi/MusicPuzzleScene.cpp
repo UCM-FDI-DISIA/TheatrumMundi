@@ -77,12 +77,12 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
         //background + musical notes helpful guide (visual)
 
         //musicalScore + mirror (changes in each phase)
-        musicalScore = entityFactory->CreateImageEntity(entityManager, "fase1Partitura", Vector2D(800, 0), Vector2D(0, 0), 1349 / 3, 748 / 3, 0, ecs::grp::DEFAULT);
+        musicalScore = entityFactory->CreateImageEntity(entityManager, "fase1Partitura", Vector2D(600, 0), Vector2D(0, 0), 1349 / 2, 748 / 2, 0, ecs::grp::DEFAULT);
         mirror = entityFactory->CreateImageEntity(entityManager, "fase1Espejo", Vector2D(0, 300), Vector2D(0, 0), 1349 / 3, 748 / 3, 0, ecs::grp::DEFAULT);
 
         //displayed notes
         initializeDisplayedNotes();
-        //cleanDisplayedNotes();
+        cleanDisplayedNotes();
 
         //piano buttons
         createPianoButtons();
@@ -365,41 +365,31 @@ void MusicPuzzleScene::updateDisplayedNotes()
     {
         string texture;
 
+        auto noteIm = entityManager->getComponent<Image>(displayedNotes[i]);
+        
+
         if (_currentComb[i] == Notes::DO)
         {
             texture = "Do";
+            noteIm->setTexture(&sdlutils().images().at(texture));
         }
         else if (_currentComb[i] == Notes::SI)
         {
             texture = "Si";
-            //cambiar posicion
+            noteIm->setTexture(&sdlutils().images().at(texture));
         }
         else
         {
             texture = "NotaBasica";
+            noteIm->setTexture(&sdlutils().images().at(texture));
+            
         }
         
-        auto noteIm = entityManager->getComponent<Image>(displayedNotes[i]);
-        noteIm->setTexture(&sdlutils().images().at(texture));
-
         entityManager->setActive(displayedNotes[i], true);
-
-        /*
-        // Crea la imagen en esa posición
-        auto musicalNotes = entityFactory->CreateImageEntity(
-            entityManager,
-            texture,
-            pos,
-            Vector2D(0, 0),     // velocidad inicial 0
-            1349 / 3,           // ancho de la imagen
-            748 / 3,            // alto de la imagen
-            0,                  // rotación
-            ecs::grp::DEFAULT   // grupo
-        );*/
 
     }
 
-    // Ocultar notas sobrantes si _currentComb ha disminuido
+    // Hide non used notes if needed
     for (size_t i = _currentComb.size(); i < displayedNotes.size(); ++i)
     {
         entityManager->setActive(displayedNotes[i], false);
@@ -408,7 +398,7 @@ void MusicPuzzleScene::updateDisplayedNotes()
 
 void MusicPuzzleScene::cleanDisplayedNotes()
 {
-    //hide displayed notes vector
+    //hide displayed notes
     for (auto a : displayedNotes)
     {
         entityManager->setActive(a, false);
@@ -417,29 +407,17 @@ void MusicPuzzleScene::cleanDisplayedNotes()
 
 void MusicPuzzleScene::initializeDisplayedNotes()
 {
-    // Suponemos que currentComb es el vector que contiene la combinación musical actual
-    const int spacingX = 100; // espacio entre cada imagen en el eje X
-    const int baseX = 100;    // posición inicial X
-    const int posY = 300;     // posición fija en Y
+    const int spacingX = 35; //space between notes
+    const int baseX = 950; //initial x
+    const int posY = 200; //initial y
 
     for (size_t i = 0; i < Notes::SI + 1; ++i)
     {
-        // Calcula la posición horizontal
+        //note position
         Vector2D pos(baseX + i * spacingX, posY);
         
-        // Crea la imagen en esa posición
-        auto musicalNotes = entityFactory->CreateImageEntity(
-            entityManager,
-            "NotaBasica",
-            pos,
-            Vector2D(0, 0),     // velocidad inicial 0
-            1349 / 3,           // ancho de la imagen
-            748 / 3,            // alto de la imagen
-            0,                  // rotación
-            ecs::grp::DEFAULT   // grupo
-        );
-
-        // Puedes almacenar el entityID si luego necesitas manipularlos
+        // create image entity
+        auto musicalNotes = entityFactory->CreateImageEntity(entityManager, "NotaBasica", pos, Vector2D(0, 0), 248/6, 649/6, 0, ecs::grp::DEFAULT);
         displayedNotes.push_back(musicalNotes);
     }
 }
