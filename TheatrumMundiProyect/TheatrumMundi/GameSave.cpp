@@ -10,6 +10,10 @@ struct SaveData {
 
 GameSave::GameSave() : TutorialCompleted(false) {}
 
+GameSave::~GameSave()
+{
+}
+
 GameSave::GameSave(const std::string& filename)
 {
     Load(filename);

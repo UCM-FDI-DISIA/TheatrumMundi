@@ -18,7 +18,7 @@ public:
 	void update() override;
 
 	// Registers a new state to perform a different update function
-	void addBehavior(BEHAVIOR_STATE newState, std::function<void()> stateUpdate);
+	void defBehavior(BEHAVIOR_STATE newState, std::function<void()> stateUpdate);
 
 	void setState(BEHAVIOR_STATE);
 

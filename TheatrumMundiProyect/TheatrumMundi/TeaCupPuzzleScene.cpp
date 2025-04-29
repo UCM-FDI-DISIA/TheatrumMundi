@@ -26,6 +26,7 @@
 #include "../../TheatrumMundi/DescriptionInfo.h"
 
 #include "DialogueManager.h"
+#include "Log.h"
 
 using namespace std;
 
@@ -132,6 +133,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 				// If the inventory is active, activate the items
 				if (sr->GetInventory()->getActive()) {
 					entityManager->setActive(InventoryBackground, true);
+					entityManager->setActive(logbtn, false);
 
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(925);
 					entityManager->setActive(downButton, true);
@@ -143,6 +145,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 				}
 				else {
 					entityManager->setActive(InventoryBackground, false);
+					entityManager->setActive(logbtn, true);
 					entityManager->setActive(InventoryBackground, false);
 					entityManager->setActive(downButton, false);
 					entityManager->setActive(upButton, false);
@@ -183,11 +186,15 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 			Game::Instance()->getSceneManager()->popScene();
 		});
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
+		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 
-		startDialogue("PuzzleTaza1");
+
+		
 	}
 	sr->GetInventory()->setFirstItem(0);
 	createInvEntities(sr);
+
+	startDialogue("PuzzleTaza1");
 }
 
 

@@ -22,7 +22,6 @@ int main(int ac, char **av) {
 	catch (...) {
 		std::cerr << "Caught and exception of unknown type ...";
 	}
-
 	delete Game::Instance();
 	return 0;
 }

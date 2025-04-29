@@ -6,6 +6,8 @@
 #include "ClickComponent.h"
 #include "TriggerComponent.h"
 #include "TiledAreaComponent.h"
+#include "SceneRoomTemplate.h"
+#include "Log.h"
 #include <list>
 #include "Area2D.h"
 #include "RectArea2D.h"
@@ -13,11 +15,12 @@
 #include "Image.h"
 #include "SceneRoomTemplate.h"
 #include "Log.h"
-DragPuzzleScene::DragPuzzleScene() : ScenePuzzleTemplate()
+DragPuzzleScene::DragPuzzleScene(TombPuzzleScene* _tomb) : ScenePuzzleTemplate()
 {
 	isStarted = false;
     auxtiledsize = Vector2D(64, 64);
     posMat = std::vector(9,std::vector<Vector2D>(8));
+    tomb = _tomb;
    
 }
 
@@ -270,6 +273,7 @@ void DragPuzzleScene::init(SceneRoomTemplate* sr)
          startDialogue("PuzzleLibros");
 
     }
+    createInvEntities(sr);
 }
 
 void DragPuzzleScene::unload()
@@ -324,7 +328,5 @@ bool DragPuzzleScene::Check()
 void DragPuzzleScene::Win()
 {
     entityManager->removeComponent<TriggerComponent>(_triggerObj);
-    solved = true;
-    // WIP active de respective part in room2 scene
-    std::cout << "WEIN";
+    tomb->setDragpuzzle(true);
 }
