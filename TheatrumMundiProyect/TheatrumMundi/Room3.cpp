@@ -75,6 +75,63 @@ void Room3Scene::endDialogue()
 void Room3Scene::_setRoomEvents()
 {
 	roomEvent.resize(event_size);
+
+#pragma region Events
+	roomEvent[InitialDialogue] = [this] {
+		startDialogue("SalaIntermedia3");
+		};
+	roomEvent[CorpseDialogue] = [this] {
+		entityManager->setActive(rmObjects.zoomCorpse, true);
+		entityManager->setActive(rmObjects.quitButton, true);
+		startDialogue("Cadaver");
+		};
+	roomEvent[CircleLockPuzzleScene] = [this] {
+
+		};
+	//roomEvent[ResolveCase] = [this] {
+	//	//IMPORTANT assign dialogue
+	//	startDialogue("SalaFinal2");
+	//	roomEvent[ResolveButtons]();
+	//	// cahnge image every 1 sec
+	//	SDL_AddTimer(1000, [](Uint32, void* param) -> Uint32 {
+	//		auto* self = static_cast<decltype(this)>(param);
+	//		if (!self) return 0;
+	//
+	//		// if stopped animation change to normal botton
+	//		if (self->stopAnimation) {
+	//			Image* img = self->entityManager->getComponent<Image>(self->rmObjects.readyToResolveBotton);
+	//			if (img) {
+	//				img->setTexture(&sdlutils().images().at("B5"));
+	//			}
+	//			return 0;  // stop timer
+	//		}
+	//
+	//		// alternate between images
+	//		static bool toggle = false;
+	//		toggle = !toggle;
+	//		const std::string& textureId = toggle ? "5.2" : "B5";
+	//
+	//		// chnage botton texture
+	//		if (auto* img = self->entityManager->getComponent<Image>(self->rmObjects.readyToResolveBotton)) {
+	//			img->setTexture(&sdlutils().images().at(textureId));
+	//		}
+	//
+	//		// call timer again
+	//		return 1000;
+	//		}, this);
+	//	};
+	roomEvent[ResolveButtons] = [this] {
+		entityManager->setActive(rmObjects.readyToResolveBotton, true);
+		};
+	roomEvent[GoodEnd] = [this] {
+		// WIP
+		Game::Instance()->getSceneManager()->popScene();
+		};
+	roomEvent[BadEnd] = [this] {
+		// WIP
+		Game::Instance()->getSceneManager()->popScene();
+		};
+#pragma endregion
 }
 
 void Room3Scene::_setRoomAudio()
@@ -107,8 +164,8 @@ void Room3Scene::_setRoomBackground()
 {
 #pragma region InitScroll
 
-	auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(22, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-	auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1200, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1160 - 1349, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 
 	auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
 	ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(ChangeRoom2));
@@ -121,11 +178,11 @@ void Room3Scene::_setRoomBackground()
 #pragma region Background
 
 	//LeftBackground
-	auto WaitingRoomBackground = entityFactory->CreateImageEntity(entityManager, "FondoSalaDeEspera", Vector2D(0, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::DEFAULT);
+	auto WaitingRoomBackground = entityFactory->CreateImageEntity(entityManager, "FondoSalaDeEspera", Vector2D(-1349 - 6, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::DEFAULT);
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(WaitingRoomBackground));
-
+	
 	//RightBackground
-	auto JugdedRoomBackground = entityFactory->CreateImageEntity(entityManager, "FondoJuzgado", Vector2D(1349, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+	auto JugdedRoomBackground = entityFactory->CreateImageEntity(entityManager, "FondoJuzgado", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(JugdedRoomBackground));
 
 
@@ -134,18 +191,15 @@ void Room3Scene::_setRoomBackground()
 #pragma region Scroll
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom2)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		if (/*isOpen &&*/ !rmObjects.backgroundScroll->isScrolling()) {
+		if (!rmObjects.backgroundScroll->isScrolling()) {
 			AudioManager::Instance().playSound(rmSounds.doorSound);
 			rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
 			scrolling = true;
 		}
-		//else if (!isOpen) {
-		//	roomEvent[DoorScene]();
-		//}
 		});
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom1)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll]() {
-		if (/*isOpen &&*/  !rmObjects.backgroundScroll->isScrolling()) {
+		if (!rmObjects.backgroundScroll->isScrolling()) {
 			AudioManager::Instance().playSound(rmSounds.doorSound);
 			rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
 			scrolling = true;
@@ -220,7 +274,7 @@ void Room3Scene::_setCaseResolution()
 				if (variantAct == 0) //if its the not correct variant one dies
 				{
 
-					Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
+					Game::Instance()->getDataManager()->SetCharacterDead(LUCY);
 					roomEvent[BadEnd]();
 
 				}

@@ -8,7 +8,14 @@ class Room3Scene : public SceneRoomTemplate {
 protected:
 	enum Room3Event {
 		InitialDialogue = 0,
-		DoorScene,
+		CorpseDialogue,
+		LightsOn,
+		CablesPuzzleScene,
+		CircleLockPuzzleScene,
+		BalancePuzzleScene,
+		ParrotScene,
+		MorseCodeScene,
+		ResolveCase,
 		ResolveButtons,
 		GoodEnd,
 		BadEnd,
@@ -22,8 +29,8 @@ public:
 	void unload() override;
 private:
 	std::string _eventToRead;
-	//bool isOpen;
 	bool stopAnimation = false;
+	bool LightsOn = false;
 	bool scrolling = false;
 
 	void endDialogue() override;
@@ -51,13 +58,10 @@ private:
 		ecs::entity_t logbtn = nullptr;
 		ecs::entity_t zoomCorpse = nullptr;
 		ecs::entity_t quitButton = nullptr; //Reference to the zoomed Quit Button
-		//ecs::entity_t zoomOrgan = nullptr; //Image of the zoomed Organ
-		//ecs::entity_t organ = nullptr; //Image of the organ
-		//ecs::entity_t rope = nullptr; // Image of the rope
-		//ecs::entity_t hook = nullptr; //Image of the hook
-		//ecs::entity_t secretEntryZoom = nullptr; //Image of the ZoomEntry
-		//ecs::entity_t secretEntryInTheZoomed = nullptr; //Image of the ZoomEntry
-		//
+		ecs::entity_t cablesPuzzle = nullptr; //Image of the cablesPuzzle
+		ecs::entity_t boxOfficeMorseCode = nullptr; //Image of the first boxOffice
+		ecs::entity_t boxOfficeCircleLock = nullptr; //Image of the second boxOffice
+		ecs::entity_t parrot = nullptr; //Image of the parrot
 		////Entities with special conditions (only appear with one specific event)
 		//std::pair<ecs::entity_t, bool>organMosaic; //Image of the entry to the organ room
 		//std::pair<ecs::entity_t, bool> mirror; //Image which reflects information
