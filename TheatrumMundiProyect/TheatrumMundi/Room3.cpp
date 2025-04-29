@@ -37,7 +37,7 @@ void Room3Scene::init()
 {
 	if (isStarted) return;
 	isStarted = true;
-	isOpen = false;
+	//isOpen = false;
 	finishallpuzzles = false;
 	_setRoomAudio();
 	_setGlobalFeatures();
@@ -121,12 +121,12 @@ void Room3Scene::_setRoomBackground()
 #pragma region Background
 
 	//LeftBackground
-	auto CementeryBackground = entityFactory->CreateImageEntity(entityManager, "FondoCementerio", Vector2D(0, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::DEFAULT);
-	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(CementeryBackground));
+	auto WaitingRoomBackground = entityFactory->CreateImageEntity(entityManager, "FondoSalaDeEspera", Vector2D(0, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::DEFAULT);
+	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(WaitingRoomBackground));
 
 	//RightBackground
-	auto MausoleumBackground = entityFactory->CreateImageEntity(entityManager, "FondoCripta", Vector2D(1349, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
-	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(MausoleumBackground));
+	auto JugdedRoomBackground = entityFactory->CreateImageEntity(entityManager, "FondoJuzgado", Vector2D(1349, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(JugdedRoomBackground));
 
 
 #pragma endregion
@@ -134,18 +134,18 @@ void Room3Scene::_setRoomBackground()
 #pragma region Scroll
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom2)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+		if (/*isOpen &&*/ !rmObjects.backgroundScroll->isScrolling()) {
 			AudioManager::Instance().playSound(rmSounds.doorSound);
 			rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
 			scrolling = true;
 		}
-		else if (!isOpen) {
-			roomEvent[DoorScene]();
-		}
+		//else if (!isOpen) {
+		//	roomEvent[DoorScene]();
+		//}
 		});
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom1)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll]() {
-		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+		if (/*isOpen &&*/  !rmObjects.backgroundScroll->isScrolling()) {
 			AudioManager::Instance().playSound(rmSounds.doorSound);
 			rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
 			scrolling = true;

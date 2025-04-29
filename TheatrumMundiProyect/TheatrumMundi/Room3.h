@@ -22,7 +22,7 @@ public:
 	void unload() override;
 private:
 	std::string _eventToRead;
-	bool isOpen;
+	//bool isOpen;
 	bool stopAnimation = false;
 	bool scrolling = false;
 

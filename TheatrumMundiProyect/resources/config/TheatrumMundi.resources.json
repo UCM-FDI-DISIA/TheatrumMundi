@@ -711,6 +711,14 @@
     {
       "id": "FondoVentana",
       "file": "../resources/images/temporales/Room2/FondoVentana.png"
+    },
+    {
+      "id": "FondoJuzgado",
+      "file": "../resources/images/temporales/Room3/Juzgado.jpeg"
+    },
+    {
+      "id": "FondoSalaDeEspera",
+      "file": "../resources/images/temporales/Room3/SalaDeEspera.jpg"
     }
 
   ],
