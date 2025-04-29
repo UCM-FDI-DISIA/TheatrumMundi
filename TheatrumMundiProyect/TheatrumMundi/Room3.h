@@ -10,6 +10,7 @@ protected:
 		InitialDialogue = 0,
 		CorpseDialogue,
 		LightsOn,
+		LightsOff,
 		CablesPuzzleScene,
 		CircleLockPuzzleScene,
 		BalancePuzzleScene,
@@ -30,7 +31,7 @@ public:
 private:
 	std::string _eventToRead;
 	bool stopAnimation = false;
-	bool LightsToOn = false;
+	bool LightsToOn = false; //To interact with determined entities
 	bool scrolling = false;
 
 	void endDialogue() override;
@@ -59,8 +60,8 @@ private:
 		ecs::entity_t zoomCorpse = nullptr;
 		ecs::entity_t quitButton = nullptr; //Reference to the zoomed Quit Button
 		ecs::entity_t cablesPuzzle = nullptr; //Image of the cablesPuzzle
-		ecs::entity_t boxOfficeMorseCode = nullptr; //Image of the first boxOffice
-		ecs::entity_t boxOfficeCircleLock = nullptr; //Image of the second boxOffice
+		ecs::entity_t boxOfficeMorseCodeB = nullptr; //Image of the first boxOffice
+		ecs::entity_t boxOfficeCircleLockP = nullptr; //Image of the second boxOffice
 		ecs::entity_t parrot = nullptr; //Image of the parrot
 		////Entities with special conditions (only appear with one specific event)
 		ecs::entity_t backgroundLeftIllumination = nullptr;

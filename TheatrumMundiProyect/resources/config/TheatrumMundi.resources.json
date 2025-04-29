@@ -214,72 +214,195 @@
     {
       "id": "Keisara",
       "file": "../resources/images/clock_horario.png"
-  },
-  {
-    "id": "Lucy",
-    "file": "../resources/images/boton_check.png"
-  },
-  {
-    "id": "Sol",
-    "file": "../resources/images/clock_minutero.png"
-  },
-  {
-    "id": "calendear",
-    "file": "../resources/images/clock_minutero.png"
-  },
-  {
-    "id": "calendearZoom",
-    "file": "../resources/images/boton_check.png"
-  },
-  {
-    "id": "mobile",
-    "file": "../resources/images/clock_minutero.png"
-  },
-  {
-    "id": "mobileZoom",
-    "file": "../resources/images/boton_check.png"
-  },
-    { "id" : "prueba", "file" : "../resources/images/socrates.png" },
-    { "id" : "init", "file" : "../resources/images/start.jpg" },
-    { "id" : "exit", "file" : "../resources/images/exit.png" },
-    { "id": "clockMinButton","file" : "../resources/images/boton_minutero.png"},
-    { "id" : "module", "file" : "../resources/images/Finales/module.png" },
-    { "id" : "pipe1", "file" : "../resources/images/Finales/pipe1.png" },
-    { "id" : "pipe2", "file" : "../resources/images/Finales/pipe2.png" },
-    { "id" : "pathLNoWater", "file" : "../resources/images/Finales/pathLNoWater.png" },
-    { "id" : "pathLWater", "file" : "../resources/images/Finales/pathLWater.png" },
-    { "id" : "pathNoWater", "file" : "../resources/images/Finales/pathNoWater.png" },
-    { "id" : "pathWater", "file" : "../resources/images/Finales/pathWater.png" },
-    { "id" : "plantilla", "file" : "../resources/images/plantilla.png" },
-    { "id" : "cube", "file" : "../resources/images/cubo.png" },
-    { "id" : "noPosible", "file" : "../resources/images/noPosible.png" },
-    { "id" : "noResolve", "file" : "../resources/images/noPosible.png" },
-    { "id" : "posible", "file" : "../resources/images/posible.png" },
-    { "id" : "resolve", "file" : "../resources/images/resolve.png" },
-    { "id" : "cubeWithWater", "file" : "../resources/images/Finales/MontaplatosCuboAgua.png" },
-    { "id" : "cubeWithoutWater", "file" : "../resources/images/Finales/MontaplatosCuboSinAgua.png" },
-    { "id" : "fullRope", "file" : "../resources/images/Finales/MontaplatosSinNada.png" },
-    { "id" : "Pared", "file" : "../resources/images/Finales/Pared.png" },
-    { "id" : "rope", "file" : "../resources/images/Finales/Cuerda.png" },
-    { "id" : "minutero", "file" : "../resources/images/Finales/minutero.png" },
-    { "id" : "horaria", "file" : "../resources/images/Finales/horaria.png" },
-    { "id" : "etiquetaV1", "file" : "../resources/images/Finales/etiquetaV1.png" },
-    { "id" : "etiquetaV2", "file" : "../resources/images/Finales/etiquetaV2.png" },
-    { "id" : "estanteria2", "file" : "../resources/images/Finales/EstanteriaFondo2.PNG" },
-    { "id" : "frascoV1", "file" : "../resources/images/Finales/frascoV1.png" },
-    { "id" : "frascoV2", "file" : "../resources/images/Finales/frascoV2.PNG" },
-    { "id" : "RelojFondo1", "file" : "../resources/images/Finales/RelojFondo1.png" },
-    { "id" : "FondoReloj2", "file" : "../resources/images/Finales/RelojFondo2.png" },
-    { "id" : "BotonMinutero", "file" : "../resources/images/Finales/BotonMinutero.PNG" },
-    { "id" : "BotonHoraria", "file" : "../resources/images/Finales/BotonHoraria.PNG" },
-    { "id" : "BotonComprobarReloj", "file" : "../resources/images/Finales/BotonComprobarReloj.PNG" },
-    { "id" : "no", "file" : "../resources/images/Finales/noButton.png" },
-    { "id" : "yes", "file" : "../resources/images/Finales/yesButton.png" },
-    { "id" : "1stQuestion", "file" : "../resources/images/Finales/1stQuestionText.png" },
-    { "id" : "2ndQuestion", "file" : "../resources/images/Finales/2ndQuestionText.png" },
-    { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
-    { "id" : "continuar", "file" : "../resources/images/Finales/continuarBackground.png" },
-    { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
+    },
+    {
+      "id": "Lucy",
+      "file": "../resources/images/boton_check.png"
+    },
+    {
+      "id": "Sol",
+      "file": "../resources/images/clock_minutero.png"
+    },
+    {
+      "id": "calendear",
+      "file": "../resources/images/clock_minutero.png"
+    },
+    {
+      "id": "calendearZoom",
+      "file": "../resources/images/boton_check.png"
+    },
+    {
+      "id": "mobile",
+      "file": "../resources/images/clock_minutero.png"
+    },
+    {
+      "id": "mobileZoom",
+      "file": "../resources/images/boton_check.png"
+    },
+    {
+      "id": "prueba",
+      "file": "../resources/images/socrates.png"
+    },
+    {
+      "id": "init",
+      "file": "../resources/images/start.jpg"
+    },
+    {
+      "id": "exit",
+      "file": "../resources/images/exit.png"
+    },
+    {
+      "id": "clockMinButton",
+      "file": "../resources/images/boton_minutero.png"
+    },
+    {
+      "id": "module",
+      "file": "../resources/images/Finales/module.png"
+    },
+    {
+      "id": "pipe1",
+      "file": "../resources/images/Finales/pipe1.png"
+    },
+    {
+      "id": "pipe2",
+      "file": "../resources/images/Finales/pipe2.png"
+    },
+    {
+      "id": "pathLNoWater",
+      "file": "../resources/images/Finales/pathLNoWater.png"
+    },
+    {
+      "id": "pathLWater",
+      "file": "../resources/images/Finales/pathLWater.png"
+    },
+    {
+      "id": "pathNoWater",
+      "file": "../resources/images/Finales/pathNoWater.png"
+    },
+    {
+      "id": "pathWater",
+      "file": "../resources/images/Finales/pathWater.png"
+    },
+    {
+      "id": "plantilla",
+      "file": "../resources/images/plantilla.png"
+    },
+    {
+      "id": "cube",
+      "file": "../resources/images/cubo.png"
+    },
+    {
+      "id": "noPosible",
+      "file": "../resources/images/noPosible.png"
+    },
+    {
+      "id": "noResolve",
+      "file": "../resources/images/noPosible.png"
+    },
+    {
+      "id": "posible",
+      "file": "../resources/images/posible.png"
+    },
+    {
+      "id": "resolve",
+      "file": "../resources/images/resolve.png"
+    },
+    {
+      "id": "cubeWithWater",
+      "file": "../resources/images/Finales/MontaplatosCuboAgua.png"
+    },
+    {
+      "id": "cubeWithoutWater",
+      "file": "../resources/images/Finales/MontaplatosCuboSinAgua.png"
+    },
+    {
+      "id": "fullRope",
+      "file": "../resources/images/Finales/MontaplatosSinNada.png"
+    },
+    {
+      "id": "Pared",
+      "file": "../resources/images/Finales/Pared.png"
+    },
+    {
+      "id": "rope",
+      "file": "../resources/images/Finales/Cuerda.png"
+    },
+    {
+      "id": "minutero",
+      "file": "../resources/images/Finales/minutero.png"
+    },
+    {
+      "id": "horaria",
+      "file": "../resources/images/Finales/horaria.png"
+    },
+    {
+      "id": "etiquetaV1",
+      "file": "../resources/images/Finales/etiquetaV1.png"
+    },
+    {
+      "id": "etiquetaV2",
+      "file": "../resources/images/Finales/etiquetaV2.png"
+    },
+    {
+      "id": "estanteria2",
+      "file": "../resources/images/Finales/EstanteriaFondo2.PNG"
+    },
+    {
+      "id": "frascoV1",
+      "file": "../resources/images/Finales/frascoV1.png"
+    },
+    {
+      "id": "frascoV2",
+      "file": "../resources/images/Finales/frascoV2.PNG"
+    },
+    {
+      "id": "RelojFondo1",
+      "file": "../resources/images/Finales/RelojFondo1.png"
+    },
+    {
+      "id": "FondoReloj2",
+      "file": "../resources/images/Finales/RelojFondo2.png"
+    },
+    {
+      "id": "BotonMinutero",
+      "file": "../resources/images/Finales/BotonMinutero.PNG"
+    },
+    {
+      "id": "BotonHoraria",
+      "file": "../resources/images/Finales/BotonHoraria.PNG"
+    },
+    {
+      "id": "BotonComprobarReloj",
+      "file": "../resources/images/Finales/BotonComprobarReloj.PNG"
+    },
+    {
+      "id": "no",
+      "file": "../resources/images/Finales/noButton.png"
+    },
+    {
+      "id": "yes",
+      "file": "../resources/images/Finales/yesButton.png"
+    },
+    {
+      "id": "1stQuestion",
+      "file": "../resources/images/Finales/1stQuestionText.png"
+    },
+    {
+      "id": "2ndQuestion",
+      "file": "../resources/images/Finales/2ndQuestionText.png"
+    },
+    {
+      "id": "FondoNegro",
+      "file": "../resources/images/Finales/FondoNegro.png"
+    },
+    {
+      "id": "continuar",
+      "file": "../resources/images/Finales/continuarBackground.png"
+    },
+    {
+      "id": "5.2",
+      "file": "../resources/images/Finales/5.2.png"
+    },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"
@@ -533,32 +656,32 @@
       "file": "../resources/images/temporales/piezadeZ.png"
     },
     {
-        "id": "Hanni",
-        "file": "../resources/images/asesinoDeHanni.png"
+      "id": "Hanni",
+      "file": "../resources/images/asesinoDeHanni.png"
     },
     {
-        "id": "TutorialButtonTemp",
-        "file": "../resources/images/temporales/RectangleTutorialButton.png"
+      "id": "TutorialButtonTemp",
+      "file": "../resources/images/temporales/RectangleTutorialButton.png"
     },
     {
-        "id": "NewGameLocked",
-        "file": "../resources/images/temporales/GameLocked.png"
+      "id": "NewGameLocked",
+      "file": "../resources/images/temporales/GameLocked.png"
     },
     {
-        "id": "teleSinAntena",
-        "file": "../resources/images/Finales/TutorialTele1.png"
+      "id": "teleSinAntena",
+      "file": "../resources/images/Finales/TutorialTele1.png"
     },
     {
-        "id": "teleConAntena",
-        "file": "../resources/images/Finales/TutorialTele2.png"
+      "id": "teleConAntena",
+      "file": "../resources/images/Finales/TutorialTele2.png"
     },
     {
       "id": "antena",
-        "file": "../resources/images/Finales/TutorialAntenas.png"
+      "file": "../resources/images/Finales/TutorialAntenas.png"
     },
     {
-        "id": "TutorialButton",
-        "file": "../resources/images/Finales/tutorialButton.png"
+      "id": "TutorialButton",
+      "file": "../resources/images/Finales/tutorialButton.png"
     },
     {
       "id": "TutorialZoom1",
@@ -597,8 +720,8 @@
       "file": "../resources/images/Finales/TutorialPuerta.png"
     },
     {
-        "id": "botonNumero",
-        "file": "../resources/images/Finales/button3711.png"
+      "id": "botonNumero",
+      "file": "../resources/images/Finales/button3711.png"
     },
     {
       "id": "Cuervo",
@@ -727,6 +850,46 @@
     {
       "id": "FondoSalaDeEsperaOscuro",
       "file": "../resources/images/temporales/Room3/SalaDeEsperaOscuro.png"
+    },
+    {
+      "id": "Cables",
+      "file": "../resources/images/temporales/Room3/cables.png"
+    },
+    {
+      "id": "CablesOscuro",
+      "file": "../resources/images/temporales/Room3/cablesOscuro.png"
+    },
+    {
+      "id": "Cadaver3",
+      "file": "../resources/images/temporales/Room3/Cadaver.png"
+    },
+    {
+      "id": "Cadaver3Oscuro",
+      "file": "../resources/images/temporales/Room3/CadaverOscuro.png"
+    },
+    {
+      "id": "Parrot",
+      "file": "../resources/images/temporales/Room3/parrot.png"
+    },
+    {
+      "id": "ParrotOscuro",
+      "file": "../resources/images/temporales/Room3/parrotOscuro.png"
+    },
+    {
+      "id": "TaquillaAzul",
+      "file": "../resources/images/temporales/Room3/Taquilla.png"
+    },
+    {
+      "id": "TaquillaAzulOscuro",
+      "file": "../resources/images/temporales/Room3/TaquillaOscura.png"
+    },
+    {
+      "id": "TaquillaMorada",
+      "file": "../resources/images/temporales/Room3/Taquilla2.png"
+    },
+    {
+      "id": "TaquillaMoradaOscuro",
+      "file": "../resources/images/temporales/Room3/Taquilla2Oscura.png"
     }
 
   ],
