@@ -284,6 +284,8 @@ void MusicPuzzleScene::addNoteToComb(Notes pressedNote)
 
 void MusicPuzzleScene::changePhase()
 {
+    //1st: plays animation. When its finished process can continue
+   
     //play animation
     playAnimation(true);
 
@@ -317,7 +319,7 @@ void MusicPuzzleScene::changePhase()
     cout << endl;
 }
 
-void MusicPuzzleScene::playAnimation(bool correct)
+bool MusicPuzzleScene::playAnimation(bool correct)
 {
     //no buttons can be pressed, the current comb plays on audio and each note appears on screen
     //-->insert animation
@@ -367,7 +369,6 @@ void MusicPuzzleScene::updateDisplayedNotes()
 
         auto noteIm = entityManager->getComponent<Image>(displayedNotes[i]);
         
-
         if (_currentComb[i] == Notes::DO)
         {
             texture = "Do";

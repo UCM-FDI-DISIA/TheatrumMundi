@@ -41,18 +41,18 @@ private:
 	entity_t musicalScore; //visual entity that changes with each phase
 	entity_t mirror; //visual entity that changes with each phase
 
-	std::vector<entity_t> displayedNotes;
+	std::vector<entity_t> displayedNotes; //entities's vector of displayed musical notes
 	
 	bool checkPhaseCombination(); //checks if current combination is correct
 	void cleanCombination(); //cleans combinations vectors
 	void addNoteToComb(Notes a); //deals with all possibilities when a note is added to the comb
 	void changePhase(); //deals with all changes when a phase is changed
-	void playAnimation(bool correct); //plays correct or incorrect animation
+	bool playAnimation(bool correct); //plays correct or incorrect animation
 
 	void createPianoButtons(); //creates all sceme notesButtons
 	void updateMusicImages(); //updates musical score and mirror
 
-	void updateDisplayedNotes();
-	void cleanDisplayedNotes();
-	void initializeDisplayedNotes();
+	void updateDisplayedNotes(); //updates displayed musical notes based on buttons clicked
+	void cleanDisplayedNotes(); //hides all displayed musical notes
+	void initializeDisplayedNotes(); //initialize all displayed musical notes entities
 };
