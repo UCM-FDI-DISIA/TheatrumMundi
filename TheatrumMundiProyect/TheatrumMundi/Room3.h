@@ -63,6 +63,9 @@ private:
 		ecs::entity_t boxOfficeMorseCodeB = nullptr; //Image of the first boxOffice
 		ecs::entity_t boxOfficeCircleLockP = nullptr; //Image of the second boxOffice
 		ecs::entity_t parrot = nullptr; //Image of the parrot
+		ecs::entity_t balance = nullptr; //Image of the balance
+		ecs::entity_t safeBox = nullptr; //Image of the safeBox
+
 		////Entities with special conditions (only appear with one specific event)
 		ecs::entity_t backgroundLeftIllumination = nullptr;
 		ecs::entity_t backgroundRightIllumination = nullptr;

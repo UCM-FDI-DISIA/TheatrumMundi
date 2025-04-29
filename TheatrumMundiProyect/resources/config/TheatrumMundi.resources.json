@@ -890,6 +890,22 @@
     {
       "id": "TaquillaMoradaOscuro",
       "file": "../resources/images/temporales/Room3/Taquilla2Oscura.png"
+    },
+    {
+      "id": "Balanza",
+      "file": "../resources/images/temporales/Room3/balanza.png"
+    },
+    {
+      "id": "BalanzaOscuro",
+      "file": "../resources/images/temporales/Room3/balanzaOscura.png"
+    },
+    {
+      "id": "CajaFuerte",
+      "file": "../resources/images/temporales/Room3/CajaFuerte.png"
+    },
+    {
+      "id": "CajaFuerteOscuro",
+      "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
     }
 
   ],

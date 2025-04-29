@@ -94,6 +94,8 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.cablesPuzzle)->setTexture(&sdlutils().images().at("Cables"));
 		entityManager->getComponent<Image>(rmObjects.parrot)->setTexture(&sdlutils().images().at("Parrot"));
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3"));
+		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("Balanza"));
+		entityManager->getComponent<Image>(rmObjects.safeBox)->setTexture(&sdlutils().images().at("CajaFuerte"));
 		};
 	roomEvent[LightsOff] = [this] {
 		LightsToOn = false; //To not interact with determined entities
@@ -104,6 +106,8 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.cablesPuzzle)->setTexture(&sdlutils().images().at("CablesOscuro"));
 		entityManager->getComponent<Image>(rmObjects.parrot)->setTexture(&sdlutils().images().at("ParrotOscuro"));
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3Oscuro"));
+		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("BalanzaOscuro"));
+		entityManager->getComponent<Image>(rmObjects.safeBox)->setTexture(&sdlutils().images().at("CajaFuerteOscuro"));
 		};
 	//roomEvent[ResolveCase] = [this] {
 	//	//IMPORTANT assign dialogue
@@ -200,9 +204,6 @@ void Room3Scene::_setRoomBackground()
 	//RightBackground
 	rmObjects.backgroundRightIllumination = entityFactory->CreateImageEntity(entityManager, "FondoJuzgadoOscuro", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.backgroundRightIllumination));
-
-	//INITIAL EVENT OF LIGHTS
-	//roomEvent[LightsOff]();
 
 #pragma endregion
 
@@ -389,7 +390,7 @@ void Room3Scene::_setInteractuables()
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.parrot));
 
 	//CORPSE
-	rmObjects.zoomCorpse = entityFactory->CreateInteractableEntity(entityManager, "Cadaver3Oscuro", EntityFactory::RECTAREA, Vector2D(800, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	rmObjects.zoomCorpse = entityFactory->CreateInteractableEntity(entityManager, "Cadaver3Oscuro", EntityFactory::RECTAREA, Vector2D(800, 400), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.zoomCorpse)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		//roomEvent[LightsOff]();
 		});
@@ -401,6 +402,20 @@ void Room3Scene::_setInteractuables()
 		//roomEvent[LightsOff]();
 		});
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.cablesPuzzle));
+
+	//BALANCE
+	rmObjects.balance = entityFactory->CreateInteractableEntity(entityManager, "BalanzaOscuro", EntityFactory::RECTAREA, Vector2D(800, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	entityManager->getComponent<ClickComponent>(rmObjects.balance)->connect(ClickComponent::JUST_CLICKED, [this]() {
+		//roomEvent[LightsOff]();
+		});
+	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.balance));
+
+	//SAFEBOX
+	rmObjects.safeBox = entityFactory->CreateInteractableEntity(entityManager, "CajaFuerteOscuro", EntityFactory::RECTAREA, Vector2D(1200, 300), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	entityManager->getComponent<ClickComponent>(rmObjects.safeBox)->connect(ClickComponent::JUST_CLICKED, [this]() {
+		//roomEvent[LightsOff]();
+		});
+	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.safeBox));
 }
 
 void Room3Scene::_setDialog()
