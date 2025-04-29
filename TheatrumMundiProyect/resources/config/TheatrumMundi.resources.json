@@ -714,11 +714,19 @@
     },
     {
       "id": "FondoJuzgado",
-      "file": "../resources/images/temporales/Room3/Juzgado.jpeg"
+      "file": "../resources/images/temporales/Room3/Juzgado.png"
     },
     {
       "id": "FondoSalaDeEspera",
-      "file": "../resources/images/temporales/Room3/SalaDeEspera.jpg"
+      "file": "../resources/images/temporales/Room3/SalaDeEspera.png"
+    },
+    {
+      "id": "FondoJuzgadoOscuro",
+      "file": "../resources/images/temporales/Room3/JuzgadoOscuro.png"
+    },
+    {
+      "id": "FondoSalaDeEsperaOscuro",
+      "file": "../resources/images/temporales/Room3/SalaDeEsperaOscuro.png"
     }
 
   ],

@@ -30,7 +30,7 @@ public:
 private:
 	std::string _eventToRead;
 	bool stopAnimation = false;
-	bool LightsOn = false;
+	bool LightsToOn = false;
 	bool scrolling = false;
 
 	void endDialogue() override;
@@ -63,6 +63,8 @@ private:
 		ecs::entity_t boxOfficeCircleLock = nullptr; //Image of the second boxOffice
 		ecs::entity_t parrot = nullptr; //Image of the parrot
 		////Entities with special conditions (only appear with one specific event)
+		ecs::entity_t backgroundLeftIllumination = nullptr;
+		ecs::entity_t backgroundRightIllumination = nullptr;
 		//std::pair<ecs::entity_t, bool>organMosaic; //Image of the entry to the organ room
 		//std::pair<ecs::entity_t, bool> mirror; //Image which reflects information
 		//std::pair<ecs::entity_t, bool> secretEntry; //Image reflected

@@ -85,8 +85,9 @@ void Room3Scene::_setRoomEvents()
 		entityManager->setActive(rmObjects.quitButton, true);
 		startDialogue("Cadaver");
 		};
-	roomEvent[CircleLockPuzzleScene] = [this] {
-
+	roomEvent[LightsOn] = [this] {
+		entityManager->getComponent<Image>(rmObjects.backgroundLeftIllumination)->setTexture(&sdlutils().images().at("FondoSalaDeEspera"));
+		entityManager->getComponent<Image>(rmObjects.backgroundRightIllumination)->setTexture(&sdlutils().images().at("FondoJuzgado"));
 		};
 	//roomEvent[ResolveCase] = [this] {
 	//	//IMPORTANT assign dialogue
@@ -178,12 +179,12 @@ void Room3Scene::_setRoomBackground()
 #pragma region Background
 
 	//LeftBackground
-	auto WaitingRoomBackground = entityFactory->CreateImageEntity(entityManager, "FondoSalaDeEspera", Vector2D(-1349 - 6, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::DEFAULT);
-	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(WaitingRoomBackground));
+	rmObjects.backgroundLeftIllumination = entityFactory->CreateImageEntity(entityManager, "FondoSalaDeEsperaOscuro", Vector2D(-1349 - 6, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::DEFAULT);
+	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.backgroundLeftIllumination));
 	
 	//RightBackground
-	auto JugdedRoomBackground = entityFactory->CreateImageEntity(entityManager, "FondoJuzgado", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
-	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(JugdedRoomBackground));
+	rmObjects.backgroundRightIllumination = entityFactory->CreateImageEntity(entityManager, "FondoJuzgadoOscuro", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.backgroundRightIllumination));
 
 
 #pragma endregion
@@ -349,6 +350,11 @@ void Room3Scene::_setCaseResolution()
 
 void Room3Scene::_setInteractuables()
 {
+	auto buttonAux = entityFactory->CreateInteractableEntity(entityManager,"patrisio",EntityFactory::RECTAREA,Vector2D(0,0),Vector2D(0,0),500,500,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::DEFAULT);
+	ClickComponent* buttonAuxClick = entityManager->getComponent<ClickComponent>(buttonAux);
+	buttonAuxClick->connect(ClickComponent::JUST_CLICKED, [this]() {
+		roomEvent[LightsOn]();
+		});
 }
 
 void Room3Scene::_setDialog()
