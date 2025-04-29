@@ -1,5 +1,6 @@
 #pragma once
 #include "ScenePuzzleTemplate.h"
+#include "../src/sdlutils/VirtualTimer.h"
 
 class array;
 class vector;
@@ -14,6 +15,7 @@ public:
 	~MusicPuzzleScene();
 	void init(SceneRoomTemplate* sr) override;
 	void unload() override;
+	void refresh() override;
 	bool Check() override;
 	void Win() override;
 
@@ -42,6 +44,12 @@ private:
 	entity_t mirror; //visual entity that changes with each phase
 
 	std::vector<entity_t> displayedNotes; //entities's vector of displayed musical notes
+
+	bool _isAnimating = false;
+	bool _animationType;
+	int _animationDuration = 1000;
+	VirtualTimer frameTimer;
+
 	
 	bool checkPhaseCombination(); //checks if current combination is correct
 	void cleanCombination(); //cleans combinations vectors

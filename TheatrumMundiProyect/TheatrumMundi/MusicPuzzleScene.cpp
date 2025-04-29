@@ -188,6 +188,39 @@ void MusicPuzzleScene::unload()
 {
 }
 
+void MusicPuzzleScene::refresh()
+{
+    if (_isAnimating)
+    {
+        //Uint32 currentTime = sdlutils().virtualTimer().currRealTime();
+        if (frameTimer.currRealTime() > _animationDuration)
+        {
+            _isAnimating = false;
+
+            // Reactive all scene buttons
+            frameTimer.resetTime();
+
+            //recolor displayed notes
+            for (auto a : displayedNotes)
+            {
+                auto aIm = entityManager->getComponent<Image>(a);
+                aIm->setAlpha(250);
+            }
+
+            if (_animationType) changePhase();
+            else
+            {
+                cleanCombination();
+                cleanDisplayedNotes();
+            }
+        }
+        else
+        {
+            return;
+        }
+    }
+}
+
 bool MusicPuzzleScene::Check()
 {
     if (_phase == _correctCombinations.size() - 1)
@@ -258,7 +291,7 @@ void MusicPuzzleScene::addNoteToComb(Notes pressedNote)
         {
             if (!Check())
             {
-                changePhase();
+                playAnimation(true);
             }
         }
         else //wrong combination
@@ -267,28 +300,22 @@ void MusicPuzzleScene::addNoteToComb(Notes pressedNote)
             playAnimation(false);
 
             //clean current comb
-            cleanCombination();
+            //cleanCombination();
 
-            //debug currentComb
+#ifdef DEBUG
             cout << "CURRENT COMB:";
             for (auto a : _currentComb)
             {
                 cout << a << " ";
             }
             cout << endl;
-
-            //reset image musical score if needed
+#endif // DEBUG
         }
     }
 }
 
 void MusicPuzzleScene::changePhase()
 {
-    //1st: plays animation. When its finished process can continue
-   
-    //play animation
-    playAnimation(true);
-
     //clean currentComb
     cleanCombination();
 
@@ -317,14 +344,28 @@ void MusicPuzzleScene::changePhase()
         cout << a << " ";
     }
     cout << endl;
+    
 }
 
 bool MusicPuzzleScene::playAnimation(bool correct)
 {
-    //no buttons can be pressed, the current comb plays on audio and each note appears on screen
-    //-->insert animation
+    if (_isAnimating) return false;
 
+    _animationType = correct;
 
+    frameTimer.resetTime();
+    _isAnimating = true;
+    
+    //dissable all scene buttons
+
+    //notes will change its colour (texture). Temporarly changes their alpha
+    for (auto a : displayedNotes)
+    {
+        auto aIm = entityManager->getComponent<Image>(a);
+        aIm->setAlpha(100);
+    }
+
+    
     if (correct)
     {
         //if currentComb was correct a joyful sound is played after
@@ -335,6 +376,10 @@ bool MusicPuzzleScene::playAnimation(bool correct)
         //if currentComb was incorrect a bad sound is played after
         //bad sound
     }
+
+    return true;
+
+    
 }
 
 void MusicPuzzleScene::updateMusicImages()
