@@ -38,6 +38,11 @@ private:
 	std::vector<Notes> _currentComb; //players combination
 	int _phase; //current phase player is in
 
+	entity_t musicalScore; //visual entity that changes with each phase
+	entity_t mirror; //visual entity that changes with each phase
+
+	std::vector<entity_t> displayedNotes;
+	
 	bool checkPhaseCombination(); //checks if current combination is correct
 	void cleanCombination(); //cleans combinations vectors
 	void addNoteToComb(Notes a); //deals with all possibilities when a note is added to the comb
@@ -45,5 +50,9 @@ private:
 	void playAnimation(bool correct); //plays correct or incorrect animation
 
 	void createPianoButtons(); //creates all sceme notesButtons
+	void updateMusicImages(); //updates musical score and mirror
 
+	void updateDisplayedNotes();
+	void cleanDisplayedNotes();
+	void initializeDisplayedNotes();
 };

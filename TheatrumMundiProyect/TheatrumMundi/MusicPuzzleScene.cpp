@@ -69,21 +69,23 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
     {
         isStarted = true;
         //Register scene in dialogue manager
-        dialogueManager->setScene(this);
+        //dialogueManager->setScene(this);
 
         //Puzzle Scene
         room = sr;
 
         //background + musical notes helpful guide (visual)
-        //auto StudyBackground = entityFactory->CreateImageEntity(entityManager, "ShelfBackground1", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 
+        //musicalScore + mirror (changes in each phase)
+        musicalScore = entityFactory->CreateImageEntity(entityManager, "fase1Partitura", Vector2D(800, 0), Vector2D(0, 0), 1349 / 3, 748 / 3, 0, ecs::grp::DEFAULT);
+        mirror = entityFactory->CreateImageEntity(entityManager, "fase1Espejo", Vector2D(0, 300), Vector2D(0, 0), 1349 / 3, 748 / 3, 0, ecs::grp::DEFAULT);
+
+        //displayed notes
+        initializeDisplayedNotes();
+        //cleanDisplayedNotes();
 
         //piano buttons
         createPianoButtons();
-
-        //musical score (changes in each round)
-
-        //mirror (changes in each round)
 
 
 #pragma region UI
@@ -171,14 +173,14 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
             });
 
         //Log
-        dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-        Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
+        //dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+       // Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
         //startDialogue("Puerta");
 
 #pragma endregion
 
     }
-    createInvEntities(sr);
+    //createInvEntities(sr);
 }
 
 
@@ -292,7 +294,10 @@ void MusicPuzzleScene::changePhase()
     _phase++;
 
     //change musical score & mirror
+    updateMusicImages();
 
+    //reset musical notes
+    cleanDisplayedNotes();
 
     //debugs
     cout << "PHASE: " << _phase << endl;
@@ -330,6 +335,115 @@ void MusicPuzzleScene::playAnimation(bool correct)
     }
 }
 
+void MusicPuzzleScene::updateMusicImages()
+{
+    auto musicalScoreIm = entityManager->getComponent<Image>(musicalScore);
+    auto mirrorIm = entityManager->getComponent<Image>(mirror);
+
+    switch (_phase)
+    {
+    case 0:
+        musicalScoreIm->setTexture(&sdlutils().images().at("fase1Partitura"));
+        mirrorIm->setTexture(&sdlutils().images().at("fase1Espejo"));
+        break;
+    case 1:
+        musicalScoreIm->setTexture(&sdlutils().images().at("fase2Partitura"));
+        mirrorIm->setTexture(&sdlutils().images().at("fase2Espejo"));
+        break;
+    case 2:
+        musicalScoreIm->setTexture(&sdlutils().images().at("fase3Partitura"));
+        mirrorIm->setTexture(&sdlutils().images().at("fase3Espejo"));
+        break;
+    default:
+        break;
+    }
+}
+
+void MusicPuzzleScene::updateDisplayedNotes()
+{
+    for (size_t i = 0; i < _currentComb.size(); ++i)
+    {
+        string texture;
+
+        if (_currentComb[i] == Notes::DO)
+        {
+            texture = "Do";
+        }
+        else if (_currentComb[i] == Notes::SI)
+        {
+            texture = "Si";
+            //cambiar posicion
+        }
+        else
+        {
+            texture = "NotaBasica";
+        }
+        
+        auto noteIm = entityManager->getComponent<Image>(displayedNotes[i]);
+        noteIm->setTexture(&sdlutils().images().at(texture));
+
+        entityManager->setActive(displayedNotes[i], true);
+
+        /*
+        // Crea la imagen en esa posición
+        auto musicalNotes = entityFactory->CreateImageEntity(
+            entityManager,
+            texture,
+            pos,
+            Vector2D(0, 0),     // velocidad inicial 0
+            1349 / 3,           // ancho de la imagen
+            748 / 3,            // alto de la imagen
+            0,                  // rotación
+            ecs::grp::DEFAULT   // grupo
+        );*/
+
+    }
+
+    // Ocultar notas sobrantes si _currentComb ha disminuido
+    for (size_t i = _currentComb.size(); i < displayedNotes.size(); ++i)
+    {
+        entityManager->setActive(displayedNotes[i], false);
+    }
+}
+
+void MusicPuzzleScene::cleanDisplayedNotes()
+{
+    //hide displayed notes vector
+    for (auto a : displayedNotes)
+    {
+        entityManager->setActive(a, false);
+    }
+}
+
+void MusicPuzzleScene::initializeDisplayedNotes()
+{
+    // Suponemos que currentComb es el vector que contiene la combinación musical actual
+    const int spacingX = 100; // espacio entre cada imagen en el eje X
+    const int baseX = 100;    // posición inicial X
+    const int posY = 300;     // posición fija en Y
+
+    for (size_t i = 0; i < Notes::SI + 1; ++i)
+    {
+        // Calcula la posición horizontal
+        Vector2D pos(baseX + i * spacingX, posY);
+        
+        // Crea la imagen en esa posición
+        auto musicalNotes = entityFactory->CreateImageEntity(
+            entityManager,
+            "NotaBasica",
+            pos,
+            Vector2D(0, 0),     // velocidad inicial 0
+            1349 / 3,           // ancho de la imagen
+            748 / 3,            // alto de la imagen
+            0,                  // rotación
+            ecs::grp::DEFAULT   // grupo
+        );
+
+        // Puedes almacenar el entityID si luego necesitas manipularlos
+        displayedNotes.push_back(musicalNotes);
+    }
+}
+
 void MusicPuzzleScene::createPianoButtons()
 {
     auto buttDo = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
@@ -347,6 +461,7 @@ void MusicPuzzleScene::createPianoButtons()
         if (!solved)
         {
             addNoteToComb(DO);
+            updateDisplayedNotes();
         }        
         });
 
@@ -356,6 +471,7 @@ void MusicPuzzleScene::createPianoButtons()
         if (!solved)
         {
             addNoteToComb(RE);
+            updateDisplayedNotes();
         }
         });
 
@@ -365,6 +481,7 @@ void MusicPuzzleScene::createPianoButtons()
         if (!solved)
         {
             addNoteToComb(MI);
+            updateDisplayedNotes();
         }
         });
 
@@ -374,6 +491,7 @@ void MusicPuzzleScene::createPianoButtons()
         if (!solved)
         {
             addNoteToComb(FA);
+            updateDisplayedNotes();
         }
         });
 
@@ -383,6 +501,7 @@ void MusicPuzzleScene::createPianoButtons()
         if (!solved)
         {
             addNoteToComb(SOL);
+            updateDisplayedNotes();
         }
         });
 
@@ -392,6 +511,7 @@ void MusicPuzzleScene::createPianoButtons()
         if (!solved)
         {
             addNoteToComb(LA);
+            updateDisplayedNotes();
         }
         });
 
@@ -401,6 +521,7 @@ void MusicPuzzleScene::createPianoButtons()
         if (!solved)
         {
             addNoteToComb(SI);
+            updateDisplayedNotes();
         }
         });
 }
