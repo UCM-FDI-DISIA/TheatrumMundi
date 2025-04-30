@@ -51,7 +51,7 @@ protected:
 		/// <param name="dir"></param>
 		void scrollInventory(int dir); //scroll room1
 		void HideAllInvetoryItems(const ecs::entity_t& invBack, const ecs::entity_t& UpButton, const ecs::entity_t& DownButt); //Hide the inventory things
-		void createDescription();
+		void createDescription(ecs::entity_t hint, Hint* desc);
 		void reposAllInventoryItems();
 		void unload() override;
 

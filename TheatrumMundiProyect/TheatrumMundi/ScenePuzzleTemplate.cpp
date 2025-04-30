@@ -194,6 +194,8 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 		sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
 
+		auto srHint = sr->GetInventory()->hints.back();
+		auto srItem = sr->GetInventory()->getItems().back();
 		//description text entity
 		entityManager->setActive(textDescriptionEnt, false);
 
@@ -246,7 +248,7 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 			//hide item description entities
 			entityManager->setActive(textDescriptionEnt, false);
 		});
-		sr->createDescription();
+		sr->createDescription(srHint,srItem);
 	}
 }
 

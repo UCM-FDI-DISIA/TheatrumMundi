@@ -213,7 +213,7 @@ bool TeaCupPuzzleScene::isItemHand(const std::string& itemId)
 	if (itemId == "TeaCupSpoon") {
 		Sound spoonSound = sdlutils().soundEffects().at("taza");
 		AudioManager::Instance().playSound(spoonSound);
-		_spoonIsInCup = true; //???
+		_spoonIsInCup = true; 
 		Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithSpoon");
 		teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
 		//spoon->getMngr()->setActive(spoon, true); 
