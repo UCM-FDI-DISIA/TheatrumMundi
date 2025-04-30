@@ -121,7 +121,7 @@ ecs::entity_t Log::Init(EntityFactory* entityFactory, EntityManager* entityManag
 
 	//Audio sfx
 	AudioManager& a = AudioManager::Instance();
-	Sound buttonSound = sdlutils().soundEffects().at("boton");
+	Sound* buttonSound = sdlutils().soundEffects().at("boton").get();
 	a.setVolume(buttonSound, 0.2);
 
 	sceneTemplate = scTp;

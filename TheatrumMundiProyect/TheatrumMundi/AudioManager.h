@@ -54,7 +54,7 @@ public:
     void update();
 
 private:
-    AudioManager() = default;
+    AudioManager();
     ~AudioManager();
 
     FMOD::System* system = nullptr;

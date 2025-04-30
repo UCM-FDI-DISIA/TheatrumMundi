@@ -60,9 +60,9 @@ private:
 
 	struct roomSounds {
 
-		Sound uiButton;
-		Sound puzzleButton;
-		Sound doorSound;
+		Sound* uiButton;
+		Sound* puzzleButton;
+		Sound* doorSound;
 
 	} rmSounds;
 

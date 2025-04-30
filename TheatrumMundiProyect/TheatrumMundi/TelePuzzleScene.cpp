@@ -55,7 +55,7 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		Sound* buttonSound = sdlutils().soundEffects().at("boton").get();
 		a.setVolume(buttonSound, 0.2);
 
 		dialogueManager->setScene(this);

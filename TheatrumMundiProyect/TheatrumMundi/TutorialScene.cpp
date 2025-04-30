@@ -112,14 +112,14 @@ void TutorialScene::init()
 		finishallpuzzles = false;
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		Sound* buttonSound = sdlutils().soundEffects().at("boton").get();
 		a.setVolume(buttonSound, 0.2);
-		Sound puzzleButtonSound = sdlutils().soundEffects().at("puzzle");
+		Sound* puzzleButtonSound = sdlutils().soundEffects().at("puzzle").get();
 		a.setVolume(puzzleButtonSound, 0.3);
 
-		Sound doorSound = sdlutils().soundEffects().at("puerta");
+		Sound* doorSound = sdlutils().soundEffects().at("puerta").get();
 		a.setVolume(doorSound, 0.6);
-		a.setSourcePosition(doorSound, -500, 0, 0);
+		a.set3DPosition(doorSound, -500, 0, 0);
 
 		//Register scene in dialogue manager
 		dialogueManager->setScene(this);

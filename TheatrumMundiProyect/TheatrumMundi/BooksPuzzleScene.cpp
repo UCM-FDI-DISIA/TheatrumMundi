@@ -72,10 +72,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 		AudioManager& a = AudioManager::Instance();
 
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		Sound* buttonSound = sdlutils().soundEffects().at("boton").get();
 		a.setVolume(buttonSound, 0.2);
 
-		Sound bookSound = sdlutils().soundEffects().at("libro");
+		Sound* bookSound = sdlutils().soundEffects().at("libro").get();
 
 
 		//INVENTORY

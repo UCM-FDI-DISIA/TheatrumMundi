@@ -21,7 +21,7 @@ void StrongBoxPuzzle::init(SceneRoomTemplate* sr)
         isStarted = true;
         //sound and music
         AudioManager& a = AudioManager::Instance();
-        Sound buttonSound = sdlutils().soundEffects().at("boton");
+        Sound* buttonSound = sdlutils().soundEffects().at("boton").get();
         a.setVolume(buttonSound, 0.2);
        
 

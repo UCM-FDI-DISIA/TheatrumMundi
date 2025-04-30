@@ -35,6 +35,7 @@ AudioManager& AudioManager::Instance()
 }
 
 bool AudioManager::init() {
+    std::cout << "BOMBOCLAT";
     FMOD_RESULT result;
     result = FMOD::System_Create(&system);
     if (result != FMOD_OK) {
@@ -64,6 +65,8 @@ void AudioManager::shutdown() {
 }
 
 Sound* AudioManager::createSound(const std::string& filePath) {
+   
+    
     // Create a unique_ptr and save the raw pointer
     auto soundPtr = std::make_unique<Sound>(filePath);
     Sound* rawSound = soundPtr.get();
@@ -155,6 +158,10 @@ void AudioManager::update() {
     if (system) {
         system->update();
     }
+}
+
+AudioManager::AudioManager() {
+    init();
 }
 
 AudioManager::~AudioManager()
