@@ -81,7 +81,6 @@ void Game::init() {
 	sdlutils().hideCursor();
 
 	// Create the manager
-
 	_log = new Log();
 	_dataManager = new DataManager();
 	dialogueReader = new ReadDialog(3);

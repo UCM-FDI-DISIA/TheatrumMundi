@@ -4,30 +4,18 @@
 #include "../TheatrumMundi/AudioManager.h"
 
 class ScrollComponent;
-class Room2Scene : public SceneRoomTemplate
-{
+class Room3Scene : public SceneRoomTemplate {
 protected:
-	enum Room2Event
-	{
+	enum Room3Event {
 		InitialDialogue = 0,
 		CorpseDialogue,
-		TombPuzzleScene,
-		TombPuzzleSceneRsv,
-		RavenScene,
-		RavenSceneRsv,
-		DoorScene,
-		DoorSceneRsv,
-		MosaciZoom,
-		MosaicPuzzleScene,
-		MosaicPuzzleSceneRsv,
-		WindowScene,
-		WindowSceneResolved,
-		Rope,
-		OrganZoom,
-		OrganPuzzleScene,
-		OrganPuzzleSceneRsv,
-		Hook,
-		SecretEntry,
+		LightsOn,
+		LightsOff,
+		CablesPuzzleScene,
+		CircleLockPuzzleScene,
+		BalancePuzzleScene,
+		ParrotScene,
+		MorseCodeScene,
 		ResolveCase,
 		ResolveButtons,
 		GoodEnd,
@@ -35,16 +23,15 @@ protected:
 		event_size,
 	};
 public:
-	Room2Scene();
-	~Room2Scene();
+	Room3Scene();
+	~Room3Scene();
 	void init() override;
 	void resolvedPuzzle(int i) override;
 	void unload() override;
 private:
-
 	std::string _eventToRead;
-	bool isOpen; //Boolean which function is to permite player to enter the mausoleum or not (if the key is on the door or not)
 	bool stopAnimation = false;
+	bool LightsToOn = false; //To interact with determined entities
 	bool scrolling = false;
 
 	void endDialogue() override;
@@ -59,15 +46,12 @@ private:
 	void _setUI();
 
 	struct roomSounds {
-
 		Sound* uiButton;
 		Sound* puzzleButton;
 		Sound* doorSound;
-
 	} rmSounds;
 
 	struct roomObjects {
-
 		//Entitites without special conditions
 		ecs::entity_t inventoryButton = nullptr;
 		ecs::entity_t readyToResolveBotton = nullptr;
@@ -75,21 +59,21 @@ private:
 		ecs::entity_t logbtn = nullptr;
 		ecs::entity_t zoomCorpse = nullptr;
 		ecs::entity_t quitButton = nullptr; //Reference to the zoomed Quit Button
-		ecs::entity_t zoomOrgan = nullptr; //Image of the zoomed Organ
-		ecs::entity_t organ = nullptr; //Image of the organ
-		ecs::entity_t rope = nullptr; // Image of the rope
-		ecs::entity_t hook = nullptr; //Image of the hook
-		ecs::entity_t secretEntryZoom = nullptr; //Image of the ZoomEntry
-		ecs::entity_t secretEntryInTheZoomed = nullptr; //Image of the ZoomEntry
+		ecs::entity_t cablesPuzzle = nullptr; //Image of the cablesPuzzle
+		ecs::entity_t boxOfficeMorseCodeB = nullptr; //Image of the first boxOffice
+		ecs::entity_t boxOfficeCircleLockP = nullptr; //Image of the second boxOffice
+		ecs::entity_t parrot = nullptr; //Image of the parrot
+		ecs::entity_t balance = nullptr; //Image of the balance
+		ecs::entity_t safeBox = nullptr; //Image of the safeBox
 
-		//Entities with special conditions (only appear with one specific event)
-		std::pair<ecs::entity_t, bool>organMosaic; //Image of the entry to the organ room
-		std::pair<ecs::entity_t, bool> mirror; //Image which reflects information
-		std::pair<ecs::entity_t, bool> secretEntry; //Image reflected
+		////Entities with special conditions (only appear with one specific event)
+		ecs::entity_t backgroundLeftIllumination = nullptr;
+		ecs::entity_t backgroundRightIllumination = nullptr;
+		//std::pair<ecs::entity_t, bool>organMosaic; //Image of the entry to the organ room
+		//std::pair<ecs::entity_t, bool> mirror; //Image which reflects information
+		//std::pair<ecs::entity_t, bool> secretEntry; //Image reflected
 
 		//ScrollComponent
 		ScrollComponent* backgroundScroll = nullptr;
-
 	} rmObjects;
 };
-

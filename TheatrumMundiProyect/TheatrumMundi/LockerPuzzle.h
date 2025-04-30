@@ -1,7 +1,7 @@
 #pragma once
 #include "ScenePuzzleTemplate.h"
 
-class StrongBoxPuzzle: public ScenePuzzleTemplate
+class LockerPuzzle: public ScenePuzzleTemplate
 {
 private:
 	std::vector<int> rotSol;

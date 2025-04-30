@@ -53,9 +53,9 @@ private:
 	void _setUI();
 	
 	struct roomSounds {
-		Sound uiButton;
-		Sound puzzleButton;
-		Sound doorSound;
+		Sound* uiButton;
+		Sound* puzzleButton;
+		Sound* doorSound;
 	} rmSounds;
 
 	struct roomObjects {

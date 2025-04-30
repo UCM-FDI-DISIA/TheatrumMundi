@@ -1,4 +1,4 @@
-﻿#include "StrongBoxPuzzle.h"
+#include "LockerPuzzle.h"
 #include "Vector2D.h"
 #include "SDLUtils.h"
 #include "DialogueManager.h"
@@ -15,7 +15,8 @@
 #include "RectArea2D.h"
 #include "../TheatrumMundi/PhysicsBodyComponent.h"
 #include "Image.h"
-StrongBoxPuzzle::StrongBoxPuzzle()
+//void StrongBoxPuzzle::init()
+void LockerPuzzle::init(SceneRoomTemplate* sr)
 {
    dialogueManager = new DialogueManager(1);
    rotSol.push_back(0);
@@ -36,7 +37,7 @@ void StrongBoxPuzzle::init()
         isStarted = true;
         //sound and music
         AudioManager& a = AudioManager::Instance();
-        Sound buttonSound = sdlutils().soundEffects().at("boton");
+        Sound* buttonSound = sdlutils().soundEffects().at("boton").get();
         a.setVolume(buttonSound, 0.2);
        
 
@@ -219,23 +220,23 @@ void StrongBoxPuzzle::init()
    // createInvEntities(sr);
 }
 
-void StrongBoxPuzzle::unload()
+void LockerPuzzle::unload()
 {
 }
 
-bool StrongBoxPuzzle::Check()
+bool LockerPuzzle::Check()
 {
     bool flag = true;
     for (int i = 0; i < rotSol.size();i++) if (rotSol[i] != wheelstr[i]->getRot()) flag = false;
     return flag;
 }
 
-void StrongBoxPuzzle::Win()
+void LockerPuzzle::Win()
 {
     for (auto a : doorEntities)entityManager->setActive(a, false);
     for (auto a : rewardEntities)entityManager->setActive(a, true);
 }
 
-void StrongBoxPuzzle::ResolveScene()
+void LockerPuzzle::ResolveScene()
 {
 }

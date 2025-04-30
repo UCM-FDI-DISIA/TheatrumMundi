@@ -217,7 +217,7 @@ void Room1Scene::_setRoomEvents()
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
-			Sound correctSound = sdlutils().soundEffects().at("correcto");
+			Sound* correctSound = sdlutils().soundEffects().at("correcto").get();
 			AudioManager::Instance().playSound(correctSound);
 
 			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
@@ -252,7 +252,7 @@ void Room1Scene::_setRoomEvents()
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
-			Sound incorrectSound = sdlutils().soundEffects().at("incorrecto");
+			Sound* incorrectSound = sdlutils().soundEffects().at("incorrecto").get();
 			AudioManager::Instance().playSound(incorrectSound);
 
 			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
@@ -318,19 +318,18 @@ void Room1Scene::_setRoomAudio()
 	//Audio sfx 
 	AudioManager& audioMngr = AudioManager::Instance();
 
-	rmSounds.uiButton = sdlutils().soundEffects().at("boton");
+	rmSounds.uiButton = sdlutils().soundEffects().at("boton").get();
 	audioMngr.setVolume(rmSounds.uiButton, 0.2);
 
-	rmSounds.puzzleButton = sdlutils().soundEffects().at("puzzle");
+	rmSounds.puzzleButton = sdlutils().soundEffects().at("puzzle").get();
 	audioMngr.setVolume(rmSounds.puzzleButton, 0.3);
 
-	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
+	rmSounds.doorSound = sdlutils().soundEffects().at("puerta").get();
 
 
 	//Audio music
-	Sound room1music = sdlutils().musics().at("sala1");
-	audioMngr.setLooping(room1music, true);
-	audioMngr.playSound(room1music);
+	Sound* room1music = sdlutils().musics().at("sala1").get();
+	audioMngr.playSound(room1music, true);
 }
 
 void Room1Scene::_setDialog()
