@@ -7,6 +7,8 @@
 #include "../utils/Vector2D.h"
 #include "../utils/Collisions.h"
 
+
+
 #include "../../TheatrumMundi/Log.h"
 
 #include "../../TheatrumMundi/CSVdataRecolector.h"
@@ -26,31 +28,32 @@ Game* Game::Instance()
 }
 Game::~Game() {
 	
-
+	
 	delete _mngr;
+	delete dialogueReader;
 	delete _dataManager;
 	delete _log;
-	delete _csvdata;
 	// release InputHandler if the instance was created correctly.
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
 
 	// release SLDUtil if the instance was created correctly.
-	if (SDLUtils::HasInstance())
+	if (SDLUtils::HasInstance()) {
 		SDLUtils::Release();
+	}
 }
 
 void Game::init() {
-	float w ;
-	float h  ;
-	wscreenScale ;
-	hscreenScale ;
-//In debug the resolution is const
+	float w;
+	float h;
+	wscreenScale;
+	hscreenScale;
+	//In debug the resolution is const
 #ifdef _DEBUG
-		w = 1349.0;
-		h = 748.0;
-		wscreenScale = 1;
-		hscreenScale = 1;	
+	w = 1349.0;
+	h = 748.0;
+	wscreenScale = 1;
+	hscreenScale = 1;
 #else
 	w = GetSystemMetrics(SM_CXSCREEN);
 	h = GetSystemMetrics(SM_CYSCREEN);
@@ -58,12 +61,15 @@ void Game::init() {
 	hscreenScale = GetSystemMetrics(SM_CYSCREEN) / 748.0;
 #endif
 
+	//Load all thee game resources in the global json else the resources have been loaded in scenes 
 	// initialize the SDL singleton
-	if (!SDLUtils::Init("TheatrumMundi",w ,h, "../resources/config/TheatrumMundi.resources.json")) {
+	if (!SDLUtils::Init("TheatrumMundi", w, h, "../resources/config/TheatrumMundi.resources.json")) {
 		std::cerr << "Something went wrong while initializing SDLUtils"
-				<< std::endl;
+			<< std::endl;
 		return;
 	}
+
+
 
 	// initialize the InputHandler singleton
 	if (!InputHandler::Init()) {
@@ -75,10 +81,9 @@ void Game::init() {
 	sdlutils().hideCursor();
 
 	// Create the manager
-
 	_log = new Log();
 	_dataManager = new DataManager();
-	_csvdata = new CSVdataRecolector();
+	dialogueReader = new ReadDialog(3);
 	_mngr = new SceneManager();
 }
 
@@ -113,7 +118,6 @@ void Game::start() {
 
 		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
 			_exitGame = true;
-			_csvdata->safeData();
 			continue;
 		}
 
@@ -153,6 +157,7 @@ void Game::reset()
 	Game::Instance()->getLog()->ResetLog();
 	Game::Instance()->getDataManager()->ResetDataManager();
 	Game::Instance()->getSceneManager()->ResetSceneManager();
+	Game::Instance()->getReadDialogue()->ResetReader();
 
 }
 
@@ -174,10 +179,9 @@ DataManager* Game::getDataManager()
 {
 	return _dataManager;
 }
-
-CSVdataRecolector* Game::getCSVDataColector()
+ReadDialog* Game::getReadDialogue()
 {
-	return _csvdata;
+	return dialogueReader;
 }
 Log* Game::getLog()
 {

@@ -4,6 +4,8 @@
 #include "DialogueManager.h"
 #include "TriggerComponent.h"
 #include "Game.h"
+#include "Image.h"
+#include "Transform.h"
 #include "Log.h"
 
 DoorPuzzleScene::DoorPuzzleScene()
@@ -24,16 +26,6 @@ void DoorPuzzleScene::init(SceneRoomTemplate* sr)
 #pragma region UI
 
 
-		//BackButton
-		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-
-		//Click component Open log button
-		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, []()
-			{
-				Game::Instance()->getSceneManager()->popScene();
-			});
-
 #pragma region Inventory
 
 		//INVENTORY
@@ -48,7 +40,7 @@ void DoorPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->setActive(downButton, false);
 
 		//InventoryButton
-		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(60 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
 		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton]() //Lamda function
 			{
@@ -98,9 +90,26 @@ void DoorPuzzleScene::init(SceneRoomTemplate* sr)
 
 #pragma endregion
 
+		//BackButton
+		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+
+		//Click component Open log button
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, inventoryButton, InventoryBackground, downButton, upButton, _backButton]()
+			{
+				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+				HideInventoryItems(InventoryBackground, downButton, upButton, room);
+				room->GetInventory()->setFirstItem(0);
+				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+				_backButtonImage->setPosOffset(0, 0);
+				Game::Instance()->getSceneManager()->popScene();
+			});
+
 		//Log
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
+		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 
 		//startDialogue("PuzzleCuervo");
 
@@ -114,14 +123,13 @@ void DoorPuzzleScene::init(SceneRoomTemplate* sr)
 
 #pragma region SceneEntities
 
-		auto chain = entityFactory->CreateInteractableEntity(entityManager, "Candado", EntityFactory::RECTAREA, Vector2D(550, 300), Vector2D(0, 0), 259, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		entityManager->addComponent<TriggerComponent>(chain);
+		auto lock = entityFactory->CreateInteractableEntity(entityManager, "Candado", EntityFactory::RECTAREA, Vector2D(550, 300), Vector2D(0, 0), 259, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		//Assigns the trigger bolean to true
-		entityManager->getComponent<TriggerComponent>(chain)->connect(TriggerComponent::AREA_ENTERED, [this]() {
+		entityManager->getComponent<TriggerComponent>(lock)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
 			});
 		//Assigns the trigger bolean to false
-		entityManager->getComponent<TriggerComponent>(chain)->connect(TriggerComponent::AREA_LEFT, [this]() {
+		entityManager->getComponent<TriggerComponent>(lock)->connect(TriggerComponent::AREA_LEFT, [this]() {
 			SetplacedHand(false);
 			});
 
@@ -147,5 +155,7 @@ bool DoorPuzzleScene::isItemHand(const std::string& itemId)
 
 void DoorPuzzleScene::Win()
 {
+	room->GetInventory()->setActive(false);
+	room->GetInventory()->setFirstItem(0);
 	room->resolvedPuzzle(2);
 }

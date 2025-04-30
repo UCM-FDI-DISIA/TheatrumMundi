@@ -12,6 +12,8 @@ public:
 
 	ClickComponent();
 
+	~ClickComponent();
+
 	inline bool isBeingClicked() {return _isBeingClicked;}
 
 protected:

@@ -214,8 +214,8 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
 			if (variant == 0)AddInvItem("frascoV2", "Un frasco con restos de algo.", position, sr);
-			else if (variant == 1)AddInvItem("frascoV2", "Un frasco totalmente limpio, que raro.", position, sr);
-			else if (variant == 2)AddInvItem("frascoV1", " Un frasco con huellas de dedos, ¿no habían guantes?", position, sr);
+			else if (variant == 1)AddInvItem("frascoV2", "Un frasco totalmente limpio, \nque raro.", position, sr);
+			else if (variant == 2)AddInvItem("frascoV1", " Un frasco con huellas de dedos,  \nï¿½no habï¿½an guantes?", position, sr);
 			container->getMngr()->setActive(container, false);
 
 		});

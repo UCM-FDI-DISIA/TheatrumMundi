@@ -538,32 +538,32 @@
       "file": "../resources/images/temporales/piezadeZ.png"
     },
     {
-        "id": "Hanni",
-        "file": "../resources/images/asesinoDeHanni.png"
+      "id": "Hanni",
+      "file": "../resources/images/asesinoDeHanni.png"
     },
     {
-        "id": "TutorialButtonTemp",
-        "file": "../resources/images/temporales/RectangleTutorialButton.png"
+      "id": "TutorialButtonTemp",
+      "file": "../resources/images/temporales/RectangleTutorialButton.png"
     },
     {
-        "id": "NewGameLocked",
-        "file": "../resources/images/temporales/GameLocked.png"
+      "id": "NewGameLocked",
+      "file": "../resources/images/temporales/GameLocked.png"
     },
     {
-        "id": "teleSinAntena",
-        "file": "../resources/images/Finales/TutorialTele1.png"
+      "id": "teleSinAntena",
+      "file": "../resources/images/Finales/TutorialTele1.png"
     },
     {
-        "id": "teleConAntena",
-        "file": "../resources/images/Finales/TutorialTele2.png"
+      "id": "teleConAntena",
+      "file": "../resources/images/Finales/TutorialTele2.png"
     },
     {
       "id": "antena",
-        "file": "../resources/images/Finales/TutorialAntenas.png"
+      "file": "../resources/images/Finales/TutorialAntenas.png"
     },
     {
-        "id": "TutorialButton",
-        "file": "../resources/images/Finales/tutorialButton.png"
+      "id": "TutorialButton",
+      "file": "../resources/images/Finales/tutorialButton.png"
     },
     {
       "id": "TutorialZoom1",
@@ -602,8 +602,8 @@
       "file": "../resources/images/Finales/TutorialPuerta.png"
     },
     {
-        "id": "botonNumero",
-        "file": "../resources/images/Finales/button3711.png"
+      "id": "botonNumero",
+      "file": "../resources/images/Finales/button3711.png"
     },
     {
       "id": "Cuervo",
@@ -638,7 +638,11 @@
       "file": "../resources/images/temporales/Room2/Pala.jpeg"
     },
     {
-      "id": "Palo",
+      "id": "CuerdaLarga",
+      "file": "../resources/images/temporales/Room2/Palo.jpeg"
+    },
+    {
+      "id": "CuerdaCorta",
       "file": "../resources/images/temporales/Room2/Palo.jpeg"
     },
     {
@@ -692,7 +696,100 @@
     {
       "id": "FondoOrgano",
       "file": "../resources/images/temporales/Room2/FondoOrgano.png"
+    },
+    {
+      "id": "Cadena",
+      "file": "../resources/images/temporales/Room2/Cadena.jpeg"
+    },
+    {
+      "id": "cuerdaVentana",
+      "file": "../resources/images/temporales/Room2/Cuerda.png"
+    },
+    {
+      "id": "VentanaAbierta",
+      "file": "../resources/images/temporales/Room2/VentanaAbierta.png"
+    },
+    {
+      "id": "EntradaSecretaAbierta",
+      "file": "../resources/images/temporales/Room2/EntradaSecretaAbierta.png"
+    },
+    {
+      "id": "FondoVentana",
+      "file": "../resources/images/temporales/Room2/FondoVentana.png"
+    },
+    {
+      "id": "FondoJuzgado",
+      "file": "../resources/images/temporales/Room3/Juzgado.png"
+    },
+    {
+      "id": "FondoSalaDeEspera",
+      "file": "../resources/images/temporales/Room3/SalaDeEspera.png"
+    },
+    {
+      "id": "FondoJuzgadoOscuro",
+      "file": "../resources/images/temporales/Room3/JuzgadoOscuro.png"
+    },
+    {
+      "id": "FondoSalaDeEsperaOscuro",
+      "file": "../resources/images/temporales/Room3/SalaDeEsperaOscuro.png"
+    },
+    {
+      "id": "Cables",
+      "file": "../resources/images/temporales/Room3/cables.png"
+    },
+    {
+      "id": "CablesOscuro",
+      "file": "../resources/images/temporales/Room3/cablesOscuro.png"
+    },
+    {
+      "id": "Cadaver3",
+      "file": "../resources/images/temporales/Room3/Cadaver.png"
+    },
+    {
+      "id": "Cadaver3Oscuro",
+      "file": "../resources/images/temporales/Room3/CadaverOscuro.png"
+    },
+    {
+      "id": "Parrot",
+      "file": "../resources/images/temporales/Room3/parrot.png"
+    },
+    {
+      "id": "ParrotOscuro",
+      "file": "../resources/images/temporales/Room3/parrotOscuro.png"
+    },
+    {
+      "id": "TaquillaAzul",
+      "file": "../resources/images/temporales/Room3/Taquilla.png"
+    },
+    {
+      "id": "TaquillaAzulOscuro",
+      "file": "../resources/images/temporales/Room3/TaquillaOscura.png"
+    },
+    {
+      "id": "TaquillaMorada",
+      "file": "../resources/images/temporales/Room3/Taquilla2.png"
+    },
+    {
+      "id": "TaquillaMoradaOscuro",
+      "file": "../resources/images/temporales/Room3/Taquilla2Oscura.png"
+    },
+    {
+      "id": "Balanza",
+      "file": "../resources/images/temporales/Room3/balanza.png"
+    },
+    {
+      "id": "BalanzaOscuro",
+      "file": "../resources/images/temporales/Room3/balanzaOscura.png"
+    },
+    {
+      "id": "CajaFuerte",
+      "file": "../resources/images/temporales/Room3/CajaFuerte.png"
+    },
+    {
+      "id": "CajaFuerteOscuro",
+      "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
     }
+
   ],
 
   "messages": [
