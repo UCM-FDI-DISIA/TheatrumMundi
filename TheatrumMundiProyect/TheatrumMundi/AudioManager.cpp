@@ -1,214 +1,163 @@
 #include "AudioManager.h"
+#include "fmod_errors.h"
 #include <iostream>
-#include <fstream>
-#include "Game.h"
 
-// Sound class methods
+
+//Class Sound
 Sound::Sound(const std::string& filePath) {
-    source = AudioManager::Instance().createSource();
-    buffer = AudioManager::Instance().loadWAV(filePath);
+    sound = nullptr;
+    channel = nullptr;
 }
 
-Sound::~Sound()
+Sound::~Sound() {
+    if (sound) {
+        sound->release();
+    }
+}
+
+FMOD::Sound* Sound::getSound() const { return sound; }
+
+void Sound::setSound(FMOD::Sound* s)
 {
+    sound = s;
 }
 
-ALuint Sound::getSource() const
+FMOD::Channel* Sound::getChannel() const { return channel; }
+void Sound::setChannel(FMOD::Channel* ch) { channel = ch; }
+
+
+
+//AUDIO MANAGER
+AudioManager& AudioManager::Instance()
 {
-    return source;
-}
-
-ALuint Sound::getBuffer() const
-{
-    return buffer;
-}
-
-
-// AudioManager class methods
-AudioManager& AudioManager::Instance() {
-    static AudioManager instance; 
+    static AudioManager instance;
     return instance;
 }
 
-AudioManager::AudioManager() {
-    // Get the list of available devices (for debug purposes)
-   const ALCchar* deviceList = alcGetString(nullptr, ALC_DEVICE_SPECIFIER);
-    if (deviceList) {
-#ifdef _DEBUG
-        std::cout << "Dispositivos de audio disponibles:" << std::endl;
-        while (*deviceList != '\0') {
-            std::cout << " - " << deviceList << std::endl;
-            deviceList += strlen(deviceList) + 1;
-        }
+bool AudioManager::init() {
+    FMOD_RESULT result;
+    result = FMOD::System_Create(&system);
+    if (result != FMOD_OK) {
+#ifdef DEBUG
+        std::cerr << "FMOD error: " << FMOD_ErrorString(result) << std::endl;
+#endif // DEBUG
+        return false;
+    }
+
+    result = system->init(32, FMOD_INIT_NORMAL, nullptr);
+    if (result != FMOD_OK) {
+#ifdef DEBUG
+        std::cerr << "FMOD error: " << FMOD_ErrorString(result) << std::endl;
 #endif
-    }
-
-
-    // Try to open the default audio device
-    const ALCchar* defaultDevice = alcGetString(nullptr, ALC_DEFAULT_DEVICE_SPECIFIER);
-    device = alcOpenDevice(defaultDevice);
-    if (!device) {
-    #ifdef _DEBUG
-        std::cerr << "Error: No se pudo abrir el dispositivo de audio: " << defaultDevice << std::endl;
-        const ALCchar* error = alcGetString(nullptr, alcGetError(nullptr));
-    #endif
-    #ifdef _DEBUG
-        std::cerr << "Razón: " << (error ? error : "Desconocido") << std::endl;
-    #endif
-    }
-
-    context = alcCreateContext(device, nullptr); // Create a context
-    if (!context) {
-    #ifdef _DEBUG
-        std::cerr << "Error: No se pudo crear el contexto de audio. Razón: ";
-        const ALCchar* error = alcGetString(device, alcGetError(device));
-    #endif
-    #ifdef _DEBUG
-        std::cerr << (error ? error : "Desconocido") << std::endl;
-        alcCloseDevice(device);
-    #endif
-
-    }
-
-    if (!alcMakeContextCurrent(context)) { // Make the current context
-        #ifdef _DEBUG
-        std::cerr << "Error: No se pudo hacer el contexto actual. Razón: ";
-        const ALCchar* error = alcGetString(device, alcGetError(device));
-        #endif
-        #ifdef _DEBUG
-        std::cerr << (error ? error : "Desconocido") << std::endl;
-        alcDestroyContext(context);
-        alcCloseDevice(device);
-        #endif
-
-    }
-    #ifdef _DEBUG
-    std::cout << "OpenAL inicializado correctamente con el dispositivo: " << defaultDevice << std::endl;
-    #endif
-}
-
-
-AudioManager::~AudioManager() {
-    for (ALuint source : sources) {
-        alDeleteSources(1, &source);
-    }
-    for (ALuint buffer : buffers) {
-        alDeleteBuffers(1, &buffer);
-    }
-
-    alcDestroyContext(context); // Destroy the context
-    alcCloseDevice(device);     // Close the device
-}
-
-
-// Load a WAV file into a buffer
-ALuint 
-AudioManager::loadWAV(const std::string& filePath) {
-    SF_INFO sfInfo;
-    SNDFILE* file = sf_open(filePath.c_str(), SFM_READ, &sfInfo);
-    if (!file) {
-        std::cerr << "No se pudo abrir el archivo: " << filePath << std::endl;
         return false;
     }
 
-    std::vector<short> audioData(sfInfo.frames * sfInfo.channels);
-    sf_read_short(file, audioData.data(), sfInfo.frames * sfInfo.channels);
-    sf_close(file);
-
-    ALenum formatAL;
-    if (sfInfo.channels == 1) {
-        formatAL = AL_FORMAT_MONO16;
-    }
-    else if (sfInfo.channels == 2) {
-        formatAL = AL_FORMAT_STEREO16;
-    }
-    else {
-        std::cerr << "Formato incorrecto: " << filePath << std::endl;
-        return false;
-    }
-    ALuint buffer;
-    alGenBuffers(1, &buffer);
-    alBufferData(buffer, formatAL, audioData.data(), audioData.size() * sizeof(short), sfInfo.samplerate);
-
-    buffers.push_back(buffer);
-
-    return buffer;
+    return true;
 }
 
-// Create an audio source
-ALuint 
-AudioManager::createSource() {
-    ALuint source;
-    alGenSources(1, &source);
-    sources.push_back(source);
-    return source;
-}
-
-//Move the sound source position in the scene
-void 
-AudioManager::setSourcePosition(Sound sound, float x, float y, float z) {
-    alSource3f(sound.getSource(), AL_POSITION, x, y, z);
-}
-
-//Move the listener position in the scene
-void 
-AudioManager::setListenerPosition(float x, float y, float z) {
-    alListener3f(AL_POSITION, x, y, z);
-}
-
-
-//Modify the track volume
-void 
-AudioManager::setVolume(Sound sound, ALfloat volume) {
-    alSourcef(sound.getSource(), AL_GAIN, volume);
-}
-
-//Modify the track speed
-void AudioManager::setSpeed(Sound sound, ALfloat speed) {
-    alSourcef(sound.getSource(), AL_VELOCITY, speed);
-}
-
-//Modify the track pitch
-void AudioManager::setPitch(Sound sound, ALfloat pitch) {
-    alSourcef(sound.getSource(), AL_PITCH, pitch);
-}
-
-// Play a sound (default, once)
-void 
-AudioManager::playSound(Sound sound) {
-    if (!isPlaying(sound)) {
-        alSourcei(sound.getSource(), AL_BUFFER, sound.getBuffer());
-        alSourcePlay(sound.getSource());
+void AudioManager::shutdown() {
+    sounds.clear();  
+    if (system) {
+        system->close();
+        system->release();
     }
 }
 
-// Stop a sound
-void 
-AudioManager::stopSound(Sound sound) {
-    alSourceStop(sound.getSource());
+Sound* AudioManager::createSound(const std::string& filePath) {
+    // Create a unique_ptr and save the raw pointer
+    auto soundPtr = std::make_unique<Sound>(filePath);
+    Sound* rawSound = soundPtr.get();
+
+    FMOD::Sound* fmodSound = nullptr;
+    FMOD_RESULT result = system->createSound(
+        filePath.c_str(), FMOD_DEFAULT, nullptr, &fmodSound
+    );
+
+    if (result != FMOD_OK) {
+#ifdef DEBUG
+        std::cerr << "FMOD error al cargar sonido: " << FMOD_ErrorString(result) << std::endl;
+#endif
+        return nullptr;
+    }
+
+    soundPtr->setSound(fmodSound);
+    sounds.push_back(std::move(soundPtr));  // Transfer ownership to the vector
+    return rawSound;  // And returns the raw pointer (for external use)
 }
 
-// Pause a sound
-void 
-AudioManager::pauseSound(Sound sound) {
-    alSourcePause(sound.getSource());
+void AudioManager::playSound(Sound* sound, bool loop) {
+    if (!sound || !sound->getSound()) return;
+
+    FMOD_MODE mode = loop ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF;
+    sound->getSound()->setMode(mode);
+
+    FMOD::Channel* channel = nullptr;
+    system->playSound(sound->getSound(), nullptr, false, &channel);
+    sound->setChannel(channel);
 }
 
-// Resume a sound
-void
-AudioManager::resumeSound(Sound sound) {
-    alSourcePlay(sound.getSource());
+
+void AudioManager::stopSound(Sound* sound) {
+    if (sound && sound->getChannel()) {
+        sound->getChannel()->stop();
+    }
 }
 
-// Set a sound in/out a loop
-void AudioManager::setLooping(Sound sound,bool loop)
+void AudioManager::pauseSound(Sound* sound) {
+    if (sound && sound->getChannel()) {
+        sound->getChannel()->setPaused(true);
+    }
+}
+
+void AudioManager::resumeSound(Sound* sound) {
+    if (sound && sound->getChannel()) {
+        sound->getChannel()->setPaused(false);
+    }
+}
+
+void AudioManager::set3DPosition(Sound* sound, float x, float y, float z) {
+    if (sound && sound->getChannel()) {
+        FMOD_VECTOR pos = { x, y, z };
+        sound->getChannel()->set3DAttributes(&pos, nullptr);
+    }
+}
+
+void AudioManager::setListenerPosition(float x, float y, float z) {
+    if (system) {
+        FMOD_VECTOR pos = { x, y, z };
+        FMOD_VECTOR vel = { 0, 0, 0 }; 
+        FMOD_VECTOR forward = { 0, 0, 1 }; 
+        FMOD_VECTOR up = { 0, 1, 0 }; 
+
+        system->set3DListenerAttributes(
+            0, // Listener id (0 is single-listener)
+            &pos,
+            &vel,
+            &forward,
+            &up
+        );
+    }
+}
+
+void AudioManager::setVolume(Sound* sound, float volume) {
+    if (sound && sound->getChannel()) {
+        sound->getChannel()->setVolume(volume);
+    }
+}
+
+void AudioManager::setPitch(Sound* sound, float pitch) {
+    if (sound && sound->getChannel()) {
+        sound->getChannel()->setPitch(pitch);
+    }
+}
+
+void AudioManager::update() {
+    if (system) {
+        system->update();
+    }
+}
+
+AudioManager::~AudioManager()
 {
-    alSourcei(sound.getSource(), AL_LOOPING, loop ? AL_TRUE : AL_FALSE);
-}
-
-//Check if a sound is already playing
-bool AudioManager::isPlaying(Sound sound) {
-    ALint state;
-    alGetSourcei(sound.getSource(), AL_SOURCE_STATE, &state);
-    return (state == AL_PLAYING);
+    shutdown();
 }

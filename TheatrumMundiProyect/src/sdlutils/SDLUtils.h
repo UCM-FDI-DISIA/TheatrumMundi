@@ -5,7 +5,7 @@
 #include <SDL.h>
 #include <string>
 #include <unordered_map>
-
+#include <memory>
 #include "../utils/Singleton.h"
 #include "RandomNumberGenerator.h"
 #include "Font.h"
@@ -226,14 +226,14 @@ private:
 	sdl_resource_table<Font> _fonts; // fonts map (string -> font)
 	sdl_resource_table<Texture> _images; // textures map (string -> texture)
 	sdl_resource_table<Texture> _msgs; // textures map (string -> texture)
-	sdl_resource_table<Sound> _sounds; // sounds map (string -> sound)
-	sdl_resource_table<Sound> _musics; // musics map (string -> music)
+	sdl_resource_table<std::unique_ptr<Sound>> _sounds; // sounds map (string -> sound)
+	sdl_resource_table<std::unique_ptr<Sound>> _musics; // musics map (string -> music)
 
 	map_access_wrapper<Font> _fontsAccessWrapper;
 	map_access_wrapper<Texture> _imagesAccessWrapper;
 	map_access_wrapper<Texture> _msgsAccessWrapper;
-	map_access_wrapper<Sound> _soundsAccessWrapper;
-	map_access_wrapper<Sound> _musicsAccessWrapper;
+	map_access_wrapper<std::unique_ptr<Sound>> _soundsAccessWrapper;
+	map_access_wrapper<std::unique_ptr<Sound>> _musicsAccessWrapper;
 
 	RandomNumberGenerator _random; // (pseudo) random numbers generator
 	VirtualTimer _timer; // virtual timer

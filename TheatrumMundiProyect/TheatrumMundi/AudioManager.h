@@ -1,62 +1,62 @@
 #pragma once
-
-#include "al.h"
-#include "alc.h"
-#include "sndfile.h"
-#include <vector>
 #include <string>
+#include <vector>
+#include <memory>
+#include "fmod.h"
+#include "fmod.hpp"
+#include "fmod_errors.h"
+#include "fmod_codec.h"
+#include "fmod_common.h"
+#include "fmod_dsp.h"
+#include "fmod_dsp_effects.h"
+#include "fmod_output.h"
 
-
-// Class that represents a specific sound and allows total abstraction over the AudioManager
 class Sound {
 public:
     Sound(const std::string& filePath = "");
     ~Sound();
-    ALuint getSource() const;
-    ALuint getBuffer() const;
+
+    FMOD::Sound* getSound() const;
+    void setSound(FMOD::Sound* s);
+
+    FMOD::Channel* getChannel() const;
+    void setChannel(FMOD::Channel* channel);
+
 private:
-    ALuint source;
-    ALuint buffer;
+    FMOD::Sound* sound = nullptr;
+    FMOD::Channel* channel = nullptr;
 };
 
 class AudioManager {
 public:
-
-    // AudioManager is a singleton
+    // Singleton
+    static AudioManager& Instance();
     AudioManager(const AudioManager&) = delete;
     AudioManager& operator=(const AudioManager&) = delete;
 
-    static AudioManager& Instance();
+    // Initialization and shutdown
+    bool init();
+    void shutdown();
 
-    
-    ALuint loadWAV(const std::string& filePath);
-    ALuint createSource();
+    // Load and play
+    Sound* createSound(const std::string& filePath);
+    void playSound(Sound* sound, bool loop = false);
+    void stopSound(Sound* sound);
+    void pauseSound(Sound* sound);
+    void resumeSound(Sound* sound);
 
-    void setSourcePosition(Sound source, float x, float y, float z);
+    // Setters
+    void setVolume(Sound* sound, float volume);
+    void setPitch(Sound* sound, float pitch);
+    void set3DPosition(Sound* sound, float x, float y, float z);
     void setListenerPosition(float x, float y, float z);
 
-    void setVolume(Sound source, ALfloat volume);
-    void setSpeed(Sound source, ALfloat speed);
-    void setPitch(Sound source, ALfloat pitch);
-
-    void playSound(Sound source);
-    void stopSound(Sound source);
-    void pauseSound(Sound source);
-    void resumeSound(Sound source);
-
-    void setLooping(Sound source, bool loop);
-
-    bool isPlaying(Sound sound);
+    void update();
 
 private:
-
-    AudioManager();
+    AudioManager() = default;
     ~AudioManager();
 
-    ALCdevice* device;          
-    ALCcontext* context; 
-    std::vector<ALuint> sources; 
-    std::vector<ALuint> buffers; 
-
+    FMOD::System* system = nullptr;
+    std::vector<std::unique_ptr<Sound>> sounds;
 };
-
