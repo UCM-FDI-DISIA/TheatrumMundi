@@ -1,5 +1,5 @@
 #include "AudioManager.h"
-#include "fmod_errors.h"
+#include "../lib/FMOD/include/fmod_errors.h"
 #include <iostream>
 
 
