@@ -7,14 +7,9 @@ public:
 	Box();
 	~Box();
 	void init(SceneRoomTemplate* sr) override;
-	void pushButton(int i);
 
 	
 private:
-
-	bool stage = 0;
-	bool lastWright = false;
-
 	
 };
 

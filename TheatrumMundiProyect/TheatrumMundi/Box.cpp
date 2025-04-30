@@ -58,6 +58,7 @@ void Box::init(SceneRoomTemplate* sr)
 			auto _button16 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(668, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 
+
 #pragma region UI
 
 
