@@ -16,6 +16,7 @@
 
 Box::Box()
 {
+	dialogueManager = new DialogueManager(2);
 }
 
 Box::~Box()
@@ -34,11 +35,12 @@ void Box::init(SceneRoomTemplate* sr)
 			room = sr;
 			//create the buttons
 			
+			auto _button1 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 #pragma region UI
 
 
-#pragma region Inventory
+/*#pragma region Inventory
 
 			//INVENTORY
 			//Invntory Background
@@ -51,7 +53,9 @@ void Box::init(SceneRoomTemplate* sr)
 			auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 			entityManager->setActive(downButton, false);
 
+			
 			//InventoryButton
+			
 			auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(60 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 			ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
 			invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton]() //Lamda function
@@ -85,22 +89,25 @@ void Box::init(SceneRoomTemplate* sr)
 				});
 
 			ClickComponent* UPbuttonInventoryClick = entityManager->getComponent<ClickComponent>(upButton);
-			UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ upButton, sr]() {
+			UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, upButton, sr]() {
 
 				//AudioManager::Instance().playSound(buttonSound);
 				sr->scrollInventory(-1);
 				});
 
 			ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
-			DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, /*buttonSound,*/ downButton, sr]() {
+			DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, downButton, sr]() {
 
 				//AudioManager::Instance().playSound(buttonSound);
 				sr->scrollInventory(1);
 				});
+
+			
+			
 			//Log
 
 
-#pragma endregion
+
 
 		//BackButton
 			auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
@@ -124,8 +131,9 @@ void Box::init(SceneRoomTemplate* sr)
 			Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 			//startDialogue("Puerta");
 
-#pragma endregion
+#pragma endregion*/
+
 		}
-		createInvEntities(sr);
+		//createInvEntities(sr);
 	
 }
