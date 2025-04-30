@@ -198,6 +198,8 @@ void TutorialScene::init()
 			roomEvent[TeleScene]();
 			});
 
+		television->getMngr()->getComponent<ClickComponent>(television)->setActive(false);
+
 		//entityManager->setActive(television,false);
 
 		
@@ -238,6 +240,7 @@ void TutorialScene::init()
 
 					if (GetInventory()->getActive()) // If the inventory is active, activate the items
 					{
+						entityManager->setActive(logbtn, false);
 						entityManager->setActive(invObjects.InventoryBackground, true);
 						//change the position of the log button
 						areaLayerManager->sendFront(invObjects.InvArea->getLayerPos());
@@ -258,6 +261,7 @@ void TutorialScene::init()
 					}
 					else
 					{
+						entityManager->setActive(logbtn, true);
 						entityManager->setActive(invObjects.InventoryBackground, false);
 						entityManager->setActive(invObjects.inventoryDownButton, false);
 						entityManager->setActive(invObjects.inventoryUpButton, false);
@@ -352,6 +356,7 @@ void TutorialScene::endDialogue()
 		case 3:
 			dialogueManager->setdisplayOnProcess(false);
 			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+			television->getMngr()->getComponent<ClickComponent>(television)->setActive(true);
 			
 			break;
 

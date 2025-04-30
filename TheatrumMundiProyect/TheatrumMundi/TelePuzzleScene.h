@@ -15,6 +15,7 @@ public:
 	void unload() override;
 	bool Check() override;
 	bool isItemHand(const std::string& itemId) override;
+	void endDialogue() override;
 
 protected:
 
@@ -25,9 +26,17 @@ protected:
 
 private:
 	ecs::entity_t inventoryButton;
+	ecs::entity_t exitButton;
+
+	ecs::entity_t InventoryBackground;
+	ecs::entity_t upButton;
+	ecs::entity_t downButton;
 
 	std::vector<Texture*> tvAnimationFrames;
 	int currentFrameIndex = 0;
 	VirtualTimer frameTimer;
 	bool isAnimating = false;
+
+
+	int dialogCount;
 };

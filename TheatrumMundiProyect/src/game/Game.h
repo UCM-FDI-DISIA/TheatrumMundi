@@ -4,9 +4,9 @@
 #include <vector>
 #include "../../TheatrumMundi/SceneManager.h"
 #include "../../TheatrumMundi/DataManager.h"
-#include "../../TheatrumMundi/ReadDialog.h"
 
-#define _LOADALLRESOURCES
+#include "../../TheatrumMundi/ReadDialog.h"
+//#define _LOADALLRESOURCES
 class Transform;
 class GameState;
 class Log;

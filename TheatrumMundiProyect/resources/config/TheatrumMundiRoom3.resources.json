@@ -1,0 +1,184 @@
+{
+
+  "fonts" : [
+    {
+      "id": "ARIAL24",
+      "file": "../resources/fonts/ARIAL.ttf",
+      "size": 24
+    },
+    { "id" : "TITLE", "file" : "../resources/fonts/PirataOne-Regular.ttf", "size": 40 },
+    { "id" : "BASE", "file" : "../resources/fonts/FeFCrm2.ttf", "size": 24}
+  ],
+
+  "images": [
+    {
+      "id": "EmptyImage",
+      "file": "../resources/images/Finales/ImagenVacia.png"
+    },
+    {
+      "id": "Room",
+      "file": "../resources/images/Finales/SalaIntermedia.PNG"
+    },
+    {
+      "id": "SolSprite",
+      "file": "../resources/images/Finales/Sol.PNG"
+    },
+    {
+      "id": "LucySprite",
+      "file": "../resources/images/Finales/Lucy.PNG"
+    },
+    {
+      "id": "KeisaraSprite",
+      "file": "../resources/images/Finales/Keisara.PNG"
+    },
+    {
+      "id": "Dialog",
+      "file": "../resources/images/Finales/Dialogo.PNG"
+    },
+    {
+      "id": "B6",
+      "file": "../resources/images/Finales/6.PNG"
+    },
+    {
+      "id": "B2",
+      "file": "../resources/images/Finales/2.PNG"
+    },
+    {
+      "id": "B5",
+      "file": "../resources/images/Finales/5.PNG"
+    },
+    { "id" : "prueba", "file" : "../resources/images/socrates.png" },
+    { "id" : "init", "file" : "../resources/images/start.jpg" },
+    { "id" : "exit", "file" : "../resources/images/exit.png" },
+    { "id" : "noPosible", "file" : "../resources/images/noPosible.png" },
+    { "id" : "noResolve", "file" : "../resources/images/noPosible.png" },
+    { "id" : "posible", "file" : "../resources/images/posible.png" },
+    { "id" : "resolve", "file" : "../resources/images/resolve.png" },
+    { "id" : "no", "file" : "../resources/images/Finales/noButton.png" },
+    { "id" : "yes", "file" : "../resources/images/Finales/yesButton.png" },
+    { "id" : "1stQuestion", "file" : "../resources/images/Finales/1stQuestionText.png" },
+    { "id" : "2ndQuestion", "file" : "../resources/images/Finales/2ndQuestionText.png" },
+    { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
+    { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
+   
+    {
+      "id": "incrementButton",
+      "file": "../resources/images/IncrementButton.png"
+    },
+    {
+      "id": "decreaseButton",
+      "file": "../resources/images/decreaseButton.png"
+    },
+    {
+      "id": "backButton",
+      "file": "../resources/images/Finales/BotonEstante.png"
+    },
+    {
+      "id": "B1",
+      "file": "../resources/images/Finales/1.PNG"
+    },
+    {
+      "id": "ChangeRoom",
+      "file": "../resources/images/Finales/CambiarSala.PNG"
+    },
+    {
+      "id": "B7",
+      "file": "../resources/images/Finales/7.PNG"
+    },
+    {
+      "id": "Title",
+      "file": "../resources/images/TemporalTitleImage.png"
+    },
+    
+    {
+      "id": "ExitToMenu",
+      "file": "../resources/images/Finales/RectangleExitToMenuButton.png"
+    },
+    {
+      "id": "B3",
+      "file": "../resources/images/Finales/3.PNG"
+    },
+    {
+      "id": "Continue",
+      "file": "../resources/images/Finales/RectangleContinueButton.png"
+    },
+    {
+      "id": "MenuBackground",
+      "file": "../resources/images/Finales/MenuBackground.png"
+    },
+    {
+      "id": "mobileBackground",
+      "file": "../resources/images/Finales/TelefonoZoom.png"
+    },
+    {
+      "id": "LivingroomBackground",
+      "file": "../resources/images/Finales/SalonFondo.PNG"
+    },
+    {
+      "id": "Timetable",
+      "file": "../resources/images/Finales/Horario.PNG"
+    },
+    {
+      "id": "TimetableZoom",
+      "file": "../resources/images/Finales/horarioZoom.png"
+    },
+    {
+      "id": "fondoPruebaLog",
+      "file": "../resources/images/fondoLogPrueba.png"
+    }
+     ],
+
+  "messages": [
+    {
+      "id": "start",
+      "text": "Press space to start",
+      "font": "ARIAL24",
+      "color": "0x441155ff"
+    }
+  ],
+
+    "sounds": [
+      {
+        "id": "explosion",
+        "file": "../resources/sound/sfx/explosion.wav"
+    },
+   
+    {
+        "id": "avanzar_dialogo",
+        "file": "../resources/sound/sfx/click_avanzar_dialogo.wav"
+    },
+    {
+        "id": "boton",
+        "file": "../resources/sound/sfx/click_boton.wav"
+    },
+    {
+        "id": "puzzle",
+        "file": "../resources/sound/sfx/click_puzzle.wav"
+    },
+  
+    {
+        "id": "puerta",
+        "file": "../resources/sound/sfx/puerta.wav"
+    },
+    {
+      "id": "cuerda",
+      "file": "../resources/sound/sfx/cuerda.wav"
+    },
+    {
+      "id": "correcto",
+      "file": "../resources/sound/sfx/correcto.wav"
+    },
+    {
+      "id": "incorrecto",
+      "file": "../resources/sound/sfx/incorrecto.wav"
+    }
+    ],
+
+  "musics" : [
+    {
+        "id": "sala1",
+        "file":  "../resources/sound/music/sala1.wav"
+    }
+  ]
+
+}

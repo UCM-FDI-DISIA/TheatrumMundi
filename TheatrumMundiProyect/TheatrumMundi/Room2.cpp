@@ -53,6 +53,7 @@ void Room2Scene::init()
 	_setCaseResolution();
 	roomEvent[InitialDialogue]();
 	SDL_Delay(1000);
+	
 
 }
 void Room2Scene::resolvedPuzzle(int i)
@@ -138,7 +139,9 @@ void Room2Scene::_setRoomEvents()
 		rmObjects.organMosaic.second = true;
 		};
 	roomEvent[OrganZoom] = [this] {
-		if (!puzzlesol[2]) rmObjects.hook->getMngr()->setActive(rmObjects.hook, false); //if organ is not complete don't show the hook
+		int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
+		
+		if (!puzzlesol[2]&&variant !=2) rmObjects.hook->getMngr()->setActive(rmObjects.hook, false); //if organ is not complete don't show the hook
 		rmObjects.zoomOrgan->getMngr()->setActive(rmObjects.zoomOrgan, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);
 		rmObjects.organ->getMngr()->setActive(rmObjects.organ, true);
@@ -319,7 +322,7 @@ void Room2Scene::_setCaseResolution()
 	Game::Instance()->getDataManager()->SetSceneCount(ROOM1);
 
 	//get actual variant
-	int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(0);
+	int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(1);
 
 
 	auto background = entityFactory->CreateImageEntity(
@@ -351,10 +354,10 @@ void Room2Scene::_setCaseResolution()
 	entityManager->getComponent<ClickComponent>(possibleButton)
 		->connect(ClickComponent::JUST_CLICKED, [this, variantAct, background]()
 			{
-				if (variantAct != 0) //if its the not correct variant one dies
+				if (variantAct == 0) //if its the not correct variant one dies
 				{
 
-					Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
+					Game::Instance()->getDataManager()->SetCharacterDead(SOL);
 					roomEvent[BadEnd]();
 				}
 				else
@@ -376,10 +379,10 @@ void Room2Scene::_setCaseResolution()
 	entityManager->getComponent<ClickComponent>(noPossibleButton)
 		->connect(ClickComponent::JUST_CLICKED, [this, variantAct, background]()
 			{
-				if (variantAct == 0) //if its the not correct variant one dies
+				if (variantAct != 0) //if its the not correct variant one dies
 				{
 
-					Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
+					Game::Instance()->getDataManager()->SetCharacterDead(SOL);
 					roomEvent[BadEnd]();
 
 				}
@@ -529,8 +532,14 @@ void Room2Scene::_setInteractuables()
 		roomEvent[OrganPuzzleSceneRsv](); //ONLY FOR DEBUGGING
 		});
 	rmObjects.organ->getMngr()->setActive(rmObjects.organ, false);
-
-	rmObjects.rope = entityFactory->CreateInteractableEntity(entityManager, "CuerdaLarga", EntityFactory::RECTAREA, Vector2D(200, 350), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+	int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
+	if (variant != 0) {
+		rmObjects.rope = entityFactory->CreateInteractableEntity(entityManager, "CuerdaGruesa", EntityFactory::RECTAREA, Vector2D(200, 350), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		
+	}
+	else {
+		rmObjects.rope = entityFactory->CreateInteractableEntity(entityManager, "CuerdaFina", EntityFactory::RECTAREA, Vector2D(200, 350), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+	}
 	entityManager->getComponent<ClickComponent>(rmObjects.rope)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[Rope]();
 		});
@@ -542,7 +551,7 @@ void Room2Scene::_setInteractuables()
 
 	//After completeing organ
 
-	rmObjects.hook = entityFactory->CreateInteractableEntity(entityManager, "Gancho", EntityFactory::RECTAREA, Vector2D(400, 190), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+	rmObjects.hook = entityFactory->CreateInteractableEntity(entityManager, "Varilla", EntityFactory::RECTAREA, Vector2D(400, 190), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 	entityManager->getComponent<ClickComponent>(rmObjects.hook)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[Hook]();
 		});
@@ -568,9 +577,17 @@ void Room2Scene::_setInteractuables()
 	secretEntryOpen->getMngr()->setActive(secretEntryOpen, false);
 
 	rmObjects.secretEntryInTheZoomed->getMngr()->getComponent<ClickComponent>(rmObjects.secretEntryInTheZoomed)->connect(ClickComponent::JUST_CLICKED, [this, secretEntryOpen]() {
-		//if variant Y
-		secretEntryOpen->getMngr()->setActive(secretEntryOpen, true);
-		rmObjects.secretEntryInTheZoomed->getMngr()->removeEntity(rmObjects.secretEntryInTheZoomed);
+		int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
+		if (variant == 2)
+		{
+			secretEntryOpen->getMngr()->setActive(secretEntryOpen, true);
+			rmObjects.secretEntryInTheZoomed->getMngr()->removeEntity(rmObjects.secretEntryInTheZoomed);
+		}
+		else {
+
+		}
+
+		
 
 		//else SONIDO/SOUND un sonidito de algo met�lico que no ceda a abrirse
 	});
