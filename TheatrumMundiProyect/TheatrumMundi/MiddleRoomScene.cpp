@@ -182,13 +182,13 @@ void MiddleRoomScene::endDialogue()
 	switch (aux)
 	{
 	case SceneCount::MIDDLEROOM1:
-		Game::Instance()->getSceneManager()->loadScene(ROOM_3);
+		Game::Instance()->getSceneManager()->loadScene(ROOM_1);
 		break;
 	case SceneCount::MIDDLEROOM2:
 		Game::Instance()->getSceneManager()->loadScene(ROOM_2);
 		break;
 	case SceneCount::MIDDLEROOM3:
-		Game::Instance()->getSceneManager()->loadScene(ROOM_1);
+		Game::Instance()->getSceneManager()->loadScene(ROOM_3);
 		break;
 	case SceneCount::END:
 		//Load the endScene WIP
