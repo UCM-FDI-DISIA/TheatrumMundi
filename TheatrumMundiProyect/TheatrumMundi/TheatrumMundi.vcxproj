@@ -79,7 +79,7 @@
     <ClCompile Include="SceneRoomTemplate.cpp" />
     <ClCompile Include="SceneTemplate.cpp" />
     <ClCompile Include="SlowRotateComponent.cpp" />
-    <ClCompile Include="StrongBoxPuzzle.cpp" />
+    <ClCompile Include="LockerPuzzle.cpp" />
     <ClCompile Include="TeaCupPuzzleScene.cpp" />
     <ClCompile Include="TelePuzzleScene.cpp" />
     <ClCompile Include="TiledAreaComponent.cpp" />
@@ -270,7 +270,7 @@
     <ClInclude Include="SceneRoomTemplate.h" />
     <ClInclude Include="SceneTemplate.h" />
     <ClInclude Include="SlowRotateComponent.h" />
-    <ClInclude Include="StrongBoxPuzzle.h" />
+    <ClInclude Include="LockerPuzzle.h" />
     <ClInclude Include="TeaCupPuzzleScene.h" />
     <ClInclude Include="TelePuzzleScene.h" />
     <ClInclude Include="TextInfo.h" />

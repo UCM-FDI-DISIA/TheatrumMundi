@@ -24,6 +24,7 @@
 #include "TelePuzzleScene.h"
 #include "DoorPuzzleScene.h"
 #include "XOPuzzleScene.h"
+#include "LockerPuzzle.h"
 #include "CSVdataRecolector.h"
 SceneManager::SceneManager()
 {
