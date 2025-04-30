@@ -67,6 +67,9 @@
     <ClCompile Include="TombPuzzleScene.cpp" />
     <ClCompile Include="..\src\Components\BehaviorStateComponent.cpp" />
     <ClCompile Include="Room3.cpp" />
+    <ClCompile Include="SlowRotateComponent.cpp" />
+    <ClCompile Include="StrongBoxPuzzle.cpp" />
+    <ClCompile Include="Box.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -257,6 +260,9 @@
     <ClInclude Include="TombPuzzleScene.h" />
     <ClInclude Include="..\src\Components\BehaviorStateComponent.h" />
     <ClInclude Include="Room3.h" />
+    <ClInclude Include="SlowRotateComponent.h" />
+    <ClInclude Include="StrongBoxPuzzle.h" />
+    <ClInclude Include="Box.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />
