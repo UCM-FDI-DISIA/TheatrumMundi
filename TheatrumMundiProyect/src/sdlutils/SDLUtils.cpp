@@ -257,8 +257,8 @@ void SDLUtils::loadReasources(std::string filename) {
 					std::cout << "Loading sound effect with id: " << key << std::endl;
 #endif
 					
-					Sound* sound = AudioManager::Instance().createSound(file);
-					_sounds.emplace(key, std::unique_ptr<Sound>(sound));
+					std::shared_ptr<Sound> sound = AudioManager::Instance().createSound(file);
+					_sounds.emplace(key, sound); 
 				}
 				else {
 					throw "'sounds' array in '" + filename + "' includes and invalid value";
@@ -283,8 +283,8 @@ void SDLUtils::loadReasources(std::string filename) {
 #ifdef _DEBUG
 					std::cout << "Loading music with id: " << key << std::endl;
 #endif
-					Sound* music = AudioManager::Instance().createSound(file);
-					_musics.emplace(key, std::unique_ptr<Sound>(music));
+					std::shared_ptr<Sound> music = AudioManager::Instance().createSound(file);
+					_musics.emplace(key, music);
 				} else {
 					throw "'musics' array in '" + filename
 							+ "' includes and invalid value";

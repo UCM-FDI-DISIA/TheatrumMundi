@@ -566,7 +566,7 @@ bool PipePuzzleScene::Check()
 	if (_waterPipes[8]->getPipeInfo().result ==true&&!solved) //the last pipe has the solution
 	{
 
-		Sound* waterSound = sdlutils().soundEffects().at("agua").get();
+		std::shared_ptr<Sound> waterSound = sdlutils().soundEffects().at("agua");
 		AudioManager::Instance().playSound(waterSound);
 		solved = true;
 		Win();
@@ -625,12 +625,12 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 		AudioManager& a = AudioManager::Instance();
 
-		Sound* buttonSound = sdlutils().soundEffects().at("boton").get();
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
 		
 
-		Sound* ropeSound = sdlutils().soundEffects().at("cuerda").get();
+		std::shared_ptr<Sound> ropeSound = sdlutils().soundEffects().at("cuerda");
 		
 		//Create cube without water
 		_cubeWithoutWater = entityFactory->CreateImageEntity(

@@ -39,16 +39,16 @@ public:
     void shutdown();
 
     // Load and play
-    Sound* createSound(const std::string& filePath);
-    void playSound(Sound* sound, bool loop = false);
-    void stopSound(Sound* sound);
-    void pauseSound(Sound* sound);
-    void resumeSound(Sound* sound);
+    std::shared_ptr<Sound> createSound(const std::string& filePath);
+    void playSound(std::shared_ptr<Sound> sound, bool loop = false);
+    void stopSound(std::shared_ptr<Sound> sound);
+    void pauseSound(std::shared_ptr<Sound> sound);
+    void resumeSound(std::shared_ptr<Sound> sound);
 
     // Setters
-    void setVolume(Sound* sound, float volume);
-    void setPitch(Sound* sound, float pitch);
-    void set3DPosition(Sound* sound, float x, float y, float z);
+    void setVolume(std::shared_ptr<Sound> sound, float volume);
+    void setPitch(std::shared_ptr<Sound> sound, float pitch);
+    void set3DPosition(std::shared_ptr<Sound> sound, float x, float y, float z);
     void setListenerPosition(float x, float y, float z);
 
     void update();
@@ -58,5 +58,5 @@ private:
     ~AudioManager();
 
     FMOD::System* system = nullptr;
-    std::vector<std::unique_ptr<Sound>> sounds;
+    std::vector<std::shared_ptr<Sound>> sounds;
 };

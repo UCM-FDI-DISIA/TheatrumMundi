@@ -46,8 +46,8 @@ void InitialScene::init()
 		a.playSound(music);
 		*/
 
-		Sound* buttonSound = sdlutils().soundEffects().at("boton").get();
-		Sound* music = sdlutils().musics().at("sala1").get();
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
+		std::shared_ptr<Sound> music = sdlutils().musics().at("sala1");
 
 		a.playSound(music, true);
 
