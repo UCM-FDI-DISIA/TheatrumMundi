@@ -242,14 +242,18 @@ void WriteTextComponent<DescriptionInfo>::render()
 template <>
 void WriteTextComponent<string>::render()
 {
-	if (_currentText.empty()) return;
+	if (textStructure == nullptr || textStructure->empty()) {
 
+		return;
+	}
+	
+	
 	// Author
 	Texture* nameText = new Texture(sdlutils().renderer(), *textStructure, _myFont, _color); //convertir texto en textura
 	
 	// x y w h
-	SDL_Rect nameRect = { 325 * Game::Instance()->wscreenScale,
-		465 * Game::Instance()->hscreenScale,
+	SDL_Rect nameRect = { 520* Game::Instance()->wscreenScale,
+		350* Game::Instance()->hscreenScale,
 
 		nameText->width() * Game::Instance()->wscreenScale,
 		nameText->height() * Game::Instance()->hscreenScale };
@@ -259,9 +263,6 @@ void WriteTextComponent<string>::render()
 	
 	
 	delete nameText;
-
-	
-	
 
 
 

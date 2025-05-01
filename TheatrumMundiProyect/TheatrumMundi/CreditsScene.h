@@ -2,6 +2,7 @@
 #include "SceneTemplate.h"
 #include "ecs.h"
 #include "../src/components/WriteTextComponent.h"
+#include <string>
 class CreditsScene : public SceneTemplate
 {
 private:
@@ -12,6 +13,8 @@ private:
 	int dialogCount;
 	int currentFrameIndex;
 	Entity* courtainsBackground;
+	std::string cred1;
+	std::string cred2;
 
 public:
 	CreditsScene();

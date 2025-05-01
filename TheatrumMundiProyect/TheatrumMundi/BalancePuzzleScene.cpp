@@ -31,7 +31,6 @@ using namespace std;
 
 BalancePuzzleScene::BalancePuzzleScene()
 {
-	std::cout << "DENTRO BALANZA COMSTRUCTOR" << std::endl;
 	_featherIsInBalance = false;
 	_hasFeather = false;
 
@@ -47,7 +46,6 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted) {
 
-		std::cout << "DENTRO BALANZA INIT" << std::endl;
 		isStarted = true;
 		room = sr;
 

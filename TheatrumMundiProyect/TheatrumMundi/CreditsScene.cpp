@@ -28,6 +28,7 @@ void CreditsScene::init()
 {
 	if (!isStarted) {
 
+		std::cout << "DENTRO INIT" << std::endl;
 		AudioManager& a = AudioManager::Instance();
 
 		a.setListenerPosition(0, 0, 0);
@@ -40,9 +41,9 @@ void CreditsScene::init()
 		a.playSound(music);
 
 		// black Background
-		auto _background = entityFactory->CreateImageEntity(entityManager, "FondoNegro", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
+		//auto _background = entityFactory->CreateImageEntity(entityManager, "FondoNegro", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
 
-		// AnimationFrames
+		/*// AnimationFrames
 		courtainAnimationFrames.clear();
 		courtainAnimationFrames.push_back(&sdlutils().images().at("TutorialZoom2"));
 		courtainAnimationFrames.push_back(&sdlutils().images().at("TutorialZoom3"));
@@ -56,27 +57,27 @@ void CreditsScene::init()
 		courtainAnimationFrames.push_back(&sdlutils().images().at("TutorialZoom5"));
 		courtainAnimationFrames.push_back(&sdlutils().images().at("FondoNegro"));
 		courtainAnimationFrames.push_back(&sdlutils().images().at("FondoNegro"));
+		*/
 
-
-		currentFrameIndex = 0;
+		//currentFrameIndex = 0;
 
 		//frameTimer.resetTime();
 		//startDialogue("Tutorial8");
-		isAnimating = true;
+		//isAnimating = true;
 		// Change to first texture
-		courtainsBackground->getMngr()->getComponent<Image>(courtainsBackground)->setTexture(courtainAnimationFrames[0]);
+		//courtainsBackground->getMngr()->getComponent<Image>(courtainsBackground)->setTexture(courtainAnimationFrames[0]);
 
-		closedSecondTime = false;
+		//closedSecondTime = false;
 
-		string creds = "a";
+		cred1 = "Hecho por Electric Bogaloo";
 
 		//texto
-		auto _text = entityManager->addEntity(ecs::grp::DEFAULT);
-		Transform* trTextLog = entityManager->addComponent<Transform>(_text, Vector2D(0, 0), Vector2D(0, 0), 800, 600, 0);
-		SDL_Color colorText = { 255, 255, 255, 255 };
-		WriteTextComponent<string>* writeLog =
-			entityManager->addComponent <WriteTextComponent<string>>(_text, sdlutils().fonts().at("BASE"), colorText, &creds); //write text component
-		entityManager->setActive(_text, false);
+		auto _text1 = entityManager->addEntity(ecs::grp::DEFAULT);
+		Transform* trTextLog1 = entityManager->addComponent<Transform>(_text1, Vector2D(0, 0), Vector2D(0, 0), 800, 600, 0);
+		SDL_Color colorText1 = { 255, 255, 255, 255 };
+		WriteTextComponent<string>* writeLog1 = entityManager->addComponent <WriteTextComponent<string>>(_text1, sdlutils().fonts().at("BASE"), colorText1, &cred1); //write text component
+		//entityManager->setActive(_text, true);
+
 		
 	}
 
