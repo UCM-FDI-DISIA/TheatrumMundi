@@ -14,6 +14,9 @@
 #include "../TheatrumMundi/PhysicsBodyComponent.h"
 #include "Image.h"
 
+
+
+
 Box::Box()
 {
 	dialogueManager = new DialogueManager(2);
@@ -57,6 +60,113 @@ void Box::init(SceneRoomTemplate* sr)
 			auto _button15 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(618, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 			auto _button16 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(668, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
+			
+				ClickComponent* button1Click = entityManager->addComponent<ClickComponent>(_button1);
+				button1Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(1);
+					});
+				ClickComponent* button2Click = entityManager->addComponent<ClickComponent>(_button2);
+				button2Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(2);
+					});
+				ClickComponent* button3Click = entityManager->addComponent<ClickComponent>(_button3);
+				button3Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(3);
+					});
+				ClickComponent* button4Click = entityManager->addComponent<ClickComponent>(_button4);
+				button4Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(4);
+					});
+				ClickComponent* button5Click = entityManager->addComponent<ClickComponent>(_button5);
+				button5Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(5);
+					});
+				ClickComponent* button6Click = entityManager->addComponent<ClickComponent>(_button6);
+				button6Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(6);
+					});
+				ClickComponent* button7Click = entityManager->addComponent<ClickComponent>(_button7);
+				button7Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(7);
+					});
+				ClickComponent* button8Click = entityManager->addComponent<ClickComponent>(_button8);
+				button8Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(8);
+					});
+				ClickComponent* button9Click = entityManager->addComponent<ClickComponent>(_button9);
+				button9Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(9);
+					});
+				ClickComponent* button10Click = entityManager->addComponent<ClickComponent>(_button10);
+				button10Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(10);
+					});
+				ClickComponent* button11Click = entityManager->addComponent<ClickComponent>(_button11);
+				button11Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(11);
+					});
+				ClickComponent* button12Click = entityManager->addComponent<ClickComponent>(_button12);
+				button12Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(12);
+					});
+				ClickComponent* button13Click = entityManager->addComponent<ClickComponent>(_button13);
+				button13Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(13);
+					});
+				ClickComponent* button14Click = entityManager->addComponent<ClickComponent>(_button14);
+				button14Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(14);
+					});
+				ClickComponent* button15Click = entityManager->addComponent<ClickComponent>(_button15);
+				button15Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(15);
+					});
+				ClickComponent* button16Click = entityManager->addComponent<ClickComponent>(_button16);
+				button16Click->connect(ClickComponent::JUST_CLICKED, [this]()
+					{
+						pushButton(16);
+					});
+			
+		
+			// Initial image
+			Image* img1 = entityManager->addComponent<Image>(_button1, &sdlutils().images().at("bookComb0"));
+			Image* img2 = entityManager->addComponent<Image>(_button2, &sdlutils().images().at("bookComb0"));
+			Image* img3 = entityManager->addComponent<Image>(_button3, &sdlutils().images().at("bookComb0"));
+			Image* img4 = entityManager->addComponent<Image>(_button4, &sdlutils().images().at("bookComb0"));
+			Image* img5 = entityManager->addComponent<Image>(_button5, &sdlutils().images().at("bookComb0"));
+			Image* img6 = entityManager->addComponent<Image>(_button6, &sdlutils().images().at("bookComb0"));
+			Image* img7 = entityManager->addComponent<Image>(_button7, &sdlutils().images().at("bookComb0"));
+			Image* img8 = entityManager->addComponent<Image>(_button8, &sdlutils().images().at("bookComb0"));
+			Image* img9 = entityManager->addComponent<Image>(_button9, &sdlutils().images().at("bookComb0"));
+			Image* img10 = entityManager->addComponent<Image>(_button10, &sdlutils().images().at("bookComb0"));
+			Image* img11 = entityManager->addComponent<Image>(_button11, &sdlutils().images().at("bookComb0"));
+			Image* img12 = entityManager->addComponent<Image>(_button12, &sdlutils().images().at("bookComb0"));
+			Image* img13 = entityManager->addComponent<Image>(_button13, &sdlutils().images().at("bookComb0"));
+			Image* img14 = entityManager->addComponent<Image>(_button14, &sdlutils().images().at("bookComb0"));
+			Image* img15 = entityManager->addComponent<Image>(_button15, &sdlutils().images().at("bookComb0"));
+			Image* img16 = entityManager->addComponent<Image>(_button16, &sdlutils().images().at("bookComb0"));
+			
+			
+
+			buttonImages = { img1, img2, img3, img4,img5,img6,img7,img8,img9,img10,img11,img12,img13,img14,img15,img16 };
+			buttonImagesIni = { "bookComb0","bookComb0","bookComb0","bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0"};
+			//Change this when we have the final assets
+			
 
 
 #pragma region UI
@@ -158,4 +268,73 @@ void Box::init(SceneRoomTemplate* sr)
 		}
 		//createInvEntities(sr);
 	
+}
+
+void Box::pushButton(int i)
+{
+	if (!completed) {
+		//buttonImages[i]->setTexture(&sdlutils().images().at("letterPushed")); // The one we have to use in the end
+		buttonImages[i - 1]->setTexture(&sdlutils().images().at("bookComb1"));
+
+		if (stage == 0) {
+			if (i == 3) {
+				lastWright = true;
+			}
+			else {
+				lastWright = false;
+			}
+		}
+
+		if (stage == 1) {
+			if (i == 8) {
+				lastWright = true;
+			}
+			else {
+				lastWright = false;
+			}
+		}
+
+		if (stage == 2) {
+			if (i == 14) {
+				lastWright = true;
+			}
+			else {
+				lastWright = false;
+			}
+		}
+
+		if (stage == 3) {
+			if (i == 5) {
+				lastWright = true;
+			}
+			else {
+				lastWright = false;
+			}
+		}
+
+		if (lastWright || stage < 1) {
+			stage++;
+			std::cout << "Stage: " << stage << std::endl;
+			if (stage == 4) {
+				Win();
+				
+
+			}
+		}
+		else {
+
+			for (int j = 0; j < buttonImages.size(); j++) {
+
+				buttonImages[j]->setTexture(&sdlutils().images().at(buttonImagesIni[j]));
+
+			}
+			stage = 0;
+		}
+	}
+}
+
+void Box::Win()
+{
+	completed = true;
+	std::cout << "WIN" << std::endl;
 }
