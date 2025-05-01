@@ -21,6 +21,7 @@
 #include "PauseManager.h"
 #include "WriteTextComponent.h"
 #include "DialogueManager.h"
+#include "BehaviorStateComponent.h"
 
 Room3Scene::Room3Scene()
 {
@@ -387,6 +388,50 @@ void Room3Scene::_setInteractuables()
 	entityManager->getComponent<ClickComponent>(rmObjects.parrot)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		//roomEvent[LightsOff]();
 		});
+	/*
+	BehaviorStateComponent* parrotStateCom = entityManager->addComponent<BehaviorStateComponent>(rmObjects.parrot);
+	parrotStateCom->setState(ParrotState::SHOOTING_SOUND); // The other will be setted after finishin the puzzle
+
+
+	parrotStateCom->defBehavior(ParrotState::SHOOTING_SOUND,
+		[&]() {
+			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
+				audioMngr.playSound(shootingSound);
+				parrotUtils.lastSoundTime = sdlutils().currTime();
+			}
+		});
+
+	parrotStateCom->defBehavior(ParrotState::RED_LIGHTS,
+		[&]() {
+			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
+
+				audioMngr.playSound(parrotUtils.codeSequenceSounds[parrotUtils.codeSeqIteration]);
+
+				++parrotUtils.codeSeqIteration;
+				parrotUtils.codeSeqIteration = parrotUtils.codeSequenceSounds.size() % parrotUtils.codeSeqIteration;
+
+				parrotUtils.lastSoundTime = sdlutils().currTime();
+			}
+		});
+
+
+	TriggerComponent* parrotTriggerCom = entityManager->addComponent<TriggerComponent>(rmObjects.parrot);
+
+	parrotTriggerCom->connect(TriggerComponent::AREA_ENTERED,
+		[&]() {
+			if (parrotStateCom->getState() != ParrotState::RED_LIGHTS) return;
+
+			auto colliders = parrotTriggerCom->triggerContextEntities(); // Entities that triggered
+
+			for (ecs::entity_t e : colliders) {
+				if (e->getMngr()->getComponent<UltraVioletStuff>(e) != nullptr) {
+					std::cout << "Parrot Explodes!!!\n";
+					// EXPLOSION
+					// entityManager->setActive(parrotEnt, false);
+				}
+			}
+		});*/
+
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.parrot));
 
 	//CORPSE

@@ -76,4 +76,14 @@ private:
 		//ScrollComponent
 		ScrollComponent* backgroundScroll = nullptr;
 	} rmObjects;
+
+	ecs::entity_t parrotEnt;
+
+	struct  {
+		Uint32 lastSoundTime; // The time where the parrot emited the last noise
+		std::vector<Sound> codeSequenceSounds; // Sequence of sounds in the second phase
+		int codeSeqIteration = 0;
+	}parrotUtils;
+
+	enum ParrotState { SHOOTING_SOUND, RED_LIGHTS };
 };
