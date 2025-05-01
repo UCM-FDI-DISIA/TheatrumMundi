@@ -160,13 +160,13 @@ void Room3Scene::_setRoomAudio()
 	//Audio sfx 
 	AudioManager& audioMngr = AudioManager::Instance();
 
-	rmSounds.uiButton = sdlutils().soundEffects().at("boton").get();
+	rmSounds.uiButton = sdlutils().soundEffects().at("boton");
 	audioMngr.setVolume(rmSounds.uiButton, 0.2);
 
-	rmSounds.puzzleButton = sdlutils().soundEffects().at("puzzle").get();
+	rmSounds.puzzleButton = sdlutils().soundEffects().at("puzzle");
 	audioMngr.setVolume(rmSounds.puzzleButton, 0.3);
 
-	rmSounds.doorSound = sdlutils().soundEffects().at("puerta").get();
+	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
 
 	/*Audio music
 	Sound room1music = sdlutils().musics().at("sala2");
