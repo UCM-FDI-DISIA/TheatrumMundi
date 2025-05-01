@@ -3,6 +3,8 @@
 #include "RectArea2D.h"
 #include "../TheatrumMundi/AudioManager.h"
 
+#include <SDL.h>
+
 class ScrollComponent;
 class Room3Scene : public SceneRoomTemplate {
 protected:
@@ -49,6 +51,7 @@ private:
 		Sound* uiButton;
 		Sound* puzzleButton;
 		Sound* doorSound;
+		Sound* explosionSound;
 	} rmSounds;
 
 	struct roomObjects {
@@ -77,13 +80,11 @@ private:
 		ScrollComponent* backgroundScroll = nullptr;
 	} rmObjects;
 
-	ecs::entity_t parrotEnt;
-
-	struct  {
-		Uint32 lastSoundTime; // The time where the parrot emited the last noise
-		std::vector<Sound> codeSequenceSounds; // Sequence of sounds in the second phase
+	struct ParrotUtils{
+		Uint32 lastSoundTime = 0; // The time where the parrot emited the last noise
+		std::vector<Sound*> codeSequenceSounds; // Sequence of sounds in the second phase
 		int codeSeqIteration = 0;
-	}parrotUtils;
+	} parrotUtils;
 
 	enum ParrotState { SHOOTING_SOUND, RED_LIGHTS };
 };

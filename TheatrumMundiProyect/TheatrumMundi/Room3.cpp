@@ -169,6 +169,7 @@ void Room3Scene::_setRoomAudio()
 
 	rmSounds.doorSound = sdlutils().soundEffects().at("puerta").get();
 
+	rmSounds.explosionSound = sdlutils().soundEffects().at("explosion").get();
 	/*Audio music
 	Sound room1music = sdlutils().musics().at("sala2");
 	audioMngr.setLooping(room1music, true);
@@ -388,15 +389,18 @@ void Room3Scene::_setInteractuables()
 	entityManager->getComponent<ClickComponent>(rmObjects.parrot)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		//roomEvent[LightsOff]();
 		});
-	/*
+	
 	BehaviorStateComponent* parrotStateCom = entityManager->addComponent<BehaviorStateComponent>(rmObjects.parrot);
-	parrotStateCom->setState(ParrotState::SHOOTING_SOUND); // The other will be setted after finishin the puzzle
 
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.explosionSound); // TODO: Gunshoot
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.doorSound); // TODO: S
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.uiButton); // TODO: T
+	// More sounds...
 
 	parrotStateCom->defBehavior(ParrotState::SHOOTING_SOUND,
 		[&]() {
 			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
-				audioMngr.playSound(shootingSound);
+				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[0]);
 				parrotUtils.lastSoundTime = sdlutils().currTime();
 			}
 		});
@@ -405,32 +409,16 @@ void Room3Scene::_setInteractuables()
 		[&]() {
 			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
 
-				audioMngr.playSound(parrotUtils.codeSequenceSounds[parrotUtils.codeSeqIteration]);
+				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[parrotUtils.codeSeqIteration]);
 
 				++parrotUtils.codeSeqIteration;
-				parrotUtils.codeSeqIteration = parrotUtils.codeSequenceSounds.size() % parrotUtils.codeSeqIteration;
+				parrotUtils.codeSeqIteration = parrotUtils.codeSeqIteration % parrotUtils.codeSequenceSounds.size();
 
 				parrotUtils.lastSoundTime = sdlutils().currTime();
 			}
 		});
 
-
-	TriggerComponent* parrotTriggerCom = entityManager->addComponent<TriggerComponent>(rmObjects.parrot);
-
-	parrotTriggerCom->connect(TriggerComponent::AREA_ENTERED,
-		[&]() {
-			if (parrotStateCom->getState() != ParrotState::RED_LIGHTS) return;
-
-			auto colliders = parrotTriggerCom->triggerContextEntities(); // Entities that triggered
-
-			for (ecs::entity_t e : colliders) {
-				if (e->getMngr()->getComponent<UltraVioletStuff>(e) != nullptr) {
-					std::cout << "Parrot Explodes!!!\n";
-					// EXPLOSION
-					// entityManager->setActive(parrotEnt, false);
-				}
-			}
-		});*/
+	parrotStateCom->setState(ParrotState::SHOOTING_SOUND); // The other will be setted after finishin the puzzle
 
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.parrot));
 
