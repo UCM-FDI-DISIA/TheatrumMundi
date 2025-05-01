@@ -112,12 +112,12 @@ void TutorialScene::init()
 		finishallpuzzles = false;
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
-		Sound* buttonSound = sdlutils().soundEffects().at("boton").get();
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
-		Sound* puzzleButtonSound = sdlutils().soundEffects().at("puzzle").get();
+		std::shared_ptr<Sound> puzzleButtonSound = sdlutils().soundEffects().at("puzzle");
 		a.setVolume(puzzleButtonSound, 0.3);
 
-		Sound* doorSound = sdlutils().soundEffects().at("puerta").get();
+		std::shared_ptr<Sound> doorSound = sdlutils().soundEffects().at("puerta");
 		a.setVolume(doorSound, 0.6);
 		a.set3DPosition(doorSound, -500, 0, 0);
 

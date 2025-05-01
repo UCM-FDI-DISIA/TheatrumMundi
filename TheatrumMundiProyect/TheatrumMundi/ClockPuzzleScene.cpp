@@ -47,12 +47,12 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		room = sr;
 		AudioManager& a = AudioManager::Instance();
-		Sound* clockMinSound = sdlutils().soundEffects().at("aguja_minutero").get();
-		Sound* clockHorSound = sdlutils().soundEffects().at("aguja_horario").get();
+		std::shared_ptr<Sound> clockMinSound = sdlutils().soundEffects().at("aguja_minutero");
+		std::shared_ptr<Sound> clockHorSound = sdlutils().soundEffects().at("aguja_horario");
 		a.setVolume(clockMinSound, 0.2);
 		a.setVolume(clockHorSound, 0.2);
 
-		Sound* buttonSound = sdlutils().soundEffects().at("boton").get();
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
 
