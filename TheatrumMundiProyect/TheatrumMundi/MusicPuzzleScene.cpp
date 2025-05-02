@@ -195,28 +195,63 @@ void MusicPuzzleScene::unload()
 
 void MusicPuzzleScene::refresh()
 {
-    if (_isAnimating)
+    if (_isStartDelay)
     {
-        //Uint32 currentTime = sdlutils().virtualTimer().currRealTime();
-        if (frameTimer.currRealTime() > _animationDuration)
+        if (sdlutils().virtualTimer().currRealTime() - _noteStartTime >= NOTE_DURATION + 100)
         {
-            _isAnimating = false;
+            //when initial animation delay is finished sound sequence begins
+            _isStartDelay = false;
+            startSoundSequence();
+            _noteStartTime = sdlutils().virtualTimer().currRealTime(); //restart noteStartTime for sound sequence
+        }
+        return;
+    }
 
-            // Reactive all scene buttons
-            frameTimer.resetTime();
+    if (_isPlayingSequence)
+    {
+        int currTime = sdlutils().virtualTimer().currRealTime();
+        
+        if (currTime - _noteStartTime >= NOTE_DURATION)
+        {
+            _currentNoteIndex++;
 
-            //recolor displayed notes
-            for (auto a : displayedNotes)
+            if (_currentNoteIndex < _currentComb.size()) //if there is more musical notes to play...
             {
-                auto aIm = entityManager->getComponent<Image>(a);
-                aIm->setAlpha(250);
+                AudioManager::Instance().playSound(musicalSounds[_currentComb[_currentNoteIndex]]);
+                _noteStartTime = currTime;
             }
-
-            if (_animationType) changePhase();
+            else if (_currentNoteIndex == _currentComb.size()) //if all musical notes from comb have been played...
+            {
+                std::shared_ptr<Sound> correctSound;
+                
+                //play correct or incorrect sound
+                if(_animationType) correctSound = sdlutils().soundEffects().at("correcto");
+                else correctSound = sdlutils().soundEffects().at("incorrecto");
+                
+                AudioManager::Instance().playSound(correctSound);
+                _noteStartTime = currTime;
+            }
             else
             {
-                cleanCombination();
-                cleanDisplayedNotes();
+                //end of sound animation
+                _isPlayingSequence = false;
+                _isAnimating = false;
+
+                //reactive all scene buttons
+                
+                //recolor displayed notes
+                for (auto a : displayedNotes)
+                {
+                    auto aIm = entityManager->getComponent<Image>(a);
+                    aIm->setAlpha(250);
+                }
+
+                if (_animationType) changePhase();
+                else
+                {
+                    cleanCombination();
+                    cleanDisplayedNotes();
+                }
             }
         }
         else
@@ -369,8 +404,10 @@ bool MusicPuzzleScene::playAnimation(bool correct)
 
     _animationType = correct;
 
-    frameTimer.resetTime();
     _isAnimating = true;
+    _isStartDelay = true; // little delay to let last musical note play accordingly
+    _noteStartTime = sdlutils().virtualTimer().currRealTime();
+
     
     //dissable all scene buttons
 
@@ -381,21 +418,19 @@ bool MusicPuzzleScene::playAnimation(bool correct)
         aIm->setAlpha(100);
     }
 
-    
-    if (correct)
-    {
-        //if currentComb was correct a joyful sound is played after
-        //joyful sound
-    }
-    else
-    {
-        //if currentComb was incorrect a bad sound is played after
-        //bad sound
-    }
-
     return true;
 
     
+}
+
+void MusicPuzzleScene::startSoundSequence()
+{
+    _isPlayingSequence = true;
+    _currentNoteIndex = 0;
+    _noteStartTime = sdlutils().virtualTimer().currRealTime();
+
+    //plays first note on combination
+    AudioManager::Instance().playSound(musicalSounds[_currentComb[_currentNoteIndex]]);
 }
 
 void MusicPuzzleScene::updateMusicImages()

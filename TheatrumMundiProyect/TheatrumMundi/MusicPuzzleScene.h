@@ -45,14 +45,24 @@ private:
 
 	std::vector<entity_t> displayedNotes; //entities's vector of displayed musical notes
 
-	std::vector<std::shared_ptr<Sound>> musicalSounds;
+	std::vector<std::shared_ptr<Sound>> musicalSounds; //vector that saves all musical notes' sounds
+
+	//animation
+	bool _animationType; //incorrect/correct combination
 
 	bool _isAnimating = false;
-	bool _animationType;
-	int _animationDuration = 1000;
-	VirtualTimer frameTimer;
+	bool _isStartDelay = false;
+	bool _isPlayingSequence = false;
 
-	void initializeMusicalSounds();
+	int _currentNoteIndex = 0;
+	int _noteStartTime = 0;
+	const int NOTE_DURATION = 900; //ms
+
+	
+
+
+	void initializeMusicalSounds(); //initializes musicalSounds vector
+	void startSoundSequence(); //starts playing the sound sequence
 	bool checkPhaseCombination(); //checks if current combination is correct
 	void cleanCombination(); //cleans combinations vectors
 	void addNoteToComb(Notes a); //deals with all possibilities when a note is added to the comb
