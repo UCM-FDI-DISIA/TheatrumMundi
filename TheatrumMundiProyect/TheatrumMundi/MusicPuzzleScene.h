@@ -5,7 +5,7 @@
 class array;
 class vector;
 class SceneRoomTemplate;
-
+class Sound;
 
 class MusicPuzzleScene : public ScenePuzzleTemplate
 {
@@ -45,12 +45,14 @@ private:
 
 	std::vector<entity_t> displayedNotes; //entities's vector of displayed musical notes
 
+	std::vector<std::shared_ptr<Sound>> musicalSounds;
+
 	bool _isAnimating = false;
 	bool _animationType;
 	int _animationDuration = 1000;
 	VirtualTimer frameTimer;
 
-	
+	void initializeMusicalSounds();
 	bool checkPhaseCombination(); //checks if current combination is correct
 	void cleanCombination(); //cleans combinations vectors
 	void addNoteToComb(Notes a); //deals with all possibilities when a note is added to the comb

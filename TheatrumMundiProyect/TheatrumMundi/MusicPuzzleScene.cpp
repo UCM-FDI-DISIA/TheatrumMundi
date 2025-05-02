@@ -34,6 +34,8 @@
 
 #include "SceneRoomTemplate.h"
 
+#include "AudioManager.h"
+
 using namespace std;
 
 MusicPuzzleScene::MusicPuzzleScene(): _phase(0)
@@ -73,6 +75,9 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
 
         //Puzzle Scene
         room = sr;
+
+        //initialize musical sounds
+        initializeMusicalSounds();
 
         //background + musical notes helpful guide (visual)
 
@@ -239,6 +244,17 @@ void MusicPuzzleScene::Win()
 {
     solved = true;
     room->resolvedPuzzle(4);
+}
+
+void MusicPuzzleScene::initializeMusicalSounds()
+{
+    musicalSounds.push_back(sdlutils().soundEffects().at("DoSound"));
+    musicalSounds.push_back(sdlutils().soundEffects().at("ReSound"));
+    musicalSounds.push_back(sdlutils().soundEffects().at("MiSound"));
+    musicalSounds.push_back(sdlutils().soundEffects().at("FaSound"));
+    musicalSounds.push_back(sdlutils().soundEffects().at("SolSound"));
+    musicalSounds.push_back(sdlutils().soundEffects().at("LaSound"));
+    musicalSounds.push_back(sdlutils().soundEffects().at("SiSound"));
 }
 
 bool MusicPuzzleScene::checkPhaseCombination()
@@ -481,7 +497,9 @@ void MusicPuzzleScene::createPianoButtons()
 
     ClickComponent* clickButtDo = entityManager->getComponent<ClickComponent>(buttDo);
     clickButtDo->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play piano key sound
+        //play organ key sound
+        AudioManager::Instance().playSound(musicalSounds[DO]);
+
         if (!solved)
         {
             addNoteToComb(DO);
@@ -491,7 +509,9 @@ void MusicPuzzleScene::createPianoButtons()
 
     ClickComponent* clickButtRe = entityManager->getComponent<ClickComponent>(buttRe);
     clickButtRe->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play piano key sound
+        //play organ key sound
+        AudioManager::Instance().playSound(musicalSounds[RE]);
+        
         if (!solved)
         {
             addNoteToComb(RE);
@@ -501,7 +521,9 @@ void MusicPuzzleScene::createPianoButtons()
 
     ClickComponent* clickButtMi = entityManager->getComponent<ClickComponent>(buttMi);
     clickButtMi->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play piano key sound
+        //play organ key sound
+        AudioManager::Instance().playSound(musicalSounds[MI]);
+        
         if (!solved)
         {
             addNoteToComb(MI);
@@ -511,7 +533,9 @@ void MusicPuzzleScene::createPianoButtons()
 
     ClickComponent* clickButtFa = entityManager->getComponent<ClickComponent>(buttFa);
     clickButtFa->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play piano key sound
+        //play organ key sound
+        AudioManager::Instance().playSound(musicalSounds[FA]);
+        
         if (!solved)
         {
             addNoteToComb(FA);
@@ -521,7 +545,9 @@ void MusicPuzzleScene::createPianoButtons()
 
     ClickComponent* clickButtSol = entityManager->getComponent<ClickComponent>(buttSol);
     clickButtSol->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play piano key sound
+        //play organ key sound
+        AudioManager::Instance().playSound(musicalSounds[SOL]);
+
         if (!solved)
         {
             addNoteToComb(SOL);
@@ -531,7 +557,9 @@ void MusicPuzzleScene::createPianoButtons()
 
     ClickComponent* clickButtLa = entityManager->getComponent<ClickComponent>(buttLa);
     clickButtLa->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play piano key sound
+        //play organ key sound
+        AudioManager::Instance().playSound(musicalSounds[LA]);
+
         if (!solved)
         {
             addNoteToComb(LA);
@@ -541,7 +569,9 @@ void MusicPuzzleScene::createPianoButtons()
 
     ClickComponent* clickButtSi = entityManager->getComponent<ClickComponent>(buttSi);
     clickButtSi->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play piano key sound
+        //play organ key sound
+        AudioManager::Instance().playSound(musicalSounds[SI]);
+
         if (!solved)
         {
             addNoteToComb(SI);
