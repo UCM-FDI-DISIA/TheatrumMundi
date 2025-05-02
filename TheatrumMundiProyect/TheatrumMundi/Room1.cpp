@@ -170,9 +170,10 @@ void Room1Scene::_setRoomEvents()
 	roomEvent[Spoon] = [this]()
 		{
 			GetInventory()->addItem(new Hint("TeaCupSpoon", "Una cuchara de plata.", &sdlutils().images().at("TeaCupSpoon")));
-			GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-			GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+			GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(GetEntityManager(), "TeaCupSpoon", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 			createDescription(GetInventory()->hints.back(),GetInventory()->getItems().back());
+			if(GetInventory()->getActive()) GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), true);
+			else GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), true);
 		};
 			
 	roomEvent[ResolveCase] = [this]() {
