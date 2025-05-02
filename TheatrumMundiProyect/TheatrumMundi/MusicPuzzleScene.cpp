@@ -197,7 +197,7 @@ void MusicPuzzleScene::refresh()
 {
     if (_isStartDelay)
     {
-        if (sdlutils().virtualTimer().currRealTime() - _noteStartTime >= NOTE_DURATION + 100)
+        if (sdlutils().virtualTimer().currRealTime() - _noteStartTime >= NOTE_DURATION)
         {
             //when initial animation delay is finished sound sequence begins
             _isStartDelay = false;
@@ -211,7 +211,7 @@ void MusicPuzzleScene::refresh()
     {
         int currTime = sdlutils().virtualTimer().currRealTime();
         
-        if (currTime - _noteStartTime >= NOTE_DURATION)
+        if (currTime - _noteStartTime >= NOTE_DURATION - 200)
         {
             _currentNoteIndex++;
 
@@ -464,7 +464,6 @@ void MusicPuzzleScene::updateDisplayedNotes()
         {
             texture = "NotaBasica";
             noteIm->setTexture(&sdlutils().images().at(texture));
-            
         }
         
         entityManager->setActive(displayedNotes[i], true);
