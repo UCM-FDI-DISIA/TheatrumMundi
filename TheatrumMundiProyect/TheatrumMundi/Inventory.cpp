@@ -88,13 +88,6 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 
 	while (itemIt != items.end()) {
 		if ((*itemIt)->getID() == idToRemove) {
-			//saves the position of the entity to be removed
-			float removedY = 0;
-			if (entityIt != invEntityList.end()) {
-				auto transform = (*entityIt)->getMngr()->getComponent<Transform>(*entityIt);
-				removedY = transform->getPos().getY();
-			}
-
 			// desactivate the item from the lists
 			if (hintIt != hints.end()) {
 				(*hintIt)->getMngr()->setActive(*hintIt, false);
@@ -109,7 +102,7 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 			if (IdIt != invIdList.end()) {
 				IdIt = invIdList.erase(IdIt);
 			}
-
+			delete* itemIt;
 			itemIt = items.erase(itemIt);
 			
 			
