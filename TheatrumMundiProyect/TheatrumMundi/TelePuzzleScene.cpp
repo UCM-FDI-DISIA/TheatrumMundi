@@ -36,7 +36,7 @@ TelePuzzleScene::TelePuzzleScene()
 {
 	_spoonIsInCup = false;
 	_poisonIsChecked = false;
-
+	dialogCount = 0;
 	dialogueManager = new DialogueManager(-1);
 }
 
@@ -52,12 +52,15 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 		isStarted = true;
 		room = sr;
 
+
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
 		dialogueManager->setScene(this);
+
+		dialogCount = 0;
 
 		tvBackground = entityFactory->CreateImageEntity(entityManager, "TutorialZoom1", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		tvBackground->getMngr()->removeComponent<Area2D>(tvBackground);
@@ -97,14 +100,16 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		//BackButton
-		auto _backButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		entityManager->addComponent<Transform>(_backButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
-		entityManager->addComponent<Image>(_backButton, &sdlutils().images().at("B1"));
+		exitButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		entityManager->addComponent<Transform>(exitButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
+		entityManager->addComponent<Image>(exitButton, &sdlutils().images().at("B1"));
 
-		entityManager->addComponent<RectArea2D>(_backButton);
+		entityManager->addComponent<RectArea2D>(exitButton);
+
+		entityManager->setActive(exitButton, false);
 
 		//Click component Open log button
-		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(exitButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [buttonSound]()
 			{
 				AudioManager::Instance().playSound(buttonSound);
@@ -113,19 +118,19 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 
 		//INVENTORY
 		//Invntory Background
-		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
+		InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
 		entityManager->setActive(InventoryBackground, false);
 
-		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(upButton, false);
 
-		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(downButton, false);
 
 		//InventoryButton
 		inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
-		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, buttonSound]() //Lamda function
+		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, buttonSound]() //Lamda function
 			{
 				AudioManager::Instance().playSound(buttonSound);
 				sr->GetInventory()->setActive(!sr->GetInventory()->getActive());  // Toggle the inventory
@@ -156,14 +161,14 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		ClickComponent* UPbuttonInventoryClick = entityManager->getComponent<ClickComponent>(upButton);
-		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, upButton, sr]() {
+		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, sr]() {
 
 			AudioManager::Instance().playSound(buttonSound);
 			sr->scrollInventory(-1);
 			});
 
 		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
-		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, downButton, sr]() {
+		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, sr]() {
 
 			AudioManager::Instance().playSound(buttonSound);
 			sr->scrollInventory(1);
@@ -178,6 +183,7 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 	}
 	else {
 		entityManager->setActive(inventoryButton, true);
+		entityManager->setActive(exitButton, false);
 		startDialogue("Tutorial7");
 	}
 
@@ -186,6 +192,32 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 
 	createInvEntities(sr);
 }
+
+void TelePuzzleScene::endDialogue() {
+	switch (dialogCount) {
+	case 0:
+		dialogueManager->setdisplayOnProcess(false);
+
+		entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+
+		entityManager->setActive(exitButton, true);
+
+		dialogCount += 1;
+		//logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
+
+		//Game::Instance()->getLog()->addDialogueLineLog(" ", "PW: 3711");
+
+		//entityManager->setActive(botonBack, true);
+
+		break;
+	case 1:
+		dialogueManager->setdisplayOnProcess(false);
+
+		entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+		break;
+	}
+}
+
 
 void TelePuzzleScene::unload()
 {
@@ -200,6 +232,12 @@ bool TelePuzzleScene::Check()
 bool TelePuzzleScene::isItemHand(const std::string& itemId)
 {
 	if (itemId == "antena") {
+
+		entityManager->setActive(inventoryButton, false);
+		entityManager->setActive(InventoryBackground, false);
+		entityManager->setActive(upButton, false);
+		entityManager->setActive(downButton, false);
+
 		_spoonIsInCup = true;
 
 		// AnimationFrames

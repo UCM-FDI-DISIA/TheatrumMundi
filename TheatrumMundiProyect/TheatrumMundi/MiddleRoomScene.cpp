@@ -84,7 +84,7 @@ void MiddleRoomScene::init()
 		isStarted = true;
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		Sound* buttonSound = sdlutils().soundEffects().at("boton").get();
 		//Audio music
 		//Sound room1music = sdlutils().musics().at("sala1");
 		//a.setLooping(room1music, true);

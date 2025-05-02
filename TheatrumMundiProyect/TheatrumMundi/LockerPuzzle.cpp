@@ -1,4 +1,4 @@
-#include "StrongBoxPuzzle.h"
+#include "LockerPuzzle.h"
 #include "Vector2D.h"
 #include "SDLUtils.h"
 #include "DialogueManager.h"
@@ -14,14 +14,14 @@
 #include "../TheatrumMundi/PhysicsBodyComponent.h"
 #include "Image.h"
 //void StrongBoxPuzzle::init()
-void StrongBoxPuzzle::init(SceneRoomTemplate* sr)
+void LockerPuzzle::init(SceneRoomTemplate* sr)
 {
     if (!isStarted) {
         room = sr;
         isStarted = true;
         //sound and music
         AudioManager& a = AudioManager::Instance();
-        Sound buttonSound = sdlutils().soundEffects().at("boton");
+        std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
         a.setVolume(buttonSound, 0.2);
        
 
@@ -122,19 +122,19 @@ void StrongBoxPuzzle::init(SceneRoomTemplate* sr)
     createInvEntities(sr);
 }
 
-void StrongBoxPuzzle::unload()
+void LockerPuzzle::unload()
 {
 }
 
-bool StrongBoxPuzzle::Check()
+bool LockerPuzzle::Check()
 {
     return false;
 }
 
-void StrongBoxPuzzle::Win()
+void LockerPuzzle::Win()
 {
 }
 
-void StrongBoxPuzzle::ResolveScene()
+void LockerPuzzle::ResolveScene()
 {
 }
