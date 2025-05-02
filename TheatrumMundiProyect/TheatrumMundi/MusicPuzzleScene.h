@@ -58,8 +58,6 @@ private:
 	int _noteStartTime = 0;
 	const int NOTE_DURATION = 900; //ms
 
-	
-
 
 	void initializeMusicalSounds(); //initializes musicalSounds vector
 	void startSoundSequence(); //starts playing the sound sequence

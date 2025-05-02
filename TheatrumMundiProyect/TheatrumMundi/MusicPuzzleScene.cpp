@@ -246,7 +246,7 @@ void MusicPuzzleScene::refresh()
                     aIm->setAlpha(250);
                 }
 
-                if (_animationType) changePhase();
+                if (_animationType) Check();
                 else
                 {
                     cleanCombination();
@@ -271,6 +271,7 @@ bool MusicPuzzleScene::Check()
     }
     else
     {
+        changePhase();
         return false;
     }
 }
@@ -340,27 +341,11 @@ void MusicPuzzleScene::addNoteToComb(Notes pressedNote)
         //check
         if (checkPhaseCombination()) //if its correct
         {
-            if (!Check())
-            {
-                playAnimation(true);
-            }
+            playAnimation(true);
         }
         else //wrong combination
         {
-            //play animation
-            playAnimation(false);
-
-            //clean current comb
-            //cleanCombination();
-
-#ifdef DEBUG
-            cout << "CURRENT COMB:";
-            for (auto a : _currentComb)
-            {
-                cout << a << " ";
-            }
-            cout << endl;
-#endif // DEBUG
+            playAnimation(false);            
         }
     }
 }
