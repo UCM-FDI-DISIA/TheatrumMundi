@@ -60,9 +60,9 @@ private:
 
 	struct roomSounds {
 
-		Sound uiButton;
-		Sound puzzleButton;
-		Sound doorSound;
+		std::shared_ptr<Sound> uiButton;
+		std::shared_ptr<Sound> puzzleButton;
+		std::shared_ptr<Sound> doorSound;
 
 	} rmSounds;
 

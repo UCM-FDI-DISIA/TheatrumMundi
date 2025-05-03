@@ -217,7 +217,7 @@ void Room1Scene::_setRoomEvents()
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
-			Sound correctSound = sdlutils().soundEffects().at("correcto");
+			std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
 			AudioManager::Instance().playSound(correctSound);
 
 			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
@@ -252,7 +252,7 @@ void Room1Scene::_setRoomEvents()
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
-			Sound incorrectSound = sdlutils().soundEffects().at("incorrecto");
+			std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
 			AudioManager::Instance().playSound(incorrectSound);
 
 			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
@@ -328,9 +328,8 @@ void Room1Scene::_setRoomAudio()
 
 
 	//Audio music
-	Sound room1music = sdlutils().musics().at("sala1");
-	audioMngr.setLooping(room1music, true);
-	audioMngr.playSound(room1music);
+	std::shared_ptr<Sound> room1music = sdlutils().musics().at("sala1");
+	audioMngr.playSound(room1music, true);
 }
 
 void Room1Scene::_setDialog()
