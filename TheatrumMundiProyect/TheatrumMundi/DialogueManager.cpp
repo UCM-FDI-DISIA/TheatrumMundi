@@ -12,6 +12,7 @@
 #include "../src/components/Transform.h"
 #include "Area2DLayerManager.h"
 #include "ClickableSpriteComponent.h"
+#include "DialogueAnimComponent.h"
 
 
 using namespace std;
@@ -35,7 +36,7 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
         //ENTIDADCONENTITYFACTORY
         auto character = entityFactory->CreateImageEntity(entityManager, "Dialog", Vector2D(500, 50), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0, ecs::grp::DIALOGUE);
         characterimg = entityManager->getComponent<Image>(character);
-
+        character->getMngr()->addComponent<DialogueAnimComponent>(character);
         entityManager->setActive(character, false);
     }
 
@@ -65,6 +66,7 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
             }
         });
     entityManager->addComponent<TriggerComponent>(_textbackground);
+    _textbackground->getMngr()->addComponent<DialogueAnimComponent>(_textbackground);
     entityManager->setActive(_textbackground, false);
 
     //ENTIDADCONENTITYFACTORY
@@ -74,12 +76,13 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
         //Character (Image)
         auto character = entityFactory->CreateImageEntity(entityManager, "Dialog", Vector2D(50, 310), Vector2D(0, 0), 1300 * 0.3, 2000 * 0.3, 0, ecs::grp::DIALOGUE);
         characterimg = entityManager->getComponent<Image>(character);
-
+        entityManager->addComponent<DialogueAnimComponent>(character);
         entityManager->setActive(character, false);
     }
 
     auto _textTest = entityManager->addEntity(ecs::grp::DIALOGUE);
     auto _testTextTranform = entityManager->addComponent<Transform>(_textTest, Vector2D(600, 300), Vector2D(0, 0), 400, 200, 0);
+    entityManager->addComponent<DialogueAnimComponent>(_textTest);
     entityManager->setActive(_textTest, false);
 
     //Add writeText to dialogueManager

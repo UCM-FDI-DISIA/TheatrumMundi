@@ -10,9 +10,9 @@ private:
 	std::vector<ecs::entity_t> rewardEntities;
 protected:
 public:
-	StrongBoxPuzzle();
-	~StrongBoxPuzzle();
-	void init() override;
+	LockerPuzzle();
+	~LockerPuzzle();
+	void init(SceneRoomTemplate* sr) override;
 	void unload() override;
 	bool Check() override;
 	void Win() override;
