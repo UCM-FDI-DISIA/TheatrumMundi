@@ -1,5 +1,5 @@
 #include "AudioManager.h"
-#include "fmod_errors.h"
+#include "../lib/FMOD/include/fmod_errors.h"
 #include <iostream>
 
 
@@ -64,11 +64,8 @@ void AudioManager::shutdown() {
     }
 }
 
-Sound* AudioManager::createSound(const std::string& filePath) {
-   
-    
-    // Create a unique_ptr and save the raw pointer
-    auto soundPtr = std::make_unique<Sound>(filePath);
+std::shared_ptr<Sound> AudioManager::createSound(const std::string& filePath) {
+    auto soundPtr = std::make_shared<Sound>(filePath);
     Sound* rawSound = soundPtr.get();
 
     FMOD::Sound* fmodSound = nullptr;
@@ -77,48 +74,72 @@ Sound* AudioManager::createSound(const std::string& filePath) {
     );
 
     if (result != FMOD_OK) {
-#ifdef DEBUG
-        std::cerr << "FMOD error al cargar sonido: " << FMOD_ErrorString(result) << std::endl;
-#endif
+        std::cerr << "FMOD error: " << FMOD_ErrorString(result) << std::endl;
         return nullptr;
     }
 
     soundPtr->setSound(fmodSound);
-    sounds.push_back(std::move(soundPtr));  // Transfer ownership to the vector
-    return rawSound;  // And returns the raw pointer (for external use)
+    sounds.push_back(soundPtr);
+    return soundPtr; 
 }
 
-void AudioManager::playSound(Sound* sound, bool loop) {
+void AudioManager::playSound(std::shared_ptr<Sound> sound, bool loop) {
     if (!sound || !sound->getSound()) return;
 
+    // Check if is already playing
+    FMOD::Channel* channel = sound->getChannel();
+    bool isPlaying = false;
+    if (channel) {
+        channel->isPlaying(&isPlaying);
+    }
+    if (isPlaying) {
+        return;
+    }
+
+    // Set loop
     FMOD_MODE mode = loop ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF;
     sound->getSound()->setMode(mode);
 
-    FMOD::Channel* channel = nullptr;
-    system->playSound(sound->getSound(), nullptr, false, &channel);
-    sound->setChannel(channel);
+    // Play new channel
+    FMOD_RESULT result = system->playSound(
+        sound->getSound(),
+        nullptr,
+        false,
+        &channel
+    );
+
+    if (result == FMOD_OK) {
+        sound->setChannel(channel);
+    }
+    else {
+#ifdef DEBUG
+        std::cerr << "FMOD error: " << FMOD_ErrorString(result) << std::endl;
+#endif // DEBUG
+
+        
+    }
 }
 
 
-void AudioManager::stopSound(Sound* sound) {
+void AudioManager::stopSound(std::shared_ptr<Sound> sound) {
     if (sound && sound->getChannel()) {
         sound->getChannel()->stop();
     }
 }
 
-void AudioManager::pauseSound(Sound* sound) {
+void AudioManager::pauseSound(std::shared_ptr<Sound> sound) {
     if (sound && sound->getChannel()) {
         sound->getChannel()->setPaused(true);
     }
 }
 
-void AudioManager::resumeSound(Sound* sound) {
+void AudioManager::resumeSound(std::shared_ptr<Sound> sound) {
     if (sound && sound->getChannel()) {
         sound->getChannel()->setPaused(false);
     }
 }
 
-void AudioManager::set3DPosition(Sound* sound, float x, float y, float z) {
+void AudioManager::set3DPosition(std::shared_ptr<Sound> sound, float x, float y, float z) {
     if (sound && sound->getChannel()) {
         FMOD_VECTOR pos = { x, y, z };
         sound->getChannel()->set3DAttributes(&pos, nullptr);
@@ -142,13 +163,13 @@ void AudioManager::setListenerPosition(float x, float y, float z) {
     }
 }
 
-void AudioManager::setVolume(Sound* sound, float volume) {
+void AudioManager::setVolume(std::shared_ptr<Sound> sound, float volume) {
     if (sound && sound->getChannel()) {
         sound->getChannel()->setVolume(volume);
     }
 }
 
-void AudioManager::setPitch(Sound* sound, float pitch) {
+void AudioManager::setPitch(std::shared_ptr<Sound> sound, float pitch) {
     if (sound && sound->getChannel()) {
         sound->getChannel()->setPitch(pitch);
     }

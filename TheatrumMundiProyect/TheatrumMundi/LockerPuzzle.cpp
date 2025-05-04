@@ -15,8 +15,9 @@
 #include "RectArea2D.h"
 #include "../TheatrumMundi/PhysicsBodyComponent.h"
 #include "Image.h"
+
 //void StrongBoxPuzzle::init()
-void LockerPuzzle::init(SceneRoomTemplate* sr)
+LockerPuzzle::LockerPuzzle()
 {
    dialogueManager = new DialogueManager(1);
    rotSol.push_back(0);
@@ -24,20 +25,20 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
    rotSol.push_back(0);
    rotSol.push_back(0);
 }
-StrongBoxPuzzle::~StrongBoxPuzzle()
+LockerPuzzle::~LockerPuzzle()
 {
 }
-void StrongBoxPuzzle::init()
+void LockerPuzzle::init(SceneRoomTemplate* sr)
 //void StrongBoxPuzzle::init(SceneRoomTemplate* sr)
 {
-    SceneRoomTemplate* sr = nullptr;
+    
     if (!isStarted) {
         room = nullptr;
         
         isStarted = true;
         //sound and music
         AudioManager& a = AudioManager::Instance();
-        Sound* buttonSound = sdlutils().soundEffects().at("boton").get();
+        std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
         a.setVolume(buttonSound, 0.2);
        
 

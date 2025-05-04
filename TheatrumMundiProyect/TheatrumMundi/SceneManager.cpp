@@ -49,14 +49,14 @@ SceneManager::SceneManager()
 	scenes[SceneName::TOMB_SCENE] = tombScene;
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene(tombScene);
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene(tombScene);
-	scenes[SceneName::STRONGBOX_PUZZLE] = new StrongBoxPuzzle();
+	scenes[SceneName::LOCKER_PUZZLE] = new LockerPuzzle();
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::STRONGBOX_PUZZLE);
+	loadScene(SceneName::INITIAL_MENU);
 }
 
 void SceneManager::popScene()
