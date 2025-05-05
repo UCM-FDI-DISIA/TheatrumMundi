@@ -17,7 +17,7 @@ Inventory::Inventory()
 	}
 	originalPos = { 0,0 };
 
-	_textDescription = new DescriptionInfo{" ",0};
+	_textDescription = DescriptionInfo{" ",0};
 }
 /// <summary>
 /// Destroy the reference to the hints
@@ -29,11 +29,6 @@ Inventory::~Inventory()
 		delete item;
 	}
 	items.clear();
-	for (auto& hint : hints) {
-		delete hint;
-	}
-	hints.clear();
-	delete _textDescription;
 }
 /// <summary>
 /// Sets the first item to show in the inventory
@@ -66,9 +61,9 @@ int Inventory::getItemNumber()
 void Inventory::setTextDescription(Hint* a, Transform* trEntity)
 {
 	//set text description
-	_textDescription->Description = a->getDescription();
+	_textDescription.Description = a->getDescription();
 	//set text description position
-	_textDescription->posY = trEntity->getPos().getY();
+	_textDescription.posY = trEntity->getPos().getY();
 		
 	
 }
@@ -93,16 +88,6 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 
 	while (itemIt != items.end()) {
 		if ((*itemIt)->getID() == idToRemove) {
-			// move the rest of the items up only if the items that are shown are between 0 and 2
-			
-		    
-			//saves the position of the entity to be removed
-			float removedY = 0;
-			if (entityIt != invEntityList.end()) {
-				auto transform = (*entityIt)->getMngr()->getComponent<Transform>(*entityIt);
-				removedY = transform->getPos().getY();
-			}
-
 			// desactivate the item from the lists
 			if (hintIt != hints.end()) {
 				(*hintIt)->getMngr()->setActive(*hintIt, false);
@@ -117,11 +102,11 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 			if (IdIt != invIdList.end()) {
 				IdIt = invIdList.erase(IdIt);
 			}
-
+			delete* itemIt;
 			itemIt = items.erase(itemIt);
 			
 			
-			if (firstItem == 0) {
+			if (firstItem == 0) { // move the rest of the items up only if the items that are shown are between 0 and 2
 				int i = 0;
 				int posE = std::distance(invEntityList.begin(), entityIt);
 				// move the rest of the items up
@@ -172,8 +157,6 @@ void Inventory::removeItem(const std::string& idToRemove, std::vector<Entity*>& 
 				}
 			firstItem = firstItem - 1;
 			}
-			
-
 			return;
 		}
 
