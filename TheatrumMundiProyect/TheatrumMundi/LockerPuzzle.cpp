@@ -89,7 +89,7 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
             }
             });
         doorEntities.push_back(checkbtn);
-/*
+
         //INVENTORY
        //Invntory Background
         auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
@@ -176,7 +176,7 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
         createInvEntities(sr);
         dialogueManager->setScene(this);
         startDialogue("PuzzleLibros");
-        */
+        
         //Puzzle rewards
         //feather
         ecs::entity_t rewardFeather = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA,
@@ -215,7 +215,6 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
             });
         rewardEntities.push_back(rewardMorse);
         entityManager->setActive(rewardMorse, false);
-
 
     }
    // createInvEntities(sr);
