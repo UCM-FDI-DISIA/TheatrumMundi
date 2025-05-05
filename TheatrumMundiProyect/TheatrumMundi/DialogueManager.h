@@ -28,6 +28,7 @@ private:
     WriteTextComponent<TextInfo>* _writeTextComp;
     std::string _eventToRead;
 
+
 public:
     DialogueManager(int numRooms);
     ~DialogueManager();

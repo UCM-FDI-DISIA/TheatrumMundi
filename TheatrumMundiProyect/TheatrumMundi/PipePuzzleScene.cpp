@@ -706,8 +706,6 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
 		entity_t gloveEntity;
 		ClickComponent* clk;
-		std::cout << "variant:" << variant << endl;
-		
 			// create entity
 			gloveEntity = entityFactory->CreateInteractableEntity(entityManager, "guantes", EntityFactory::RECTAREA,
 				Vector2D(1150, 840), Vector2D(0, 0), 150, 150, 0,
@@ -776,7 +774,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 					img->setTexture(&sdlutils().images().at("fullRope"));
 
 					auto ScrollCube = entityManager->getComponent<ScrollComponent>(_rope);
-					if(variant<=1)ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(gloveEntity));
+					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(gloveEntity));
 					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_cubeWithoutWater));
 					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(clock));
 					entityManager->getComponent<ScrollComponent>(_rope)->Scroll(ScrollComponent::UP);
