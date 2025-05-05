@@ -110,7 +110,7 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.parrot)->setTexture(&sdlutils().images().at("Parrot"));
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3"));
 		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("Balanza"));
-		entityManager->getComponent<Image>(rmObjects.safeBox)->setTexture(&sdlutils().images().at("CajaFuerte"));
+		entityManager->getComponent<Image>(rmObjects.locker)->setTexture(&sdlutils().images().at("CajaFuerte"));
 		//characterCorpse
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3"));
 		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("Cadaver3"));
@@ -125,7 +125,7 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.cablesPuzzle)->setTexture(&sdlutils().images().at("CablesOscuro"));
 		entityManager->getComponent<Image>(rmObjects.parrot)->setTexture(&sdlutils().images().at("ParrotOscuro"));
 		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("BalanzaOscuro"));
-		entityManager->getComponent<Image>(rmObjects.safeBox)->setTexture(&sdlutils().images().at("CajaFuerteOscuro"));
+		entityManager->getComponent<Image>(rmObjects.locker)->setTexture(&sdlutils().images().at("CajaFuerteOscuro"));
 		//characterCorpse
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3Oscuro"));
 		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("Cadaver3Oscuro"));
@@ -140,7 +140,7 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.cablesPuzzle)->setTexture(&sdlutils().images().at("CablesRojo"));
 		entityManager->getComponent<Image>(rmObjects.parrot)->setTexture(&sdlutils().images().at("ParrotRojo"));
 		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("BalanzaRojo"));
-		entityManager->getComponent<Image>(rmObjects.safeBox)->setTexture(&sdlutils().images().at("CajaFuerteRojo"));
+		entityManager->getComponent<Image>(rmObjects.locker)->setTexture(&sdlutils().images().at("CajaFuerteRojo"));
 		//characterCorpse
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3Rojo"));
 		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("Cadaver3Rojo"));
@@ -150,6 +150,9 @@ void Room3Scene::_setRoomEvents()
 		};
 	roomEvent[WiresPuzzleScene] = [this] {
 		Game::Instance()->getSceneManager()->loadScene(WIRES_PUZZLE, this);
+		};
+	roomEvent[CircleLockPuzzleScene] = [this] {
+		Game::Instance()->getSceneManager()->loadScene(LOCKER_PUZZLE, this);
 		};
 	//roomEvent[ResolveCase] = [this] {
 	//	//IMPORTANT assign dialogue
@@ -491,12 +494,12 @@ void Room3Scene::_setInteractuables()
 		});
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.balance));
 
-	//SAFEBOX
-	rmObjects.safeBox = entityFactory->CreateInteractableEntity(entityManager, "CajaFuerteOscuro", EntityFactory::RECTAREA, Vector2D(1200, 300), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-	entityManager->getComponent<ClickComponent>(rmObjects.safeBox)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		//roomEvent[LightsOff]();
+	//LOCKER
+	rmObjects.locker = entityFactory->CreateInteractableEntity(entityManager, "CajaFuerteOscuro", EntityFactory::RECTAREA, Vector2D(1200, 300), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	entityManager->getComponent<ClickComponent>(rmObjects.locker)->connect(ClickComponent::JUST_CLICKED, [this]() {
+		roomEvent[CircleLockPuzzleScene]();
 		});
-	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.safeBox));
+	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.locker));
 }
 
 void Room3Scene::_setDialog()

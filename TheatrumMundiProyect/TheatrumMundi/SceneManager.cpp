@@ -42,6 +42,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::ROOM_3] = new Room3Scene();
 	scenes[SceneName::BALANCE_PUZZLE] = new BalancePuzzleScene();
 	scenes[SceneName::WIRES_PUZZLE] = new WiresPuzzleScene();
+	scenes[SceneName::LOCKER_PUZZLE] = new LockerPuzzle();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
