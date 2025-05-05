@@ -125,6 +125,78 @@
     {
       "id": "fondoPruebaLog",
       "file": "../resources/images/fondoLogPrueba.png"
+    },
+    {
+      "id": "FondoJuzgado",
+      "file": "../resources/images/temporales/Room3/Juzgado.png"
+    },
+    {
+      "id": "FondoSalaDeEspera",
+      "file": "../resources/images/temporales/Room3/SalaDeEspera.png"
+    },
+    {
+      "id": "FondoJuzgadoOscuro",
+      "file": "../resources/images/temporales/Room3/JuzgadoOscuro.png"
+    },
+    {
+      "id": "FondoSalaDeEsperaOscuro",
+      "file": "../resources/images/temporales/Room3/SalaDeEsperaOscuro.png"
+    },
+    {
+      "id": "Cables",
+      "file": "../resources/images/temporales/Room3/cables.png"
+    },
+    {
+      "id": "CablesOscuro",
+      "file": "../resources/images/temporales/Room3/cablesOscuro.png"
+    },
+    {
+      "id": "Cadaver3",
+      "file": "../resources/images/temporales/Room3/Cadaver.png"
+    },
+    {
+      "id": "Cadaver3Oscuro",
+      "file": "../resources/images/temporales/Room3/CadaverOscuro.png"
+    },
+    {
+      "id": "Parrot",
+      "file": "../resources/images/temporales/Room3/parrot.png"
+    },
+    {
+      "id": "ParrotOscuro",
+      "file": "../resources/images/temporales/Room3/parrotOscuro.png"
+    },
+    {
+      "id": "TaquillaAzul",
+      "file": "../resources/images/temporales/Room3/Taquilla.png"
+    },
+    {
+      "id": "TaquillaAzulOscuro",
+      "file": "../resources/images/temporales/Room3/TaquillaOscura.png"
+    },
+    {
+      "id": "TaquillaMorada",
+      "file": "../resources/images/temporales/Room3/Taquilla2.png"
+    },
+    {
+      "id": "TaquillaMoradaOscuro",
+      "file": "../resources/images/temporales/Room3/Taquilla2Oscura.png"
+    },
+    {
+      "id": "Balanza",
+      "file": "../resources/images/temporales/Room3/balanza.png"
+    },
+    {
+      "id": "BalanzaOscuro",
+      "file": "../resources/images/temporales/Room3/balanzaOscura.png"
+    },
+    {
+      "id": "CajaFuerte",
+      "file": "../resources/images/temporales/Room3/CajaFuerte.png"
+    },
+    {
+      "id": "CajaFuerteOscuro",
+      "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
     }
      ],
 

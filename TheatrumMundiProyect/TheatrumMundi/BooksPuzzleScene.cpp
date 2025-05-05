@@ -72,10 +72,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 
 		AudioManager& a = AudioManager::Instance();
 
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
-		Sound bookSound = sdlutils().soundEffects().at("libro");
+		std::shared_ptr<Sound> bookSound = sdlutils().soundEffects().at("libro");
 
 
 		//INVENTORY

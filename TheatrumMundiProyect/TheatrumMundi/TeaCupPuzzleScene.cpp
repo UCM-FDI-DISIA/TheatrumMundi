@@ -51,7 +51,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		room = sr;
 		
 		AudioManager& a = AudioManager::Instance();
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
 		dialogueManager->setScene(this);
@@ -211,7 +211,7 @@ bool TeaCupPuzzleScene::Check()
 bool TeaCupPuzzleScene::isItemHand(const std::string& itemId)
 {
 	if (itemId == "TeaCupSpoon") {
-		Sound spoonSound = sdlutils().soundEffects().at("taza");
+		std::shared_ptr<Sound> spoonSound = sdlutils().soundEffects().at("taza");
 		AudioManager::Instance().playSound(spoonSound);
 		_spoonIsInCup = true; 
 		Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithSpoon");
