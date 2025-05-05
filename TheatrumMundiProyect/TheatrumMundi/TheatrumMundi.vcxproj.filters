@@ -73,6 +73,8 @@
     <ClCompile Include="BalancePuzzleScene.cpp" />
     <ClCompile Include="roomprueba.cpp" />
     <ClCompile Include="DialogueAnimComponent.cpp" />
+    <ClCompile Include="StrongBoxPuzzle.cpp" />
+    <ClCompile Include="Box.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -269,6 +271,8 @@
     <ClInclude Include="BalancePuzzleScene.h" />
     <ClInclude Include="roomprueba.h" />
     <ClInclude Include="DialogueAnimComponent.h" />
+    <ClInclude Include="StrongBoxPuzzle.h" />
+    <ClInclude Include="Box.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />
