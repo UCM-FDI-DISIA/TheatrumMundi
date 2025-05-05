@@ -53,6 +53,7 @@
     <ClCompile Include="CSVdataRecolector.cpp" />
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
+    <ClCompile Include="DialogueAnimComponent.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
     <ClCompile Include="DoorPuzzleScene.cpp" />
     <ClCompile Include="DragPuzzleScene.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="ClockPuzzleScene.h" />
     <ClInclude Include="DescriptionInfo.h" />
+    <ClInclude Include="DialogueAnimComponent.h" />
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="DoorPuzzleScene.h" />
