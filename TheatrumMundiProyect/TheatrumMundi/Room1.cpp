@@ -169,11 +169,12 @@ void Room1Scene::_setRoomEvents()
 
 	roomEvent[Spoon] = [this]()
 		{
-			GetInventory()->addItem(new Hint("TeaCupSpoon", "Una cuchara de plata.", &sdlutils().images().at("TeaCupSpoon")));
-			GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(GetEntityManager(), "TeaCupSpoon", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-			createDescription(GetInventory()->hints.back(),GetInventory()->getItems().back());
-			if(GetInventory()->getActive()) GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), true);
-			else GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), true);
+			inv->addItem(new Hint("TeaCupSpoon", "Una cuchara de plata.", &sdlutils().images().at("TeaCupSpoon")));
+			inv->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, inv->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+			createDescription(inv->hints.back(), inv->getItems().back());
+			if(inv->getActive()) inv->hints.back()->getMngr()->setActive(inv->hints.back(), true);
+			else inv->hints.back()->getMngr()->setActive(inv->hints.back(), false);
+
 		};
 			
 	roomEvent[ResolveCase] = [this]() {
@@ -415,7 +416,9 @@ void Room1Scene::_setUI()
 				entityManager->setActive(invObjects.inventoryDownButton, true);
 				entityManager->setActive(invObjects.inventoryUpButton,   true);
 
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
+				for (int i = inv->getFirstItem(); i < inv->getItemNumber() + inv->getFirstItem(); ++i) {
+					inv->hints[i]->getMngr()->setActive(inv->hints[i], true);  // Activate the items
+				}
 			}
 			else 
 			{
@@ -424,7 +427,7 @@ void Room1Scene::_setUI()
 				entityManager->setActive(invObjects.inventoryUpButton,   false);
 				entityManager->setActive(rmObjects.logbtn, true);
 				rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the items
+				for (int i = inv->getFirstItem(); i < inv->getItemNumber() + inv->getFirstItem(); ++i) inv->hints[i]->getMngr()->setActive(inv->hints[i], false);  // Desactivate the items 
 				
 			}
 		});
@@ -659,8 +662,7 @@ void Room1Scene::_setInteractuables()
 				entityManager->setActive(corpseZoom, true);
 				entityManager->setActive(rmObjects.quitButton, true);
 
-				if (!finishallpuzzles)roomEvent[CorpseDialogue]();
-				//else roomEvent[ResolveBottons]();
+				roomEvent[CorpseDialogue]();
 			});
 
 	//Mobile Clue

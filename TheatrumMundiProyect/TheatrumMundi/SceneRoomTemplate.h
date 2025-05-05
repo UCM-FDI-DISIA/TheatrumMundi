@@ -5,6 +5,7 @@
 
 #include <functional>
 class RectArea2D;
+class Inventory;
 class SceneRoomTemplate: public SceneTemplate
 {
 protected:
