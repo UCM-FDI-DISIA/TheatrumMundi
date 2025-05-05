@@ -37,11 +37,11 @@ using namespace std;
 
 WiresPuzzleScene::WiresPuzzleScene() : lightsOn(0), selectedWireIndex(-1)
 {
+	dialogueManager = new DialogueManager(0);
 }
 
 WiresPuzzleScene::~WiresPuzzleScene()
 {
-
 }
 
 void WiresPuzzleScene::init(SceneRoomTemplate* sr)
@@ -56,7 +56,7 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		portToCable.resize(ports.size(), -1);
 
 		AudioManager& a = AudioManager::Instance();
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
 		//INVENTORY

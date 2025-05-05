@@ -39,8 +39,9 @@ SceneManager::SceneManager()
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::ROOM_2] = new Room2Scene();
-	scenes[SceneName::ROOM_3] = new roomprueba();
+	scenes[SceneName::ROOM_3] = new Room3Scene();
 	scenes[SceneName::BALANCE_PUZZLE] = new BalancePuzzleScene();
+	scenes[SceneName::WIRES_PUZZLE] = new WiresPuzzleScene();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
@@ -77,7 +78,7 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 {
 	
 	//loadResouces
-#ifndef _LOADALLRESOURCES
+// #ifndef //  _LOADALLRESOURCES
 	
 	switch (index)
 	{
@@ -96,7 +97,7 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 	default:
 		break;
 	}
-#endif // !_LOADALLRESOURCES
+// #endif // !_LOADALLRESOURCES
 	scenes[index]->init(room);
 	actsceneindex = index;
 	currentscenes.push_back(scenes[index]);

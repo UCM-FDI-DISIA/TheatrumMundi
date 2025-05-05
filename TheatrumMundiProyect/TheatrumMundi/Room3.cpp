@@ -52,6 +52,19 @@ void Room3Scene::init()
 
 void Room3Scene::resolvedPuzzle(int i)
 {
+	if (i < 5) {
+		int auxevent = event_size;
+		if (i == 0)  auxevent = BalanceSceneRsv;
+		//else if (i == 1)  auxevent = RavenSceneRsv;
+		//else if (i == 2)  auxevent = DoorSceneRsv;
+		//else if (i == 3)  auxevent = MosaicPuzzleSceneRsv;
+		//else if (i == 4)  auxevent = OrganPuzzleSceneRsv;
+		roomEvent[auxevent]();
+		bool aux = true;
+		for (bool a : puzzlesol) if (!a) aux = false;
+		finishallpuzzles = aux;
+		if (aux) entityManager->setActive(characterCorpse, true);
+	}
 }
 
 void Room3Scene::unload()
@@ -130,6 +143,12 @@ void Room3Scene::_setRoomEvents()
 		//characterCorpse
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3Rojo"));
 		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("Cadaver3Rojo"));
+		};
+	roomEvent[BalancePuzzleScene] = [this] {
+		Game::Instance()->getSceneManager()->loadScene(BALANCE_PUZZLE, this);
+		};
+	roomEvent[WiresPuzzleScene] = [this] {
+		Game::Instance()->getSceneManager()->loadScene(WIRES_PUZZLE, this);
 		};
 	//roomEvent[ResolveCase] = [this] {
 	//	//IMPORTANT assign dialogue
@@ -421,21 +440,21 @@ void Room3Scene::_setInteractuables()
 	//PARROT
 	rmObjects.parrot = entityFactory->CreateInteractableEntity(entityManager, "ParrotOscuro", EntityFactory::RECTAREA, Vector2D(1000, 0), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.parrot)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		//roomEvent[LightsOff]();
+		roomEvent[LightsOff]();
 		});
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.parrot));
 
 	//CABLES
 	rmObjects.cablesPuzzle = entityFactory->CreateInteractableEntity(entityManager, "CablesOscuro", EntityFactory::RECTAREA, Vector2D(-600, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.cablesPuzzle)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		roomEvent[LightsRed]();
+		roomEvent[WiresPuzzleScene]();
 		});
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.cablesPuzzle));
 
 	//BALANCE
 	rmObjects.balance = entityFactory->CreateInteractableEntity(entityManager, "BalanzaOscuro", EntityFactory::RECTAREA, Vector2D(800, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.balance)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		//roomEvent[LightsOff]();
+		roomEvent[BalancePuzzleScene]();
 		});
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.balance));
 
