@@ -160,6 +160,12 @@ void Room3Scene::_setRoomEvents()
 	roomEvent[CircleLockSceneRsv] = [this] {
 			roomEvent[LightsRed]();
 		};
+	roomEvent[MorseCodePuzzleScene] = [this] {
+			
+		};
+	roomEvent[MorseCodeSceneRsv] = [this] {
+
+		};
 	//roomEvent[ResolveCase] = [this] {
 	//	//IMPORTANT assign dialogue
 	//	startDialogue("SalaFinal2");
