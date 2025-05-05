@@ -247,8 +247,7 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(lights[i], true);
 				}
 				std::cout << "Correct combination" << std::endl;
-				//Win();
-
+				Win();
 			}
 			else
 			{
@@ -324,10 +323,10 @@ bool WiresPuzzleScene::Check()
 }
 void WiresPuzzleScene::Win()
 {
-	
+	room->resolvedPuzzle(1);
 }
 
 void WiresPuzzleScene::ResolveScene()
 {
-
+	Win();
 }

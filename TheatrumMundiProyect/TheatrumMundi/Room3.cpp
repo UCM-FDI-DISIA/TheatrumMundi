@@ -151,8 +151,14 @@ void Room3Scene::_setRoomEvents()
 	roomEvent[WiresPuzzleScene] = [this] {
 		Game::Instance()->getSceneManager()->loadScene(WIRES_PUZZLE, this);
 		};
+	roomEvent[WiresSceneRsv] = [this] {
+			roomEvent[LightsOn]();
+		};
 	roomEvent[CircleLockPuzzleScene] = [this] {
 		Game::Instance()->getSceneManager()->loadScene(LOCKER_PUZZLE, this);
+		};
+	roomEvent[CircleLockSceneRsv] = [this] {
+			roomEvent[LightsRed]();
 		};
 	//roomEvent[ResolveCase] = [this] {
 	//	//IMPORTANT assign dialogue

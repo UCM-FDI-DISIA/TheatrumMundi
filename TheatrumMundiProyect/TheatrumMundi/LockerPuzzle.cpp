@@ -33,7 +33,7 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
 {
     
     if (!isStarted) {
-        room = nullptr;
+        room = sr;
         
         isStarted = true;
         //sound and music
@@ -235,8 +235,11 @@ void LockerPuzzle::Win()
 {
     for (auto a : doorEntities)entityManager->setActive(a, false);
     for (auto a : rewardEntities)entityManager->setActive(a, true);
+
+    room->resolvedPuzzle(2);
 }
 
 void LockerPuzzle::ResolveScene()
 {
+    Win();
 }
