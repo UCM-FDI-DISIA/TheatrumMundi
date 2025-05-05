@@ -69,6 +69,9 @@
     <ClCompile Include="Room3.cpp" />
     <ClCompile Include="SlowRotateComponent.cpp" />
     <ClCompile Include="LockerPuzzle.cpp" />
+    <ClCompile Include="WiresPuzzleScene.cpp" />
+    <ClCompile Include="BalancePuzzleScene.cpp" />
+    <ClCompile Include="roomprueba.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -261,6 +264,9 @@
     <ClInclude Include="Room3.h" />
     <ClInclude Include="SlowRotateComponent.h" />
     <ClInclude Include="LockerPuzzle.h" />
+    <ClInclude Include="WiresPuzzleScene.h" />
+    <ClInclude Include="BalancePuzzleScene.h" />
+    <ClInclude Include="roomprueba.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />

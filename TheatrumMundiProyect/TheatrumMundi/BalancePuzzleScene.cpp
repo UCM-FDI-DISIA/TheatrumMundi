@@ -1,4 +1,4 @@
-#include "TeaCupPuzzleScene.h"
+#include "BalancePuzzleScene.h"
 
 #include "EntityFactory.h"
 #include "../src/utils/Vector2D.h"
@@ -26,77 +26,83 @@
 #include "../../TheatrumMundi/DescriptionInfo.h"
 
 #include "DialogueManager.h"
-#include "Log.h"
 
 using namespace std;
 
-TeaCupPuzzleScene::TeaCupPuzzleScene()
+BalancePuzzleScene::BalancePuzzleScene()
 {
-	_spoonIsInCup = false;
-	_poisonIsChecked = false;
+	std::cout << "DENTRO BALANZA COMSTRUCTOR" << std::endl;
+	_featherIsInBalance = false;
+	//_poisonIsChecked = false;
 
 	dialogueManager = new DialogueManager(1);
 }
 
-TeaCupPuzzleScene::~TeaCupPuzzleScene()
+BalancePuzzleScene::~BalancePuzzleScene()
 {
 
 }
 
-void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
+void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted) {
-		
+
+		std::cout << "DENTRO BALANZA INIT" << std::endl;
 		isStarted = true;
 		room = sr;
-		
+
 		AudioManager& a = AudioManager::Instance();
-		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
+		Sound buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
 		dialogueManager->setScene(this);
 
-		teaCupBackground = entityFactory->CreateImageEntity(entityManager, "TeaCupBackgroundWithoutSpoon", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
-		teaCupBackground->getMngr()->removeComponent<Area2D>(teaCupBackground);
+		balanceBackground = entityFactory->CreateImageEntity(entityManager, "BotonHoraria", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+		balanceBackground->getMngr()->removeComponent<Area2D>(balanceBackground);
 
 		/*ecs::entity_t teaCupSpoon = entityFactory->CreateInteractableEntity( // Spoon entity
 			entityManager, "TeaCupSpoon", EntityFactory::RECTAREA,
 			Vector2D(100, 400), Vector2D(), 600, 400, 0,
 			areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);*/
 
-		ecs::entity_t teaCup = entityFactory->CreateInteractableEntity( // Cup entity
-			entityManager, "clockShape", EntityFactory::RECTAREA,
+		auto balance = entityFactory->
+			CreateImageEntity(entityManager, "balance", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+
+
+
+		auto balanceArea = entityFactory->CreateInteractableEntity( // balance entity
+			entityManager, "balance", EntityFactory::RECTAREA,
 			Vector2D(400, 100), Vector2D(), 460, 280, 0,
 			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
-		/*entityManager->addComponent<TriggerComponent>(teaCup) // Spoon enters the cup Area2D
-			->connect(TriggerComponent::AREA_ENTERED, [teaCupBackground, this]()
-				{
-					_spoonIsInCup = true;
-				});*/
+		//balanceArea->getMngr()->removeComponent<Image>(balanceArea);
 
-		teaCup->getMngr()->removeComponent<Image>(teaCup);
+	auto heart = entityFactory->CreateImageEntity(entityManager, "heart", Vector2D(250, 100), Vector2D(0, 0), 460, 280, 0, ecs::grp::DEFAULT);
 
-		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_ENTERED, [this]() {
-			SetplacedHand(true);
-			std::cout << "pasa por el triger de la taza" << std::endl;
+
+		auto feather = entityFactory->CreateInteractableEntity( // feather entity
+			entityManager, "pluma", EntityFactory::RECTAREA,
+			Vector2D(400, 300), Vector2D(), 460, 280, 0,
+			areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);
+
+		entityManager->getComponent<ClickComponent>(feather)->connect(ClickComponent::JUST_CLICKED, [this, feather, sr]() {
+			feather->getMngr()->setActive(feather, false);
+			Vector2D position = sr->GetInventory()->setPosition();
+			AddInvItem("pluma", "Fue dificil cogerla.", position, sr);
 			});
+
+
+		balanceArea->getMngr()->getComponent<TriggerComponent>(balanceArea)->connect(TriggerComponent::AREA_ENTERED, [this]() {
+			SetplacedHand(true);
+			std::cout << "pasa por el triger de la balanza" << std::endl;
+			});
+
+
 		//Assigns the trigger bolean to false
-		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_LEFT, [this]() {
+		balanceArea->getMngr()->getComponent<TriggerComponent>(balanceArea)->connect(TriggerComponent::AREA_LEFT, [this]() {
 			SetplacedHand(false);
 			});
 
-		entityManager->getComponent<ClickComponent>(teaCup) // The cup is clicked after introducing the spoon
-			->connect(ClickComponent::JUST_CLICKED, [teaCup, this]()
-				{
-					if (_spoonIsInCup == false) return;
-					_poisonIsChecked = true;
-
-					// ... Change image revealing poinson or whatever  <-- TODO
-					Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithPoison");
-					teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
-					startDialogue("PuzzleTaza2");
-				});
 
 
 		//BackButton
@@ -109,6 +115,9 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
 		entityManager->setActive(InventoryBackground, false);
 
+
+
+
 		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(upButton, false);
 
@@ -119,14 +128,13 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
 		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton, buttonSound]() //Lamda function
-		{
+			{
 				AudioManager::Instance().playSound(buttonSound);
 				sr->GetInventory()->setActive(!sr->GetInventory()->getActive());  // Toggle the inventory
 
 				// If the inventory is active, activate the items
 				if (sr->GetInventory()->getActive()) {
 					entityManager->setActive(InventoryBackground, true);
-					entityManager->setActive(logbtn, false);
 
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(925);
 					entityManager->setActive(downButton, true);
@@ -138,7 +146,6 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 				}
 				else {
 					entityManager->setActive(InventoryBackground, false);
-					entityManager->setActive(logbtn, true);
 					entityManager->setActive(InventoryBackground, false);
 					entityManager->setActive(downButton, false);
 					entityManager->setActive(upButton, false);
@@ -148,7 +155,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 						invObjects[i]->getMngr()->setActive(invObjects[i], false);
 					}
 				}
-		});
+			});
 
 		ClickComponent* UPbuttonInventoryClick = entityManager->getComponent<ClickComponent>(upButton);
 		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, upButton, sr]() {
@@ -166,49 +173,53 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, downButton, upButton, inventoryButton, _backButton, buttonSound]()
-		{
+			{
 				AudioManager::Instance().playSound(buttonSound);
 
-			inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
-			HideInventoryItems(InventoryBackground, downButton, upButton, sr);
-			sr->GetInventory()->setFirstItem(0);
-			auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
-			_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
-			_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
-			_backButtonImage->setPosOffset(0, 0);
-			Game::Instance()->getSceneManager()->popScene();
-		});
+				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+				HideInventoryItems(InventoryBackground, downButton, upButton, sr);
+				sr->GetInventory()->setFirstItem(0);
+				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+				_backButtonImage->setPosOffset(0, 0);
+				Game::Instance()->getSceneManager()->popScene();
+			});
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
-		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 
-
-		
+		//startDialogue("PuzzleTaza1");
 	}
 	sr->GetInventory()->setFirstItem(0);
 	createInvEntities(sr);
+}
 
-	startDialogue("PuzzleTaza1");
+void BalancePuzzleScene::init()
+{
 }
 
 
-void TeaCupPuzzleScene::unload()
+void BalancePuzzleScene::unload()
 {
 
 }
 
-bool TeaCupPuzzleScene::Check()
+bool BalancePuzzleScene::Check()
 {
-	return _poisonIsChecked;
+	//return _poisonIsChecked;
+	return true;
 }
 
-bool TeaCupPuzzleScene::isItemHand(const std::string& itemId)
+bool BalancePuzzleScene::isItemHand(const std::string& itemId)
 {
-	if (itemId == "TeaCupSpoon") {
-		std::shared_ptr<Sound> spoonSound = sdlutils().soundEffects().at("taza");
-		AudioManager::Instance().playSound(spoonSound);
-		_spoonIsInCup = true; //???
-		Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithSpoon");
-		teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
+	if (itemId == "Feather") {
+		//Sound spoonSound = sdlutils().soundEffects().at("taza");
+		//AudioManager::Instance().playSound(spoonSound);
+		_featherIsInBalance = true; //???
+
+
+
+		/*Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithSpoon");
+		teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);*/
 		//spoon->getMngr()->setActive(spoon, true); 
 		return true;
 	}

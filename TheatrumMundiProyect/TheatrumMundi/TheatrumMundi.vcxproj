@@ -46,6 +46,7 @@
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="BalancePuzzleScene.cpp" />
     <ClCompile Include="BooksPuzzleScene.cpp" />
     <ClCompile Include="Area2DLayerManager.cpp" />
     <ClCompile Include="CalendearMobileTestScene.cpp" />
@@ -74,6 +75,7 @@
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="Room2.cpp" />
     <ClCompile Include="Room3.cpp" />
+    <ClCompile Include="roomprueba.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScenePuzzleTemplate.cpp" />
     <ClCompile Include="SceneRoomTemplate.cpp" />
@@ -86,6 +88,7 @@
     <ClCompile Include="TombPuzzleScene.cpp" />
     <ClCompile Include="TutorialScene.cpp" />
     <ClCompile Include="WindowPuzzleScene.cpp" />
+    <ClCompile Include="WiresPuzzleScene.cpp" />
     <ClCompile Include="XOPuzzleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -234,6 +237,7 @@
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="BalancePuzzleScene.h" />
     <ClInclude Include="BooksPuzzleScene.h" />
     <ClInclude Include="Area2DLayerManager.h" />
     <ClInclude Include="CalendearMobileTestScene.h" />
@@ -265,6 +269,7 @@
     <ClInclude Include="Room1.h" />
     <ClInclude Include="Room2.h" />
     <ClInclude Include="Room3.h" />
+    <ClInclude Include="roomprueba.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScenePuzzleTemplate.h" />
     <ClInclude Include="SceneRoomTemplate.h" />
@@ -278,6 +283,7 @@
     <ClInclude Include="TombPuzzleScene.h" />
     <ClInclude Include="TutorialScene.h" />
     <ClInclude Include="WindowPuzzleScene.h" />
+    <ClInclude Include="WiresPuzzleScene.h" />
     <ClInclude Include="XOPuzzleScene.h" />
   </ItemGroup>
   <ItemGroup>
