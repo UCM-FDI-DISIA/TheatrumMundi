@@ -56,8 +56,8 @@ void Room3Scene::resolvedPuzzle(int i)
 	if (i < 5) {
 		int auxevent = event_size;
 		if (i == 0)  auxevent = BalanceSceneRsv;
-		//else if (i == 1)  auxevent = RavenSceneRsv;
-		//else if (i == 2)  auxevent = DoorSceneRsv;
+		else if (i == 1)  auxevent = WiresSceneRsv;
+		else if (i == 2)  auxevent = CircleLockSceneRsv;
 		//else if (i == 3)  auxevent = MosaicPuzzleSceneRsv;
 		//else if (i == 4)  auxevent = OrganPuzzleSceneRsv;
 		roomEvent[auxevent]();
