@@ -2,14 +2,14 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include "fmod.h"
-#include "fmod.hpp"
-#include "fmod_errors.h"
-#include "fmod_codec.h"
-#include "fmod_common.h"
-#include "fmod_dsp.h"
-#include "fmod_dsp_effects.h"
-#include "fmod_output.h"
+#include "../lib/FMOD/include/fmod.h"
+#include "../lib/FMOD/include/fmod.hpp"
+#include "../lib/FMOD/include/fmod_errors.h"
+#include "../lib/FMOD/include/fmod_codec.h"
+#include "../lib/FMOD/include/fmod_common.h"
+#include "../lib/FMOD/include/fmod_dsp.h"
+#include "../lib/FMOD/include/fmod_dsp_effects.h"
+#include "../lib/FMOD/include/fmod_output.h"
 
 class Sound {
 public:

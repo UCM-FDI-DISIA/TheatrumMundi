@@ -21,6 +21,7 @@
 #include "PauseManager.h"
 #include "WriteTextComponent.h"
 #include "DialogueManager.h"
+#include "BehaviorStateComponent.h"
 
 Room3Scene::Room3Scene()
 {
@@ -209,6 +210,7 @@ void Room3Scene::_setRoomAudio()
 
 	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
 
+	rmSounds.explosionSound = sdlutils().soundEffects().at("explosion");
 	/*Audio music
 	Sound room1music = sdlutils().musics().at("sala2");
 	audioMngr.setLooping(room1music, true);
@@ -442,6 +444,37 @@ void Room3Scene::_setInteractuables()
 	entityManager->getComponent<ClickComponent>(rmObjects.parrot)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[LightsOff]();
 		});
+	
+	BehaviorStateComponent* parrotStateCom = entityManager->addComponent<BehaviorStateComponent>(rmObjects.parrot);
+
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.explosionSound); // TODO: Gunshoot
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.doorSound); // TODO: S
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.uiButton); // TODO: T
+	// More sounds...
+
+	parrotStateCom->defBehavior(ParrotState::SHOOTING_SOUND,
+		[&]() {
+			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
+				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[0]);
+				parrotUtils.lastSoundTime = sdlutils().currTime();
+			}
+		});
+
+	parrotStateCom->defBehavior(ParrotState::RED_LIGHTS,
+		[&]() {
+			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
+
+				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[parrotUtils.codeSeqIteration]);
+
+				++parrotUtils.codeSeqIteration;
+				parrotUtils.codeSeqIteration = parrotUtils.codeSeqIteration % parrotUtils.codeSequenceSounds.size();
+
+				parrotUtils.lastSoundTime = sdlutils().currTime();
+			}
+		});
+
+	parrotStateCom->setState(ParrotState::SHOOTING_SOUND); // The other will be setted after finishin the puzzle
+
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.parrot));
 
 	//CABLES
