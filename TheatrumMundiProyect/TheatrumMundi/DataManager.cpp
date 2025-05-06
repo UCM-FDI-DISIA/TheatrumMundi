@@ -13,12 +13,13 @@ DataManager::DataManager()
 int DataManager::getRandomVariant()
 
 {
-    //Sala 1:
-    //0 = es posible
-    // 1 y 2 = variantes de ha sido un mago 
+    //Room 1:
+    //0 = posible
+    // 1 and 2 = not posible
 
-	//Sala 2:
-    
+	//Room 2:
+	//0 = not possible
+	//1 and 2 = possible
 
     int mage = sdlutils().rand().nextInt(0,2);
 

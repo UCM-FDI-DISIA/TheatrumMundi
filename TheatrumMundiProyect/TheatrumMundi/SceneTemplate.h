@@ -21,6 +21,7 @@ protected:
 	 DialogueManager* dialogueManager;
 	 Area2DLayerManager* areaLayerManager;
 	 PauseManager* pauseManager;
+	 entity_t logbtn;
 	/// <summary>
 	/// Control is the scene has been iniciated or not. If(!isStarted) create all entities of the scece (this conditions is OBLIGATORY IN THE SCENE INIT)
 	/// </summary>
@@ -69,6 +70,8 @@ public:
 	inline ecs::EntityManager* GetEntityManager() { return entityManager; }
 
 	virtual void closedLog() {};
+
+	void closedMenus();
 
 };
 

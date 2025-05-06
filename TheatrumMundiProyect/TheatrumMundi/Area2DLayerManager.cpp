@@ -8,6 +8,14 @@ Area2DLayerManager::Area2DLayerManager()
 
 }
 
+Area2DLayerManager::~Area2DLayerManager()
+{
+	for (auto& a : _areaLayerOrderList) {
+		delete a;
+	}
+	_areaLayerOrderList.clear();
+}
+
 std::list<Area2D*> const& Area2DLayerManager::list()
 {
 	return _areaLayerOrderList;

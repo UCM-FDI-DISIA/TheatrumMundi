@@ -35,7 +35,6 @@ protected:
 		RectArea2D* InvArea = nullptr;
 		ecs::entity_t inventoryUpButton = nullptr;
 		ecs::entity_t inventoryDownButton = nullptr;
-		ecs::entity_t backgroundTextDescription = nullptr;
 		ecs::entity_t textDescriptionEnt = nullptr;
 
 	}invObjects;
@@ -54,6 +53,7 @@ protected:
 		void HideAllInvetoryItems(const ecs::entity_t& invBack, const ecs::entity_t& UpButton, const ecs::entity_t& DownButt); //Hide the inventory things
 		void createDescription(Entity* hintEntity, Hint* hintItem);
 		void reposAllInventoryItems();
+		void unload() override;
 
 	SceneRoomTemplate();
 	virtual ~SceneRoomTemplate();

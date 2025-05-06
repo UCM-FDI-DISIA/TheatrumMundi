@@ -19,13 +19,12 @@ using namespace std;
 DialogueManager::DialogueManager(int numRooms) : _scene(nullptr), displayOnProcess(false), characterimg(nullptr), _writeTextComp(nullptr){
     actualroom = numRooms;
     room = "Sala" + to_string(actualroom);
-    dialogueReader = new ReadDialog(numRooms);
-    _showText = new TextInfo{ " ", " " };
+    dialogueReader = Game::Instance()->getReadDialogue();
+   // _showText = TextInfo{ "", "" };
 }
 
 DialogueManager::~DialogueManager() {
-    delete _showText;
-    delete dialogueReader;
+
 }
 
 void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityManager* entityManager, bool isMiddleRoom, Area2DLayerManager* areaLayerManager, string event)
@@ -85,7 +84,7 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
 
     //Add writeText to dialogueManager
     SDL_Color colorDialog = { 0, 0, 0, 255 }; // Color = red
-    WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, _showText);
+    WriteTextComponent<TextInfo>* writeLogentityManager = entityManager->addComponent<WriteTextComponent<TextInfo>>(_textTest, sdlutils().fonts().at("BASE"), colorDialog, &_showText);
     writeLogentityManager->setMiddleRoom(isMiddleRoom);
 
     _writeTextComp = writeLogentityManager;
@@ -107,23 +106,24 @@ void DialogueManager::ReadDialogue(const string& event) {
             _writeTextComp->startTextLine();
 
             TextInfo elem = roomDialogues[event].front();
-            _showText->Character = elem.Character;
-            _showText->Text = elem.Text;
+            _showText.Character = elem.Character;
+            _showText.Text = elem.Text;
 
             Game::Instance()->getLog()->addDialogueLineLog(elem.Character, elem.Text);
             setCharacterImage(elem.Character);
 
             roomDialogues[event].pop_front();
+
+            //Indicate log the dialogue Event has ended
+            if(roomDialogues[event].empty()) Game::Instance()->getLog()->addDialogueLineLog("/", "/");
         }
         else {
-            //Indicate log the dialogue Event has ended
-            Game::Instance()->getLog()->addDialogueLineLog("/", "/");
-
+           
             _scene->endDialogue();
             displayOnProcess = false;
 
-            _showText->Character = " "; // Saves new text
-            _showText->Text = " ";
+            _showText.Character = " "; // Saves new text
+            _showText.Text = " ";
             _writeTextComp->startTextLine();
         }
     }
@@ -146,7 +146,7 @@ void DialogueManager::setEventToRead(std::string eventToRead)
     _eventToRead = eventToRead;
 }
 
-TextInfo* DialogueManager::getShowText() {
+TextInfo DialogueManager::getShowText() {
     return _showText;
 }
 

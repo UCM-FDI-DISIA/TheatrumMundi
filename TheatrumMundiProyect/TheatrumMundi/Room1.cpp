@@ -35,6 +35,7 @@ Room1Scene::Room1Scene() : SceneRoomTemplate(), _eventToRead("Sala1Intro")
 
 Room1Scene::~Room1Scene()
 {
+	
 }
 
 void Room1Scene::init()
@@ -216,7 +217,7 @@ void Room1Scene::_setRoomEvents()
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
-			Sound correctSound = sdlutils().soundEffects().at("correcto");
+			std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
 			AudioManager::Instance().playSound(correctSound);
 
 			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
@@ -251,7 +252,7 @@ void Room1Scene::_setRoomEvents()
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
-			Sound incorrectSound = sdlutils().soundEffects().at("incorrecto");
+			std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
 			AudioManager::Instance().playSound(incorrectSound);
 
 			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
@@ -327,9 +328,8 @@ void Room1Scene::_setRoomAudio()
 
 
 	//Audio music
-	Sound room1music = sdlutils().musics().at("sala1");
-	audioMngr.setLooping(room1music, true);
-	audioMngr.playSound(room1music);
+	std::shared_ptr<Sound> room1music = sdlutils().musics().at("sala1");
+	audioMngr.playSound(room1music, true);
 }
 
 void Room1Scene::_setDialog()
@@ -371,12 +371,8 @@ void Room1Scene::_setUI()
 
 	entityManager->setActive(rmObjects.quitButton, false);
 
-	//inventory descriptions
 	
-	//visual background for item description text
-	invObjects.backgroundTextDescription = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(150, 800), Vector2D(0, 0), 500, 75, 0, ecs::grp::UI);
-	entityManager->setActive(invObjects.backgroundTextDescription, false);
-
+	//inventory descriptions
 	//description text entity
 	invObjects.textDescriptionEnt = entityManager->addEntity(ecs::grp::UI);
 	auto _testTextTranform = entityManager->addComponent<Transform>(invObjects.textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
@@ -457,7 +453,7 @@ void Room1Scene::_setUI()
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getreanudePauseButton())->getLayerPos());
 	areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(pauseManager->_getexitPauseButton())->getLayerPos());
 
-	rmObjects.logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
+	logbtn = rmObjects.logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 }
 
 void Room1Scene::_setRoomBackground()

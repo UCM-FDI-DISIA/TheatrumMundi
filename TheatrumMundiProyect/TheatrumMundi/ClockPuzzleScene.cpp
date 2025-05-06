@@ -47,12 +47,12 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		room = sr;
 		AudioManager& a = AudioManager::Instance();
-		Sound clockMinSound = sdlutils().soundEffects().at("aguja_minutero");
-		Sound clockHorSound = sdlutils().soundEffects().at("aguja_horario");
+		std::shared_ptr<Sound> clockMinSound = sdlutils().soundEffects().at("aguja_minutero");
+		std::shared_ptr<Sound> clockHorSound = sdlutils().soundEffects().at("aguja_horario");
 		a.setVolume(clockMinSound, 0.2);
 		a.setVolume(clockHorSound, 0.2);
 
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
 
@@ -214,8 +214,8 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
 			if (variant == 0)AddInvItem("frascoV2", "Un frasco con restos de algo.", position, sr);
-			else if (variant == 1)AddInvItem("frascoV2", "Un frasco totalmente limpio, que raro.", position, sr);
-			else if (variant == 2)AddInvItem("frascoV1", " Un frasco con huellas de dedos, ¿no habían guantes?", position, sr);
+			else if (variant == 1)AddInvItem("frascoV2", "Un frasco totalmente limpio, \nque raro.", position, sr);
+			else if (variant == 2)AddInvItem("frascoV1", " Un frasco con huellas de dedos,  \nï¿½no habï¿½an guantes?", position, sr);
 			container->getMngr()->setActive(container, false);
 
 		});

@@ -4,8 +4,10 @@
 
 #include <cassert>
 #include <memory>
-
+#include "../game/Game.h"
 #include "../json/JSON.h"
+
+
 
 SDLUtils::SDLUtils() :
 		_windowTitle("TheatrumMundi"), //
@@ -42,8 +44,9 @@ bool SDLUtils::init(std::string windowTitle, int width, int height) {
 bool SDLUtils::init(std::string windowTitle, int width, int height,
 		std::string filename) {
 	init(windowTitle, width, height);
+#ifdef _LOADALLRESOURCES
 	loadReasources(filename);
-
+#endif
 	// we always return true, because this class either exit or throws an
 	// exception on error. If you want to avoid using exceptions you should
 	// find a workaround using booleans.
@@ -244,23 +247,25 @@ void SDLUtils::loadReasources(std::string filename) {
 	jValue = root["sounds"];
 	if (jValue != nullptr) {
 		if (jValue->IsArray()) {
-			_sounds.reserve(jValue->AsArray().size()); // reserve enough space to avoid resizing
-			for (auto &v : jValue->AsArray()) {
+			_sounds.reserve(jValue->AsArray().size());
+			for (auto& v : jValue->AsArray()) {
 				if (v->IsObject()) {
 					JSONObject vObj = v->AsObject();
 					std::string key = vObj["id"]->AsString();
 					std::string file = vObj["file"]->AsString();
 #ifdef _DEBUG
-					std::cout << "Loading sound effect with id: " << key
-							<< std::endl;
+					std::cout << "Loading sound effect with id: " << key << std::endl;
 #endif
-					_sounds.emplace(key, Sound(file));
-				} else {
-					throw "'sounds' array in '" + filename
-							+ "' includes and invalid value";
+					
+					std::shared_ptr<Sound> sound = AudioManager::Instance().createSound(file);
+					_sounds.emplace(key, sound); 
+				}
+				else {
+					throw "'sounds' array in '" + filename + "' includes and invalid value";
 				}
 			}
-		} else {
+		}
+		else {
 			throw "'sounds' is not an array";
 		}
 	}
@@ -278,7 +283,8 @@ void SDLUtils::loadReasources(std::string filename) {
 #ifdef _DEBUG
 					std::cout << "Loading music with id: " << key << std::endl;
 #endif
-					_musics.emplace(key, Sound(file));
+					std::shared_ptr<Sound> music = AudioManager::Instance().createSound(file);
+					_musics.emplace(key, music);
 				} else {
 					throw "'musics' array in '" + filename
 							+ "' includes and invalid value";
@@ -289,6 +295,14 @@ void SDLUtils::loadReasources(std::string filename) {
 		}
 	}
 
+}
+void SDLUtils::ClearMaps()
+{
+	_musics.clear();
+	_sounds.clear();
+	_msgs.clear();
+	_images.clear();
+	_fonts.clear();
 }
 
 void SDLUtils::closeSDLExtensions() {

@@ -6,6 +6,7 @@ class GameSave
 {
 public:
     GameSave();
+    ~GameSave();
     GameSave(const std::string& filename);
 
     void Load(const std::string& filename);

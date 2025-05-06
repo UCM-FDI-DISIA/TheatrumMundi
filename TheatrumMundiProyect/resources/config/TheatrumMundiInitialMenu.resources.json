@@ -1,0 +1,68 @@
+{
+
+  "fonts" : [
+    {
+      "id": "ARIAL24",
+      "file": "../resources/fonts/ARIAL.ttf",
+      "size": 24
+    },
+    { "id" : "TITLE", "file" : "../resources/fonts/PirataOne-Regular.ttf", "size": 40 },
+    { "id" : "BASE", "file" : "../resources/fonts/FeFCrm2.ttf", "size": 24}
+  ],
+
+  "images": [
+    {
+      "id": "Room",
+      "file": "../resources/images/Finales/SalaIntermedia.PNG"
+    },
+    {
+      "id": "Title",
+      "file": "../resources/images/TemporalTitleImage.png"
+    },
+    {
+      "id": "TutorialButton",
+      "file": "../resources/images/Finales/tutorialButton.png"
+  },
+  {
+    "id": "NewGame",
+    "file": "../resources/images/Finales/RectangleNewGameButton.PNG"
+  },
+  {
+    "id": "loading",
+    "file": "../resources/images/loading.png"
+  },
+  {
+    "id": "NewGameLocked",
+    "file": "../resources/images/temporales/GameLocked.png"
+},
+{
+  "id": "Exit",
+  "file": "../resources/images/Finales/RectangleExitButton.PNG"
+}
+  ],
+
+  "messages": [
+    {
+      "id": "start",
+      "text": "Press space to start",
+      "font": "ARIAL24",
+      "color": "0x441155ff"
+    }
+  ],
+
+    "sounds": [
+        {
+            "id": "boton",
+            "file": "../resources/sound/sfx/click_boton.wav"
+        }
+       
+    ],
+
+  "musics" : [
+    {
+        "id": "sala1",
+        "file":  "../resources/sound/music/sala1.wav"
+    }
+  ]
+
+}

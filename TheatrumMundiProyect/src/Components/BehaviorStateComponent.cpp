@@ -11,7 +11,7 @@ BehaviorStateComponent::~BehaviorStateComponent()
 {
 }
 
-void BehaviorStateComponent::addBehavior(BEHAVIOR_STATE newState, std::function<void()> stateUpdate)
+void BehaviorStateComponent::defBehavior(BEHAVIOR_STATE newState, std::function<void()> stateUpdate)
 {
 	if (_stateBehaviors.find(newState) == _stateBehaviors.end())
 	{

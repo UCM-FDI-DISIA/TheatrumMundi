@@ -75,6 +75,7 @@ MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaInterm
 
 MiddleRoomScene::~MiddleRoomScene()
 {
+	
 }
 
 void MiddleRoomScene::init()
@@ -83,7 +84,7 @@ void MiddleRoomScene::init()
 		isStarted = true;
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		Sound* buttonSound = sdlutils().soundEffects().at("boton").get();
 		//Audio music
 		//Sound room1music = sdlutils().musics().at("sala1");
 		//a.setLooping(room1music, true);
@@ -105,7 +106,7 @@ void MiddleRoomScene::init()
 */
 		
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
+		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 	}
 	SDL_Delay(1000);
 

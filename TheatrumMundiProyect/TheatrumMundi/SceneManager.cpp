@@ -1,9 +1,11 @@
 #include "SceneManager.h"
 #include <assert.h>
 #include "SceneTemplate.h"
+#include "../game/Game.h"
+#include "../sdlutils/SDLUtils.h"
 #include "Room1.h"
 #include "Room2.h"
-#include "roomprueba.h"
+#include "Room3.h"
 #include "InitialScene.h"
 #include "PipePuzzleScene.h"
 #include "ClockPuzzleScene.h"
@@ -11,31 +13,31 @@
 #include "TeaCupPuzzleScene.h"
 #include "checkML.h"
 #include "SceneRoomTemplate.h"
-#include"DebugInventoryScene.h"
 #include "MosaicPuzzleScene.h"
 #include "RavenPuzzleScene.h"
 #include "WindowPuzzleScene.h"
 #include "MiddleRoomScene.h"
 #include "MusicPuzzleScene.h"
+#include "TombPuzzleScene.h"
 #include "DragPuzzleScene.h"
 #include "TutorialScene.h"
 #include "TelePuzzleScene.h"
 #include "DoorPuzzleScene.h"
 #include "XOPuzzleScene.h"
 #include "WiresPuzzleScene.h"
-#include "BalancePuzzleScene.h"
+#include "LockerPuzzle.h"
 #include "CSVdataRecolector.h"
-#include "../../TheatrumMundiProyect/src/game/Game.h"
 SceneManager::SceneManager()
 {
+	//If this content is edited, please put the same code in ResetSceneManager
 	scenes.resize(SceneName::SCENE_SIZE);
+	auto tombScene = new TombPuzzleScene(); //For the chain Puzzle, to take the reference
 
 	scenes[SceneName::INITIAL_MENU] = new InitialScene();
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::ROOM_2] = new Room2Scene();
-	scenes[SceneName::ROOM_3] = new roomprueba();
-	scenes[SceneName::BALANCE_PUZZLE] = new BalancePuzzleScene();
+	scenes[SceneName::ROOM_3] = new Room3Scene();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
@@ -45,9 +47,10 @@ SceneManager::SceneManager()
 	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
 	scenes[SceneName::WINDOW_SCENE] = new WindowPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
-	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
-	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
 	scenes[SceneName::WIRES_PUZZLE] = new WiresPuzzleScene();
+	scenes[SceneName::TOMB_SCENE] = tombScene;
+	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene(tombScene);
+	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene(tombScene);
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 
@@ -61,68 +64,8 @@ void SceneManager::popScene()
 {
 	std::cout << "pop scene" << endl;
 	assert(!currentscenes.empty());
-	std::string scene = "NONE";
-	switch (actsceneindex)
-	{
-	case SceneName::INITIAL_MENU:
-		scene = "INITIAL MENU";
-		break;
-	case SceneName::ROOM_1:
-		scene = "ROOM_1";
-		break;
-	case SceneName::MIDDLE_ROOM:
-		scene = "MIDDLE_ROOM";
-		break;
-	case SceneName::PIPE_PUZZLE:
-		scene = "PIPE_PUZZLE";
-		break;
-	case SceneName::CLOCK_PUZZLE:
-		scene = "CLOCK_PUZZLE";
-		break;
-	case SceneName::BOOKS_PUZZLE:
-		scene = "MIDDLE_ROOM";
-		break;
-	case -1:
-		scene = "TUTORIAL";
-		break;
-	default:
-		break;
-	}
-	Game::Instance()->getCSVDataColector()->exitScene(scene);
-
 	currentscenes.pop_back();
-	int aux;
-	for (int i = 0;i < scenes.size();i++){
-		if (currentscenes.back() == scenes[i]) aux = i;
-	}
-	switch (actsceneindex)
-	{
-	case SceneName::INITIAL_MENU:
-		scene = "INITIAL MENU";
-		break;
-	case SceneName::ROOM_1:
-		scene = "ROOM_1";
-		break;
-	case SceneName::MIDDLE_ROOM:
-		scene = "MIDDLE_ROOM";
-		break;
-	case SceneName::PIPE_PUZZLE:
-		scene = "PIPE_PUZZLE";
-		break;
-	case SceneName::CLOCK_PUZZLE:
-		scene = "CLOCK_PUZZLE";
-		break;
-	case SceneName::BOOKS_PUZZLE:
-		scene = "MIDDLE_ROOM";
-		break;
-	case -1:
-		scene = "TUTORIAL";
-		break;
-	default:
-		break;
-	}
-	Game::Instance()->getCSVDataColector()->enterScene(scene);
-
+	currentscenes.back()->closedMenus();
 
 }
 
@@ -130,148 +73,64 @@ void SceneManager::popScene()
 
 void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 {
-	std::string scene = "NONE";
-	int aux;
-	for (int i = 0;i < scenes.size();i++) {
-		if (currentscenes.back() == scenes[i]) aux = i;
-	}
-	switch (actsceneindex)
-	{
-	case SceneName::INITIAL_MENU:
-		scene = "INITIAL MENU";
-		break;
-	case SceneName::ROOM_1:
-		scene = "ROOM_1";
-		break;
-	case SceneName::MIDDLE_ROOM:
-		scene = "MIDDLE_ROOM";
-		break;
-	case SceneName::PIPE_PUZZLE:
-		scene = "PIPE_PUZZLE";
-		break;
-	case SceneName::CLOCK_PUZZLE:
-		scene = "CLOCK_PUZZLE";
-		break;
-	case SceneName::BOOKS_PUZZLE:
-		scene = "MIDDLE_ROOM";
-		break;
-	case -1:
-		scene = "TUTORIAL";
-		break;
-	default:
-		break;
-	}
-	Game::Instance()->getCSVDataColector()->exitScene(scene);
-
-	scenes[index]->init(room);
 	
-	actsceneindex = index;
-
-	switch (actsceneindex)
+	//loadResouces
+#ifndef _LOADALLRESOURCES
+	
+	switch (index)
 	{
-	case SceneName::INITIAL_MENU:
-		scene = "INITIAL MENU";
+	case INITIAL_MENU:
+		sdlutils().ClearMaps();
+		sdlutils().loadReasources("../resources/config/TheatrumMundiInitialMenu.resources.json");
 		break;
-	case SceneName::ROOM_1:
-		scene = "ROOM_1";
+	case TUTORIAL_SCENE:
+		sdlutils().ClearMaps();
+		sdlutils().loadReasources("../resources/config/TheatrumMundiTutorial.resources.json");
 		break;
-	case SceneName::MIDDLE_ROOM:
-		scene = "MIDDLE_ROOM";
-		break;
-	case SceneName::PIPE_PUZZLE:
-		scene = "PIPE_PUZZLE";
-		break;
-	case SceneName::CLOCK_PUZZLE:
-		scene = "CLOCK_PUZZLE";
-		break;
-	case SceneName::BOOKS_PUZZLE:
-		scene = "MIDDLE_ROOM";
-		break;
-	case -1:
-		scene = "TUTORIAL";
+	case ROOM1:
+		sdlutils().ClearMaps();
+		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom1.resources.json");
 		break;
 	default:
 		break;
 	}
-	Game::Instance()->getCSVDataColector()->enterScene(scene);
+#endif // !_LOADALLRESOURCES
+	scenes[index]->init(room);
+	actsceneindex = index;
 	currentscenes.push_back(scenes[index]);
+	currentscenes.back()->closedMenus();
 	
 }
 
 void SceneManager::loadScene(int index)
 {
-	std::string scene = "NONE";
-	if (!currentscenes.empty()) {
-		int aux;
-		for (int i = 0;i < scenes.size();i++) {
-			if (currentscenes.back() == scenes[i]) aux = i;
-		}
-		switch (actsceneindex)
-		{
-		case SceneName::INITIAL_MENU:
-			scene = "INITIAL MENU";
-			break;
-		case SceneName::ROOM_1:
-			scene = "ROOM_1";
-			break;
-		case SceneName::MIDDLE_ROOM:
-			scene = "MIDDLE_ROOM";
-			break;
-		case SceneName::PIPE_PUZZLE:
-			scene = "PIPE_PUZZLE";
-			break;
-		case SceneName::CLOCK_PUZZLE:
-			scene = "CLOCK_PUZZLE";
-			break;
-		case SceneName::BOOKS_PUZZLE:
-			scene = "MIDDLE_ROOM";
-			break;
-		case SceneName::ROOM_3:
-			scene = "ROOM_3";
-			break;
-		case -1:
-			scene = "TUTORIAL";
-			break;
-		default:
-			break;
-		}
-		Game::Instance()->getCSVDataColector()->exitScene(scene);
-	}
-	scenes[index]->init();
+	//loadResouces
+#ifndef _LOADALLRESOURCES
 	
-	actsceneindex = index;
-
-	switch (actsceneindex)
+	switch (index)
 	{
-	case SceneName::INITIAL_MENU:
-		scene = "INITIAL MENU";
+	case INITIAL_MENU:
+		sdlutils().ClearMaps();
+		sdlutils().loadReasources("../resources/config/TheatrumMundiInitialMenu.resources.json");
 		break;
-	case SceneName::ROOM_1:
-		scene = "ROOM_1";
+	case TUTORIAL_SCENE:
+		sdlutils().ClearMaps();
+		sdlutils().loadReasources("../resources/config/TheatrumMundiTutorial.resources.json");
 		break;
-	case SceneName::MIDDLE_ROOM:
-		scene = "MIDDLE_ROOM";
-		break;
-	case SceneName::PIPE_PUZZLE:
-		scene = "PIPE_PUZZLE";
-		break;
-	case SceneName::CLOCK_PUZZLE:
-		scene = "CLOCK_PUZZLE";
-		break;
-	case SceneName::BOOKS_PUZZLE:
-		scene = "MIDDLE_ROOM";
-		break;
-	case SceneName::ROOM_3:
-		scene = "ROOM_3";
-		break;
-	case -1:
-		scene = "TUTORIAL";
+	case ROOM1:
+		sdlutils().ClearMaps();
+
+		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom1.resources.json");
 		break;
 	default:
 		break;
 	}
-	Game::Instance()->getCSVDataColector()->enterScene(scene);
+#endif // !_LOADALLRESOURCES
+
+	scenes[index]->init();
+	actsceneindex = index;
 	currentscenes.push_back(scenes[index]);
+	currentscenes.back()->closedMenus();
 }
 
 void SceneManager::unloadScene()
@@ -318,23 +177,31 @@ void SceneManager::ResetSceneManager()
 {
 
 	scenes.resize(SceneName::SCENE_SIZE);
+	auto tombScene = new TombPuzzleScene(); //For the chain Puzzle, to take the reference
 
 	scenes[SceneName::INITIAL_MENU] = new InitialScene();
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
+	scenes[SceneName::ROOM_2] = new Room2Scene();
+	scenes[SceneName::ROOM_3] = new Room3Scene();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
 	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
 	scenes[SceneName::MUSIC_PUZZLE] = new MusicPuzzleScene();
+	scenes[SceneName::RAVEN_SCENE] = new RavenPuzzleScene();
+	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
+	scenes[SceneName::WINDOW_SCENE] = new WindowPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
-	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene();
+	scenes[SceneName::TOMB_SCENE] = tombScene;
+	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene(tombScene);
+	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene(tombScene);
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
-	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 
 	loadScene(SceneName::INITIAL_MENU);
-
 }
+
+
 
 
