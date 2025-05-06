@@ -61,6 +61,7 @@ void AudioManager::shutdown() {
     if (system) {
         system->close();
         system->release();
+       
     }
 }
 

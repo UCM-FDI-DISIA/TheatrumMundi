@@ -325,8 +325,7 @@ void TutorialScene::endDialogue()
 	switch (dialogCount) {
 		case 0:
 			dialogueManager->setdisplayOnProcess(false);
-			
-			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+		
 			
 			logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 
@@ -339,7 +338,7 @@ void TutorialScene::endDialogue()
 		case 1:
 			dialogueManager->setdisplayOnProcess(false);
 
-			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+			
 
 			entityManager->setActive(passwordButton, true);
 			
@@ -348,27 +347,28 @@ void TutorialScene::endDialogue()
 		case 2:
 			dialogueManager->setdisplayOnProcess(false);
 
-			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+			
 			entityManager->setActive(ChangeRoom1, true);
 			
 			break;
 
 		case 3:
 			dialogueManager->setdisplayOnProcess(false);
-			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+			
 			television->getMngr()->getComponent<ClickComponent>(television)->setActive(true);
 			
 			break;
 
 		case 5:
 			dialogueManager->setdisplayOnProcess(false);
-			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+			
 			entityManager->setActive(inventoryButton, true);
 			break;
 
 		case 6:
 			dialogueManager->setdisplayOnProcess(false);
-			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+		
+
 			break;
 
 
