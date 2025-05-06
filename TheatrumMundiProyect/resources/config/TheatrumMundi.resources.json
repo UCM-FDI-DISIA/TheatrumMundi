@@ -285,6 +285,10 @@
     { "id" : "pluma", "file" : "../resources/images/temporales/pluma.png" },
     { "id" : "juzgado", "file" : "../resources/images/temporales/juzgado.png" },
     { "id" : "salaEspera", "file" : "../resources/images/temporales/salaEspera.png" },
+    { "id" : "cortinaFija", "file" : "../resources/images/Finales/cortinaFija.png" },
+    { "id" : "cortinaD", "file" : "../resources/images/Finales/cortinaD.png" },
+    { "id" : "cortinaI", "file" : "../resources/images/Finales/cortinaI.png" },
+    { "id" : "fondoMorado", "file" : "../resources/images/temporales/fondoMorado.png" },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"

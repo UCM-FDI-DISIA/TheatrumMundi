@@ -15,7 +15,12 @@ private:
 	Entity* courtainsBackground;
 	std::string cred1;
 	std::string cred2;
-
+	ecs::Entity* _scrollAreaRight;
+	ecs::Entity* _scrollAreaLeft;
+	ecs::Entity* _bigCourtain;
+	ecs::Entity* _courtainLeft;
+	ecs::Entity* _courtainRight;
+	bool _backToMainMenu;
 public:
 	CreditsScene();
 	~CreditsScene();
