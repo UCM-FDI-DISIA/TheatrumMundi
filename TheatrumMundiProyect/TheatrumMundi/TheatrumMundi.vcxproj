@@ -53,6 +53,7 @@
     <ClCompile Include="CSVdataRecolector.cpp" />
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
+    <ClCompile Include="DialogueAnimComponent.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
     <ClCompile Include="DoorPuzzleScene.cpp" />
     <ClCompile Include="DragPuzzleScene.cpp" />
@@ -244,6 +245,7 @@
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="ClockPuzzleScene.h" />
     <ClInclude Include="DescriptionInfo.h" />
+    <ClInclude Include="DialogueAnimComponent.h" />
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="DoorPuzzleScene.h" />
@@ -399,7 +401,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;OpenAL32.lib;sndfile.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;OpenAL32.lib;sndfile.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

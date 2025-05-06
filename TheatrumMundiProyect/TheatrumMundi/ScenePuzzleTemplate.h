@@ -6,6 +6,8 @@ class ScenePuzzleTemplate: public SceneTemplate
 	private:
 
 	bool placeHand; //if an object is on the trigger
+
+	bool firstEntry; //To create Descriptions components only at first time
 	
 	protected:
 		 
@@ -16,6 +18,10 @@ class ScenePuzzleTemplate: public SceneTemplate
 		bool logActive = false; //if log is activated
 
 		Vector2D originalPos; //Saves the origianl position of an object
+
+		ecs::entity_t textDescriptionEnt; //Description entities
+
+		Transform* _testTextTranform; //Description position
 
 	public:
 	
@@ -50,6 +56,8 @@ class ScenePuzzleTemplate: public SceneTemplate
 	void compareInv(SceneRoomTemplate* sr); //Compare the inventory of the room with the inventory of the puzzle
 
 	void reposInv(SceneRoomTemplate* sr); //Reposition the inventory items
+
+	void CreateDescriptions(SceneRoomTemplate* sr);
 
 	void scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr); //scroll puzzle
 
