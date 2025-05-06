@@ -27,6 +27,7 @@ enum SceneName {
 	LOCKER_PUZZLE,
 	TUTORIAL_SCENE,
 	TELE_PUZZLE,
+	WIRES_PUZZLE,
 	SCENE_SIZE
 };
 class SceneManager

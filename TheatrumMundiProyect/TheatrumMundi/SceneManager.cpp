@@ -24,6 +24,7 @@
 #include "TelePuzzleScene.h"
 #include "DoorPuzzleScene.h"
 #include "XOPuzzleScene.h"
+#include "WiresPuzzleScene.h"
 #include "LockerPuzzle.h"
 #include "CSVdataRecolector.h"
 SceneManager::SceneManager()
@@ -46,6 +47,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
 	scenes[SceneName::WINDOW_SCENE] = new WindowPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
+	scenes[SceneName::WIRES_PUZZLE] = new WiresPuzzleScene();
 	scenes[SceneName::TOMB_SCENE] = tombScene;
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene(tombScene);
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene(tombScene);
@@ -56,7 +58,7 @@ SceneManager::SceneManager()
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::INITIAL_MENU);
+	loadScene(SceneName::ROOM_3);
 }
 
 void SceneManager::popScene()
