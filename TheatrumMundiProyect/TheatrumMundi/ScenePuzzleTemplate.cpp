@@ -191,7 +191,7 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 	if (!ItemAlreadyCreated(id)) {
 		//Add Items to the room inventory
 		sr->GetInventory()->addItem(new Hint(id, description, &sdlutils().images().at(id)));
-		sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, sr->GetAreaLayerManager(), EntityFactory::NODRAG, ecs::grp::UI));
 		sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
 
 		auto srHint = sr->GetInventory()->hints.back();
