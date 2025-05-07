@@ -67,7 +67,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//create the clock
 		clock = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(420,50), Vector2D(0, 0), 300, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		entityManager->addComponent<TriggerComponent>(clock);
+		clock->getMngr()->getComponent<TriggerComponent>(clock)->setTargetGroup(ecs::grp::INVENTORY);
 		//Assigns the trigger bolean to true
 		clock->getMngr()->getComponent<TriggerComponent>(clock)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);

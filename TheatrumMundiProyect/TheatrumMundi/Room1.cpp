@@ -174,7 +174,6 @@ void Room1Scene::_setRoomEvents()
 			createDescription(inv->hints.back(), inv->getItems().back());
 			if(inv->getActive()) inv->hints.back()->getMngr()->setActive(inv->hints.back(), true);
 			else inv->hints.back()->getMngr()->setActive(inv->hints.back(), false);
-
 		};
 			
 	roomEvent[ResolveCase] = [this]() {
@@ -417,6 +416,7 @@ void Room1Scene::_setUI()
 
 				for (int i = inv->getFirstItem(); i < inv->getItemNumber() + inv->getFirstItem(); ++i) {
 					inv->hints[i]->getMngr()->setActive(inv->hints[i], true);  // Activate the items
+					areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inv->hints[i])->getLayerPos());
 				}
 			}
 			else 

@@ -28,7 +28,6 @@ Game* Game::Instance()
 }
 Game::~Game() {
 	
-	AudioManager::Instance().shutdown();
 	delete _mngr;
 	delete dialogueReader;
 	delete _dataManager;
@@ -37,12 +36,12 @@ Game::~Game() {
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
 
+	AudioManager::Instance().shutdown();
+
 	// release SLDUtil if the instance was created correctly.
 	if (SDLUtils::HasInstance()) {
 		SDLUtils::Release();
 	}
-
-	
 }
 
 void Game::init() {
