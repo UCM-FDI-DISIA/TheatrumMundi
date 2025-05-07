@@ -27,7 +27,7 @@
 
 #include "DialogueManager.h"
 
-
+#include "../sdlutils/SoundEffect.h"
 #include "GameSave.h"
 
 using namespace std;
@@ -56,6 +56,7 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
+
 		a.setVolume(buttonSound, 0.2);
 
 		dialogueManager->setScene(this);
@@ -261,7 +262,8 @@ bool TelePuzzleScene::isItemHand(const std::string& itemId)
 		isAnimating = true;
 		// Change to first texture
 		tvBackground->getMngr()->getComponent<Image>(tvBackground)->setTexture(tvAnimationFrames[0]);
-
+		AudioManager::Instance().playSound(sdlutils().soundEffects().at("Statica"), true);
+		AudioManager::Instance().setVolume(sdlutils().soundEffects().at("Statica"), 0.1);
 
 		
 
@@ -287,11 +289,12 @@ void TelePuzzleScene::refresh()
 		if (currentFrameIndex >= tvAnimationFrames.size()) {
 			
 			isAnimating = false;
-			Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
+			
 			Game::Instance()->reset();
 			return;
 		}
-
+		float vol = (float)currentFrameIndex * 0.1;
+		AudioManager::Instance().setVolume(sdlutils().soundEffects().at("Statica"), vol);
 		
 		tvBackground->getMngr()->getComponent<Image>(tvBackground)->setTexture(tvAnimationFrames[currentFrameIndex]);
 
@@ -302,11 +305,13 @@ void TelePuzzleScene::refresh()
 		
 		currentFrameIndex++;
 
+		float vol = (float)currentFrameIndex * 0.1;
+		AudioManager::Instance().setVolume(sdlutils().soundEffects().at("Statica"), vol);
 
 		if (currentFrameIndex >= tvAnimationFrames.size()) {
 
 			isAnimating = false;
-			Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
+			
 			Game::Instance()->reset();
 			return;
 		}
@@ -317,5 +322,9 @@ void TelePuzzleScene::refresh()
 
 		frameTimer.resetTime();
 
+	}
+	if (currentFrameIndex == 10) {
+		AudioManager::Instance().stopSound(sdlutils().soundEffects().at("Statica"));
+		AudioManager::Instance().playSound(sdlutils().soundEffects().at("FinalTeleTutorial"));
 	}
 }

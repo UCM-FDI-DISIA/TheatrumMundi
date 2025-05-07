@@ -2,7 +2,7 @@
 #include "ScenePuzzleTemplate.h"
 #include "vector"
 #include "../src/sdlutils/VirtualTimer.h"
-
+#include "AudioManager.h"
 class TelePuzzleScene : public ScenePuzzleTemplate
 {
 public:
