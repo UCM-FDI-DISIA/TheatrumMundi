@@ -78,6 +78,7 @@ TutorialScene::TutorialScene() : SceneRoomTemplate()
 				HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
 				Game::Instance()->getSceneManager()->loadScene(TELE_PUZZLE, this);
 			}
+			else if(dialogCount == 4 || dialogCount == 5){}//Do nothing
 			else {
 				HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
 				Game::Instance()->getSceneManager()->loadScene(TELE_PUZZLE, this);
@@ -85,7 +86,7 @@ TutorialScene::TutorialScene() : SceneRoomTemplate()
 		};
 	roomEvent[Antenna] = [this] {
 		// InventoryLogic
-		GetInventory()->addItem(new Hint("antena", "Antena de un televisor. ¿Esto sigue existiendo?", &sdlutils().images().at("antena")));
+		GetInventory()->addItem(new Hint("antena", "Antena de un televisor. \n¿Esto sigue existiendo?", &sdlutils().images().at("antena")));
 		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "antena", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		createDescription(GetInventory()->hints.back(), GetInventory()->getItems().back());
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);

@@ -151,7 +151,6 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 			AudioManager::Instance().playSound(buttonSound);
 			scrollInventoryPuzzle(1, sr);
 			});
-		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, downButton, upButton, inventoryButton, _backButton, buttonSound]()
 		{
