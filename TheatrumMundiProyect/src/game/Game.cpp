@@ -28,7 +28,6 @@ Game* Game::Instance()
 }
 Game::~Game() {
 	
-
 	delete _mngr;
 	delete dialogueReader;
 	delete _dataManager;
@@ -163,6 +162,7 @@ void Game::reset()
 	Game::Instance()->getLog()->ResetLog();
 	Game::Instance()->getDataManager()->ResetDataManager();
 	Game::Instance()->getSceneManager()->ResetSceneManager();
+
 	Game::Instance()->getReadDialogue()->ResetReader();
 
 }

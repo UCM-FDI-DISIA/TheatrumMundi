@@ -63,6 +63,17 @@ int DataManager::GetActualScene()
     return ActualScene;
 }
 
+void DataManager::SetRoom3Phase(int phase)
+{
+	room3phase = phase;
+}
+
+int DataManager::GetRoom3Phase()
+{
+    
+    return room3phase;
+}
+
 DataManager::~DataManager()
 {
 }
