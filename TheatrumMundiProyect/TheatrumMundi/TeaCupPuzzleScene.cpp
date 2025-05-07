@@ -57,25 +57,13 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		dialogueManager->setScene(this);
 
 		teaCupBackground = entityFactory->CreateImageEntity(entityManager, "TeaCupBackgroundWithoutSpoon", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
-		teaCupBackground->getMngr()->removeComponent<Area2D>(teaCupBackground);
-
-		/*ecs::entity_t teaCupSpoon = entityFactory->CreateInteractableEntity( // Spoon entity
-			entityManager, "TeaCupSpoon", EntityFactory::RECTAREA,
-			Vector2D(100, 400), Vector2D(), 600, 400, 0,
-			areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);*/
+		teaCupBackground->getMngr()->removeComponent<Area2D>(teaCupBackground); //Disable the area, this allows to change the background without errors (NOT REMOVE THIS LINE)
 
 		ecs::entity_t teaCup = entityFactory->CreateInteractableEntity( // Cup entity
-			entityManager, "clockShape", EntityFactory::RECTAREA,
+			entityManager, "EmptyImage", EntityFactory::RECTAREA,
 			Vector2D(400, 100), Vector2D(), 460, 280, 0,
 			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
-		/*entityManager->addComponent<TriggerComponent>(teaCup) // Spoon enters the cup Area2D
-			->connect(TriggerComponent::AREA_ENTERED, [teaCupBackground, this]()
-				{
-					_spoonIsInCup = true;
-				});*/
-
-		teaCup->getMngr()->removeComponent<Image>(teaCup);
 		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->setTargetGroup(ecs::grp::INVENTORY);
 		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
@@ -91,7 +79,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 				{
 					if (_spoonIsInCup == false) return;
 					_poisonIsChecked = true;
-
+					teaCup->getMngr()->setActive(teaCup, false); //Disable the area to lay the spoon
 					// ... Change image revealing poinson or whatever  <-- TODO
 					Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithPoison");
 					teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
