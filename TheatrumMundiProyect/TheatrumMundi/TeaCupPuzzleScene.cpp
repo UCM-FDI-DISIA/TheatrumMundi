@@ -76,7 +76,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 				});*/
 
 		teaCup->getMngr()->removeComponent<Image>(teaCup);
-
+		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->setTargetGroup(ecs::grp::INVENTORY);
 		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
 			std::cout << "pasa por el triger de la taza" << std::endl;

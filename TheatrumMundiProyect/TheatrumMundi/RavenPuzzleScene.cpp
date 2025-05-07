@@ -126,8 +126,7 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 #pragma region SceneEntities
 
 		auto raven = entityFactory->CreateInteractableEntity(entityManager, "CuervoPeligroso",EntityFactory::RECTAREA, Vector2D(200, 350), Vector2D(0, 0), 259, 200, 0,areaLayerManager,EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		auto trag = entityManager->getComponent<TriggerComponent>(raven);
-		trag->setTargetGroup(ecs::grp::DEFAULT);
+		entityManager->getComponent<TriggerComponent>(raven)->setTargetGroup(ecs::grp::INVENTORY);
 		//Assigns the trigger bolean to true
 		entityManager->getComponent<TriggerComponent>(raven)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
