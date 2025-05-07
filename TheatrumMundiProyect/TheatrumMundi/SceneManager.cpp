@@ -29,6 +29,7 @@
 #include "WiresPuzzleScene.h"
 #include "LockerPuzzle.h"
 #include "CSVdataRecolector.h"
+#include "BalancePuzzleScene.h"
 SceneManager::SceneManager()
 {
 	//If this content is edited, please put the same code in ResetSceneManager
@@ -61,7 +62,7 @@ SceneManager::SceneManager()
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::CREDITS);
+	loadScene(SceneName::INITIAL_MENU);
 }
 
 void SceneManager::popScene()

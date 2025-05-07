@@ -29,18 +29,17 @@ void CreditsScene::init()
 {
 	if (!isStarted) {
 
-		std::cout << "DENTRO INIT" << std::endl;
+		/*std::cout << "DENTRO INIT" << std::endl;
 		AudioManager& a = AudioManager::Instance();
 
 		a.setListenerPosition(0, 0, 0);
 
-		Sound music = sdlutils().musics().at("sala1"); //cambiar a la melodia que sea
+		shared_ptr<Sound> music = sdlutils().musics().at("sala1"); //cambiar a la melodia que sea
 		a.setVolume(music, 0.4);
 
 		//	a.setVolume(music, 1);
-		a.setLooping(music, true);
-		a.playSound(music);
-
+		a.playSound(music, true);
+		*/
 		// black Background FondoNegro 
 		auto _background = entityFactory->CreateImageEntity(entityManager, "fondoMorado", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
 		_backToMainMenu = false;
@@ -116,7 +115,7 @@ void CreditsScene::init()
 			 if (!self) return 0;
 
 
-			 //self->Game::Instance()->getSceneManager()->popScene();
+			 //self->backToMenu();
 
 
 			 return 0;
@@ -158,4 +157,10 @@ void CreditsScene::closeCourtains()
 		Scroll2->addElementToScroll(entityManager->getComponent<Transform>(_courtainLeft));
 		entityManager->getComponent<ScrollComponent>(_scrollAreaLeft)->Scroll(ScrollComponent::RIGHT);
 	}
+}
+
+void CreditsScene::backToMenu()
+{
+	Game::Instance()->getSceneManager()->popScene();
+
 }

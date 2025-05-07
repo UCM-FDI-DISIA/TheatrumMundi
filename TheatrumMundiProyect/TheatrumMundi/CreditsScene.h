@@ -27,5 +27,6 @@ public:
 	void init() override;
 	void openCourtains();
 	void closeCourtains();
+	void backToMenu();
 };
 

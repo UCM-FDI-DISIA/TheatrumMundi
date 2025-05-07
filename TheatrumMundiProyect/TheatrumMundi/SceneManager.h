@@ -29,6 +29,7 @@ enum SceneName {
 	TELE_PUZZLE,
 	CREDITS,
 	WIRES_PUZZLE,
+	BALANCE_PUZZLE,
 	SCENE_SIZE
 };
 class SceneManager
