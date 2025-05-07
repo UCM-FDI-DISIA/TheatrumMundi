@@ -28,7 +28,7 @@ Game* Game::Instance()
 }
 Game::~Game() {
 	
-	
+	AudioManager::Instance().shutdown();
 	delete _mngr;
 	delete dialogueReader;
 	delete _dataManager;
@@ -42,7 +42,7 @@ Game::~Game() {
 		SDLUtils::Release();
 	}
 
-	AudioManager::Instance().shutdown();
+	
 }
 
 void Game::init() {
@@ -163,6 +163,7 @@ void Game::reset()
 	Game::Instance()->getLog()->ResetLog();
 	Game::Instance()->getDataManager()->ResetDataManager();
 	Game::Instance()->getSceneManager()->ResetSceneManager();
+
 	Game::Instance()->getReadDialogue()->ResetReader();
 
 }
