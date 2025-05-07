@@ -30,6 +30,12 @@ void WriteTextComponent<std::list<TextInfo>>::update()
 
 }
 
+template <>
+void WriteTextComponent<std::list<string>>::update()
+{
+
+}
+
 template <typename T>
 void WriteTextComponent<T>::update()
 {
@@ -234,6 +240,35 @@ void WriteTextComponent<DescriptionInfo>::render()
 
 }
 
+template <>
+void WriteTextComponent<string>::render()
+{
+	if (textStructure == nullptr || textStructure->empty()) {
+
+		return;
+	}
+	
+	
+	// Author
+	Texture* nameText = new Texture(sdlutils().renderer(), *textStructure, _myFont, _color); //convertir texto en textura
+	
+	// x y w h
+	SDL_Rect nameRect = { 520* Game::Instance()->wscreenScale,
+		350* Game::Instance()->hscreenScale,
+
+		nameText->width() * Game::Instance()->wscreenScale,
+		nameText->height() * Game::Instance()->hscreenScale };
+	
+	
+	nameText->render(nameRect, 0);
+	
+	
+	delete nameText;
+
+
+
+}
+
 //IS FINISHED
 template<>
 bool WriteTextComponent<std::list<TextInfo>>::isFinished()
@@ -314,3 +349,5 @@ template class WriteTextComponent<TextInfo>;
 template class WriteTextComponent<std::list<TextInfo>>;
 
 template class WriteTextComponent<DescriptionInfo>;
+
+template class WriteTextComponent<string>;

@@ -80,12 +80,12 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		//create the clock hands : minute
-		longClockHand = entityFactory->CreateInteractableEntity(entityManager, "minutero", EntityFactory::RECTAREA, Vector2D(447, 23), Vector2D(0, 0), 150, 250, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
+		longClockHand = entityFactory->CreateInteractableEntityNotMoveSprite(entityManager, "minutero", EntityFactory::RECTAREA, Vector2D(447, 23), Vector2D(0, 0), 150, 250, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
 		auto _clockMinTransform = longClockHand->getMngr()->getComponent<Transform>(longClockHand);
 		if (!hasLongClockHand) longClockHand->getMngr()->setActive(longClockHand, false);
 
 		//create the clock hands : hour
-		shortClockHand = entityFactory->CreateInteractableEntity(entityManager, "horaria", EntityFactory::RECTAREA, Vector2D(447,23), Vector2D(0, 0), 150, 250, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
+		shortClockHand = entityFactory->CreateInteractableEntityNotMoveSprite(entityManager, "horaria", EntityFactory::RECTAREA, Vector2D(447,23), Vector2D(0, 0), 150, 250, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BACKGROUND);
 		auto _clockHorTransform = shortClockHand->getMngr()->getComponent<Transform>(shortClockHand);
 		if (!hasShortClockHand) shortClockHand->getMngr()->setActive(shortClockHand, false);
 
@@ -327,11 +327,15 @@ bool ClockPuzzleScene::isItemHand(const std::string& itemId)
 	if (itemId == "minutero") {
 		hasLongClockHand = true;
 		longClockHand->getMngr()->setActive(longClockHand, true);
+		//longClockHand->getMngr()->removeComponent<ClickableSpriteComponent>(longClockHand);
+		//ClickableSpriteComponent
 		return true;
 	}
 	else if (itemId == "horaria") {
 		hasShortClockHand = true;
 		shortClockHand->getMngr()->setActive(shortClockHand, true);
+		//shortClockHand->getMngr()->removeComponent<ClickableSpriteComponent>(shortClockHand);
+
 		return true;
 	}
 	return false;

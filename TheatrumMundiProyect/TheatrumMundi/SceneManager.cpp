@@ -24,9 +24,12 @@
 #include "TelePuzzleScene.h"
 #include "DoorPuzzleScene.h"
 #include "XOPuzzleScene.h"
+#include "BalancePuzzleScene.h"
+#include "CreditsScene.h"
 #include "WiresPuzzleScene.h"
 #include "LockerPuzzle.h"
 #include "CSVdataRecolector.h"
+#include "BalancePuzzleScene.h"
 SceneManager::SceneManager()
 {
 	//If this content is edited, please put the same code in ResetSceneManager
@@ -37,6 +40,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::ROOM_2] = new Room2Scene();
+	scenes[SceneName::BALANCE_PUZZLE] = new BalancePuzzleScene();
 	scenes[SceneName::ROOM_3] = new Room3Scene();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
@@ -54,7 +58,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::LOCKER_PUZZLE] = new LockerPuzzle();
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
-
+	scenes[SceneName::CREDITS] = new CreditsScene();
 }
 void SceneManager::init()
 {

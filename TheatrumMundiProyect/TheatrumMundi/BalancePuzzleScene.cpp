@@ -31,9 +31,8 @@ using namespace std;
 
 BalancePuzzleScene::BalancePuzzleScene()
 {
-	std::cout << "DENTRO BALANZA COMSTRUCTOR" << std::endl;
 	_featherIsInBalance = false;
-	//_poisonIsChecked = false;
+	_hasFeather = false;
 
 	dialogueManager = new DialogueManager(1);
 }
@@ -47,7 +46,6 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted) {
 
-		std::cout << "DENTRO BALANZA INIT" << std::endl;
 		isStarted = true;
 		room = sr;
 
@@ -81,17 +79,22 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 	auto heart = entityFactory->CreateImageEntity(entityManager, "heart", Vector2D(250, 100), Vector2D(0, 0), 460, 280, 0, ecs::grp::DEFAULT);
 
 
-		auto feather = entityFactory->CreateInteractableEntity( // feather entity
+		auto featherReward = entityFactory->CreateInteractableEntity( // featherReawrd entity
 			entityManager, "pluma", EntityFactory::RECTAREA,
 			Vector2D(400, 300), Vector2D(), 460, 280, 0,
 			areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);
 
-		entityManager->getComponent<ClickComponent>(feather)->connect(ClickComponent::JUST_CLICKED, [this, feather, sr]() {
-			feather->getMngr()->setActive(feather, false);
+		entityManager->getComponent<ClickComponent>(featherReward)->connect(ClickComponent::JUST_CLICKED, [this, featherReward, sr]() {
+			featherReward->getMngr()->setActive(featherReward, false);
 			Vector2D position = sr->GetInventory()->setPosition();
 			AddInvItem("pluma", "Fue dificil cogerla.", position, sr);
 			});
 
+		feather = entityFactory->CreateInteractableEntity( // feather entity
+			entityManager, "pluma", EntityFactory::RECTAREA,
+			Vector2D(400, 300), Vector2D(), 460, 280, 0,
+			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		if (!_hasFeather) feather->getMngr()->setActive(feather, false);
 
 		balanceArea->getMngr()->getComponent<TriggerComponent>(balanceArea)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
@@ -206,22 +209,17 @@ void BalancePuzzleScene::unload()
 
 bool BalancePuzzleScene::Check()
 {
-	//return _poisonIsChecked;
-	return true;
+
+	return _featherIsInBalance;
 }
 
 bool BalancePuzzleScene::isItemHand(const std::string& itemId)
 {
-	if (itemId == "Feather") {
-		//Sound spoonSound = sdlutils().soundEffects().at("taza");
-		//AudioManager::Instance().playSound(spoonSound);
-		_featherIsInBalance = true; //???
+	if (itemId == "pluma") {
+		_hasFeather = true;
+		_featherIsInBalance = true;
+		feather->getMngr()->setActive(feather, true);
 
-
-
-		/*Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithSpoon");
-		teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);*/
-		//spoon->getMngr()->setActive(spoon, true); 
 		return true;
 	}
 	return false;
