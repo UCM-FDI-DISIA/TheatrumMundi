@@ -170,7 +170,7 @@ void Room1Scene::_setRoomEvents()
 	roomEvent[Spoon] = [this]()
 		{
 			inv->addItem(new Hint("TeaCupSpoon", "Una cuchara de plata.", &sdlutils().images().at("TeaCupSpoon")));
-			inv->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, inv->setPosition(), Vector2D(0, 0), 100, 100, 0, new Area2DLayerManager(), EntityFactory::NODRAG, ecs::grp::UI));
+			inv->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, inv->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 			createDescription(inv->hints.back(), inv->getItems().back());
 			if(inv->getActive()) inv->hints.back()->getMngr()->setActive(inv->hints.back(), true);
 			else inv->hints.back()->getMngr()->setActive(inv->hints.back(), false);
@@ -416,6 +416,7 @@ void Room1Scene::_setUI()
 
 				for (int i = inv->getFirstItem(); i < inv->getItemNumber() + inv->getFirstItem(); ++i) {
 					inv->hints[i]->getMngr()->setActive(inv->hints[i], true);  // Activate the items
+					areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inv->hints[i])->getLayerPos());
 				}
 			}
 			else 
