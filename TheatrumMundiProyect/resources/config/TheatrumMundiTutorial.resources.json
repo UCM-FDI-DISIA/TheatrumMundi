@@ -136,6 +136,28 @@
       "id": "puerta",
       "file": "../resources/sound/sfx/puerta.wav"
   },
+
+
+  {
+    "id": "CogerCosa",
+    "file": "../resources/sound/sfx/CogerCosa.wav"
+},
+
+{
+  "id": "ColocarCosa",
+  "file": "../resources/sound/sfx/ColocarCosa.wav"
+},
+{
+  "id": "FinalTeleTutorial",
+  "file": "../resources/sound/sfx/FinalTeleTutorial.wav"
+},
+{
+  "id": "Statica",
+  "file": "../resources/sound/sfx/FinalTeleTutorial.wav"
+},
+
+
+
   {
       "id": "boton",
       "file": "../resources/sound/sfx/click_boton.wav"
