@@ -17,6 +17,7 @@ protected:
 		InitialDialogue = 0,
 		CorpseDialogue,
 		BalancePuzzleScene,
+		WiresPuzzleScene,
 		BalanceSceneRsv,
 		event_size,
 	};

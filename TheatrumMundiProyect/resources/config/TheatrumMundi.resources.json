@@ -716,6 +716,9 @@
     {
       "id": "EntradaSecretaAbierta",
       "file": "../resources/images/temporales/Room2/EntradaSecretaAbierta.png"
+    },{
+      "id": "StrongBoxWheel",
+      "file": "../resources/images/temporales/CajafuerteRueda.png"
     },
     {
       "id": "FondoVentana",

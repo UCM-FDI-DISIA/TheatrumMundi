@@ -112,14 +112,14 @@ void TutorialScene::init()
 		finishallpuzzles = false;
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
-		Sound puzzleButtonSound = sdlutils().soundEffects().at("puzzle");
+		std::shared_ptr<Sound> puzzleButtonSound = sdlutils().soundEffects().at("puzzle");
 		a.setVolume(puzzleButtonSound, 0.3);
 
-		Sound doorSound = sdlutils().soundEffects().at("puerta");
+		std::shared_ptr<Sound> doorSound = sdlutils().soundEffects().at("puerta");
 		a.setVolume(doorSound, 0.6);
-		a.setSourcePosition(doorSound, -500, 0, 0);
+		a.set3DPosition(doorSound, -500, 0, 0);
 
 		//Register scene in dialogue manager
 		dialogueManager->setScene(this);
@@ -325,8 +325,7 @@ void TutorialScene::endDialogue()
 	switch (dialogCount) {
 		case 0:
 			dialogueManager->setdisplayOnProcess(false);
-			
-			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+		
 			
 			logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 
@@ -339,7 +338,7 @@ void TutorialScene::endDialogue()
 		case 1:
 			dialogueManager->setdisplayOnProcess(false);
 
-			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+			
 
 			entityManager->setActive(passwordButton, true);
 			
@@ -348,27 +347,28 @@ void TutorialScene::endDialogue()
 		case 2:
 			dialogueManager->setdisplayOnProcess(false);
 
-			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+			
 			entityManager->setActive(ChangeRoom1, true);
 			
 			break;
 
 		case 3:
 			dialogueManager->setdisplayOnProcess(false);
-			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+			
 			television->getMngr()->getComponent<ClickComponent>(television)->setActive(true);
 			
 			break;
 
 		case 5:
 			dialogueManager->setdisplayOnProcess(false);
-			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+			
 			entityManager->setActive(inventoryButton, true);
 			break;
 
 		case 6:
 			dialogueManager->setdisplayOnProcess(false);
-			entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+		
+
 			break;
 
 

@@ -17,6 +17,9 @@ roomprueba::roomprueba()
 	roomEvent[BalancePuzzleScene] = [this] {
 		Game::Instance()->getSceneManager()->loadScene(BALANCE_PUZZLE, this);
 		};
+	roomEvent[WiresPuzzleScene] = [this] {
+		Game::Instance()->getSceneManager()->loadScene(WIRES_PUZZLE, this);
+		};
 	roomEvent[BalanceSceneRsv] = [this] {
 
 #pragma endregion
@@ -176,6 +179,12 @@ void roomprueba::init()
 		CementeryBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(balance));
 		entityManager->getComponent<ClickComponent>(balance)->connect(ClickComponent::JUST_CLICKED, [this]() {
 			roomEvent[BalancePuzzleScene]();
+			});
+
+		auto boa = entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, Vector2D(700, 300), Vector2D(0, 0), 250 / 3, 225 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		CementeryBackgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(boa));
+		entityManager->getComponent<ClickComponent>(boa)->connect(ClickComponent::JUST_CLICKED, [this]() {
+			roomEvent[WiresPuzzleScene]();
 			});
 
 	}

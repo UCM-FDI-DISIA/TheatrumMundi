@@ -566,7 +566,7 @@ bool PipePuzzleScene::Check()
 	if (_waterPipes[8]->getPipeInfo().result ==true&&!solved) //the last pipe has the solution
 	{
 
-		Sound waterSound = sdlutils().soundEffects().at("agua");
+		std::shared_ptr<Sound> waterSound = sdlutils().soundEffects().at("agua");
 		AudioManager::Instance().playSound(waterSound);
 		solved = true;
 		Win();
@@ -625,12 +625,12 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 		AudioManager& a = AudioManager::Instance();
 
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
 		
 
-		Sound ropeSound = sdlutils().soundEffects().at("cuerda");
+		std::shared_ptr<Sound> ropeSound = sdlutils().soundEffects().at("cuerda");
 		
 		//Create cube without water
 		_cubeWithoutWater = entityFactory->CreateImageEntity(
@@ -706,8 +706,6 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
 		entity_t gloveEntity;
 		ClickComponent* clk;
-		std::cout << "variant:" << variant << endl;
-		
 			// create entity
 			gloveEntity = entityFactory->CreateInteractableEntity(entityManager, "guantes", EntityFactory::RECTAREA,
 				Vector2D(1150, 840), Vector2D(0, 0), 150, 150, 0,
@@ -764,7 +762,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 					img->setTexture(&sdlutils().images().at("fullRope"));
 
 					auto ScrollCube = entityManager->getComponent<ScrollComponent>(_rope);
-					if(variant<=1)ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(gloveEntity));
+					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(gloveEntity));
 					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_cubeWithoutWater));
 					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(clock));
 					entityManager->getComponent<ScrollComponent>(_rope)->Scroll(ScrollComponent::UP);

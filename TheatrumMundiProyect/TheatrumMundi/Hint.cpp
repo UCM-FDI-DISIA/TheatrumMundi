@@ -14,5 +14,5 @@ Hint::Hint()
 
 Hint::~Hint()
 {
-	
+
 }

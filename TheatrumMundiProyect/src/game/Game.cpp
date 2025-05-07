@@ -41,6 +41,8 @@ Game::~Game() {
 	if (SDLUtils::HasInstance()) {
 		SDLUtils::Release();
 	}
+
+	AudioManager::Instance().shutdown();
 }
 
 void Game::init() {
@@ -69,6 +71,10 @@ void Game::init() {
 		return;
 	}
 
+	if (!AudioManager::Instance().init()) {
+		std::cerr << "Failed to initialize fmod." << std::endl;
+		return;
+	}
 
 
 	// initialize the InputHandler singleton

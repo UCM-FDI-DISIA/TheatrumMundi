@@ -20,7 +20,7 @@ template <typename T>
 WriteTextComponent<T>::WriteTextComponent(Font& desiredFont, const SDL_Color& desiredColor, T* text)
 	:_myFont(desiredFont), _color(desiredColor), textStructure(text), _currentText(" "), charsToShow(0)
 {
-
+	posOffset = Vector2D(0, 0);
 }
 
 //UPDATE
@@ -101,8 +101,8 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 
 			divideLine->render(dstVRect, 0.0);
 			y += 80 * scaleY;
-
 			delete divideLine;
+
 		}
 		else
 		{
@@ -132,8 +132,8 @@ void WriteTextComponent<std::list<TextInfo>>::render()
 				};
 				textTexture->render(dstRect, 0.0);
 				currentY += textTexture->height() + 5;
-
 				delete textTexture;
+				
 			}
 
 			y += static_cast<int>(100 * scaleY); // Space between split lines
@@ -157,25 +157,24 @@ void WriteTextComponent<TextInfo>::render()
 
 	// Author
 	Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
-	SDL_Rect nameRect = { 325* Game::Instance()->wscreenScale, 465* Game::Instance()->hscreenScale,
+	SDL_Rect nameRect = { (posOffset.getX() + 325)* Game::Instance()->wscreenScale,(posOffset.getY() + 465)* Game::Instance()->hscreenScale,
 		nameText->width()* Game::Instance()->wscreenScale,nameText->height()* Game::Instance()->hscreenScale };
 	nameText->render(nameRect, 0);
-	delete nameText;
 
 	if (isMiddleRoom)
 	{
 		// Text
 		std::vector<std::string> lines = splitTextByNewline(_currentText); //splits text into different lines
 
-		int y = 550* Game::Instance()->hscreenScale;  // initial dialogue text
+		float y = 550* Game::Instance()->hscreenScale;  // initial dialogue text
 
 		for (const auto& line : lines) {
 			Texture* dialogText = new Texture(sdlutils().renderer(), line, _myFont, _color);
-			SDL_Rect dialogRect = { 325* Game::Instance()->wscreenScale, y,
+			SDL_Rect dialogRect = {( posOffset.getX() + 325)* Game::Instance()->wscreenScale,(posOffset.getY() + y),
 				dialogText->width()* Game::Instance()->wscreenScale, dialogText->height()* Game::Instance()->hscreenScale };
 			dialogText->render(dialogRect, 0);
 
-			y += dialogText->height() + 5*Game::Instance()->hscreenScale;  // space between split lines
+			y += (dialogText->height() + 5) * Game::Instance()->hscreenScale;  // space between split lines
 			delete dialogText;
 		}
 	}
@@ -184,18 +183,19 @@ void WriteTextComponent<TextInfo>::render()
 		// Text
 		std::vector<std::string> lines = splitTextByNewline(_currentText); //splits text into different lines
 
-		int y = 550* Game::Instance()->hscreenScale;  // initial dialogue text
+		float y = 550* Game::Instance()->hscreenScale;  // initial dialogue text
 
 		for (const auto& line : lines) {
-			Texture* dialogText = new Texture(sdlutils().renderer(), line, _myFont, _color);
-			SDL_Rect dialogRect = { 375* Game::Instance()->wscreenScale, y, dialogText->width()* Game::Instance()->wscreenScale, dialogText->height()* Game::Instance()->hscreenScale };
+			Texture* dialogText =  new Texture(sdlutils().renderer(), line, _myFont, _color);
+			SDL_Rect dialogRect = { (posOffset.getX()  +375)* Game::Instance()->wscreenScale, posOffset.getY() + y, dialogText->width()* Game::Instance()->wscreenScale, dialogText->height()* Game::Instance()->hscreenScale };
 			dialogText->render(dialogRect, 0);
 
-			y += dialogText->height() + 5* Game::Instance()->hscreenScale;  // space between split lines
+			y += (dialogText->height() + 5)* Game::Instance()->hscreenScale;  // space between split lines
 			delete dialogText;
+		
 		}
 	}
-
+	delete nameText;
 	
 	
 }
@@ -217,12 +217,11 @@ void WriteTextComponent<DescriptionInfo>::render()
 	// calculate background scale
 	std::vector<Texture*> renderedLines;
 	for (const auto& line : lines) {
-		Texture* dialogText = new Texture(sdlutils().renderer(), line, _myFont, _color);
+		auto dialogText = new Texture(sdlutils().renderer(), line, _myFont, _color);
 		renderedLines.push_back(dialogText);
 
 		totalHeight += dialogText->height() + (5 * Game::Instance()->hscreenScale); // split lines space
 		maxWidth = std::max(maxWidth, dialogText->width());
-		delete dialogText;
 	}
 
 	// Background
@@ -235,8 +234,10 @@ void WriteTextComponent<DescriptionInfo>::render()
 	{
 		SDL_Rect dialogRect = {	x, y, dialogText->width() * Game::Instance()->wscreenScale,	dialogText->height() * Game::Instance()->hscreenScale};
 		dialogText->render(dialogRect, 0);
-		y += dialogText->height() + 5 * Game::Instance()->hscreenScale;
+		y += dialogText->height() + 5 * Game::Instance()->hscreenScale; 
+		delete dialogText;
 	}
+
 }
 
 template <>
@@ -305,6 +306,26 @@ template<typename T>
 void WriteTextComponent<T>::setMiddleRoom(bool state)
 {
 	isMiddleRoom = state;
+}
+
+template<>
+void WriteTextComponent<TextInfo>::resetOffset()
+{
+	posOffset.setX(0);
+	posOffset.setY(0);
+}
+
+template<>
+void WriteTextComponent<TextInfo>::addOffset(int x, int y)
+{
+	posOffset.setX(posOffset.getX()+x);
+	posOffset.setY(posOffset.getY() +y);
+}
+
+template<>
+Vector2D WriteTextComponent<TextInfo>::getOffset()
+{
+	return posOffset;
 }
 
 template<>

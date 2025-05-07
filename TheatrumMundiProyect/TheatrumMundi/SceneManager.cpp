@@ -5,7 +5,6 @@
 #include "../sdlutils/SDLUtils.h"
 #include "Room1.h"
 #include "Room2.h"
-#include "roomprueba.h"
 #include "Room3.h"
 #include "InitialScene.h"
 #include "PipePuzzleScene.h"
@@ -27,6 +26,8 @@
 #include "XOPuzzleScene.h"
 #include "BalancePuzzleScene.h"
 #include "CreditsScene.h"
+#include "WiresPuzzleScene.h"
+#include "LockerPuzzle.h"
 #include "CSVdataRecolector.h"
 SceneManager::SceneManager()
 {
@@ -49,9 +50,11 @@ SceneManager::SceneManager()
 	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
 	scenes[SceneName::WINDOW_SCENE] = new WindowPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
+	scenes[SceneName::WIRES_PUZZLE] = new WiresPuzzleScene();
 	scenes[SceneName::TOMB_SCENE] = tombScene;
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene(tombScene);
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene(tombScene);
+	scenes[SceneName::LOCKER_PUZZLE] = new LockerPuzzle();
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 	scenes[SceneName::CREDITS] = new CreditsScene();

@@ -49,8 +49,9 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 		isStarted = true;
 		room = sr;
 
-		AudioManager& a = AudioManager::Instance();
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		AudioManager& a = AudioManager
+			::Instance();
+		shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
 		dialogueManager->setScene(this);
