@@ -41,7 +41,7 @@ void CreditsScene::init()
 		a.playSound(music, true);
 		*/
 		// black Background FondoNegro 
-		auto _background = entityFactory->CreateImageEntity(entityManager, "fondoMorado", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
+		auto _background = entityFactory->CreateImageEntity(entityManager, "FondoNegro", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
 		_backToMainMenu = false;
 	
 		cred1 = "Hecho por Electric Bogaloo";
@@ -56,7 +56,7 @@ void CreditsScene::init()
 		//scroll area right
 		_scrollAreaRight = entityFactory->CreateInteractableEntityScroll(entityManager, "rope", EntityFactory::RECTAREA,
 			Vector2D(1200, 400), Vector2D(0, 0), 324 / 3, 893 / 3, 1, areaLayerManager,
-			2, 150, EntityFactory::SCROLLNORMAL, 1,
+			5, 150, EntityFactory::SCROLLNORMAL, 1,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
 		entityManager->removeComponent<Image>(_scrollAreaRight);
@@ -64,7 +64,7 @@ void CreditsScene::init()
 		//scroll area Left
 		_scrollAreaLeft = entityFactory->CreateInteractableEntityScroll(entityManager, "rope", EntityFactory::RECTAREA,
 			Vector2D(1200, 400), Vector2D(0, 0), 324 / 3, 893 / 3, 1, areaLayerManager,
-			2, 150, EntityFactory::SCROLLINVERSE, 1,
+			5, 150, EntityFactory::SCROLLINVERSE, 1,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
 
@@ -95,11 +95,11 @@ void CreditsScene::init()
 		 
 		
 		 //we wait some seconnds and we close them
-		 SDL_AddTimer(12000, [](Uint32, void* param) -> Uint32 {
+		 SDL_AddTimer(9000, [](Uint32, void* param) -> Uint32 {
 			 auto* self = static_cast<decltype(this)>(param);
 			 if (!self) return 0;
 
-			 
+			 //std::cout << "LLAMOO CIERRO CORTINAS" << std::endl;
 			 self->closeCourtains();
 
 
