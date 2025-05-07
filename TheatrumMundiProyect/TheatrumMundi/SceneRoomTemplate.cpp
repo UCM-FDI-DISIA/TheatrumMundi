@@ -85,19 +85,19 @@ void SceneRoomTemplate::HideAllInvetoryItems(const ecs::entity_t& invBack, const
         GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Desactivate the hints
 }
 
-void SceneRoomTemplate::createDescription(Entity* hintEntity, Hint* hintItem)
+void SceneRoomTemplate::createDescription(ecs::entity_t hint, Hint* desc)
 {
     //if mouse is on item, show item description
-    hintEntity->getMngr()->getComponent<TriggerComponent>(hintEntity)->connect(TriggerComponent::CURSOR_ENTERED, [this, hintEntity, hintItem]() {
+   hint->getMngr()->getComponent<TriggerComponent>(hint)->connect(TriggerComponent::CURSOR_ENTERED, [this, hint,desc]() {
         //show item description entities
         entityManager->setActive(invObjects.textDescriptionEnt, true);
 
         //change text description
-        GetInventory()->setTextDescription(hintItem, entityManager->getComponent<Transform>(hintEntity));
+        inv->setTextDescription(desc, entityManager->getComponent<Transform>(hint));
         });
 
     //if mouse leaves item, hide item description
-    hintEntity->getMngr()->getComponent<TriggerComponent>(hintEntity)->connect(TriggerComponent::CURSOR_LEFT, [this]() {
+    hint->getMngr()->getComponent<TriggerComponent>(hint)->connect(TriggerComponent::CURSOR_LEFT, [this]() {
         //hide item description entities
         entityManager->setActive(invObjects.textDescriptionEnt, false);
         });

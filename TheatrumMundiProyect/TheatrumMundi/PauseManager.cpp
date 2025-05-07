@@ -37,7 +37,7 @@ bool PauseManager::GetPauseActive()
 
 void PauseManager::Init(EntityFactory* entityFactory, ecs::EntityManager* entityManager, Area2DLayerManager* areaLayerManager)
 {
-	Sound buttonSound = sdlutils().soundEffects().at("boton");
+	std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 	AudioManager::Instance().setVolume(buttonSound, 0.2);
 
 	auto _backgroundPause = entityFactory->CreateImageEntity(entityManager, "MenuBackground", Vector2D(443, 250), Vector2D(0, 0), 450, 245, 0, ecs::grp::BACKGROUNDPAUSE);
@@ -67,10 +67,9 @@ void PauseManager::Init(EntityFactory* entityFactory, ecs::EntityManager* entity
 		entityManager->setActiveGroup(ecs::grp::INTERACTPAUSE, false);
 		entityManager->setActiveGroup(ecs::grp::BACKGROUNDPAUSE, false);
 
-		//LLAMADA A FUNCION
-		Game::Instance()->reset();
 
 		Game::Instance()->getSceneManager()->loadScene(SceneName::INITIAL_MENU);
+		
 		});
 
 	//GO TO THE PAUSE SCENE

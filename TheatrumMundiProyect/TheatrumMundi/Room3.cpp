@@ -21,6 +21,7 @@
 #include "PauseManager.h"
 #include "WriteTextComponent.h"
 #include "DialogueManager.h"
+#include "BehaviorStateComponent.h"
 
 Room3Scene::Room3Scene()
 {
@@ -63,7 +64,7 @@ void Room3Scene::endDialogue()
 {
 	dialogueManager->setdisplayOnProcess(false);
 
-	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+	
 	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
 
 	if (finishallpuzzles)
@@ -108,6 +109,10 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3Oscuro"));
 		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("BalanzaOscuro"));
 		entityManager->getComponent<Image>(rmObjects.safeBox)->setTexture(&sdlutils().images().at("CajaFuerteOscuro"));
+		};
+
+	roomEvent[BalancePuzzleScene] = [this] {
+		Game::Instance()->getSceneManager()->loadScene(BALANCE_PUZZLE, this);
 		};
 	//roomEvent[ResolveCase] = [this] {
 	//	//IMPORTANT assign dialogue
@@ -168,6 +173,7 @@ void Room3Scene::_setRoomAudio()
 
 	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
 
+	rmSounds.explosionSound = sdlutils().soundEffects().at("explosion");
 	/*Audio music
 	Sound room1music = sdlutils().musics().at("sala2");
 	audioMngr.setLooping(room1music, true);
@@ -387,6 +393,37 @@ void Room3Scene::_setInteractuables()
 	entityManager->getComponent<ClickComponent>(rmObjects.parrot)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		//roomEvent[LightsOff]();
 		});
+	
+	BehaviorStateComponent* parrotStateCom = entityManager->addComponent<BehaviorStateComponent>(rmObjects.parrot);
+
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.explosionSound); // TODO: Gunshoot
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.doorSound); // TODO: S
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.uiButton); // TODO: T
+	// More sounds...
+
+	parrotStateCom->defBehavior(ParrotState::SHOOTING_SOUND,
+		[&]() {
+			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
+				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[0]);
+				parrotUtils.lastSoundTime = sdlutils().currTime();
+			}
+		});
+
+	parrotStateCom->defBehavior(ParrotState::RED_LIGHTS,
+		[&]() {
+			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
+
+				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[parrotUtils.codeSeqIteration]);
+
+				++parrotUtils.codeSeqIteration;
+				parrotUtils.codeSeqIteration = parrotUtils.codeSeqIteration % parrotUtils.codeSequenceSounds.size();
+
+				parrotUtils.lastSoundTime = sdlutils().currTime();
+			}
+		});
+
+	parrotStateCom->setState(ParrotState::SHOOTING_SOUND); // The other will be setted after finishin the puzzle
+
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.parrot));
 
 	//CORPSE
@@ -407,6 +444,7 @@ void Room3Scene::_setInteractuables()
 	rmObjects.balance = entityFactory->CreateInteractableEntity(entityManager, "BalanzaOscuro", EntityFactory::RECTAREA, Vector2D(800, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.balance)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		//roomEvent[LightsOff]();
+		roomEvent[BalancePuzzleScene]();
 		});
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.balance));
 

@@ -46,12 +46,15 @@
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="BalancePuzzleScene.cpp" />
     <ClCompile Include="BooksPuzzleScene.cpp" />
     <ClCompile Include="Area2DLayerManager.cpp" />
     <ClCompile Include="CalendearMobileTestScene.cpp" />
+    <ClCompile Include="CreditsScene.cpp" />
     <ClCompile Include="CSVdataRecolector.cpp" />
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
+    <ClCompile Include="DialogueAnimComponent.cpp" />
     <ClCompile Include="DialogueManager.cpp" />
     <ClCompile Include="DoorPuzzleScene.cpp" />
     <ClCompile Include="DragPuzzleScene.cpp" />
@@ -80,13 +83,14 @@
     <ClCompile Include="SceneRoomTemplate.cpp" />
     <ClCompile Include="SceneTemplate.cpp" />
     <ClCompile Include="SlowRotateComponent.cpp" />
-    <ClCompile Include="StrongBoxPuzzle.cpp" />
+    <ClCompile Include="LockerPuzzle.cpp" />
     <ClCompile Include="TeaCupPuzzleScene.cpp" />
     <ClCompile Include="TelePuzzleScene.cpp" />
     <ClCompile Include="TiledAreaComponent.cpp" />
     <ClCompile Include="TombPuzzleScene.cpp" />
     <ClCompile Include="TutorialScene.cpp" />
     <ClCompile Include="WindowPuzzleScene.cpp" />
+    <ClCompile Include="WiresPuzzleScene.cpp" />
     <ClCompile Include="XOPuzzleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -235,13 +239,16 @@
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="BalancePuzzleScene.h" />
     <ClInclude Include="BooksPuzzleScene.h" />
     <ClInclude Include="Area2DLayerManager.h" />
     <ClInclude Include="CalendearMobileTestScene.h" />
+    <ClInclude Include="CreditsScene.h" />
     <ClInclude Include="CSVdataRecolector.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="ClockPuzzleScene.h" />
     <ClInclude Include="DescriptionInfo.h" />
+    <ClInclude Include="DialogueAnimComponent.h" />
     <ClInclude Include="DialogueManager.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="DoorPuzzleScene.h" />
@@ -272,7 +279,7 @@
     <ClInclude Include="SceneRoomTemplate.h" />
     <ClInclude Include="SceneTemplate.h" />
     <ClInclude Include="SlowRotateComponent.h" />
-    <ClInclude Include="StrongBoxPuzzle.h" />
+    <ClInclude Include="LockerPuzzle.h" />
     <ClInclude Include="TeaCupPuzzleScene.h" />
     <ClInclude Include="TelePuzzleScene.h" />
     <ClInclude Include="TextInfo.h" />
@@ -280,6 +287,7 @@
     <ClInclude Include="TombPuzzleScene.h" />
     <ClInclude Include="TutorialScene.h" />
     <ClInclude Include="WindowPuzzleScene.h" />
+    <ClInclude Include="WiresPuzzleScene.h" />
     <ClInclude Include="XOPuzzleScene.h" />
   </ItemGroup>
   <ItemGroup>
@@ -339,18 +347,18 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)src\json;$(SolutionDir)src\utils;$(SolutionDir)src\game;$(SolutionDir)src\sdlutils;$(SolutionDir)src\Components;$(SolutionDir)src\ecs;$(SolutionDir)lib\SDL2_net-2.2.0\include;$(SolutionDir)lib\SDL2_mixer-2.8.0\include;$(SolutionDir)lib\SDL2_ttf-2.24.0\include;$(SolutionDir)lib\SDL2_image-2.8.4\include;$(SolutionDir)lib\SDL2-2.30.11\include;$(SolutionDir)lib\OpenAL_1.1_SDK\include;$(SolutionDir)lib\libsndfile-1.2.2\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)src\json;$(SolutionDir)src\utils;$(SolutionDir)src\game;$(SolutionDir)src\sdlutils;$(SolutionDir)src\Components;$(SolutionDir)src\ecs;$(SolutionDir)lib\SDL2_net-2.2.0\include;$(SolutionDir)lib\SDL2_mixer-2.8.0\include;$(SolutionDir)lib\SDL2_ttf-2.24.0\include;$(SolutionDir)lib\SDL2_image-2.8.4\include;$(SolutionDir)lib\SDL2-2.30.11\include;$(SolutionDir)lib\OpenAL_1.1_SDK\include;$(SolutionDir)lib\libsndfile-1.2.2\include;$(SolutionDir)lib\FMOD\include;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir)\SRC</SourcePath>
-    <LibraryPath>$(SolutionDir)lib\SDL2_net-2.2.0\lib\$(Platform);$(SolutionDir)lib\SDL2_mixer-2.8.0\lib\$(Platform);$(SolutionDir)lib\SDL2_ttf-2.24.0\lib\$(Platform);$(SolutionDir)lib\SDL2_image-2.8.4\lib\$(Platform);$(SolutionDir)lib\SDL2-2.30.11\lib\$(Platform);$(SolutionDir)lib\OpenAL_1.1_SDK\lib\$(Platform);$(SolutionDir)lib\libsndfile-1.2.2\lib\$(Platform);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)lib\SDL2_net-2.2.0\lib\$(Platform);$(SolutionDir)lib\SDL2_mixer-2.8.0\lib\$(Platform);$(SolutionDir)lib\SDL2_ttf-2.24.0\lib\$(Platform);$(SolutionDir)lib\SDL2_image-2.8.4\lib\$(Platform);$(SolutionDir)lib\SDL2-2.30.11\lib\$(Platform);$(SolutionDir)lib\OpenAL_1.1_SDK\lib\$(Platform);$(SolutionDir)lib\libsndfile-1.2.2\lib\$(Platform);$(SolutionDir)lib\FMOD\lib\$(Platform);$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\</OutDir>
     <IntDir>$(SolutionDir)\tmp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)$(Configuration)</TargetName>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)src\json;$(SolutionDir)src\utils;$(SolutionDir)src\game;$(SolutionDir)src\sdlutils;$(SolutionDir)src\Components;$(SolutionDir)src\ecs;$(SolutionDir)lib\SDL2_net-2.2.0\include;$(SolutionDir)lib\SDL2_mixer-2.8.0\include;$(SolutionDir)lib\SDL2_ttf-2.24.0\include;$(SolutionDir)lib\SDL2_image-2.8.4\include;$(SolutionDir)lib\SDL2-2.30.11\include;$(SolutionDir)lib\OpenAL_1.1_SDK\include;$(SolutionDir)lib\libsndfile-1.2.2\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)src\json;$(SolutionDir)src\utils;$(SolutionDir)src\game;$(SolutionDir)src\sdlutils;$(SolutionDir)src\Components;$(SolutionDir)src\ecs;$(SolutionDir)lib\SDL2_net-2.2.0\include;$(SolutionDir)lib\SDL2_mixer-2.8.0\include;$(SolutionDir)lib\SDL2_ttf-2.24.0\include;$(SolutionDir)lib\SDL2_image-2.8.4\include;$(SolutionDir)lib\SDL2-2.30.11\include;$(SolutionDir)lib\OpenAL_1.1_SDK\include;$(SolutionDir)lib\libsndfile-1.2.2\include;$(SolutionDir)lib\FMOD\include;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir)\SRC</SourcePath>
-    <LibraryPath>$(SolutionDir)lib\SDL2_net-2.2.0\lib\$(Platform);$(SolutionDir)lib\SDL2_mixer-2.8.0\lib\$(Platform);$(SolutionDir)lib\SDL2_ttf-2.24.0\lib\$(Platform);$(SolutionDir)lib\SDL2_image-2.8.4\lib\$(Platform);$(SolutionDir)lib\SDL2-2.30.11\lib\$(Platform);$(SolutionDir)lib\OpenAL_1.1_SDK\lib\$(Platform);$(SolutionDir)lib\libsndfile-1.2.2\lib\$(Platform);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)lib\SDL2_net-2.2.0\lib\$(Platform);$(SolutionDir)lib\SDL2_mixer-2.8.0\lib\$(Platform);$(SolutionDir)lib\SDL2_ttf-2.24.0\lib\$(Platform);$(SolutionDir)lib\SDL2_image-2.8.4\lib\$(Platform);$(SolutionDir)lib\SDL2-2.30.11\lib\$(Platform);$(SolutionDir)lib\OpenAL_1.1_SDK\lib\$(Platform);$(SolutionDir)lib\libsndfile-1.2.2\lib\$(Platform);$(SolutionDir)lib\FMOD\lib\$(Platform);$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\bin\</OutDir>
     <IntDir>$(SolutionDir)\tmp\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)$(Configuration)</TargetName>
@@ -397,7 +405,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;OpenAL32.lib;sndfile.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;OpenAL32.lib;sndfile.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -417,7 +425,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;OpenAL32.lib;sndfile.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;OpenAL32.lib;sndfile.lib;fmod_vc.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <PerUserRedirection>false</PerUserRedirection>
     </Link>
   </ItemDefinitionGroup>

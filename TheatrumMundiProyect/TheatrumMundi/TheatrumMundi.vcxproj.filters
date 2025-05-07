@@ -66,10 +66,14 @@
     <ClCompile Include="WindowPuzzleScene.cpp" />
     <ClCompile Include="TombPuzzleScene.cpp" />
     <ClCompile Include="..\src\Components\BehaviorStateComponent.cpp" />
+    <ClCompile Include="BalancePuzzleScene.cpp" />
+    <ClCompile Include="StrongBoxPuzzle.cpp" />
+    <ClCompile Include="CreditsScene.cpp" />
+    <ClCompile Include="WiresPuzzleScene.cpp" />
     <ClCompile Include="Room3.cpp" />
     <ClCompile Include="SlowRotateComponent.cpp" />
-    <ClCompile Include="StrongBoxPuzzle.cpp" />
-    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="LockerPuzzle.cpp" />
+    <ClCompile Include="DialogueAnimComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -259,10 +263,14 @@
     <ClInclude Include="WindowPuzzleScene.h" />
     <ClInclude Include="TombPuzzleScene.h" />
     <ClInclude Include="..\src\Components\BehaviorStateComponent.h" />
+    <ClInclude Include="BalancePuzzleScene.h" />
+    <ClInclude Include="StrongBoxPuzzle.h" />
+    <ClInclude Include="CreditsScene.h" />
+    <ClInclude Include="WiresPuzzleScene.h" />
     <ClInclude Include="Room3.h" />
     <ClInclude Include="SlowRotateComponent.h" />
-    <ClInclude Include="StrongBoxPuzzle.h" />
-    <ClInclude Include="Box.h" />
+    <ClInclude Include="LockerPuzzle.h" />
+    <ClInclude Include="DialogueAnimComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />

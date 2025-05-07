@@ -24,9 +24,12 @@
 #include "TelePuzzleScene.h"
 #include "DoorPuzzleScene.h"
 #include "XOPuzzleScene.h"
+#include "BalancePuzzleScene.h"
+#include "CreditsScene.h"
+#include "WiresPuzzleScene.h"
+#include "LockerPuzzle.h"
 #include "CSVdataRecolector.h"
-#include "Box.h"
-
+#include "BalancePuzzleScene.h"
 SceneManager::SceneManager()
 {
 	//If this content is edited, please put the same code in ResetSceneManager
@@ -37,6 +40,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::ROOM_2] = new Room2Scene();
+	scenes[SceneName::BALANCE_PUZZLE] = new BalancePuzzleScene();
 	scenes[SceneName::ROOM_3] = new Room3Scene();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
@@ -47,17 +51,18 @@ SceneManager::SceneManager()
 	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
 	scenes[SceneName::WINDOW_SCENE] = new WindowPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
+	scenes[SceneName::WIRES_PUZZLE] = new WiresPuzzleScene();
 	scenes[SceneName::TOMB_SCENE] = tombScene;
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene(tombScene);
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene(tombScene);
+	scenes[SceneName::LOCKER_PUZZLE] = new LockerPuzzle();
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
-	scenes[SceneName::BOX] = new Box();
-
+	scenes[SceneName::CREDITS] = new CreditsScene();
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::BOX, nullptr);
+	loadScene(SceneName::INITIAL_MENU);
 }
 
 void SceneManager::popScene()
@@ -177,9 +182,12 @@ void SceneManager::ResetSceneManager()
 {
 
 	scenes.resize(SceneName::SCENE_SIZE);
+	for (int i = 1;i < SCENE_SIZE;i++) {
+		delete scenes[i];
+	}
 	auto tombScene = new TombPuzzleScene(); //For the chain Puzzle, to take the reference
 
-	scenes[SceneName::INITIAL_MENU] = new InitialScene();
+	
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::ROOM_2] = new Room2Scene();
@@ -198,7 +206,6 @@ void SceneManager::ResetSceneManager()
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene(tombScene);
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
-
 
 	loadScene(SceneName::INITIAL_MENU);
 }

@@ -55,7 +55,7 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
 		dialogueManager->setScene(this);
@@ -198,7 +198,6 @@ void TelePuzzleScene::endDialogue() {
 	case 0:
 		dialogueManager->setdisplayOnProcess(false);
 
-		entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 
 		entityManager->setActive(exitButton, true);
 
@@ -213,7 +212,6 @@ void TelePuzzleScene::endDialogue() {
 	case 1:
 		dialogueManager->setdisplayOnProcess(false);
 
-		entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 		break;
 	}
 }

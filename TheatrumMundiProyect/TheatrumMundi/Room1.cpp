@@ -109,7 +109,7 @@ void Room1Scene::endDialogue()
 {
 	dialogueManager->setdisplayOnProcess(false);
 
-	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+	
 	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
 
 	if (finishallpuzzles)
@@ -169,13 +169,12 @@ void Room1Scene::_setRoomEvents()
 
 	roomEvent[Spoon] = [this]()
 		{
-			// InventoryLogic
-			GetInventory()->addItem(new Hint("TeaCupSpoon", "Una cuchara de plata.", &sdlutils().images().at("TeaCupSpoon")));
-			GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-			GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+			inv->addItem(new Hint("TeaCupSpoon", "Una cuchara de plata.", &sdlutils().images().at("TeaCupSpoon")));
+			inv->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, inv->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+			createDescription(inv->hints.back(), inv->getItems().back());
+			if(inv->getActive()) inv->hints.back()->getMngr()->setActive(inv->hints.back(), true);
+			else inv->hints.back()->getMngr()->setActive(inv->hints.back(), false);
 
-
-			createDescription(GetInventory()->hints.back(), GetInventory()->getItems().back());
 		};
 			
 	roomEvent[ResolveCase] = [this]() {
@@ -217,7 +216,7 @@ void Room1Scene::_setRoomEvents()
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
-			Sound correctSound = sdlutils().soundEffects().at("correcto");
+			std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
 			AudioManager::Instance().playSound(correctSound);
 
 			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
@@ -252,7 +251,7 @@ void Room1Scene::_setRoomEvents()
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
 
-			Sound incorrectSound = sdlutils().soundEffects().at("incorrecto");
+			std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
 			AudioManager::Instance().playSound(incorrectSound);
 
 			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
@@ -328,9 +327,8 @@ void Room1Scene::_setRoomAudio()
 
 
 	//Audio music
-	Sound room1music = sdlutils().musics().at("sala1");
-	audioMngr.setLooping(room1music, true);
-	audioMngr.playSound(room1music);
+	std::shared_ptr<Sound> room1music = sdlutils().musics().at("sala1");
+	audioMngr.playSound(room1music, true);
 }
 
 void Room1Scene::_setDialog()
@@ -417,7 +415,9 @@ void Room1Scene::_setUI()
 				entityManager->setActive(invObjects.inventoryDownButton, true);
 				entityManager->setActive(invObjects.inventoryUpButton,   true);
 
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
+				for (int i = inv->getFirstItem(); i < inv->getItemNumber() + inv->getFirstItem(); ++i) {
+					inv->hints[i]->getMngr()->setActive(inv->hints[i], true);  // Activate the items
+				}
 			}
 			else 
 			{
@@ -426,7 +426,7 @@ void Room1Scene::_setUI()
 				entityManager->setActive(invObjects.inventoryUpButton,   false);
 				entityManager->setActive(rmObjects.logbtn, true);
 				rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
-				for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the items
+				for (int i = inv->getFirstItem(); i < inv->getItemNumber() + inv->getFirstItem(); ++i) inv->hints[i]->getMngr()->setActive(inv->hints[i], false);  // Desactivate the items 
 				
 			}
 		});
@@ -661,8 +661,7 @@ void Room1Scene::_setInteractuables()
 				entityManager->setActive(corpseZoom, true);
 				entityManager->setActive(rmObjects.quitButton, true);
 
-				if (!finishallpuzzles)roomEvent[CorpseDialogue]();
-				//else roomEvent[ResolveBottons]();
+				roomEvent[CorpseDialogue]();
 			});
 
 	//Mobile Clue

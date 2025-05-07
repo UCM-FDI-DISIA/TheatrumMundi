@@ -28,7 +28,7 @@ Game* Game::Instance()
 }
 Game::~Game() {
 	
-	
+	AudioManager::Instance().shutdown();
 	delete _mngr;
 	delete dialogueReader;
 	delete _dataManager;
@@ -41,6 +41,8 @@ Game::~Game() {
 	if (SDLUtils::HasInstance()) {
 		SDLUtils::Release();
 	}
+
+	
 }
 
 void Game::init() {
@@ -69,6 +71,10 @@ void Game::init() {
 		return;
 	}
 
+	if (!AudioManager::Instance().init()) {
+		std::cerr << "Failed to initialize fmod." << std::endl;
+		return;
+	}
 
 
 	// initialize the InputHandler singleton
@@ -157,6 +163,7 @@ void Game::reset()
 	Game::Instance()->getLog()->ResetLog();
 	Game::Instance()->getDataManager()->ResetDataManager();
 	Game::Instance()->getSceneManager()->ResetSceneManager();
+
 	Game::Instance()->getReadDialogue()->ResetReader();
 
 }
