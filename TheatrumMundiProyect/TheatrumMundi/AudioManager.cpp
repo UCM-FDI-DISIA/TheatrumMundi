@@ -35,7 +35,6 @@ AudioManager& AudioManager::Instance()
 }
 
 bool AudioManager::init() {
-    std::cout << "BOMBOCLAT";
     FMOD_RESULT result;
     result = FMOD::System_Create(&system);
     if (result != FMOD_OK) {
