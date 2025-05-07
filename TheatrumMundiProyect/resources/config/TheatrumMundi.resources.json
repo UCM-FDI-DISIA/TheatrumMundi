@@ -859,7 +859,7 @@
         },
         {
           "id": "CogerCosa",
-          "file": "../resources/sound/sfx/CogerCosa.wav"
+          "file": "../resources/sound/sfx/CogerCosa.MP3"
       },
       {
         "id": "FinalTeleTutorial",
@@ -872,7 +872,7 @@
       
       {
         "id": "ColocarCosa",
-        "file": "../resources/sound/sfx/ColocarCosa.wav"
+        "file": "../resources/sound/sfx/ColocarCosa.MP3"
       },
         {
           "id": "incorrecto",

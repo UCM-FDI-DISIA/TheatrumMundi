@@ -361,10 +361,8 @@
     ]
   },
   "Sala2": {
-    "SalaIntermedia2": [{ "Character": " ", "Text": "Bueno, bueno, bueno." }]
-  },
-  "Sala3": {
-    "Sala2Intro": [{ "Character": " ", "Text": "Bueno, bueno, bueno." }],
+    "Sala2Intro": [{ "Character": " ", "Text": "Bueno, bueno, bueno." }
+  ],
     "TUMBA1_2P": [
       { "Character": "Lucy", "Text": "Es una lápida." },
       {
@@ -406,7 +404,7 @@
     ],
     "TUMBA3_1P":[
         {"Character":"Lucy","Text":"Como era de esperar, un cuerpo."},
-        {"Character":"Lleva un colgante, podría ser útil."}
+        {"Character":"Lucy","Text":"Lleva un colgante, podría ser útil."}
     ],
     "MOSAICO1_2P":[                 
         {"Character":"Lucy","Text":"¿Qué se supone que es esto?"},
@@ -498,5 +496,7 @@
     ]
 
 
-  }
+  },
+  "Sala3": {}
+  
 }
