@@ -56,7 +56,7 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		portToCable.resize(ports.size(), -1);
 
 		AudioManager& a = AudioManager::Instance();
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
 		//INVENTORY
