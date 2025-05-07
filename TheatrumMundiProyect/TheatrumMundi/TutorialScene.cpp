@@ -78,22 +78,16 @@ TutorialScene::TutorialScene() : SceneRoomTemplate()
 				HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
 				Game::Instance()->getSceneManager()->loadScene(TELE_PUZZLE, this);
 			}
-			else if (dialogCount == 4) {
-				std::cout << "dialogo 4 no puedo entrar" << std::endl;
-				return;
-			}
-			else if (dialogCount == 5) {
-				std::cout << "dialogo 5 no puedo entrar" << std::endl;
-				return;
-			}
-			else 
+			else {
+				HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
 				Game::Instance()->getSceneManager()->loadScene(TELE_PUZZLE, this);
-			
+			}
 		};
 	roomEvent[Antenna] = [this] {
 		// InventoryLogic
 		GetInventory()->addItem(new Hint("antena", "Antena de un televisor. ¿Esto sigue existiendo?", &sdlutils().images().at("antena")));
 		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "antena", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		createDescription(GetInventory()->hints.back(), GetInventory()->getItems().back());
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 		roomEvent[Dialog5]();
 		};
@@ -200,23 +194,6 @@ void TutorialScene::init()
 
 		television->getMngr()->getComponent<ClickComponent>(television)->setActive(false);
 
-		//entityManager->setActive(television,false);
-
-		
-
-
-		//quit button
-		/*
-		botonBack = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(1349 - 110, 20), Vector2D(0, 0), 270 / 4, 270 / 4, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-		entityManager->getComponent<ClickComponent>(botonBack)->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
-
-			AudioManager::Instance().playSound(buttonSound);
-			Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
-			});
-
-		entityManager->setActive(botonBack, false);
-		*/
-
 		//INVENTORY
 
 		invObjects.InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
@@ -231,6 +208,12 @@ void TutorialScene::init()
 
 		invObjects.inventoryDownButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(invObjects.inventoryDownButton, false);
+
+		invObjects.textDescriptionEnt = entityManager->addEntity(ecs::grp::UI);
+		auto _testTextTranform = entityManager->addComponent<Transform>(invObjects.textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
+		entityManager->setActive(invObjects.textDescriptionEnt, false);
+		SDL_Color colorDialog = { 255, 255, 255, 255 };
+		entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(invObjects.textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, GetInventory()->getTextDescription());
 
 		entityManager->getComponent<ClickComponent>(inventoryButton)
 			->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]()
@@ -252,7 +235,10 @@ void TutorialScene::init()
 						entityManager->setActive(invObjects.inventoryDownButton, true);
 						entityManager->setActive(invObjects.inventoryUpButton, true);
 
-						for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
+						for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i) {
+							GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
+							areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inv->hints[i])->getLayerPos());
+						}
 					
 						if (dialogCount == 5) {
 							roomEvent[Dialog6]();

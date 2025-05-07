@@ -70,7 +70,7 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 			entityManager, "clockShape", EntityFactory::RECTAREA,
 			Vector2D(400, 150), Vector2D(), 1000, 500, 0,
 			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-
+		tv->getMngr()->getComponent<TriggerComponent>(tv)->setTargetGroup(ecs::grp::INVENTORY);
 	
 
 		tv->getMngr()->removeComponent<Image>(tv);
