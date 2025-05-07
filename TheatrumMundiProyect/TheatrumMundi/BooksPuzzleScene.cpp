@@ -370,7 +370,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 
 		
-}
+	}
 	
 	//IMPORTANT this need to be out of the isstarted!!!
 	sr->GetInventory()->setFirstItem(0);

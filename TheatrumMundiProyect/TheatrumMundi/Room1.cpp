@@ -109,7 +109,7 @@ void Room1Scene::endDialogue()
 {
 	dialogueManager->setdisplayOnProcess(false);
 
-	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+	
 	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
 
 	if (finishallpuzzles)

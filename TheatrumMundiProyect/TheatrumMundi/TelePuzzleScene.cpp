@@ -198,7 +198,6 @@ void TelePuzzleScene::endDialogue() {
 	case 0:
 		dialogueManager->setdisplayOnProcess(false);
 
-		entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 
 		entityManager->setActive(exitButton, true);
 
@@ -213,7 +212,6 @@ void TelePuzzleScene::endDialogue() {
 	case 1:
 		dialogueManager->setdisplayOnProcess(false);
 
-		entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
 		break;
 	}
 }
