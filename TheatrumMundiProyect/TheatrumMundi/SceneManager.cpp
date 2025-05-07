@@ -62,7 +62,7 @@ SceneManager::SceneManager()
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::CREDITS);
+	loadScene(SceneName::INITIAL_MENU);
 }
 
 void SceneManager::popScene()
