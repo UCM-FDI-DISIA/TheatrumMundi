@@ -30,6 +30,7 @@ enum SceneName {
 	CREDITS,
 	WIRES_PUZZLE,
 	BALANCE_PUZZLE,
+	BOX,
 	SCENE_SIZE
 };
 class SceneManager
