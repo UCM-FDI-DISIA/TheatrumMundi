@@ -30,6 +30,8 @@
 #include "LockerPuzzle.h"
 #include "CSVdataRecolector.h"
 #include "BalancePuzzleScene.h"
+#include "Box.h"
+
 SceneManager::SceneManager()
 {
 	//If this content is edited, please put the same code in ResetSceneManager
@@ -59,6 +61,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 	scenes[SceneName::CREDITS] = new CreditsScene();
+	scenes[SceneName::BOX] = new Box();
 }
 void SceneManager::init()
 {

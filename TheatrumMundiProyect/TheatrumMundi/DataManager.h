@@ -28,6 +28,7 @@ private:
 
 	std::vector<int> variants;// rooms 
 	std::vector<bool> charactersAlive;
+	int room3phase = 0;
 
 protected:
 public:
@@ -42,6 +43,10 @@ public:
 	int GetRoomVariant(int i);
 	bool GetCharacterState(Character cha);
 	int GetActualScene();
+
+	
+	void SetRoom3Phase(int phase);
+	int GetRoom3Phase();
 
 	~DataManager();
 
