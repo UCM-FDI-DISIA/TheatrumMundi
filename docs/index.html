@@ -62,7 +62,7 @@
       </div>
 
       <div class="about-game-img">
-        <img src="images/logo.png" alt="Game Image">
+        <img src="images/sinopsisImagen.png" alt="Game Image">
       </div>
 
     </div>
@@ -74,7 +74,16 @@
     <div class="about-game-content">
       
       <div class="about-game-img">
-        <img src="images/CapturaPuzzle.jpg" alt="Game Image">
+        <!--<img src="images/CapturaPuzzle.jpg" alt="Game Image">-->
+        <div class="carousel"><!--Clase para el carrusel de imagenes-->
+          <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+          <div class="carousel-images">
+            <img src="images/CapturaPuzzle.jpg" alt="Image 1">
+            <img src="images/CapturaPregunta.jpg" alt="Image 2">
+            <img src="images/AsesinatoPosibleCaptura.jpg" alt="Image 3">
+          </div>
+          <button class="next" onclick="changeSlide(1)">&#10095;</button>
+        </div>
       </div>
 
       <div class="about-game-text">

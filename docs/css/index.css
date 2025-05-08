@@ -52,7 +52,7 @@ main a:hover{
 .about-game-title {
     font-size: 48px;
     text-align: center;
-    margin-bottom: 30px; /* Espacio debajo del título */
+    margin-bottom: 50px; /* Espacio debajo del título */
 }
 
 /* Contenedor de dos columnas */
@@ -74,7 +74,7 @@ main a:hover{
 
 /* Columna derecha: imagen */
 .about-game-img {
-    width: 60%;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
@@ -135,15 +135,16 @@ main a:hover{
 
 .footer{
     width: 100vw;  /* Ocupa todo el ancho de la pantalla */
-    height: 70vh; /* Ocupa toda la altura de la pantalla */
+    height: 30vh; /* Ocupa toda la altura de la pantalla */
     display: flex;
     flex-direction: column; /* Organiza en columna */
     align-items: center; /* Centra el contenido */
     justify-content: flex-start; /* Centra verticalmente */
     padding: 50px 10%;
-    background-color: rgb(255, 0, 0); /* Fondo oscuro */
-    color: white; /* Color del texto */
+    background-color: rgb(238, 238, 238); /* Fondo oscuro */
+    color: rgb(0, 0, 0); /* Color del texto */
     font-family: Arial, Helvetica, sans-serif;
+    border: 5px solid rgb(0, 0, 0);
 }
 
 .footer-title{
@@ -189,7 +190,7 @@ main a:hover{
     width: fit-content; /* Permite que crezca si el texto es más largo */
     text-align: center; /* Centra el texto dentro del botón */
     text-decoration: none;
-    color: white;
+    color: rgb(0, 0, 0);
     border-radius: 10px; /* Opcional: bordes redondeados */
     font-weight: bold;
     margin-left: auto;
@@ -199,3 +200,58 @@ main a:hover{
 .footer button:hover{
     cursor: pointer;
 }
+
+.footer h2{
+    font-size: 30px;
+    color: #000000;
+}
+
+.carousel {
+position: relative;
+width: 80%;
+max-width: 600px;
+margin: auto;
+overflow: hidden;
+}
+
+.carousel-images {
+display: flex;
+width: 300%; /* 100% por cada imagen */
+}
+
+.carousel-images img {
+width: 100%;
+flex-shrink: 0;
+}
+
+button.prev, button.next {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background-color: rgba(255, 0, 0, 0.542);
+color: white;
+border: none;
+padding: 10px;
+cursor: pointer;
+z-index: 1;
+font-size: 20px;
+}
+
+button.prev {
+left: 5px;
+}
+
+button.next {
+right: 40px;
+}
+
+.carousel-images img {
+    display: none;
+    width: 100%;
+}
+  
+.carousel-images img.active {
+    display: block;
+}
+  
+  

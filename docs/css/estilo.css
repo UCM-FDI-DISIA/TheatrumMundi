@@ -228,8 +228,8 @@ h3{
  /**/
 
  .butFooter {
-  --color: #ffffff;
-  --color2: rgb(0, 0, 0);
+  --color: #000000;
+  --color2: rgb(255, 0, 0);
   padding: 0.8em 1.75em;
   background-color: transparent;
   border-radius: 6px;
@@ -282,6 +282,7 @@ h3{
   filter: brightness(.7);
   transform: scale(.98);
  }
+
 
  /*
 .butFooter {
