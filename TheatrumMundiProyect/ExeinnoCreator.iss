@@ -60,8 +60,9 @@ Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}\DefaultIcon"; ValueType: s
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\\bin\\{#MyAppExeName}"" ""%1"""  ; 
 
 [Icons]
-Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\\bin\\{#MyAppExeName}"  ; 
-Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\\bin\\{#MyAppExeName}"; Tasks: desktopicon  ; 
+Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\bin\{#MyAppExeName}"; IconFilename: "{app}\resources\images\finales\icono.ico"
+
+Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\bin\{#MyAppExeName}"; Tasks: desktopicon; IconFilename: "{app}\resources\images\finales\icono.ico"
 
 [Run]
 Filename: "{app}\\bin\\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent  ; 
