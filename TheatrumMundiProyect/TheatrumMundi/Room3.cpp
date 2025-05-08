@@ -161,7 +161,7 @@ void Room3Scene::_setRoomEvents()
 			roomEvent[LightsRed]();
 		};
 	roomEvent[MorseCodePuzzleScene] = [this] {
-			
+		Game::Instance()->getSceneManager()->loadScene(BOX, this);
 		};
 	roomEvent[MorseCodeSceneRsv] = [this] {
 
@@ -440,14 +440,14 @@ void Room3Scene::_setInteractuables()
 				if (!finishallpuzzles)roomEvent[CorpseDialogue]();
 			});
 
-	//BOXOFFICE MORSECODE
+	//BOXOFFICE MORSECODE - Caja fuerte
 	rmObjects.boxOfficeMorseCodeB = entityFactory->CreateInteractableEntity(entityManager,"TaquillaAzulOscuro",EntityFactory::RECTAREA,Vector2D(-1200,300),Vector2D(0,0),100,100,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.boxOfficeMorseCodeB)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		roomEvent[LightsOn]();
+		roomEvent[MorseCodePuzzleScene]();
 		});
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.boxOfficeMorseCodeB));
 
-	//BOXOFFICE CIRCLELOCK
+	//BOXOFFICE CIRCLELOCK - 
 	rmObjects.boxOfficeCircleLockP = entityFactory->CreateInteractableEntity(entityManager, "TaquillaMoradaOscuro", EntityFactory::RECTAREA, Vector2D(-1000,200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.boxOfficeCircleLockP)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[LightsOff]();
