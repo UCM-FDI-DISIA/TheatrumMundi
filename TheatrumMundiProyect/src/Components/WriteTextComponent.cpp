@@ -209,7 +209,7 @@ void WriteTextComponent<DescriptionInfo>::render()
 	int x = 0;
 	int y = (textStructure->posY + 60) * Game::Instance()->hscreenScale;
 	//X POSITION
-	if(textStructure->Description.size() > 21) x = 550  * Game::Instance()->wscreenScale; //If the description has less than 21 characthers, then set closer to the left
+	if(textStructure->Description.size() > 28) x = 550  * Game::Instance()->wscreenScale; //If the description has less than 21 characthers, then set closer to the left
 	else x = 650 * Game::Instance()->wscreenScale; // else set farther 
 
 	// scale background
