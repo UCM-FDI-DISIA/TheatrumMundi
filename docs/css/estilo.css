@@ -232,8 +232,8 @@ h3{
  /**/
 
  .butFooter {
-  --color: #ffffff;
-  --color2: rgb(183, 9, 9);
+  --color: rgb(183, 9, 9);
+  --color2: rgb(255, 255, 255);
   padding: 0.8em 1.75em;
   background-color: transparent;
   border-radius: 6px;
