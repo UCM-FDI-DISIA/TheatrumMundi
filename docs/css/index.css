@@ -32,7 +32,7 @@ main a {
 }
 
 main a:hover{
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 .about-game {
@@ -43,8 +43,8 @@ main a:hover{
     align-items: center; /* Centra el contenido */
     justify-content: center; /* Centra verticalmente */
     padding: 50px 10%;
-    background-color: darkgray; /* Fondo oscuro */
-    color: rgb(0, 0, 0); /* Color del texto */
+    background-color: rgb(0, 0, 0); /* Fondo oscuro */
+    color: rgb(255, 255, 255); /* Color del texto */
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -141,7 +141,7 @@ main a:hover{
     align-items: center; /* Centra el contenido */
     justify-content: flex-start; /* Centra verticalmente */
     padding: 50px 10%;
-    background-color: rgb(34, 34, 34); /* Fondo oscuro */
+    background-color: rgb(255, 0, 0); /* Fondo oscuro */
     color: white; /* Color del texto */
     font-family: Arial, Helvetica, sans-serif;
 }
