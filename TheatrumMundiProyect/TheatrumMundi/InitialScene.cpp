@@ -21,7 +21,7 @@ InitialScene::InitialScene()
 
 InitialScene::~InitialScene()
 {
-
+	
 }
 
 void InitialScene::init()

@@ -234,7 +234,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			#endif // DEBUG
 			
 			AudioManager::Instance().playSound(buttonSound);
-			if (Check()) {
+			if (!solved && Check()) {
 				Win();
 				Image* img = entityManager->getComponent<Image>(StudyBackground);
 				img->setTexture(&sdlutils().images().at("estanteria2"));
@@ -370,7 +370,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 
 		
-}
+	}
 	
 	//IMPORTANT this need to be out of the isstarted!!!
 	sr->GetInventory()->setFirstItem(0);

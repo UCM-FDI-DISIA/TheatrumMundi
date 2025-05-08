@@ -706,8 +706,6 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
 		entity_t gloveEntity;
 		ClickComponent* clk;
-		std::cout << "variant:" << variant << endl;
-		
 			// create entity
 			gloveEntity = entityFactory->CreateInteractableEntity(entityManager, "guantes", EntityFactory::RECTAREA,
 				Vector2D(1150, 840), Vector2D(0, 0), 150, 150, 0,
@@ -736,26 +734,14 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			Vector2D position = sr->GetInventory()->setPosition();
 			AddInvItem("minutero", "La manecilla de los minutos de un reloj", position, sr);
 			});
-			
-
-		/*entityManager->getComponent<ClickComponent>(spoon)->connect(ClickComponent::JUST_CLICKED, [this, spoon]() {
-			spoon->getMngr()->setActive(spoon, false);
-			roomEvent[Spoon]();
-			});*/
 
 		//Create background
 		auto background = entityFactory->CreateImageEntity(
 			entityManager, "Pared", Vector2D(2, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
 	
 
-		//Create string segnment sprite
-		
-		/*
-		* auto ChangeRoom1 = 
-		sentityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0,
-		areaLayerManager, 12, ((sdlutils().width()) / 12) , EntityFactory::SCROLLNORMAL, 1, 
-		EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-		*/
+
+		//rope will have the component to scroll
 		_rope = entityFactory->CreateInteractableEntityScroll(entityManager, "rope", EntityFactory::RECTAREA,
 			Vector2D(1200, 400), Vector2D(0, 0), 324 / 3, 893 / 3, 1, areaLayerManager,
 			2, 150, EntityFactory::SCROLLNORMAL, 1,
@@ -776,7 +762,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 					img->setTexture(&sdlutils().images().at("fullRope"));
 
 					auto ScrollCube = entityManager->getComponent<ScrollComponent>(_rope);
-					if(variant<=1)ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(gloveEntity));
+					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(gloveEntity));
 					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(_cubeWithoutWater));
 					ScrollCube->addElementToScroll(entityManager->getComponent<Transform>(clock));
 					entityManager->getComponent<ScrollComponent>(_rope)->Scroll(ScrollComponent::UP);

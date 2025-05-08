@@ -57,26 +57,14 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		dialogueManager->setScene(this);
 
 		teaCupBackground = entityFactory->CreateImageEntity(entityManager, "TeaCupBackgroundWithoutSpoon", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
-		teaCupBackground->getMngr()->removeComponent<Area2D>(teaCupBackground);
-
-		/*ecs::entity_t teaCupSpoon = entityFactory->CreateInteractableEntity( // Spoon entity
-			entityManager, "TeaCupSpoon", EntityFactory::RECTAREA,
-			Vector2D(100, 400), Vector2D(), 600, 400, 0,
-			areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);*/
+		teaCupBackground->getMngr()->removeComponent<Area2D>(teaCupBackground); //Disable the area, this allows to change the background without errors (NOT REMOVE THIS LINE)
 
 		ecs::entity_t teaCup = entityFactory->CreateInteractableEntity( // Cup entity
-			entityManager, "clockShape", EntityFactory::RECTAREA,
+			entityManager, "EmptyImage", EntityFactory::RECTAREA,
 			Vector2D(400, 100), Vector2D(), 460, 280, 0,
 			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
-		/*entityManager->addComponent<TriggerComponent>(teaCup) // Spoon enters the cup Area2D
-			->connect(TriggerComponent::AREA_ENTERED, [teaCupBackground, this]()
-				{
-					_spoonIsInCup = true;
-				});*/
-
-		teaCup->getMngr()->removeComponent<Image>(teaCup);
-
+		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->setTargetGroup(ecs::grp::INVENTORY);
 		teaCup->getMngr()->getComponent<TriggerComponent>(teaCup)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
 			std::cout << "pasa por el triger de la taza" << std::endl;
@@ -86,16 +74,12 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 			SetplacedHand(false);
 			});
 
-		//create the spoon
-		//spoon = entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, Vector2D(100, 400), Vector2D(0, 0), 600, 400, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);
-
-
 		entityManager->getComponent<ClickComponent>(teaCup) // The cup is clicked after introducing the spoon
 			->connect(ClickComponent::JUST_CLICKED, [teaCup, this]()
 				{
 					if (_spoonIsInCup == false) return;
 					_poisonIsChecked = true;
-
+					teaCup->getMngr()->setActive(teaCup, false); //Disable the area to lay the spoon
 					// ... Change image revealing poinson or whatever  <-- TODO
 					Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithPoison");
 					teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
@@ -112,9 +96,6 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		//Invntory Background
 		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::DEFAULT);
 		entityManager->setActive(InventoryBackground, false);
-
-		
-		
 
 		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(upButton, false);
@@ -170,7 +151,6 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 			AudioManager::Instance().playSound(buttonSound);
 			scrollInventoryPuzzle(1, sr);
 			});
-		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, downButton, upButton, inventoryButton, _backButton, buttonSound]()
 		{
@@ -213,7 +193,7 @@ bool TeaCupPuzzleScene::isItemHand(const std::string& itemId)
 	if (itemId == "TeaCupSpoon") {
 		std::shared_ptr<Sound> spoonSound = sdlutils().soundEffects().at("taza");
 		AudioManager::Instance().playSound(spoonSound);
-		_spoonIsInCup = true; //???
+		_spoonIsInCup = true; 
 		Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithSpoon");
 		teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);
 		//spoon->getMngr()->setActive(spoon, true); 

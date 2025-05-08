@@ -5,7 +5,9 @@
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 #include <iterator>
+#include <unordered_set>
 #include <algorithm>
+#include <vector>
 
 TriggerComponent::TriggerComponent()
 {
@@ -117,10 +119,13 @@ void TriggerComponent::updateTriggerState()
 	_currentOverlappingEntities.sort(_memAddrIDOrder);
 	unchangedEnts.sort(_memAddrIDOrder);
 
-	std::set_difference(
-		_currentOverlappingEntities.begin(), _currentOverlappingEntities.end(), unchangedEnts.begin(), unchangedEnts.end(),
-		std::inserter(enteredEnts, enteredEnts.begin()));
-		
+	//Difference between two groups
+	std::unordered_set<ecs::entity_t> unchangedSet(unchangedEnts.begin(), unchangedEnts.end());
+	for (const auto& ent : _currentOverlappingEntities) {
+		if (unchangedSet.find(ent) == unchangedSet.end()) {
+			enteredEnts.push_back(ent);
+		}
+	}
 	_triggerState = { exitEnts, unchangedEnts, enteredEnts }; // Update the TriggerState
 }
 

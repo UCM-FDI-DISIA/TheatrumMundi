@@ -64,7 +64,7 @@ void Room3Scene::endDialogue()
 {
 	dialogueManager->setdisplayOnProcess(false);
 
-	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+	
 	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
 
 	if (finishallpuzzles)
@@ -109,6 +109,10 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3Oscuro"));
 		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("BalanzaOscuro"));
 		entityManager->getComponent<Image>(rmObjects.safeBox)->setTexture(&sdlutils().images().at("CajaFuerteOscuro"));
+		};
+
+	roomEvent[BalancePuzzleScene] = [this] {
+		Game::Instance()->getSceneManager()->loadScene(BALANCE_PUZZLE, this);
 		};
 	//roomEvent[ResolveCase] = [this] {
 	//	//IMPORTANT assign dialogue
@@ -440,6 +444,7 @@ void Room3Scene::_setInteractuables()
 	rmObjects.balance = entityFactory->CreateInteractableEntity(entityManager, "BalanzaOscuro", EntityFactory::RECTAREA, Vector2D(800, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.balance)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		//roomEvent[LightsOff]();
+		roomEvent[BalancePuzzleScene]();
 		});
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.balance));
 

@@ -4,6 +4,7 @@
 #include "../TheatrumMundi/Area2DLayerManager.h"
 #include "DialogueManager.h"
 #include "PauseManager.h"
+#include "DialogueAnimComponent.h";
 #include "Game.h"
 
 using namespace std;
@@ -48,6 +49,11 @@ SceneTemplate::~SceneTemplate()
 void SceneTemplate::startDialogue(const string& _eventToRead)
 {
 	entityManager->setActiveGroup(ecs::grp::DIALOGUE, true);
+	for (auto a : entityManager->getEntities(ecs::grp::DIALOGUE)) {
+		if(a->getMngr()->getComponent<DialogueAnimComponent>(a) != nullptr) 
+		a->getMngr()->getComponent<DialogueAnimComponent>(a)->startDialogueAnim();
+	
+	}
 	dialogueManager->setdisplayOnProcess(true);
 	//entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 	dialogueManager->setEventToRead(_eventToRead);
@@ -58,7 +64,7 @@ void SceneTemplate::startDialogue(const string& _eventToRead)
 void SceneTemplate::endDialogue()
 {
 	dialogueManager->setdisplayOnProcess(false);
-	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+	
 	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
 
 }

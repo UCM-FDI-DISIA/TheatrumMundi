@@ -20,7 +20,7 @@ protected:
 	std::vector<Hint*> items; //Vector of hints
 	Vector2D originalPos;
 	std::vector<Vector2D> positions; //Array where all the positions are
-	DescriptionInfo* _textDescription; //TextDescription that displays on screen
+	DescriptionInfo _textDescription; //TextDescription that displays on screen
 public:
 
 	std::vector<ecs::Entity*> hints; //Array of inventory entities
@@ -33,7 +33,7 @@ public:
 	void eraseNotRoomItems(); //Remove the entities which were created in this puzzle scene but there were removed in other puzzle scene
 	bool hasItem(const std::string& _id) const; //Check if the hint is in the inventory
 
-	inline Vector2D setPosition() { return positions[hints.size()]; } //Sets the position of the item to the inventory using the array of Positions
+	inline Vector2D setPosition() { return positions[hints.size() - firstItem]; } //Sets the position of the item to the inventory using the array of Positions
 	inline void setActive(bool _active) { active = _active; } //set the item to active or not
 	inline bool getActive() const { return active; } //Returns if the item is active or not
 	int getItemNumber(); //Get the hints that are going to be rendered
@@ -50,7 +50,7 @@ public:
 	}; //Return the position of the item in the inventory USING IN THE CREATION OF THE INVENTITIES IN THE PUZZLESCENES
 	
 	void setTextDescription(Hint* a, Transform* trEntity); //Sets item description on screen
-	DescriptionInfo* getTextDescription() { return _textDescription; } //Gets item description
+	DescriptionInfo* getTextDescription() { return &_textDescription; } //Gets item description
 
 private:
 	bool active; //Defines if the object is active or not
