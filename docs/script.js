@@ -21,3 +21,24 @@ function changeCharacter(character) {
     document.getElementById("character-image").src = characters[character].img;
     document.getElementById("character-description").innerText = characters[character].description;
   }
+
+let slideIndex = 0;
+
+function showSlide(index) {
+  const slides = document.querySelectorAll('.carousel-images img');
+  slides.forEach(slide => slide.classList.remove('active'));
+
+  if (index < 0) slideIndex = slides.length - 1;
+  else if (index >= slides.length) slideIndex = 0;
+  else slideIndex = index;
+
+  slides[slideIndex].classList.add('active');
+}
+
+function changeSlide(direction) {
+  showSlide(slideIndex + direction);
+}
+
+window.onload = () => showSlide(slideIndex);
+
+

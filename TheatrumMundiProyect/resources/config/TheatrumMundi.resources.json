@@ -723,6 +723,46 @@
       "file": "../resources/images/temporales/Room2/FondoVentana.png"
     },
     {
+      "id": "FondoVentana",
+      "file": "../resources/images/temporales/Room2/FondoVentana.png"
+    },
+    {
+      "id": "NotaBasica",
+      "file": "../resources/images/temporales/notaBasica.png"
+    },
+    {
+      "id": "Do",
+      "file": "../resources/images/temporales/do.png"
+    },
+    {
+      "id": "Si",
+      "file": "../resources/images/temporales/si.png"
+    },
+    {
+      "id": "fase1Partitura",
+      "file": "../resources/images/temporales/fase1Partitura.jpg"
+    },
+    {
+      "id": "fase2Partitura",
+      "file": "../resources/images/temporales/fase2Partitura.jpg"
+    },
+    {
+      "id": "fase3Partitura",
+      "file": "../resources/images/temporales/fase3Partitura.jpg"
+    },
+    {
+      "id": "fase1Espejo",
+      "file": "../resources/images/temporales/fase1Espejo.jpg"
+    },
+    {
+      "id": "fase2Espejo",
+      "file": "../resources/images/temporales/fase2Espejo.jpg"
+    },
+    {
+      "id": "fase3Espejo",
+      "file": "../resources/images/temporales/fase3Espejo.jpg"
+    },
+    {
       "id": "FondoJuzgado",
       "file": "../resources/images/temporales/Room3/Juzgado.png"
     },
@@ -794,6 +834,8 @@
       "id": "CajaFuerteOscuro",
       "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
     }
+    
+    
 
   ],
 
@@ -866,7 +908,36 @@
         {
           "id": "incorrecto",
           "file": "../resources/sound/sfx/incorrecto.wav"
+        },
+        {
+          "id": "DoSound",
+          "file": "../resources/sound/sfx/Do.wav"
+        },
+        {
+          "id": "ReSound",
+          "file": "../resources/sound/sfx/Re.wav"
+        },
+        {
+          "id": "MiSound",
+          "file": "../resources/sound/sfx/Mi.wav"
+        },
+        {
+          "id": "FaSound",
+          "file": "../resources/sound/sfx/Fa.wav"
+        },
+        {
+          "id": "SolSound",
+          "file": "../resources/sound/sfx/Sol.wav"
+        },
+        {
+          "id": "LaSound",
+          "file": "../resources/sound/sfx/La.wav"
+        },
+        {
+          "id": "SiSound",
+          "file": "../resources/sound/sfx/Si.wav"
         }
+
     ],
 
   "musics" : [

@@ -34,6 +34,8 @@
 
 #include "SceneRoomTemplate.h"
 
+#include "AudioManager.h"
+
 using namespace std;
 
 MusicPuzzleScene::MusicPuzzleScene(): _phase(0)
@@ -69,21 +71,26 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
     {
         isStarted = true;
         //Register scene in dialogue manager
-        dialogueManager->setScene(this);
+        //dialogueManager->setScene(this);
 
         //Puzzle Scene
         room = sr;
 
-        //background + musical notes helpful guide (visual)
-        //auto StudyBackground = entityFactory->CreateImageEntity(entityManager, "ShelfBackground1", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+        //initialize musical sounds
+        initializeMusicalSounds();
 
+        //background + musical notes helpful guide (visual)
+
+        //musicalScore + mirror (changes in each phase)
+        musicalScore = entityFactory->CreateImageEntity(entityManager, "fase1Partitura", Vector2D(600, 0), Vector2D(0, 0), 1349 / 2, 748 / 2, 0, ecs::grp::DEFAULT);
+        mirror = entityFactory->CreateImageEntity(entityManager, "fase1Espejo", Vector2D(0, 300), Vector2D(0, 0), 1349 / 3, 748 / 3, 0, ecs::grp::DEFAULT);
+
+        //displayed notes
+        initializeDisplayedNotes();
+        cleanDisplayedNotes();
 
         //piano buttons
         createPianoButtons();
-
-        //musical score (changes in each round)
-
-        //mirror (changes in each round)
 
 
 #pragma region UI
@@ -171,19 +178,87 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
             });
 
         //Log
-        dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-        Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
+        //dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+       // Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
         //startDialogue("Puerta");
 
 #pragma endregion
 
     }
-    createInvEntities(sr);
+    //createInvEntities(sr);
 }
 
 
 void MusicPuzzleScene::unload()
 {
+}
+
+void MusicPuzzleScene::refresh()
+{
+    if (_isStartDelay)
+    {
+        if (sdlutils().virtualTimer().currRealTime() - _noteStartTime >= NOTE_DURATION)
+        {
+            //when initial animation delay is finished sound sequence begins
+            _isStartDelay = false;
+            startSoundSequence();
+            _noteStartTime = sdlutils().virtualTimer().currRealTime(); //restart noteStartTime for sound sequence
+        }
+        return;
+    }
+
+    if (_isPlayingSequence)
+    {
+        int currTime = sdlutils().virtualTimer().currRealTime();
+        
+        if (currTime - _noteStartTime >= NOTE_DURATION - 200)
+        {
+            _currentNoteIndex++;
+
+            if (_currentNoteIndex < _currentComb.size()) //if there is more musical notes to play...
+            {
+                AudioManager::Instance().playSound(musicalSounds[_currentComb[_currentNoteIndex]]);
+                _noteStartTime = currTime;
+            }
+            else if (_currentNoteIndex == _currentComb.size()) //if all musical notes from comb have been played...
+            {
+                std::shared_ptr<Sound> correctSound;
+                
+                //play correct or incorrect sound
+                if(_animationType) correctSound = sdlutils().soundEffects().at("correcto");
+                else correctSound = sdlutils().soundEffects().at("incorrecto");
+                
+                AudioManager::Instance().playSound(correctSound);
+                _noteStartTime = currTime;
+            }
+            else
+            {
+                //end of sound animation
+                _isPlayingSequence = false;
+                _isAnimating = false;
+
+                //reactive all scene buttons
+                
+                //recolor displayed notes
+                for (auto a : displayedNotes)
+                {
+                    auto aIm = entityManager->getComponent<Image>(a);
+                    aIm->setAlpha(250);
+                }
+
+                if (_animationType) Check();
+                else
+                {
+                    cleanCombination();
+                    cleanDisplayedNotes();
+                }
+            }
+        }
+        else
+        {
+            return;
+        }
+    }
 }
 
 bool MusicPuzzleScene::Check()
@@ -196,6 +271,7 @@ bool MusicPuzzleScene::Check()
     }
     else
     {
+        changePhase();
         return false;
     }
 }
@@ -204,6 +280,17 @@ void MusicPuzzleScene::Win()
 {
     solved = true;
     room->resolvedPuzzle(4);
+}
+
+void MusicPuzzleScene::initializeMusicalSounds()
+{
+    musicalSounds.push_back(sdlutils().soundEffects().at("DoSound"));
+    musicalSounds.push_back(sdlutils().soundEffects().at("ReSound"));
+    musicalSounds.push_back(sdlutils().soundEffects().at("MiSound"));
+    musicalSounds.push_back(sdlutils().soundEffects().at("FaSound"));
+    musicalSounds.push_back(sdlutils().soundEffects().at("SolSound"));
+    musicalSounds.push_back(sdlutils().soundEffects().at("LaSound"));
+    musicalSounds.push_back(sdlutils().soundEffects().at("SiSound"));
 }
 
 bool MusicPuzzleScene::checkPhaseCombination()
@@ -254,37 +341,17 @@ void MusicPuzzleScene::addNoteToComb(Notes pressedNote)
         //check
         if (checkPhaseCombination()) //if its correct
         {
-            if (!Check())
-            {
-                changePhase();
-            }
+            playAnimation(true);
         }
         else //wrong combination
         {
-            //play animation
-            playAnimation(false);
-
-            //clean current comb
-            cleanCombination();
-
-            //debug currentComb
-            cout << "CURRENT COMB:";
-            for (auto a : _currentComb)
-            {
-                cout << a << " ";
-            }
-            cout << endl;
-
-            //reset image musical score if needed
+            playAnimation(false);            
         }
     }
 }
 
 void MusicPuzzleScene::changePhase()
 {
-    //play animation
-    playAnimation(true);
-
     //clean currentComb
     cleanCombination();
 
@@ -292,7 +359,10 @@ void MusicPuzzleScene::changePhase()
     _phase++;
 
     //change musical score & mirror
+    updateMusicImages();
 
+    //reset musical notes
+    cleanDisplayedNotes();
 
     //debugs
     cout << "PHASE: " << _phase << endl;
@@ -310,23 +380,126 @@ void MusicPuzzleScene::changePhase()
         cout << a << " ";
     }
     cout << endl;
+    
 }
 
-void MusicPuzzleScene::playAnimation(bool correct)
+bool MusicPuzzleScene::playAnimation(bool correct)
 {
-    //no buttons can be pressed, the current comb plays on audio and each note appears on screen
-    //-->insert animation
+    if (_isAnimating) return false;
 
+    _animationType = correct;
 
-    if (correct)
+    _isAnimating = true;
+    _isStartDelay = true; // little delay to let last musical note play accordingly
+    _noteStartTime = sdlutils().virtualTimer().currRealTime();
+
+    
+    //dissable all scene buttons
+
+    //notes will change its colour (texture). Temporarly changes their alpha
+    for (auto a : displayedNotes)
     {
-        //if currentComb was correct a joyful sound is played after
-        //joyful sound
+        auto aIm = entityManager->getComponent<Image>(a);
+        aIm->setAlpha(100);
     }
-    else
+
+    return true;
+
+    
+}
+
+void MusicPuzzleScene::startSoundSequence()
+{
+    _isPlayingSequence = true;
+    _currentNoteIndex = 0;
+    _noteStartTime = sdlutils().virtualTimer().currRealTime();
+
+    //plays first note on combination
+    AudioManager::Instance().playSound(musicalSounds[_currentComb[_currentNoteIndex]]);
+}
+
+void MusicPuzzleScene::updateMusicImages()
+{
+    auto musicalScoreIm = entityManager->getComponent<Image>(musicalScore);
+    auto mirrorIm = entityManager->getComponent<Image>(mirror);
+
+    switch (_phase)
     {
-        //if currentComb was incorrect a bad sound is played after
-        //bad sound
+    case 0:
+        musicalScoreIm->setTexture(&sdlutils().images().at("fase1Partitura"));
+        mirrorIm->setTexture(&sdlutils().images().at("fase1Espejo"));
+        break;
+    case 1:
+        musicalScoreIm->setTexture(&sdlutils().images().at("fase2Partitura"));
+        mirrorIm->setTexture(&sdlutils().images().at("fase2Espejo"));
+        break;
+    case 2:
+        musicalScoreIm->setTexture(&sdlutils().images().at("fase3Partitura"));
+        mirrorIm->setTexture(&sdlutils().images().at("fase3Espejo"));
+        break;
+    default:
+        break;
+    }
+}
+
+void MusicPuzzleScene::updateDisplayedNotes()
+{
+    for (size_t i = 0; i < _currentComb.size(); ++i)
+    {
+        string texture;
+
+        auto noteIm = entityManager->getComponent<Image>(displayedNotes[i]);
+        
+        if (_currentComb[i] == Notes::DO)
+        {
+            texture = "Do";
+            noteIm->setTexture(&sdlutils().images().at(texture));
+        }
+        else if (_currentComb[i] == Notes::SI)
+        {
+            texture = "Si";
+            noteIm->setTexture(&sdlutils().images().at(texture));
+        }
+        else
+        {
+            texture = "NotaBasica";
+            noteIm->setTexture(&sdlutils().images().at(texture));
+        }
+        
+        entityManager->setActive(displayedNotes[i], true);
+
+    }
+
+    // Hide non used notes if needed
+    for (size_t i = _currentComb.size(); i < displayedNotes.size(); ++i)
+    {
+        entityManager->setActive(displayedNotes[i], false);
+    }
+}
+
+void MusicPuzzleScene::cleanDisplayedNotes()
+{
+    //hide displayed notes
+    for (auto a : displayedNotes)
+    {
+        entityManager->setActive(a, false);
+    }
+}
+
+void MusicPuzzleScene::initializeDisplayedNotes()
+{
+    const int spacingX = 35; //space between notes
+    const int baseX = 950; //initial x
+    const int posY = 200; //initial y
+
+    for (size_t i = 0; i < Notes::SI + 1; ++i)
+    {
+        //note position
+        Vector2D pos(baseX + i * spacingX, posY);
+        
+        // create image entity
+        auto musicalNotes = entityFactory->CreateImageEntity(entityManager, "NotaBasica", pos, Vector2D(0, 0), 248/6, 649/6, 0, ecs::grp::DEFAULT);
+        displayedNotes.push_back(musicalNotes);
     }
 }
 
@@ -343,64 +516,85 @@ void MusicPuzzleScene::createPianoButtons()
 
     ClickComponent* clickButtDo = entityManager->getComponent<ClickComponent>(buttDo);
     clickButtDo->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play piano key sound
+        //play organ key sound
+        AudioManager::Instance().playSound(musicalSounds[DO]);
+
         if (!solved)
         {
             addNoteToComb(DO);
+            updateDisplayedNotes();
         }        
         });
 
     ClickComponent* clickButtRe = entityManager->getComponent<ClickComponent>(buttRe);
     clickButtRe->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play piano key sound
+        //play organ key sound
+        AudioManager::Instance().playSound(musicalSounds[RE]);
+        
         if (!solved)
         {
             addNoteToComb(RE);
+            updateDisplayedNotes();
         }
         });
 
     ClickComponent* clickButtMi = entityManager->getComponent<ClickComponent>(buttMi);
     clickButtMi->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play piano key sound
+        //play organ key sound
+        AudioManager::Instance().playSound(musicalSounds[MI]);
+        
         if (!solved)
         {
             addNoteToComb(MI);
+            updateDisplayedNotes();
         }
         });
 
     ClickComponent* clickButtFa = entityManager->getComponent<ClickComponent>(buttFa);
     clickButtFa->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play piano key sound
+        //play organ key sound
+        AudioManager::Instance().playSound(musicalSounds[FA]);
+        
         if (!solved)
         {
             addNoteToComb(FA);
+            updateDisplayedNotes();
         }
         });
 
     ClickComponent* clickButtSol = entityManager->getComponent<ClickComponent>(buttSol);
     clickButtSol->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play piano key sound
+        //play organ key sound
+        AudioManager::Instance().playSound(musicalSounds[SOL]);
+
         if (!solved)
         {
             addNoteToComb(SOL);
+            updateDisplayedNotes();
         }
         });
 
     ClickComponent* clickButtLa = entityManager->getComponent<ClickComponent>(buttLa);
     clickButtLa->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play piano key sound
+        //play organ key sound
+        AudioManager::Instance().playSound(musicalSounds[LA]);
+
         if (!solved)
         {
             addNoteToComb(LA);
+            updateDisplayedNotes();
         }
         });
 
     ClickComponent* clickButtSi = entityManager->getComponent<ClickComponent>(buttSi);
     clickButtSi->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play piano key sound
+        //play organ key sound
+        AudioManager::Instance().playSound(musicalSounds[SI]);
+
         if (!solved)
         {
             addNoteToComb(SI);
+            updateDisplayedNotes();
         }
         });
 }

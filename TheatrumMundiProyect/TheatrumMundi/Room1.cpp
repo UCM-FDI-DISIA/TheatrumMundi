@@ -90,7 +90,10 @@ void Room1Scene::resolvedPuzzle(int i)
 		if (aux) entityManager->setActive(characterCorpse, true);
 	}
 	else {
-#ifdef _DEBUG
+#ifdef _
+
+
+
 		std::cout << i << " invalid index" << std::endl;
 #endif
 	}
