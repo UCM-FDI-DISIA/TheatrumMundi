@@ -167,8 +167,8 @@
 
   "musics" : [
     {
-        "id": "sala1",
-        "file":  "../resources/sound/music/sala1.wav"
+        "id": "menu",
+        "file":  "../resources/sound/music/menu.wav"
     }
   ]
 

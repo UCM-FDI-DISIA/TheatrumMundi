@@ -28,7 +28,7 @@ void InitialScene::init()
 {
 	if (!isStarted) {
 
-
+		SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 
 		GameSave save("savegame.dat");
 		bool tutorialCompleted = save.isTutoCompleted();
@@ -49,7 +49,7 @@ void InitialScene::init()
 		*/
 
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-		std::shared_ptr<Sound> music = sdlutils().musics().at("sala1");
+		std::shared_ptr<Sound> music = sdlutils().musics().at("menu");
 
 		a.playSound(music, true);
 
@@ -126,7 +126,7 @@ void InitialScene::init()
 				});
 
 		//ENTIDADCONENTITYFACTORY
-		_loadimg = entityFactory->CreateImageEntity(entityManager, "loading", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
+		_loadimg = entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
 	
 	}
 	_loadimg->getMngr()->setActive(_loadimg, false);

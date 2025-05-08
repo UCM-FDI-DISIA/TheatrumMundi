@@ -157,7 +157,7 @@ void WriteTextComponent<TextInfo>::render()
 
 	// Author
 	Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
-	SDL_Rect nameRect = { (posOffset.getX() + 325)* Game::Instance()->wscreenScale,(posOffset.getY() + 465)* Game::Instance()->hscreenScale,
+	SDL_Rect nameRect = { (posOffset.getX() + 330)* Game::Instance()->wscreenScale,(posOffset.getY() + 465)* Game::Instance()->hscreenScale,
 		nameText->width()* Game::Instance()->wscreenScale,nameText->height()* Game::Instance()->hscreenScale };
 	nameText->render(nameRect, 0);
 
@@ -187,7 +187,7 @@ void WriteTextComponent<TextInfo>::render()
 
 		for (const auto& line : lines) {
 			Texture* dialogText =  new Texture(sdlutils().renderer(), line, _myFont, _color);
-			SDL_Rect dialogRect = { (posOffset.getX()  +375)* Game::Instance()->wscreenScale, posOffset.getY() + y, dialogText->width()* Game::Instance()->wscreenScale, dialogText->height()* Game::Instance()->hscreenScale };
+			SDL_Rect dialogRect = { (posOffset.getX()  +390)* Game::Instance()->wscreenScale, posOffset.getY() + y, dialogText->width()* Game::Instance()->wscreenScale, dialogText->height()* Game::Instance()->hscreenScale };
 			dialogText->render(dialogRect, 0);
 
 			y += (dialogText->height() + 5)* Game::Instance()->hscreenScale;  // space between split lines
@@ -341,7 +341,7 @@ void WriteTextComponent<TextInfo>::startTextLine()
 template <typename T>
 WriteTextComponent<T>::~WriteTextComponent()
 {
-	
+
 }
 
 

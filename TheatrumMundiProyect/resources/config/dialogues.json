@@ -361,8 +361,84 @@
     ]
   },
   "Sala2": {
-    "SalaIntermedia1": [{ "Character": " ", "Text": "Bueno, bueno, bueno." }
-    ]
+        "SalaIntermedia2_1": [
+        { "Character": "Sol", "Text": "¿Hemos acertado?" },
+        { "Character": "Keisara", "Text": "¿Acertado el qué?" },
+        { "Character": "Lucy", "Text": "¡Keisara!" },
+        { "Character": "Sol", "Text": "¡Kei!" },
+        {
+          "Character": "Keisara",
+          "Text": "¿Oye, os encontráis bien? Me alegro de que\n estéis tan animados con mi presencia, pero…"
+        },
+        {
+          "Character": " ",
+          "Text": "Bueno, bueno, ¡lo habéis conseguido!"
+        },
+        {
+          "Character": " ",
+          "Text": "Mi más sincera enhorabuena."
+        },
+        {
+          "Character": "Lucy",
+          "Text": "¡Eres el ser más despreciable que he conocido en mi vida!"
+        },
+        {
+          "Character": "Keisara",
+          "Text": "¿Puede alguien explicarme qué está sucediendo?"
+        },
+        {
+          "Character": "Sol",
+          "Text": "Kei, estabas muerta hace unos segundos."
+        },
+        {
+          "Character": " ",
+          "Text": "¡Pero no pasa nada!"
+        },
+        {
+          "Character": " ",
+          "Text": "Tus maravillosos compañeros te han salvado y ahora estás de vuelta."
+        },
+        {
+          "Character": " ",
+          "Text": "Justo a tiempo para la siguiente ronda."
+        }
+        ],
+        "SalaIntermedia2_2": [
+          { "Character": "Sol", "Text": "Espera, ¿qué significa—" },
+          {
+            "Character": " ",
+            "Text": "Vaya, una pena."
+          },
+          {
+            "Character": " ",
+            "Text": "Vaya, una pena."
+          },
+          { "Character": "Lucy", "Text": "¿Dónde está Keisara?" },
+          {
+            "Character": " ",
+            "Text": "¿Dónde va a estar?"
+          },
+          {
+            "Character": " ",
+            "Text": "Pues donde la habéis visto por última vez."
+          },
+          { "Character": "Lucy", "Text": "Pero eso significa…" },
+          { "Character": "Sol", "Text": "¡No puede ser! ¡Esto tiene que ser una broma!" },
+          {
+            "Character": " ",
+            "Text": "Os di una oportunidad, fallasteis."
+          },
+          {
+            "Character": " ",
+            "Text": "Fin de la historia."
+          },
+          {
+            "Character": " ",
+            "Text": "Simplemente hacedlo mejor la próxima vez."
+          },
+          { "Character": "Lucy", "Text": "No, no, no…" },
+          { "Character": "Sol", "Text": "¿Cómo que la próxima—" }
+        ]
   },
   "Sala3": {
     "Sala2Intro":[],
