@@ -157,14 +157,14 @@ void TombPuzzleScene::init(SceneRoomTemplate* sr)
 					auto jewel = entityFactory->CreateInteractableEntity(entityManager, "Joya", EntityFactory::RECTAREA, Vector2D(600, 300), Vector2D(0, 0), 120, 120, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 					entityManager->getComponent<ClickComponent>(jewel)->connect(ClickComponent::JUST_CLICKED, [this,jewel]()
 						{
-							AddInvItem("Joya", "EYYYY Lapislazuli", room->GetInventory()->setPosition(), room);
+							AddInvItem("Joya", sdlutils().invDescriptions().at("Joya"), room->GetInventory()->setPosition(), room);
 							entityManager->setActive(jewel,false);
 						});
 
 					auto shovel = entityFactory->CreateInteractableEntity(entityManager, "Pala", EntityFactory::RECTAREA, Vector2D(500, 300), Vector2D(0, 0), 120, 120, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 					entityManager->getComponent<ClickComponent>(shovel)->connect(ClickComponent::JUST_CLICKED, [this, shovel]()
 						{
-							AddInvItem("Pala", "No era la pala que esperaba", room->GetInventory()->setPosition(), room);
+							AddInvItem("Pala", sdlutils().invDescriptions().at("Pala"), room->GetInventory()->setPosition(), room);
 							entityManager->setActive(shovel, false);
 						});
 					lock->getMngr()->setActive(lock, false);

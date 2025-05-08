@@ -189,9 +189,9 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
         clk->connect(ClickComponent::JUST_CLICKED, [this, rewardFeather, variant, sr]() {
 
             Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-            if (variant == 0)AddInvItem("frascoV2", "Un frasco con restos de algo.", position, sr);
-            else if (variant == 1)AddInvItem("frascoV2", "Un frasco totalmente limpio, \nque raro.", position, sr);
-            else if (variant == 2)AddInvItem("frascoV1", " Un frasco con huellas de dedos,  \n�no hab�an guantes?", position, sr);
+            if (variant == 0)AddInvItem("frascoV2", sdlutils().Instance()->invDescriptions().at("frascoV2"), position, sr);
+            else if (variant == 1)AddInvItem("frascoV2", sdlutils().Instance()->invDescriptions().at("frascoV1-1"), position, sr);
+            else if (variant == 2)AddInvItem("frascoV1", sdlutils().Instance()->invDescriptions().at("frascoV1"), position, sr);
             rewardFeather->getMngr()->setActive(rewardFeather, false);
 
             });
@@ -207,9 +207,9 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
         clk->connect(ClickComponent::JUST_CLICKED, [this, rewardMorse, variant, sr]() {
 
             Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-            if (variant == 0)AddInvItem("frascoV2", "Un frasco con restos de algo.", position, sr);
-            else if (variant == 1)AddInvItem("frascoV2", "Un frasco totalmente limpio, \nque raro.", position, sr);
-            else if (variant == 2)AddInvItem("frascoV1", " Un frasco con huellas de dedos,  \n�no hab�an guantes?", position, sr);
+            if (variant == 0)AddInvItem("frascoV2", sdlutils().Instance()->invDescriptions().at("frascoV2"), position, sr);
+            else if (variant == 1)AddInvItem("frascoV2", sdlutils().Instance()->invDescriptions().at("frascoV1-1"), position, sr);
+            else if (variant == 2)AddInvItem("frascoV1", sdlutils().Instance()->invDescriptions().at("frascoV1"), position, sr);
             rewardMorse->getMngr()->setActive(rewardMorse, false);
 
             });

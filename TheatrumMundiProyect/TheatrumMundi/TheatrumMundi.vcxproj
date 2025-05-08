@@ -75,6 +75,7 @@
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="RavenPuzzleScene.cpp" />
     <ClCompile Include="ReadDialog.cpp" />
+    <ClCompile Include="ReadInvdesc.cpp" />
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="Room2.cpp" />
     <ClCompile Include="Room3.cpp" />
@@ -271,6 +272,7 @@
     <ClInclude Include="Box.h" />
     <ClInclude Include="RavenPuzzleScene.h" />
     <ClInclude Include="ReadDialog.h" />
+    <ClInclude Include="ReadInvdesc.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="Room2.h" />
     <ClInclude Include="Room3.h" />

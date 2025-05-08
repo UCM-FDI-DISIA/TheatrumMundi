@@ -61,7 +61,7 @@ int Inventory::getItemNumber()
 void Inventory::setTextDescription(Hint* a, Transform* trEntity)
 {
 	//set text description
-	_textDescription.Description = a->getDescription();
+	_textDescription.Description = a->at();
 	//set text description position
 	_textDescription.posY = trEntity->getPos().getY();
 		
