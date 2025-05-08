@@ -87,7 +87,7 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->getComponent<ClickComponent>(featherReward)->connect(ClickComponent::JUST_CLICKED, [this, featherReward, sr]() {
 			featherReward->getMngr()->setActive(featherReward, false);
 			Vector2D position = sr->GetInventory()->setPosition();
-			AddInvItem("pluma", "Fue dificil cogerla.", position, sr);
+			AddInvItem("pluma", sdlutils().invDescriptions().at("pluma"), position, sr);
 			});
 
 		feather = entityFactory->CreateInteractableEntity( // feather entity
