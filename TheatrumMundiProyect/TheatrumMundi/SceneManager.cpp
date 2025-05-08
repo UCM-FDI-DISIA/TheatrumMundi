@@ -74,6 +74,7 @@ void SceneManager::popScene()
 	assert(!currentscenes.empty());
 	currentscenes.pop_back();
 	currentscenes.back()->closedMenus();
+	currentscenes.back()->init();
 
 }
 

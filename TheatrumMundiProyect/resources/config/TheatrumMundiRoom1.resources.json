@@ -16,6 +16,14 @@
       "file": "../resources/images/Finales/ImagenVacia.png"
     },
     {
+      "id": "loading1",
+      "file": "../resources/images/Finales/Carga1.png"
+    },
+    {
+      "id": "loading2",
+      "file": "../resources/images/Finales/Carga2.png"
+    },
+    {
       "id": "Clock",
       "file": "../resources/images/Finales/Reloj.PNG"
     },

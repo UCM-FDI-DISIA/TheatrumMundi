@@ -93,7 +93,7 @@ void MiddleRoomScene::init()
 		//a.playSound(room1music);
 
 		//Register scene in dialogue manager
-		dialogueManager->setScene(this);
+		//dialogueManager->setScene(this);
 		//MiddleRoomBackground
 		entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::MIDDLEROOM);
 
@@ -112,7 +112,7 @@ void MiddleRoomScene::init()
 	}
 	SDL_Delay(1000);
 
-	
+	dialogueManager->setScene(this);
 	int aux = Game::Instance()->getDataManager()->GetActualScene();
 	bool auxkei = Game::Instance()->getDataManager()->GetCharacterState(Character::KEISARA);
 	bool auxlucy = Game::Instance()->getDataManager()->GetCharacterState(Character::LUCY);
@@ -123,6 +123,7 @@ void MiddleRoomScene::init()
 		roomEvent[FIRST_DIALOGUE]();
 	break;
 	case SceneCount::MIDDLEROOM2:
+		dialogueManager->setActualRoom(2);
 		if (auxkei && auxlucy && auxsol) roomEvent[AFTER_ROOM1_GOOD3]();
 		else if (!auxkei && auxlucy && auxsol)roomEvent[AFTER_ROOM1_BAD2]();
 		else {
@@ -132,6 +133,7 @@ void MiddleRoomScene::init()
 		}
 		break;
 	case SceneCount::MIDDLEROOM3:
+		dialogueManager->setActualRoom(3);
 		if (auxkei && auxlucy && auxsol) roomEvent[AFTER_ROOM2_GOOD3]();
 		else if (!auxkei && auxlucy && auxsol)roomEvent[AFTER_ROOM2_GOOD2]();
 		else if (auxkei && !auxlucy && auxsol)roomEvent[AFTER_ROOM2_BAD2]();

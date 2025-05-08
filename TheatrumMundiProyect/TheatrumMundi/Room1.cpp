@@ -61,7 +61,13 @@ void Room1Scene::init()
 	_setCaseResolution();
 
 	roomEvent[InitialDialogue]();
-	
+
+	_loadimg1 = entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
+	_loadimg1->getMngr()->setActive(_loadimg1, false);
+
+	_loadimg2 = entityFactory->CreateImageEntity(entityManager, "loading2", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
+	_loadimg2->getMngr()->setActive(_loadimg2, false);
+
 	SDL_Delay(1000);
 }
 
@@ -216,6 +222,7 @@ void Room1Scene::_setRoomEvents()
 	roomEvent[GoodEnd] = [this]()
 		{
 			// black background
+			Game::Instance()->getDataManager()->SetSceneCount(SceneCount::MIDDLEROOM2);
 			entityManager->setActive(rmObjects.blackBackground, true);
 			entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 			std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
@@ -252,6 +259,8 @@ void Room1Scene::_setRoomEvents()
 	roomEvent[BadEnd] = [this]()
 		{
 			// black background
+			Game::Instance()->getDataManager()->SetCharacterDead(Character::KEISARA);
+			Game::Instance()->getDataManager()->SetSceneCount(SceneCount::MIDDLEROOM2);
 			entityManager->setActive(rmObjects.blackBackground, true);
 			entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 			std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
