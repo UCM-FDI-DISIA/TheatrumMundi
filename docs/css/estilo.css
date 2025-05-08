@@ -5,8 +5,13 @@
   box-sizing: border-box;
 }
 
-body{
-  background-color: rgb(0, 0, 0);
+body {
+  background-image: url('images/sinopsisImagen.png');
+  background-size: cover;        /* Hace que cubra toda la pantalla */
+  background-repeat: no-repeat;  /* Evita que se repita */
+  background-position: center;   /* Centrada */
+  background-attachment: fixed;  /* Fondo fijo al hacer scroll */
+  color: white;                  /* Por si el texto necesita contraste */
 }
 
 h1{

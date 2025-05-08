@@ -1,7 +1,13 @@
 main{
     width: 100%;
     height: calc(100vh - 60px);
-    background-color: rgb(0, 0, 0);
+    /*background-color: rgb(0, 0, 0);*/
+
+    background-image: url('../images/SalaIntermedia.PNG');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
 
     display:flex;
     justify-content: center;
@@ -43,7 +49,14 @@ main a:hover{
     align-items: center; /* Centra el contenido */
     justify-content: center; /* Centra verticalmente */
     padding: 50px 10%;
-    background-color: rgb(0, 0, 0); /* Fondo oscuro */
+   /* background-color: rgb(0, 0, 0); /* Fondo oscuro */
+
+    background-image: url('../images/SalaIntermedia.PNG');
+    background-size: cover;         /* Que cubra toda la pantalla */
+    background-repeat: no-repeat;   /* Que no se repita */
+    background-position: center;    /* Centrada en pantalla */
+    background-attachment: fixed;   /* Fondo estático al hacer scroll */
+
     color: rgb(255, 255, 255); /* Color del texto */
 }
 
