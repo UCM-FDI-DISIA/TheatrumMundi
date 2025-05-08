@@ -361,8 +361,11 @@
     ]
   },
   "Sala2": {
-    "Sala2Intro": [{ "Character": " ", "Text": "Bueno, bueno, bueno." }
-  ],
+    "SalaIntermedia1": [{ "Character": " ", "Text": "Bueno, bueno, bueno." }
+    ]
+  },
+  "Sala3": {
+    "Sala2Intro":[],
     "TUMBA1_2P": [
       { "Character": "Lucy", "Text": "Es una lápida." },
       {
@@ -496,7 +499,7 @@
     ]
 
 
-  },
-  "Sala3": {}
+  }
+  
   
 }
