@@ -13,7 +13,7 @@
 #include "SoundEffect.h"
 #include "Texture.h"
 #include "VirtualTimer.h"
-
+#include "../../TheatrumMundi/ReadInvdesc.h"
 #include "../../TheatrumMundi/AudioManager.h"
 
 class SDLUtils: public Singleton<SDLUtils> {
@@ -141,8 +141,8 @@ public:
 	}
 
 	// messages map
-	inline auto& invDescriptions() {
-		return _descriptionsAccessWrapper;
+	inline ReadInvdesc& invDescriptions() {
+		return *_descriptionsItems;
 	}
 
 	// sound effects map
@@ -228,7 +228,7 @@ private:
 	sdl_resource_table<std::string> _descriptions; // textures map (string -> texture)
 	sdl_resource_table<std::shared_ptr<Sound>> _sounds; // sounds map (string -> sound)
 	sdl_resource_table<std::shared_ptr<Sound>> _musics; // musics map (string -> music)
-
+	ReadInvdesc* _descriptionsItems;
 	map_access_wrapper<Font> _fontsAccessWrapper;
 	map_access_wrapper<Texture> _imagesAccessWrapper;
 	map_access_wrapper<std::string> _descriptionsAccessWrapper;

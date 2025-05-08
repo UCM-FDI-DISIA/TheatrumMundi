@@ -141,6 +141,7 @@ void SDLUtils::loadReasources(std::string filename) {
 	// Load JSON configuration file. We use a unique pointer since we
 	// can exit the method in different ways, this way we guarantee that
 	// it is always deleted
+	_descriptionsItems = new ReadInvdesc();
 	std::unique_ptr<JSONValue> jValueRoot(JSON::ParseFromFile(filename));
 
 	// check it was loaded correctly
@@ -224,6 +225,7 @@ void SDLUtils::loadReasources(std::string filename) {
 						_descriptions.emplace(key,txt);
 					else
 						_descriptions.emplace(key, txt);
+						_descriptions.emplace(key, txt);
 				} else {
 					throw "'messages' array in '" + filename
 							+ "' includes and invalid value";
@@ -303,7 +305,7 @@ void SDLUtils::closeSDLExtensions() {
 	_descriptions.clear();
 	_images.clear();
 	_fonts.clear();
-
+	delete _descriptionsItems;
 	Mix_Quit(); // quit SDL_mixer
 	IMG_Quit(); // quit SDL_image
 	TTF_Quit(); // quit SDL_ttf

@@ -169,7 +169,7 @@ void Room1Scene::_setRoomEvents()
 
 	roomEvent[Spoon] = [this]()
 		{
-			inv->addItem(new Hint("TeaCupSpoon", "Una cuchara de plata.", &sdlutils().images().at("TeaCupSpoon")));
+			inv->addItem(new Hint("TeaCupSpoon", sdlutils().invDescriptions().at("TeaCupSpoon"), &sdlutils().images().at("TeaCupSpoon")));
 			inv->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "TeaCupSpoon", EntityFactory::RECTAREA, inv->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 			createDescription(inv->hints.back(), inv->getItems().back());
 			if(inv->getActive()) inv->hints.back()->getMngr()->setActive(inv->hints.back(), true);

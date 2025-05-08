@@ -2,7 +2,7 @@
       "Inventory" : [
     { "id" : "antena", "text" :"Antena de un televisor. \n¿Esto sigue existiendo?"},
 
-    { "id" : "Cuchara", "text" : "Press space to start"},
+    { "id" : "TeaCupSpoon", "text" : "Una cuchara de plata."},
     { "id" : "pluma", "text" : "Fue difícil cogerla."},
     { "id" : "frascoV2", "text" : "Un frasco con restos de algo."},
     { "id" : "frascoV1", "text" : "Un frasco con huellas de dedos,  \n¿no habían guantes?"},
