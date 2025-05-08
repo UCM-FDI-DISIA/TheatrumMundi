@@ -15,6 +15,7 @@
       "id": "Room",
       "file": "../resources/images/Finales/SalaIntermedia.PNG"
     },
+    { "id" : "menuInicial", "file" : "../resources/images/Finales/mainMenu.png" },
     {
       "id": "Title",
       "file": "../resources/images/TemporalTitleImage.png"
@@ -60,8 +61,12 @@
 
   "musics" : [
     {
-        "id": "sala1",
-        "file":  "../resources/sound/music/sala1.wav"
+      "id": "sala1",
+      "file":  "../resources/sound/music/sala1.wav"
+  },
+    {
+        "id": "menu",
+        "file":  "../resources/sound/music/menu.wav"
     }
   ]
 

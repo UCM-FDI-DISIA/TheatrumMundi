@@ -185,12 +185,16 @@ void SceneManager::ResetSceneManager()
 {
 
 	scenes.resize(SceneName::SCENE_SIZE);
-	for (int i = 1;i < SCENE_SIZE;i++) {
-		delete scenes[i];
+	for (int i = 0; i < SCENE_SIZE;i++) {
+		
+		 delete scenes[i];
+
 	}
+	scenes.resize(SceneName::SCENE_SIZE);
+	currentscenes.clear();
 	auto tombScene = new TombPuzzleScene(); //For the chain Puzzle, to take the reference
 
-	
+	scenes[SceneName::INITIAL_MENU] = new InitialScene();
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::ROOM_2] = new Room2Scene();
@@ -213,6 +217,7 @@ void SceneManager::ResetSceneManager()
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 	scenes[SceneName::CREDITS] = new CreditsScene();
+	scenes[SceneName::BOX] = new Box();
 
 	loadScene(SceneName::INITIAL_MENU);
 }

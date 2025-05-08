@@ -6,7 +6,7 @@
 #include "../../TheatrumMundi/DataManager.h"
 
 #include "../../TheatrumMundi/ReadDialog.h"
-#define _LOADALLRESOURCES
+//#define _LOADALLRESOURCES
 class Transform;
 class GameState;
 class Log;
@@ -19,7 +19,9 @@ private:
 	 Log* _log;
 	 ReadDialog* dialogueReader;
 	 DataManager* _dataManager;
+	 bool _reset = false;
 	 Game();
+	 void reset(); //Reset the progress of the game and creates one new
 	
 	 void checkCollisions();
 public:
@@ -29,10 +31,11 @@ public:
 	void init();
 	void render()const;
 	void start();
-	void reset(); //Reset the progress of the game and creates one new
+	
 	SceneManager* getSceneManager();
 	DataManager* getDataManager();
 	ReadDialog* getReadDialogue();
+	void setReset();
 	Log* getLog();
 	Game& operator=(const Game& o) = delete;
 	Game(const Game& o) = delete;

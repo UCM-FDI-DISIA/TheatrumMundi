@@ -67,9 +67,9 @@ void PauseManager::Init(EntityFactory* entityFactory, ecs::EntityManager* entity
 		entityManager->setActiveGroup(ecs::grp::INTERACTPAUSE, false);
 		entityManager->setActiveGroup(ecs::grp::BACKGROUNDPAUSE, false);
 
+		Game::Instance()->setReset();
 
-		Game::Instance()->getSceneManager()->loadScene(SceneName::INITIAL_MENU);
-		
+		if (Game::Instance()->getDataManager()->GetActualScene() == 1) AudioManager::Instance().stopSound(sdlutils().musics().at("sala1"));
 		});
 
 	//GO TO THE PAUSE SCENE

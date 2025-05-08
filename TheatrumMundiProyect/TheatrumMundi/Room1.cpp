@@ -236,6 +236,7 @@ void Room1Scene::_setRoomEvents()
 					SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
 						auto* self = static_cast<decltype(this)>(param);
 						if (self) {
+							AudioManager::Instance().stopSound(sdlutils().musics().at("sala1"));
 							Game::Instance()->getSceneManager()->popScene();
 						}
 						return 0;
@@ -263,6 +264,7 @@ void Room1Scene::_setRoomEvents()
 				if (self) {
 					Image* img = self->entityManager->getComponent<Image>(self->rmObjects.blackBackground);
 					if (img) {
+						AudioManager::Instance().stopSound(sdlutils().musics().at("sala1"));
 						img->setTexture(&sdlutils().images().at("continuar"));
 					}
 
@@ -324,10 +326,10 @@ void Room1Scene::_setRoomAudio()
 
 	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
 
-
+	//audioMngr.stopSound(sdlutils().musics().at("menu"));
 	//Audio music
-	std::shared_ptr<Sound> room1music = sdlutils().musics().at("sala1");
-	audioMngr.playSound(room1music, true);
+	//std::shared_ptr<Sound> room1music = sdlutils().musics().at("sala1");
+	//audioMngr.playSound(room1music, true);
 }
 
 void Room1Scene::_setDialog()

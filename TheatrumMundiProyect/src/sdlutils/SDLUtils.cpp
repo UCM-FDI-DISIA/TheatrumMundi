@@ -130,7 +130,7 @@ void SDLUtils::initSDLExtensions() {
 #ifdef _DEBUG
 	std::cout << "Initializing the InputHandler" << std::endl;
 #endif
-
+	_descriptionsItems = new ReadInvdesc();
 }
 
 void SDLUtils::loadReasources(std::string filename) {
@@ -141,7 +141,7 @@ void SDLUtils::loadReasources(std::string filename) {
 	// Load JSON configuration file. We use a unique pointer since we
 	// can exit the method in different ways, this way we guarantee that
 	// it is always deleted
-	_descriptionsItems = new ReadInvdesc();
+	
 	std::unique_ptr<JSONValue> jValueRoot(JSON::ParseFromFile(filename));
 
 	// check it was loaded correctly
@@ -291,7 +291,6 @@ void SDLUtils::loadReasources(std::string filename) {
 }
 void SDLUtils::ClearMaps()
 {
-	_musics.clear();
 	_sounds.clear();
 	_descriptions.clear();
 	_images.clear();

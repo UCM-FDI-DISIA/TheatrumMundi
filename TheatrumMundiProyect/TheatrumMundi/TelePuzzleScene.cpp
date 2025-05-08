@@ -270,7 +270,7 @@ void TelePuzzleScene::refresh()
 			
 			isAnimating = false;
 			
-			Game::Instance()->reset();
+			Game::Instance()->setReset();
 			return;
 		}
 		float vol = (float)currentFrameIndex * 0.1;
@@ -292,7 +292,7 @@ void TelePuzzleScene::refresh()
 
 			isAnimating = false;
 			
-			Game::Instance()->reset();
+			Game::Instance()->setReset();
 			return;
 		}
 

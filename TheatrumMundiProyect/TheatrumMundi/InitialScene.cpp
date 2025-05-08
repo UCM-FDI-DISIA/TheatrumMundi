@@ -49,7 +49,7 @@ void InitialScene::init()
 		*/
 
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-		std::shared_ptr<Sound> music = sdlutils().musics().at("sala1");
+		std::shared_ptr<Sound> music = sdlutils().musics().at("menu");
 
 		a.playSound(music, true);
 
