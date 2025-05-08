@@ -51,7 +51,9 @@ private:
 	void _setInteractuables();
 	void _setDialog();
 	void _setUI();
-	
+	Entity* _loadimg1;
+	Entity* _loadimg2;
+
 	struct roomSounds {
 		std::shared_ptr<Sound> uiButton;
 		std::shared_ptr<Sound> puzzleButton;

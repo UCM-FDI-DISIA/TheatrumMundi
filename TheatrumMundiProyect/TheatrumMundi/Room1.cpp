@@ -61,7 +61,13 @@ void Room1Scene::init()
 	_setCaseResolution();
 
 	roomEvent[InitialDialogue]();
-	
+
+	_loadimg1 = entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
+	_loadimg1->getMngr()->setActive(_loadimg1, false);
+
+	_loadimg2 = entityFactory->CreateImageEntity(entityManager, "loading2", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
+	_loadimg2->getMngr()->setActive(_loadimg2, false);
+
 	SDL_Delay(1000);
 }
 

@@ -24,6 +24,7 @@ enum Character {
 class DataManager
 {
 private:
+
 	SceneCount ActualScene;
 
 	std::vector<int> variants;// rooms 
