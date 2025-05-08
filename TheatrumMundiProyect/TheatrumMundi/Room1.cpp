@@ -214,7 +214,7 @@ void Room1Scene::_setRoomEvents()
 		{
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
-
+			entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 			std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
 			AudioManager::Instance().playSound(correctSound);
 
@@ -249,7 +249,7 @@ void Room1Scene::_setRoomEvents()
 		{
 			// black background
 			entityManager->setActive(rmObjects.blackBackground, true);
-
+			entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 			std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
 			AudioManager::Instance().playSound(incorrectSound);
 
