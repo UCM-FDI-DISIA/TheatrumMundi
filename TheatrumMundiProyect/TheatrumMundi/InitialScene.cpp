@@ -68,7 +68,7 @@ void InitialScene::init()
 
 		//Tutorial button
 		//ENTIDADCONENTITYFACTORY
-		auto _tutobtn = entityFactory->CreateInteractableEntity(entityManager, "TutorialButton", EntityFactory::RECTAREA, Vector2D(850, 375), Vector2D(0, 0), 248, 56, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto _tutobtn = entityFactory->CreateInteractableEntity(entityManager, "TutorialButton", EntityFactory::RECTAREA, Vector2D(850, 375), Vector2D(0, 0), 250, 57, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 		ClickComponent* clktuto = entityManager->getComponent<ClickComponent>(_tutobtn);
 
@@ -87,7 +87,7 @@ void InitialScene::init()
 		//Start button room1
 		//ENTIDADCONENTITYFACTORY
 		if (tutorialCompleted) {
-			auto _startbtn = entityFactory->CreateInteractableEntity(entityManager, "NewGame", EntityFactory::RECTAREA, Vector2D(850, 450), Vector2D(0, 0), 248, 56, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _startbtn = entityFactory->CreateInteractableEntity(entityManager, "NewGame", EntityFactory::RECTAREA, Vector2D(850, 450), Vector2D(0, 0), 250, 57, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 			ClickComponent* clk = entityManager->getComponent<ClickComponent>(_startbtn);
 
@@ -104,7 +104,7 @@ void InitialScene::init()
 		}
 
 		else {
-			auto _startbtn = entityFactory->CreateInteractableEntity(entityManager, "NewGameLocked", EntityFactory::RECTAREA, Vector2D(850, 375), Vector2D(0, 0), 248, 56, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _startbtn = entityFactory->CreateInteractableEntity(entityManager, "NewGameLocked", EntityFactory::RECTAREA, Vector2D(850, 375), Vector2D(0, 0), 250, 57, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 			ClickComponent* clk = entityManager->getComponent<ClickComponent>(_startbtn);
 
@@ -116,7 +116,7 @@ void InitialScene::init()
 		}
 		//Exit 
 		//ENTIDADCONENTITYFACTORY
-		auto _exitbtn = entityFactory->CreateInteractableEntity(entityManager, "Exit", EntityFactory::RECTAREA, Vector2D(850, 525), Vector2D(0, 0), 248, 56, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto _exitbtn = entityFactory->CreateInteractableEntity(entityManager, "Exit", EntityFactory::RECTAREA, Vector2D(850, 525), Vector2D(0, 0), 250, 57, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 		ClickComponent* clkext = entityManager->getComponent<ClickComponent>(_exitbtn);
 		clkext->connect(ClickComponent::JUST_CLICKED, [buttonSound]() 
