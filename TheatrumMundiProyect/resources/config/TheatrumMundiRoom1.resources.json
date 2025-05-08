@@ -417,6 +417,15 @@
       "file": "../resources/sound/sfx/correcto.wav"
     },
     {
+      "id": "CogerCosa",
+      "file": "../resources/sound/sfx/CogerCosa.wav"
+  },
+  
+  {
+    "id": "ColocarCosa",
+    "file": "../resources/sound/sfx/ColocarCosa.wav"
+  },
+    {
       "id": "incorrecto",
       "file": "../resources/sound/sfx/incorrecto.wav"
     }

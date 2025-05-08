@@ -43,9 +43,14 @@ public:
 		posoffset.setX(i);
 		posoffset.setY(j);
 	}
+	inline void addPosOffset(int i = 0, int j = 0) {
+		posoffset.setX(posoffset.getX() + i);
+		posoffset.setY(posoffset.getY()+ j);
+	}
 	inline void setPosOffset(Vector2D vec) {
 		posoffset = vec;
 	}
+	inline Texture* GetTexture() { return _tex; };
 
 private:
 	Transform* _tr;

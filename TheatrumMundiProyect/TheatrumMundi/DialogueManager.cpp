@@ -46,6 +46,7 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
     //No need to modify his transform at select
     entityManager->removeComponent<ClickableSpriteComponent>(_textbackground);
     auto dialogInteractionArea = entityManager->getComponent<RectArea2D>(_textbackground);
+    entityManager->addComponent<DialogueAnimComponent>(_textbackground);
     // Put the dialog interaction area in front of the other interactables
     areaLayerManager->sendFront(dialogInteractionArea->getLayerPos());
 
@@ -121,7 +122,12 @@ void DialogueManager::ReadDialogue(const string& event) {
             if(roomDialogues[event].empty()) Game::Instance()->getLog()->addDialogueLineLog("/", "/");
         }
         else {
-           
+            
+            for (auto a : _scene->GetEntityManager()->getEntities(ecs::grp::DIALOGUE)) {
+                if (a->getMngr()->getComponent<DialogueAnimComponent>(a) != nullptr)
+                    a->getMngr()->getComponent<DialogueAnimComponent>(a)->endDialogueAnim();
+
+            }
             _scene->endDialogue();
             displayOnProcess = false;
 

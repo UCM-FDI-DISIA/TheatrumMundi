@@ -46,9 +46,11 @@
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="BalancePuzzleScene.cpp" />
     <ClCompile Include="BooksPuzzleScene.cpp" />
     <ClCompile Include="Area2DLayerManager.cpp" />
     <ClCompile Include="CalendearMobileTestScene.cpp" />
+    <ClCompile Include="CreditsScene.cpp" />
     <ClCompile Include="CSVdataRecolector.cpp" />
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="ClockPuzzleScene.cpp" />
@@ -70,6 +72,7 @@
     <ClCompile Include="Pipe.cpp" />
     <ClCompile Include="PipePuzzleScene.cpp" />
     <ClCompile Include="PhysicsBodyComponent.cpp" />
+    <ClCompile Include="Box.cpp" />
     <ClCompile Include="RavenPuzzleScene.cpp" />
     <ClCompile Include="ReadDialog.cpp" />
     <ClCompile Include="Room1.cpp" />
@@ -87,6 +90,7 @@
     <ClCompile Include="TombPuzzleScene.cpp" />
     <ClCompile Include="TutorialScene.cpp" />
     <ClCompile Include="WindowPuzzleScene.cpp" />
+    <ClCompile Include="WiresPuzzleScene.cpp" />
     <ClCompile Include="XOPuzzleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -235,9 +239,11 @@
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="BalancePuzzleScene.h" />
     <ClInclude Include="BooksPuzzleScene.h" />
     <ClInclude Include="Area2DLayerManager.h" />
     <ClInclude Include="CalendearMobileTestScene.h" />
+    <ClInclude Include="CreditsScene.h" />
     <ClInclude Include="CSVdataRecolector.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="ClockPuzzleScene.h" />
@@ -262,6 +268,7 @@
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="PipePuzzleScene.h" />
     <ClInclude Include="PhysicsBodyComponent.h" />
+    <ClInclude Include="Box.h" />
     <ClInclude Include="RavenPuzzleScene.h" />
     <ClInclude Include="ReadDialog.h" />
     <ClInclude Include="Room1.h" />
@@ -280,6 +287,7 @@
     <ClInclude Include="TombPuzzleScene.h" />
     <ClInclude Include="TutorialScene.h" />
     <ClInclude Include="WindowPuzzleScene.h" />
+    <ClInclude Include="WiresPuzzleScene.h" />
     <ClInclude Include="XOPuzzleScene.h" />
   </ItemGroup>
   <ItemGroup>
@@ -397,7 +405,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;OpenAL32.lib;sndfile.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;OpenAL32.lib;sndfile.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -417,7 +425,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;OpenAL32.lib;sndfile.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_net.lib;OpenAL32.lib;sndfile.lib;fmod_vc.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <PerUserRedirection>false</PerUserRedirection>
     </Link>
   </ItemDefinitionGroup>
