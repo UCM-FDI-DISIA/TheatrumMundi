@@ -3,7 +3,7 @@ main{
     height: calc(100vh - 60px);
     /*background-color: rgb(0, 0, 0);*/
 
-    background-image: url('../images/SalaIntermedia.PNG');
+    background-image: url('../images/fondoNegro.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -14,11 +14,24 @@ main{
     align-items: center;
 }
 
+main .main-intro {
+    text-align: center; /* Centra el texto dentro del contenedor */
+  }
+
 main .main-intro h1{
     font-size: 96px;
     line-height: 106px;
     transform: translateY(-15px); /* Sube el h1 30px */
 }
+
+main .main-intro h3 {
+    margin-top: 60px;
+    font-size: 30px;
+    transform: translateY(-15px); /* Sube el h3 15px */
+    background-color: rgb(183, 9, 9); /* Fondo rojo */
+    display: inline-block; /* Hace que el fondo se ajuste al tamaño del texto */
+    padding: 5px 10px; /* Ajusta el espacio alrededor del texto */
+  }
 
 main a {
     margin-top: 30px;
@@ -51,7 +64,7 @@ main a:hover{
     padding: 50px 10%;
    /* background-color: rgb(0, 0, 0); /* Fondo oscuro */
 
-    background-image: url('../images/SalaIntermedia.PNG');
+    background-image: url('../images/fondoNegro.jpg');
     background-size: cover;         /* Que cubra toda la pantalla */
     background-repeat: no-repeat;   /* Que no se repita */
     background-position: center;    /* Centrada en pantalla */
@@ -153,9 +166,10 @@ main a:hover{
     align-items: center; /* Centra el contenido */
     justify-content: flex-start; /* Centra verticalmente */
     padding: 50px 10%;
-    background-color: rgb(238, 238, 238); /* Fondo oscuro */
-    color: rgb(0, 0, 0); /* Color del texto */
-    border: 5px solid rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0); /* Fondo oscuro */
+    color: rgb(255, 255, 255); /* Color del texto */
+    border: 2px solid rgb(255, 255, 255);
+    
 }
 
 .footer-title{
@@ -183,7 +197,7 @@ main a:hover{
     width: fit-content; /* Permite que crezca si el texto es más largo */
     text-align: center; /* Centra el texto dentro del botón */
     text-decoration: none;
-    color: rgb(46, 46, 46);
+    color: rgb(255, 255, 255);
     border-radius: 10px; /* Opcional: bordes redondeados */
     font-weight: bold;
     margin-left: auto;
@@ -201,7 +215,7 @@ main a:hover{
     width: fit-content; /* Permite que crezca si el texto es más largo */
     text-align: center; /* Centra el texto dentro del botón */
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     border-radius: 10px; /* Opcional: bordes redondeados */
     font-weight: bold;
     margin-left: auto;
@@ -214,7 +228,7 @@ main a:hover{
 
 .footer h2{
     font-size: 30px;
-    color: #000000;
+    color: #ffffff;
 }
 
 .carousel {
