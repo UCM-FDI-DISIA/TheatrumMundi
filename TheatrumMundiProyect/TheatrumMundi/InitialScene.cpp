@@ -28,7 +28,7 @@ void InitialScene::init()
 {
 	if (!isStarted) {
 
-
+		SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 
 		GameSave save("savegame.dat");
 		bool tutorialCompleted = save.isTutoCompleted();
