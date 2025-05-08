@@ -52,7 +52,7 @@ main a:hover{
 .about-game-title {
     font-size: 48px;
     text-align: center;
-    margin-bottom: 50px; /* Espacio debajo del título */
+    margin-bottom: 30px; /* Espacio debajo del título */
 }
 
 /* Contenedor de dos columnas */
@@ -135,7 +135,7 @@ main a:hover{
 
 .footer{
     width: 100vw;  /* Ocupa todo el ancho de la pantalla */
-    height: 30vh; /* Ocupa toda la altura de la pantalla */
+    height: 70vh; /* Ocupa toda la altura de la pantalla */
     display: flex;
     flex-direction: column; /* Organiza en columna */
     align-items: center; /* Centra el contenido */
@@ -149,7 +149,7 @@ main a:hover{
 .footer-title{
     font-size: 30px;
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 70px;
 }
 
 .footer-content{
@@ -158,6 +158,7 @@ main a:hover{
     justify-content: space-between; /* Separa uniformemente los elementos */
     align-items: center; /* Alinea los elementos verticalmente */
     max-width: 1200px; /* Limita el ancho máximo */
+    background-color: transparent;
 }
 
 .footer a {
@@ -175,4 +176,26 @@ main a:hover{
     font-weight: bold;
     margin-left: auto;
     margin-right: auto;
+}
+
+.footer button{
+    margin-top: 30px;
+    font-size: 25px;
+    display: block;
+   /* background-color: rgb(255, 0, 0);*
+    padding: 15px 40px; /* Aumenta el tamaño del botón */
+    padding: 15px 40px; /* Aumenta el tamaño del botón */
+    min-width: 200px; /* Establece un ancho mínimo */
+    width: fit-content; /* Permite que crezca si el texto es más largo */
+    text-align: center; /* Centra el texto dentro del botón */
+    text-decoration: none;
+    color: white;
+    border-radius: 10px; /* Opcional: bordes redondeados */
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer button:hover{
+    cursor: pointer;
 }
