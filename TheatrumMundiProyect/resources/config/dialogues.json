@@ -360,7 +360,7 @@
       { "Character": " ", "Text": "Espero vuestra respuesta." }
     ]
   },
-      "Sala2": {
+  "Sala2": {
         "SalaIntermedia2_1": [
         { "Character": "Sol", "Text": "¿Hemos acertado?" },
         { "Character": "Keisara", "Text": "¿Acertado el qué?" },
@@ -439,7 +439,7 @@
           { "Character": "Lucy", "Text": "No, no, no…" },
           { "Character": "Sol", "Text": "¿Cómo que la próxima—" }
         ]
-      },
+  },
   "Sala3": {
     "Sala2Intro":[],
     "TUMBA1_2P": [

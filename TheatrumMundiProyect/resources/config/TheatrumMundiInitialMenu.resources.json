@@ -15,6 +15,7 @@
       "id": "Room",
       "file": "../resources/images/Finales/SalaIntermedia.PNG"
     },
+    { "id" : "loading1", "file" : "../resources/images/Finales/Carga1.png" },
     { "id" : "menuInicial", "file" : "../resources/images/Finales/mainMenu.png" },
     {
       "id": "Title",

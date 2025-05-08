@@ -126,7 +126,7 @@ void InitialScene::init()
 				});
 
 		//ENTIDADCONENTITYFACTORY
-		_loadimg = entityFactory->CreateImageEntity(entityManager, "loading", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
+		_loadimg = entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
 	
 	}
 	_loadimg->getMngr()->setActive(_loadimg, false);
