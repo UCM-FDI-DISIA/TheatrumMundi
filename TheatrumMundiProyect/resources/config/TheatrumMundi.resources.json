@@ -289,6 +289,8 @@
     { "id" : "cortinaD", "file" : "../resources/images/Finales/cortinaD.png" },
     { "id" : "cortinaI", "file" : "../resources/images/Finales/cortinaI.png" },
     { "id" : "fondoMorado", "file" : "../resources/images/temporales/fondoMorado.png" },
+    { "id" : "menuInicial", "file" : "../resources/images/Finales/mainMenu.png" },
+    { "id" : "Title", "file" : "../resources/images/Finales/title.png" },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"
@@ -448,10 +450,6 @@
     {
       "id": "incrementButtonSelected",
       "file": "../resources/images/incrementButtonSelected.png"
-    },
-    {
-      "id": "Title",
-      "file": "../resources/images/TemporalTitleImage.png"
     },
     {
       "id": "TeaCupSprite",
