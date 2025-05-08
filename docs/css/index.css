@@ -166,7 +166,7 @@ main a:hover{
     margin-top: 30px;
     font-size: 25px;
     display: block;
-    background-color: darkgray;
+    background-color: transparent;
     padding: 15px 40px; /* Aumenta el tamaño del botón */
     min-width: 200px; /* Establece un ancho mínimo */
     width: fit-content; /* Permite que crezca si el texto es más largo */
