@@ -1,0 +1,22 @@
+{
+      "Inventory" : [
+    { "id" : "antena", "text" :"Antena de un televisor. \n¿Esto sigue existiendo?"},
+
+    { "id" : "TeaCupSpoon", "text" : "Una cuchara de plata."},
+    { "id" : "pluma", "text" : "Fue difícil cogerla."},
+    { "id" : "frascoV2", "text" : "Un frasco con restos de algo."},
+    { "id" : "frascoV1", "text" : "Un frasco con huellas de dedos,  \n¿no habían guantes?"},
+    { "id" : "frascoV1-1", "text" :"Un frasco totalmente limpio, \nque raro."},
+    { "id" : "horaria", "text" : "La manecilla de las horas de un reloj."},
+    { "id" : "etiquetaV1", "text" : "Etiqueta de algún químico. \nIndica una cantidad de 200mg."},
+    { "id" : "etiquetaV2", "text" :  "Etiqueta de algún químico. \n¿Solo 10 mg?"},
+    { "id" : "guantes", "text" :  "Unos guantes. Ya está. Son unos guantes."},
+    { "id" : "minutero", "text" : "La manecilla de los minutos de un reloj."},
+
+    
+    { "id" : "Pala", "text" :"No era la pala que esperaba"},
+    { "id" : "Llave", "text" : "La llave de una puerta, seguro que abre algo."},
+    { "id" : "Joya", "text" : "EYYYY Lapislazuli."}
+  ]
+
+}

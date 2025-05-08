@@ -716,7 +716,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 			entityManager->getComponent<ClickComponent>(gloveEntity)->connect(ClickComponent::JUST_CLICKED, [this, gloveEntity, sr]() {
 				gloveEntity->getMngr()->setActive(gloveEntity, false);
 				Vector2D position = sr->GetInventory()->setPosition();
-				AddInvItem("guantes", "Unos guantes. Ya está. Son unos guantes.", position, sr);
+				AddInvItem("guantes",sdlutils().Instance()->invDescriptions().at("guantes"), position, sr);
 				});
 		
 
@@ -732,7 +732,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->getComponent<ClickComponent>(clock)->connect(ClickComponent::JUST_CLICKED, [this, clock,sr]() {
 			clock->getMngr()->setActive(clock, false);
 			Vector2D position = sr->GetInventory()->setPosition();
-			AddInvItem("minutero", "La manecilla de los minutos de un reloj", position, sr);
+			AddInvItem("minutero", sdlutils().invDescriptions().at("minutero"), position, sr);
 			});
 
 		//Create background
