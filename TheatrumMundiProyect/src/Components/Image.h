@@ -50,6 +50,7 @@ public:
 	inline void setPosOffset(Vector2D vec) {
 		posoffset = vec;
 	}
+	inline Texture* GetTexture() { return _tex; };
 
 private:
 	Transform* _tr;

@@ -17,8 +17,7 @@
 	GAMESTATE, \
 	GAMEINFOMSGS, \
 	DECELERATION, \
-	SHOWATOPPOSITESIDE, \
-	FIGHTERCTRL
+	SHOWATOPPOSITESIDE
 	
 
 // Groups list - must have at least one element

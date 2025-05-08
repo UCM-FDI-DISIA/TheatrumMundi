@@ -66,6 +66,7 @@ public:
 	virtual void ResolveScene() {
 		
 	}
+	inline Area2DLayerManager* GetAreaLayerManager() { return areaLayerManager; };
 	virtual void endDialogue();
 	inline ecs::EntityManager* GetEntityManager() { return entityManager; }
 

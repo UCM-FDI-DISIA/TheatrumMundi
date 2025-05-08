@@ -66,8 +66,8 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 			0, ecs::grp::DEFAULT);
 
 		//create the clock
-		clock = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(420,50), Vector2D(0, 0), 300, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		entityManager->addComponent<TriggerComponent>(clock);
+		clock = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(420,50), Vector2D(0, 0), 300, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		clock->getMngr()->getComponent<TriggerComponent>(clock)->setTargetGroup(ecs::grp::INVENTORY);
 		//Assigns the trigger bolean to true
 		clock->getMngr()->getComponent<TriggerComponent>(clock)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
@@ -76,7 +76,6 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		clock->getMngr()->getComponent<TriggerComponent>(clock)->connect(TriggerComponent::AREA_LEFT, [this]() {
 			SetplacedHand(false);
 			});
-		entityManager->removeComponent<Image>(clock);
 
 
 		//create the clock hands : minute
@@ -327,14 +326,11 @@ bool ClockPuzzleScene::isItemHand(const std::string& itemId)
 	if (itemId == "minutero") {
 		hasLongClockHand = true;
 		longClockHand->getMngr()->setActive(longClockHand, true);
-		//longClockHand->getMngr()->removeComponent<ClickableSpriteComponent>(longClockHand);
-		//ClickableSpriteComponent
 		return true;
 	}
 	else if (itemId == "horaria") {
 		hasShortClockHand = true;
 		shortClockHand->getMngr()->setActive(shortClockHand, true);
-		//shortClockHand->getMngr()->removeComponent<ClickableSpriteComponent>(shortClockHand);
 
 		return true;
 	}

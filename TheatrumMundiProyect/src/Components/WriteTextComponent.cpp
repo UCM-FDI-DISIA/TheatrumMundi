@@ -206,9 +206,11 @@ void WriteTextComponent<DescriptionInfo>::render()
 	if (textStructure->Description.empty()) return;
 
 	std::vector<std::string> lines = splitTextByNewline(textStructure->Description); //splits text into different lines
-
+	int x = 0;
 	int y = (textStructure->posY + 60) * Game::Instance()->hscreenScale;
-	int x = 550 * Game::Instance()->wscreenScale;
+	//X POSITION
+	if(textStructure->Description.size() > 28) x = 550  * Game::Instance()->wscreenScale; //If the description has less than 21 characthers, then set closer to the left
+	else x = 650 * Game::Instance()->wscreenScale; // else set farther 
 
 	// scale background
 	int totalHeight = 0;

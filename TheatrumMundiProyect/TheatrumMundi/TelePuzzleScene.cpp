@@ -27,7 +27,7 @@
 
 #include "DialogueManager.h"
 
-
+#include "../sdlutils/SoundEffect.h"
 #include "GameSave.h"
 
 using namespace std;
@@ -56,6 +56,7 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
+
 		a.setVolume(buttonSound, 0.2);
 
 		dialogueManager->setScene(this);
@@ -69,43 +70,23 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 			entityManager, "clockShape", EntityFactory::RECTAREA,
 			Vector2D(400, 150), Vector2D(), 1000, 500, 0,
 			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-
+		tv->getMngr()->getComponent<TriggerComponent>(tv)->setTargetGroup(ecs::grp::INVENTORY);
 	
 
 		tv->getMngr()->removeComponent<Image>(tv);
 
 		tv->getMngr()->getComponent<TriggerComponent>(tv)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
-			std::cout << "pasa por el triger de la taza" << std::endl;
 			});
 		//Assigns the trigger bolean to false
 		tv->getMngr()->getComponent<TriggerComponent>(tv)->connect(TriggerComponent::AREA_LEFT, [this]() {
 			SetplacedHand(false);
 			});
-
-		//create the spoon
 	
-
-		entityManager->getComponent<ClickComponent>(tv) // The cup is clicked after introducing the spoon
-			->connect(ClickComponent::JUST_CLICKED, [tv, this]()
-				{
-					if (_spoonIsInCup == false) return;
-					_poisonIsChecked = true;
-
-					// ... Change image revealing poinson or whatever  <-- TODO
-					//Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithPoison");
-					//tvBackground->getMngr()->getComponent<Image>(tvBackground)->setTexture(tx);
-					//startDialogue("PuzzleTaza2");
-				});
 
 
 		//BackButton
-		exitButton = entityManager->addEntity(ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		entityManager->addComponent<Transform>(exitButton, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0);
-		entityManager->addComponent<Image>(exitButton, &sdlutils().images().at("B1"));
-
-		entityManager->addComponent<RectArea2D>(exitButton);
-
+		exitButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		entityManager->setActive(exitButton, false);
 
 		//Click component Open log button
@@ -261,7 +242,8 @@ bool TelePuzzleScene::isItemHand(const std::string& itemId)
 		isAnimating = true;
 		// Change to first texture
 		tvBackground->getMngr()->getComponent<Image>(tvBackground)->setTexture(tvAnimationFrames[0]);
-
+		AudioManager::Instance().playSound(sdlutils().soundEffects().at("Statica"), true);
+		AudioManager::Instance().setVolume(sdlutils().soundEffects().at("Statica"), 0.1);
 
 		
 
@@ -287,11 +269,12 @@ void TelePuzzleScene::refresh()
 		if (currentFrameIndex >= tvAnimationFrames.size()) {
 			
 			isAnimating = false;
-			Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
+			
 			Game::Instance()->reset();
 			return;
 		}
-
+		float vol = (float)currentFrameIndex * 0.1;
+		AudioManager::Instance().setVolume(sdlutils().soundEffects().at("Statica"), vol);
 		
 		tvBackground->getMngr()->getComponent<Image>(tvBackground)->setTexture(tvAnimationFrames[currentFrameIndex]);
 
@@ -302,11 +285,13 @@ void TelePuzzleScene::refresh()
 		
 		currentFrameIndex++;
 
+		float vol = (float)currentFrameIndex * 0.1;
+		AudioManager::Instance().setVolume(sdlutils().soundEffects().at("Statica"), vol);
 
 		if (currentFrameIndex >= tvAnimationFrames.size()) {
 
 			isAnimating = false;
-			Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
+			
 			Game::Instance()->reset();
 			return;
 		}
@@ -317,5 +302,9 @@ void TelePuzzleScene::refresh()
 
 		frameTimer.resetTime();
 
+	}
+	if (currentFrameIndex == 10) {
+		AudioManager::Instance().stopSound(sdlutils().soundEffects().at("Statica"));
+		AudioManager::Instance().playSound(sdlutils().soundEffects().at("FinalTeleTutorial"));
 	}
 }

@@ -225,6 +225,15 @@
       "file": "../resources/sound/sfx/cuerda.wav"
     },
     {
+      "id": "CogerCosa",
+      "file": "../resources/sound/sfx/CogerCosa.wav"
+  },
+  
+  {
+    "id": "ColocarCosa",
+    "file": "../resources/sound/sfx/ColocarCosa.wav"
+  },
+    {
       "id": "correcto",
       "file": "../resources/sound/sfx/correcto.wav"
     },
