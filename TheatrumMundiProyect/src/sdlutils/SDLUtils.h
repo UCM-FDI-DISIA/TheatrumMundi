@@ -141,8 +141,8 @@ public:
 	}
 
 	// messages map
-	inline auto& msgs() {
-		return _msgsAccessWrapper;
+	inline auto& invDescriptions() {
+		return _descriptionsAccessWrapper;
 	}
 
 	// sound effects map
@@ -225,13 +225,13 @@ private:
 
 	sdl_resource_table<Font> _fonts; // fonts map (string -> font)
 	sdl_resource_table<Texture> _images; // textures map (string -> texture)
-	sdl_resource_table<Texture> _msgs; // textures map (string -> texture)
+	sdl_resource_table<std::string> _descriptions; // textures map (string -> texture)
 	sdl_resource_table<std::shared_ptr<Sound>> _sounds; // sounds map (string -> sound)
 	sdl_resource_table<std::shared_ptr<Sound>> _musics; // musics map (string -> music)
 
 	map_access_wrapper<Font> _fontsAccessWrapper;
 	map_access_wrapper<Texture> _imagesAccessWrapper;
-	map_access_wrapper<Texture> _msgsAccessWrapper;
+	map_access_wrapper<std::string> _descriptionsAccessWrapper;
 	map_access_wrapper<std::shared_ptr<Sound>> _soundsAccessWrapper;
 	map_access_wrapper<std::shared_ptr<Sound>> _musicsAccessWrapper;
 

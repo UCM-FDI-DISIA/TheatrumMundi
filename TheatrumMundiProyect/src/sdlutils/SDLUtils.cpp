@@ -17,7 +17,7 @@ SDLUtils::SDLUtils() :
 		_renderer(nullptr), //
 		_fontsAccessWrapper(_fonts, "Fonts Table"), //
 		_imagesAccessWrapper(_images, "Images Table"), //
-		_msgsAccessWrapper(_msgs, "Messages Table"), //
+		_descriptionsAccessWrapper(_descriptions, "Inv Table"), //
 		_soundsAccessWrapper(_sounds, "Sounds Table"), //
 		_musicsAccessWrapper(_musics, "Musics Table"), //
 		_currTime(0), //
@@ -207,32 +207,23 @@ void SDLUtils::loadReasources(std::string filename) {
 	}
 
 	// load messages
-	jValue = root["messages"];
+	jValue = root["Inventory"];
 	if (jValue != nullptr) {
 		if (jValue->IsArray()) {
-			_msgs.reserve(jValue->AsArray().size()); // reserve enough space to avoid resizing
+			_descriptions.reserve(jValue->AsArray().size()); // reserve enough space to avoid resizing
 			for (auto &v : jValue->AsArray()) {
 				if (v->IsObject()) {
 					JSONObject vObj = v->AsObject();
 					std::string key = vObj["id"]->AsString();
 					std::string txt = vObj["text"]->AsString();
-					auto &font = _fonts.at(vObj["font"]->AsString());
 #ifdef _DEBUG
 					std::cout << "Loading message with id: " << key
 							<< std::endl;
 #endif
 					if (vObj["bg"] == nullptr)
-						_msgs.emplace(key,
-								Texture(renderer(), txt, font,
-										build_sdlcolor(
-												vObj["color"]->AsString())));
+						_descriptions.emplace(key,txt);
 					else
-						_msgs.emplace(key,
-								Texture(renderer(), txt, font,
-										build_sdlcolor(
-												vObj["color"]->AsString()),
-										build_sdlcolor(
-												vObj["bg"]->AsString())));
+						_descriptions.emplace(key, txt);
 				} else {
 					throw "'messages' array in '" + filename
 							+ "' includes and invalid value";
@@ -300,7 +291,7 @@ void SDLUtils::ClearMaps()
 {
 	_musics.clear();
 	_sounds.clear();
-	_msgs.clear();
+	_descriptions.clear();
 	_images.clear();
 	_fonts.clear();
 }
@@ -309,7 +300,7 @@ void SDLUtils::closeSDLExtensions() {
 
 	_musics.clear();
 	_sounds.clear();
-	_msgs.clear();
+	_descriptions.clear();
 	_images.clear();
 	_fonts.clear();
 

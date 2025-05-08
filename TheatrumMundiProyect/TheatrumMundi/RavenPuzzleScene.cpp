@@ -143,7 +143,7 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 				if (ravenHappy) { //If you give the jewel to the bird, the key is pickable
 
 					Vector2D position = sr->GetInventory()->setPosition();
-					AddInvItem("Llave", "La llave de una puerta, seguro que abre algo", position, sr);
+					AddInvItem("Llave", sdlutils().invDescriptions().at("Llave"), position, sr);
 					entityManager->setActive(key, false);
 					Win();
 				}
