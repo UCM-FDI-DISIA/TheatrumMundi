@@ -28,7 +28,6 @@ Game* Game::Instance()
 }
 Game::~Game() {
 	
-	
 	delete _mngr;
 	delete dialogueReader;
 	delete _dataManager;
@@ -37,12 +36,12 @@ Game::~Game() {
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
 
+	AudioManager::Instance().shutdown();
+
 	// release SLDUtil if the instance was created correctly.
 	if (SDLUtils::HasInstance()) {
 		SDLUtils::Release();
 	}
-
-	AudioManager::Instance().shutdown();
 }
 
 void Game::init() {
@@ -163,6 +162,7 @@ void Game::reset()
 	Game::Instance()->getLog()->ResetLog();
 	Game::Instance()->getDataManager()->ResetDataManager();
 	Game::Instance()->getSceneManager()->ResetSceneManager();
+
 	Game::Instance()->getReadDialogue()->ResetReader();
 
 }

@@ -67,10 +67,9 @@ void PauseManager::Init(EntityFactory* entityFactory, ecs::EntityManager* entity
 		entityManager->setActiveGroup(ecs::grp::INTERACTPAUSE, false);
 		entityManager->setActiveGroup(ecs::grp::BACKGROUNDPAUSE, false);
 
-		//LLAMADA A FUNCION
-		Game::Instance()->reset();
 
 		Game::Instance()->getSceneManager()->loadScene(SceneName::INITIAL_MENU);
+		
 		});
 
 	//GO TO THE PAUSE SCENE

@@ -35,7 +35,6 @@ AudioManager& AudioManager::Instance()
 }
 
 bool AudioManager::init() {
-    std::cout << "BOMBOCLAT";
     FMOD_RESULT result;
     result = FMOD::System_Create(&system);
     if (result != FMOD_OK) {
@@ -59,8 +58,8 @@ bool AudioManager::init() {
 void AudioManager::shutdown() {
     sounds.clear();  
     if (system) {
-        system->close();
         system->release();
+        system->close();
     }
 }
 
@@ -69,6 +68,7 @@ std::shared_ptr<Sound> AudioManager::createSound(const std::string& filePath) {
     Sound* rawSound = soundPtr.get();
 
     FMOD::Sound* fmodSound = nullptr;
+
     FMOD_RESULT result = system->createSound(
         filePath.c_str(), FMOD_DEFAULT, nullptr, &fmodSound
     );

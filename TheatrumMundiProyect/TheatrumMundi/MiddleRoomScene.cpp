@@ -130,7 +130,7 @@ void MiddleRoomScene::refresh()
 		else if (!auxkei && auxlucy && auxsol)roomEvent[AFTER_ROOM1_BAD2]();
 		else {
 		#ifdef _DEBUG
-			std::cout << "INVALID CHARACTERS STATE";
+			//std::cout << "INVALID CHARACTERS STATE";
 		#endif // DEBUG
 		}
 		break;
@@ -141,7 +141,7 @@ void MiddleRoomScene::refresh()
 		else if (!auxkei && !auxlucy && auxsol)roomEvent[AFTER_ROOM2_BAD1]();
 		else {
 		#ifdef _DEBUG
-			std::cout << "INVALID CHARACTERS STATE";
+		//	std::cout << "INVALID CHARACTERS STATE";
 		#endif // DEBUG
 		}
 		break;
@@ -154,14 +154,14 @@ void MiddleRoomScene::refresh()
 		else if (auxkei && !auxlucy && !auxsol)roomEvent[AFTER_ROOM3_BAD1K]();
 		else {
 #ifdef _DEBUG
-			std::cout << "INVALID CHARACTERS STATE";
+			//std::cout << "INVALID CHARACTERS STATE";
 #endif // DEBUG
 		}
 		break;
 		break;
 	default:
 	#ifdef _DEBUG
-		std::cout << "ERROR INVALID SCENECOUNT";
+		//std::cout << "ERROR INVALID SCENECOUNT";
 	#endif // DEBUG
 
 		break;

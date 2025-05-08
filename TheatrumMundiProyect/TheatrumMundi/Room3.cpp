@@ -77,7 +77,7 @@ void Room3Scene::endDialogue()
 {
 	dialogueManager->setdisplayOnProcess(false);
 
-	entityManager->setActiveGroup(ecs::grp::DIALOGUE, false);
+	
 	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
 
 	if (finishallpuzzles)
@@ -165,6 +165,10 @@ void Room3Scene::_setRoomEvents()
 		};
 	roomEvent[MorseCodeSceneRsv] = [this] {
 
+		};
+
+	roomEvent[BalancePuzzleScene] = [this] {
+		Game::Instance()->getSceneManager()->loadScene(BALANCE_PUZZLE, this);
 		};
 	//roomEvent[ResolveCase] = [this] {
 	//	//IMPORTANT assign dialogue

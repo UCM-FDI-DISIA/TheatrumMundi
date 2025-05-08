@@ -17,9 +17,8 @@ public:
 	bool isItemHand(const std::string& itemId) override;
 
 protected:
-
+	bool _hasFeather;
 	bool _featherIsInBalance;
-	//bool _poisonIsChecked;
 	Entity* feather;
 	Entity* balanceBackground;
 };

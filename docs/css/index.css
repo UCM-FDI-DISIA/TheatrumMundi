@@ -1,0 +1,178 @@
+main{
+    width: 100%;
+    height: calc(100vh - 60px);
+    background-color: darkgrey;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main .main-intro h1{
+    font-size: 96px;
+    line-height: 106px;
+    transform: translateY(-15px); /* Sube el h1 30px */
+}
+
+main a {
+    margin-top: 30px;
+    font-size: 25px;
+    display: block;
+    background-color: rgb(255, 0, 0);
+    padding: 15px 40px; /* Aumenta el tamaño del botón */
+    min-width: 200px; /* Establece un ancho mínimo */
+    width: fit-content; /* Permite que crezca si el texto es más largo */
+    text-align: center; /* Centra el texto dentro del botón */
+    text-decoration: none;
+    color: white;
+    border-radius: 10px; /* Opcional: bordes redondeados */
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main a:hover{
+    color: black;
+}
+
+.about-game {
+    width: 100vw;  /* Ocupa todo el ancho de la pantalla */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    display: flex;
+    flex-direction: column; /* Organiza en columna */
+    align-items: center; /* Centra el contenido */
+    justify-content: center; /* Centra verticalmente */
+    padding: 50px 10%;
+    background-color: darkgray; /* Fondo oscuro */
+    color: white; /* Color del texto */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Título centrado arriba */
+.about-game-title {
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 50px; /* Espacio debajo del título */
+}
+
+/* Contenedor de dos columnas */
+.about-game-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; 
+    max-width: 1000px; /* Limita el ancho para que no sea demasiado grande */
+}
+
+/* Columna izquierda: texto */
+.about-game-text {
+    width: 50%;
+    text-align: left;
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+/* Columna derecha: imagen */
+.about-game-img {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.about-game-img img {
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px; /* Bordes redondeados (opcional) */
+}
+
+.characters-choose{
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 60px;
+    align-items: center;
+}
+
+.characters-choose button{
+    margin-top: 30px;
+    font-size: 25px;
+    display: block;
+   /* background-color: rgb(255, 0, 0);*
+    padding: 15px 40px; /* Aumenta el tamaño del botón */
+    min-width: 100px; /* Establece un ancho mínimo */
+    width: fit-content; /* Permite que crezca si el texto es más largo */
+    text-align: center; /* Centra el texto dentro del botón */
+    text-decoration: none;
+    color: white;
+    border-radius: 10px; /* Opcional: bordes redondeados */
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.characters-choose button:hover{
+    cursor: pointer;
+}
+
+.characters-img{
+    width: 33%;
+    display: flex;
+    justify-content: center;
+}
+
+.characters-img img{
+    width: 80%;
+    max-width: 500px;
+}
+
+.characters-text {
+    width: 33%;
+    text-align: left;
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+.footer{
+    width: 100vw;  /* Ocupa todo el ancho de la pantalla */
+    height: 30vh; /* Ocupa toda la altura de la pantalla */
+    display: flex;
+    flex-direction: column; /* Organiza en columna */
+    align-items: center; /* Centra el contenido */
+    justify-content: flex-start; /* Centra verticalmente */
+    padding: 50px 10%;
+    background-color: rgb(34, 34, 34); /* Fondo oscuro */
+    color: white; /* Color del texto */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.footer-title{
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.footer-content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Separa uniformemente los elementos */
+    align-items: center; /* Alinea los elementos verticalmente */
+    max-width: 1200px; /* Limita el ancho máximo */
+}
+
+.footer a {
+    margin-top: 30px;
+    font-size: 25px;
+    display: block;
+    background-color: darkgray;
+    padding: 15px 40px; /* Aumenta el tamaño del botón */
+    min-width: 200px; /* Establece un ancho mínimo */
+    width: fit-content; /* Permite que crezca si el texto es más largo */
+    text-align: center; /* Centra el texto dentro del botón */
+    text-decoration: none;
+    color: rgb(46, 46, 46);
+    border-radius: 10px; /* Opcional: bordes redondeados */
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+}

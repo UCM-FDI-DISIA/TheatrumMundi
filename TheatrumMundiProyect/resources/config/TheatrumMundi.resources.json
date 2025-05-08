@@ -285,6 +285,10 @@
     { "id" : "pluma", "file" : "../resources/images/temporales/pluma.png" },
     { "id" : "juzgado", "file" : "../resources/images/temporales/juzgado.png" },
     { "id" : "salaEspera", "file" : "../resources/images/temporales/salaEspera.png" },
+    { "id" : "cortinaFija", "file" : "../resources/images/Finales/cortinaFija.png" },
+    { "id" : "cortinaD", "file" : "../resources/images/Finales/cortinaD.png" },
+    { "id" : "cortinaI", "file" : "../resources/images/Finales/cortinaI.png" },
+    { "id" : "fondoMorado", "file" : "../resources/images/temporales/fondoMorado.png" },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"
@@ -889,6 +893,23 @@
           "id": "correcto",
           "file": "../resources/sound/sfx/correcto.wav"
         },
+        {
+          "id": "CogerCosa",
+          "file": "../resources/sound/sfx/CogerCosa.MP3"
+      },
+      {
+        "id": "FinalTeleTutorial",
+        "file": "../resources/sound/sfx/FinalTeleTutorial.wav"
+      },
+      {
+        "id": "Statica",
+        "file": "../resources/sound/sfx/Statica.wav"
+      },
+      
+      {
+        "id": "ColocarCosa",
+        "file": "../resources/sound/sfx/ColocarCosa.MP3"
+      },
         {
           "id": "incorrecto",
           "file": "../resources/sound/sfx/incorrecto.wav"

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THEATRUM MUNDI</title>
+  <link rel="stylesheet" href="css/estilo.css"> <!-- Esto cargaria un archivo de estilo, pero no es necesario en Fiddle porque lo hace automáticamente -->
+  <link rel="stylesheet" href="css/index.css">
+  <script src="script.js"></script> <!--Aquí podriamos cargar los scripts, también se puede en el <body>, y pasa lo mismo que con el css de antes, en verdad aquí no estamos cargando nada-->
+</head>
+
+
+<body>
+  <header class = "header-main">
+    <div class = "header-main-logo">
+      <img src = "images/logo.png" alt = "logo">
+      <nav class = "header-main-nav">
+        <ul>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="#about-game">ACERCA DEL JUEGO</a></li>
+          <li><a href="#PERSONAJES">PERSONAJES</a></li>
+          <li><a href="#SOBRE-NOSOTROS">SOBRE NOSOTROS</a></li>
+          <li><a href="#CONTACTOS">CONTÁCTANOS</a></li>
+        </ul>
+      </nav>
+    </div>
+    
+    <div class = "header-main-sm">
+      <a href="https://x.com/EboogalooGames"><div class = "header-main-sm-twt"> </div></a>
+      <!--
+      <div class = "header-main-sm-wrl"></div>-->
+    </div>
+  </header>
+
+  <!--Main intro section-->
+  <main>
+    <div class="main-intro" id="HOME">
+      <h1>THEATRUM MUNDI</h1>
+      <h2> by ElectricBoogaloo </h2>
+      <a href="#" class = "button"> COMMING SOON </a>
+    </div>
+  </main>
+
+  <!--About game section-->
+  <section class="about-game" id="about-game">
+    <h2 class="about-game-title">¿A QUÉ SE JUEGA?</h2>
+    
+    <div class="about-game-content">
+      <div class="about-game-text">
+        <p>
+          Immerse yourself in a world of mystery and adventure. 
+          Theatrum Mundi brings you an unparalleled gaming experience 
+          filled with captivating storytelling and breathtaking visuals.
+          Immerse yourself in a world of mystery and adventure. 
+          Theatrum Mundi brings you an unparalleled gaming experience 
+          filled with captivating storytelling and breathtaking visuals.
+        </p>
+      </div>
+
+      <div class="about-game-img">
+        <img src="images/logo.png" alt="Game Image">
+      </div>
+
+    </div>
+  </section>
+
+  <section class="about-game" id="about-game">
+    <h2 class="about-game-title">PUZZLES</h2>
+    
+    <div class="about-game-content">
+      
+      <div class="about-game-img">
+        <img src="images/logo.png" alt="Game Image">
+      </div>
+
+      <div class="about-game-text">
+        <p>
+          Hay que resolver puzzles para conseguir pistas.
+          Theatrum Mundi brings you an unparalleled gaming experience 
+          filled with captivating storytelling and breathtaking visuals.
+          Immerse yourself in a world of mystery and adventure. 
+          Theatrum Mundi brings you an unparalleled gaming experience 
+          filled with captivating storytelling and breathtaking visuals.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="about-game" id="about-game">
+    <h2 class="about-game-title">PREGUNTA FINAL</h2>
+    
+    <div class="about-game-content">
+      <div class="about-game-text">
+        <p>
+          Responder pregunta final para ganar o perder.
+          Theatrum Mundi brings you an unparalleled gaming experience 
+          filled with captivating storytelling and breathtaking visuals.
+          Immerse yourself in a world of mystery and adventure. 
+          Theatrum Mundi brings you an unparalleled gaming experience 
+          filled with captivating storytelling and breathtaking visuals.
+        </p>
+      </div>
+
+      <div class="about-game-img">
+        <img src="images/logo.png" alt="Game Image">
+      </div>
+
+    </div>
+  </section>
+
+  <!--Personajes (HAY Q CAMBIARLO)-->
+  <section class="about-game" id="PERSONAJES">
+    <h2 class="about-game-title">PERSONAJES</h2>
+    
+    <div class="about-game-content">
+      
+
+      <div class="characters-choose">
+        <button class="btn" onclick="changeCharacter('lucy')"> LUCY </a>
+        <button class="btn" onclick="changeCharacter('keisara')"> KEISARA </a>
+        <button class="btn" onclick="changeCharacter('sol')"> SOL</a>
+      </div>
+
+      <div class="characters-img">
+        <img id="character-image" src="images/lucy.png" alt="Game Image">
+      </div>
+
+      <div class="characters-text">
+        <h3 id="character-name" class="about-game-title">
+          LUCY
+        </h3>        
+        <p id="character-description">
+          Lucy, policía desde los 21 años, su pasión y dedicación son admirables. 
+          En los últimos meses, su vista ha comenzado a fallar.
+          Los médicos le advierten que la perderá por completo, pero Lucy no está lista para aceptarlo. 
+          Los grandes cambios no son fáciles de asumir.
+        </p>
+      </div>
+      
+
+    </div>
+  </section>
+
+  <!--Sobre nosotros (HAY Q CAMBIARLO)-->
+  <section class="about-game" id="SOBRE-NOSOTROS">
+    <h2 class="about-game-title">SOBRE ELECTRIC BOOGALOO</h2>
+    
+    <div class="about-game-content">
+      <div class="about-game-text">
+        <p>
+          Somos un grupo de estudiantes de la Facultad de Informática de la Universidad Complutense de Madrid y
+          hemos creado un videojuego como parte de la asignatura Proyectos II.
+        </p>
+      </div>
+
+      <div class="about-game-img">
+        <img src="images/logo.png" alt="Game Image">
+      </div>
+
+    </div>
+  </section>
+
+  <!--Footer, contactos: email, github, twitter-->
+  <section class="footer" id="CONTACTOS">
+    <h2 class="footer-title">CONTACTA CON NOSOTROS</h2>
+    <div class="footer-content">
+      <a href="https://x.com/EboogalooGames" class="butFooter"> TWITTER </a>
+      <a href="#" class="butFooter"> GMAIL </a>
+      <a href="https://github.com/UCM-FDI-DISIA/TheatrumMundi" class="butFooter"> GITHUB </a>
+    </div>
+    
+  </section>
+
+</body>
+
+</html>

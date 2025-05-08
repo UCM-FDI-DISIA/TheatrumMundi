@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-
+#include "../utils/Vector2D.h"
 #include "../sdlutils/SDLUtils.h"
 
 #include "../ecs/Component.h"
@@ -25,7 +25,7 @@ private:
 	int lastUpdate;
 	std::string _currentText;
 	int charsToShow;
-
+	Vector2D posOffset = Vector2D(0, 0);
 	bool isMiddleRoom;
 
 public:
@@ -45,7 +45,9 @@ public:
 	void startTextLine(); //resets values to start displaying new TextLine
 
 	void setMiddleRoom(bool state);
-
+	void resetOffset();
+	void addOffset(int x, int y);
+	Vector2D getOffset();
 	~WriteTextComponent();
 	
 };

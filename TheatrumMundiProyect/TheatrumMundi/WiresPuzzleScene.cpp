@@ -232,7 +232,7 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 			bool allConnected = std::all_of(actualPos.begin(), actualPos.end(), [](int pos) { return pos != -1; });
 
 			if (!allConnected) {
-				std::cout << "No todos los cables están conectados. El botón no hace nada." << std::endl;
+				std::cout << "No todos los cables estï¿½n conectados. El botï¿½n no hace nada." << std::endl;
 				for (int i = 0; i < lights.size(); i++) {
 					entityManager->setActive(lights[i], false);
 				}
