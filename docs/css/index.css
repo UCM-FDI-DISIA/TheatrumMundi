@@ -1,7 +1,7 @@
 main{
     width: 100%;
     height: calc(100vh - 60px);
-    background-color: darkgrey;
+    background-color: rgb(0, 0, 0);
 
     display:flex;
     justify-content: center;
@@ -44,7 +44,7 @@ main a:hover{
     justify-content: center; /* Centra verticalmente */
     padding: 50px 10%;
     background-color: darkgray; /* Fondo oscuro */
-    color: white; /* Color del texto */
+    color: rgb(0, 0, 0); /* Color del texto */
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -74,7 +74,7 @@ main a:hover{
 
 /* Columna derecha: imagen */
 .about-game-img {
-    width: 50%;
+    width: 60%;
     display: flex;
     justify-content: center;
 }
