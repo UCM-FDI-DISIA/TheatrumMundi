@@ -236,7 +236,7 @@ void Room1Scene::_setRoomEvents()
 				
 				
 				// change texture after 4 secs
-				if (self) {
+				/*if (self) {
 					Image* img = self->entityManager->getComponent<Image>(self->rmObjects.blackBackground);
 					if (img) {
 						img->setTexture(&sdlutils().images().at("continuar"));
@@ -252,6 +252,10 @@ void Room1Scene::_setRoomEvents()
 						return 0;
 						}, param);
 				}
+				*/
+
+				self->_loadimg1->getMngr()->setActive(self->_loadimg1, true);
+				Game::Instance()->render();
 
 				return 0;
 				}, this);
@@ -273,7 +277,7 @@ void Room1Scene::_setRoomEvents()
 				//PUT SOUND
 				
 				// change texture after 4 secs
-				if (self) {
+				/*if (self) {
 					Image* img = self->entityManager->getComponent<Image>(self->rmObjects.blackBackground);
 					if (img) {
 						AudioManager::Instance().stopSound(sdlutils().musics().at("sala1"));
@@ -288,8 +292,9 @@ void Room1Scene::_setRoomEvents()
 						}
 						return 0;
 						}, param);
-				}
-
+				}*/
+				self->_loadimg2->getMngr()->setActive(self->_loadimg2, true);
+				Game::Instance()->render();
 				return 0;
 				}, this);
 		};
