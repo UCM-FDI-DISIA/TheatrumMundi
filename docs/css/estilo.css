@@ -81,7 +81,6 @@ h3{
 .header-main-nav ul li a {
   text-decoration: none;
   padding: 0 20px;
-  font-family: Arial;
   line-height: 60px;
   color: white;
   display: block;
@@ -184,7 +183,6 @@ h3{
   z-index: 1;
   font-weight: 300;
   font-size: 17px;
-  font-family: 'Roboto', 'Segoe UI', sans-serif;
   text-transform: uppercase;
   color: var(--color);
  }
@@ -242,7 +240,6 @@ h3{
   z-index: 1;
   font-weight: 300;
   font-size: 17px;
-  font-family: 'Roboto', 'Segoe UI', sans-serif;
   text-transform: uppercase;
   color: var(--color);
  }
