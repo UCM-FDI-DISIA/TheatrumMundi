@@ -213,6 +213,7 @@ void Room1Scene::_setRoomEvents()
 	roomEvent[GoodEnd] = [this]()
 		{
 			// black background
+			Game::Instance()->getDataManager()->SetSceneCount(SceneCount::MIDDLEROOM2);
 			entityManager->setActive(rmObjects.blackBackground, true);
 			entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 			std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
@@ -249,6 +250,8 @@ void Room1Scene::_setRoomEvents()
 	roomEvent[BadEnd] = [this]()
 		{
 			// black background
+			Game::Instance()->getDataManager()->SetCharacterDead(Character::KEISARA);
+			Game::Instance()->getDataManager()->SetSceneCount(SceneCount::MIDDLEROOM2);
 			entityManager->setActive(rmObjects.blackBackground, true);
 			entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 			std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
