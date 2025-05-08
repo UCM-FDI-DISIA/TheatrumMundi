@@ -31,14 +31,12 @@ MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaInterm
 		};
 	//ROOM1
 	roomEvent[AFTER_ROOM1_GOOD3] = [this]() {
-		startDialogue("SalaIntermedia1");
+		startDialogue("SalaIntermedia2_1");
 		};
 	roomEvent[AFTER_ROOM1_BAD2] = [this]() {
-		startDialogue("SalaIntermedia1");
+		startDialogue("SalaIntermedia2_2");
 		};
-	roomEvent[AFTER_ROOM1_GOOD3] = [this]() {
-		startDialogue("SalaIntermedia1");
-		};
+
 	//ROOM2
 	roomEvent[AFTER_ROOM2_GOOD3] = [this]() {
 		startDialogue("SalaIntermedia1");
