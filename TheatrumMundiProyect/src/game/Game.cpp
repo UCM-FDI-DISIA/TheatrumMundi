@@ -36,12 +36,13 @@ Game::~Game() {
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
 
-	AudioManager::Instance().shutdown();
+	
 
 	// release SLDUtil if the instance was created correctly.
 	if (SDLUtils::HasInstance()) {
 		SDLUtils::Release();
 	}
+	AudioManager::Instance().shutdown();
 }
 
 void Game::init() {
