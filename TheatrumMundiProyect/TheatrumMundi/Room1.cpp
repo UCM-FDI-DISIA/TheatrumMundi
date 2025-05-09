@@ -62,10 +62,10 @@ void Room1Scene::init()
 
 	roomEvent[InitialDialogue]();
 
-	_loadimg1 = entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
+	_loadimg1 = entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
 	_loadimg1->getMngr()->setActive(_loadimg1, false);
 
-	_loadimg2 = entityFactory->CreateImageEntity(entityManager, "loading2", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
+	_loadimg2 = entityFactory->CreateImageEntity(entityManager, "loading2", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
 	_loadimg2->getMngr()->setActive(_loadimg2, false);
 
 	SDL_Delay(1000);
@@ -223,80 +223,24 @@ void Room1Scene::_setRoomEvents()
 		{
 			// black background
 			Game::Instance()->getDataManager()->SetSceneCount(SceneCount::MIDDLEROOM2);
-			entityManager->setActive(rmObjects.blackBackground, true);
+			_loadimg1->getMngr()->setActive(_loadimg1, true);
 			entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 			std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
 			AudioManager::Instance().playSound(correctSound);
-
-			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
-				auto* self = static_cast<decltype(this)>(param);
-
-
-				//PUT SOUND
-				
-				
-				// change texture after 4 secs
-				/*if (self) {
-					Image* img = self->entityManager->getComponent<Image>(self->rmObjects.blackBackground);
-					if (img) {
-						img->setTexture(&sdlutils().images().at("continuar"));
-					}
-
-					// pop scene after 4 more secs
-					SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
-						auto* self = static_cast<decltype(this)>(param);
-						if (self) {
-							AudioManager::Instance().stopSound(sdlutils().musics().at("sala1"));
-							Game::Instance()->getSceneManager()->popScene();
-						}
-						return 0;
-						}, param);
-				}
-				*/
-
-				self->_loadimg1->getMngr()->setActive(self->_loadimg1, true);
-				Game::Instance()->render();
-
-				return 0;
-				}, this);
+			Game::Instance()->render();
+			Game::Instance()->getSceneManager()->popScene();
 		};
 	roomEvent[BadEnd] = [this]()
 		{
 			// black background
 			Game::Instance()->getDataManager()->SetCharacterDead(Character::KEISARA);
 			Game::Instance()->getDataManager()->SetSceneCount(SceneCount::MIDDLEROOM2);
-			entityManager->setActive(rmObjects.blackBackground, true);
+			_loadimg2->getMngr()->setActive(_loadimg2, true);
 			entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 			std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
 			AudioManager::Instance().playSound(incorrectSound);
-
-			SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
-				auto* self = static_cast<decltype(this)>(param);
-
-
-				//PUT SOUND
-				
-				// change texture after 4 secs
-				/*if (self) {
-					Image* img = self->entityManager->getComponent<Image>(self->rmObjects.blackBackground);
-					if (img) {
-						AudioManager::Instance().stopSound(sdlutils().musics().at("sala1"));
-						img->setTexture(&sdlutils().images().at("continuar"));
-					}
-
-					// pop scene after 4 more secs
-					SDL_AddTimer(4000, [](Uint32 interval, void* param) -> Uint32 {
-						auto* self = static_cast<decltype(this)>(param);
-						if (self) {
-							Game::Instance()->getSceneManager()->popScene();
-						}
-						return 0;
-						}, param);
-				}*/
-				self->_loadimg2->getMngr()->setActive(self->_loadimg2, true);
-				Game::Instance()->render();
-				return 0;
-				}, this);
+			Game::Instance()->render();
+			Game::Instance()->getSceneManager()->popScene();
 		};
 
 	roomEvent[MobileDialogue] = [this]()

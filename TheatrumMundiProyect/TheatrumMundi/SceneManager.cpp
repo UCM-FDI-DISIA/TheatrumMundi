@@ -70,11 +70,10 @@ void SceneManager::init()
 
 void SceneManager::popScene()
 {
-	std::cout << "pop scene" << endl;
 	assert(!currentscenes.empty());
 	currentscenes.pop_back();
 	currentscenes.back()->closedMenus();
-	currentscenes.back()->init();
+	if(currentscenes.back() == scenes[SceneName::MIDDLE_ROOM]) currentscenes.back()->init();
 
 }
 
