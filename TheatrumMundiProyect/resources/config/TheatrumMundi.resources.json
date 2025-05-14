@@ -933,6 +933,11 @@
           "id": "LaSound",
           "file": "../resources/sound/sfx/La.wav"
         },
+
+  {
+          "id": "NextDialogue",
+          "file": "../resources/sound/sfx/NextDialogue.wav"
+        },
         {
           "id": "SiSound",
           "file": "../resources/sound/sfx/Si.wav"

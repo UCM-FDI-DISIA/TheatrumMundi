@@ -434,6 +434,10 @@
     "id": "ColocarCosa",
     "file": "../resources/sound/sfx/ColocarCosa.wav"
   },
+{
+          "id": "NextDialogue",
+          "file": "../resources/sound/sfx/NextDialogue.wav"
+        },
     {
       "id": "incorrecto",
       "file": "../resources/sound/sfx/incorrecto.wav"

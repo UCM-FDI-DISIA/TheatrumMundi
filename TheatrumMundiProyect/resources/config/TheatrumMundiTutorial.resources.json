@@ -156,7 +156,10 @@
   "file": "../resources/sound/sfx/Statica.wav"
 },
 
-
+{
+          "id": "NextDialogue",
+          "file": "../resources/sound/sfx/NextDialogue.wav"
+        },
 
   {
       "id": "boton",
