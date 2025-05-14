@@ -45,6 +45,7 @@
     <ClCompile Include="..\SRC\sdlutils\Texture.cpp" />
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
+    <ClCompile Include="AnimPauseComponent.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BalancePuzzleScene.cpp" />
     <ClCompile Include="BooksPuzzleScene.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="..\SRC\utils\ptr_iterator.h" />
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
+    <ClInclude Include="AnimPauseComponent.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BalancePuzzleScene.h" />
     <ClInclude Include="BooksPuzzleScene.h" />

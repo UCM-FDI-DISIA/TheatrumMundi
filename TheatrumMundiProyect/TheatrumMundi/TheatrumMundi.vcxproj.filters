@@ -75,6 +75,7 @@
     <ClCompile Include="DialogueAnimComponent.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="ReadInvdesc.cpp" />
+    <ClCompile Include="AnimPauseComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -273,6 +274,7 @@
     <ClInclude Include="DialogueAnimComponent.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="ReadInvdesc.h" />
+    <ClInclude Include="AnimPauseComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />

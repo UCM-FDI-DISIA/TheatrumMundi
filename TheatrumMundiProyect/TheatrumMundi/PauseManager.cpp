@@ -7,7 +7,7 @@
 #include "TriggerComponent.h"
 #include "MouseIntaractionComponent.h"
 #include "../src/ecs/Manager.h"
-
+#include "AnimPauseComponent.h"
 #include "SceneManager.h"
 #include "Area2D.h"
 #include "RectArea2D.h"
@@ -39,33 +39,38 @@ void PauseManager::Init(EntityFactory* entityFactory, ecs::EntityManager* entity
 {
 	std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 	AudioManager::Instance().setVolume(buttonSound, 0.2);
-
+	
 	auto _backgroundPause = entityFactory->CreateImageEntity(entityManager, "MenuBackground", Vector2D(443, 250), Vector2D(0, 0), 450, 245, 0, ecs::grp::BACKGROUNDPAUSE);
+	entityManager->addComponent<AnimPauseComponent>(_backgroundPause);
+	animElems.push_back(_backgroundPause);
 	entityManager->setActive(_backgroundPause, false);
 
 	//ENTIDADCONENTITYFACTORY
 	_backgroundNotInteractable = entityFactory->CreateInteractableEntity(entityManager,"EmptyImage",EntityFactory::RECTAREA,Vector2D(0,0),Vector2D(0,0),1349,748,0,areaLayerManager,EntityFactory::NODRAG, ecs::grp::BACKGROUNDPAUSE);
+	entityManager->addComponent<AnimPauseComponent>(_backgroundNotInteractable);
+	animElems.push_back(_backgroundNotInteractable);
 	entityManager->setActive(_backgroundNotInteractable, false);
-
+	
 	//GO TO ROOM
 	_reanudePauseButton = entityFactory->CreateInteractableEntity(entityManager, "Continue", EntityFactory::RECTAREA, Vector2D(482, 280), Vector2D(0, 0), 367, 67, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTPAUSE);
+	entityManager->addComponent<AnimPauseComponent>(_reanudePauseButton);
+	animElems.push_back(_reanudePauseButton);
 	entityManager->setActive(_reanudePauseButton, false);
 	ClickComponent* buttonReanudePauseClick = entityManager->getComponent<ClickComponent>(_reanudePauseButton);
 	buttonReanudePauseClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, entityManager]() {
 		AudioManager::Instance().playSound(buttonSound);
-		entityManager->setActiveGroup(ecs::grp::INTERACTPAUSE, false);
-		entityManager->setActiveGroup(ecs::grp::BACKGROUNDPAUSE, false);
-		entityManager->setActive(_backgroundNotInteractable, false);
+		for (auto a : animElems) entityManager->getComponent<AnimPauseComponent>(a)->endPauseAnim();
 		});
 
 	//GO TO THE INITIALMENU SCENE
 	_exitPauseButton = entityFactory->CreateInteractableEntity(entityManager, "ExitToMenu", EntityFactory::RECTAREA, Vector2D(482, 398), Vector2D(0, 0), 367, 67, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTPAUSE);
+	entityManager->addComponent<AnimPauseComponent>(_exitPauseButton);
+	animElems.push_back(_exitPauseButton);
 	entityManager->setActive(_exitPauseButton, false);
 	ClickComponent* buttonExitPauseClick = entityManager->getComponent<ClickComponent>(_exitPauseButton);
 	buttonExitPauseClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, entityManager]() {
 		AudioManager::Instance().playSound(buttonSound);
-		entityManager->setActiveGroup(ecs::grp::INTERACTPAUSE, false);
-		entityManager->setActiveGroup(ecs::grp::BACKGROUNDPAUSE, false);
+		for (auto a : animElems) entityManager->getComponent<AnimPauseComponent>(a)->endPauseAnim();
 
 		Game::Instance()->setReset();
 
@@ -80,6 +85,7 @@ void PauseManager::Init(EntityFactory* entityFactory, ecs::EntityManager* entity
 		entityManager->setActiveGroup(ecs::grp::INTERACTPAUSE, true);
 		entityManager->setActiveGroup(ecs::grp::BACKGROUNDPAUSE, true);
 		entityManager->setActive(_backgroundNotInteractable,true);
+		for (auto a : animElems) entityManager->getComponent<AnimPauseComponent>(a)->startPauseAnim();
 		});
 }
 
