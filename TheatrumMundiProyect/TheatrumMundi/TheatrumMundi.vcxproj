@@ -63,6 +63,7 @@
     <ClCompile Include="GameSave.cpp" />
     <ClCompile Include="Hint.cpp" />
     <ClCompile Include="InitialScene.cpp" />
+    <ClCompile Include="InvAnimComponent.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="MiddleRoomScene.cpp" />
@@ -261,6 +262,7 @@
     <ClInclude Include="GameSave.h" />
     <ClInclude Include="Hint.h" />
     <ClInclude Include="InitialScene.h" />
+    <ClInclude Include="InvAnimComponent.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="MiddleRoomScene.h" />
