@@ -172,7 +172,7 @@ void Box::init(SceneRoomTemplate* sr)
 #pragma region UI
 
 
-/*#pragma region Inventory
+#pragma region Inventory
 
 			//INVENTORY
 			//Invntory Background
@@ -263,7 +263,7 @@ void Box::init(SceneRoomTemplate* sr)
 			Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 			//startDialogue("Puerta");
 
-#pragma endregion*/
+#pragma endregion
 
 		}
 		//createInvEntities(sr);

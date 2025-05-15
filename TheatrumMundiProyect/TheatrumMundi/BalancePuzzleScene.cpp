@@ -218,8 +218,17 @@ bool BalancePuzzleScene::isItemHand(const std::string& itemId)
 		_hasFeather = true;
 		_featherIsInBalance = true;
 		feather->getMngr()->setActive(feather, true);
-
+		Win();
 		return true;
 	}
 	return false;
+}
+void BalancePuzzleScene::Win()
+{
+	room->resolvedPuzzle(0);
+}
+
+void BalancePuzzleScene::ResolveScene()
+{
+	Win();
 }

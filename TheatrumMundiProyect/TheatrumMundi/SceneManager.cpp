@@ -193,12 +193,14 @@ void SceneManager::ResetSceneManager()
 	}
 	auto tombScene = new TombPuzzleScene(); //For the chain Puzzle, to take the reference
 
-	
+	scenes[SceneName::INITIAL_MENU] = new InitialScene();
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::ROOM_2] = new Room2Scene();
-	scenes[SceneName::BALANCE_PUZZLE] = new BalancePuzzleScene();
 	scenes[SceneName::ROOM_3] = new Room3Scene();
+	scenes[SceneName::BALANCE_PUZZLE] = new BalancePuzzleScene();
+	scenes[SceneName::WIRES_PUZZLE] = new WiresPuzzleScene();
+	scenes[SceneName::LOCKER_PUZZLE] = new LockerPuzzle();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
@@ -216,6 +218,7 @@ void SceneManager::ResetSceneManager()
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 	scenes[SceneName::CREDITS] = new CreditsScene();
+	scenes[SceneName::BOX] = new Box();
 
 	loadScene(SceneName::INITIAL_MENU);
 }

@@ -38,8 +38,9 @@ public:
 private:
 	std::string _eventToRead;
 	bool stopAnimation = false;
-	bool LightsToOn = false; //To interact with determined entities when the room is with light
-	bool LightsToRed = false; //To interact with determined entities when de room is with red light
+	//Determined by the integer PhaseRoom3 from DataManager
+	//bool LightsToOn = false; //To interact with determined entities when the room is with light
+	//bool LightsToRed = false; //To interact with determined entities when de room is with red light
 	bool scrolling = false;
 
 	void endDialogue() override;
