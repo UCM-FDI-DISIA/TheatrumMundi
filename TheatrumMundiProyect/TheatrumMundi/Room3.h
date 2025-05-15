@@ -21,6 +21,7 @@ protected:
 		BalancePuzzleScene,
 		BalanceSceneRsv,
 		ParrotScene,
+		ParrotSceneRsv,
 		MorseCodePuzzleScene,
 		MorseCodeSceneRsv,
 		ResolveCase,
@@ -59,6 +60,11 @@ private:
 		std::shared_ptr<Sound> puzzleButton;
 		std::shared_ptr<Sound> doorSound;
 		std::shared_ptr<Sound> explosionSound;
+		std::shared_ptr<Sound> morse_Sound;
+		std::shared_ptr<Sound> s_Sound;
+		std::shared_ptr<Sound> t_Sound;
+		std::shared_ptr<Sound> o_Sound;
+		std::shared_ptr<Sound> p_Sound;
 
 	} rmSounds;
 

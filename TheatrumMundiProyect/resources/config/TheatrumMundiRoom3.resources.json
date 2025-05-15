@@ -197,28 +197,28 @@
     }
   ],
 
-    "sounds": [
-      {
-        "id": "explosion",
-        "file": "../resources/sound/sfx/explosion.wav"
-    },
-   
+  "sounds": [
     {
-        "id": "avanzar_dialogo",
-        "file": "../resources/sound/sfx/click_avanzar_dialogo.wav"
+      "id": "explosion",
+      "file": "../resources/sound/sfx/explosion.wav"
     },
+
     {
-        "id": "boton",
-        "file": "../resources/sound/sfx/click_boton.wav"
+      "id": "avanzar_dialogo",
+      "file": "../resources/sound/sfx/click_avanzar_dialogo.wav"
     },
     {
-        "id": "puzzle",
-        "file": "../resources/sound/sfx/click_puzzle.wav"
+      "id": "boton",
+      "file": "../resources/sound/sfx/click_boton.wav"
     },
-  
     {
-        "id": "puerta",
-        "file": "../resources/sound/sfx/puerta.wav"
+      "id": "puzzle",
+      "file": "../resources/sound/sfx/click_puzzle.wav"
+    },
+
+    {
+      "id": "puerta",
+      "file": "../resources/sound/sfx/puerta.wav"
     },
     {
       "id": "cuerda",
@@ -227,12 +227,12 @@
     {
       "id": "CogerCosa",
       "file": "../resources/sound/sfx/CogerCosa.wav"
-  },
-  
-  {
-    "id": "ColocarCosa",
-    "file": "../resources/sound/sfx/ColocarCosa.wav"
-  },
+    },
+
+    {
+      "id": "ColocarCosa",
+      "file": "../resources/sound/sfx/ColocarCosa.wav"
+    },
     {
       "id": "correcto",
       "file": "../resources/sound/sfx/correcto.wav"
@@ -240,8 +240,28 @@
     {
       "id": "incorrecto",
       "file": "../resources/sound/sfx/incorrecto.wav"
+    },
+    {
+      "id": "sSound",
+      "file": "../resources/sound/sfx/s_soundRoom3.wav"
+    },
+    {
+      "id": "tSound",
+      "file": "../resources/sound/sfx/t_soundRoom3.wav"
+    },
+    {
+      "id": "oSound",
+      "file": "../resources/sound/sfx/o_soundRoom3.wav"
+    },
+    {
+      "id": "pSound",
+      "file": "../resources/sound/sfx/p_soundRoom3.wav"
+    },
+    {
+      "id": "MorseSound",
+      "file": "../resources/sound/sfx/morse_soundRoom3.wav"
     }
-    ],
+  ],
 
   "musics" : [
     {

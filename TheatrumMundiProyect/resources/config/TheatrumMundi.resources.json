@@ -844,77 +844,97 @@
     }
   ],
 
-    "sounds": [
-        {
-            "id": "explosion",
-            "file": "../resources/sound/sfx/explosion.wav"
-        },
-        {
-            "id": "agua",
-            "file": "../resources/sound/sfx/agua.wav"
-        },
-        {
-            "id": "avanzar_dialogo",
-            "file": "../resources/sound/sfx/click_avanzar_dialogo.wav"
-        },
-        {
-            "id": "boton",
-            "file": "../resources/sound/sfx/click_boton.wav"
-        },
-        {
-            "id": "puzzle",
-            "file": "../resources/sound/sfx/click_puzzle.wav"
-        },
-        {
-            "id": "aguja_horario",
-            "file": "../resources/sound/sfx/horario.wav"
-        },
-        {
-            "id": "aguja_minutero",
-            "file": "../resources/sound/sfx/minutero.wav"
-        },
-        {
-            "id": "libro",
-            "file": "../resources/sound/sfx/libro.wav"
-        },
-        {
-            "id": "taza",
-            "file": "../resources/sound/sfx/metal_taza.wav"
-        },
-        {
-            "id": "puerta",
-            "file": "../resources/sound/sfx/puerta.wav"
-        },
-        {
-          "id": "cuerda",
-          "file": "../resources/sound/sfx/cuerda.wav"
-        },
-        {
-          "id": "correcto",
-          "file": "../resources/sound/sfx/correcto.wav"
-        },
-        {
-          "id": "CogerCosa",
-          "file": "../resources/sound/sfx/CogerCosa.MP3"
-      },
-      {
-        "id": "FinalTeleTutorial",
-        "file": "../resources/sound/sfx/FinalTeleTutorial.wav"
-      },
-      {
-        "id": "Statica",
-        "file": "../resources/sound/sfx/Statica.wav"
-      },
-      
-      {
-        "id": "ColocarCosa",
-        "file": "../resources/sound/sfx/ColocarCosa.MP3"
-      },
-        {
-          "id": "incorrecto",
-          "file": "../resources/sound/sfx/incorrecto.wav"
-        }
-    ],
+  "sounds": [
+    {
+      "id": "explosion",
+      "file": "../resources/sound/sfx/explosion.wav"
+    },
+    {
+      "id": "agua",
+      "file": "../resources/sound/sfx/agua.wav"
+    },
+    {
+      "id": "avanzar_dialogo",
+      "file": "../resources/sound/sfx/click_avanzar_dialogo.wav"
+    },
+    {
+      "id": "boton",
+      "file": "../resources/sound/sfx/click_boton.wav"
+    },
+    {
+      "id": "puzzle",
+      "file": "../resources/sound/sfx/click_puzzle.wav"
+    },
+    {
+      "id": "aguja_horario",
+      "file": "../resources/sound/sfx/horario.wav"
+    },
+    {
+      "id": "aguja_minutero",
+      "file": "../resources/sound/sfx/minutero.wav"
+    },
+    {
+      "id": "libro",
+      "file": "../resources/sound/sfx/libro.wav"
+    },
+    {
+      "id": "taza",
+      "file": "../resources/sound/sfx/metal_taza.wav"
+    },
+    {
+      "id": "puerta",
+      "file": "../resources/sound/sfx/puerta.wav"
+    },
+    {
+      "id": "cuerda",
+      "file": "../resources/sound/sfx/cuerda.wav"
+    },
+    {
+      "id": "correcto",
+      "file": "../resources/sound/sfx/correcto.wav"
+    },
+    {
+      "id": "CogerCosa",
+      "file": "../resources/sound/sfx/CogerCosa.MP3"
+    },
+    {
+      "id": "FinalTeleTutorial",
+      "file": "../resources/sound/sfx/FinalTeleTutorial.wav"
+    },
+    {
+      "id": "Statica",
+      "file": "../resources/sound/sfx/Statica.wav"
+    },
+    {
+      "id": "ColocarCosa",
+      "file": "../resources/sound/sfx/ColocarCosa.MP3"
+    },
+    {
+      "id": "incorrecto",
+      "file": "../resources/sound/sfx/incorrecto.wav"
+    },
+    {
+      "id": "sSound",
+      "file": "../resources/sound/sfx/s_soundRoom3.wav"
+    },
+    {
+      "id": "tSound",
+      "file": "../resources/sound/sfx/t_soundRoom3.wav"
+    },
+    {
+      "id": "oSound",
+      "file": "../resources/sound/sfx/o_soundRoom3.wav"
+    },
+    {
+      "id": "pSound",
+      "file": "../resources/sound/sfx/p_soundRoom3.wav"
+    },
+    {
+      "id": "MorseSound",
+      "file": "../resources/sound/sfx/morse_soundRoom3.wav"
+    }
+
+  ],
 
   "musics" : [
     {
