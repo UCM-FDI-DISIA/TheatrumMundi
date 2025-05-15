@@ -33,7 +33,7 @@ void PipePuzzleScene::pipeCreation()
 {
 	int nextPipeId = 0;
 
-	_waterPipes.push_back(new Pipe({ nextPipeId, Pipe::TWO, {'M', 0, DOWN}, {'M', 1, RIGHT}, false }));
+	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::TWO, {'M', 0, DOWN}, {'M', 1, RIGHT}, false }));
 	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::ONE, {'M', 0,   RIGHT}, {'P', 0,  NONE}, true }));
 	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::TWO, {'P', 5,  NONE}, {'P', 3,  NONE}, false }));
 	_waterPipes.push_back(new Pipe({ nextPipeId++,Pipe::ONE, {'M', 1,  DOWN}, {'M', 4,  UP}, false }));
@@ -53,7 +53,7 @@ void PipePuzzleScene::moduleCreation()
 	//if N 0 never going to have water(null direction)
 	 int nextId = 0;
 	
-	_modules.push_back(new Module({ nextId, RIGHT, {'P', 0}, true }));
+	_modules.push_back(new Module({ nextId++, RIGHT, {'P', 0}, true }));
 	_modules.push_back(new Module({ nextId++,  RIGHT, {'P', 2}, true }));
 	_modules.push_back(new Module({ nextId++,  DOWN,  {'P', 5}, true }));
 	_modules.push_back(new Module({ nextId++,  RIGHT,  {'P', 10}, false }));
@@ -67,7 +67,7 @@ void PipePuzzleScene::pathCreation()
     int nextId = 0;
 
 	//PATH 0 
-	_waterPath.push_back({ nextId, true, {'N',0,NONE}});//0
+	_waterPath.push_back({ nextId++, true, {'N',0,NONE}});//0
 
 	auto path0 =entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(180, -50),
 	Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
@@ -991,7 +991,7 @@ void PipePuzzleScene::updatePuzzle() {
             waterPassModule(i);  
             bool after = _modules[i]->getModuleInfo().result;
 
-           // std::cout << "Module " << i << " Before: " << before << " After: " << after << std::endl;
+          //  std::cout << "Module " << i << " Before: " << before << " After: " << after << std::endl;
 
             if (before != after) {
                 stateChanged = true;
@@ -1004,7 +1004,7 @@ void PipePuzzleScene::updatePuzzle() {
             waterPassPath(i);  
             bool after = _waterPath[i]._withWater;
 
-           // std::cout << "Path " << i << " Before: " << before << " After: " << after << std::endl;
+            //std::cout << "Path " << i << " Before: " << before << " After: " << after << std::endl;
 
             if (before != after) {
                 stateChanged = true;
@@ -1024,9 +1024,8 @@ void PipePuzzleScene::updatePuzzle() {
             }
         }
 
-       
-        Check();
     }
+	Check();
 }
 
 
