@@ -6,6 +6,8 @@
 #include "ClickComponent.h"
 #include "Transform.h"
 #include "TriggerComponent.h"
+#include "Area2DLayerManager.h"
+#include "RectArea2D.h"
 #include "../src/game/Game.h"
 #include <iostream>
 using namespace ecs;
@@ -38,6 +40,7 @@ void SceneRoomTemplate::scrollInventory(int dir)
 
 
             GetInventory()->hints[GetInventory()->getFirstItem()]->getMngr()->setActive(GetInventory()->hints[GetInventory()->getFirstItem()], true);
+            areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(GetInventory()->hints[GetInventory()->getFirstItem()])->getLayerPos());
 
 
             for (auto& hint : GetInventory()->hints) {
@@ -56,6 +59,7 @@ void SceneRoomTemplate::scrollInventory(int dir)
             int newLastVisibleIndex = GetInventory()->getFirstItem() + GetInventory()->getItemNumber() - 1;
             if (newLastVisibleIndex < GetInventory()->hints.size()) {
                 GetInventory()->hints[newLastVisibleIndex]->getMngr()->setActive(GetInventory()->hints[newLastVisibleIndex], true);
+                areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(GetInventory()->hints[newLastVisibleIndex])->getLayerPos());
             }
 
 

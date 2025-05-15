@@ -73,10 +73,10 @@ void SceneManager::init()
 
 void SceneManager::popScene()
 {
-	std::cout << "pop scene" << endl;
 	assert(!currentscenes.empty());
 	currentscenes.pop_back();
 	currentscenes.back()->closedMenus();
+	if(currentscenes.back() == scenes[SceneName::MIDDLE_ROOM]) currentscenes.back()->init();
 
 }
 
@@ -188,9 +188,13 @@ void SceneManager::ResetSceneManager()
 {
 
 	scenes.resize(SceneName::SCENE_SIZE);
-	for (int i = 1;i < SCENE_SIZE;i++) {
-		delete scenes[i];
+	for (int i = 0; i < SCENE_SIZE;i++) {
+		
+		 delete scenes[i];
+
 	}
+	scenes.resize(SceneName::SCENE_SIZE);
+	currentscenes.clear();
 	auto tombScene = new TombPuzzleScene(); //For the chain Puzzle, to take the reference
 
 	scenes[SceneName::INITIAL_MENU] = new InitialScene();

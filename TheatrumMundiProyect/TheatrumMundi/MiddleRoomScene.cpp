@@ -27,18 +27,20 @@ MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaInterm
 	dialogueManager = new DialogueManager(0);
 	roomEvent.resize(MIDDLEROOMEVENTSIZE);
 	roomEvent[FIRST_DIALOGUE] = [this]() {
+		AudioManager::Instance().stopSound(sdlutils().musics().at("menu"));
+		//Audio music
+		std::shared_ptr<Sound> room1music = sdlutils().musics().at("sala1");
+		AudioManager::Instance().playSound(room1music, true);
 		startDialogue("SalaIntermedia1");
 		};
 	//ROOM1
 	roomEvent[AFTER_ROOM1_GOOD3] = [this]() {
-		startDialogue("SalaIntermedia1");
+		startDialogue("SalaIntermedia2_1");
 		};
 	roomEvent[AFTER_ROOM1_BAD2] = [this]() {
-		startDialogue("SalaIntermedia1");
+		startDialogue("SalaIntermedia2_2");
 		};
-	roomEvent[AFTER_ROOM1_GOOD3] = [this]() {
-		startDialogue("SalaIntermedia1");
-		};
+
 	//ROOM2
 	roomEvent[AFTER_ROOM2_GOOD3] = [this]() {
 		startDialogue("SalaIntermedia1");
@@ -91,7 +93,7 @@ void MiddleRoomScene::init()
 		//a.playSound(room1music);
 
 		//Register scene in dialogue manager
-		dialogueManager->setScene(this);
+		//dialogueManager->setScene(this);
 		//MiddleRoomBackground
 		entityFactory->CreateImageEntity(entityManager, "Room", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::MIDDLEROOM);
 
@@ -110,39 +112,36 @@ void MiddleRoomScene::init()
 	}
 	SDL_Delay(1000);
 
-	roomEvent[FIRST_DIALOGUE]();
-}
-
-void MiddleRoomScene::resolvedPuzzle(int i)
-{
-}
-
-void MiddleRoomScene::refresh()
-{
+	dialogueManager->setScene(this);
 	int aux = Game::Instance()->getDataManager()->GetActualScene();
 	bool auxkei = Game::Instance()->getDataManager()->GetCharacterState(Character::KEISARA);
 	bool auxlucy = Game::Instance()->getDataManager()->GetCharacterState(Character::LUCY);
 	bool auxsol = Game::Instance()->getDataManager()->GetCharacterState(Character::SOL);
 	switch (aux)
 	{
+	case SceneCount::MIDDLEROOM1:
+		roomEvent[FIRST_DIALOGUE]();
+	break;
 	case SceneCount::MIDDLEROOM2:
+		dialogueManager->setActualRoom(2);
 		if (auxkei && auxlucy && auxsol) roomEvent[AFTER_ROOM1_GOOD3]();
 		else if (!auxkei && auxlucy && auxsol)roomEvent[AFTER_ROOM1_BAD2]();
 		else {
-		#ifdef _DEBUG
+#ifdef _DEBUG
 			//std::cout << "INVALID CHARACTERS STATE";
-		#endif // DEBUG
+#endif // DEBUG
 		}
 		break;
 	case SceneCount::MIDDLEROOM3:
+		dialogueManager->setActualRoom(3);
 		if (auxkei && auxlucy && auxsol) roomEvent[AFTER_ROOM2_GOOD3]();
 		else if (!auxkei && auxlucy && auxsol)roomEvent[AFTER_ROOM2_GOOD2]();
 		else if (auxkei && !auxlucy && auxsol)roomEvent[AFTER_ROOM2_BAD2]();
 		else if (!auxkei && !auxlucy && auxsol)roomEvent[AFTER_ROOM2_BAD1]();
 		else {
-		#ifdef _DEBUG
-		//	std::cout << "INVALID CHARACTERS STATE";
-		#endif // DEBUG
+#ifdef _DEBUG
+			//	std::cout << "INVALID CHARACTERS STATE";
+#endif // DEBUG
 		}
 		break;
 	case SceneCount::END:
@@ -160,12 +159,21 @@ void MiddleRoomScene::refresh()
 		break;
 		break;
 	default:
-	#ifdef _DEBUG
+#ifdef _DEBUG
 		//std::cout << "ERROR INVALID SCENECOUNT";
-	#endif // DEBUG
+#endif // DEBUG
 
 		break;
 	}
+}
+
+void MiddleRoomScene::resolvedPuzzle(int i)
+{
+}
+
+void MiddleRoomScene::refresh()
+{
+	
 }
 
 void MiddleRoomScene::unload()

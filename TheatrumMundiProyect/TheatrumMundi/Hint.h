@@ -19,7 +19,7 @@ public:
 	~Hint();
 	//void render() const;
 
-	std::string getDescription() { return description; }
+	std::string at() { return description; }
 	std::string getID() { return id; }
 
 	void setActive(bool _active) { active = _active; }

@@ -168,6 +168,10 @@
       "id": "correcto",
       "file": "../resources/sound/sfx/correcto.wav"
     },
+{
+          "id": "NextDialogue",
+          "file": "../resources/sound/sfx/NextDialogue.wav"
+        },
     {
       "id": "CogerCosa",
       "file": "../resources/sound/sfx/CogerCosa.wav"

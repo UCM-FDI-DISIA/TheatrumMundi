@@ -1,6 +1,7 @@
 #pragma once
 #include "ecs.h"
-
+#include <vector>
+#include "../ecs/Entity.h"
 class EntityFactory;
 class SceneTemplate;
 class ClickComponent;
@@ -10,6 +11,7 @@ class PauseManager {
 private:
 	bool _pauseActive;
 	SceneTemplate* _scene;
+	std::vector<ecs::entity_t> animElems;
 public:
 	PauseManager();
 	~PauseManager();

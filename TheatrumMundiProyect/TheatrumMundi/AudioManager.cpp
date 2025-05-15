@@ -10,7 +10,7 @@ Sound::Sound(const std::string& filePath) {
 }
 
 Sound::~Sound() {
-    if (sound) {
+    if (sound!=nullptr) {
         sound->release();
     }
 }

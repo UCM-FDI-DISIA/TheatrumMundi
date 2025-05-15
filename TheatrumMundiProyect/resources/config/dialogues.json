@@ -45,7 +45,7 @@
       { "Character": " ", "Text": "¿Por qué me sigues mirando así?" },
       {
         "Character": " ",
-        "Text": "Sé que la sala sigue ligeramente cochambrosa,\npero tengo que educarte antes de nada. \nPor eso la tenemos en el almacén."
+        "Text": "Sé que la sala sigue ligeramente cochambrosa,\npero tengo que educarte antes de nada."
       },
       {
         "Character": " ",
@@ -89,7 +89,7 @@
       { "Character": " ", "Text": "Venga, este paso es sencillo." },
       {
         "Character": " ",
-        "Text": "Agarra la antena de tus objetos y arrástrala a su lugar."
+        "Text": "Toma la antena de tus objetos y arrástrala a su lugar."
       }
     ],
     "Tutorial8": [{ "Character": " ", "Text": "Fantástico." }]
@@ -194,7 +194,7 @@
       { "Character": " ", "Text": "Depende de vosotros para ser honestos." },
       {
         "Character": " ",
-        "Text": "Os recomiendo que miréis alrededor e investigueis \ntodo a vuestro alrededor."
+        "Text": "Os recomiendo que miréis alrededor e investiguéis \ntodo a vuestro alrededor."
       },
       {
         "Character": " ",
@@ -224,7 +224,7 @@
       { "Character": "Lucy", "Text": "..." },
       {
         "Character": "Lucy",
-        "Text": "Por el color de sus labios y la falta de heridas externas, \nparece un envenamiento."
+        "Text": "Por el color de sus labios y la falta de heridas externas, \nparece un envenemamiento."
       },
       { "Character": "Sol", "Text": "Lucy, ¿estás bien?" },
       { "Character": "Sol", "Text": "Keisara está..." },
@@ -246,7 +246,7 @@
         "Text": "Ya tendré tiempo para lamentar más tarde si fallamos."
       },
       { "Character": "Sol", "Text": "..." },
-      { "Character": "Sol", "Text": "Entonces,¿veneno?" },
+      { "Character": "Sol", "Text": "Entonces, ¿veneno?" },
       { "Character": "Lucy", "Text": "Probablemente." }
     ],
     "PuzzleTuberias": [
@@ -317,7 +317,7 @@
       }
     ],
     "RecogerVeneno2": [
-      { "Character": "Lucy", "Text": "10mg, eso no mataría ni a un bebe" },
+      { "Character": "Lucy", "Text": "10mg, eso no mataría ni a un bebé." },
       { "Character": "Sol", "Text": "¿De verdad?" },
       {
         "Character": "Lucy",
@@ -331,7 +331,7 @@
 
     "Sala1Final": [
       { "Character": " ", "Text": "Bueno, bueno, bueno." },
-      { "Character": " ", "Text": "Parece que el incentivo a funcionado." },
+      { "Character": " ", "Text": "Parece que el incentivo ha funcionado." },
       { "Character": " ", "Text": "¡Me habéis hecho caso!" },
       { "Character": "Sol", "Text": "Tienes un problema." },
       { "Character": "Lucy", "Text": "Creo que eso es quedarse corto." },
@@ -361,13 +361,92 @@
     ]
   },
   "Sala2": {
-    "Sala2Intro": [{ "Character": " ", "Text": "Bueno, bueno, bueno." }
-  ],
+        "SalaIntermedia2_1": [
+        { "Character": "Sol", "Text": "¿Hemos acertado?" },
+        { "Character": "Keisara", "Text": "¿Acertado el qué?" },
+        { "Character": "Lucy", "Text": "¡Keisara!" },
+        { "Character": "Sol", "Text": "¡Kei!" },
+        {
+          "Character": "Keisara",
+          "Text": "¿Oye, os encontráis bien? Me alegro de que\n estéis tan animados con mi presencia, pero…"
+        },
+        {
+          "Character": " ",
+          "Text": "Bueno, bueno, ¡lo habéis conseguido!"
+        },
+        {
+          "Character": " ",
+          "Text": "Mi más sincera enhorabuena."
+        },
+        {
+          "Character": "Lucy",
+          "Text": "¡Eres el ser más despreciable que he conocido en mi vida!"
+        },
+        {
+          "Character": "Keisara",
+          "Text": "¿Puede alguien explicarme qué está sucediendo?"
+        },
+        {
+          "Character": "Sol",
+          "Text": "Kei, estabas muerta hace unos segundos."
+        },
+        {
+          "Character": " ",
+          "Text": "¡Pero no pasa nada!"
+        },
+        {
+          "Character": " ",
+          "Text": "Tus maravillosos compañeros te han salvado y ahora estás de vuelta."
+        },
+        {
+          "Character": " ",
+          "Text": "Justo a tiempo para la siguiente ronda."
+        }
+        ],
+        "SalaIntermedia2_2": [
+          { "Character": "Sol", "Text": "Espera, ¿qué significa—" },
+          {
+            "Character": " ",
+            "Text": "Vaya, una pena."
+          },
+          {
+            "Character": " ",
+            "Text": "Vaya, una pena."
+          },
+          { "Character": "Lucy", "Text": "¿Dónde está Keisara?" },
+          {
+            "Character": " ",
+            "Text": "¿Dónde va a estar?"
+          },
+          {
+            "Character": " ",
+            "Text": "Pues donde la habéis visto por última vez."
+          },
+          { "Character": "Lucy", "Text": "Pero eso significa…" },
+          { "Character": "Sol", "Text": "¡No puede ser! ¡Esto tiene que ser una broma!" },
+          {
+            "Character": " ",
+            "Text": "Os di una oportunidad, fallasteis."
+          },
+          {
+            "Character": " ",
+            "Text": "Fin de la historia."
+          },
+          {
+            "Character": " ",
+            "Text": "Simplemente hacedlo mejor la próxima vez."
+          },
+          { "Character": "Lucy", "Text": "No, no, no…" },
+          { "Character": "Sol", "Text": "¿Cómo que la próxima—" }
+        ]
+  },
+  "Sala3": {
+    "Sala2Intro":[],
     "TUMBA1_2P": [
       { "Character": "Lucy", "Text": "Es una lápida." },
       {
         "Character": "Keisara",
-        "Text": "A mi me parece mas un cofre de piedra. "
+        "Text": "A mi me parece más un cofre de piedra. "
       },
       { "Character": "Lucy", "Text": "Keisara, es literalmnete una lápida." },
       { "Character": "Lucy", "Text": "Probablemente tenga un cuerpo dentro." },
@@ -455,7 +534,7 @@
 
     "ORGANO_1P":[                 
     {"Character":"Lucy","Text":"¿Qué hace aquí un órgano?"},
-    {"Character":"Lucy","Text":"Este mauoleo es cada vez más extraño."}
+    {"Character":"Lucy","Text":"Este mausoleo es cada vez más extraño."}
     ],
    "CUERVO1_2P":[                 
     {"Character":"Lucy","Text":"¡Eh! Ese cuervo tiene una llave."},
@@ -471,19 +550,19 @@
     {"Character":"Lucy","Text":"Uh. Ese pájaro tiene una llave."},
     {"Character":"Lucy","Text":"Ven aquí pajarraco."},
     {"Character":"Lucy","Text":"Mierda, no puedo quitársela."},
-    {"Character":"Lucy","Text":"¿Qu´puedo usar para ditraerle?"}
+    {"Character":"Lucy","Text":"¿Qué puedo usar para ditraerle?"}
     ],
 
     "CUERVO2_2P":[
     {"Character":"Keisara","Text":"Un colgante bonito para un cuervo bonito."},
     {"Character":"Lucy","Text":"Bien, ya tenemos la llave."},
-    {"Character":"Keisara","Text":"Mira que feliz esta con su nuevo collar."},
+    {"Character":"Keisara","Text":"Mira qué feliz esta con su nuevo collar."},
     {"Character":"Lucy","Text":"Kei, nos vamos."},
     {"Character":"Keisara","Text":"¿Nos lo podemos llevar a casa?"},
     {"Character":"Lucy","Text":"..."},
     {"Character":"Lucy","Text":"Te recuerdo que tenemos una gata."},
     {"Character":"Keisara","Text":"Seguro que Artemisa y Edgeworth se hacen buenos amigos."},
-    {"Character":"Lucy","Text":"Enserio, ¿ya le has puesto nombre?"},
+    {"Character":"Lucy","Text":"En serio, ¿ya le has puesto nombre?"},
     {"Character":"Lucy","Text":"Kei estamos investigando un asesinato, no\n tenemos tiempo para jugar a protectora de animales."},
     {"Character":"Keisara","Text":"Pero..."},
     {"Character":"Lucy","Text":"No."},
@@ -496,7 +575,7 @@
     ]
 
 
-  },
-  "Sala3": {}
+  }
+  
   
 }

@@ -9,7 +9,7 @@
     { "id" : "TITLE", "file" : "../resources/fonts/PirataOne-Regular.ttf", "size": 40 },
     { "id" : "BASE", "file" : "../resources/fonts/FeFCrm2.ttf", "size": 24}
   ],
-
+  
   "images": [
     {
       "id": "EmptyImage",
@@ -289,6 +289,8 @@
     { "id" : "cortinaD", "file" : "../resources/images/Finales/cortinaD.png" },
     { "id" : "cortinaI", "file" : "../resources/images/Finales/cortinaI.png" },
     { "id" : "fondoMorado", "file" : "../resources/images/temporales/fondoMorado.png" },
+    { "id" : "menuInicial", "file" : "../resources/images/Finales/mainMenu.png" },
+    { "id" : "Title", "file" : "../resources/images/Finales/title.png" },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"
@@ -448,10 +450,6 @@
     {
       "id": "incrementButtonSelected",
       "file": "../resources/images/incrementButtonSelected.png"
-    },
-    {
-      "id": "Title",
-      "file": "../resources/images/TemporalTitleImage.png"
     },
     {
       "id": "TeaCupSprite",
@@ -626,7 +624,7 @@
       "file": "../resources/images/temporales/Room2/Entrada oculta.jpeg"
     },
     {
-      "id": "Gancho",
+      "id": "Varilla",
       "file": "../resources/images/temporales/Room2/Gancho.jpg"
     },
     {
@@ -642,11 +640,11 @@
       "file": "../resources/images/temporales/Room2/Pala.jpeg"
     },
     {
-      "id": "CuerdaLarga",
+      "id": "CuerdaGruesa",
       "file": "../resources/images/temporales/Room2/Palo.jpeg"
     },
     {
-      "id": "CuerdaCorta",
+      "id": "CuerdaFina",
       "file": "../resources/images/temporales/Room2/Palo.jpeg"
     },
     {
@@ -723,6 +721,46 @@
     {
       "id": "FondoVentana",
       "file": "../resources/images/temporales/Room2/FondoVentana.png"
+    },
+    {
+      "id": "FondoVentana",
+      "file": "../resources/images/temporales/Room2/FondoVentana.png"
+    },
+    {
+      "id": "NotaBasica",
+      "file": "../resources/images/temporales/notaBasica.png"
+    },
+    {
+      "id": "Do",
+      "file": "../resources/images/temporales/do.png"
+    },
+    {
+      "id": "Si",
+      "file": "../resources/images/temporales/si.png"
+    },
+    {
+      "id": "fase1Partitura",
+      "file": "../resources/images/temporales/fase1Partitura.jpg"
+    },
+    {
+      "id": "fase2Partitura",
+      "file": "../resources/images/temporales/fase2Partitura.jpg"
+    },
+    {
+      "id": "fase3Partitura",
+      "file": "../resources/images/temporales/fase3Partitura.jpg"
+    },
+    {
+      "id": "fase1Espejo",
+      "file": "../resources/images/temporales/fase1Espejo.jpg"
+    },
+    {
+      "id": "fase2Espejo",
+      "file": "../resources/images/temporales/fase2Espejo.jpg"
+    },
+    {
+      "id": "fase3Espejo",
+      "file": "../resources/images/temporales/fase3Espejo.jpg"
     },
     {
       "id": "FondoJuzgado",
@@ -832,88 +870,115 @@
       "id": "CajaFuerteRojo",
       "file": "../resources/images/temporales/Room3/CajaFuerteRojo.png"
     }
+    
+    
 
   ],
 
-  "messages": [
-    {
-      "id": "start",
-      "text": "Press space to start",
-      "font": "ARIAL24",
-      "color": "0x441155ff"
-    }
-  ],
+    "sounds": [
+        {
+            "id": "explosion",
+            "file": "../resources/sound/sfx/explosion.wav"
+        },
+        {
+            "id": "agua",
+            "file": "../resources/sound/sfx/agua.wav"
+        },
+        {
+            "id": "avanzar_dialogo",
+            "file": "../resources/sound/sfx/click_avanzar_dialogo.wav"
+        },
+        {
+            "id": "boton",
+            "file": "../resources/sound/sfx/click_boton.wav"
+        },
+        {
+            "id": "puzzle",
+            "file": "../resources/sound/sfx/click_puzzle.wav"
+        },
+        {
+            "id": "aguja_horario",
+            "file": "../resources/sound/sfx/horario.wav"
+        },
+        {
+            "id": "aguja_minutero",
+            "file": "../resources/sound/sfx/minutero.wav"
+        },
+        {
+            "id": "libro",
+            "file": "../resources/sound/sfx/libro.wav"
+        },
+        {
+            "id": "taza",
+            "file": "../resources/sound/sfx/metal_taza.wav"
+        },
+        {
+            "id": "puerta",
+            "file": "../resources/sound/sfx/puerta.wav"
+        },
+        {
+          "id": "cuerda",
+          "file": "../resources/sound/sfx/cuerda.wav"
+        },
+        {
+          "id": "correcto",
+          "file": "../resources/sound/sfx/correcto.wav"
+        },
+        {
+          "id": "CogerCosa",
+          "file": "../resources/sound/sfx/CogerCosa.MP3"
+      },
+      {
+        "id": "FinalTeleTutorial",
+        "file": "../resources/sound/sfx/FinalTeleTutorial.wav"
+      },
+      {
+        "id": "Statica",
+        "file": "../resources/sound/sfx/Statica.wav"
+      },
+      
+      {
+        "id": "ColocarCosa",
+        "file": "../resources/sound/sfx/ColocarCosa.MP3"
+      },
+        {
+          "id": "incorrecto",
+          "file": "../resources/sound/sfx/incorrecto.wav"
+        },
+        {
+          "id": "DoSound",
+          "file": "../resources/sound/sfx/Do.wav"
+        },
+        {
+          "id": "ReSound",
+          "file": "../resources/sound/sfx/Re.wav"
+        },
+        {
+          "id": "MiSound",
+          "file": "../resources/sound/sfx/Mi.wav"
+        },
+        {
+          "id": "FaSound",
+          "file": "../resources/sound/sfx/Fa.wav"
+        },
+        {
+          "id": "SolSound",
+          "file": "../resources/sound/sfx/Sol.wav"
+        },
+        {
+          "id": "LaSound",
+          "file": "../resources/sound/sfx/La.wav"
+        },
 
-  "sounds": [
-    {
-      "id": "explosion",
-      "file": "../resources/sound/sfx/explosion.wav"
-    },
-    {
-      "id": "agua",
-      "file": "../resources/sound/sfx/agua.wav"
-    },
-    {
-      "id": "avanzar_dialogo",
-      "file": "../resources/sound/sfx/click_avanzar_dialogo.wav"
-    },
-    {
-      "id": "boton",
-      "file": "../resources/sound/sfx/click_boton.wav"
-    },
-    {
-      "id": "puzzle",
-      "file": "../resources/sound/sfx/click_puzzle.wav"
-    },
-    {
-      "id": "aguja_horario",
-      "file": "../resources/sound/sfx/horario.wav"
-    },
-    {
-      "id": "aguja_minutero",
-      "file": "../resources/sound/sfx/minutero.wav"
-    },
-    {
-      "id": "libro",
-      "file": "../resources/sound/sfx/libro.wav"
-    },
-    {
-      "id": "taza",
-      "file": "../resources/sound/sfx/metal_taza.wav"
-    },
-    {
-      "id": "puerta",
-      "file": "../resources/sound/sfx/puerta.wav"
-    },
-    {
-      "id": "cuerda",
-      "file": "../resources/sound/sfx/cuerda.wav"
-    },
-    {
-      "id": "correcto",
-      "file": "../resources/sound/sfx/correcto.wav"
-    },
-    {
-      "id": "CogerCosa",
-      "file": "../resources/sound/sfx/CogerCosa.MP3"
-    },
-    {
-      "id": "FinalTeleTutorial",
-      "file": "../resources/sound/sfx/FinalTeleTutorial.wav"
-    },
-    {
-      "id": "Statica",
-      "file": "../resources/sound/sfx/Statica.wav"
-    },
-    {
-      "id": "ColocarCosa",
-      "file": "../resources/sound/sfx/ColocarCosa.MP3"
-    },
-    {
-      "id": "incorrecto",
-      "file": "../resources/sound/sfx/incorrecto.wav"
-    },
-    {
+  {
+          "id": "NextDialogue",
+          "file": "../resources/sound/sfx/NextDialogue.wav"
+        },
+        {
+          "id": "SiSound",
+          "file": "../resources/sound/sfx/Si.wav"
+        },
+            {
       "id": "sSound",
       "file": "../resources/sound/sfx/s_soundRoom3.wav"
     },
@@ -934,13 +999,22 @@
       "file": "../resources/sound/sfx/morse_soundRoom3.wav"
     }
 
-  ],
+    ],
 
   "musics" : [
     {
+      "id": "menu",
+      "file":  "../resources/sound/music/sala1.wav"
+  },
+    {
         "id": "sala1",
         "file":  "../resources/sound/music/sala1.wav"
-    }
+    },
+    {
+      "id": "sala2",
+      "file":  "../resources/sound/music/sala1.wav"
+  }
+    
   ]
 
 }

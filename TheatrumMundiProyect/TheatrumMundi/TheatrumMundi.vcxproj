@@ -45,6 +45,7 @@
     <ClCompile Include="..\SRC\sdlutils\Texture.cpp" />
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
+    <ClCompile Include="AnimPauseComponent.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="BalancePuzzleScene.cpp" />
     <ClCompile Include="BooksPuzzleScene.cpp" />
@@ -62,6 +63,7 @@
     <ClCompile Include="GameSave.cpp" />
     <ClCompile Include="Hint.cpp" />
     <ClCompile Include="InitialScene.cpp" />
+    <ClCompile Include="InvAnimComponent.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="MiddleRoomScene.cpp" />
@@ -75,6 +77,7 @@
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="RavenPuzzleScene.cpp" />
     <ClCompile Include="ReadDialog.cpp" />
+    <ClCompile Include="ReadInvdesc.cpp" />
     <ClCompile Include="Room1.cpp" />
     <ClCompile Include="Room2.cpp" />
     <ClCompile Include="Room3.cpp" />
@@ -239,6 +242,7 @@
     <ClInclude Include="..\SRC\utils\ptr_iterator.h" />
     <ClInclude Include="..\SRC\utils\Singleton.h" />
     <ClInclude Include="..\SRC\utils\Vector2D.h" />
+    <ClInclude Include="AnimPauseComponent.h" />
     <ClInclude Include="AudioManager.h" />
     <ClInclude Include="BalancePuzzleScene.h" />
     <ClInclude Include="BooksPuzzleScene.h" />
@@ -259,6 +263,7 @@
     <ClInclude Include="GameSave.h" />
     <ClInclude Include="Hint.h" />
     <ClInclude Include="InitialScene.h" />
+    <ClInclude Include="InvAnimComponent.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="MiddleRoomScene.h" />
@@ -272,6 +277,7 @@
     <ClInclude Include="Box.h" />
     <ClInclude Include="RavenPuzzleScene.h" />
     <ClInclude Include="ReadDialog.h" />
+    <ClInclude Include="ReadInvdesc.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="Room2.h" />
     <ClInclude Include="Room3.h" />

@@ -37,6 +37,7 @@ public:
     void ReadDialogue(const std::string& event);
     void setScene(SceneTemplate* scene);
     void setCharacterImage(const std::string& Character);
+    inline void setActualRoom(int act) { room = "Sala" + std::to_string(act); };
     void setEventToRead(std::string _eventToRead);
     TextInfo getShowText();
     inline void setdisplayOnProcess(bool disply) { displayOnProcess = disply; }

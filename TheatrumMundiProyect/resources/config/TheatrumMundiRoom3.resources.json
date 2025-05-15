@@ -224,6 +224,10 @@
       "id": "cuerda",
       "file": "../resources/sound/sfx/cuerda.wav"
     },
+{
+          "id": "NextDialogue",
+          "file": "../resources/sound/sfx/NextDialogue.wav"
+        },
     {
       "id": "CogerCosa",
       "file": "../resources/sound/sfx/CogerCosa.wav"

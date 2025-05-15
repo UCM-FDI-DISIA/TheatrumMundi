@@ -36,12 +36,13 @@ Game::~Game() {
 	if (InputHandler::HasInstance())
 		InputHandler::Release();
 
-	AudioManager::Instance().shutdown();
+	
 
 	// release SLDUtil if the instance was created correctly.
 	if (SDLUtils::HasInstance()) {
 		SDLUtils::Release();
 	}
+	AudioManager::Instance().shutdown();
 }
 
 void Game::init() {
@@ -132,6 +133,7 @@ void Game::start() {
 		render();
 
 		_mngr->refresh();
+		if (_reset) reset();
 		Uint32 frameTime = sdlutils().currRealTime() - startTime;
 		
 		if (frameTime < 10)
@@ -157,7 +159,7 @@ void Game::start() {
 
 void Game::reset()
 {
-
+	_reset = false;
 	//Reset instances
 	Game::Instance()->getLog()->ResetLog();
 	Game::Instance()->getDataManager()->ResetDataManager();
@@ -188,6 +190,10 @@ DataManager* Game::getDataManager()
 ReadDialog* Game::getReadDialogue()
 {
 	return dialogueReader;
+}
+void Game::setReset()
+{
+	_reset = true;
 }
 Log* Game::getLog()
 {
