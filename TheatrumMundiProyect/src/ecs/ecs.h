@@ -57,6 +57,7 @@ enum cmpId : cmpId_t {
 	SLOW_ROTATE_COMPONENT,
 	DIALOGUE_ANIM_COMPONENT,
 	ANIM_PAUSE_COMPONENT,
+	INV_ANIM_COMPONENT,
 	// do not remove this
 	_LAST_CMP_ID
 };

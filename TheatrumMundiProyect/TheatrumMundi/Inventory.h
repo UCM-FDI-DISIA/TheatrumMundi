@@ -6,7 +6,6 @@
 #include "Vector2D.h"
 #include "Manager.h"
 #include "../../src/Components/Transform.h"
-#include <string>
 #include "../../TheatrumMundi/DescriptionInfo.h"
 class SceneTemplate;
 class Hint;

@@ -21,7 +21,7 @@
 #include "PauseManager.h"
 #include "WriteTextComponent.h"
 #include "DialogueManager.h"
-
+#include "InvAnimComponent.h"
 Room2Scene::Room2Scene()
 {
 	//Creation of the DialogueManager of the room and creation of the events 
@@ -152,7 +152,7 @@ void Room2Scene::_setRoomEvents()
 		rmObjects.rope->getMngr()->setActive(rmObjects.rope, false);
 		// InventoryLogic
 		GetInventory()->addItem(new Hint("CuerdaLarga", "Ta", &sdlutils().images().at("CuerdaLarga")));
-		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "CuerdaLarga", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		GetInventory()->hints.push_back(entityFactory->CreateInvEntity(entityManager, "CuerdaLarga", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 		};
 	roomEvent[WindowScene] = [this] {
@@ -181,7 +181,7 @@ void Room2Scene::_setRoomEvents()
 		rmObjects.hook->getMngr()->removeEntity(rmObjects.hook);
 		// InventoryLogic
 		GetInventory()->addItem(new Hint("Gancho", "Esto se enganchara en algun lado", &sdlutils().images().at("Gancho")));
-		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "Gancho", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		GetInventory()->hints.push_back(entityFactory->CreateInvEntity(entityManager, "Gancho", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 
 		};
@@ -267,8 +267,8 @@ void Room2Scene::_setRoomBackground()
 
 #pragma region InitScroll
 
-	auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(22, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-	auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1200, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(22, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12.0) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1200, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12.0) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 
 	auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
 	ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(ChangeRoom2));
@@ -656,16 +656,16 @@ void Room2Scene::_setUI()
 	//Inventory
 
 	invObjects.InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
-
+	entityManager->addComponent<InvAnimComponent>(invObjects.InventoryBackground);
 	rmObjects.inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 	entityManager->setActive(invObjects.InventoryBackground, false);
 
 	invObjects.InvArea = entityManager->addComponent<RectArea2D>(invObjects.InventoryBackground, areaLayerManager);
 
-	invObjects.inventoryUpButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	invObjects.inventoryUpButton = entityFactory->CreateInvEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 	entityManager->setActive(invObjects.inventoryUpButton, false);
 
-	invObjects.inventoryDownButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	invObjects.inventoryDownButton = entityFactory->CreateInvEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 	entityManager->setActive(invObjects.inventoryDownButton, false);
 
 	entityManager->getComponent<ClickComponent>(rmObjects.inventoryButton)
@@ -677,10 +677,11 @@ void Room2Scene::_setUI()
 				if (GetInventory()->getActive()) // If the inventory is active, activate the items
 				{
 					entityManager->setActive(invObjects.InventoryBackground, true);
+					entityManager->getComponent<InvAnimComponent>(invObjects.InventoryBackground)->startInvAnim();
 					entityManager->setActive(rmObjects.logbtn, false);
 					//change the position of the log button
 					areaLayerManager->sendFront(invObjects.InvArea->getLayerPos());
-					entityManager->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(925);
+					
 
 					areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(invObjects.inventoryUpButton)->getLayerPos());
 					areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(invObjects.inventoryDownButton)->getLayerPos());
@@ -688,16 +689,23 @@ void Room2Scene::_setUI()
 					entityManager->setActive(invObjects.inventoryDownButton, true);
 					entityManager->setActive(invObjects.inventoryUpButton, true);
 
-					for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
+					entityManager->getComponent<InvAnimComponent>(invObjects.inventoryDownButton)->startInvAnim();
+					entityManager->getComponent<InvAnimComponent>(invObjects.inventoryUpButton)->startInvAnim();
+
+					for (int i = inv->getFirstItem(); i < inv->getItemNumber() + inv->getFirstItem(); ++i) {
+						inv->hints[i]->getMngr()->setActive(inv->hints[i], true);  // Activate the items
+						areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inv->hints[i])->getLayerPos());
+						inv->hints[i]->getMngr()->getComponent<InvAnimComponent>(inv->hints[i])->startInvAnim();
+					}
 				}
 				else
 				{
-					entityManager->setActive(invObjects.InventoryBackground, false);
-					entityManager->setActive(invObjects.inventoryDownButton, false);
-					entityManager->setActive(invObjects.inventoryUpButton, false);
+
+					entityManager->getComponent<InvAnimComponent>(invObjects.inventoryDownButton)->endInvAnim();
+					entityManager->getComponent<InvAnimComponent>(invObjects.inventoryUpButton)->endInvAnim();
+					entityManager->getComponent<InvAnimComponent>(invObjects.InventoryBackground)->endInvAnim();
 					entityManager->setActive(rmObjects.logbtn, true);
-					rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
-					for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the items
+					for (int i = inv->getFirstItem(); i < inv->getItemNumber() + inv->getFirstItem(); ++i) inv->hints[i]->getMngr()->getComponent<InvAnimComponent>(inv->hints[i])->endInvAnim();// Desactivate the items 
 
 				}
 			});

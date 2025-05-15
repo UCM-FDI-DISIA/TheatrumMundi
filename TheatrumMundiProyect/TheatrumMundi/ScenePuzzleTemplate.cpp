@@ -5,7 +5,7 @@
 #include "TriggerComponent.h"
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 #include "SDLUtils.h"
-
+#include "InvAnimComponent.h"
 #include "../src/Components/WriteTextComponent.h"
 
 
@@ -95,6 +95,75 @@ ScenePuzzleTemplate::~ScenePuzzleTemplate()
 {
 	
 }
+void ScenePuzzleTemplate::createInventoryUI()
+{
+	std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
+	AudioManager::Instance().setVolume(buttonSound, 0.2);
+
+	
+	//INVENTORY
+	//Invntory Background
+	auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
+	entityManager->setActive(InventoryBackground, false);
+	entityManager->addComponent<InvAnimComponent>(InventoryBackground);
+	invElems.push_back(InventoryBackground);
+	auto upButton = entityFactory->CreateInvEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	entityManager->setActive(upButton, false);
+	invElems.push_back(upButton);
+	auto downButton = entityFactory->CreateInvEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 640), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	entityManager->setActive(downButton, false);
+	invElems.push_back(downButton);
+	//InventoryButton
+	 inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(129, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
+	invOpen->connect(ClickComponent::JUST_CLICKED, [this, InventoryBackground, upButton, downButton, buttonSound]() //Lamda function
+		{
+			AudioManager::Instance().playSound(buttonSound);
+			room->GetInventory()->setActive(!room->GetInventory()->getActive());  // Toggle the inventory
+
+			// If the inventory is active, activate the items
+			if (room->GetInventory()->getActive()) {
+				entityManager->setActive(InventoryBackground, true);
+				entityManager->getComponent<InvAnimComponent>(InventoryBackground)->startInvAnim();
+				entityManager->setActive(logbtn, false);
+
+				entityManager->setActive(downButton, true);
+				entityManager->setActive(upButton, true);
+				entityManager->getComponent<InvAnimComponent>(downButton)->startInvAnim();
+				entityManager->getComponent<InvAnimComponent>(upButton)->startInvAnim();
+				for (int i = room->GetInventory()->getFirstItem(); i < room->GetInventory()->getFirstItem() + room->GetInventory()->getItemNumber(); ++i) {
+					invObjects[i]->getMngr()->setActive(invObjects[i], true);
+					entityManager->getComponent<InvAnimComponent>(invObjects[i])->startInvAnim();
+				}
+
+			}
+			else {
+				entityManager->getComponent<InvAnimComponent>(InventoryBackground)->endInvAnim();
+				entityManager->setActive(logbtn, true);
+				entityManager->getComponent<InvAnimComponent>(downButton)->endInvAnim();
+				entityManager->getComponent<InvAnimComponent>(upButton)->endInvAnim();
+
+				for (int i = room->GetInventory()->getFirstItem(); i < room->GetInventory()->getFirstItem() + room->GetInventory()->getItemNumber(); ++i) {
+					entityManager->getComponent<InvAnimComponent>(invObjects[i])->endInvAnim();
+				}
+			}
+		});
+
+	ClickComponent* UPbuttonInventoryClick = entityManager->getComponent<ClickComponent>(upButton);
+	UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, upButton]() {
+
+		AudioManager::Instance().playSound(buttonSound);
+		scrollInventoryPuzzle(-1, room);
+		});
+
+	ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
+	DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, downButton]() {
+
+		AudioManager::Instance().playSound(buttonSound);
+		scrollInventoryPuzzle(1, room);
+		});
+
+}
 /// <summary>
 /// For all the Inventory itmes in the SceneRoomTemplate, we created a new Entity in the puzzle Scenes
 /// </summary>
@@ -117,7 +186,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 
 			invID.push_back(a->getID());
 			//Add the entitie to the array
-			invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, a->getID(), EntityFactory::RECTAREA, sr->GetInventory()->GetPosition(index), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::INVENTORY));
+			invObjects.push_back(entityFactory->CreateInvEntity(entityManager, a->getID(), EntityFactory::RECTAREA, sr->GetInventory()->GetPosition(index), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::INVENTORY));
 
 			auto it = invObjects.back();
 
@@ -191,7 +260,7 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 	if (!ItemAlreadyCreated(id)) {
 		//Add Items to the room inventory
 		sr->GetInventory()->addItem(new Hint(id, description, &sdlutils().images().at(id)));
-		sr->GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(sr->GetEntityManager(), id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, sr->GetAreaLayerManager(), EntityFactory::NODRAG, ecs::grp::UI));
+		sr->GetInventory()->hints.push_back(entityFactory->CreateInvEntity(sr->GetEntityManager(), id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, sr->GetAreaLayerManager(), EntityFactory::NODRAG, ecs::grp::UI));
 		sr->GetInventory()->hints.back()->getMngr()->setActive(sr->GetInventory()->hints.back(), false);
 
 		auto srHint = sr->GetInventory()->hints.back();
@@ -201,7 +270,7 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 
 		//Add to the puzzle Lists
 		invID.push_back(id);
-		invObjects.push_back(entityFactory->CreateInteractableEntity(entityManager, id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::INVENTORY));
+		invObjects.push_back(entityFactory->CreateInvEntity(entityManager, id, EntityFactory::RECTAREA, position, Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::DRAG, ecs::grp::INVENTORY));
 		auto it = invObjects.back();
 		auto item = sr->GetInventory()->getItems().back();
 
@@ -302,15 +371,14 @@ void ScenePuzzleTemplate::scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr)
 	}
 }
 
-void ScenePuzzleTemplate::HideInventoryItems(const ecs::entity_t& InventoryBackground, const ecs::entity_t& downButton, const ecs::entity_t& upButton,SceneRoomTemplate* sr)
+void ScenePuzzleTemplate::HideInventoryItems()
 {
-	sr->GetInventory()->setActive(false);
-	sr->reposAllInventoryItems();
-	entityManager->setActive(InventoryBackground, false);
-	entityManager->setActive(downButton, false);
-	entityManager->setActive(upButton, false);
+	room->GetInventory()->setActive(false);
+	room->reposAllInventoryItems();
+	for (auto& a : invElems) entityManager->setActive(a,false);
 	
-	for (int i = 0; i < sr->GetInventory()->getItems().size(); ++i) {
+	for (int i = 0; i < room->GetInventory()->getItems().size(); ++i) {
 		invObjects[i]->getMngr()->setActive(invObjects[i], false);
+
 	}
 }

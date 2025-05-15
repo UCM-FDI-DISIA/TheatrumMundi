@@ -624,7 +624,7 @@
       "file": "../resources/images/temporales/Room2/Entrada oculta.jpeg"
     },
     {
-      "id": "Gancho",
+      "id": "Varilla",
       "file": "../resources/images/temporales/Room2/Gancho.jpg"
     },
     {
@@ -640,11 +640,11 @@
       "file": "../resources/images/temporales/Room2/Pala.jpeg"
     },
     {
-      "id": "CuerdaLarga",
+      "id": "CuerdaGruesa",
       "file": "../resources/images/temporales/Room2/Palo.jpeg"
     },
     {
-      "id": "CuerdaCorta",
+      "id": "CuerdaFina",
       "file": "../resources/images/temporales/Room2/Palo.jpeg"
     },
     {
