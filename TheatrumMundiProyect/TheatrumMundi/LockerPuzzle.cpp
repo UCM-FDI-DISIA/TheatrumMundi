@@ -159,7 +159,7 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
             {
                 AudioManager::Instance().playSound(buttonSound);
                 inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
-                HideInventoryItems(InventoryBackground, downButton, upButton, sr);
+                HideInventoryItems();
                 sr->GetInventory()->setFirstItem(0);
                 auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
                 _backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());

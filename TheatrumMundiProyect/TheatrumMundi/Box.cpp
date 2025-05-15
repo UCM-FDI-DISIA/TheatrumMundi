@@ -249,7 +249,7 @@ void Box::init(SceneRoomTemplate* sr)
 			clkOpen->connect(ClickComponent::JUST_CLICKED, [this, inventoryButton, InventoryBackground, downButton, upButton, _backButton]()
 				{
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
-					HideInventoryItems(InventoryBackground, downButton, upButton, room);
+					HideInventoryItems();
 					room->GetInventory()->setFirstItem(0);
 					auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
 					_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());

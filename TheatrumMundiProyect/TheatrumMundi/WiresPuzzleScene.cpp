@@ -61,7 +61,7 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		a.setVolume(buttonSound, 0.2);
 
 		//INVENTORY
-		createInventoryUI();
+		//createInventoryUI();
 		
 
 		//where the wires are going to be connected
@@ -205,25 +205,31 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		});
 
 		//BackButton
+		//ENTIDADCONENTITYFACTORY
 		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
+
+		//INVENTORY
+		//Invntory Background
+		createInventoryUI();
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, _backButton, buttonSound]()
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, _backButton, buttonSound]()
 			{
 				AudioManager::Instance().playSound(buttonSound);
+
 				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 				HideInventoryItems();
-				sr->GetInventory()->setFirstItem(0);
+				room->GetInventory()->setFirstItem(0);
 				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
 				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
 				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
 				_backButtonImage->setPosOffset(0, 0);
 				Game::Instance()->getSceneManager()->popScene();
 			});
-
-		dialogueManager->Init(1, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
+		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
+		dialogueManager->setScene(this);
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
 	sr->GetInventory()->setFirstItem(0);
