@@ -146,11 +146,7 @@ void TutorialScene::init()
 		auto ChangeRoom1Button = entityManager->getComponent<ClickComponent>(ChangeRoom1);
 		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, startRoomScroll, ChangeRoomScroll, doorSound]() {
 			if (!startRoomScroll->isScrolling()) {
-				AudioManager::Instance().playSound(doorSound);
-				startRoomScroll->Scroll(ScrollComponent::RIGHT);
-				
-			
-				
+				if(startRoomScroll->Scroll(ScrollComponent::RIGHT)) AudioManager::Instance().playSound(doorSound);	
 			}
 			});
 

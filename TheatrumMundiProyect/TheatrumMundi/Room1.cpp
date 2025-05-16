@@ -445,9 +445,10 @@ void Room1Scene::_setRoomBackground()
 		->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll]() 
 		{
 			if (!rmObjects.backgroundScroll->isScrolling()) {
-				AudioManager::Instance().playSound(rmSounds.doorSound);
-				rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
-				scrolling = true;
+				if (rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT)) {
+					AudioManager::Instance().playSound(rmSounds.doorSound); //If you can scroll, scroll and play the door sound
+					scrolling = true;
+				}
 			}
 		});
 
@@ -455,9 +456,10 @@ void Room1Scene::_setRoomBackground()
 		->connect(ClickComponent::JUST_CLICKED, [this]() 
 		{
 			if (!rmObjects.backgroundScroll->isScrolling()) {
-				AudioManager::Instance().playSound(rmSounds.doorSound);
-				scrolling = true;
-				rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
+				if (rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT)) {
+					AudioManager::Instance().playSound(rmSounds.doorSound); //If you can scroll, scroll and play the door sound
+					scrolling = true;
+				}
 			}
 		});
 }
