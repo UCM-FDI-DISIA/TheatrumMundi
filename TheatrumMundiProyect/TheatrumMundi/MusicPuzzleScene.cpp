@@ -358,8 +358,6 @@ void MusicPuzzleScene::changePhase()
 
 bool MusicPuzzleScene::playAnimation(bool correct)
 {
-    //if (_isAnimating) return false;
-
     _animationType = correct;
 
     _isAnimating = true;
@@ -367,8 +365,6 @@ bool MusicPuzzleScene::playAnimation(bool correct)
     _noteStartTime = sdlutils().virtualTimer().currRealTime();
 
     return true;
-
-    
 }
 
 void MusicPuzzleScene::startSoundSequence()
