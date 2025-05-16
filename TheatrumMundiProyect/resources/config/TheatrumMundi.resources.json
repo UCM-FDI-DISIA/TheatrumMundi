@@ -779,6 +779,10 @@
       "file": "../resources/images/Finales/espejo.png"
     },
     {
+      "id": "teclasNegras",
+      "file": "../resources/images/Finales/teclasNegras.png"
+    },
+    {
       "id": "FondoJuzgado",
       "file": "../resources/images/temporales/Room3/Juzgado.png"
     },

@@ -87,7 +87,7 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
         entityFactory->CreateImageEntity(entityManager, "espejo", Vector2D(175, 0), Vector2D(0, 0), 345/1.5, 707/1.5, 0, ecs::grp::DEFAULT);
 
         //instructions
-
+        entityFactory->CreateImageEntity(entityManager, "instrucciones", Vector2D(940, 0), Vector2D(0, 0), 354 / 1.5, 707 / 1.5, 0, ecs::grp::DEFAULT);
 
         //musicalScore + mirror (changes in each phase)
         musicalScore = entityFactory->CreateImageEntity(entityManager, "fase1Partitura", Vector2D(545, 330), Vector2D(0, 0), 403 / 1.5, 171 / 1.5, 0, ecs::grp::DEFAULT);
@@ -100,6 +100,8 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
         //piano buttons
         createPianoButtons();
 
+        //black musical notes
+        entityFactory->CreateImageEntity(entityManager, "teclasNegras", Vector2D(430, 473), Vector2D(0, 0), 739 / 1.5, 44 / 1.5, 0, ecs::grp::DEFAULT);
 
 #pragma region UI
 
