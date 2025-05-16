@@ -437,7 +437,32 @@
         ]
   },
   "Sala3": {
-    "Sala2Intro":[],
+    "Sala2Intro_P2":[                 
+    {"Character":"Keisara","Text":"¿A qué ser refiere con siguiente ronda?"},
+    {"Character":"Keisara","Text":"¿Y dónde está Sol?"},
+    {"Character":"Keisara","Text":"Oh."},
+    {"Character":"Lucy","Text":"Esto es los mismo que te pasó a ti antes."},
+    {"Character":"Keisara","Text":"Vale, vale, pero no pasa nada."},
+    {"Character":"Keisara","Text":"Si a mi no me ha pasado nada, \na él no le va a pasar nada."},
+    {"Character":"Lucy","Text":"Sigue pensando así."},
+    {"Character":"Lucy","Text":"Hay que investigar y averiguar \nsi es posible que su muerte haya sido un asesinato."},
+    {"Character":"Lucy","Text":"Al menos así fue en tu caso."},
+    {"Character":"Keisara","Text":"¿Lo de estar en un cementerio\n también ha pasado antes?"},
+    {"Character":"Lucy","Text":"No, eso es nuevo."}
+    ],
+    "Sala2Intro_P1":[                 
+    {"Character":"Lucy","Text":"¡No!"},
+    {"Character":"Lucy","Text":"Sol..."},
+    {"Character":"Lucy","Text":"No, no, no."},
+    {"Character":" ","Text":"¿Entonces vas a dejar morir a tu amigo?"},
+    {"Character":" ","Text":"Esperaba más de ti la verdad."},
+    {"Character":" ","Text":"¿Qué diría tu novia?"},
+    {"Character":"Lucy","Text":"Cállate de una puta vez."},
+    {"Character":" ","Text":"Vale, vale, veo que no soy bienvenido."},
+    {"Character":"Lucy","Text":"..."},
+    {"Character":"Lucy","Text":"Tengo que hacer algo."}
+    
+    ],
     "TUMBA1_2P": [
       { "Character": "Lucy", "Text": "Es una lápida." },
       {
