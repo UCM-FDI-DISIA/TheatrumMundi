@@ -80,7 +80,7 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
         initializeMusicalSounds();
 
         //background
-        entityFactory->CreateImageEntity(entityManager, "fondoOrgano", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+        background = entityFactory->CreateImageEntity(entityManager, "fondoOrgano", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 
         //mirror
         auto mirror = entityFactory->CreateImageEntity(entityManager, "espejo", Vector2D(175, 0), Vector2D(0, 0), 345/1.5, 707/1.5, 0, ecs::grp::DEFAULT);
@@ -218,7 +218,19 @@ void MusicPuzzleScene::refresh()
                 _isAnimating = false;
 
                 //reactive all scene buttons
-                if (_animationType) Check();
+                if (_animationType)
+                {
+                    if (!solved && Check())
+                    {
+                        //puzzle win
+                        Win();
+                        
+                        Image* img = entityManager->getComponent<Image>(background);
+                        img->setTexture(&sdlutils().images().at("fondoCajon"));
+
+                        //recompensas
+                    }
+                }
                 else
                 {
                     cleanCombination();
@@ -235,12 +247,7 @@ void MusicPuzzleScene::refresh()
 
 bool MusicPuzzleScene::Check()
 {
-    if (_phase == _correctCombinations.size() - 1)
-    {
-        //puzzle win
-        Win();
-        return true;
-    }
+    if (_phase == _correctCombinations.size() - 1) return true;
     else
     {
         changePhase();

@@ -846,6 +846,10 @@
       "file": "../resources/images/Finales/siTecla.png"
     },
     {
+      "id": "fondoCajon",
+      "file": "../resources/images/Finales/fondoMusicalCajon.jpg"
+    },
+    {
       "id": "FondoJuzgado",
       "file": "../resources/images/temporales/Room3/Juzgado.png"
     },

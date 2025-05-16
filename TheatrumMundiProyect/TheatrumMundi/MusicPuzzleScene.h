@@ -42,6 +42,7 @@ private:
 
 	entity_t musicalScore; //visual entity that changes with each phase
 	entity_t mirrorScore; //visual entity that changes with each phase
+	entity_t background; //background
 
 	std::vector<entity_t> displayedNotes; //entities's vector of displayed musical notes
 
