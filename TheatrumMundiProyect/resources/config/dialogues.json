@@ -283,7 +283,7 @@
     ],
     "PuzzleTaza2": [
       { "Character": "Lucy", "Text": "La cuchara ha cambiado de color." },
-      { "Character": "Sol", "Text": "¿Eso significa qe estaba envenenado?" },
+      { "Character": "Sol", "Text": "¿Eso significa que estaba envenenado?" },
       { "Character": "Lucy", "Text": "Sí." }
     ],
     "PuzzleLibros": [
@@ -405,10 +405,6 @@
         ],
         "SalaIntermedia2_2": [
           { "Character": "Sol", "Text": "Espera, ¿qué significa—" },
-          {
-            "Character": " ",
-            "Text": "Vaya, una pena."
-          },
           {
             "Character": " ",
             "Text": "Vaya, una pena."
