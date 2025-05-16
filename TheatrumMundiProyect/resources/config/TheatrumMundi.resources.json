@@ -740,27 +740,27 @@
     },
     {
       "id": "fase1Partitura",
-      "file": "../resources/images/temporales/fase1Partitura.jpg"
+      "file": "../resources/images/Finales/fase1Partitura.png"
     },
     {
       "id": "fase2Partitura",
-      "file": "../resources/images/temporales/fase2Partitura.jpg"
+      "file": "../resources/images/Finales/fase2Partitura.png"
     },
     {
       "id": "fase3Partitura",
-      "file": "../resources/images/temporales/fase3Partitura.jpg"
+      "file": "../resources/images/Finales/fase3Partitura.png"
     },
     {
       "id": "fase1Espejo",
-      "file": "../resources/images/temporales/fase1Espejo.jpg"
+      "file": "../resources/images/Finales/fase1Espejo.png"
     },
     {
       "id": "fase2Espejo",
-      "file": "../resources/images/temporales/fase2Espejo.jpg"
+      "file": "../resources/images/Finales/fase2Espejo.png"
     },
     {
       "id": "fase3Espejo",
-      "file": "../resources/images/temporales/fase3Espejo.jpg"
+      "file": "../resources/images/Finales/fase3Espejo.png"
     },
     {
       "id": "FondoJuzgado",
