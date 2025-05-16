@@ -72,6 +72,7 @@
     <ClCompile Include="Room3.cpp" />
     <ClCompile Include="SlowRotateComponent.cpp" />
     <ClCompile Include="LockerPuzzle.cpp" />
+    <ClCompile Include="roomprueba.cpp" />
     <ClCompile Include="DialogueAnimComponent.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="ReadInvdesc.cpp" />
@@ -272,6 +273,7 @@
     <ClInclude Include="Room3.h" />
     <ClInclude Include="SlowRotateComponent.h" />
     <ClInclude Include="LockerPuzzle.h" />
+    <ClInclude Include="roomprueba.h" />
     <ClInclude Include="DialogueAnimComponent.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="ReadInvdesc.h" />

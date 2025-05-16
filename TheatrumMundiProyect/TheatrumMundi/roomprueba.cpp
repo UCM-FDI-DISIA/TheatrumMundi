@@ -15,10 +15,10 @@ roomprueba::roomprueba()
 		startDialogue("SalaIntermedia2");
 		};
 	roomEvent[BalancePuzzleScene] = [this] {
-		Game::Instance()->getSceneManager()->loadScene(BALANCE_PUZZLE, this);
+		//Game::Instance()->getSceneManager()->loadScene(BALANCE_PUZZLE, this);
 		};
 	roomEvent[WiresPuzzleScene] = [this] {
-		Game::Instance()->getSceneManager()->loadScene(WIRES_PUZZLE, this);
+		//Game::Instance()->getSceneManager()->loadScene(WIRES_PUZZLE, this);
 		};
 	roomEvent[BalanceSceneRsv] = [this] {
 
@@ -45,11 +45,11 @@ void roomprueba::init()
 
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
-		Sound buttonSound = sdlutils().soundEffects().at("boton");
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
-		Sound puzzleButtonSound = sdlutils().soundEffects().at("puzzle");
+		std::shared_ptr<Sound> puzzleButtonSound = sdlutils().soundEffects().at("puzzle");
 		a.setVolume(puzzleButtonSound, 0.3);
-		Sound doorSound = sdlutils().soundEffects().at("puerta");
+		std::shared_ptr<Sound> doorSound = sdlutils().soundEffects().at("puerta");
 		//Audio music
 		//Sound room2music = sdlutils().musics().at("room2music");
 		//a.setLooping(room2music, true);

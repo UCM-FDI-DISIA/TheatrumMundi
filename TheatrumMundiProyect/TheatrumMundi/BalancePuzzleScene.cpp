@@ -27,6 +27,8 @@
 
 #include "DialogueManager.h"
 
+#include "Log.h"
+
 using namespace std;
 
 BalancePuzzleScene::BalancePuzzleScene()
@@ -49,9 +51,8 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 		isStarted = true;
 		room = sr;
 
-		AudioManager& a = AudioManager
-			::Instance();
-		shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
+		AudioManager& a = AudioManager::Instance();
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
 		dialogueManager->setScene(this);
@@ -113,7 +114,7 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 		//ENTIDADCONENTITYFACTORY
 		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
-
+		
 		//INVENTORY
 		//Invntory Background
 		createInventoryUI();
@@ -133,7 +134,7 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 				Game::Instance()->getSceneManager()->popScene();
 			});
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
-
+		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 		//startDialogue("PuzzleTaza1");
 	}
 	sr->GetInventory()->setFirstItem(0);
@@ -162,8 +163,17 @@ bool BalancePuzzleScene::isItemHand(const std::string& itemId)
 		_hasFeather = true;
 		_featherIsInBalance = true;
 		feather->getMngr()->setActive(feather, true);
-
+		Win();
 		return true;
 	}
 	return false;
+}
+void BalancePuzzleScene::Win()
+{
+	room->resolvedPuzzle(0);
+}
+
+void BalancePuzzleScene::ResolveScene()
+{
+	Win();
 }

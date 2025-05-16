@@ -26,12 +26,14 @@ InitialScene::~InitialScene()
 
 void InitialScene::init()
 {
+	GameSave save("savegame.dat");
+	bool tutorialCompleted = save.isTutoCompleted();
+
+
 	if (!isStarted) {
 
 		SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
-
-		GameSave save("savegame.dat");
-		bool tutorialCompleted = save.isTutoCompleted();
+		
 
 		AudioManager& a = AudioManager::Instance();
 		/*

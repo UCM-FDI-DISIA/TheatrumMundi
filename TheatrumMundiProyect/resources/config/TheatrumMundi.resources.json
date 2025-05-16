@@ -15,6 +15,37 @@
       "id": "EmptyImage",
       "file": "../resources/images/Finales/ImagenVacia.png"
     },
+     { "id" : "loading1", "file" : "../resources/images/Finales/Carga1.png" },
+    {
+      "id": "Room",
+      "file": "../resources/images/Finales/SalaIntermedia.PNG"
+    },
+    { "id" : "loading1", "file" : "../resources/images/Finales/Carga1.png" },
+    { "id" : "menuInicial", "file" : "../resources/images/Finales/mainMenu.png" },
+    {
+      "id": "Title",
+      "file": "../resources/images/TemporalTitleImage.png"
+    },
+    {
+      "id": "TutorialButton",
+      "file": "../resources/images/Finales/tutorialButton.png"
+  },
+  {
+    "id": "NewGame",
+    "file": "../resources/images/Finales/RectangleNewGameButton.PNG"
+  },
+  {
+    "id": "loading",
+    "file": "../resources/images/loading.png"
+  },
+  {
+    "id": "NewGameLocked",
+    "file": "../resources/images/temporales/GameLocked.png"
+},
+{
+  "id": "Exit",
+  "file": "../resources/images/Finales/RectangleExitButton.PNG"
+},
     {
       "id": "ShelfButton",
       "file": "../resources/images/Finales/BotonEstante.PNG"
@@ -210,6 +241,10 @@
     {
       "id": "loading",
       "file": "../resources/images/loading.png"
+    },
+    {
+      "id": "loading2",
+      "file": "../resources/images/Finales/Carga2.png"
     },
     {
       "id": "Keisara",
@@ -815,16 +850,24 @@
       "file": "../resources/images/temporales/Room3/Juzgado.png"
     },
     {
-      "id": "FondoSalaDeEspera",
-      "file": "../resources/images/temporales/Room3/SalaDeEspera.png"
-    },
-    {
       "id": "FondoJuzgadoOscuro",
       "file": "../resources/images/temporales/Room3/JuzgadoOscuro.png"
     },
     {
+      "id": "FondoJuzgadoRojo",
+      "file": "../resources/images/temporales/Room3/JuzgadoRojo.png"
+    },
+    {
+      "id": "FondoSalaDeEspera",
+      "file": "../resources/images/temporales/Room3/SalaDeEspera.png"
+    },
+    {
       "id": "FondoSalaDeEsperaOscuro",
       "file": "../resources/images/temporales/Room3/SalaDeEsperaOscuro.png"
+    },
+    {
+      "id": "FondoSalaDeEsperaRojo",
+      "file": "../resources/images/temporales/Room3/SalaDeEsperaRojo.png"
     },
     {
       "id": "Cables",
@@ -835,12 +878,20 @@
       "file": "../resources/images/temporales/Room3/cablesOscuro.png"
     },
     {
+      "id": "CablesRojo",
+      "file": "../resources/images/temporales/Room3/cablesRojo.png"
+    },
+    {
       "id": "Cadaver3",
       "file": "../resources/images/temporales/Room3/Cadaver.png"
     },
     {
       "id": "Cadaver3Oscuro",
       "file": "../resources/images/temporales/Room3/CadaverOscuro.png"
+    },
+    {
+      "id": "Cadaver3Rojo",
+      "file": "../resources/images/temporales/Room3/CadaverRojo.png"
     },
     {
       "id": "Parrot",
@@ -851,12 +902,20 @@
       "file": "../resources/images/temporales/Room3/parrotOscuro.png"
     },
     {
+      "id": "ParrotRojo",
+      "file": "../resources/images/temporales/Room3/parrotRojo.png"
+    },
+    {
       "id": "TaquillaAzul",
       "file": "../resources/images/temporales/Room3/Taquilla.png"
     },
     {
       "id": "TaquillaAzulOscuro",
       "file": "../resources/images/temporales/Room3/TaquillaOscura.png"
+    },
+    {
+      "id": "TaquillaAzulRojo",
+      "file": "../resources/images/temporales/Room3/TaquillaRojo.png"
     },
     {
       "id": "TaquillaMorada",
@@ -867,12 +926,20 @@
       "file": "../resources/images/temporales/Room3/Taquilla2Oscura.png"
     },
     {
+      "id": "TaquillaMoradaRojo",
+      "file": "../resources/images/temporales/Room3/Taquilla2Rojo.png"
+    },
+    {
       "id": "Balanza",
       "file": "../resources/images/temporales/Room3/balanza.png"
     },
     {
       "id": "BalanzaOscuro",
       "file": "../resources/images/temporales/Room3/balanzaOscura.png"
+    },
+    {
+      "id": "BalanzaRojo",
+      "file": "../resources/images/temporales/Room3/balanzaRojo.png"
     },
     {
       "id": "CajaFuerte",
@@ -885,6 +952,10 @@
     {
       "id": "fondoOrgano",
       "file": "../resources/images/Finales/fondoPuzzleMusical.jpg"
+    },
+    {
+      "id": "CajaFuerteRojo",
+      "file": "../resources/images/temporales/Room3/CajaFuerteRojo.png"
     }
     
 
@@ -991,8 +1062,27 @@
         {
           "id": "NextDialogue",
           "file": "../resources/sound/sfx/NextDialogue.wav"
+        },
+        {
+          "id": "sSound",
+          "file": "../resources/sound/sfx/s_soundRoom3.wav"
+        },
+        {
+          "id": "tSound",
+          "file": "../resources/sound/sfx/t_soundRoom3.wav"
+        },
+        {
+          "id": "oSound",
+          "file": "../resources/sound/sfx/o_soundRoom3.wav"
+        },
+        {
+          "id": "pSound",
+          "file": "../resources/sound/sfx/p_soundRoom3.wav"
+        },
+        {
+          "id": "MorseSound",
+          "file": "../resources/sound/sfx/morse_soundRoom3.wav"
         }
-        
 
     ],
 
