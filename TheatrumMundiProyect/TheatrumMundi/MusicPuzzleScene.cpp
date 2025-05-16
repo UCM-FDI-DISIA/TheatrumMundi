@@ -103,7 +103,7 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
         });
 
         //doorB
-        auto doorB = entityFactory->CreateInteractableEntity(entityManager, "puertaBMusical", EntityFactory::RECTAREA, Vector2D(747, 7), Vector2D(0, 0), 328 / 1.5, 667 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+        auto doorB = entityFactory->CreateInteractableEntity(entityManager, "puertaBMusical", EntityFactory::RECTAREA, Vector2D(746, 11), Vector2D(0, 0), 328 / 1.5, 667 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
         ClickComponent* clickDoorB = entityManager->getComponent<ClickComponent>(doorB);
         clickDoorB->connect(ClickComponent::JUST_CLICKED, [this, instructions, doorB]() {
