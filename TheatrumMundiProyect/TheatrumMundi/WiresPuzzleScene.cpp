@@ -37,11 +37,11 @@ using namespace std;
 
 WiresPuzzleScene::WiresPuzzleScene() : lightsOn(0), selectedWireIndex(-1)
 {
+	dialogueManager = new DialogueManager(0);
 }
 
 WiresPuzzleScene::~WiresPuzzleScene()
 {
-
 }
 
 void WiresPuzzleScene::init(SceneRoomTemplate* sr)
@@ -57,11 +57,11 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		portToCable.resize(ports.size(), -1);
 
 		AudioManager& a = AudioManager::Instance();
-		shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
+		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 
 		//INVENTORY
-		createInventoryUI();
+		//createInventoryUI();
 		
 
 		//where the wires are going to be connected
@@ -174,7 +174,7 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 			bool allConnected = std::all_of(actualPos.begin(), actualPos.end(), [](int pos) { return pos != -1; });
 
 			if (!allConnected) {
-				std::cout << "No todos los cables están conectados. El botón no hace nada." << std::endl;
+				std::cout << "No todos los cables estï¿½n conectados. El botï¿½n no hace nada." << std::endl;
 				for (int i = 0; i < lights.size(); i++) {
 					entityManager->setActive(lights[i], false);
 				}
@@ -189,8 +189,7 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(lights[i], true);
 				}
 				std::cout << "Correct combination" << std::endl;
-				//Win();
-
+				Win();
 			}
 			else
 			{
@@ -206,25 +205,31 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		});
 
 		//BackButton
+		//ENTIDADCONENTITYFACTORY
 		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
+
+		//INVENTORY
+		//Invntory Background
+		createInventoryUI();
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, _backButton, buttonSound]()
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, _backButton, buttonSound]()
 			{
 				AudioManager::Instance().playSound(buttonSound);
+
 				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 				HideInventoryItems();
-				sr->GetInventory()->setFirstItem(0);
+				room->GetInventory()->setFirstItem(0);
 				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
 				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
 				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
 				_backButtonImage->setPosOffset(0, 0);
 				Game::Instance()->getSceneManager()->popScene();
 			});
-
-		dialogueManager->Init(1, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
+		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
+		dialogueManager->setScene(this);
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
 	sr->GetInventory()->setFirstItem(0);
@@ -266,10 +271,10 @@ bool WiresPuzzleScene::Check()
 }
 void WiresPuzzleScene::Win()
 {
-	
+	room->resolvedPuzzle(1);
 }
 
 void WiresPuzzleScene::ResolveScene()
 {
-
+	Win();
 }

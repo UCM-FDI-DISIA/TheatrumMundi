@@ -26,12 +26,14 @@ InitialScene::~InitialScene()
 
 void InitialScene::init()
 {
+	GameSave save("savegame.dat");
+	bool tutorialCompleted = save.isTutoCompleted();
+
+
 	if (!isStarted) {
 
 		SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
-
-		GameSave save("savegame.dat");
-		bool tutorialCompleted = save.isTutoCompleted();
+		
 
 		AudioManager& a = AudioManager::Instance();
 		/*
@@ -104,7 +106,7 @@ void InitialScene::init()
 		}
 
 		else {
-			auto _startbtn = entityFactory->CreateInteractableEntity(entityManager, "NewGameLocked", EntityFactory::RECTAREA, Vector2D(850, 375), Vector2D(0, 0), 250, 57, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _startbtn = entityFactory->CreateInteractableEntity(entityManager, "NewGameLocked", EntityFactory::RECTAREA, Vector2D(850, 450), Vector2D(0, 0), 250, 57, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 			ClickComponent* clk = entityManager->getComponent<ClickComponent>(_startbtn);
 
