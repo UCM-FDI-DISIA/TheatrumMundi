@@ -17,6 +17,7 @@
 /// </summary>
 void MosaicPuzzleScene::createSquares()
 {
+	
 	for (int i = 0; i < TOTALSQUARES; ++i) {
 		auto it = entityFactory->CreateInteractableEntity(entityManager, imgId[i], EntityFactory::RECTAREA, positions[indexPositions[i]], Vector2D(0, 0), SQUAREWIDTH, SQUAREWIDTH, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		squares.push_back(it);
@@ -45,7 +46,7 @@ entity_t MosaicPuzzleScene::createBorder(const Vector2D& position, float width, 
 MosaicPuzzleScene::MosaicPuzzleScene()
 {
 	//Assignation of the possitions 
-
+	dialogueManager = new DialogueManager(3);
 	int onlyRelease = 1;
 
 #ifdef _DEBUG
@@ -139,14 +140,19 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
 				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
 				_backButtonImage->setPosOffset(0, 0);
+				if (solved) AudioManager::Instance().playSound(sdlutils().soundEffects().at("Mosaico"));
 				Game::Instance()->getSceneManager()->popScene();
 			});
 		//Log
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+		dialogueManager->setScene(this);
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
-
+		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) {
+			startDialogue("MOSAICO1_2P");
+		}
+		else startDialogue("MOSAICO1_1P");
 		//startDialogue("PuzzleCuervo");
-
+		dialogueManager->setScene(this);
 #pragma endregion
 
 	}
@@ -322,6 +328,9 @@ bool MosaicPuzzleScene::Check()
 /// </summary>
 void MosaicPuzzleScene::Win()
 {
+	//start Dialogue
+	if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("MOSAICO2_2P");
+	else startDialogue("MOSAICO2_1P");
 	room->resolvedPuzzle(3);
 	setSolved(true);
 }

@@ -11,6 +11,7 @@
 WindowPuzzleScene::WindowPuzzleScene()
 {
 	isStarted = false;
+	dialogueManager =new DialogueManager(3);
 }
 
 WindowPuzzleScene::~WindowPuzzleScene()
@@ -56,9 +57,13 @@ void WindowPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		//Log
-		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
+		dialogueManager->setScene(this);
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
-
+		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("Ventana1_2P");
+		else {
+			startDialogue("Ventana1_1P");
+		}
 		//startDialogue("Ventana");
 
 #pragma endregion
