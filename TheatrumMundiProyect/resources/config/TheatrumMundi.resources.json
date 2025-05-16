@@ -833,8 +833,11 @@
     {
       "id": "CajaFuerteOscuro",
       "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
+    },
+    {
+      "id": "fondoOrgano",
+      "file": "../resources/images/Finales/fondoPuzzleMusical.jpg"
     }
-    
     
 
   ],
@@ -933,15 +936,15 @@
           "id": "LaSound",
           "file": "../resources/sound/sfx/La.wav"
         },
-
-  {
-          "id": "NextDialogue",
-          "file": "../resources/sound/sfx/NextDialogue.wav"
-        },
         {
           "id": "SiSound",
           "file": "../resources/sound/sfx/Si.wav"
+        },
+        {
+          "id": "NextDialogue",
+          "file": "../resources/sound/sfx/NextDialogue.wav"
         }
+        
 
     ],
 

@@ -80,6 +80,7 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
         initializeMusicalSounds();
 
         //background + musical notes helpful guide (visual)
+        entityFactory->CreateImageEntity(entityManager, "fondoOrgano", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 
         //musicalScore + mirror (changes in each phase)
         musicalScore = entityFactory->CreateImageEntity(entityManager, "fase1Partitura", Vector2D(600, 0), Vector2D(0, 0), 1349 / 2, 748 / 2, 0, ecs::grp::DEFAULT);

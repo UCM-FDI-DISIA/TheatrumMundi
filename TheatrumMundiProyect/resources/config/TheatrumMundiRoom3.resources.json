@@ -244,6 +244,34 @@
     {
       "id": "incorrecto",
       "file": "../resources/sound/sfx/incorrecto.wav"
+    },
+    {
+      "id": "DoSound",
+      "file": "../resources/sound/sfx/Do.wav"
+    },
+    {
+      "id": "ReSound",
+      "file": "../resources/sound/sfx/Re.wav"
+    },
+    {
+      "id": "MiSound",
+      "file": "../resources/sound/sfx/Mi.wav"
+    },
+    {
+      "id": "FaSound",
+      "file": "../resources/sound/sfx/Fa.wav"
+    },
+    {
+      "id": "SolSound",
+      "file": "../resources/sound/sfx/Sol.wav"
+    },
+    {
+      "id": "LaSound",
+      "file": "../resources/sound/sfx/La.wav"
+    },
+    {
+      "id": "SiSound",
+      "file": "../resources/sound/sfx/Si.wav"
     }
     ],
 
