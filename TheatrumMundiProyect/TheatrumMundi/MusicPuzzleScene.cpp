@@ -218,14 +218,6 @@ void MusicPuzzleScene::refresh()
                 _isAnimating = false;
 
                 //reactive all scene buttons
-                
-                //recolor displayed notes
-                for (auto a : displayedNotes)
-                {
-                    auto aIm = entityManager->getComponent<Image>(a);
-                    aIm->setAlpha(250);
-                }
-
                 if (_animationType) Check();
                 else
                 {
@@ -374,16 +366,6 @@ bool MusicPuzzleScene::playAnimation(bool correct)
     _isStartDelay = true; // little delay to let last musical note play accordingly
     _noteStartTime = sdlutils().virtualTimer().currRealTime();
 
-    
-    //dissable all scene buttons
-
-    //notes will change its colour (texture). Temporarly changes their alpha
-    for (auto a : displayedNotes)
-    {
-        auto aIm = entityManager->getComponent<Image>(a);
-        aIm->setAlpha(100);
-    }
-
     return true;
 
     
@@ -433,36 +415,47 @@ void MusicPuzzleScene::updateDisplayedNotes()
         auto noteTr = entityManager->getComponent<Transform>(displayedNotes[i]);
         
         int yPos = 385;
+        int xPos = 0;
         float width = 25/1.2;
         float height = 65/1.2;
+
+        int spacingX = 32 - _phase * 7.5;
+        int baseX = 682;
 
         switch (_currentComb[i])
         {
         case Notes::DO:
             texture = "Do";
+            xPos = baseX + i * spacingX;
             break;
         case Notes::RE:
             texture = "NotaBasica";
+            xPos = baseX + i * spacingX;
             yPos = 380.0f;
             break;
         case Notes::MI:
             texture = "NotaBasica";
+            xPos = baseX + i * spacingX;
             yPos = 373.0f;
             break;
         case Notes::FA:
             texture = "NotaBasica";
+            xPos = baseX + i * spacingX;
             yPos = 363.0f;
             break;
         case Notes::SOL:
             texture = "NotaBasica";
+            xPos = baseX + i * spacingX;
             yPos = 355.0f;
             break;
         case Notes::LA:
             texture = "NotaBasica";
+            xPos = baseX + i * spacingX;
             yPos = 345.0f;
             break;
         case Notes::SI:
             texture = "Si";
+            xPos = baseX + i * spacingX;
             yPos = 370.0f;
             break;
         default:
@@ -474,7 +467,7 @@ void MusicPuzzleScene::updateDisplayedNotes()
         
         
         noteIm->setTexture(&sdlutils().images().at(texture));
-        noteTr->setPosY(yPos);
+        noteTr->setPos(Vector2D(xPos, yPos));
         noteTr->setWidth(width);
         noteTr->setHeight(height);
 
@@ -484,22 +477,6 @@ void MusicPuzzleScene::updateDisplayedNotes()
         entityManager->setActive(displayedNotes[i], true);
 
 
-        /*
-        if (_currentComb[i] == Notes::DO)
-        {
-            texture = "Do";
-            noteIm->setTexture(&sdlutils().images().at(texture));
-        }
-        else if (_currentComb[i] == Notes::SI)
-        {
-            texture = "Si";
-            noteIm->setTexture(&sdlutils().images().at(texture));
-        }
-        else
-        {
-            texture = "NotaBasica";
-            noteIm->setTexture(&sdlutils().images().at(texture));
-        }*/
     }
 
     // Hide non used notes if needed
