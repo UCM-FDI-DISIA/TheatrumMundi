@@ -82,16 +82,41 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
         //background
         entityFactory->CreateImageEntity(entityManager, "fondoOrgano", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 
-        
         //mirror
-        entityFactory->CreateImageEntity(entityManager, "espejo", Vector2D(175, 0), Vector2D(0, 0), 345/1.5, 707/1.5, 0, ecs::grp::DEFAULT);
+        auto mirror = entityFactory->CreateImageEntity(entityManager, "espejo", Vector2D(175, 0), Vector2D(0, 0), 345/1.5, 707/1.5, 0, ecs::grp::DEFAULT);
+        entityManager->setActive(mirror, false);
 
         //instructions
-        entityFactory->CreateImageEntity(entityManager, "instrucciones", Vector2D(940, 0), Vector2D(0, 0), 354 / 1.5, 707 / 1.5, 0, ecs::grp::DEFAULT);
+        auto instructions = entityFactory->CreateImageEntity(entityManager, "instrucciones", Vector2D(940, 0), Vector2D(0, 0), 354 / 1.5, 707 / 1.5, 0, ecs::grp::DEFAULT);
+        entityManager->setActive(instructions, false);
+
+        //doorA
+        auto doorA = entityFactory->CreateInteractableEntity(entityManager, "puertaAMusical", EntityFactory::RECTAREA, Vector2D(394, 9), Vector2D(0, 0), 328 / 1.5, 667 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+
+        ClickComponent* clickDoorA = entityManager->getComponent<ClickComponent>(doorA);
+        clickDoorA->connect(ClickComponent::JUST_CLICKED, [this, mirror, doorA]() {
+            //show mirror
+            entityManager->setActive(mirror, true);
+
+            //hide doorA
+            entityManager->setActive(doorA, false);
+        });
+
+        //doorB
+        auto doorB = entityFactory->CreateInteractableEntity(entityManager, "puertaBMusical", EntityFactory::RECTAREA, Vector2D(747, 7), Vector2D(0, 0), 328 / 1.5, 667 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+
+        ClickComponent* clickDoorB = entityManager->getComponent<ClickComponent>(doorB);
+        clickDoorB->connect(ClickComponent::JUST_CLICKED, [this, instructions, doorB]() {
+            //show mirror
+            entityManager->setActive(instructions, true);
+
+            //hide doorA
+            entityManager->setActive(doorB, false);
+            });
 
         //musicalScore + mirror (changes in each phase)
         musicalScore = entityFactory->CreateImageEntity(entityManager, "fase1Partitura", Vector2D(545, 330), Vector2D(0, 0), 403 / 1.5, 171 / 1.5, 0, ecs::grp::DEFAULT);
-        mirror = entityFactory->CreateImageEntity(entityManager, "fase1Espejo", Vector2D(230, 100), Vector2D(0, 0), 208/1.5, 395/1.5, 0, ecs::grp::DEFAULT);
+        mirrorScore = entityFactory->CreateImageEntity(entityManager, "fase1Espejo", Vector2D(230, 100), Vector2D(0, 0), 208/1.5, 395/1.5, 0, ecs::grp::DEFAULT);
 
         //displayed notes
         initializeDisplayedNotes();
@@ -376,7 +401,7 @@ void MusicPuzzleScene::startSoundSequence()
 void MusicPuzzleScene::updateMusicImages()
 {
     auto musicalScoreIm = entityManager->getComponent<Image>(musicalScore);
-    auto mirrorIm = entityManager->getComponent<Image>(mirror);
+    auto mirrorIm = entityManager->getComponent<Image>(mirrorScore);
 
     switch (_phase)
     {
@@ -465,14 +490,9 @@ void MusicPuzzleScene::createPianoButtons()
     auto buttMi = entityFactory->CreateInteractableEntity(entityManager, "miTecla", EntityFactory::RECTAREA, Vector2D(598, 480), Vector2D(0, 0), 70 / 1.5, 132 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
     auto buttFa = entityFactory->CreateInteractableEntity(entityManager, "faTecla", EntityFactory::RECTAREA, Vector2D(633, 481), Vector2D(0, 0), 69 / 1.5, 131 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
     auto buttSol = entityFactory->CreateInteractableEntity(entityManager, "solTecla", EntityFactory::RECTAREA, Vector2D(668, 482), Vector2D(0, 0), 73 / 1.5, 130 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-    
     auto buttSi = entityFactory->CreateInteractableEntity(entityManager, "siTecla", EntityFactory::RECTAREA, Vector2D(730, 480), Vector2D(0, 0), 99 / 1.5, 132 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-
-
     auto buttLa = entityFactory->CreateInteractableEntity(entityManager, "laTecla", EntityFactory::RECTAREA, Vector2D(703, 481), Vector2D(0, 0), 82 / 1.5, 131 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
    
-    //
-
     ClickComponent* clickButtDo = entityManager->getComponent<ClickComponent>(buttDo);
     clickButtDo->connect(ClickComponent::JUST_CLICKED, [this]() {
         //play organ key sound

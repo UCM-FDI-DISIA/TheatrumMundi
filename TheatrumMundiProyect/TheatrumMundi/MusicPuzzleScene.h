@@ -41,7 +41,7 @@ private:
 	int _phase; //current phase player is in
 
 	entity_t musicalScore; //visual entity that changes with each phase
-	entity_t mirror; //visual entity that changes with each phase
+	entity_t mirrorScore; //visual entity that changes with each phase
 
 	std::vector<entity_t> displayedNotes; //entities's vector of displayed musical notes
 
