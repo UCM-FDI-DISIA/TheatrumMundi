@@ -574,8 +574,8 @@
     {"Character":"Lucy","Text":"Este mausoleo es cada vez más extraño."}
     ],
    "CUERVO1_2P":[                 
-    {"Character":"Lucy","Text":"¡Eh! Ese cuervo tiene una llave."},
-    {"Character":"Lucy","Text":"¿Crees que es la del mausoleo?"},
+    {"Character":"Keisara","Text":"¡Eh! Ese cuervo tiene una llave."},
+    {"Character":"Keisara","Text":"¿Crees que es la del mausoleo?"},
     {"Character":"Lucy","Text":"Ven aquí pajarraco."},
     {"Character":"Keisara","Text":"Asi no vamos a conseguir nada."},
     {"Character":"Lucy","Text":"Entonces, ¿qué hacemos?"},
