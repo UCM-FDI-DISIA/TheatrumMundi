@@ -82,13 +82,16 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
         //background
         entityFactory->CreateImageEntity(entityManager, "fondoOrgano", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 
+        
         //mirror
+        entityFactory->CreateImageEntity(entityManager, "espejo", Vector2D(175, 0), Vector2D(0, 0), 345/1.5, 707/1.5, 0, ecs::grp::DEFAULT);
 
         //instructions
 
+
         //musicalScore + mirror (changes in each phase)
         musicalScore = entityFactory->CreateImageEntity(entityManager, "fase1Partitura", Vector2D(545, 330), Vector2D(0, 0), 403 / 1.5, 171 / 1.5, 0, ecs::grp::DEFAULT);
-        mirror = entityFactory->CreateImageEntity(entityManager, "fase1Espejo", Vector2D(0, 300), Vector2D(0, 0), 1349 / 3, 748 / 3, 0, ecs::grp::DEFAULT);
+        mirror = entityFactory->CreateImageEntity(entityManager, "fase1Espejo", Vector2D(230, 100), Vector2D(0, 0), 208/1.5, 395/1.5, 0, ecs::grp::DEFAULT);
 
         //displayed notes
         initializeDisplayedNotes();

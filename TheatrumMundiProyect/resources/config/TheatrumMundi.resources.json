@@ -763,6 +763,22 @@
       "file": "../resources/images/Finales/fase3Espejo.png"
     },
     {
+      "id": "puertaAMusical",
+      "file": "../resources/images/Finales/puertaA.png"
+    },
+    {
+      "id": "puertaBMusical",
+      "file": "../resources/images/Finales/puertaB.png"
+    },
+    {
+      "id": "instrucciones",
+      "file": "../resources/images/Finales/instrucciones.png"
+    },
+    {
+      "id": "espejo",
+      "file": "../resources/images/Finales/espejo.png"
+    },
+    {
       "id": "FondoJuzgado",
       "file": "../resources/images/temporales/Room3/Juzgado.png"
     },
