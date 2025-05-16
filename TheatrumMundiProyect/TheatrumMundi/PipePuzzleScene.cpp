@@ -33,7 +33,7 @@ void PipePuzzleScene::pipeCreation()
 {
 	int nextPipeId = 0;
 
-	_waterPipes.push_back(new Pipe({ nextPipeId, Pipe::TWO, {'M', 0, DOWN}, {'M', 1, RIGHT}, false }));
+	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::TWO, {'M', 0, DOWN}, {'M', 1, RIGHT}, false }));
 	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::ONE, {'M', 0,   RIGHT}, {'P', 0,  NONE}, true }));
 	_waterPipes.push_back(new Pipe({ nextPipeId++, Pipe::TWO, {'P', 5,  NONE}, {'P', 3,  NONE}, false }));
 	_waterPipes.push_back(new Pipe({ nextPipeId++,Pipe::ONE, {'M', 1,  DOWN}, {'M', 4,  UP}, false }));
@@ -53,7 +53,7 @@ void PipePuzzleScene::moduleCreation()
 	//if N 0 never going to have water(null direction)
 	 int nextId = 0;
 	
-	_modules.push_back(new Module({ nextId, RIGHT, {'P', 0}, true }));
+	_modules.push_back(new Module({ nextId++, RIGHT, {'P', 0}, true }));
 	_modules.push_back(new Module({ nextId++,  RIGHT, {'P', 2}, true }));
 	_modules.push_back(new Module({ nextId++,  DOWN,  {'P', 5}, true }));
 	_modules.push_back(new Module({ nextId++,  RIGHT,  {'P', 10}, false }));
@@ -67,7 +67,7 @@ void PipePuzzleScene::pathCreation()
     int nextId = 0;
 
 	//PATH 0 
-	_waterPath.push_back({ nextId, true, {'N',0,NONE}});//0
+	_waterPath.push_back({ nextId++, true, {'N',0,NONE}});//0
 
 	auto path0 =entityFactory->CreateImageEntity(entityManager, "pathWater", Vector2D(180, -50),
 	Vector2D(0, 0), 90, 40, 0, ecs::grp::DEFAULT);
@@ -640,67 +640,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 		//INVENTORY
 				//Invntory Background
-		auto InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
-		entityManager->setActive(InventoryBackground, false);
-
-		auto upButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-		entityManager->setActive(upButton, false);
-
-		auto downButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-		entityManager->setActive(downButton, false);
-
-		//InventoryButton
-		auto inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
-		invOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, upButton, downButton, inventoryButton, buttonSound]() //Lamda function
-			{
-				AudioManager::Instance().playSound(buttonSound);
-				sr->GetInventory()->setActive(!sr->GetInventory()->getActive());  // Toggle the inventory
-
-				for (int i = 0; i < invObjects.size(); ++i) {
-					std::cout << "objetos antes y despues: " << sr->GetInventory()->hints[i]->getMngr()->getComponent<Transform>(sr->GetInventory()->hints[i])->getPos().getY() << std::endl;
-				}
-
-				// If the inventory is active, activate the items
-				if (sr->GetInventory()->getActive()) {
-					entityManager->setActive(InventoryBackground, true);
-
-					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(925);
-					entityManager->setActive(downButton, true);
-					entityManager->setActive(upButton, true);
-					entityManager->setActive(logbtn, false);
-					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
-						invObjects[i]->getMngr()->setActive(invObjects[i], true);
-					}
-				}
-				else {
-					entityManager->setActive(InventoryBackground, false);
-					entityManager->setActive(InventoryBackground, false);
-					entityManager->setActive(downButton, false);
-					entityManager->setActive(upButton, false);
-					entityManager->setActive(logbtn, true);
-					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
-
-					for (int i = sr->GetInventory()->getFirstItem(); i < sr->GetInventory()->getFirstItem() + sr->GetInventory()->getItemNumber(); ++i) {
-						invObjects[i]->getMngr()->setActive(invObjects[i], false);
-					}
-				}
-			});
-
-		ClickComponent* UPbuttonInventoryClick = entityManager->getComponent<ClickComponent>(upButton);
-		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, upButton, sr]() {
-
-			AudioManager::Instance().playSound(buttonSound);
-			scrollInventoryPuzzle(-1, sr);
-			});
-
-		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
-		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, downButton, sr]() {
-
-			AudioManager::Instance().playSound(buttonSound);
-			scrollInventoryPuzzle(1, sr);
-			});
-
+		createInventoryUI();
 		
 		//Viriant logic
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(0);
@@ -869,12 +809,12 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Click component Open log button
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, InventoryBackground, downButton, upButton, inventoryButton,_backButton, buttonSound]()
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, _backButton, buttonSound]()
 		{
 				AudioManager::Instance().playSound(buttonSound);
 
 			inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
-			HideInventoryItems(InventoryBackground, downButton, upButton, sr);
+			HideInventoryItems();
 			sr->GetInventory()->setFirstItem(0);
 			auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
 			_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
@@ -1051,7 +991,7 @@ void PipePuzzleScene::updatePuzzle() {
             waterPassModule(i);  
             bool after = _modules[i]->getModuleInfo().result;
 
-           // std::cout << "Module " << i << " Before: " << before << " After: " << after << std::endl;
+          //  std::cout << "Module " << i << " Before: " << before << " After: " << after << std::endl;
 
             if (before != after) {
                 stateChanged = true;
@@ -1064,7 +1004,7 @@ void PipePuzzleScene::updatePuzzle() {
             waterPassPath(i);  
             bool after = _waterPath[i]._withWater;
 
-           // std::cout << "Path " << i << " Before: " << before << " After: " << after << std::endl;
+            //std::cout << "Path " << i << " Before: " << before << " After: " << after << std::endl;
 
             if (before != after) {
                 stateChanged = true;
@@ -1084,9 +1024,8 @@ void PipePuzzleScene::updatePuzzle() {
             }
         }
 
-       
-        Check();
     }
+	Check();
 }
 
 

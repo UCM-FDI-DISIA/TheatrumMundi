@@ -109,7 +109,7 @@ void ScrollComponent::update()
 		//cout << _timeScroll << endl;
 		_timeScroll--;
 
-		if (_timeScroll == 0) {
+		if (_timeScroll <= 0) {
 
 			auto& callbacks = _eventConnectionsScroll.at(ScrollComponent::ENDEDSCROLLING);
 			///funcion x

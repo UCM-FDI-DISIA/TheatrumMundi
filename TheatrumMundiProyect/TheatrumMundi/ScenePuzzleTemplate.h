@@ -20,8 +20,10 @@ class ScenePuzzleTemplate: public SceneTemplate
 		Vector2D originalPos; //Saves the origianl position of an object
 
 		ecs::entity_t textDescriptionEnt; //Description entities
-
+		ecs::entity_t inventoryButton;
 		Transform* _testTextTranform; //Description position
+		std::list<ecs::entity_t> invElems; // all the btns and bacground of the inventory
+		void createInventoryUI();
 
 	public:
 	
@@ -61,7 +63,7 @@ class ScenePuzzleTemplate: public SceneTemplate
 
 	void scrollInventoryPuzzle(int dir, SceneRoomTemplate* sr); //scroll puzzle
 
-	void HideInventoryItems(const ecs::entity_t& InventoryBackground, const ecs::entity_t& downButton, const ecs::entity_t& upButton, SceneRoomTemplate* sr);
+	void HideInventoryItems();
 
 	ScenePuzzleTemplate();
 

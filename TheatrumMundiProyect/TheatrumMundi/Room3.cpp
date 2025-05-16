@@ -53,6 +53,19 @@ void Room3Scene::init()
 
 void Room3Scene::resolvedPuzzle(int i)
 {
+	if (i < 5) {
+		int auxevent = event_size;
+		if (i == 0)  auxevent = BalanceSceneRsv;
+		else if (i == 1)  auxevent = WiresSceneRsv;
+		else if (i == 2)  auxevent = CircleLockSceneRsv;
+		//else if (i == 3)  auxevent = MosaicPuzzleSceneRsv;
+		//else if (i == 4)  auxevent = OrganPuzzleSceneRsv;
+		roomEvent[auxevent]();
+		bool aux = true;
+		for (bool a : puzzlesol) if (!a) aux = false;
+		finishallpuzzles = aux;
+		if (aux) entityManager->setActive(characterCorpse, true);
+	}
 }
 
 void Room3Scene::unload()
@@ -79,15 +92,17 @@ void Room3Scene::_setRoomEvents()
 
 #pragma region Events
 	roomEvent[InitialDialogue] = [this] {
-		startDialogue("SalaIntermedia3");
+		//startDialogue("SalaIntermedia3");
 		};
 	roomEvent[CorpseDialogue] = [this] {
 		entityManager->setActive(rmObjects.zoomCorpse, true);
 		entityManager->setActive(rmObjects.quitButton, true);
-		startDialogue("Cadaver");
+		//startDialogue("Cadaver");
 		};
 	roomEvent[LightsOn] = [this] {
-		LightsToOn = true; //To interact with determined entities
+		Game::Instance()->getDataManager()->SetRoom3Phase(1);
+		//LightsToOn = true; //To interact with determined entities
+		//LightsToRed = false;
 		entityManager->getComponent<Image>(rmObjects.backgroundLeftIllumination)->setTexture(&sdlutils().images().at("FondoSalaDeEspera"));
 		entityManager->getComponent<Image>(rmObjects.backgroundRightIllumination)->setTexture(&sdlutils().images().at("FondoJuzgado"));
 		entityManager->getComponent<Image>(rmObjects.boxOfficeMorseCodeB)->setTexture(&sdlutils().images().at("TaquillaAzul"));
@@ -96,23 +111,86 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.parrot)->setTexture(&sdlutils().images().at("Parrot"));
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3"));
 		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("Balanza"));
-		entityManager->getComponent<Image>(rmObjects.safeBox)->setTexture(&sdlutils().images().at("CajaFuerte"));
+		entityManager->getComponent<Image>(rmObjects.locker)->setTexture(&sdlutils().images().at("CajaFuerte"));
+		//characterCorpse
+		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3"));
+		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("Cadaver3"));
 		};
 	roomEvent[LightsOff] = [this] {
-		LightsToOn = false; //To not interact with determined entities
+		//LightsToOn = false; //To not interact with determined entities
+		//LightsToRed = false;
+		Game::Instance()->getDataManager()->SetRoom3Phase(0);
+		//entityManager->getComponent<Image>(rmObjects.backgroundLeftIllumination)->setTexture(&sdlutils().images().at("FondoSalaDeEsperaOscuro"));
+		//entityManager->getComponent<Image>(rmObjects.backgroundRightIllumination)->setTexture(&sdlutils().images().at("FondoJuzgadoOscuro"));
+		//entityManager->getComponent<Image>(rmObjects.boxOfficeMorseCodeB)->setTexture(&sdlutils().images().at("TaquillaAzulOscuro"));
+		//entityManager->getComponent<Image>(rmObjects.boxOfficeCircleLockP)->setTexture(&sdlutils().images().at("TaquillaMoradaOscuro"));
+		//entityManager->getComponent<Image>(rmObjects.cablesPuzzle)->setTexture(&sdlutils().images().at("CablesOscuro"));
+		//entityManager->getComponent<Image>(rmObjects.parrot)->setTexture(&sdlutils().images().at("ParrotOscuro"));
+		//entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("BalanzaOscuro"));
+		//entityManager->getComponent<Image>(rmObjects.locker)->setTexture(&sdlutils().images().at("CajaFuerteOscuro"));
+
 		entityManager->getComponent<Image>(rmObjects.backgroundLeftIllumination)->setTexture(&sdlutils().images().at("FondoSalaDeEsperaOscuro"));
 		entityManager->getComponent<Image>(rmObjects.backgroundRightIllumination)->setTexture(&sdlutils().images().at("FondoJuzgadoOscuro"));
-		entityManager->getComponent<Image>(rmObjects.boxOfficeMorseCodeB)->setTexture(&sdlutils().images().at("TaquillaAzulOscuro"));
-		entityManager->getComponent<Image>(rmObjects.boxOfficeCircleLockP)->setTexture(&sdlutils().images().at("TaquillaMoradaOscuro"));
+		entityManager->getComponent<Image>(rmObjects.boxOfficeMorseCodeB)->setTexture(&sdlutils().images().at("EmptyImage"));
+		entityManager->getComponent<Image>(rmObjects.boxOfficeCircleLockP)->setTexture(&sdlutils().images().at("EmptyImage"));
 		entityManager->getComponent<Image>(rmObjects.cablesPuzzle)->setTexture(&sdlutils().images().at("CablesOscuro"));
-		entityManager->getComponent<Image>(rmObjects.parrot)->setTexture(&sdlutils().images().at("ParrotOscuro"));
+		entityManager->getComponent<Image>(rmObjects.parrot)->setTexture(&sdlutils().images().at("EmptyImage"));
+		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("EmptyImage"));
+		entityManager->getComponent<Image>(rmObjects.locker)->setTexture(&sdlutils().images().at("EmptyImage"));
+		//characterCorpse
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3Oscuro"));
-		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("BalanzaOscuro"));
-		entityManager->getComponent<Image>(rmObjects.safeBox)->setTexture(&sdlutils().images().at("CajaFuerteOscuro"));
+		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("EmptyImage"));
 		};
+	roomEvent[LightsRed] = [this] {
+		//LightsToOn = true;  //To interact with determined entities when the room is red
+		//LightsToRed = true;
+		Game::Instance()->getDataManager()->SetRoom3Phase(2);
+		entityManager->getComponent<Image>(rmObjects.backgroundLeftIllumination)->setTexture(&sdlutils().images().at("FondoSalaDeEsperaRojo"));
+		entityManager->getComponent<Image>(rmObjects.backgroundRightIllumination)->setTexture(&sdlutils().images().at("FondoJuzgadoRojo"));
+		entityManager->getComponent<Image>(rmObjects.boxOfficeMorseCodeB)->setTexture(&sdlutils().images().at("TaquillaAzulRojo"));
+		entityManager->getComponent<Image>(rmObjects.boxOfficeCircleLockP)->setTexture(&sdlutils().images().at("TaquillaMoradaRojo"));
+		entityManager->getComponent<Image>(rmObjects.cablesPuzzle)->setTexture(&sdlutils().images().at("CablesRojo"));
+		entityManager->getComponent<Image>(rmObjects.parrot)->setTexture(&sdlutils().images().at("ParrotRojo"));
+		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("BalanzaRojo"));
+		entityManager->getComponent<Image>(rmObjects.locker)->setTexture(&sdlutils().images().at("CajaFuerteRojo"));
+		//characterCorpse
+		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3Rojo"));
+		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("Cadaver3Rojo"));
 
+		entityManager->getComponent<BehaviorStateComponent>(rmObjects.parrot)->setState(ParrotState::RED_LIGHTS);
+		};
 	roomEvent[BalancePuzzleScene] = [this] {
 		Game::Instance()->getSceneManager()->loadScene(BALANCE_PUZZLE, this);
+		};
+	roomEvent[WiresPuzzleScene] = [this] {
+		Game::Instance()->getSceneManager()->loadScene(WIRES_PUZZLE, this);
+		};
+	roomEvent[WiresSceneRsv] = [this] {
+			roomEvent[LightsOn]();
+		};
+	roomEvent[CircleLockPuzzleScene] = [this] {
+		Game::Instance()->getSceneManager()->loadScene(LOCKER_PUZZLE, this);
+		};
+	roomEvent[CircleLockSceneRsv] = [this] {
+
+		};
+	roomEvent[MorseCodePuzzleScene] = [this] {
+		Game::Instance()->getSceneManager()->loadScene(BOX, this);
+		};
+	roomEvent[MorseCodeSceneRsv] = [this] {
+
+		};
+	roomEvent[BalancePuzzleScene] = [this] {
+		Game::Instance()->getSceneManager()->loadScene(BALANCE_PUZZLE, this);
+		};
+	roomEvent[BalanceSceneRsv] = [this] {
+			roomEvent[LightsRed]();
+		};
+	roomEvent[ParrotScene] = [this] {
+
+		};
+	roomEvent[ParrotSceneRsv] = [this] {
+
 		};
 	//roomEvent[ResolveCase] = [this] {
 	//	//IMPORTANT assign dialogue
@@ -174,6 +252,15 @@ void Room3Scene::_setRoomAudio()
 	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
 
 	rmSounds.explosionSound = sdlutils().soundEffects().at("explosion");
+
+	rmSounds.s_Sound = sdlutils().soundEffects().at("sSound");
+	rmSounds.t_Sound = sdlutils().soundEffects().at("tSound");
+	rmSounds.o_Sound = sdlutils().soundEffects().at("oSound");
+	rmSounds.p_Sound = sdlutils().soundEffects().at("pSound");
+
+	rmSounds.morse_Sound = sdlutils().soundEffects().at("MorseSound");
+
+	//rmSounds.stopSound = sdlutils().soundEffects().at("");
 	/*Audio music
 	Sound room1music = sdlutils().musics().at("sala2");
 	audioMngr.setLooping(room1music, true);
@@ -374,86 +461,134 @@ void Room3Scene::_setCaseResolution()
 
 void Room3Scene::_setInteractuables()
 {
-	//BOXOFFICE MORSECODE
-	rmObjects.boxOfficeMorseCodeB = entityFactory->CreateInteractableEntity(entityManager,"TaquillaAzulOscuro",EntityFactory::RECTAREA,Vector2D(-1200,300),Vector2D(0,0),100,100,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::DEFAULT);
+	//CORPSE
+	rmObjects.zoomCorpse = entityFactory->CreateImageEntity(entityManager, "Cadaver3Oscuro", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
+	RectArea2D* corpseZoomArea = entityManager->addComponent<RectArea2D>(rmObjects.zoomCorpse, areaLayerManager);
+	entityManager->setActive(rmObjects.zoomCorpse, false);
+
+	characterCorpse = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(1000, 300), Vector2D(0, 0), 250 / 3, 225 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(characterCorpse));
+
+	entityManager->getComponent<ClickComponent>(characterCorpse)
+		->connect(ClickComponent::JUST_CLICKED, [this]()
+			{
+				if (!finishallpuzzles && Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
+					roomEvent[CorpseDialogue]();
+				}
+			});
+
+	//BOXOFFICE MORSECODE - Caja fuerte
+	rmObjects.boxOfficeMorseCodeB = entityFactory->CreateInteractableEntity(entityManager,"EmptyImage",EntityFactory::RECTAREA,Vector2D(-1200,300),Vector2D(0,0),100,100,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.boxOfficeMorseCodeB)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		roomEvent[LightsOn]();
+		
+		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
+			roomEvent[MorseCodePuzzleScene]();
+		}
+
 		});
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.boxOfficeMorseCodeB));
 
-	//BOXOFFICE CIRCLELOCK
-	rmObjects.boxOfficeCircleLockP = entityFactory->CreateInteractableEntity(entityManager, "TaquillaMoradaOscuro", EntityFactory::RECTAREA, Vector2D(-1000,200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	//BOXOFFICE CIRCLELOCK - 
+	rmObjects.boxOfficeCircleLockP = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(-1000,200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.boxOfficeCircleLockP)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		roomEvent[LightsOff]();
+		
+		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
+
+		}
+
 		});
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.boxOfficeCircleLockP));
 
 	//PARROT
-	rmObjects.parrot = entityFactory->CreateInteractableEntity(entityManager, "ParrotOscuro", EntityFactory::RECTAREA, Vector2D(1000, 0), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	rmObjects.parrot = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(1000, 0), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.parrot)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		//roomEvent[LightsOff]();
+		
+		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
+			roomEvent[ParrotScene]();
+		}
+
 		});
 	
 	BehaviorStateComponent* parrotStateCom = entityManager->addComponent<BehaviorStateComponent>(rmObjects.parrot);
 
 	parrotUtils.codeSequenceSounds.push_back(rmSounds.explosionSound); // TODO: Gunshoot
-	parrotUtils.codeSequenceSounds.push_back(rmSounds.doorSound); // TODO: S
-	parrotUtils.codeSequenceSounds.push_back(rmSounds.uiButton); // TODO: T
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.s_Sound); // TODO: S
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.t_Sound); // TODO: T
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.o_Sound); // TODO: O
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.p_Sound); // TODO: P
 	// More sounds...
 
 	parrotStateCom->defBehavior(ParrotState::SHOOTING_SOUND,
 		[&]() {
-			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
-				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[0]);
-				parrotUtils.lastSoundTime = sdlutils().currTime();
+			if (rmObjects.backgroundScroll->startPhaseCheck()) { //Right side of the room PARROT
+				if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
+					AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[0]);
+					parrotUtils.lastSoundTime = sdlutils().currTime();
+				}
 			}
+
+			//parrotStateCom->setState(Game::Instance()->getDataManager()->GetRoom3Phase()); // Check if changes the room state
 		});
 
 	parrotStateCom->defBehavior(ParrotState::RED_LIGHTS,
 		[&]() {
-			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
+			if (rmObjects.backgroundScroll->startPhaseCheck()) { //Right side of the room PARROT
+				if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
+					AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[parrotUtils.codeSeqIteration]);
 
-				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[parrotUtils.codeSeqIteration]);
+					++parrotUtils.codeSeqIteration;
+					parrotUtils.codeSeqIteration = parrotUtils.codeSeqIteration % parrotUtils.codeSequenceSounds.size();
 
-				++parrotUtils.codeSeqIteration;
-				parrotUtils.codeSeqIteration = parrotUtils.codeSeqIteration % parrotUtils.codeSequenceSounds.size();
-
-				parrotUtils.lastSoundTime = sdlutils().currTime();
+					parrotUtils.lastSoundTime = sdlutils().currTime();
+				}
 			}
+			else { //Left side of the room MORSE (if we have the redLightsState)
+				if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 8000) { // Every eight seconds
+					AudioManager::Instance().playSound(rmSounds.morse_Sound);
+					parrotUtils.lastSoundTime = sdlutils().currTime();
+				}
+			}
+
+
+			//parrotStateCom->setState(Game::Instance()->getDataManager()->GetRoom3Phase()); // Check if changes the room state
 		});
 
 	parrotStateCom->setState(ParrotState::SHOOTING_SOUND); // The other will be setted after finishin the puzzle
 
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.parrot));
 
-	//CORPSE
-	rmObjects.zoomCorpse = entityFactory->CreateInteractableEntity(entityManager, "Cadaver3Oscuro", EntityFactory::RECTAREA, Vector2D(800, 400), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-	entityManager->getComponent<ClickComponent>(rmObjects.zoomCorpse)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		//roomEvent[LightsOff]();
-		});
-	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.zoomCorpse));
-
 	//CABLES
 	rmObjects.cablesPuzzle = entityFactory->CreateInteractableEntity(entityManager, "CablesOscuro", EntityFactory::RECTAREA, Vector2D(-600, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.cablesPuzzle)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		//roomEvent[LightsOff]();
+		
+		if (!rmObjects.backgroundScroll->isScrolling()) {
+			roomEvent[WiresPuzzleScene]();
+		}
+
 		});
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.cablesPuzzle));
 
 	//BALANCE
-	rmObjects.balance = entityFactory->CreateInteractableEntity(entityManager, "BalanzaOscuro", EntityFactory::RECTAREA, Vector2D(800, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	rmObjects.balance = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(800, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.balance)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		//roomEvent[LightsOff]();
-		roomEvent[BalancePuzzleScene]();
+		
+		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
+			roomEvent[BalancePuzzleScene]();
+		}
+			
 		});
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.balance));
 
-	//SAFEBOX
-	rmObjects.safeBox = entityFactory->CreateInteractableEntity(entityManager, "CajaFuerteOscuro", EntityFactory::RECTAREA, Vector2D(1200, 300), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-	entityManager->getComponent<ClickComponent>(rmObjects.safeBox)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		//roomEvent[LightsOff]();
+	//LOCKER
+	rmObjects.locker = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(1200, 300), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	entityManager->getComponent<ClickComponent>(rmObjects.locker)->connect(ClickComponent::JUST_CLICKED, [this]() {
+		
+		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
+			roomEvent[CircleLockPuzzleScene]();
+		}
+
 		});
-	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.safeBox));
+	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.locker));
 }
 
 void Room3Scene::_setDialog()
