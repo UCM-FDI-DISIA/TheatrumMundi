@@ -32,6 +32,7 @@
 #include "CSVdataRecolector.h"
 #include "BalancePuzzleScene.h"
 #include "Box.h"
+#include "ParrotPuzzleScene.h"
 
 SceneManager::SceneManager()
 {
@@ -63,6 +64,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 	scenes[SceneName::CREDITS] = new CreditsScene();
 	scenes[SceneName::BOX] = new Box();
+	scenes[SceneName::PARROT_PUZZLE] = new ParrotPuzzleScene();
 }
 void SceneManager::init()
 {

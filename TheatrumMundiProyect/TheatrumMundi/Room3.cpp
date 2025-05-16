@@ -516,10 +516,9 @@ void Room3Scene::_setInteractuables()
 	parrotUtils.codeSequenceSounds.push_back(rmSounds.t_Sound); // TODO: T
 	parrotUtils.codeSequenceSounds.push_back(rmSounds.o_Sound); // TODO: O
 	parrotUtils.codeSequenceSounds.push_back(rmSounds.p_Sound); // TODO: P
-	// More sounds...
 
 	parrotStateCom->defBehavior(ParrotState::SHOOTING_SOUND,
-		[&]() {
+		[parrotStateCom, this]() {
 			if (rmObjects.backgroundScroll->startPhaseCheck()) { //Right side of the room PARROT
 				if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
 					AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[0]);
@@ -527,11 +526,11 @@ void Room3Scene::_setInteractuables()
 				}
 			}
 
-			//parrotStateCom->setState(Game::Instance()->getDataManager()->GetRoom3Phase()); // Check if changes the room state
+			parrotStateCom->setState(Game::Instance()->getDataManager()->GetRoom3Phase()); // Check if changes the room state
 		});
 
 	parrotStateCom->defBehavior(ParrotState::RED_LIGHTS,
-		[&]() {
+		[parrotStateCom, this]() {
 			if (rmObjects.backgroundScroll->startPhaseCheck()) { //Right side of the room PARROT
 				if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
 					AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[parrotUtils.codeSeqIteration]);
@@ -550,7 +549,7 @@ void Room3Scene::_setInteractuables()
 			}
 
 
-			//parrotStateCom->setState(Game::Instance()->getDataManager()->GetRoom3Phase()); // Check if changes the room state
+			parrotStateCom->setState(Game::Instance()->getDataManager()->GetRoom3Phase()); // Check if changes the room state
 		});
 
 	parrotStateCom->setState(ParrotState::SHOOTING_SOUND); // The other will be setted after finishin the puzzle

@@ -25,7 +25,7 @@ void BehaviorStateComponent::defBehavior(BEHAVIOR_STATE newState, std::function<
 
 void BehaviorStateComponent::setState(BEHAVIOR_STATE state)
 {
-	assert(_stateBehaviors.find(state) != _stateBehaviors.end());
+	//assert(_stateBehaviors.find(state) != _stateBehaviors.end());
 
 	_currentState = state;
 }
@@ -33,6 +33,8 @@ void BehaviorStateComponent::setState(BEHAVIOR_STATE state)
 void BehaviorStateComponent::update()
 {
 	if (_stateBehaviors.empty()) return;
+
+	if (_stateBehaviors.find(_currentState) == _stateBehaviors.end()) return;
 
 	auto& stateBehavior = _stateBehaviors.at(_currentState);
 
