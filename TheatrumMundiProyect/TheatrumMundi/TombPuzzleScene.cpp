@@ -53,7 +53,7 @@ void TombPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Log
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
+		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 		if(Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("TUMBA1_2P");
 		else {
 			startDialogue("TUMBA1_1P");

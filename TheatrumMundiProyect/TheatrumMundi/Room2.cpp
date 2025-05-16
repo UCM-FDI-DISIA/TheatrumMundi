@@ -63,7 +63,9 @@ void Room2Scene::resolvedPuzzle(int i)
 		if (i == 0)  auxevent = TombPuzzleSceneRsv;
 		else if (i == 1)  auxevent = RavenSceneRsv;
 		else if (i == 2)  auxevent = DoorSceneRsv;
-		else if (i == 3)  auxevent = MosaicPuzzleSceneRsv;
+		else if (i == 3) { auxevent = MosaicPuzzleSceneRsv;
+		}
+
 		else if (i == 4)  auxevent = OrganPuzzleSceneRsv;
 		else if (i == 5)  auxevent = WindowSceneResolved;
 		roomEvent[auxevent]();
@@ -88,6 +90,11 @@ void Room2Scene::endDialogue()
 	if (finishallpuzzles)
 	{
 		roomEvent[ResolveButtons]();
+	}
+	//Mosaic case
+	if (brokenMosaic) {
+		brokenMosaic = false;
+
 	}
 }
 
@@ -135,8 +142,15 @@ void Room2Scene::_setRoomEvents()
 		Game::Instance()->getSceneManager()->loadScene(MOSAIC_SCENE, this);
 		};
 	roomEvent[MosaicPuzzleSceneRsv] = [this] {
+
+		rmObjects.organMosaic.first->getMngr()->setActive(rmObjects.mosaic, false);
+
 		rmObjects.organMosaic.first->getMngr()->setActive(rmObjects.organMosaic.first, true);
 		rmObjects.organMosaic.second = true;
+		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("MOSAICO3_2P");
+		else {
+			startDialogue("MOSAICO3_1P");
+		}
 		};
 	roomEvent[OrganZoom] = [this] {
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
@@ -497,9 +511,9 @@ void Room2Scene::_setInteractuables()
 #pragma region PreSolveMosaic
 
 	//Before Completing mosaic
-	auto mosaic = entityFactory->CreateInteractableEntity(entityManager, "Mosaico", EntityFactory::RECTAREA, Vector2D(400 + 1344, 300), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(mosaic));
-	entityManager->getComponent<ClickComponent>(mosaic)->connect(ClickComponent::JUST_CLICKED, [this]() {
+	rmObjects.mosaic = entityFactory->CreateInteractableEntity(entityManager, "Mosaico", EntityFactory::RECTAREA, Vector2D(400 + 1344, 300), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.mosaic));
+	entityManager->getComponent<ClickComponent>(rmObjects.mosaic)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[MosaicPuzzleScene]();
 		});
 

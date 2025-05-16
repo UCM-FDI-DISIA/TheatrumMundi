@@ -40,6 +40,7 @@ using namespace std;
 
 MusicPuzzleScene::MusicPuzzleScene(): _phase(0)
 {
+    dialogueManager = new DialogueManager(3);
     _correctCombinations.push_back(_correctComb1);
     _correctCombinations.push_back(_correctComb2);
     _correctCombinations.push_back(_correctComb3);
@@ -123,9 +124,14 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
             });
 
         //Log
-        //dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-       // Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
-        //startDialogue("Puerta");
+        dialogueManager->setScene(this);
+        dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
+        logbtn =Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
+        if(Game::Instance()->getDataManager()->GetCharacterState(KEISARA))  startDialogue("ORGANO_2P");
+        else
+        {
+            startDialogue("ORGANO_1P");
+        }
 
 #pragma endregion
 

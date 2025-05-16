@@ -150,7 +150,7 @@ void roomprueba::init()
 
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, _eventToRead);
 
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
+		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 
 		//startDialogue("Room2");
 

@@ -155,11 +155,18 @@
         "id": "puzzle",
         "file": "../resources/sound/sfx/click_puzzle.wav"
     },
-  
+  {
+    "id": "MoverPiedra",
+    "file": "../resources/sound/sfx/MoverTapaPiedra.wav"
+  },
     {
         "id": "puerta",
         "file": "../resources/sound/sfx/puerta.wav"
     },
+    {
+    "id": "cuervo",
+    "file": "../resources/sound/sfx/cuervo.wav"
+  },
     {
       "id": "cuerda",
       "file": "../resources/sound/sfx/cuerda.wav"
@@ -180,6 +187,10 @@
   {
     "id": "ColocarCosa",
     "file": "../resources/sound/sfx/ColocarCosa.wav"
+  },
+  {
+    "id": "Mosaico",
+    "file": "../resources/sound/sfx/MosaicoRompiendose.wav"
   },
     {
       "id": "incorrecto",
