@@ -6,7 +6,7 @@
 #include "../../TheatrumMundi/DataManager.h"
 
 #include "../../TheatrumMundi/ReadDialog.h"
-//#define _LOADALLRESOURCES
+#define _LOADALLRESOURCES
 class Transform;
 class GameState;
 class Log;

@@ -35,10 +35,12 @@ ChangesAssociations=yes
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only).
 ;PrivilegesRequired=lowest
-OutputDir=C:\Users\david\OneDrive\Escritorio\TheatrumMundiProyect  ;
+OutputDir={userdesktop}\TheatrumMundiProyect
+
 OutputBaseFilename=mysetup
 SolidCompression=yes
 WizardStyle=modern
+Uninstallable=yes
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -51,13 +53,35 @@ Source: "bin\\{#MyAppExeName}"; DestDir: "{app}\\bin"; Flags: ignoreversion;
 
 Source: "*"; DestDir: "{app}"; Excludes: "*.~*,\tmp\*,\src\*,\PlanDePruebas\,\TheatrumMundi\*,\.vs\*,TheatrumMundi.sln,ExeinnoCreator.iss"; Flags: ignoreversion recursesubdirs createallsubdirs
 
-
+[Dirs]
+Name: "{localappdata}\TheatrumMundi\saves"; Permissions: users-modify
 
 [Registry]
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExt}\OpenWithProgids"; ValueType: string; ValueName: "{#MyAppAssocKey}"; ValueData: ""; Flags: uninsdeletevalue
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocName}"; Flags: uninsdeletekey
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\\bin\\{#MyAppExeName},0"  ; 
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\\bin\\{#MyAppExeName}"" ""%1"""  ; 
+
+[Code]
+procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+var
+  savePath: string;
+begin
+  if CurUninstallStep = usPostUninstall then
+  begin
+    savePath := ExpandConstant('{localappdata}') + '\TheatrumMundi\saves';
+    
+    if DirExists(savePath) then
+    begin
+      if MsgBox('¿Desea eliminar todos los archivos de guardado del juego?', 
+         mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
+      begin
+        DelTree(savePath, True, True, True);
+      end;
+    end;
+  end;
+end;
+
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\bin\{#MyAppExeName}"; IconFilename: "{app}\resources\images\finales\icono.ico"

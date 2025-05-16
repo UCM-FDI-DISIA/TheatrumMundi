@@ -19,9 +19,9 @@ private:
 	Image* myImg;
 	Transform* myTransform;
 	WriteTextComponent<TextInfo>* _mytext;
-	int _movespeed = 1;
-	int actmovespeed = 1;
-	int maxSpeed = 20;
+	float _movespeed = 1;
+	float actmovespeed = 1;
+	float maxSpeed = 20;
 	int _alphaspeed = 20;
 	int posCooldown = 0;
 	int distantoToanim;

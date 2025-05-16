@@ -13,11 +13,17 @@ protected:
 		CorpseDialogue,
 		LightsOn,
 		LightsOff,
-		CablesPuzzleScene,
+		LightsRed,
+		WiresPuzzleScene,
+		WiresSceneRsv,
 		CircleLockPuzzleScene,
+		CircleLockSceneRsv,
 		BalancePuzzleScene,
+		BalanceSceneRsv,
 		ParrotScene,
-		MorseCodeScene,
+		ParrotSceneRsv,
+		MorseCodePuzzleScene,
+		MorseCodeSceneRsv,
 		ResolveCase,
 		ResolveButtons,
 		GoodEnd,
@@ -33,7 +39,9 @@ public:
 private:
 	std::string _eventToRead;
 	bool stopAnimation = false;
-	bool LightsToOn = false; //To interact with determined entities
+	//Determined by the integer PhaseRoom3 from DataManager
+	//bool LightsToOn = false; //To interact with determined entities when the room is with light
+	//bool LightsToRed = false; //To interact with determined entities when de room is with red light
 	bool scrolling = false;
 
 	void endDialogue() override;
@@ -52,6 +60,11 @@ private:
 		std::shared_ptr<Sound> puzzleButton;
 		std::shared_ptr<Sound> doorSound;
 		std::shared_ptr<Sound> explosionSound;
+		std::shared_ptr<Sound> morse_Sound;
+		std::shared_ptr<Sound> s_Sound;
+		std::shared_ptr<Sound> t_Sound;
+		std::shared_ptr<Sound> o_Sound;
+		std::shared_ptr<Sound> p_Sound;
 
 	} rmSounds;
 
@@ -68,6 +81,7 @@ private:
 		ecs::entity_t boxOfficeCircleLockP = nullptr; //Image of the second boxOffice
 		ecs::entity_t parrot = nullptr; //Image of the parrot
 		ecs::entity_t balance = nullptr; //Image of the balance
+		ecs::entity_t locker = nullptr;
 		ecs::entity_t safeBox = nullptr; //Image of the safeBox
 
 		////Entities with special conditions (only appear with one specific event)

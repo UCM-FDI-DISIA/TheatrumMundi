@@ -571,6 +571,113 @@
     ]
 
 
+  },
+   "Sala4": {
+    "Sala4Intro":[],
+    "CABLES_2P": [
+      { "Character": "Sol", "Text": "Es una caja de luz." },
+      {
+        "Character": "Keisara",
+        "Text": "Estoy bastante segura de que esto es lo que hay que arreglar para que vuelva la luz "
+      },
+      { "Character": "Sol", "Text": "Hay que conectar cada cable a su puerto." }
+      
+    ],
+    "CABLES_1PS": [
+      { "Character": "Sol", "Text": "Es una caja de luz." },
+      {"Character": "Sol", "Text": "Si conecto los cables a sus puertos volverá la luz."}
+    ],
+    "CABLES_1PK": [
+      { "Character": "Keisara", "Text": "Es una caja de luz con cables." },
+      { "Character": "Keisara", "Text": "Desde luego si arreglo esto volverá la luz." }
+    ],
+    "BALANZA_2P": [
+      { "Character": "Sol", "Text": "¿Eso es un corazón?" },
+      {"Character": "Keisara", "Text": "Espero que no sea el de Lucy."},
+      { "Character": "Sol", "Text": "No creo. " },
+      { "Character": "Keisara", "Text": "La balanza, el corazón, ¡Todo como en el juicio de Osiris!" },
+      { "Character": "Sol", "Text": "¿Osiris?" },
+      { "Character": "Keisara", "Text": "En resumidas cuentas necesitamos algo muy ligero para colocar en el otro plato de la balanza." }
+    ],
+    "BALANZA_1PS": [
+      
+      {"Character": "Sol", "Text": "Claramente es una balanza con lo que espero que no sea el corazón de Lucy."},
+      { "Character": "Sol", "Text": "Es una balanza por ende necesitará algo en el otro platillo" },
+      {"Character": "Sol", "Text": "¿Algo menos o más pesado que un corazón?"}
+    ],
+    "BALANZA_1PK":[
+      {"Character":"Keisara","Text":"Ese corazón, no puede ser de Lucy. Está jugando conmigo."},
+      {"Character":"Keisara","Text":"La balanza y el corazón… ¡Justo como en el juicio de Osiris!"},
+      {"Character":"Keisara","Text":"Está claro necesito algo muy ligero para colocar en el otro plato de la balanza."}
+    ],
+    "RADIO_2P":[                 
+        {"Character":"Keisara","Text":"No parece que la radio funcione."},
+        {"Character":"Sol","Text":"Bueno es antigua que esperas."},
+         {"Character":"Keisara","Text":"A lo mejor vuelve a funcionar correctamente en algún momento, con estos objetos nunca se sabe."}
+    ],
+    "RADIO_1PS":[                 
+        {"Character":"Sol","Text":"Una radio un tanto antigua."},
+        {"Character":"Sol","Text":"No creo que vuelva a funcionar correctamente, pero dado donde estoy me espero lo que sea."}
+        
+    ],
+    "RADIO_1PK":[                 
+        {"Character":"Keisara","Text":"Parece que no funciona bien del todo esta radio."},
+        {"Character":"Keisara","Text":"Bueno a lo mejor en algún momento lo hará correctamente quien sabe"}
+        
+    ],
+
+    "CAJAFUERTE_2P":[                 
+        {"Character":"Keisara","Text":"Esta caja fuerte es un poco peculiar."},
+        {"Character":"Sol","Text":"Tú también te has fijado."},
+        {"Character":"Keisara","Text":"Es la segunda vez que veo una caja fuerte con una contraseña de letras en vez de ser numérica."}
+    ],
+
+    "CAJAFUERTE_1PS":[                 
+        {"Character":"Sol","Text":"Una caja fuerte, parece normal."},
+        {"Character":"Sol","Text":"Mira ahí está el truco, es de contraseña de letras no numérica."}
+    ],
+
+    "CAJAFUERTE_1PK":[                 
+        {"Character":"Keisara","Text":"A simple vista creo que no tiene nada extraño esta caja fuerte."},
+        {"Character":"Keisara","Text":"Espera, hay que poner una combinación de letras."}
+    ],
+
+    "LORO1_2P":[                 
+    {"Character":"Sol","Text":"¿Qué hace aquí un animal?"},
+    {"Character":"Keisara","Text":"Pobre, lo habrá secuestrado."},
+    {"Character":"Sol","Text":"Parece que está demasiado tranquilo, me inquieta."},
+    {"Character":"Keisara","Text":"Sol no juzgues a el loro, mejor así que alterado."},
+    {"Character":"Keisara","Text":"Artemisa se llevaría bien con él."}
+    ],
+
+    "LORO1_1PS":[                 
+    {"Character":"Sol","Text":"¿Un loro?"},
+    {"Character":"Sol","Text":"Parece demasiado tranquilo.¿Respira?"}
+    ],
+   "LORO1_1PK":[                 
+    {"Character":"Keisara","Text":"Pobre loro se ha quedado aquí atrapado también."},
+    {"Character":"Keisara","Text":"Es una víctima colateral, aunque por lo menos parece muy relajado."}
+    ],
+
+    "LORO2_2P":[                 
+    {"Character":"Sol","Text":" Que ruidoso."},
+    {"Character":"Keisara","Text":"¿Cómo hacemos que pare?"},
+    {"Character":"Sol","Text":"¿No tenemos algo para confundir sus sentidos?"}
+    ],
+
+    "LORO2_2PS":[                 
+    {"Character":"Sol","Text":"No para de hacer ruido."},
+    {"Character":"Sol","Text":"Creo que si consigo confundirle los sentidos consiga que pare."}
+    ],
+    
+    "LORO2_2PK":[
+    {"Character":"Keisara","Text":"Desde luego no es un loro normal."},
+    {"Character":"Keisara","Text":"Tiene mucho aguante vocal, pero ¿Cómo consigo que pare?"},
+    {"Character":"Keisara","Text":"¿Cómo puedo confundirle los sentidos?"}
+    ]
+
+
+
   }
   
   

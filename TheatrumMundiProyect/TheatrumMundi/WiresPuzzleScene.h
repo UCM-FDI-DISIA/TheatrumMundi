@@ -18,7 +18,6 @@ public:
 	void ResolveScene() override;
 
 private:
-	ecs::entity_t logbtn;
 	std::vector<int> actualPos = { -1, -1, -1, -1, -1 };
 	std::vector<int> winPos = { 2, 0, 4, 1, 3 };
 
