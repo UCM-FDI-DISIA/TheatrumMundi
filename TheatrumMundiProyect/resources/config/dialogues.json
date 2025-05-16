@@ -461,7 +461,23 @@
     {"Character":" ","Text":"Vale, vale, veo que no soy bienvenido."},
     {"Character":"Lucy","Text":"..."},
     {"Character":"Lucy","Text":"Tengo que hacer algo."}
-    
+    ],
+    "CADAVER_P2":[                 
+    {"Character":"Keisara","Text":"No puede ser de verdad."},
+    {"Character":"Keisara","Text":"Igual que el mío, si no no estaría viva."},
+    {"Character":"Keisara","Text":"El verdadero Sol tiene que estar en otro lado."},
+    {"Character":"Lucy","Text":"..."},
+    {"Character":"Lucy","Text":"La causa de muerte es un traumatismo craneal."},
+    {"Character":"Lucy","Text":"No parece que tenga ninguna otra herida externa."},
+    {"Character":"Keisara","Text":"Vale, golpe fuerte en la cabeza."},
+    {"Character":"Keisara","Text":"Entendido."}
+    ],
+    "CADAVER_P1":[                 
+    {"Character":"Lucy","Text":"Otro más."},
+    {"Character":"Lucy","Text":"Un traumatismo craneal."},
+    {"Character":"Lucy","Text":"Al menos es una forma rápida de morir."},
+    {"Character":"Lucy","Text":"..."},
+    {"Character":"Lucy","Text":"Me tengo que centrar, no puedo fallar otra vez."}
     ],
     "TUMBA1_2P": [
       { "Character": "Lucy", "Text": "Es una lápida." },
@@ -558,8 +574,8 @@
     {"Character":"Lucy","Text":"Este mausoleo es cada vez más extraño."}
     ],
    "CUERVO1_2P":[                 
-    {"Character":"Lucy","Text":"¡Eh! Ese cuervo tiene una llave."},
-    {"Character":"Lucy","Text":"¿Crees que es la del mausoleo?"},
+    {"Character":"Keisara","Text":"¡Eh! Ese cuervo tiene una llave."},
+    {"Character":"Keisara","Text":"¿Crees que es la del mausoleo?"},
     {"Character":"Lucy","Text":"Ven aquí pajarraco."},
     {"Character":"Keisara","Text":"Asi no vamos a conseguir nada."},
     {"Character":"Lucy","Text":"Entonces, ¿qué hacemos?"},
