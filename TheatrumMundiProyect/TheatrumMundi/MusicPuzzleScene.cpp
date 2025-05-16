@@ -318,6 +318,7 @@ void MusicPuzzleScene::addNoteToComb(Notes pressedNote)
     //if currentComb is full check if its correct
     if (_currentComb.size() >= _correctCombinations[_phase].size())
     {
+        _isAnimating = true;
         //check
         if (checkPhaseCombination()) //if its correct
         {
@@ -365,7 +366,7 @@ void MusicPuzzleScene::changePhase()
 
 bool MusicPuzzleScene::playAnimation(bool correct)
 {
-    if (_isAnimating) return false;
+    //if (_isAnimating) return false;
 
     _animationType = correct;
 
@@ -429,7 +430,61 @@ void MusicPuzzleScene::updateDisplayedNotes()
         string texture;
 
         auto noteIm = entityManager->getComponent<Image>(displayedNotes[i]);
+        auto noteTr = entityManager->getComponent<Transform>(displayedNotes[i]);
         
+        int yPos = 385;
+        float width = 25/1.2;
+        float height = 65/1.2;
+
+        switch (_currentComb[i])
+        {
+        case Notes::DO:
+            texture = "Do";
+            break;
+        case Notes::RE:
+            texture = "NotaBasica";
+            yPos = 380.0f;
+            break;
+        case Notes::MI:
+            texture = "NotaBasica";
+            yPos = 373.0f;
+            break;
+        case Notes::FA:
+            texture = "NotaBasica";
+            yPos = 363.0f;
+            break;
+        case Notes::SOL:
+            texture = "NotaBasica";
+            yPos = 355.0f;
+            break;
+        case Notes::LA:
+            texture = "NotaBasica";
+            yPos = 345.0f;
+            break;
+        case Notes::SI:
+            texture = "Si";
+            yPos = 370.0f;
+            break;
+        default:
+            texture = "NotaBasica";
+            yPos = 395.0f;
+            break;
+        }
+
+        
+        
+        noteIm->setTexture(&sdlutils().images().at(texture));
+        noteTr->setPosY(yPos);
+        noteTr->setWidth(width);
+        noteTr->setHeight(height);
+
+        noteIm->setW(width);
+        noteIm->setH(height);
+
+        entityManager->setActive(displayedNotes[i], true);
+
+
+        /*
         if (_currentComb[i] == Notes::DO)
         {
             texture = "Do";
@@ -444,10 +499,7 @@ void MusicPuzzleScene::updateDisplayedNotes()
         {
             texture = "NotaBasica";
             noteIm->setTexture(&sdlutils().images().at(texture));
-        }
-        
-        entityManager->setActive(displayedNotes[i], true);
-
+        }*/
     }
 
     // Hide non used notes if needed
@@ -468,9 +520,9 @@ void MusicPuzzleScene::cleanDisplayedNotes()
 
 void MusicPuzzleScene::initializeDisplayedNotes()
 {
-    const int spacingX = 35; //space between notes
-    const int baseX = 950; //initial x
-    const int posY = 200; //initial y
+    const int spacingX = 17; //space between notes
+    const int baseX = 680; //initial x
+    const int posY = 395; //initial y
 
     for (size_t i = 0; i < Notes::SI + 1; ++i)
     {
@@ -478,7 +530,7 @@ void MusicPuzzleScene::initializeDisplayedNotes()
         Vector2D pos(baseX + i * spacingX, posY);
         
         // create image entity
-        auto musicalNotes = entityFactory->CreateImageEntity(entityManager, "NotaBasica", pos, Vector2D(0, 0), 248/6, 649/6, 0, ecs::grp::DEFAULT);
+        auto musicalNotes = entityFactory->CreateImageEntity(entityManager, "NotaBasica", pos, Vector2D(0, 0), 210/6.5, 304/6.5, 0, ecs::grp::DEFAULT);
         displayedNotes.push_back(musicalNotes);
     }
 }
@@ -495,85 +547,116 @@ void MusicPuzzleScene::createPianoButtons()
    
     ClickComponent* clickButtDo = entityManager->getComponent<ClickComponent>(buttDo);
     clickButtDo->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play organ key sound
-        AudioManager::Instance().playSound(musicalSounds[DO]);
-
-        if (!solved)
+        if (!_isAnimating)
         {
-            addNoteToComb(DO);
-            updateDisplayedNotes();
-        }        
-        });
+            //play organ key sound
+            AudioManager::Instance().playSound(musicalSounds[DO]);
+
+            if (!solved)
+            {
+                addNoteToComb(DO);
+                updateDisplayedNotes();
+            }
+        }
+              
+    });
 
     ClickComponent* clickButtRe = entityManager->getComponent<ClickComponent>(buttRe);
     clickButtRe->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play organ key sound
-        AudioManager::Instance().playSound(musicalSounds[RE]);
         
-        if (!solved)
+        if (!_isAnimating)
         {
-            addNoteToComb(RE);
-            updateDisplayedNotes();
+            //play organ key sound
+            AudioManager::Instance().playSound(musicalSounds[RE]);
+
+            if (!solved)
+            {
+                addNoteToComb(RE);
+                updateDisplayedNotes();
+            }
         }
+        
         });
 
     ClickComponent* clickButtMi = entityManager->getComponent<ClickComponent>(buttMi);
     clickButtMi->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play organ key sound
-        AudioManager::Instance().playSound(musicalSounds[MI]);
         
-        if (!solved)
+        if (!_isAnimating)
         {
-            addNoteToComb(MI);
-            updateDisplayedNotes();
+            //play organ key sound
+            AudioManager::Instance().playSound(musicalSounds[MI]);
+
+            if (!solved)
+            {
+                addNoteToComb(MI);
+                updateDisplayedNotes();
+            }
         }
+        
         });
 
     ClickComponent* clickButtFa = entityManager->getComponent<ClickComponent>(buttFa);
     clickButtFa->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play organ key sound
-        AudioManager::Instance().playSound(musicalSounds[FA]);
         
-        if (!solved)
+        if (!_isAnimating)
         {
-            addNoteToComb(FA);
-            updateDisplayedNotes();
+            //play organ key sound
+            AudioManager::Instance().playSound(musicalSounds[FA]);
+
+            if (!solved)
+            {
+                addNoteToComb(FA);
+                updateDisplayedNotes();
+            }
         }
+        
         });
 
     ClickComponent* clickButtSol = entityManager->getComponent<ClickComponent>(buttSol);
     clickButtSol->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play organ key sound
-        AudioManager::Instance().playSound(musicalSounds[SOL]);
-
-        if (!solved)
+        
+        if (!_isAnimating)
         {
-            addNoteToComb(SOL);
-            updateDisplayedNotes();
+            //play organ key sound
+            AudioManager::Instance().playSound(musicalSounds[SOL]);
+
+            if (!solved)
+            {
+                addNoteToComb(SOL);
+                updateDisplayedNotes();
+            }
         }
         });
 
     ClickComponent* clickButtLa = entityManager->getComponent<ClickComponent>(buttLa);
     clickButtLa->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play organ key sound
-        AudioManager::Instance().playSound(musicalSounds[LA]);
-
-        if (!solved)
+        
+        if (!_isAnimating)
         {
-            addNoteToComb(LA);
-            updateDisplayedNotes();
+            //play organ key sound
+            AudioManager::Instance().playSound(musicalSounds[LA]);
+
+            if (!solved)
+            {
+                addNoteToComb(LA);
+                updateDisplayedNotes();
+            }
         }
         });
 
     ClickComponent* clickButtSi = entityManager->getComponent<ClickComponent>(buttSi);
     clickButtSi->connect(ClickComponent::JUST_CLICKED, [this]() {
-        //play organ key sound
-        AudioManager::Instance().playSound(musicalSounds[SI]);
-
-        if (!solved)
+        
+        if (!_isAnimating)
         {
-            addNoteToComb(SI);
-            updateDisplayedNotes();
+            //play organ key sound
+            AudioManager::Instance().playSound(musicalSounds[SI]);
+
+            if (!solved)
+            {
+                addNoteToComb(SI);
+                updateDisplayedNotes();
+            }
         }
         });
 }
