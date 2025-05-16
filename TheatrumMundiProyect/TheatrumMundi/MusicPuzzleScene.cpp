@@ -71,7 +71,7 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
     {
         isStarted = true;
         //Register scene in dialogue manager
-        //dialogueManager->setScene(this);
+        dialogueManager->setScene(this);
 
         //Puzzle Scene
         room = sr;
@@ -158,14 +158,14 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
             });
 
         //Log
-        //dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-       // Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
-        //startDialogue("Puerta");
+        dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+        Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
+        startDialogue("Puerta");
 
 #pragma endregion
 
     }
-    //createInvEntities(sr);
+    createInvEntities(sr);
 }
 
 
