@@ -101,7 +101,7 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
         createPianoButtons();
 
         //black musical notes
-        entityFactory->CreateImageEntity(entityManager, "teclasNegras", Vector2D(430, 473), Vector2D(0, 0), 739 / 1.5, 44 / 1.5, 0, ecs::grp::DEFAULT);
+        entityFactory->CreateImageEntity(entityManager, "teclasNegras", Vector2D(430, 473), Vector2D(0, 0), 739 / 1.5, 44 / 1.5, 0, ecs::grp::BACKGROUND);
 
 #pragma region UI
 
@@ -460,14 +460,18 @@ void MusicPuzzleScene::initializeDisplayedNotes()
 
 void MusicPuzzleScene::createPianoButtons()
 {
-    auto buttDo = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-    auto buttRe = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(562, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-    auto buttMi = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(606, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-    auto buttFa = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(650, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-    auto buttSol = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(694, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-    auto buttLa = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(738, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-    auto buttSi = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(782, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+    auto buttDo = entityFactory->CreateInteractableEntity(entityManager, "doTecla", EntityFactory::RECTAREA, Vector2D(523, 479), Vector2D(0, 0), 97/1.5, 134 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+    auto buttRe = entityFactory->CreateInteractableEntity(entityManager, "reTecla", EntityFactory::RECTAREA, Vector2D(560, 480), Vector2D(0, 0), 83 / 1.5, 132 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+    auto buttMi = entityFactory->CreateInteractableEntity(entityManager, "miTecla", EntityFactory::RECTAREA, Vector2D(598, 480), Vector2D(0, 0), 70 / 1.5, 132 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+    auto buttFa = entityFactory->CreateInteractableEntity(entityManager, "faTecla", EntityFactory::RECTAREA, Vector2D(633, 481), Vector2D(0, 0), 69 / 1.5, 131 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+    auto buttSol = entityFactory->CreateInteractableEntity(entityManager, "solTecla", EntityFactory::RECTAREA, Vector2D(668, 482), Vector2D(0, 0), 73 / 1.5, 130 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
     
+    auto buttSi = entityFactory->CreateInteractableEntity(entityManager, "siTecla", EntityFactory::RECTAREA, Vector2D(730, 480), Vector2D(0, 0), 99 / 1.5, 132 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+
+
+    auto buttLa = entityFactory->CreateInteractableEntity(entityManager, "laTecla", EntityFactory::RECTAREA, Vector2D(703, 481), Vector2D(0, 0), 82 / 1.5, 131 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+   
+    //
 
     ClickComponent* clickButtDo = entityManager->getComponent<ClickComponent>(buttDo);
     clickButtDo->connect(ClickComponent::JUST_CLICKED, [this]() {

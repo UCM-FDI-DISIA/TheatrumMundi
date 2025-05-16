@@ -783,6 +783,34 @@
       "file": "../resources/images/Finales/teclasNegras.png"
     },
     {
+      "id": "doTecla",
+      "file": "../resources/images/Finales/doTecla.png"
+    },
+    {
+      "id": "reTecla",
+      "file": "../resources/images/Finales/reTecla.png"
+    },
+    {
+      "id": "miTecla",
+      "file": "../resources/images/Finales/miTecla.png"
+    },
+    {
+      "id": "faTecla",
+      "file": "../resources/images/Finales/faTecla.png"
+    },
+    {
+      "id": "solTecla",
+      "file": "../resources/images/Finales/solTecla.png"
+    },
+    {
+      "id": "laTecla",
+      "file": "../resources/images/Finales/laTecla.png"
+    },
+    {
+      "id": "siTecla",
+      "file": "../resources/images/Finales/siTecla.png"
+    },
+    {
       "id": "FondoJuzgado",
       "file": "../resources/images/temporales/Room3/Juzgado.png"
     },
