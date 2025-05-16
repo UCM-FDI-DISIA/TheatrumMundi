@@ -16,6 +16,36 @@
       "file": "../resources/images/Finales/ImagenVacia.png"
     },
     {
+      "id": "Room",
+      "file": "../resources/images/Finales/SalaIntermedia.PNG"
+    },
+    { "id" : "loading1", "file" : "../resources/images/Finales/Carga1.png" },
+    { "id" : "menuInicial", "file" : "../resources/images/Finales/mainMenu.png" },
+    {
+      "id": "Title",
+      "file": "../resources/images/TemporalTitleImage.png"
+    },
+    {
+      "id": "TutorialButton",
+      "file": "../resources/images/Finales/tutorialButton.png"
+  },
+  {
+    "id": "NewGame",
+    "file": "../resources/images/Finales/RectangleNewGameButton.PNG"
+  },
+  {
+    "id": "loading",
+    "file": "../resources/images/loading.png"
+  },
+  {
+    "id": "NewGameLocked",
+    "file": "../resources/images/temporales/GameLocked.png"
+},
+{
+  "id": "Exit",
+  "file": "../resources/images/Finales/RectangleExitButton.PNG"
+},
+    {
       "id": "ShelfButton",
       "file": "../resources/images/Finales/BotonEstante.PNG"
     },
