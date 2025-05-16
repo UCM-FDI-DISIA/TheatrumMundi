@@ -19,6 +19,5 @@ protected:
 	bool _poisonIsChecked;
 	Entity* spoon;
 	Entity* teaCupBackground;
-	ecs::entity_t logbtn;
 };
 
