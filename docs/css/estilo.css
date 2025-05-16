@@ -5,14 +5,19 @@
   box-sizing: border-box;
 }
 
-body{
-  background-color: rgb(222, 222, 222);
+body {
+  background-image: url('images/sinopsisImagen.png');
+  background-size: cover;        /* Hace que cubra toda la pantalla */
+  background-repeat: no-repeat;  /* Evita que se repita */
+  background-position: center;   /* Centrada */
+  background-attachment: fixed;  /* Fondo fijo al hacer scroll */
+  color: white;                  /* Por si el texto necesita contraste */
 }
 
 h1{
   font-size: 26px;
   line-height: 32px;
-  color: #000000;
+  color: rgb(255, 255, 255);
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -21,10 +26,16 @@ p{
   font-size: 20px;
   line-height: 30px;
   color: #fff;
+  margin-bottom: 20px;
 }
 
 a{
   cursor: pointer;
+}
+
+h2{
+  font-size: 30px;
+  color: #fff;
 }
 
 h3{
@@ -34,11 +45,11 @@ h3{
 .header-main {
   width: 100%;
   height: 60px;
-  background-color: rgb(38, 38, 38);
+  background-color: rgb(183, 9, 9);
   display: flex;
   justify-content: space-between;
   color: white;
-
+  /*border: 2px solid rgb(255, 255, 255);*/
   position: fixed; /* Hace que el header esté fijo */
   top: 0;          /* Lo posiciona en la parte superior */
   z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
@@ -75,7 +86,6 @@ h3{
 .header-main-nav ul li a {
   text-decoration: none;
   padding: 0 20px;
-  font-family: Arial;
   line-height: 60px;
   color: white;
   display: block;
@@ -83,7 +93,7 @@ h3{
 }
 
 .header-main-nav ul li a:hover {
-  color: red;
+  color: rgb(0, 0, 0);
 }
 
 .header-main-sm{
@@ -120,7 +130,7 @@ h3{
     inset 12px 0px 12px -6px rgba(3, 15, 20, 0),
     inset -12px 0px 12px -6px rgba(3, 15, 20, 0),
     rgba(54, 69, 75, 1) -1px -1px 6px 0px;
-  border: solid 2px #030f14;
+  border: solid 2px #cf0606;
   cursor: pointer;
   font-size: 18px;
   padding: 0.7em 1.7em;
@@ -131,18 +141,18 @@ h3{
 
 .button:hover {
   box-shadow:
-    inset 0px -6px 18px -6px rgba(3, 15, 20, 1),
-    inset 0px 6px 18px -6px rgba(3, 15, 20, 1),
-    inset 12px 0px 12px -6px rgba(3, 15, 20, 0),
+    inset 0px -6px 18px -6px rgb(255, 0, 0),
+    inset 0px 6px 18px -6px rgb(255, 0, 0),
+    inset 12px 0px 12px -6px rgba(255, 0, 0, 0),
     inset -12px 0px 12px -6px rgba(3, 15, 20, 0),
-    -1px -1px 6px 0px rgba(54, 69, 75, 1);
+    -1px -1px 6px 0px rgb(75, 54, 54);
 }
 
 .button:active {
   box-shadow:
-    inset 0px -12px 12px -6px rgba(3, 15, 20, 1),
-    inset 0px 12px 12px -6px rgba(3, 15, 20, 1),
-    inset 12px 0px 12px -6px rgba(3, 15, 20, 1),
+    inset 0px -12px 12px -6px rgb(255, 0, 0),
+    inset 0px 12px 12px -6px rgb(255, 0, 0),
+    inset 12px 0px 12px -6px rgb(20, 3, 3),
     inset -12px 0px 12px -6px rgba(3, 15, 20, 1),
     -1px -1px 6px 0px rgba(54, 69, 75, 1);
 }
@@ -165,8 +175,8 @@ h3{
 
 /* From Uiverse.io by nikk7007 */ 
 .btn {
-  --color: #00A97F;
-  --color2: rgb(10, 25, 30);
+  --color: rgb(183, 9, 9);
+  --color2: rgb(0, 0, 0);
   padding: 0.8em 1.75em;
   background-color: transparent;
   border-radius: 6px;
@@ -178,7 +188,6 @@ h3{
   z-index: 1;
   font-weight: 300;
   font-size: 17px;
-  font-family: 'Roboto', 'Segoe UI', sans-serif;
   text-transform: uppercase;
   color: var(--color);
  }
@@ -221,6 +230,64 @@ h3{
  }
 
  /**/
+
+ .butFooter {
+  --color: rgb(183, 9, 9);
+  --color2: rgb(255, 255, 255);
+  padding: 0.8em 1.75em;
+  background-color: transparent;
+  border-radius: 6px;
+  border: .3px solid var(--color);
+  transition: .5s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 1;
+  font-weight: 300;
+  font-size: 17px;
+  text-transform: uppercase;
+  color: var(--color);
+ }
+ 
+ .butFooter::after, .butFooter::before {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform: skew(90deg) translate(-50%, -50%);
+  position: absolute;
+  inset: 50%;
+  left: 25%;
+  z-index: -1;
+  transition: .5s ease-out;
+  background-color: var(--color);
+ }
+ 
+ .butFooter::before {
+  top: -50%;
+  left: -25%;
+  transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+ }
+ 
+ .butFooter:hover::before {
+  transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+ }
+ 
+ .butFooter:hover::after {
+  transform: skew(45deg) translate(-50%, -50%);
+ }
+ 
+ .butFooter:hover {
+  color: var(--color2);
+ }
+ 
+ .butFooter:active {
+  filter: brightness(.7);
+  transform: scale(.98);
+ }
+
+
+ /*
 .butFooter {
   cursor: pointer;
   position: relative;
@@ -261,6 +328,6 @@ h3{
 
 .butFooter:active {
   scale: 1;
-}
+}*/
 
 

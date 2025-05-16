@@ -157,7 +157,7 @@ void WriteTextComponent<TextInfo>::render()
 
 	// Author
 	Texture* nameText = new Texture(sdlutils().renderer(), textStructure->Character, _myFont, _color);
-	SDL_Rect nameRect = { (posOffset.getX() + 325)* Game::Instance()->wscreenScale,(posOffset.getY() + 465)* Game::Instance()->hscreenScale,
+	SDL_Rect nameRect = { (posOffset.getX() + 330)* Game::Instance()->wscreenScale,(posOffset.getY() + 465)* Game::Instance()->hscreenScale,
 		nameText->width()* Game::Instance()->wscreenScale,nameText->height()* Game::Instance()->hscreenScale };
 	nameText->render(nameRect, 0);
 
@@ -187,7 +187,7 @@ void WriteTextComponent<TextInfo>::render()
 
 		for (const auto& line : lines) {
 			Texture* dialogText =  new Texture(sdlutils().renderer(), line, _myFont, _color);
-			SDL_Rect dialogRect = { (posOffset.getX()  +375)* Game::Instance()->wscreenScale, posOffset.getY() + y, dialogText->width()* Game::Instance()->wscreenScale, dialogText->height()* Game::Instance()->hscreenScale };
+			SDL_Rect dialogRect = { (posOffset.getX()  +390)* Game::Instance()->wscreenScale, posOffset.getY() + y, dialogText->width()* Game::Instance()->wscreenScale, dialogText->height()* Game::Instance()->hscreenScale };
 			dialogText->render(dialogRect, 0);
 
 			y += (dialogText->height() + 5)* Game::Instance()->hscreenScale;  // space between split lines
@@ -207,7 +207,7 @@ void WriteTextComponent<DescriptionInfo>::render()
 
 	std::vector<std::string> lines = splitTextByNewline(textStructure->Description); //splits text into different lines
 	int x = 0;
-	int y = (textStructure->posY + 60) * Game::Instance()->hscreenScale;
+	int y = textStructure->posY + (60 * Game::Instance()->hscreenScale);
 	//X POSITION
 	if(textStructure->Description.size() > 28) x = 550  * Game::Instance()->wscreenScale; //If the description has less than 21 characthers, then set closer to the left
 	else x = 650 * Game::Instance()->wscreenScale; // else set farther 
@@ -228,7 +228,7 @@ void WriteTextComponent<DescriptionInfo>::render()
 
 	// Background
 	Texture* backgroundText = &sdlutils().images().at("fondoPruebaLog");
-	SDL_Rect backgroundTextRect = {(x - 10), (textStructure->posY + 50) * Game::Instance()->hscreenScale,(maxWidth + 50) * Game::Instance()->wscreenScale,(totalHeight + 25) * Game::Instance()->hscreenScale};
+	SDL_Rect backgroundTextRect = {(x - 10), textStructure->posY + (50 * Game::Instance()->hscreenScale),(maxWidth + 50) * Game::Instance()->wscreenScale,(totalHeight + 25) * Game::Instance()->hscreenScale};
 	backgroundText->render(backgroundTextRect, 0);
 
 	// Render description
@@ -236,7 +236,7 @@ void WriteTextComponent<DescriptionInfo>::render()
 	{
 		SDL_Rect dialogRect = {	x, y, dialogText->width() * Game::Instance()->wscreenScale,	dialogText->height() * Game::Instance()->hscreenScale};
 		dialogText->render(dialogRect, 0);
-		y += dialogText->height() + 5 * Game::Instance()->hscreenScale; 
+		y += dialogText->height() + (5 * Game::Instance()->hscreenScale); 
 		delete dialogText;
 	}
 
@@ -341,7 +341,7 @@ void WriteTextComponent<TextInfo>::startTextLine()
 template <typename T>
 WriteTextComponent<T>::~WriteTextComponent()
 {
-	
+
 }
 
 

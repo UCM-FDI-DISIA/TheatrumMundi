@@ -59,6 +59,10 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
                 if (getDisplayOnProcess())
                 {
                     ReadDialogue(_eventToRead);
+                       
+                    AudioManager::Instance().stopSound(sdlutils().soundEffects().at("NextDialogue"));
+                    AudioManager::Instance().setVolume(sdlutils().soundEffects().at("NextDialogue"), float(0.1));
+                    AudioManager::Instance().playSound(sdlutils().soundEffects().at("NextDialogue"));
                 }
                 else
                 {

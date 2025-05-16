@@ -1,9 +1,10 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-#include <unordered_map>
-class GameSave
-{
+#include <filesystem> 
+#include <string>
+
+class GameSave {
 public:
     GameSave();
     ~GameSave();
@@ -14,6 +15,9 @@ public:
 
     void setTutoCompleted(bool completed);
     bool isTutoCompleted();
+
+
+    static std::string GetSavePath(const std::string& filename);
 
 protected:
     bool TutorialCompleted;

@@ -17,6 +17,7 @@
 #include "ClickableSpriteComponent.h"
 #include "../../TheatrumMundiProyect/TheatrumMundi/EntityFactory.h"
 #include "EventsInfo.h"
+#include "InvAnimComponent.h"
 #include "Log.h"
 
 
@@ -87,7 +88,7 @@ TutorialScene::TutorialScene() : SceneRoomTemplate()
 	roomEvent[Antenna] = [this] {
 		// InventoryLogic
 		GetInventory()->addItem(new Hint("antena", sdlutils().invDescriptions().at("antena"), &sdlutils().images().at("antena")));
-		GetInventory()->hints.push_back(entityFactory->CreateInteractableEntity(entityManager, "antena", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		GetInventory()->hints.push_back(entityFactory->CreateInvEntity(entityManager, "antena", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		createDescription(GetInventory()->hints.back(), GetInventory()->getItems().back());
 		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
 		roomEvent[Dialog5]();
@@ -198,24 +199,17 @@ void TutorialScene::init()
 		//INVENTORY
 
 		invObjects.InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
-
+		entityManager->addComponent<InvAnimComponent>(invObjects.InventoryBackground);
 		inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(invObjects.InventoryBackground, false);
 
 		invObjects.InvArea = entityManager->addComponent<RectArea2D>(invObjects.InventoryBackground, areaLayerManager);
 
-		invObjects.inventoryUpButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		invObjects.inventoryUpButton = entityFactory->CreateInvEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(invObjects.inventoryUpButton, false);
 
-		invObjects.inventoryDownButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+		invObjects.inventoryDownButton = entityFactory->CreateInvEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		entityManager->setActive(invObjects.inventoryDownButton, false);
-
-		invObjects.textDescriptionEnt = entityManager->addEntity(ecs::grp::UI);
-		auto _testTextTranform = entityManager->addComponent<Transform>(invObjects.textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
-		entityManager->setActive(invObjects.textDescriptionEnt, false);
-		SDL_Color colorDialog = { 255, 255, 255, 255 };
-		entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(invObjects.textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, GetInventory()->getTextDescription());
-
 		entityManager->getComponent<ClickComponent>(inventoryButton)
 			->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]()
 				{
@@ -224,11 +218,12 @@ void TutorialScene::init()
 
 					if (GetInventory()->getActive()) // If the inventory is active, activate the items
 					{
-						entityManager->setActive(logbtn, false);
 						entityManager->setActive(invObjects.InventoryBackground, true);
+						entityManager->getComponent<InvAnimComponent>(invObjects.InventoryBackground)->startInvAnim();
+						entityManager->setActive(logbtn, false);
 						//change the position of the log button
 						areaLayerManager->sendFront(invObjects.InvArea->getLayerPos());
-						entityManager->getComponent<Transform>(inventoryButton)->setPosX(925);
+						
 
 						areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(invObjects.inventoryUpButton)->getLayerPos());
 						areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(invObjects.inventoryDownButton)->getLayerPos());
@@ -236,9 +231,13 @@ void TutorialScene::init()
 						entityManager->setActive(invObjects.inventoryDownButton, true);
 						entityManager->setActive(invObjects.inventoryUpButton, true);
 
+						entityManager->getComponent<InvAnimComponent>(invObjects.inventoryDownButton)->startInvAnim();
+						entityManager->getComponent<InvAnimComponent>(invObjects.inventoryUpButton)->startInvAnim();
+
 						for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i) {
 							GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
 							areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inv->hints[i])->getLayerPos());
+							inv->hints[i]->getMngr()->getComponent<InvAnimComponent>(inv->hints[i])->startInvAnim();
 						}
 					
 						if (dialogCount == 5) {
@@ -249,11 +248,11 @@ void TutorialScene::init()
 					else
 					{
 						entityManager->setActive(logbtn, true);
-						entityManager->setActive(invObjects.InventoryBackground, false);
-						entityManager->setActive(invObjects.inventoryDownButton, false);
-						entityManager->setActive(invObjects.inventoryUpButton, false);
-						inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
-						for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the items
+						entityManager->getComponent<InvAnimComponent>(invObjects.inventoryDownButton)->endInvAnim();
+						entityManager->getComponent<InvAnimComponent>(invObjects.inventoryUpButton)->endInvAnim();
+						entityManager->getComponent<InvAnimComponent>(invObjects.InventoryBackground)->endInvAnim();
+						
+						for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber(); ++i) GetInventory()->hints[i]->getMngr()->getComponent<InvAnimComponent>(inv->hints[i])->endInvAnim();
 
 						
 

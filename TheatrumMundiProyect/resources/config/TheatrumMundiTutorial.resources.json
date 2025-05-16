@@ -156,7 +156,10 @@
   "file": "../resources/sound/sfx/Statica.wav"
 },
 
-
+{
+          "id": "NextDialogue",
+          "file": "../resources/sound/sfx/NextDialogue.wav"
+        },
 
   {
       "id": "boton",
@@ -167,8 +170,8 @@
 
   "musics" : [
     {
-        "id": "sala1",
-        "file":  "../resources/sound/music/sala1.wav"
+        "id": "menu",
+        "file":  "../resources/sound/music/menu.wav"
     }
   ]
 

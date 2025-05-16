@@ -9,7 +9,9 @@
 
 DialogueAnimComponent::DialogueAnimComponent(int movespeed , int alphaspeed)
 {
-	_movespeed = movespeed;
+	_movespeed = movespeed*Game::Instance()->hscreenScale;
+	maxSpeed*= Game::Instance()->hscreenScale;
+
 	_alphaspeed = alphaspeed;
 	myImg = nullptr;
 	myTransform = nullptr;

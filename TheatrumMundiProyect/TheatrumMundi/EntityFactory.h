@@ -26,6 +26,11 @@ public:
 	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer,
 	Dragging _drag, //DRAG ENTITY
 	ecs::grpId_t gId); //GROUP OF ENTITIES
+	//Creates an interactable entity (BUTTON) or drag interactable entity (OBJECT TO MOVE IN PUZZLES)
+	ecs::entity_t CreateInvEntity(ecs::EntityManager* _entityManager, const std::string& _idImage, AreaType _typeRect,
+		Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer,
+		Dragging _drag, //DRAG ENTITY
+		ecs::grpId_t gId); //GROUP OF ENTITIES
 
 	ecs::entity_t CreateInteractableEntityNotMoveSprite(ecs::EntityManager* _entityManager, const std::string& _idImage, AreaType _typeRect,
 	Vector2D _pos, Vector2D _dir, int _width, int _height, int _rot, Area2DLayerManager* _myLayer,

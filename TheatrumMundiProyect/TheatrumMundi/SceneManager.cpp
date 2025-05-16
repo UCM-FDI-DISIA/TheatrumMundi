@@ -6,6 +6,7 @@
 #include "Room1.h"
 #include "Room2.h"
 #include "Room3.h"
+#include "roomprueba.h"
 #include "InitialScene.h"
 #include "PipePuzzleScene.h"
 #include "ClockPuzzleScene.h"
@@ -42,8 +43,10 @@ SceneManager::SceneManager()
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::ROOM_2] = new Room2Scene();
-	scenes[SceneName::BALANCE_PUZZLE] = new BalancePuzzleScene();
 	scenes[SceneName::ROOM_3] = new Room3Scene();
+	scenes[SceneName::BALANCE_PUZZLE] = new BalancePuzzleScene();
+	scenes[SceneName::WIRES_PUZZLE] = new WiresPuzzleScene();
+	scenes[SceneName::LOCKER_PUZZLE] = new LockerPuzzle();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
@@ -53,11 +56,9 @@ SceneManager::SceneManager()
 	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
 	scenes[SceneName::WINDOW_SCENE] = new WindowPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
-	scenes[SceneName::WIRES_PUZZLE] = new WiresPuzzleScene();
 	scenes[SceneName::TOMB_SCENE] = tombScene;
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene(tombScene);
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene(tombScene);
-	scenes[SceneName::LOCKER_PUZZLE] = new LockerPuzzle();
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 	scenes[SceneName::CREDITS] = new CreditsScene();
@@ -70,10 +71,10 @@ void SceneManager::init()
 
 void SceneManager::popScene()
 {
-	std::cout << "pop scene" << endl;
 	assert(!currentscenes.empty());
 	currentscenes.pop_back();
 	currentscenes.back()->closedMenus();
+	if(currentscenes.back() == scenes[SceneName::MIDDLE_ROOM]) currentscenes.back()->init();
 
 }
 
@@ -83,7 +84,7 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 {
 	
 	//loadResouces
-#ifndef _LOADALLRESOURCES
+// #ifndef //  _LOADALLRESOURCES
 	
 	switch (index)
 	{
@@ -102,7 +103,7 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 	default:
 		break;
 	}
-#endif // !_LOADALLRESOURCES
+// #endif // !_LOADALLRESOURCES
 	scenes[index]->init(room);
 	actsceneindex = index;
 	currentscenes.push_back(scenes[index]);
@@ -185,17 +186,23 @@ void SceneManager::ResetSceneManager()
 {
 
 	scenes.resize(SceneName::SCENE_SIZE);
-	for (int i = 1;i < SCENE_SIZE;i++) {
-		delete scenes[i];
+	for (int i = 0; i < SCENE_SIZE;i++) {
+		
+		 delete scenes[i];
+
 	}
+	scenes.resize(SceneName::SCENE_SIZE);
+	currentscenes.clear();
 	auto tombScene = new TombPuzzleScene(); //For the chain Puzzle, to take the reference
 
-	
+	scenes[SceneName::INITIAL_MENU] = new InitialScene();
 	scenes[SceneName::MIDDLE_ROOM] = new MiddleRoomScene();
 	scenes[SceneName::ROOM_1] = new Room1Scene();
 	scenes[SceneName::ROOM_2] = new Room2Scene();
-	scenes[SceneName::BALANCE_PUZZLE] = new BalancePuzzleScene();
 	scenes[SceneName::ROOM_3] = new Room3Scene();
+	scenes[SceneName::BALANCE_PUZZLE] = new BalancePuzzleScene();
+	scenes[SceneName::WIRES_PUZZLE] = new WiresPuzzleScene();
+	scenes[SceneName::LOCKER_PUZZLE] = new LockerPuzzle();
 	scenes[SceneName::PIPE_PUZZLE] = new PipePuzzleScene();
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
@@ -205,14 +212,13 @@ void SceneManager::ResetSceneManager()
 	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
 	scenes[SceneName::WINDOW_SCENE] = new WindowPuzzleScene();
 	scenes[SceneName::MOSAIC_SCENE] = new MosaicPuzzleScene();
-	scenes[SceneName::WIRES_PUZZLE] = new WiresPuzzleScene();
 	scenes[SceneName::TOMB_SCENE] = tombScene;
 	scenes[SceneName::DRAG_PUZZLE] = new DragPuzzleScene(tombScene);
 	scenes[SceneName::XO_PUZZLE] = new XOPuzzleScene(tombScene);
-	scenes[SceneName::LOCKER_PUZZLE] = new LockerPuzzle();
 	scenes[SceneName::TUTORIAL_SCENE] = new TutorialScene();
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 	scenes[SceneName::CREDITS] = new CreditsScene();
+	scenes[SceneName::BOX] = new Box();
 
 	loadScene(SceneName::INITIAL_MENU);
 }
