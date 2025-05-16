@@ -20,6 +20,7 @@ XOPuzzleScene::XOPuzzleScene(TombPuzzleScene* tomb)
 {
 	XO = { false,false,false,false,false };
 	_tomb = tomb;
+	dialogueManager = new DialogueManager(3);
 }
 
 XOPuzzleScene::~XOPuzzleScene()

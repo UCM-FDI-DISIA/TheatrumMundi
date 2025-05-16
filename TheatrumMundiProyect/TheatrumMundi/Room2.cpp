@@ -25,7 +25,7 @@
 Room2Scene::Room2Scene()
 {
 	//Creation of the DialogueManager of the room and creation of the events 
-	dialogueManager = new DialogueManager(1);
+	dialogueManager = new DialogueManager(3);
 	_setRoomEvents();
 }
 
@@ -96,7 +96,8 @@ void Room2Scene::_setRoomEvents()
 	roomEvent.resize(event_size);
 #pragma region Events
 	roomEvent[InitialDialogue] = [this] {
-		startDialogue("SalaIntermedia2");
+		if(Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("Sala2Intro_P2");
+		else  startDialogue("Sala2Intro_P1");
 		};
 	roomEvent[CorpseDialogue] = [this] {
 		entityManager->setActive(rmObjects.zoomCorpse, true);

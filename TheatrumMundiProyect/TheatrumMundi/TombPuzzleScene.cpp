@@ -7,7 +7,7 @@
 #include "Transform.h"
 TombPuzzleScene::TombPuzzleScene()
 {
-
+	dialogueManager = new DialogueManager(3);
 }
 
 TombPuzzleScene::~TombPuzzleScene()
@@ -52,10 +52,12 @@ void TombPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		//Log
-		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
-
-		//startDialogue("PuzzleCuervo");
+		if(Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("TUMBA1_2P");
+		else {
+			startDialogue("TUMBA1_1P");
+		}
 
 #pragma endregion
 #pragma region BackGround
@@ -132,4 +134,26 @@ void TombPuzzleScene::Win()
 {
 	room->resolvedPuzzle(0);
 	setSolved(true);
+}
+
+void TombPuzzleScene::refresh()
+{
+	if (startDg) {
+		switch (numDialog)
+		{
+		case 1:
+			if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("TUMBA2_2P");
+			else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("TUMBA2_1P");
+			startDg = false;
+			break;
+		case 2:
+			if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("TUMBA3_2P");
+			else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("TUMBA3_1P");
+			startDg = false;
+			break;
+
+		default:
+			break;
+		}
+	}
 }
