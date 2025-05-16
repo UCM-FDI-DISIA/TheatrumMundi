@@ -526,6 +526,8 @@ void Room3Scene::_setInteractuables()
 					parrotUtils.lastSoundTime = sdlutils().currTime();
 				}
 			}
+
+			parrotStateCom->setState(Game::Instance()->getDataManager()->GetRoom3Phase()); // Check if changes the room state
 		});
 
 	parrotStateCom->defBehavior(ParrotState::RED_LIGHTS,
@@ -547,6 +549,8 @@ void Room3Scene::_setInteractuables()
 				}
 			}
 
+
+			parrotStateCom->setState(Game::Instance()->getDataManager()->GetRoom3Phase()); // Check if changes the room state
 		});
 
 	parrotStateCom->setState(ParrotState::SHOOTING_SOUND); // The other will be setted after finishin the puzzle

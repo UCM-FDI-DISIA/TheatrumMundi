@@ -15,6 +15,7 @@
       "id": "EmptyImage",
       "file": "../resources/images/Finales/ImagenVacia.png"
     },
+     { "id" : "loading1", "file" : "../resources/images/Finales/Carga1.png" },
     {
       "id": "Room",
       "file": "../resources/images/Finales/SalaIntermedia.PNG"
@@ -240,6 +241,10 @@
     {
       "id": "loading",
       "file": "../resources/images/loading.png"
+    },
+    {
+      "id": "loading2",
+      "file": "../resources/images/Finales/Carga2.png"
     },
     {
       "id": "Keisara",
