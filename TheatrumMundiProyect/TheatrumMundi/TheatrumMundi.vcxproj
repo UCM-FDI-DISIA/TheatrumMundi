@@ -68,6 +68,7 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="MiddleRoomScene.cpp" />
     <ClCompile Include="Module.cpp" />
+    <ClCompile Include="ParrotPuzzleScene.cpp" />
     <ClCompile Include="PauseManager.cpp" />
     <ClCompile Include="MusicPuzzleScene.cpp" />
     <ClCompile Include="MosaicPuzzleScene.cpp" />
@@ -268,6 +269,7 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="MiddleRoomScene.h" />
     <ClInclude Include="Module.h" />
+    <ClInclude Include="ParrotPuzzleScene.h" />
     <ClInclude Include="PauseManager.h" />
     <ClInclude Include="MusicPuzzleScene.h" />
     <ClInclude Include="MosaicPuzzleScene.h" />

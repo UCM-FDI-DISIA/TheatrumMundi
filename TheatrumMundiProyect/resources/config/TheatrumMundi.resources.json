@@ -775,27 +775,79 @@
     },
     {
       "id": "fase1Partitura",
-      "file": "../resources/images/temporales/fase1Partitura.jpg"
+      "file": "../resources/images/Finales/fase1Partitura.png"
     },
     {
       "id": "fase2Partitura",
-      "file": "../resources/images/temporales/fase2Partitura.jpg"
+      "file": "../resources/images/Finales/fase2Partitura.png"
     },
     {
       "id": "fase3Partitura",
-      "file": "../resources/images/temporales/fase3Partitura.jpg"
+      "file": "../resources/images/Finales/fase3Partitura.png"
     },
     {
       "id": "fase1Espejo",
-      "file": "../resources/images/temporales/fase1Espejo.jpg"
+      "file": "../resources/images/Finales/fase1Espejo.png"
     },
     {
       "id": "fase2Espejo",
-      "file": "../resources/images/temporales/fase2Espejo.jpg"
+      "file": "../resources/images/Finales/fase2Espejo.png"
     },
     {
       "id": "fase3Espejo",
-      "file": "../resources/images/temporales/fase3Espejo.jpg"
+      "file": "../resources/images/Finales/fase3Espejo.png"
+    },
+    {
+      "id": "puertaAMusical",
+      "file": "../resources/images/Finales/puertaA.png"
+    },
+    {
+      "id": "puertaBMusical",
+      "file": "../resources/images/Finales/puertaB.png"
+    },
+    {
+      "id": "instrucciones",
+      "file": "../resources/images/Finales/instrucciones.png"
+    },
+    {
+      "id": "espejo",
+      "file": "../resources/images/Finales/espejo.png"
+    },
+    {
+      "id": "teclasNegras",
+      "file": "../resources/images/Finales/teclasNegras.png"
+    },
+    {
+      "id": "doTecla",
+      "file": "../resources/images/Finales/doTecla.png"
+    },
+    {
+      "id": "reTecla",
+      "file": "../resources/images/Finales/reTecla.png"
+    },
+    {
+      "id": "miTecla",
+      "file": "../resources/images/Finales/miTecla.png"
+    },
+    {
+      "id": "faTecla",
+      "file": "../resources/images/Finales/faTecla.png"
+    },
+    {
+      "id": "solTecla",
+      "file": "../resources/images/Finales/solTecla.png"
+    },
+    {
+      "id": "laTecla",
+      "file": "../resources/images/Finales/laTecla.png"
+    },
+    {
+      "id": "siTecla",
+      "file": "../resources/images/Finales/siTecla.png"
+    },
+    {
+      "id": "fondoCajon",
+      "file": "../resources/images/Finales/fondoMusicalCajon.jpg"
     },
     {
       "id": "FondoJuzgado",
@@ -902,10 +954,13 @@
       "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
     },
     {
+      "id": "fondoOrgano",
+      "file": "../resources/images/Finales/fondoPuzzleMusical.jpg"
+    },
+    {
       "id": "CajaFuerteRojo",
       "file": "../resources/images/temporales/Room3/CajaFuerteRojo.png"
     }
-    
     
 
   ],
@@ -956,6 +1011,10 @@
           "file": "../resources/sound/sfx/cuerda.wav"
         },
         {
+    "id": "Mosaico",
+    "file": "../resources/sound/sfx/MosaicoRompiendose.wav"
+  },
+        {
           "id": "correcto",
           "file": "../resources/sound/sfx/correcto.wav"
         },
@@ -1004,35 +1063,42 @@
           "id": "LaSound",
           "file": "../resources/sound/sfx/La.wav"
         },
-
-  {
-          "id": "NextDialogue",
-          "file": "../resources/sound/sfx/NextDialogue.wav"
-        },
         {
           "id": "SiSound",
           "file": "../resources/sound/sfx/Si.wav"
         },
-            {
-      "id": "sSound",
-      "file": "../resources/sound/sfx/s_soundRoom3.wav"
-    },
-    {
-      "id": "tSound",
-      "file": "../resources/sound/sfx/t_soundRoom3.wav"
-    },
-    {
-      "id": "oSound",
-      "file": "../resources/sound/sfx/o_soundRoom3.wav"
-    },
-    {
-      "id": "pSound",
-      "file": "../resources/sound/sfx/p_soundRoom3.wav"
-    },
-    {
-      "id": "MorseSound",
-      "file": "../resources/sound/sfx/morse_soundRoom3.wav"
-    }
+        {
+          "id": "NextDialogue",
+          "file": "../resources/sound/sfx/NextDialogue.wav"
+        },
+        {
+          "id": "sSound",
+          "file": "../resources/sound/sfx/s_soundRoom3.wav"
+        },
+        {
+          "id": "tSound",
+          "file": "../resources/sound/sfx/t_soundRoom3.wav"
+        },
+        {
+          "id": "oSound",
+          "file": "../resources/sound/sfx/o_soundRoom3.wav"
+        },
+        {
+          "id": "pSound",
+          "file": "../resources/sound/sfx/p_soundRoom3.wav"
+        },
+        {
+          "id": "MorseSound",
+          "file": "../resources/sound/sfx/morse_soundRoom3.wav"
+        },
+        {
+          "id": "MoverPiedra",
+          "file": "../resources/sound/sfx/MoverTapaPiedra.wav"
+        },
+        {
+          "id": "cuervo",
+          "file": "../resources/sound/sfx/cuervo.wav"
+        }
 
     ],
 

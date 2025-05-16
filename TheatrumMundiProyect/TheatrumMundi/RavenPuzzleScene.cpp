@@ -10,6 +10,7 @@
 #include "Transform.h"
 RavenPuzzleScene::RavenPuzzleScene()
 {
+	dialogueManager = new DialogueManager(3);
 }
 
 RavenPuzzleScene::~RavenPuzzleScene()
@@ -36,11 +37,11 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 #pragma endregion
 
 		//Log
-		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
 
 		//startDialogue("PuzzleCuervo");
-
+		dialogueManager->setScene(this);
 		
 		//BackButton
 		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
@@ -94,7 +95,8 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 				}
 				//	else sound of angry bird
 			});
-
+		if(Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("CUERVO1_2P");
+		else startDialogue("CUERVO1_1P");
 #pragma endregion
 
 	}
@@ -107,6 +109,8 @@ bool RavenPuzzleScene::isItemHand(const std::string& itemId)
 {
     if (itemId == "Joya") {
 		ravenHappy = true;
+		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("CUERVO2_2P");
+		else startDialogue("CUERVO2_1P");
 		return true;
     }
 	return false;

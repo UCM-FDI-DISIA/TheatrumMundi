@@ -31,6 +31,7 @@ enum SceneName {
 	WIRES_PUZZLE,
 	BALANCE_PUZZLE,
 	BOX,
+	PARROT_PUZZLE,
 	SCENE_SIZE
 };
 class SceneManager

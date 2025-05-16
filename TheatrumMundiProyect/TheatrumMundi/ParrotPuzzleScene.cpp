@@ -1,9 +1,16 @@
 #include "ParrotPuzzleScene.h"
 
 #include "../src/Components/TriggerComponent.h"
+#include "../src/Components/ClickComponent.h"
 #include "../src/Components/BehaviorStateComponent.h"
+#include "../src/Components/RectArea2D.h"
+#include "Area2DLayerManager.h"
+#include "Log.h"
+#include "PauseManager.h"
+#include "DialogueManager.h"
 #include "../src/game/Game.h"
 #include "../src/sdlutils/SDLUtils.h"
+#include "AudioManager.h"
 
 ParrotPuzzleScene::ParrotPuzzleScene()
 {
@@ -17,7 +24,17 @@ ParrotPuzzleScene::~ParrotPuzzleScene()
 
 void ParrotPuzzleScene::init(SceneRoomTemplate* sr)
 {
+	_setRoomAudio();
 
+	_setGlobalFeatures();
+
+	_setRoomBackground();
+
+	_setInteractuables();
+
+	_setUI();
+
+	_setDialog();
 }
 
 void ParrotPuzzleScene::unload()
@@ -38,9 +55,32 @@ void ParrotPuzzleScene::_setGlobalFeatures()
 	dialogueManager->setScene(this);
 }
 
+void ParrotPuzzleScene::_setRoomAudio()
+{
+	//Audio sfx 
+	AudioManager& audioMngr = AudioManager::Instance();
+
+	rmSounds.uiButton = sdlutils().soundEffects().at("boton");
+	audioMngr.setVolume(rmSounds.uiButton, 0.2);
+
+	rmSounds.puzzleButton = sdlutils().soundEffects().at("puzzle");
+	audioMngr.setVolume(rmSounds.puzzleButton, 0.3);
+
+	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
+
+	rmSounds.explosionSound = sdlutils().soundEffects().at("explosion");
+
+	rmSounds.s_Sound = sdlutils().soundEffects().at("sSound");
+	rmSounds.t_Sound = sdlutils().soundEffects().at("tSound");
+	rmSounds.o_Sound = sdlutils().soundEffects().at("oSound");
+	rmSounds.p_Sound = sdlutils().soundEffects().at("pSound");
+
+	rmSounds.morse_Sound = sdlutils().soundEffects().at("MorseSound");
+}
+
 void ParrotPuzzleScene::_setRoomBackground()
 {
-	teaCupBackground = entityFactory->CreateImageEntity(entityManager, "Parrot", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+	entityFactory->CreateImageEntity(entityManager, "Parrot", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 }
 
 void ParrotPuzzleScene::_setInteractuables()
@@ -53,9 +93,10 @@ void ParrotPuzzleScene::_setInteractuables()
 	BehaviorStateComponent* parrotStateCom = entityManager->addComponent<BehaviorStateComponent>(parrotUtils.parrotEnt);
 
 	parrotUtils.codeSequenceSounds.push_back(rmSounds.explosionSound); // TODO: Gunshoot
-	parrotUtils.codeSequenceSounds.push_back(rmSounds.doorSound); // TODO: S
-	parrotUtils.codeSequenceSounds.push_back(rmSounds.uiButton); // TODO: T
-	// More sounds...
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.s_Sound); // TODO: S
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.t_Sound); // TODO: T
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.o_Sound); // TODO: O
+	parrotUtils.codeSequenceSounds.push_back(rmSounds.p_Sound); // TODO: P
 
 	parrotStateCom->defBehavior(ParrotState::SHOOTING_SOUND,
 		[&]() {
@@ -88,7 +129,7 @@ void ParrotPuzzleScene::_setInteractuables()
 void ParrotPuzzleScene::_setDialog()
 {
 	// Dialog
-	dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, _eventToRead);
+	dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "Sala3");
 
 	assert(rmObjects.inventoryButton != nullptr); // UI must be Initialized First
 
@@ -112,7 +153,6 @@ void ParrotPuzzleScene::_setUI()
 	entityManager->getComponent<ClickComponent>(rmObjects.quitButton)
 		->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
-				room->GetInventory()->setFirstItem(0);
 				AudioManager::Instance().playSound(rmSounds.uiButton);
 				Game::Instance()->getSceneManager()->popScene();
 			});
@@ -120,81 +160,7 @@ void ParrotPuzzleScene::_setUI()
 	entityManager->setActive(rmObjects.quitButton, false);
 
 
-	//inventory descriptions
-	//description text entity
-	invObjects.textDescriptionEnt = entityManager->addEntity(ecs::grp::UI);
-	auto _testTextTranform = entityManager->addComponent<Transform>(invObjects.textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
-	entityManager->setActive(invObjects.textDescriptionEnt, false);
-	SDL_Color colorDialog = { 255, 255, 255, 255 };
-	entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(invObjects.textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, GetInventory()->getTextDescription());
-
-
-	//Inventory
-
-	invObjects.InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
-
-	rmObjects.inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-	entityManager->setActive(invObjects.InventoryBackground, false);
-
-	invObjects.InvArea = entityManager->addComponent<RectArea2D>(invObjects.InventoryBackground, areaLayerManager);
-
-	invObjects.inventoryUpButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-	entityManager->setActive(invObjects.inventoryUpButton, false);
-
-	invObjects.inventoryDownButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-	entityManager->setActive(invObjects.inventoryDownButton, false);
-
-	entityManager->getComponent<ClickComponent>(rmObjects.inventoryButton)
-		->connect(ClickComponent::JUST_CLICKED, [this]()
-			{
-				AudioManager::Instance().playSound(rmSounds.uiButton);
-				GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
-
-				if (GetInventory()->getActive()) // If the inventory is active, activate the items
-				{
-					entityManager->setActive(invObjects.InventoryBackground, true);
-					entityManager->setActive(rmObjects.logbtn, false);
-					//change the position of the log button
-					areaLayerManager->sendFront(invObjects.InvArea->getLayerPos());
-					entityManager->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(925);
-
-					areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(invObjects.inventoryUpButton)->getLayerPos());
-					areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(invObjects.inventoryDownButton)->getLayerPos());
-
-					entityManager->setActive(invObjects.inventoryDownButton, true);
-					entityManager->setActive(invObjects.inventoryUpButton, true);
-
-					for (int i = inv->getFirstItem(); i < inv->getItemNumber() + inv->getFirstItem(); ++i) {
-						inv->hints[i]->getMngr()->setActive(inv->hints[i], true);  // Activate the items
-						areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inv->hints[i])->getLayerPos());
-					}
-				}
-				else
-				{
-					entityManager->setActive(invObjects.InventoryBackground, false);
-					entityManager->setActive(invObjects.inventoryDownButton, false);
-					entityManager->setActive(invObjects.inventoryUpButton, false);
-					entityManager->setActive(rmObjects.logbtn, true);
-					rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
-					for (int i = inv->getFirstItem(); i < inv->getItemNumber() + inv->getFirstItem(); ++i) inv->hints[i]->getMngr()->setActive(inv->hints[i], false);  // Desactivate the items 
-
-				}
-			});
-
-	entityManager->getComponent<ClickComponent>(invObjects.inventoryUpButton)
-		->connect(ClickComponent::JUST_CLICKED, [this]()
-			{
-				AudioManager::Instance().playSound(rmSounds.uiButton);
-				scrollInventory(-1);
-			});
-	entityManager->getComponent<ClickComponent>(invObjects.inventoryDownButton)
-		->connect(ClickComponent::JUST_CLICKED, [this]()
-			{
-				AudioManager::Instance().playSound(rmSounds.uiButton);
-				scrollInventory(1);
-			});
-
-	entityManager->setActive(rmObjects.quitButton, false);
+	createInventoryUI();
 
 	// Pause Logic
 	pauseManager->setScene(this);
