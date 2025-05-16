@@ -564,12 +564,49 @@
     {"Character":"Lucy","Text":"No."},
     {"Character":"Keisara","Text":"Jo."}
     ],
-
     "CUERVO2_1P":[                 
     {"Character":"Lucy","Text":"Oh, ha funcionado."},
     {"Character":"Lucy","Text":"Espero que esto de verdad abra el mausoleo."}
+    ],
+    "Ventana1_2P":[                 
+    {"Character":"Keisara","Text":"¡Por fin! Una cristalera."},
+    {"Character":"Keisara","Text":"¿Qué clase de mausoleo solo tiene una cristalera?"},
+    {"Character":"Lucy","Text":"Kei no te distraigas."},
+    {"Character":"Lucy","Text":"Fijate, tiene una manilla así que probablemente sea una ventana."},
+    {"Character":"Keisara","Text":"¿Crees que el culpable pudo escapar por ahí?"},
+    {"Character":"Lucy","Text":"Si tuviese algo para llegar a esa altura."},
+    {"Character":"Keisara","Text":"Ya, ni siquiera Arte sería capaz de \nllegar ahí de un solo salto."}
+    ],
+    "Ventana1_1P":[                 
+    {"Character":"Lucy","Text":"Hum..."},
+    {"Character":"Lucy","Text":"Una sola cristalera en todo el mausoleo."},
+    {"Character":"Lucy","Text":"Tiene una manilla."},
+    {"Character":"Lucy","Text":"Con las herramientas adecuadas, el \nasesino podría haber escapado por ahí."}
+    ],
+    "SalidaSecreta1_2PA":[                 
+    {"Character":"Keisara","Text":"¿Una rejilla?¿cómo no la hemos visto antes?"},
+    {"Character":"Lucy","Text":"Parece que lleva al exterior."},
+    {"Character":"Lucy","Text":"Pero no se abre."},
+    {"Character":"Keisara","Text":"Será solo para ventilar entonces."}
+    ],
+    "SalidaSecreta1_2PB":[                 
+    {"Character":"Keisara","Text":"¿Una rejilla?¿cómo no la hemos visto antes?"},
+    {"Character":"Lucy","Text":"Parece que lleva al exterior."},
+    {"Character":"Lucy","Text":"Y no parece muy bien sellada."},
+    {"Character":"Keisara","Text":"Si podemos abirla, hemos \nencontrado otra ruta de escape."}
+    ],
+    "SalidaSecreta1_1PA":[                 
+    {"Character":"Lucy","Text":"Una reja."},
+    {"Character":"Lucy","Text":"Bien, otra salida."},
+    {"Character":"Lucy","Text":"O puede que no."},
+    {"Character":"Lucy","Text":"Está totalmente cerrada."}
+    ],
+     "SalidaSecreta1_1PB":[                 
+    {"Character":"Lucy","Text":"Una reja."},
+    {"Character":"Lucy","Text":"Bien, otra salida."},
+    {"Character":"Lucy","Text":"Parece que lleva al exterior."},
+    {"Character":"Lucy","Text":"Y no está especialmente bien sellada."}
     ]
-
 
   },
    "Sala4": {
