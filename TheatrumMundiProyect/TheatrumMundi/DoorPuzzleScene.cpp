@@ -10,6 +10,7 @@
 
 DoorPuzzleScene::DoorPuzzleScene()
 {
+	dialogueManager = new DialogueManager(3);
 }
 
 DoorPuzzleScene::~DoorPuzzleScene()

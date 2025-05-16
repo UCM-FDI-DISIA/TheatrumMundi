@@ -20,6 +20,7 @@ XOPuzzleScene::XOPuzzleScene(TombPuzzleScene* tomb)
 {
 	XO = { false,false,false,false,false };
 	_tomb = tomb;
+	dialogueManager = new DialogueManager(3);
 }
 
 XOPuzzleScene::~XOPuzzleScene()
@@ -112,7 +113,7 @@ void XOPuzzleScene::init(SceneRoomTemplate* sr)
 
 		//Log
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
-		Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
+		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 		//startDialogue("Puerta");
 
 #pragma endregion

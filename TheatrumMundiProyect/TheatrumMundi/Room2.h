@@ -20,6 +20,7 @@ protected:
 		MosaciZoom,
 		MosaicPuzzleScene,
 		MosaicPuzzleSceneRsv,
+		
 		WindowScene,
 		WindowSceneResolved,
 		Rope,
@@ -46,7 +47,7 @@ private:
 	bool isOpen; //Boolean which function is to permite player to enter the mausoleum or not (if the key is on the door or not)
 	bool stopAnimation = false;
 	bool scrolling = false;
-
+	bool brokenMosaic = false;
 	void endDialogue() override;
 	void _setRoomEvents();
 	void _setRoomAudio();
@@ -81,7 +82,7 @@ private:
 		ecs::entity_t hook = nullptr; //Image of the hook
 		ecs::entity_t secretEntryZoom = nullptr; //Image of the ZoomEntry
 		ecs::entity_t secretEntryInTheZoomed = nullptr; //Image of the ZoomEntry
-
+		ecs::entity_t mosaic = nullptr;
 		//Entities with special conditions (only appear with one specific event)
 		std::pair<ecs::entity_t, bool>organMosaic; //Image of the entry to the organ room
 		std::pair<ecs::entity_t, bool> mirror; //Image which reflects information

@@ -956,6 +956,10 @@
           "file": "../resources/sound/sfx/cuerda.wav"
         },
         {
+    "id": "Mosaico",
+    "file": "../resources/sound/sfx/MosaicoRompiendose.wav"
+  },
+        {
           "id": "correcto",
           "file": "../resources/sound/sfx/correcto.wav"
         },
@@ -1029,6 +1033,14 @@
       "id": "pSound",
       "file": "../resources/sound/sfx/p_soundRoom3.wav"
     },
+      {
+    "id": "MoverPiedra",
+    "file": "../resources/sound/sfx/MoverTapaPiedra.wav"
+  },
+    {
+    "id": "cuervo",
+    "file": "../resources/sound/sfx/cuervo.wav"
+  },
     {
       "id": "MorseSound",
       "file": "../resources/sound/sfx/morse_soundRoom3.wav"
