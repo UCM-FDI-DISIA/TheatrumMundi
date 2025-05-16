@@ -19,6 +19,7 @@ DragPuzzleScene::DragPuzzleScene(TombPuzzleScene* _tomb) : ScenePuzzleTemplate()
 	isStarted = false;
     auxtiledsize = Vector2D(64, 64);
     posMat = std::vector(9,std::vector<Vector2D>(8));
+    dialogueManager = new DialogueManager(3);
     tomb = _tomb;
    
 }
