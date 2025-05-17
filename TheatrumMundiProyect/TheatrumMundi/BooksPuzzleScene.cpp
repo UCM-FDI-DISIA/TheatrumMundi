@@ -176,9 +176,10 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 				std::cout << "CLICK" << std::endl;
 			#endif // DEBUG
 			
-			AudioManager::Instance().playSound(buttonSound);
+			
 			if (!solved && Check()) {
 				Win();
+				AudioManager::Instance().playSound(sdlutils().soundEffects().at("OpenPuzzle"));
 				Image* img = entityManager->getComponent<Image>(StudyBackground);
 				img->setTexture(&sdlutils().images().at("estanteria2"));
 				//std::cout << "WIN" << std::endl;
@@ -187,7 +188,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 				
 				clock->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, true);
 				tag->getMngr()->setActiveGroup(ecs::grp::BOOKS_PUZZLE_SCENE_REWARD, true);
-			}
+			}else AudioManager::Instance().playSound(sdlutils().soundEffects().at("failOpenPuzzle"));
 			});
 
 		ClickComponent* clk = entityManager->getComponent<ClickComponent>(clock);

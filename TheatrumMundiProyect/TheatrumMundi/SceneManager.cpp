@@ -68,7 +68,7 @@ SceneManager::SceneManager()
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::ROOM_2);
+	loadScene(SceneName::INITIAL_MENU);
 }
 
 void SceneManager::popScene()
@@ -221,7 +221,7 @@ void SceneManager::ResetSceneManager()
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 	scenes[SceneName::CREDITS] = new CreditsScene();
 	scenes[SceneName::BOX] = new Box();
-
+	scenes[SceneName::PARROT_PUZZLE] = new ParrotPuzzleScene();
 	loadScene(SceneName::INITIAL_MENU);
 }
 
