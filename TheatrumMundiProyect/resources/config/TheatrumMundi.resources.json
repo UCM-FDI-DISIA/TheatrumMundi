@@ -1100,6 +1100,14 @@
     "file": "../resources/sound/sfx/MecanismoNoAbre.wav"
   },
    {
+    "id": "MecanismoAbre",
+    "file": "../resources/sound/sfx/MecanismoAbre.wav"
+  },
+   {
+    "id": "AbrirPuertaPiedra",
+    "file": "../resources/sound/sfx/AbrirPuertaPiedra.mp3"
+  },
+   {
     "id": "failOpenPuzzle",
     "file": "../resources/sound/sfx/FailOpenPuzzle.wav"
   },
@@ -1117,7 +1125,7 @@
   },
     {
     "id": "cuervo",
-    "file": "../resources/sound/sfx/cuervo.wav"
+    "file": "../resources/sound/sfx/cuervo.mp3"
   },
     {
       "id": "MorseSound",

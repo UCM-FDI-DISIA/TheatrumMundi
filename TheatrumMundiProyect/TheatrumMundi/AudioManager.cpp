@@ -58,8 +58,9 @@ bool AudioManager::init() {
 void AudioManager::shutdown() {
     sounds.clear();  
     if (system) {
-        system->release();
         system->close();
+        system->release();
+       
     }
 }
 

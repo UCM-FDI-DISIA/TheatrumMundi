@@ -310,7 +310,7 @@ void Room2Scene::_setRoomBackground()
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom2)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
-			AudioManager::Instance().playSound(rmSounds.doorSound);
+			AudioManager::Instance().playSound(sdlutils().soundEffects().at("AbrirPuertaPiedra"));
 			rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
 			scrolling = true;
 		}
@@ -321,7 +321,7 @@ void Room2Scene::_setRoomBackground()
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom1)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll]() {
 		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
-			AudioManager::Instance().playSound(rmSounds.doorSound);
+			AudioManager::Instance().playSound(sdlutils().soundEffects().at("AbrirPuertaPiedra"));
 			rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
 			scrolling = true;
 		}
