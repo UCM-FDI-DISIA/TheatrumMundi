@@ -175,6 +175,46 @@
       "id": "correcto",
       "file": "../resources/sound/sfx/correcto.wav"
     },
+      {
+    "id": "MecanismoNoAbre",
+    "file": "../resources/sound/sfx/MecanismoNoAbre.wav"
+  },
+   {
+    "id": "MecanismoAbre",
+    "file": "../resources/sound/sfx/MecanismoAbre.wav"
+  },
+   {
+    "id": "LlaveMoviendose",
+    "file": "../resources/sound/sfx/llaveMoviendose.wav"
+  },
+   {
+    "id": "NoAbrePuertaHierro",
+    "file": "../resources/sound/sfx/NoAbrelFierro.wav"
+  },
+   {
+          "id": "DoSound",
+          "file": "../resources/sound/sfx/Do.wav"
+        },
+        {
+          "id": "ReSound",
+          "file": "../resources/sound/sfx/Re.wav"
+        },
+        {
+          "id": "MiSound",
+          "file": "../resources/sound/sfx/Mi.wav"
+        },
+        {
+          "id": "FaSound",
+          "file": "../resources/sound/sfx/Fa.wav"
+        },
+        {
+          "id": "SolSound",
+          "file": "../resources/sound/sfx/Sol.wav"
+        },
+        {
+          "id": "LaSound",
+          "file": "../resources/sound/sfx/La.wav"
+        },
 {
           "id": "NextDialogue",
           "file": "../resources/sound/sfx/NextDialogue.wav"

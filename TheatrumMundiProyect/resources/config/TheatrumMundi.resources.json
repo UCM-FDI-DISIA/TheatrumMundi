@@ -1075,30 +1075,54 @@
           "id": "sSound",
           "file": "../resources/sound/sfx/s_soundRoom3.wav"
         },
-        {
-          "id": "tSound",
-          "file": "../resources/sound/sfx/t_soundRoom3.wav"
-        },
-        {
-          "id": "oSound",
-          "file": "../resources/sound/sfx/o_soundRoom3.wav"
-        },
-        {
-          "id": "pSound",
-          "file": "../resources/sound/sfx/p_soundRoom3.wav"
-        },
-        {
-          "id": "MorseSound",
-          "file": "../resources/sound/sfx/morse_soundRoom3.wav"
-        },
-        {
-          "id": "MoverPiedra",
-          "file": "../resources/sound/sfx/MoverTapaPiedra.wav"
-        },
-        {
-          "id": "cuervo",
-          "file": "../resources/sound/sfx/cuervo.wav"
-        }
+            {
+      "id": "sSound",
+      "file": "../resources/sound/sfx/s_soundRoom3.wav"
+    },
+    {
+      "id": "tSound",
+      "file": "../resources/sound/sfx/t_soundRoom3.wav"
+    },
+    {
+      "id": "oSound",
+      "file": "../resources/sound/sfx/o_soundRoom3.wav"
+    },
+    {
+      "id": "pSound",
+      "file": "../resources/sound/sfx/p_soundRoom3.wav"
+    },
+      {
+    "id": "MoverPiedra",
+    "file": "../resources/sound/sfx/MoverTapaPiedra.wav"
+  },
+    {
+    "id": "MecanismoNoAbre",
+    "file": "../resources/sound/sfx/MecanismoNoAbre.wav"
+  },
+   {
+    "id": "failOpenPuzzle",
+    "file": "../resources/sound/sfx/FailOpenPuzzle.wav"
+  },
+   {
+    "id": "OpenPuzzle",
+    "file": "../resources/sound/sfx/openPuzzle.wav"
+  },
+   {
+    "id": "LlaveMoviendose",
+    "file": "../resources/sound/sfx/llaveMoviendose.wav"
+  },
+   {
+    "id": "NoAbrePuertaHierro",
+    "file": "../resources/sound/sfx/NoAbrelFierro.wav"
+  },
+    {
+    "id": "cuervo",
+    "file": "../resources/sound/sfx/cuervo.wav"
+  },
+    {
+      "id": "MorseSound",
+      "file": "../resources/sound/sfx/morse_soundRoom3.wav"
+    }
 
     ],
 

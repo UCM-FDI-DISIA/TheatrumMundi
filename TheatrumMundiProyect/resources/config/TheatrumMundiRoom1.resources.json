@@ -409,6 +409,14 @@
         "id": "libro",
         "file": "../resources/sound/sfx/libro.wav"
     },
+      {
+    "id": "failOpenPuzzle",
+    "file": "../resources/sound/sfx/FailOpenPuzzle.wav"
+  },
+   {
+    "id": "OpenPuzzle",
+    "file": "../resources/sound/sfx/openPuzzle.wav"
+  },
     {
         "id": "taza",
         "file": "../resources/sound/sfx/metal_taza.wav"
