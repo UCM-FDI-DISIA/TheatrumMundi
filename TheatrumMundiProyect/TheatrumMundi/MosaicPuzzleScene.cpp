@@ -46,11 +46,6 @@ MosaicPuzzleScene::MosaicPuzzleScene()
 {
 	//Assignation of the possitions 
 	dialogueManager = new DialogueManager(3);
-	int onlyRelease = 1; //Round corrector to move the squares
-
-#ifdef _DEBUG
-	onlyRelease = 0;
-#endif // DEBUG
 
 	int index = 0; //Aux index to set the Y position
 	for (int i = 0; i < TOTALSQUARES; ++i) { //Initializate the list of positions
@@ -62,9 +57,9 @@ MosaicPuzzleScene::MosaicPuzzleScene()
 
 		//Assign the positions of the different rows
 		if(i < 4) positions.push_back(Vector2D((WIDTHCORRECTOR * Game::Instance()->wscreenScale) + (index * SQUAREWIDTH * Game::Instance()->wscreenScale),(HEIGHTCORRECTOR * Game::Instance()->hscreenScale))); //First row possitions (0-3)
-		else if(i < 8) positions.push_back(Vector2D((WIDTHCORRECTOR * Game::Instance()->wscreenScale) + (index * SQUAREWIDTH * Game::Instance()->wscreenScale) + onlyRelease, (HEIGHTCORRECTOR * Game::Instance()->hscreenScale) + (SQUAREHEIGHT * Game::Instance()->hscreenScale))); //Second row possitions (4-7)
-		else if(i < 12)positions.push_back(Vector2D((WIDTHCORRECTOR * Game::Instance()->wscreenScale) + (index * SQUAREWIDTH * Game::Instance()->wscreenScale) + onlyRelease, (HEIGHTCORRECTOR * Game::Instance()->hscreenScale) + (2 * SQUAREHEIGHT * Game::Instance()->hscreenScale))); //Third row possitions (8-11)
-		else positions.push_back(Vector2D((WIDTHCORRECTOR * Game::Instance()->wscreenScale) + (index * SQUAREWIDTH * Game::Instance()->wscreenScale) + onlyRelease, (HEIGHTCORRECTOR * Game::Instance()->hscreenScale) + (3 * SQUAREHEIGHT * Game::Instance()->hscreenScale))); //Third row possitions (12-15)
+		else if(i < 8) positions.push_back(Vector2D((WIDTHCORRECTOR * Game::Instance()->wscreenScale) + (index * SQUAREWIDTH * Game::Instance()->wscreenScale), (HEIGHTCORRECTOR * Game::Instance()->hscreenScale) + (SQUAREHEIGHT * Game::Instance()->hscreenScale))); //Second row possitions (4-7)
+		else if(i < 12)positions.push_back(Vector2D((WIDTHCORRECTOR * Game::Instance()->wscreenScale) + (index * SQUAREWIDTH * Game::Instance()->wscreenScale), (HEIGHTCORRECTOR * Game::Instance()->hscreenScale) + (2 * SQUAREHEIGHT * Game::Instance()->hscreenScale))); //Third row possitions (8-11)
+		else positions.push_back(Vector2D((WIDTHCORRECTOR * Game::Instance()->wscreenScale) + (index * SQUAREWIDTH * Game::Instance()->wscreenScale), (HEIGHTCORRECTOR * Game::Instance()->hscreenScale) + (3 * SQUAREHEIGHT * Game::Instance()->hscreenScale))); //Third row possitions (12-15)
 		++index;
 
 	}
@@ -170,11 +165,9 @@ void MosaicPuzzleScene::MoveSquare()
 	//Compare if is in the same X
 	if (abs(diffX) < SQUAREWIDTH/2) {
 		//If free position is under the square position, move square down
-		int a = round(square->getPos().getY()) + round((SQUAREHEIGHT * Game::Instance()->hscreenScale));
-		int b = round(freePos.getY());
-		std::cout << a << " " << b << std::endl;
-
-		if (round(square->getPos().getY()) + round((SQUAREHEIGHT * Game::Instance()->hscreenScale)) == round(freePos.getY())) {
+		int diff1 = round(square->getPos().getY()) + round((SQUAREHEIGHT * Game::Instance()->hscreenScale)) - round(freePos.getY());
+		int diff2 = round(square->getPos().getY()) - round((SQUAREHEIGHT * Game::Instance()->hscreenScale)) - round(freePos.getY());
+		if (abs(diff1) < SQUAREHEIGHT/2) {
 
 			//Evitate to clcik in another square during the animation
 			squareMoving = true;
@@ -201,7 +194,7 @@ void MosaicPuzzleScene::MoveSquare()
 		}
 
 		//If free position is over the square position, move square up
-		else if (round(square->getPos().getY()) - round((SQUAREHEIGHT * Game::Instance()->hscreenScale)) == round(freePos.getY())) {
+		else if (abs(diff2) < SQUAREHEIGHT / 2) {
 
 			//Evitate to clcik in another square during the animation
 			squareMoving = true;
@@ -232,9 +225,10 @@ void MosaicPuzzleScene::MoveSquare()
 
 	//Compare if is in the same Y
 	else if (abs(diffY) < SQUAREHEIGHT / 2) {
-		int diff = round(square->getPos().getX()) + round((SQUAREWIDTH * Game::Instance()->wscreenScale)) - round(freePos.getX());
+		int diff1 = round(square->getPos().getX()) + round((SQUAREWIDTH * Game::Instance()->wscreenScale)) - round(freePos.getX());
+		int diff2 = round(square->getPos().getX()) - round((SQUAREWIDTH * Game::Instance()->wscreenScale)) - round(freePos.getX());
 		//If free position is on the right of the square position, move square right
-		if (abs(diff) < SQUAREWIDTH/2) {
+		if (abs(diff1) < SQUAREWIDTH / 2) {
 
 			//Evitate to clcik in another square during the animation
 			squareMoving = true;
@@ -261,7 +255,7 @@ void MosaicPuzzleScene::MoveSquare()
 		}
 
 		//If free position is on the left of the square position, move square left
-		else if (round(square->getPos().getX()) - round((SQUAREWIDTH * Game::Instance()->wscreenScale)) == round(freePos.getX())) {
+		else if (abs(diff2) < SQUAREHEIGHT / 2) {
 
 			//Evitate to clcik in another square during the animation
 			squareMoving = true;
