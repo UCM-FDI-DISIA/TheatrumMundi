@@ -525,6 +525,10 @@
     {
       "id": "Hanni",
       "file": "../resources/images/asesinoDeHanni.png"
+    },
+    {
+      "id": "fondoEntradaMausoleo",
+      "file": "../resources/images/Finales/fondoEntrada.png"
     }
   ],
 
