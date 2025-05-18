@@ -3,6 +3,7 @@
 #include "../../TheatrumMundiProyect/src/ecs/Manager.h"
 #include "../TheatrumMundi/Area2DLayerManager.h"
 #include "DialogueManager.h"
+#include "Area2D.h"
 #include "PauseManager.h"
 #include "DialogueAnimComponent.h";
 #include "Game.h"
@@ -52,7 +53,6 @@ void SceneTemplate::startDialogue(const string& _eventToRead)
 	for (auto a : entityManager->getEntities(ecs::grp::DIALOGUE)) {
 		if(a->getMngr()->getComponent<DialogueAnimComponent>(a) != nullptr) 
 		a->getMngr()->getComponent<DialogueAnimComponent>(a)->startDialogueAnim();
-	
 	}
 	dialogueManager->setdisplayOnProcess(true);
 	//entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);

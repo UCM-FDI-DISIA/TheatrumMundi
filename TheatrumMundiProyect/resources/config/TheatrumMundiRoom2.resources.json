@@ -347,11 +347,11 @@
     "id": "cuervo",
     "file": "../resources/sound/sfx/cuervo.wav"
   },
-    {
-      "id": "cuerda",
-      "file": "../resources/sound/sfx/cuerda.wav"
-    },
-    {
+  {
+    "id": "cuerda",
+    "file": "../resources/sound/sfx/cuerda.wav"
+  },
+  {
       "id": "correcto",
       "file": "../resources/sound/sfx/correcto.wav"
     },
@@ -372,11 +372,11 @@
     "id": "Mosaico",
     "file": "../resources/sound/sfx/MosaicoRompiendose.wav"
   },
-    {
-      "id": "incorrecto",
-      "file": "../resources/sound/sfx/incorrecto.wav"
-    }
-    ],
+  {
+    "id": "incorrecto",
+    "file": "../resources/sound/sfx/incorrecto.wav"
+  }
+],
 
   "musics" : [
     {

@@ -16,7 +16,7 @@
     
     { "id" : "Pala", "text" :"No era la pala que esperaba"},
     { "id" : "Llave", "text" : "La llave de una puerta, seguro que abre algo."},
-    { "id" : "Joya", "text" : "EYYYY Lapislazuli."}
+    { "id" : "ColganteTumba", "text" : "EYYYY Lapislazuli."}
   ]
 
 }

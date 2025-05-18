@@ -300,7 +300,7 @@ void Room2Scene::_setRoomBackground()
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(CementeryBackground));
 
 	//RightBackground
-	auto MausoleumBackground = entityFactory->CreateImageEntity(entityManager, "FondoCripta", Vector2D(1349, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+	auto MausoleumBackground = entityFactory->CreateImageEntity(entityManager, "MausoleoSala2", Vector2D(1349, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(MausoleumBackground));
 
 
@@ -309,18 +309,18 @@ void Room2Scene::_setRoomBackground()
 #pragma region Scroll
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom2)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+		if (!isOpen && !rmObjects.backgroundScroll->isScrolling()) {
 			AudioManager::Instance().playSound(rmSounds.doorSound);
 			rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
 			scrolling = true;
 		}
-		else if (!isOpen) {
+		else if (isOpen) {
 			roomEvent[DoorScene]();
 		}
 		});
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom1)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll]() {
-		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+		if (!isOpen && !rmObjects.backgroundScroll->isScrolling()) {
 			AudioManager::Instance().playSound(rmSounds.doorSound);
 			rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
 			scrolling = true;
@@ -482,7 +482,7 @@ void Room2Scene::_setInteractuables()
 	RectArea2D* corpseZoomArea = entityManager->addComponent<RectArea2D>(rmObjects.zoomCorpse, areaLayerManager);
 	entityManager->setActive(rmObjects.zoomCorpse, false);
 
-	characterCorpse = entityFactory->CreateInteractableEntity(entityManager, "Cadaver2", EntityFactory::RECTAREA, Vector2D(100, 300), Vector2D(0, 0), 250 / 3, 225 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	characterCorpse = entityFactory->CreateInteractableEntity(entityManager, "CadaverSol", EntityFactory::RECTAREA, Vector2D(100, 300), Vector2D(0, 0), 250 / 3, 225 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(characterCorpse));
 
@@ -511,7 +511,7 @@ void Room2Scene::_setInteractuables()
 #pragma region PreSolveMosaic
 
 	//Before Completing mosaic
-	rmObjects.mosaic = entityFactory->CreateInteractableEntity(entityManager, "Mosaico", EntityFactory::RECTAREA, Vector2D(400 + 1344, 300), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	rmObjects.mosaic = entityFactory->CreateInteractableEntity(entityManager, "MosaicoSala", EntityFactory::RECTAREA, Vector2D(400 + 1344, 300), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.mosaic));
 	entityManager->getComponent<ClickComponent>(rmObjects.mosaic)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[MosaicPuzzleScene]();

@@ -42,43 +42,43 @@ void XOPuzzleScene::init(SceneRoomTemplate* sr)
 		auto _button4 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(668, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		auto _button5 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(718, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		auto _reset = entityFactory->CreateInteractableEntity(entityManager, "bookComb2", EntityFactory::RECTAREA, Vector2D(1000, 500), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		ClickComponent* button1Click = entityManager->addComponent<ClickComponent>(_button1);
+		ClickComponent* button1Click = entityManager->getComponent<ClickComponent>(_button1);
 		button1Click->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
 				pushButton(0);
 			});
-		ClickComponent* button2Click = entityManager->addComponent<ClickComponent>(_button2);
+		ClickComponent* button2Click = entityManager->getComponent<ClickComponent>(_button2);
 		button2Click->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
 				pushButton(1);
 			});
-		ClickComponent* button3Click = entityManager->addComponent<ClickComponent>(_button3);
+		ClickComponent* button3Click = entityManager->getComponent<ClickComponent>(_button3);
 		button3Click->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
 				pushButton(2);
 			});
-		ClickComponent* button4Click = entityManager->addComponent<ClickComponent>(_button4);
+		ClickComponent* button4Click = entityManager->getComponent<ClickComponent>(_button4);
 		button4Click->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
 				pushButton(3);
 			});
-		ClickComponent* button5Click = entityManager->addComponent<ClickComponent>(_button5);
+		ClickComponent* button5Click = entityManager->getComponent<ClickComponent>(_button5);
 		button5Click->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
 				pushButton(4);
 			});
-		ClickComponent* _resetClick = entityManager->addComponent<ClickComponent>(_reset);
+		ClickComponent* _resetClick = entityManager->getComponent<ClickComponent>(_reset);
 		_resetClick->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
 				resetButtons();
 			});
 
 		// Initial image
-		Image* img1 = entityManager->addComponent<Image>(_button1, &sdlutils().images().at("bookComb0"));
-		Image* img2 = entityManager->addComponent<Image>(_button2, &sdlutils().images().at("bookComb0"));
-		Image* img3 = entityManager->addComponent<Image>(_button3, &sdlutils().images().at("bookComb0"));
-		Image* img4 = entityManager->addComponent<Image>(_button4, &sdlutils().images().at("bookComb0"));
-		Image* img5 = entityManager->addComponent<Image>(_button5, &sdlutils().images().at("bookComb0"));
+		Image* img1 = entityManager->getComponent<Image>(_button1);
+		Image* img2 = entityManager->getComponent<Image>(_button2);
+		Image* img3 = entityManager->getComponent<Image>(_button3);
+		Image* img4 = entityManager->getComponent<Image>(_button4);
+		Image* img5 = entityManager->getComponent<Image>(_button5);
 
 
 		buttonImages = { img1, img2, img3, img4,img5 };
