@@ -143,11 +143,6 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000 && Game::Instance()->getDataManager()->GetRoom3Phase() == 2) { // Every second
 
 				AudioManager& audioMngr = AudioManager::Instance();
-;
-				audioMngr.setVolume(rmSounds.s_Sound, 1.0f);
-				audioMngr.setVolume(rmSounds.t_Sound, 1.0f);
-				audioMngr.setVolume(rmSounds.o_Sound, 1.0f);
-				audioMngr.setVolume(rmSounds.p_Sound, 1.0f);
 
 				if (parrotUtils.codeSeqIteration == parrotUtils.codeSequenceSounds.size() - 1) {
 					parrotUtils.codeSeqIteration++;
@@ -271,10 +266,15 @@ void ParrotPuzzleScene::_setUI()
 			_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
 			_backButtonImage->setPosOffset(0, 0);
 
-			//AudioManager::Instance().setVolume(rmSounds.s_Sound, 0.1);
-			//AudioManager::Instance().setVolume(rmSounds.t_Sound, 0.1);
-			//AudioManager::Instance().setVolume(rmSounds.o_Sound, 0.1);
-			//AudioManager::Instance().setVolume(rmSounds.p_Sound, 0.1);
+			AudioManager::Instance().stopSound(rmSounds.shootSound);
+			AudioManager::Instance().stopSound(rmSounds.explosionSound);
+			AudioManager::Instance().stopSound(rmSounds.morse_Sound);
+			AudioManager::Instance().stopSound(rmSounds.s_Sound);
+			AudioManager::Instance().stopSound(rmSounds.t_Sound);
+			AudioManager::Instance().stopSound(rmSounds.o_Sound);
+			AudioManager::Instance().stopSound(rmSounds.p_Sound);
+
+			parrotUtils.lastSoundTime = 0;
 
 			Game::Instance()->getSceneManager()->popScene();
 		});
