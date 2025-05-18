@@ -461,6 +461,22 @@
     {
       "id": "TumbaPuzzles",
       "file": "../resources/images/Finales/TumbaPuzzles.png"
+    },
+    {
+      "id": "fondoXO",
+      "file": "../resources/images/Finales/fondoXO.png"
+    },
+    {
+      "id": "resetButton",
+      "file": "../resources/images/Finales/resetB.png"
+    },
+    {
+      "id": "xButton",
+      "file": "../resources/images/Finales/xButton.png"
+    },
+    {
+      "id": "oButton",
+      "file": "../resources/images/Finales/oButton.png"
     }
   ],
 

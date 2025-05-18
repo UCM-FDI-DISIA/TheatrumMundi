@@ -35,13 +35,17 @@ void XOPuzzleScene::init(SceneRoomTemplate* sr)
 		dialogueManager->setScene(this);
 		//startDialogue("PuzzleXO");
 		room = sr;
+
+		//create background
+		entityFactory->CreateImageEntity(entityManager, "fondoXO", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+
 		//create the buttons
-		auto _button1 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		auto _button2 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(568, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		auto _button3 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(618, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		auto _button4 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(668, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		auto _button5 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(718, 430), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		auto _reset = entityFactory->CreateInteractableEntity(entityManager, "bookComb2", EntityFactory::RECTAREA, Vector2D(1000, 500), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto _button1 = entityFactory->CreateInteractableEntity(entityManager, "xButton", EntityFactory::RECTAREA, Vector2D(300, 300), Vector2D(0, 0), 183/1.5, 172 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto _button2 = entityFactory->CreateInteractableEntity(entityManager, "xButton", EntityFactory::RECTAREA, Vector2D(450, 300), Vector2D(0, 0), 183 / 1.5, 172 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto _button3 = entityFactory->CreateInteractableEntity(entityManager, "xButton", EntityFactory::RECTAREA, Vector2D(600, 300), Vector2D(0, 0), 183 / 1.5, 172 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto _button4 = entityFactory->CreateInteractableEntity(entityManager, "xButton", EntityFactory::RECTAREA, Vector2D(750, 300), Vector2D(0, 0), 183 / 1.5, 172 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto _button5 = entityFactory->CreateInteractableEntity(entityManager, "xButton", EntityFactory::RECTAREA, Vector2D(900, 300), Vector2D(0, 0), 183 / 1.5, 172 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto _reset = entityFactory->CreateInteractableEntity(entityManager, "resetButton", EntityFactory::RECTAREA, Vector2D(1000, 500), Vector2D(0, 0), 183 / 1.5, 172 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		ClickComponent* button1Click = entityManager->getComponent<ClickComponent>(_button1);
 		button1Click->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
@@ -174,9 +178,9 @@ void XOPuzzleScene::resetButtons()
 void XOPuzzleScene::updateButtonImage(int index)
 {
 	if (XO[index])
-		buttonImages[index]->setTexture(&sdlutils().images().at("bookComb1")); // Change to "O"
+		buttonImages[index]->setTexture(&sdlutils().images().at("oButton")); // Change to "O"
 	else
-		buttonImages[index]->setTexture(&sdlutils().images().at("bookComb0")); // Change to "X"
+		buttonImages[index]->setTexture(&sdlutils().images().at("xButton")); // Change to "X"
 }
 
 bool XOPuzzleScene::checkWin()
