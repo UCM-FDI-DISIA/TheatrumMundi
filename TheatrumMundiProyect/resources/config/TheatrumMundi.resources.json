@@ -1071,10 +1071,7 @@
           "id": "NextDialogue",
           "file": "../resources/sound/sfx/NextDialogue.wav"
         },
-        {
-          "id": "sSound",
-          "file": "../resources/sound/sfx/s_soundRoom3.wav"
-        },
+        
             {
       "id": "sSound",
       "file": "../resources/sound/sfx/s_soundRoom3.wav"

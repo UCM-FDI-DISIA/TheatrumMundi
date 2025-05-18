@@ -389,6 +389,10 @@
         "file": "../resources/sound/sfx/click_avanzar_dialogo.wav"
     },
     {
+          "id": "sSound",
+          "file": "../resources/sound/sfx/s_soundRoom3.wav"
+        },
+    {
         "id": "boton",
         "file": "../resources/sound/sfx/click_boton.wav"
     },
@@ -409,6 +413,7 @@
         "id": "libro",
         "file": "../resources/sound/sfx/libro.wav"
     },
+    
       {
     "id": "failOpenPuzzle",
     "file": "../resources/sound/sfx/FailOpenPuzzle.wav"

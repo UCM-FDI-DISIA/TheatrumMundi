@@ -128,10 +128,20 @@ void SceneManager::loadScene(int index)
 		sdlutils().ClearMaps();
 		sdlutils().loadReasources("../resources/config/TheatrumMundiTutorial.resources.json");
 		break;
-	case ROOM1:
+	case ROOM_1:
 		sdlutils().ClearMaps();
 
 		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom1.resources.json");
+		break;
+	case ROOM_2:
+		sdlutils().ClearMaps();
+
+		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom2.resources.json");
+		break;
+	case ROOM_3:
+		sdlutils().ClearMaps();
+
+		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom3.resources.json");
 		break;
 	default:
 		break;
