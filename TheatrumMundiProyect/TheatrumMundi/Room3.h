@@ -24,13 +24,22 @@ protected:
 		ParrotSceneRsv,
 		MorseCodePuzzleScene,
 		MorseCodeSceneRsv,
+		ZoomRadio,
 		ResolveCase,
 		ResolveButtons,
 		GoodEnd,
 		BadEnd,
 		event_size,
 	};
+
 public:
+
+	enum Phase {
+		LIGHTS_OFF,
+		LIGHTS_ON,
+		LIGHTS_RED
+	};
+
 	Room3Scene();
 	~Room3Scene();
 	void init() override;
@@ -76,10 +85,15 @@ private:
 		ecs::entity_t logbtn = nullptr;
 		ecs::entity_t zoomCorpse = nullptr;
 		ecs::entity_t quitButton = nullptr; //Reference to the zoomed Quit Button
+		
 		ecs::entity_t cablesPuzzle = nullptr; //Image of the cablesPuzzle
 		ecs::entity_t boxOfficeMorseCodeB = nullptr; //Image of the first boxOffice
 		ecs::entity_t boxOfficeCircleLockP = nullptr; //Image of the second boxOffice
+		ecs::entity_t radio = nullptr; //Image of the radio
+		ecs::entity_t zoomRadio = nullptr;
+		
 		ecs::entity_t parrot = nullptr; //Image of the parrot
+		ecs::entity_t zoomParrot = nullptr; 
 		ecs::entity_t balance = nullptr; //Image of the balance
 		ecs::entity_t locker = nullptr;
 		ecs::entity_t safeBox = nullptr; //Image of the safeBox
@@ -99,7 +113,6 @@ private:
 		Uint32 lastSoundTime = 0; // The time where the parrot emited the last noise
 		std::vector<std::shared_ptr<Sound>> codeSequenceSounds; // Sequence of sounds in the second phase
 		int codeSeqIteration = 0;
+		bool zoomParrotRadio = false;
 	} parrotUtils;
-
-	enum ParrotState { SHOOTING_SOUND, RED_LIGHTS };
 };
