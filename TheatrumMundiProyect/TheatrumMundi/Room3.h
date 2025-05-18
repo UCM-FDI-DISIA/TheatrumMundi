@@ -71,6 +71,7 @@ private:
 		std::shared_ptr<Sound> shootSound;
 		std::shared_ptr<Sound> explosionSound;
 		std::shared_ptr<Sound> morse_Sound;
+		std::shared_ptr<Sound> morse_Sound_Low;
 		std::shared_ptr<Sound> s_Sound;
 		std::shared_ptr<Sound> t_Sound;
 		std::shared_ptr<Sound> o_Sound;

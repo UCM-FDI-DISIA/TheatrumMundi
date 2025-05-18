@@ -224,10 +224,10 @@
       "id": "cuerda",
       "file": "../resources/sound/sfx/cuerda.wav"
     },
-{
-          "id": "NextDialogue",
-          "file": "../resources/sound/sfx/NextDialogue.wav"
-        },
+    {
+      "id": "NextDialogue",
+      "file": "../resources/sound/sfx/NextDialogue.wav"
+    },
     {
       "id": "CogerCosa",
       "file": "../resources/sound/sfx/CogerCosa.wav"
@@ -296,6 +296,26 @@
     {
       "id": "MorseSound",
       "file": "../resources/sound/sfx/morse_soundRoom3.wav"
+    },
+    {
+      "id": "sSoundLow",
+      "file": "../resources/sound/sfx/s_soundRoom3small.wav"
+    },
+    {
+      "id": "tSoundLow",
+      "file": "../resources/sound/sfx/t_soundRoom3small.wav"
+    },
+    {
+      "id": "oSoundLow",
+      "file": "../resources/sound/sfx/o_soundRoom3small.wav"
+    },
+    {
+      "id": "pSoundLow",
+      "file": "../resources/sound/sfx/p_soundRoom3small.wav"
+    },
+    {
+      "id": "MorseSoundLow",
+      "file": "../resources/sound/sfx/morse_soundRoom3small.wav"
     }
   ],
 
