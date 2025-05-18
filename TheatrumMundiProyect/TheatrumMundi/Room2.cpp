@@ -286,7 +286,7 @@ void Room2Scene::_setRoomBackground()
 #pragma region InitScroll
 
 	auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(22, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12.0) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-	auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "PuertaCementerio", EntityFactory::RECTAREA, Vector2D(1225, 144), Vector2D(0, 0), 352 / 3, 1286 / 3, 0, areaLayerManager, 12, ((sdlutils().width()) / 12.0) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "PuertaCementerio", EntityFactory::RECTAREA, Vector2D(1218, 140), Vector2D(0, 0), 352 / 3, 1286 / 3, 0, areaLayerManager, 12, ((sdlutils().width()) / 12.0) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 
 	auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
 	ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(ChangeRoom2));
