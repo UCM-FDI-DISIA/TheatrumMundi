@@ -107,7 +107,7 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 
 bool RavenPuzzleScene::isItemHand(const std::string& itemId)
 {
-    if (itemId == "ColganteTumba") {
+    if (itemId == "colganteInv") {
 		ravenHappy = true;
 		raven->getMngr()->getComponent<Image>(raven)->setTexture(&sdlutils().images().at("CuervoColgante"));
 		key->getMngr()->setActive(key, true);

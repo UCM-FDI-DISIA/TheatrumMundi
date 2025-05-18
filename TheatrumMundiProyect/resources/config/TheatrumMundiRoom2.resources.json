@@ -303,6 +303,10 @@
       "file": "../resources/images/Finales/CuervoColgante.png"
     },
     {
+      "id": "colganteInv",
+      "file": "../resources/images/Finales/collar.png"
+    },
+    {
       "id": "doTecla",
       "file": "../resources/images/Finales/doTecla.png"
     },
@@ -360,7 +364,7 @@
     },
     {
       "id": "Llave",
-      "file": "../resources/images/Finales/Llave.png"
+      "file": "../resources/images/Finales/llaveInv.png"
     },
     {
       "id": "MausoleoSala2",
@@ -477,6 +481,50 @@
     {
       "id": "oButton",
       "file": "../resources/images/Finales/oButton.png"
+    },
+    {
+      "id": "piezaL1",
+      "file": "../resources/images/temporales/piezadeL1.png"
+    },
+    {
+      "id": "piezaL2",
+      "file": "../resources/images/temporales/piezadeL2.png"
+    },
+    {
+      "id": "MatPared",
+      "file": "../resources/images/temporales/MatrizPared.png"
+    },
+    {
+      "id": "MatHueco",
+      "file": "../resources/images/temporales/MatrizCuadrado.png"
+    },
+    {
+      "id": "CosaQueArrastras",
+      "file": "../resources/images/temporales/Cosaquearrastras.png"
+    },
+    {
+      "id": "piezade4",
+      "file": "../resources/images/temporales/piezade4.png"
+    },
+    {
+      "id": "piezade2",
+      "file": "../resources/images/temporales/piezade2.png"
+    },
+    {
+      "id": "piezade3",
+      "file": "../resources/images/temporales/piezade3.png"
+    },
+    {
+      "id": "piezademeta",
+      "file": "../resources/images/temporales/piezademeta.png"
+    },
+    {
+      "id": "piezadez",
+      "file": "../resources/images/temporales/piezadeZ.png"
+    },
+    {
+      "id": "Hanni",
+      "file": "../resources/images/asesinoDeHanni.png"
     }
   ],
 
