@@ -89,7 +89,7 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 
 #pragma region Buttons
 		//Creation of all the buttons
-		auto reset = entityFactory->CreateInteractableEntity(entityManager, "clockHorButton", EntityFactory::RECTAREA, Vector2D(800, 0), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		auto reset = entityFactory->CreateInteractableEntity(entityManager, "resetButton", EntityFactory::RECTAREA, Vector2D(80, 320), Vector2D(0, 0), 183 / 1.5, 172 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		reset->getMngr()->getComponent<ClickComponent>(reset)->connect(ClickComponent::JUST_CLICKED, [this] {
 			ResetPuzzle();
 		});
@@ -289,7 +289,7 @@ void MosaicPuzzleScene::ResetPuzzle()
 	for (int i = 0; i < TOTALSQUARES; ++i) {
 		squares[i]->getMngr()->getComponent<Transform>(squares[i])->setPosPure(positions[indexPositions[i]]);
 	}
-	freePos = Vector2D(750 * Game::Instance()->wscreenScale, 475 * Game::Instance()->hscreenScale);
+	freePos = Vector2D((WIDTHCORRECTOR * Game::Instance()->wscreenScale) + (3 * SQUAREWIDTH * Game::Instance()->wscreenScale), (HEIGHTCORRECTOR * Game::Instance()->hscreenScale + (3 * SQUAREHEIGHT * Game::Instance()->hscreenScale)));
 }
 
 void MosaicPuzzleScene::Resolve()
