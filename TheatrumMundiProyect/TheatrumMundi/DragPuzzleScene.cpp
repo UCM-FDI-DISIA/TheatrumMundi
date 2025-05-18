@@ -88,7 +88,10 @@ void DragPuzzleScene::init(SceneRoomTemplate* sr)
 
             std::list<entity_t> collist = goaltrigger->getOverlappingEntities();
             for (auto a : collist) {
-                if (a == _triggerObj)Check();
+                if (a == _triggerObj) {
+                   
+                    Check();
+                }
             }
             });
 
@@ -266,11 +269,13 @@ void DragPuzzleScene::Exit()
 bool DragPuzzleScene::Check()
 {
     Win();
+    
     return true;
 }
 
 void DragPuzzleScene::Win()
 {
+    AudioManager::Instance().playSound(sdlutils().soundEffects().at("MecanismoAbre"));
     entityManager->removeComponent<TriggerComponent>(_triggerObj);
     tomb->setDragpuzzle(true);
 }

@@ -93,6 +93,7 @@ bool DoorPuzzleScene::isItemHand(const std::string& itemId)
 	if (itemId == "Llave") {
 		
 		Win();
+		AudioManager::Instance().playSound(sdlutils().soundEffects().at("MoverPiedra"));
 		//DoorSound, and maybe a Delay?
 		Exit();
 		return true;

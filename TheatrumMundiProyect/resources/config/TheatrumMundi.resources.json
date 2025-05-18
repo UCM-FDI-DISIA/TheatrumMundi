@@ -960,147 +960,204 @@
     {
       "id": "CajaFuerteRojo",
       "file": "../resources/images/temporales/Room3/CajaFuerteRojo.png"
+    },
+    {
+      "id": "Radio",
+      "file": "../resources/images/temporales/Room3/Radio.png"
     }
     
 
   ],
 
-    "sounds": [
-        {
-            "id": "explosion",
-            "file": "../resources/sound/sfx/explosion.wav"
-        },
-        {
-            "id": "agua",
-            "file": "../resources/sound/sfx/agua.wav"
-        },
-        {
-            "id": "avanzar_dialogo",
-            "file": "../resources/sound/sfx/click_avanzar_dialogo.wav"
-        },
-        {
-            "id": "boton",
-            "file": "../resources/sound/sfx/click_boton.wav"
-        },
-        {
-            "id": "puzzle",
-            "file": "../resources/sound/sfx/click_puzzle.wav"
-        },
-        {
-            "id": "aguja_horario",
-            "file": "../resources/sound/sfx/horario.wav"
-        },
-        {
-            "id": "aguja_minutero",
-            "file": "../resources/sound/sfx/minutero.wav"
-        },
-        {
-            "id": "libro",
-            "file": "../resources/sound/sfx/libro.wav"
-        },
-        {
-            "id": "taza",
-            "file": "../resources/sound/sfx/metal_taza.wav"
-        },
-        {
-            "id": "puerta",
-            "file": "../resources/sound/sfx/puerta.wav"
-        },
-        {
-          "id": "cuerda",
-          "file": "../resources/sound/sfx/cuerda.wav"
-        },
-        {
-    "id": "Mosaico",
-    "file": "../resources/sound/sfx/MosaicoRompiendose.wav"
-  },
-        {
-          "id": "correcto",
-          "file": "../resources/sound/sfx/correcto.wav"
-        },
-        {
-          "id": "CogerCosa",
-          "file": "../resources/sound/sfx/CogerCosa.MP3"
-      },
-      {
-        "id": "FinalTeleTutorial",
-        "file": "../resources/sound/sfx/FinalTeleTutorial.wav"
-      },
-      {
-        "id": "Statica",
-        "file": "../resources/sound/sfx/Statica.wav"
-      },
-      
-      {
-        "id": "ColocarCosa",
-        "file": "../resources/sound/sfx/ColocarCosa.MP3"
-      },
-        {
-          "id": "incorrecto",
-          "file": "../resources/sound/sfx/incorrecto.wav"
-        },
-        {
-          "id": "DoSound",
-          "file": "../resources/sound/sfx/Do.wav"
-        },
-        {
-          "id": "ReSound",
-          "file": "../resources/sound/sfx/Re.wav"
-        },
-        {
-          "id": "MiSound",
-          "file": "../resources/sound/sfx/Mi.wav"
-        },
-        {
-          "id": "FaSound",
-          "file": "../resources/sound/sfx/Fa.wav"
-        },
-        {
-          "id": "SolSound",
-          "file": "../resources/sound/sfx/Sol.wav"
-        },
-        {
-          "id": "LaSound",
-          "file": "../resources/sound/sfx/La.wav"
-        },
-        {
-          "id": "SiSound",
-          "file": "../resources/sound/sfx/Si.wav"
-        },
-        {
-          "id": "NextDialogue",
-          "file": "../resources/sound/sfx/NextDialogue.wav"
-        },
-        {
-          "id": "sSound",
-          "file": "../resources/sound/sfx/s_soundRoom3.wav"
-        },
-        {
-          "id": "tSound",
-          "file": "../resources/sound/sfx/t_soundRoom3.wav"
-        },
-        {
-          "id": "oSound",
-          "file": "../resources/sound/sfx/o_soundRoom3.wav"
-        },
-        {
-          "id": "pSound",
-          "file": "../resources/sound/sfx/p_soundRoom3.wav"
-        },
-        {
-          "id": "MorseSound",
-          "file": "../resources/sound/sfx/morse_soundRoom3.wav"
-        },
-        {
-          "id": "MoverPiedra",
-          "file": "../resources/sound/sfx/MoverTapaPiedra.wav"
-        },
-        {
-          "id": "cuervo",
-          "file": "../resources/sound/sfx/cuervo.wav"
-        }
+  "sounds": [
+    {
+      "id": "explosion",
+      "file": "../resources/sound/sfx/explosion.wav"
+    },
+    {
+      "id": "agua",
+      "file": "../resources/sound/sfx/agua.wav"
+    },
+    {
+      "id": "avanzar_dialogo",
+      "file": "../resources/sound/sfx/click_avanzar_dialogo.wav"
+    },
+    {
+      "id": "boton",
+      "file": "../resources/sound/sfx/click_boton.wav"
+    },
+    {
+      "id": "puzzle",
+      "file": "../resources/sound/sfx/click_puzzle.wav"
+    },
+    {
+      "id": "aguja_horario",
+      "file": "../resources/sound/sfx/horario.wav"
+    },
+    {
+      "id": "aguja_minutero",
+      "file": "../resources/sound/sfx/minutero.wav"
+    },
+    {
+      "id": "libro",
+      "file": "../resources/sound/sfx/libro.wav"
+    },
+    {
+      "id": "taza",
+      "file": "../resources/sound/sfx/metal_taza.wav"
+    },
+    {
+      "id": "puerta",
+      "file": "../resources/sound/sfx/puerta.wav"
+    },
+    {
+      "id": "cuerda",
+      "file": "../resources/sound/sfx/cuerda.wav"
+    },
+    {
+      "id": "Mosaico",
+      "file": "../resources/sound/sfx/MosaicoRompiendose.wav"
+    },
+    {
+      "id": "correcto",
+      "file": "../resources/sound/sfx/correcto.wav"
+    },
+    {
+      "id": "CogerCosa",
+      "file": "../resources/sound/sfx/CogerCosa.MP3"
+    },
+    {
+      "id": "FinalTeleTutorial",
+      "file": "../resources/sound/sfx/FinalTeleTutorial.wav"
+    },
+    {
+      "id": "Statica",
+      "file": "../resources/sound/sfx/Statica.wav"
+    },
 
-    ],
+    {
+      "id": "ColocarCosa",
+      "file": "../resources/sound/sfx/ColocarCosa.MP3"
+    },
+    {
+      "id": "incorrecto",
+      "file": "../resources/sound/sfx/incorrecto.wav"
+    },
+    {
+      "id": "DoSound",
+      "file": "../resources/sound/sfx/Do.wav"
+    },
+    {
+      "id": "ReSound",
+      "file": "../resources/sound/sfx/Re.wav"
+    },
+    {
+      "id": "MiSound",
+      "file": "../resources/sound/sfx/Mi.wav"
+    },
+    {
+      "id": "FaSound",
+      "file": "../resources/sound/sfx/Fa.wav"
+    },
+    {
+      "id": "SolSound",
+      "file": "../resources/sound/sfx/Sol.wav"
+    },
+    {
+      "id": "LaSound",
+      "file": "../resources/sound/sfx/La.wav"
+    },
+    {
+      "id": "SiSound",
+      "file": "../resources/sound/sfx/Si.wav"
+    },
+    {
+      "id": "NextDialogue",
+      "file": "../resources/sound/sfx/NextDialogue.wav"
+    },
+    {
+      "id": "shootShound",
+      "file": "../resources/sound/sfx/shoot_soundRoom3.wav"
+    },
+    {
+      "id": "sSound",
+      "file": "../resources/sound/sfx/s_soundRoom3.wav"
+    },
+    {
+      "id": "tSound",
+      "file": "../resources/sound/sfx/t_soundRoom3.wav"
+    },
+    {
+      "id": "oSound",
+      "file": "../resources/sound/sfx/o_soundRoom3.wav"
+    },
+    {
+      "id": "pSound",
+      "file": "../resources/sound/sfx/p_soundRoom3.wav"
+    },
+    {
+      "id": "MoverPiedra",
+      "file": "../resources/sound/sfx/MoverTapaPiedra.wav"
+    },
+    {
+      "id": "MecanismoNoAbre",
+      "file": "../resources/sound/sfx/MecanismoNoAbre.wav"
+    },
+    {
+      "id": "MecanismoAbre",
+      "file": "../resources/sound/sfx/MecanismoAbre.wav"
+    },
+    {
+      "id": "AbrirPuertaPiedra",
+      "file": "../resources/sound/sfx/AbrirPuertaPiedra.mp3"
+    },
+    {
+      "id": "failOpenPuzzle",
+      "file": "../resources/sound/sfx/FailOpenPuzzle.wav"
+    },
+    {
+      "id": "OpenPuzzle",
+      "file": "../resources/sound/sfx/openPuzzle.wav"
+    },
+    {
+      "id": "LlaveMoviendose",
+      "file": "../resources/sound/sfx/llaveMoviendose.wav"
+    },
+    {
+      "id": "NoAbrePuertaHierro",
+      "file": "../resources/sound/sfx/NoAbrelFierro.wav"
+    },
+    {
+      "id": "cuervo",
+      "file": "../resources/sound/sfx/cuervo.mp3"
+    },
+    {
+      "id": "MorseSound",
+      "file": "../resources/sound/sfx/morse_soundRoom3.wav"
+    },
+
+    {
+      "id": "sSoundLow",
+      "file": "../resources/sound/sfx/s_soundRoom3small.wav"
+    },
+    {
+      "id": "tSoundLow",
+      "file": "../resources/sound/sfx/t_soundRoom3small.wav"
+    },
+    {
+      "id": "oSoundLow",
+      "file": "../resources/sound/sfx/o_soundRoom3small.wav"
+    },
+    {
+      "id": "pSoundLow",
+      "file": "../resources/sound/sfx/p_soundRoom3small.wav"
+    },
+    {
+      "id": "MorseSoundLow",
+      "file": "../resources/sound/sfx/morse_soundRoom3small.wav"
+    }
+
+  ],
 
   "musics" : [
     {
