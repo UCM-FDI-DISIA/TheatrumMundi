@@ -964,8 +964,11 @@
     {
       "id": "Radio",
       "file": "../resources/images/temporales/Room3/Radio.png"
+    },
+    {
+      "id": "MorseGuide",
+      "file": "../resources/images/temporales/Room3/morseGuia.jpg"
     }
-    
 
   ],
 
