@@ -529,6 +529,14 @@
     {
       "id": "fondoEntradaMausoleo",
       "file": "../resources/images/Finales/fondoEntrada.png"
+    },
+    {
+      "id": "clockHorButton",
+      "file": "../resources/images/boton_horario.png"
+    },
+    {
+      "id": "fondoOrgano",
+      "file": "../resources/images/Finales/fondoPuzzleMusical.jpg"
     }
   ],
 
@@ -619,7 +627,11 @@
           "id": "LaSound",
           "file": "../resources/sound/sfx/La.wav"
         },
-{
+        {
+          "id": "SiSound",
+          "file": "../resources/sound/sfx/Si.wav"
+        },
+        {
           "id": "NextDialogue",
           "file": "../resources/sound/sfx/NextDialogue.wav"
         },
