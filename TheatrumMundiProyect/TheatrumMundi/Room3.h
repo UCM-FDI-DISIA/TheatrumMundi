@@ -30,7 +30,15 @@ protected:
 		BadEnd,
 		event_size,
 	};
+
 public:
+
+	enum Phase {
+		LIGHTS_OFF,
+		LIGHTS_ON,
+		LIGHTS_RED
+	};
+
 	Room3Scene();
 	~Room3Scene();
 	void init() override;
@@ -100,6 +108,4 @@ private:
 		std::vector<std::shared_ptr<Sound>> codeSequenceSounds; // Sequence of sounds in the second phase
 		int codeSeqIteration = 0;
 	} parrotUtils;
-
-	enum ParrotState { SHOOTING_SOUND, RED_LIGHTS };
 };

@@ -100,7 +100,7 @@ void Room3Scene::_setRoomEvents()
 		//startDialogue("Cadaver");
 		};
 	roomEvent[LightsOn] = [this] {
-		Game::Instance()->getDataManager()->SetRoom3Phase(1);
+		Game::Instance()->getDataManager()->SetRoom3Phase(Phase::LIGHTS_ON);
 		//LightsToOn = true; //To interact with determined entities
 		//LightsToRed = false;
 		entityManager->getComponent<Image>(rmObjects.backgroundLeftIllumination)->setTexture(&sdlutils().images().at("FondoSalaDeEspera"));
@@ -119,7 +119,7 @@ void Room3Scene::_setRoomEvents()
 	roomEvent[LightsOff] = [this] {
 		//LightsToOn = false; //To not interact with determined entities
 		//LightsToRed = false;
-		Game::Instance()->getDataManager()->SetRoom3Phase(0);
+		Game::Instance()->getDataManager()->SetRoom3Phase(Phase::LIGHTS_OFF);
 		//entityManager->getComponent<Image>(rmObjects.backgroundLeftIllumination)->setTexture(&sdlutils().images().at("FondoSalaDeEsperaOscuro"));
 		//entityManager->getComponent<Image>(rmObjects.backgroundRightIllumination)->setTexture(&sdlutils().images().at("FondoJuzgadoOscuro"));
 		//entityManager->getComponent<Image>(rmObjects.boxOfficeMorseCodeB)->setTexture(&sdlutils().images().at("TaquillaAzulOscuro"));
@@ -144,7 +144,7 @@ void Room3Scene::_setRoomEvents()
 	roomEvent[LightsRed] = [this] {
 		//LightsToOn = true;  //To interact with determined entities when the room is red
 		//LightsToRed = true;
-		Game::Instance()->getDataManager()->SetRoom3Phase(2);
+		Game::Instance()->getDataManager()->SetRoom3Phase(Phase::LIGHTS_RED);
 		entityManager->getComponent<Image>(rmObjects.backgroundLeftIllumination)->setTexture(&sdlutils().images().at("FondoSalaDeEsperaRojo"));
 		entityManager->getComponent<Image>(rmObjects.backgroundRightIllumination)->setTexture(&sdlutils().images().at("FondoJuzgadoRojo"));
 		entityManager->getComponent<Image>(rmObjects.boxOfficeMorseCodeB)->setTexture(&sdlutils().images().at("TaquillaAzulRojo"));
@@ -157,7 +157,7 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3Rojo"));
 		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("Cadaver3Rojo"));
 
-		entityManager->getComponent<BehaviorStateComponent>(rmObjects.parrot)->setState(ParrotState::RED_LIGHTS);
+		// entityManager->getComponent<BehaviorStateComponent>(rmObjects.parrot)->setState(Phase::LIGHTS_RED); In theory not necessary
 		};
 	roomEvent[BalancePuzzleScene] = [this] {
 		Game::Instance()->getSceneManager()->loadScene(BALANCE_PUZZLE, this);
@@ -187,7 +187,7 @@ void Room3Scene::_setRoomEvents()
 			roomEvent[LightsRed]();
 		};
 	roomEvent[ParrotScene] = [this] {
-
+		Game::Instance()->getSceneManager()->loadScene(PARROT_PUZZLE, this);
 		};
 	roomEvent[ParrotSceneRsv] = [this] {
 
@@ -500,10 +500,10 @@ void Room3Scene::_setInteractuables()
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.boxOfficeCircleLockP));
 
 	//PARROT
-	rmObjects.parrot = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(1000, 0), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	rmObjects.parrot = entityFactory->CreateInteractableEntity(entityManager, "ParrotOscuro", EntityFactory::RECTAREA, Vector2D(1000, 0), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.parrot)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
-		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
+		if (/*Game::Instance()->getDataManager()->GetRoom3Phase() > 0 &&*/ !rmObjects.backgroundScroll->isScrolling()) {
 			roomEvent[ParrotScene]();
 		}
 
@@ -517,8 +517,8 @@ void Room3Scene::_setInteractuables()
 	parrotUtils.codeSequenceSounds.push_back(rmSounds.o_Sound); // TODO: O
 	parrotUtils.codeSequenceSounds.push_back(rmSounds.p_Sound); // TODO: P
 
-	parrotStateCom->defBehavior(ParrotState::SHOOTING_SOUND,
-		[parrotStateCom, this]() {
+	auto shootingBehavior = [parrotStateCom, this] // SHOOTING_SOUND
+		() {
 			if (rmObjects.backgroundScroll->startPhaseCheck()) { //Right side of the room PARROT
 				if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
 					AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[0]);
@@ -527,9 +527,12 @@ void Room3Scene::_setInteractuables()
 			}
 
 			parrotStateCom->setState(Game::Instance()->getDataManager()->GetRoom3Phase()); // Check if changes the room state
-		});
+		};
 
-	parrotStateCom->defBehavior(ParrotState::RED_LIGHTS,
+	parrotStateCom->defBehavior(Phase::LIGHTS_OFF, shootingBehavior); // Both phases have the same behavior in the parrot
+	parrotStateCom->defBehavior(Phase::LIGHTS_ON,  shootingBehavior);
+
+	parrotStateCom->defBehavior(Phase::LIGHTS_RED, // PUZZLE CODE REVEAL PHASE
 		[parrotStateCom, this]() {
 			if (rmObjects.backgroundScroll->startPhaseCheck()) { //Right side of the room PARROT
 				if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
@@ -552,7 +555,7 @@ void Room3Scene::_setInteractuables()
 			parrotStateCom->setState(Game::Instance()->getDataManager()->GetRoom3Phase()); // Check if changes the room state
 		});
 
-	parrotStateCom->setState(ParrotState::SHOOTING_SOUND); // The other will be setted after finishin the puzzle
+	parrotStateCom->setState(Phase::LIGHTS_OFF); // The other will be setted after finishin the puzzle
 
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.parrot));
 
