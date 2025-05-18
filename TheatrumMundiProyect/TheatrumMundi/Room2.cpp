@@ -109,7 +109,10 @@ void Room2Scene::_setRoomEvents()
 	roomEvent[CorpseDialogue] = [this] {
 		entityManager->setActive(rmObjects.zoomCorpse, true);
 		entityManager->setActive(rmObjects.quitButton, true);
-		startDialogue("Cadaver");
+		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("CADAVER_P2");
+		else {
+			startDialogue("CADAVER_P1");
+		}
 		};
 	roomEvent[TombPuzzleScene] = [this] {
 		Game::Instance()->getSceneManager()->loadScene(TOMB_SCENE, this); 
