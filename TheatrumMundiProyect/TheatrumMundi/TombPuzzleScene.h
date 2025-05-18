@@ -5,8 +5,13 @@ class TombPuzzleScene : public ScenePuzzleTemplate
 private:
 	bool XOpuzzleResolve;
 	bool dragPuzzleResolve;
+	bool win = false;
+	bool open = false;
 	bool startDg = false;
 	int numDialog = 0;
+	ecs::entity_t TombBackGround;
+	ecs::entity_t XOAccess;
+	ecs::entity_t dragAccess;
 public:
 	TombPuzzleScene();
 	~TombPuzzleScene();

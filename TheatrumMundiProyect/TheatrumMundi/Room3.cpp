@@ -150,6 +150,7 @@ void Room3Scene::_setRoomEvents()
 	roomEvent[LightsRed] = [this] {
 		//LightsToOn = true;  //To interact with determined entities when the room is red
 		//LightsToRed = true;
+		parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
 		Game::Instance()->getDataManager()->SetRoom3Phase(Phase::LIGHTS_RED);
 		entityManager->getComponent<Image>(rmObjects.backgroundLeftIllumination)->setTexture(&sdlutils().images().at("FondoSalaDeEsperaRojo"));
 		entityManager->getComponent<Image>(rmObjects.backgroundRightIllumination)->setTexture(&sdlutils().images().at("FondoJuzgadoRojo"));
@@ -167,49 +168,63 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<BehaviorStateComponent>(rmObjects.parrot)->setState(Phase::LIGHTS_RED);
 		};
 	roomEvent[BalancePuzzleScene] = [this] {
+		parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
+		_resetSounds();
 		Game::Instance()->getSceneManager()->loadScene(BALANCE_PUZZLE, this);
 		};
 	roomEvent[WiresPuzzleScene] = [this] {
+		parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
+		_resetSounds();
 		Game::Instance()->getSceneManager()->loadScene(WIRES_PUZZLE, this);
 		};
 	roomEvent[WiresSceneRsv] = [this] {
 			roomEvent[LightsOn]();
 		};
 	roomEvent[CircleLockPuzzleScene] = [this] {
+		parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
+		_resetSounds();
 		Game::Instance()->getSceneManager()->loadScene(LOCKER_PUZZLE, this);
 		};
 	roomEvent[CircleLockSceneRsv] = [this] {
 
 		};
 	roomEvent[MorseCodePuzzleScene] = [this] {
+		parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
+		_resetSounds();
 		Game::Instance()->getSceneManager()->loadScene(BOX, this);
 		};
 	roomEvent[MorseCodeSceneRsv] = [this] {
 
 		};
 	roomEvent[BalancePuzzleScene] = [this] {
+		parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
+		_resetSounds();
 		Game::Instance()->getSceneManager()->loadScene(BALANCE_PUZZLE, this);
 		};
 	roomEvent[BalanceSceneRsv] = [this] {
 			roomEvent[LightsRed]();
 		};
 	roomEvent[ParrotScene] = [this] {
-		//AudioManager::Instance().setVolume(rmSounds.s_Sound, 1.0);
-		//AudioManager::Instance().setVolume(rmSounds.t_Sound, 1.0);
-		//AudioManager::Instance().setVolume(rmSounds.o_Sound, 1.0);
-		//AudioManager::Instance().setVolume(rmSounds.p_Sound, 1.0);
 		parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
+		_resetSounds();
 		Game::Instance()->getSceneManager()->loadScene(PARROT_PUZZLE, this);
 		};
 	roomEvent[ParrotSceneRsv] = [this] {
 
 		};
+	roomEvent[ZoomMorseGuide] = [this] {
+		parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
+		entityManager->setActive(rmObjects.zoomMorseGuide, true);
+		entityManager->setActive(rmObjects.quitButton, true);
+		_resetSounds();
+
+		};
 	roomEvent[ZoomRadio] = [this] {
+		parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
 		parrotUtils.zoomParrotRadio = true;
-		AudioManager::Instance().setVolume(rmSounds.morse_Sound, 1.0);
+		_resetSounds();
 		entityManager->setActive(rmObjects.zoomRadio, true);
 		entityManager->setActive(rmObjects.quitButton, true);
-		parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
 		};
 	//roomEvent[ResolveCase] = [this] {
 	//	//IMPORTANT assign dialogue
@@ -272,18 +287,14 @@ void Room3Scene::_setRoomAudio()
 
 	rmSounds.explosionSound = sdlutils().soundEffects().at("explosion");
 
-	rmSounds.s_Sound = sdlutils().soundEffects().at("sSound");
-	rmSounds.t_Sound = sdlutils().soundEffects().at("tSound");
-	rmSounds.o_Sound = sdlutils().soundEffects().at("oSound");
-	rmSounds.p_Sound = sdlutils().soundEffects().at("pSound");
+	rmSounds.s_Sound = sdlutils().soundEffects().at("sSoundLow");
+	rmSounds.t_Sound = sdlutils().soundEffects().at("tSoundLow");
+	rmSounds.o_Sound = sdlutils().soundEffects().at("oSoundLow");
+	rmSounds.p_Sound = sdlutils().soundEffects().at("pSoundLow");
 
 	rmSounds.morse_Sound = sdlutils().soundEffects().at("MorseSound");
+	rmSounds.morse_Sound_Low = sdlutils().soundEffects().at("MorseSoundLow");
 	rmSounds.shootSound = sdlutils().soundEffects().at("shootShound");
-
-	AudioManager::Instance().setVolume(rmSounds.s_Sound, 0.1);
-	AudioManager::Instance().setVolume(rmSounds.t_Sound, 0.1);
-	AudioManager::Instance().setVolume(rmSounds.o_Sound, 0.1);
-	AudioManager::Instance().setVolume(rmSounds.p_Sound, 0.1);
 
 	//rmSounds.stopSound = sdlutils().soundEffects().at("");
 	/*Audio music
@@ -330,16 +341,21 @@ void Room3Scene::_setRoomBackground()
 	entityManager->getComponent<ClickComponent>(ChangeRoom2)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		if (!rmObjects.backgroundScroll->isScrolling()) {
 			AudioManager::Instance().playSound(rmSounds.doorSound);
+			_resetSounds();
 			rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
 			scrolling = true;
+			parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
+
 		}
 		});
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom1)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll]() {
 		if (!rmObjects.backgroundScroll->isScrolling()) {
 			AudioManager::Instance().playSound(rmSounds.doorSound);
+			_resetSounds();
 			rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
 			scrolling = true;
+			parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
 		}
 		});
 #pragma endregion
@@ -502,23 +518,26 @@ void Room3Scene::_setInteractuables()
 				}
 			});
 
-	//BOXOFFICE MORSECODE - Caja fuerte
+	//BOXOFFICE CIRCLE LOCK
 	rmObjects.boxOfficeMorseCodeB = entityFactory->CreateInteractableEntity(entityManager,"EmptyImage",EntityFactory::RECTAREA,Vector2D(-1200,300),Vector2D(0,0),100,100,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.boxOfficeMorseCodeB)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
 		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
-			roomEvent[MorseCodePuzzleScene]();
+			roomEvent[CircleLockPuzzleScene]();
 		}
 
 		});
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.boxOfficeMorseCodeB));
 
-	//BOXOFFICE CIRCLELOCK - 
+	//BOXOFFICE ZOOM MORSE GUIDE
+	rmObjects.zoomMorseGuide = entityFactory->CreateImageEntity(entityManager, "MorseGuide", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
+	entityManager->setActive(rmObjects.zoomMorseGuide, false);
+
 	rmObjects.boxOfficeCircleLockP = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(-1000,200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.boxOfficeCircleLockP)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
 		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
-
+			roomEvent[ZoomMorseGuide]();
 		}
 
 		});
@@ -560,10 +579,9 @@ void Room3Scene::_setInteractuables()
 			}
 		}
 		else { //Left side of the room MORSE (if we have the LightsOnState)
-			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 8000 && Game::Instance()->getDataManager()->GetRoom3Phase() > 0) { // Every eight seconds and lights on
-				AudioManager::Instance().setVolume(rmSounds.morse_Sound, 0.1f);
-				if (parrotUtils.zoomParrotRadio) AudioManager::Instance().setVolume(rmSounds.morse_Sound, 1.0f);
-				AudioManager::Instance().playSound(rmSounds.morse_Sound);
+			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 8000 && Game::Instance()->getDataManager()->GetRoom3Phase() == 2) { // Every eight seconds and lights on
+				if (parrotUtils.zoomParrotRadio) AudioManager::Instance().playSound(rmSounds.morse_Sound);
+				else AudioManager::Instance().playSound(rmSounds.morse_Sound_Low);
 				parrotUtils.lastSoundTime = sdlutils().currTime();
 			}
 		}
@@ -585,12 +603,6 @@ void Room3Scene::_setInteractuables()
 					++parrotUtils.codeSeqIteration;
 				} //Not repeat the shoot
 
-
-				AudioManager::Instance().setVolume(rmSounds.s_Sound, 0.1f);
-				AudioManager::Instance().setVolume(rmSounds.t_Sound, 0.1f);
-				AudioManager::Instance().setVolume(rmSounds.o_Sound, 0.1f);
-				AudioManager::Instance().setVolume(rmSounds.p_Sound, 0.1f);
-
 				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[parrotUtils.codeSeqIteration]);
 				
 				++parrotUtils.codeSeqIteration;
@@ -601,10 +613,9 @@ void Room3Scene::_setInteractuables()
 			}
 		}
 		else { //Left side of the room MORSE (if we have the redLightsState)
-			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 8000 && Game::Instance()->getDataManager()->GetRoom3Phase() > 0) { // Every eight seconds
-				AudioManager::Instance().setVolume(rmSounds.morse_Sound, 0.1f);
-				if (parrotUtils.zoomParrotRadio) AudioManager::Instance().setVolume(rmSounds.morse_Sound, 1.0f);
-				AudioManager::Instance().playSound(rmSounds.morse_Sound);
+			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 8000 && Game::Instance()->getDataManager()->GetRoom3Phase() == 2) { // Every eight seconds
+				if (parrotUtils.zoomParrotRadio) AudioManager::Instance().playSound(rmSounds.morse_Sound);
+				else AudioManager::Instance().playSound(rmSounds.morse_Sound_Low);
 				parrotUtils.lastSoundTime = sdlutils().currTime();
 			}
 		}
@@ -653,7 +664,7 @@ void Room3Scene::_setInteractuables()
 	entityManager->getComponent<ClickComponent>(rmObjects.locker)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
 		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
-			roomEvent[CircleLockPuzzleScene]();
+			roomEvent[MorseCodePuzzleScene]();
 		}
 
 		});
@@ -672,6 +683,7 @@ void Room3Scene::_setInteractuables()
 
 	});
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.radio));
+
 }
 
 void Room3Scene::_setDialog()
@@ -712,6 +724,11 @@ void Room3Scene::_setUI()
 				entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, true);
 
 				parrotUtils.zoomParrotRadio = false;
+
+				_resetSounds();
+
+				parrotUtils.lastSoundTime = 0;
+
 
 				//if the condition of this objects has not been apply disallow them
 				//if (rmObjects.mirror.second == false) rmObjects.mirror.first->getMngr()->setActive(rmObjects.mirror.first, false);
@@ -809,4 +826,16 @@ void Room3Scene::_setUI()
 	rmObjects.logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 #pragma endregion
 
+}
+
+void Room3Scene::_resetSounds()
+{
+	AudioManager::Instance().stopSound(rmSounds.s_Sound);
+	AudioManager::Instance().stopSound(rmSounds.t_Sound);
+	AudioManager::Instance().stopSound(rmSounds.o_Sound);
+	AudioManager::Instance().stopSound(rmSounds.p_Sound);
+	AudioManager::Instance().stopSound(rmSounds.shootSound);
+	AudioManager::Instance().stopSound(rmSounds.explosionSound);
+	AudioManager::Instance().stopSound(rmSounds.morse_Sound);
+	AudioManager::Instance().stopSound(rmSounds.morse_Sound_Low);
 }
