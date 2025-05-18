@@ -145,9 +145,17 @@ void Game::start() {
 		if (ihdlr.isKeyDown(SDL_SCANCODE_1)) {
 			std::cout << "Load Room1Scene"<<std::endl;
 			_mngr->loadScene(SceneName::ROOM_1);
+			InputHandler::Instance()->clearState();
 		}
 		if (ihdlr.isKeyDown(SDL_SCANCODE_2)) {
-			std::cout << "Load Room1Scene" << std::endl;
+			std::cout << "Load Room2Scene" << std::endl;
+			_mngr->loadScene(SceneName::ROOM_2);
+			InputHandler::Instance()->clearState();
+		}
+		if (ihdlr.isKeyDown(SDL_SCANCODE_3)) {
+			std::cout << "Load Room3Scene" << std::endl;
+			_mngr->loadScene(SceneName::ROOM_3);
+			InputHandler::Instance()->clearState();
 		}
 		if (ihdlr.isKeyDown(SDL_SCANCODE_S)) {
 			_mngr->ResolveActScene();

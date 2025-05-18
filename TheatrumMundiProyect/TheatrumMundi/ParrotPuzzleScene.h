@@ -33,6 +33,7 @@ private:
 		std::shared_ptr<Sound> uiButton;
 		std::shared_ptr<Sound> puzzleButton;
 		std::shared_ptr<Sound> doorSound;
+		std::shared_ptr<Sound> shootSound;
 		std::shared_ptr<Sound> explosionSound;
 		std::shared_ptr<Sound> morse_Sound;
 		std::shared_ptr<Sound> s_Sound;

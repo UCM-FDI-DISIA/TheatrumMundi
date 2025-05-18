@@ -190,20 +190,22 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		clockCheckClick->connect(ClickComponent::JUST_CLICKED, [variant,_buttonCheckTransform, sr, this,_buttonCheck,_buttonHor,_buttonMin,container,background, buttonSound]()
 			{
 
-				AudioManager::Instance().playSound(buttonSound);
+				
 
 				if (Check() && getSolved()) {
 					Image* img = entityManager->getComponent<Image>(background);
 					img->setTexture(&sdlutils().images().at("FondoReloj2"));
 					container->getMngr()->setActive(container, true);
 					//Assign to this inventory the hint;
-
+					AudioManager::Instance().playSound(buttonSound);
 #ifdef DEBUG
 					std::cout << "wii";
 #endif // DEBUG
+					AudioManager::Instance().playSound(sdlutils().soundEffects().at("OpenPuzzle"));
 					Win();
 
 				}
+				else AudioManager::Instance().playSound(sdlutils().soundEffects().at("failOpenPuzzle"));
 			});
 
 		//REWARD
