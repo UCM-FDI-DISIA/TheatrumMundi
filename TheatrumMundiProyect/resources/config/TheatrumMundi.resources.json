@@ -922,12 +922,12 @@
       "file": "../resources/images/Finales/siTecla.png"
     },
     {
-      "id": "fondoCajon",
+      "id": "fondoMusicalCajon",
       "file": "../resources/images/Finales/fondoMusicalCajon.jpg"
     },
     {
       "id": "FondoJuzgado",
-      "file": "../resources/images/temporales/Room3/Juzgado.png"
+      "file": "../resources/images/temporales/Room3/Juzgado.jpg"
     },
     {
       "id": "FondoJuzgadoOscuro",

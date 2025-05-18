@@ -15,10 +15,6 @@
       "id": "Cuervo",
       "file": "../resources/images/temporales/Room2/Cuervo.jpeg"
     },
-     {
-      "id": "FondoCementerio",
-      "file": "../resources/images/temporales/Room2/FondoCementerio.jpg"
-    },
     {
       "id": "FondoCripta",
       "file": "../resources/images/temporales/Room2/FondoCripta.jpeg"
@@ -312,7 +308,7 @@
     },
     {
       "id": "CadaverSol",
-      "file": "../resources/images/CadaverSol.png"
+      "file": "../resources/images/Finales/CadaverSol.png"
     },
     {
       "id": "FondoCementerio",
@@ -372,11 +368,11 @@
     },
     {
       "id": "fondoMusicalCajon",
-      "file": "../resources/images/Finales/fondoMusicalCajon.png"
+      "file": "../resources/images/Finales/fondoMusicalCajon.jpg"
     },
     {
       "id": "fondoPuzzleMusical",
-      "file": "../resources/images/Finales/fondoPuzzleMusical.png"
+      "file": "../resources/images/Finales/fondoPuzzleMusical.jpg"
     },
     {
       "id": "instrucciones",
