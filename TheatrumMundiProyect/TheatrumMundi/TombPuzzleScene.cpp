@@ -147,7 +147,7 @@ void TombPuzzleScene::refresh()
 		}
 	}
 	if (!win && Check()) { //If the puzzle is resolved 
-		auto neckclace = entityFactory->CreateInteractableEntity(entityManager, "ColganteTumba", EntityFactory::RECTAREA, Vector2D(600, 300), Vector2D(0, 0), 600, 600, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto neckclace = entityFactory->CreateInteractableEntity(entityManager, "ColganteTumba", EntityFactory::RECTAREA, Vector2D(290, 290), Vector2D(0, 0), 262/1.35, 234/1.35, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		entityManager->getComponent<ClickComponent>(neckclace)->connect(ClickComponent::JUST_CLICKED, [this, neckclace]()
 			{
 				AddInvItem("colganteInv", sdlutils().invDescriptions().at("colganteInv"), room->GetInventory()->setPosition(), room);
