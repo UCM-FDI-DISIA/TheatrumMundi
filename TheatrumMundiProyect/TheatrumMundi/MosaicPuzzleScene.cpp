@@ -22,7 +22,6 @@ void MosaicPuzzleScene::createSquares()
 		auto it = entityFactory->CreateInteractableEntity(entityManager, imgId[i], EntityFactory::RECTAREA, positions[indexPositions[i]], Vector2D(0, 0), SQUAREWIDTH, SQUAREWIDTH, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		squares.push_back(it);
 		it->getMngr()->getComponent<Transform>(it)->setPosPure(positions[indexPositions[i]]);
-		//it->getMngr()->removeComponent<ClickableSpriteComponent>(squares.back());
 		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED,[this,it]() {
 			if (!squareMoving) {
 				square = it->getMngr()->getComponent<Transform>(it);
@@ -57,18 +56,19 @@ MosaicPuzzleScene::MosaicPuzzleScene()
 	for (int i = 0; i < TOTALSQUARES; ++i) { //Initializate the list of positions
 
 		//Resset the index if we change row
-		if (i == 3 || i == 6) {
+		if (i == 4 || i == 8 || i == 12) {
 			index = 0;
 		}
 
 		//Assign the positions of the different rows
-		if(i < 3) positions.push_back(Vector2D((350 * Game::Instance()->wscreenScale) - onlyRelease, (75 * Game::Instance()->hscreenScale) + (index * SQUAREWIDTH * Game::Instance()->hscreenScale))); //First row possitions (0-2)
-		else if(i < 6) positions.push_back(Vector2D((350 * Game::Instance()->wscreenScale) + (SQUAREWIDTH * Game::Instance()->wscreenScale), (75 * Game::Instance()->hscreenScale) + (index * SQUAREWIDTH * Game::Instance()->hscreenScale))); //Second row possitions (3-5)
-		else positions.push_back(Vector2D((350 * Game::Instance()->wscreenScale) + (2 * SQUAREWIDTH * Game::Instance()->wscreenScale), (75 * Game::Instance()->hscreenScale) + (index * SQUAREWIDTH * Game::Instance()->hscreenScale))); //Third row possitions (6-8)
+		if(i < 4) positions.push_back(Vector2D((350 * Game::Instance()->wscreenScale) - onlyRelease, (75 * Game::Instance()->hscreenScale) + (index * SQUAREWIDTH * Game::Instance()->hscreenScale))); //First row possitions (0-3)
+		else if(i < 8) positions.push_back(Vector2D((350 * Game::Instance()->wscreenScale) + (SQUAREWIDTH * Game::Instance()->wscreenScale), (75 * Game::Instance()->hscreenScale) + (index * SQUAREWIDTH * Game::Instance()->hscreenScale))); //Second row possitions (4-7)
+		else if(i < 12)positions.push_back(Vector2D((350 * Game::Instance()->wscreenScale) + (2 * SQUAREWIDTH * Game::Instance()->wscreenScale), (75 * Game::Instance()->hscreenScale) + (index * SQUAREWIDTH * Game::Instance()->hscreenScale))); //Third row possitions (8-11)
+		else positions.push_back(Vector2D((350 * Game::Instance()->wscreenScale) + (3 * SQUAREWIDTH * Game::Instance()->wscreenScale), (75 * Game::Instance()->hscreenScale) + (index * SQUAREWIDTH * Game::Instance()->hscreenScale))); //Third row possitions (12-15)
 		++index;
 
 	}
-	freePos = Vector2D(750 * Game::Instance()->wscreenScale, 475 * Game::Instance()->hscreenScale);
+	freePos = Vector2D(800 * Game::Instance()->wscreenScale, 525 * Game::Instance()->hscreenScale);
 }
 
 MosaicPuzzleScene::~MosaicPuzzleScene()
