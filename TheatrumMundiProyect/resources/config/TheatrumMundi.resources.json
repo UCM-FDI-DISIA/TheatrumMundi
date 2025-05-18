@@ -960,6 +960,10 @@
     {
       "id": "CajaFuerteRojo",
       "file": "../resources/images/temporales/Room3/CajaFuerteRojo.png"
+    },
+    {
+      "id": "Radio",
+      "file": "../resources/images/temporales/Room3/Radio.png"
     }
     
 
