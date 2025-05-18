@@ -71,7 +71,7 @@ void TombPuzzleScene::init(SceneRoomTemplate* sr)
 #pragma region Entities
 
 		//Left Chain, gives access to the XOPuzzle
-		XOAccess = entityFactory->CreateInteractableEntity(entityManager, "Cadena", EntityFactory::RECTAREA, Vector2D(100, 250), Vector2D(0,0), 128, 128, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		XOAccess = entityFactory->CreateInteractableEntity(entityManager, "XOPuzzleAccess", EntityFactory::RECTAREA, Vector2D(350, 300), Vector2D(0,0), 510 / 3, 447 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		entityManager->getComponent<ClickComponent>(XOAccess)->connect(ClickComponent::JUST_CLICKED, [this, _backButton]()
 			{
 				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
@@ -86,7 +86,7 @@ void TombPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->setActive(XOAccess, false);
 
 		//Right Chain, gives access to the DragPuzzle
-		dragAccess = entityFactory->CreateInteractableEntity(entityManager, "Cadena", EntityFactory::RECTAREA, Vector2D(1000,250), Vector2D(0, 0), 128, 128, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		dragAccess = entityFactory->CreateInteractableEntity(entityManager, "DraggPuzzleAccess", EntityFactory::RECTAREA, Vector2D(870,300), Vector2D(0, 0), 510 / 3, 447 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		entityManager->getComponent<ClickComponent>(dragAccess)->connect(ClickComponent::JUST_CLICKED, [this, _backButton]()
 			{
 				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);

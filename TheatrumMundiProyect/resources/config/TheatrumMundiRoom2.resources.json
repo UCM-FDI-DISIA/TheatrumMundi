@@ -13,7 +13,7 @@
   "images": [
      {
       "id": "Cuervo",
-      "file": "../resources/images/temporales/Room2/Cuervo.jpeg"
+      "file": "../resources/images/Finales/CuervoSala.png"
     },
     {
       "id": "FondoCripta",
@@ -52,8 +52,8 @@
       "file": "../resources/images/temporales/Room2/PasadizoSecreto(Espejo).jpeg"
     },
     {
-      "id": "PuertaSantuario",
-      "file": "../resources/images/temporales/Room2/Puerta.jpg"
+      "id": "PuertaCementerio",
+      "file": "../resources/images/Finales/PuertaCementerio.png"
     },
     {
       "id": "Ventana",
@@ -61,47 +61,23 @@
     },
     {
       "id": "Tumba",
-      "file": "../resources/images/temporales/Room2/Tumba.jpeg"
-    },
-    {
-      "id": "Cadaver2",
-      "file": "../resources/images/temporales/Room2/Cadaver.png"
-    },
-    {
-      "id": "CuervoPeligroso",
-      "file": "../resources/images/temporales/Room2/hinata.png"
-    },
-    {
-      "id": "FondoCuervo",
-      "file": "../resources/images/temporales/Room2/FondoCuervo.png"
-    },
-    {
-      "id": "Candado",
-      "file": "../resources/images/temporales/Room2/Candado.png"
-    },
-    {
-      "id": "Llave",
-      "file": "../resources/images/temporales/Room2/Llave.png"
-    },
-    {
-      "id": "Joya",
-      "file": "../resources/images/temporales/Room2/Joya.png"
+      "file": "../resources/images/Finales/TumbaSala.png"
     },
     {
       "id": "patrisio",
       "file": "../resources/images/temporales/Room2/patrisio.jpeg"
     },
     {
-      "id": "FondoPuzzleTumba",
-      "file": "../resources/images/temporales/Room2/FondoPuzzleTumba.png"
-    },
-    {
       "id": "FondoOrgano",
       "file": "../resources/images/temporales/Room2/FondoOrgano.png"
     },
     {
-      "id": "Cadena",
-      "file": "../resources/images/temporales/Room2/Cadena.jpeg"
+      "id": "XOPuzzleAccess",
+      "file": "../resources/images/Finales/XOPuzzleAccess.png"
+    },
+    {
+      "id": "DraggPuzzleAccess",
+      "file": "../resources/images/Finales/DraggPuzzleAccess.png"
     },
     {
       "id": "cuerdaVentana",
