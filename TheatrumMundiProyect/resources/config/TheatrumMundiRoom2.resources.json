@@ -639,7 +639,11 @@
   {
     "id": "incorrecto",
     "file": "../resources/sound/sfx/incorrecto.wav"
-  }
+  },
+  {
+      "id": "AbrirPuertaPiedra",
+      "file": "../resources/sound/sfx/AbrirPuertaPiedra.mp3"
+    }
 ],
 
   "musics" : [
