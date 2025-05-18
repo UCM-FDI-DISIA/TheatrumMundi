@@ -485,7 +485,7 @@ void Room2Scene::_setInteractuables()
 	RectArea2D* corpseZoomArea = entityManager->addComponent<RectArea2D>(rmObjects.zoomCorpse, areaLayerManager);
 	entityManager->setActive(rmObjects.zoomCorpse, false);
 
-	characterCorpse = entityFactory->CreateInteractableEntity(entityManager, "CadaverSol", EntityFactory::RECTAREA, Vector2D(100, 300), Vector2D(0, 0), 250 / 3, 225 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	characterCorpse = entityFactory->CreateInteractableEntity(entityManager, "CadaverSol", EntityFactory::RECTAREA, Vector2D(40, 350), Vector2D(0, 0), 650 / 3, 625 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(characterCorpse));
 
