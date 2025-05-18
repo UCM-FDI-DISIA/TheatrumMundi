@@ -54,7 +54,6 @@ void TombPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, _backButton]()
 			{
-				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 				HideInventoryItems();
 				room->GetInventory()->setFirstItem(0);
 				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
@@ -74,14 +73,16 @@ void TombPuzzleScene::init(SceneRoomTemplate* sr)
 		XOAccess = entityFactory->CreateInteractableEntity(entityManager, "XOPuzzleAccess", EntityFactory::RECTAREA, Vector2D(350, 300), Vector2D(0,0), 510 / 3, 447 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		entityManager->getComponent<ClickComponent>(XOAccess)->connect(ClickComponent::JUST_CLICKED, [this, _backButton]()
 			{
-				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
-				HideInventoryItems();
-				room->GetInventory()->setFirstItem(0);
-				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
-				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
-				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
-				_backButtonImage->setPosOffset(0, 0);
-				Game::Instance()->getSceneManager()->loadScene(XO_PUZZLE, room);
+				if (!XOpuzzleResolve) {
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+					HideInventoryItems();
+					room->GetInventory()->setFirstItem(0);
+					auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+					_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+					_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+					_backButtonImage->setPosOffset(0, 0);
+					Game::Instance()->getSceneManager()->loadScene(XO_PUZZLE, room);
+				}
 			});
 		entityManager->setActive(XOAccess, false);
 
@@ -89,20 +90,39 @@ void TombPuzzleScene::init(SceneRoomTemplate* sr)
 		dragAccess = entityFactory->CreateInteractableEntity(entityManager, "DraggPuzzleAccess", EntityFactory::RECTAREA, Vector2D(870,300), Vector2D(0, 0), 510 / 3, 447 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		entityManager->getComponent<ClickComponent>(dragAccess)->connect(ClickComponent::JUST_CLICKED, [this, _backButton]()
 			{
-				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
-				HideInventoryItems();
-				room->GetInventory()->setFirstItem(0);
-				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
-				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
-				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
-				_backButtonImage->setPosOffset(0, 0);
-				Game::Instance()->getSceneManager()->loadScene(DRAG_PUZZLE, room);
+				if (!dragPuzzleResolve) {
+					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+					HideInventoryItems();
+					room->GetInventory()->setFirstItem(0);
+					auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+					_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+					_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+					_backButtonImage->setPosOffset(0, 0);
+					Game::Instance()->getSceneManager()->loadScene(DRAG_PUZZLE, room);
+				}
 			});
 		entityManager->setActive(dragAccess, false);
 #pragma endregion
 		areaLayerManager->sendFront(TombBackGround->getMngr()->getComponent<Area2D>(TombBackGround)->getLayerPos());
 		areaLayerManager->sendFront(_backButton->getMngr()->getComponent<Area2D>(_backButton)->getLayerPos());
 		areaLayerManager->sendFront(inventoryButton->getMngr()->getComponent<Area2D>(inventoryButton)->getLayerPos());
+
+		neckclace = entityFactory->CreateInteractableEntity(entityManager, "ColganteTumba", EntityFactory::RECTAREA, Vector2D(290, 290), Vector2D(0, 0), 262 / 1.35, 234 / 1.35, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		entityManager->getComponent<ClickComponent>(neckclace)->connect(ClickComponent::JUST_CLICKED, [this]()
+			{
+				AddInvItem("colganteInv", sdlutils().invDescriptions().at("colganteInv"), room->GetInventory()->setPosition(), room);
+				entityManager->removeEntity(neckclace);
+				entityManager->setActive(neckclace, false);
+			});
+		neckclace->getMngr()->setActive(neckclace, false);
+		shovel = entityFactory->CreateInteractableEntity(entityManager, "Pala", EntityFactory::RECTAREA, Vector2D(500, 300), Vector2D(0, 0), 120, 120, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		entityManager->getComponent<ClickComponent>(shovel)->connect(ClickComponent::JUST_CLICKED, [this]()
+			{
+				AddInvItem("Pala", sdlutils().invDescriptions().at("Pala"), room->GetInventory()->setPosition(), room);
+				entityManager->removeEntity(shovel);
+				entityManager->setActive(shovel, false);
+			});
+		shovel->getMngr()->setActive(shovel, false);
 	}
 	dialogueManager->Init(2, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 	logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
@@ -127,6 +147,18 @@ void TombPuzzleScene::Win()
 
 void TombPuzzleScene::refresh()
 {
+	if (!win && Check()) { //If the puzzle is resolved 
+	
+		XOAccess->getMngr()->setActive(XOAccess, false);
+		dragAccess->getMngr()->setActive(dragAccess, false);
+		XOAccess->getMngr()->removeEntity(XOAccess);
+		dragAccess->getMngr()->removeEntity(dragAccess);
+		auto TombImage = entityManager->getComponent<Image>(TombBackGround);
+		TombImage->setTexture(&sdlutils().images().at("TumbaAbierta"));
+		neckclace->getMngr()->setActive(neckclace, true);
+		shovel->getMngr()->setActive(shovel, true);
+		Win();
+	}
 	if (startDg) {
 		switch (numDialog)
 		{
@@ -145,30 +177,5 @@ void TombPuzzleScene::refresh()
 		default:
 			break;
 		}
-	}
-	if (!win && Check()) { //If the puzzle is resolved 
-		auto neckclace = entityFactory->CreateInteractableEntity(entityManager, "ColganteTumba", EntityFactory::RECTAREA, Vector2D(290, 290), Vector2D(0, 0), 262/1.35, 234/1.35, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		entityManager->getComponent<ClickComponent>(neckclace)->connect(ClickComponent::JUST_CLICKED, [this, neckclace]()
-			{
-				AddInvItem("colganteInv", sdlutils().invDescriptions().at("colganteInv"), room->GetInventory()->setPosition(), room);
-				entityManager->removeEntity(neckclace);
-				entityManager->setActive(neckclace,false);
-			});
-
-		auto shovel = entityFactory->CreateInteractableEntity(entityManager, "Pala", EntityFactory::RECTAREA, Vector2D(500, 300), Vector2D(0, 0), 120, 120, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		entityManager->getComponent<ClickComponent>(shovel)->connect(ClickComponent::JUST_CLICKED, [this, shovel]()
-			{
-				AddInvItem("Pala", sdlutils().invDescriptions().at("Pala"), room->GetInventory()->setPosition(), room);
-				entityManager->removeEntity(shovel);
-				entityManager->setActive(shovel,false);
-			});
-		XOAccess->getMngr()->setActive(XOAccess, false);
-		dragAccess->getMngr()->setActive(dragAccess, false);
-		XOAccess->getMngr()->removeEntity(XOAccess);
-		dragAccess->getMngr()->removeEntity(dragAccess);
-
-		auto TombImage = entityManager->getComponent<Image>(TombBackGround);
-		TombImage->setTexture(&sdlutils().images().at("TumbaAbierta"));
-		Win();
 	}
 }

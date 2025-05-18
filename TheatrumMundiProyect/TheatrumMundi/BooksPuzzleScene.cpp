@@ -299,7 +299,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, _backButton, buttonSound]()
 		{	
-				AudioManager::Instance().playSound(buttonSound);
+			AudioManager::Instance().playSound(buttonSound);
 			HideInventoryItems();
 			sr->GetInventory()->setFirstItem(0);
 			auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);

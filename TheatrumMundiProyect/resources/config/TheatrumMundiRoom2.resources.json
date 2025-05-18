@@ -362,8 +362,12 @@
       "id": "laTecla",
       "file": "../resources/images/Finales/laTecla.png"
     },
-    {
+        {
       "id": "Llave",
+      "file": "../resources/images/Finales/Llave.png"
+    },
+    {
+      "id": "LlaveInv",
       "file": "../resources/images/Finales/llaveInv.png"
     },
     {

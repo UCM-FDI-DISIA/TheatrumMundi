@@ -12,6 +12,8 @@ private:
 	ecs::entity_t TombBackGround;
 	ecs::entity_t XOAccess;
 	ecs::entity_t dragAccess;
+	ecs::entity_t neckclace;
+	ecs::entity_t shovel;
 public:
 	TombPuzzleScene();
 	~TombPuzzleScene();
