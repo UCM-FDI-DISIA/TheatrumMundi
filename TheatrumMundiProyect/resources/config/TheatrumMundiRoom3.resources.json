@@ -274,6 +274,10 @@
       "file": "../resources/sound/sfx/Si.wav"
     },
     {
+      "id": "shootShound",
+      "file": "../resources/sound/sfx/shoot_soundRoom3.wav"
+    },
+    {
       "id": "sSound",
       "file": "../resources/sound/sfx/s_soundRoom3.wav"
     },
