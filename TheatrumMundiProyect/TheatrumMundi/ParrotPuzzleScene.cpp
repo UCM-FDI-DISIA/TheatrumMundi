@@ -4,6 +4,7 @@
 #include "../src/Components/ClickComponent.h"
 #include "../src/Components/BehaviorStateComponent.h"
 #include "../src/Components/RectArea2D.h"
+#include "../src/Components/Image.h"
 #include "Area2DLayerManager.h"
 #include "Log.h"
 #include "PauseManager.h"
@@ -11,10 +12,11 @@
 #include "../src/game/Game.h"
 #include "../src/sdlutils/SDLUtils.h"
 #include "AudioManager.h"
+#include "Room3.h"
 
 ParrotPuzzleScene::ParrotPuzzleScene()
 {
-
+	dialogueManager = new DialogueManager(1);
 }
 
 ParrotPuzzleScene::~ParrotPuzzleScene()
@@ -30,7 +32,7 @@ void ParrotPuzzleScene::init(SceneRoomTemplate* sr)
 
 	_setRoomBackground();
 
-	_setInteractuables();
+	_setInteractuables(sr);
 
 	_setUI();
 
@@ -83,12 +85,26 @@ void ParrotPuzzleScene::_setRoomBackground()
 	entityFactory->CreateImageEntity(entityManager, "Parrot", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 }
 
-void ParrotPuzzleScene::_setInteractuables()
+void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 {
-	parrotUtils.parrotEnt = entityFactory->CreateInteractableEntity(entityManager, "ParrotOscuro", EntityFactory::RECTAREA, Vector2D(1000, 0), Vector2D(0, 0), 450, 450, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-	entityManager->getComponent<TriggerComponent>(parrotUtils.parrotEnt)->connect(TriggerComponent::AREA_ENTERED, [this]() {
-		// when the torch enters
+	// BULLETS
+	Vector2D bulletsPosition((sdlutils().width() - 150) / 2, (sdlutils().height() - 150) / 2);
+	auto bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "CajaFuerte", EntityFactory::RECTAREA, // TODO Imagen balas
+		bulletsPosition, Vector2D(0, 0), 150, 150, 0,
+		areaLayerManager,
+		EntityFactory::NODRAG,
+		ecs::grp::DEFAULT);
+	
+	entityManager->getComponent<ClickComponent>(bulletsEntity) // Collectable
+		->connect(ClickComponent::JUST_CLICKED, [&, this]() {
+			bulletsEntity->getMngr()->setActive(bulletsEntity, false);
+			Vector2D position = sr->GetInventory()->setPosition();
+			AddInvItem("guantes", sdlutils().Instance()->invDescriptions().at("CajaFuerte"), position, sr); // TODO Imagen balas
 		});
+
+	// PARROT
+	Vector2D parrotPosition((sdlutils().width() - 700) / 2, (sdlutils().height() - 700) / 2);
+	parrotUtils.parrotEnt = entityFactory->CreateInteractableEntity(entityManager, "ParrotOscuro", EntityFactory::RECTAREA, parrotPosition, Vector2D(0, 0), 700, 700, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 	BehaviorStateComponent* parrotStateCom = entityManager->addComponent<BehaviorStateComponent>(parrotUtils.parrotEnt);
 
@@ -98,32 +114,55 @@ void ParrotPuzzleScene::_setInteractuables()
 	parrotUtils.codeSequenceSounds.push_back(rmSounds.o_Sound); // TODO: O
 	parrotUtils.codeSequenceSounds.push_back(rmSounds.p_Sound); // TODO: P
 
-	parrotStateCom->defBehavior(ParrotState::SHOOTING_SOUND,
-		[&]() {
+	auto shootingBehavior = [parrotStateCom, this] // SHOOTING_SOUND
+		() {
 			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
 				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[0]);
 				parrotUtils.lastSoundTime = sdlutils().currTime();
-			}
+			}	
 
 			parrotStateCom->setState(Game::Instance()->getDataManager()->GetRoom3Phase()); // Check if changes the room state
-		});
+		};
 
-	parrotStateCom->defBehavior(ParrotState::RED_LIGHTS,
-		[&]() {
+	parrotStateCom->defBehavior(Room3Scene::Phase::LIGHTS_OFF, shootingBehavior); // Both phases have the same behavior in the parrot
+	parrotStateCom->defBehavior(Room3Scene::Phase::LIGHTS_ON, shootingBehavior);
+
+	parrotStateCom->defBehavior(Room3Scene::Phase::LIGHTS_RED, // PUZZLE CODE REVEAL PHASE
+		[parrotStateCom, this]() {
 			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000) { // Every second
-
 				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[parrotUtils.codeSeqIteration]);
 
 				++parrotUtils.codeSeqIteration;
 				parrotUtils.codeSeqIteration = parrotUtils.codeSeqIteration % parrotUtils.codeSequenceSounds.size();
 
 				parrotUtils.lastSoundTime = sdlutils().currTime();
-			}
+			}			
 
 			parrotStateCom->setState(Game::Instance()->getDataManager()->GetRoom3Phase()); // Check if changes the room state
 		});
 
-	parrotStateCom->setState(ParrotState::SHOOTING_SOUND); // The other will be setted after finishin the puzzle
+	parrotStateCom->setState(Room3Scene::Phase::LIGHTS_OFF); // The other will be setted after finishin the puzzle
+
+	TriggerComponent* triggComp = entityManager->getComponent<TriggerComponent>(parrotUtils.parrotEnt);
+	triggComp->connect(TriggerComponent::AREA_ENTERED, // handdle if the torch enters
+		[triggComp, parrotStateCom, this]() {
+			auto enteredEnts = triggComp->triggerContextEntities();
+
+			for (ecs::entity_t ent : enteredEnts) 
+			{
+				Image* objectImg = ent->getMngr()->getComponent<Image>(ent);
+																							// TODO Torch final image
+				if (objectImg != nullptr && objectImg->GetTexture() == &sdlutils().images().at("B1")) // Torch enters
+					if (parrotStateCom->getState() == Room3Scene::Phase::LIGHTS_RED)
+					{
+						// Change parrot image to exploded parrot
+					//  AudioManager::Instance().playSound(rmSounds.explosionSound);
+					//  entityManager->getComponent<Image>(parrotUtils.parrotEnt)->setTexture(&sdlutils().images().at("Exploded_Parrot"));
+						entityManager->removeComponent<Area2D>(parrotUtils.parrotEnt);
+						break;
+					}
+			}
+		});
 }
 
 void ParrotPuzzleScene::_setDialog()
@@ -131,9 +170,9 @@ void ParrotPuzzleScene::_setDialog()
 	// Dialog
 	dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "Sala3");
 
-	assert(rmObjects.inventoryButton != nullptr); // UI must be Initialized First
+	assert(inventoryButton != nullptr); // UI must be Initialized First
 
-	Area2D* inventoryButtonArea = entityManager->getComponent<Area2D>(rmObjects.inventoryButton);
+	Area2D* inventoryButtonArea = entityManager->getComponent<Area2D>(inventoryButton);
 
 	auto dialogEnts = entityManager->getEntities(ecs::grp::DIALOGUE);
 
@@ -158,7 +197,6 @@ void ParrotPuzzleScene::_setUI()
 			});
 
 	entityManager->setActive(rmObjects.quitButton, false);
-
 
 	createInventoryUI();
 

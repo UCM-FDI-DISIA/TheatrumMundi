@@ -19,7 +19,7 @@ private:
 	void _setGlobalFeatures();
 	void _setRoomAudio();
 	void _setRoomBackground();
-	void _setInteractuables();
+	void _setInteractuables(SceneRoomTemplate* sr);
 	void _setDialog();
 	void _setUI();
 
@@ -48,7 +48,5 @@ private:
 		std::vector<std::shared_ptr<Sound>> codeSequenceSounds; // Sequence of sounds in the second phase
 		int codeSeqIteration = 0;
 	} parrotUtils;
-
-	enum ParrotState { SHOOTING_SOUND, RED_LIGHTS };
 };
 

@@ -31,7 +31,15 @@ protected:
 		BadEnd,
 		event_size,
 	};
+
 public:
+
+	enum Phase {
+		LIGHTS_OFF,
+		LIGHTS_ON,
+		LIGHTS_RED
+	};
+
 	Room3Scene();
 	~Room3Scene();
 	void init() override;
@@ -107,6 +115,4 @@ private:
 		int codeSeqIteration = 0;
 		bool zoomParrotRadio = false;
 	} parrotUtils;
-
-	enum ParrotState { SHOOTING_SOUND, RED_LIGHTS };
 };
