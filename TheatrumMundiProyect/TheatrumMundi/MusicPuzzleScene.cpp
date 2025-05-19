@@ -491,8 +491,8 @@ void MusicPuzzleScene::updateDisplayedNotes()
         noteTr->setWidth(width);
         noteTr->setHeight(height);
 
-        noteIm->setW(width);
-        noteIm->setH(height);
+        noteIm->setW(width*Game::Instance()->wscreenScale);
+        noteIm->setH(height*Game::Instance()->wscreenScale);
 
         entityManager->setActive(displayedNotes[i], true);
 
