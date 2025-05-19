@@ -538,7 +538,7 @@ void Room2Scene::_setInteractuables()
 	rmObjects.zoomOrgan = entityFactory->CreateImageEntity(entityManager, "FondoOrgano", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 	rmObjects.zoomOrgan->getMngr()->setActive(rmObjects.zoomOrgan, false);
 
-	rmObjects.organ = entityFactory->CreateInteractableEntity(entityManager, "Organo", EntityFactory::RECTAREA, Vector2D(600, 350), Vector2D(0, 0), 500, 400, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+	rmObjects.organ = entityFactory->CreateInteractableEntity(entityManager, "Organo", EntityFactory::RECTAREA, Vector2D(410, 60), Vector2D(0, 0), 456, 591, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 	entityManager->getComponent<ClickComponent>(rmObjects.organ)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[OrganPuzzleScene]();
 		});

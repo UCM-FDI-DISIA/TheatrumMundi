@@ -29,7 +29,7 @@
     },
     {
       "id": "Organo",
-      "file": "../resources/images/temporales/Room2//Organo.jpeg"
+      "file": "../resources/images/Finales/organoInteractuable.png"
     },
     {
       "id": "Pala",
@@ -65,7 +65,7 @@
     },
     {
       "id": "FondoOrgano",
-      "file": "../resources/images/temporales/Room2/FondoOrgano.png"
+      "file": "../resources/images/Finales/fondoHueco.png"
     },
     {
       "id": "XOPuzzleAccess",
