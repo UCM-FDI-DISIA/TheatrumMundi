@@ -18,7 +18,7 @@ int main(int ac, char** av) {
         Game::Instance()->start();
     }
     catch (const std::exception& e) {
-        MessageBoxA(NULL, e.what(), "Error", MB_ICONERROR);
+       // MessageBoxA(NULL, e.what(), "Error", MB_ICONERROR);
     }
     catch (...) {
         MessageBoxA(NULL, "Error desconocido", "Error", MB_ICONERROR);
