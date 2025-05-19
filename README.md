@@ -725,9 +725,9 @@ Posición inicial:
 
 Solución:
 
-|   |   |   |
-|---|---|---|
-|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcTA104tu-Ru6DB2Z7K4w8R00UWhnjMtE0ncqBRSWF4lrHFONIpnKb80Z2LCMbGZ1F49iyDsi1QnyuOeVgeBFeR0zY3rF6nxWe_ux_Vy7PiMkAYS3EMK7NnGoQEGloRePqJ6SoIXw?key=J7nf_FWWHfuhd8vnjF8jXdc4)|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdk_0aeg_LdOKLNQKmH0sx3HYyqN9vnPW5kro_dEirCEf-Gb3JYk9mXRqHcgwrA5ZxtTwmtFK8PF3k_FTITI8ApSpQ29znQUhPmUgRrWWqSEzwlRjqOn80STtgp3uzxCA2AJxW7WA?key=J7nf_FWWHfuhd8vnjF8jXdc4)|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXegFi04tf9i9lJ4h-r5dmlsjSueOHa4qqDdmz2Z6ykPn5vefrXbnfpyImv0LhsHePtPzedJRYBS8i4JkB49nvwBRmjSvS2X_cPwZAwSAra47YPzpHku-sZf-YHx7Lu3wQfNy7UVbg?key=J7nf_FWWHfuhd8vnjF8jXdc4)|
+|                                                                                                                                                                                                                             |                                                                                                                                                                                                                             |                                                                                                                                                                                                                             |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcTA104tu-Ru6DB2Z7K4w8R00UWhnjMtE0ncqBRSWF4lrHFONIpnKb80Z2LCMbGZ1F49iyDsi1QnyuOeVgeBFeR0zY3rF6nxWe_ux_Vy7PiMkAYS3EMK7NnGoQEGloRePqJ6SoIXw?key=J7nf_FWWHfuhd8vnjF8jXdc4) | ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdk_0aeg_LdOKLNQKmH0sx3HYyqN9vnPW5kro_dEirCEf-Gb3JYk9mXRqHcgwrA5ZxtTwmtFK8PF3k_FTITI8ApSpQ29znQUhPmUgRrWWqSEzwlRjqOn80STtgp3uzxCA2AJxW7WA?key=J7nf_FWWHfuhd8vnjF8jXdc4) | ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXegFi04tf9i9lJ4h-r5dmlsjSueOHa4qqDdmz2Z6ykPn5vefrXbnfpyImv0LhsHePtPzedJRYBS8i4JkB49nvwBRmjSvS2X_cPwZAwSAra47YPzpHku-sZf-YHx7Lu3wQfNy7UVbg?key=J7nf_FWWHfuhd8vnjF8jXdc4) |
 
   
 
@@ -779,47 +779,62 @@ Puzzle Órgano:
 
 Pista y Material para otro puzzle: Cuerda y gancho.
 
+Salida Secreta:    
+Tras pinchar en el espejo (anteriormente el mosaico), se abrirá la escena de la sala secreta que mostrará una rejilla que al pulsarla se abrirá (o no) indicando que es una posible salida.
+Una vez comprobado el estado de la ventana, se podrá responder a la pregunta de la sala: ¿Es el asesinato posible?
+
+
+En caso positivo habrá dos variantes:
+
+- La pala está ensangrentada, hay varilla y la cuerda es lo suficientemente resistente como para poder usarse para escalar
+    
+- La pala está ensangrentada y la salida subterránea está abierta, no hay varilla pero si cuerda resistente.    
+
+En caso negativo habrá una variante:
+
+-La pala está ensangrentada, hay cuerda larga y hay varilla pero la cuerda es demasiado endeble y la salida subterránea está cerrada.
   
+
 
 ### Sala 3
 
-  Puzzle Luces:
 
-  
+Asesinato: Muerte por una de múltiples heridas externas (estrangulamiento, una puñalada limpia en el hombro y tiro a la cabeza) de la policía (Lucy).
 
--Concepto: 
+Pruebas a encontrar: Pistola y balas, arma blanca, soga.
 
-Conectar los cables a los diferentes puertos en el orden correcto ,para poder encender todas las bombillas a la vez .  Consiguiendo encender las luces del juzgado y obtener el cable.
+Esta sala consta de 2 habitaciones (sala de espera y  sala del juzgado) En un inicio ambas habitaciones están a oscuras. Sin embargo, la sala del juzgado (que es donde se aparece por primera vez) tiene una luz de emergencia encima de la puerta hacia la otra habitación. En la sala del juzgado también se puede oír un loro reproduciendo un sonido de un disparo en bucle.
 
-  
+El cadáver estará desplomado en el estrado del juzgado con las heridas anteriormente mencionadas, pero ni estas ni el mismo cadáver serán visibles en un inicio.
 
--Funcionamiento del puzzle:
+Para encender la luz se deberán arreglar los cables (puzzle). Se encuentran en la caja de electricidad en la sala de espera cerca de la puerta, iluminadas un poco por luz de emergencia. Al resolver este puzzle, se activará una luz azul y se podrá sacar de detrás de los cables una pistola con o sin silenciador (pista).
 
-Nos encontramos un cuadro de luz. A la izquierda observamos cinco bombillas colocadas verticalmente. En medio cinco cables inicialmente conectados a puertos y debajo de estos un botón rojo con el símbolo de corriente de electricidad. A la derecha  se encontrará un compartimento cerrado.
+En la sala de espera ahora se podrá ver una serie de 4 taquillas y una mesa con una radio. De las 4 taquillas 2 de ellas serán no interactuables, una estará visiblemente dañada y se podrá abrir sin problema (tendrá un manual de código morse y una pluma dentro) y otra tendrá un candado circular (puzzle). Una vez pasemos a la siguiente fase (luz roja) (NO SE PUEDE HACER ESTO AÚN) la radio empezará a emitir la clave de la taquilla en código morse. Al abrir la taquilla se podrá recoger una cuerda : una soga o unos alambres (pista). 
 
-El numero de luces encendidas indica el numero de cables correctamente conectados. La posición de las luces no es igual a la posición de los cables.
-Las luces solo se encenderán cuando estén los cinco cables conectados a puertos diferentes y se haya pulsado el botón de la corriente eléctrica. Si no están los cinco cables conectados el botón de la electricidad estará menos saturado y no se podrá pulsarlo, por lo tanto, no se podrá comprobar si los cables están en la posición adecuada.
+Ahora que hay luz, al volver a la sala del juzgado se puede ver el cadáver (solo se aprecia la herida de bala en la cabeza) al loro, y una balanza en la mesa del juez. En una de los platos se encuentra el corazón de Lucy. Para pasar a la siguiente luz (roja), que revelará también las marcas de estrangulamiento, se deberá poner la pluma en la balanza (el corazón se hundirá).
 
-Inicialmente todos los cables estarán conectados, con una o dos luces encendidas indicando que 1 o 2 cables están bien conectados.  
-Para desconectar un cable se deberá de hacer clic en él y para conectarlo a un puerto se deberá de clicar y arrastrar hasta el puerto deseado. No se puede conectar dos cables a un puerto a la vez.
+Cuando se cambien las luces a rojo, se podrá ver un mensaje en la pared: “No confíes en tus ojos”. Con esta luz, se empezarán a ver múltiples números por las paredes de ambas salas que NO HACEN NADA. El loro empezará a ciclar en este momento entre el sonido de disparo y las letras: “S” “T” “O” “P”. (Estaba pensando que sonaran las letras como robóticas a lo minijuego de fnaf, no se estoy cansado, plot twist el loro es un robot). Esta palabra abrirá la caja fuerte (no una grande de un banco, una que tendría cualquiera por casa) con código de letras que se encontrará encima de una de las dos  6+tarimas (la que no tenga la balanza). Al abrir la caja se encontrará una linterna ultravioleta y  un arma blanca que podrá ser un cuchillo con filo liso o serrado (pista). 
 
-Solución: 
-Contando de izquierda a derecha la solución seria la siguiente: 31524
-El cable 1 le corresponde la posición 3
-El cable 2 le corresponde la posición 1
-El cable 3 le corresponde la posición 5
-El cable 4 le corresponde la posición 2
-El cable 4 le corresponde la posición 4
+Con la luz ultravioleta apuntada al cadáver se podrá encontrar la última herida (esta luz mostrará una mancha de sangre en el hombro del cadáver y al pulsar otra vez se verá la herida (un corte limpio). 
 
--Recompensa:
-Cable en el compartimento derecho de la caja de luz.
+Si se apunta al loro con la lámpara ultravioleta, este explotará y dejará caer balas, reales o de fogueo (pista). Tras esto se activará la pregunta de la sala.
+
+Las pruebas que se descubren con los puzzles tienen algunas variaciones. En caso de que la respuesta a la pregunta de la sala sea sí las pruebas serán de esta manera:
+
+La pistola NO tendrá silenciador, las balas serán reales, el arma blanca será un cuchillo con filo liso y la cuerda será una soga.
+
+En caso negativo habrá dos variantes:
+
+-El arma blanca será con filo serrado y las balas serán de fogueo.
+
+-La cuerda será alambre y la pistola tendrá silenciador.
+
+## ideas de puzzles
 
 
-
-
-|   |   |   |
-|---|---|---|
-|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcTA104tu-Ru6DB2Z7K4w8R00UWhnjMtE0ncqBRSWF4lrHFONIpnKb80Z2LCMbGZ1F49iyDsi1QnyuOeVgeBFeR0zY3rF6nxWe_ux_Vy7PiMkAYS3EMK7NnGoQEGloRePqJ6SoIXw?key=J7nf_FWWHfuhd8vnjF8jXdc4)|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdk_0aeg_LdOKLNQKmH0sx3HYyqN9vnPW5kro_dEirCEf-Gb3JYk9mXRqHcgwrA5ZxtTwmtFK8PF3k_FTITI8ApSpQ29znQUhPmUgRrWWqSEzwlRjqOn80STtgp3uzxCA2AJxW7WA?key=J7nf_FWWHfuhd8vnjF8jXdc4)|![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXegFi04tf9i9lJ4h-r5dmlsjSueOHa4qqDdmz2Z6ykPn5vefrXbnfpyImv0LhsHePtPzedJRYBS8i4JkB49nvwBRmjSvS2X_cPwZAwSAra47YPzpHku-sZf-YHx7Lu3wQfNy7UVbg?key=J7nf_FWWHfuhd8vnjF8jXdc4)|
+|                                                                                                                                                                                                                             |                                                                                                                                                                                                                             |                                                                                                                                                                                                                             |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcTA104tu-Ru6DB2Z7K4w8R00UWhnjMtE0ncqBRSWF4lrHFONIpnKb80Z2LCMbGZ1F49iyDsi1QnyuOeVgeBFeR0zY3rF6nxWe_ux_Vy7PiMkAYS3EMK7NnGoQEGloRePqJ6SoIXw?key=J7nf_FWWHfuhd8vnjF8jXdc4) | ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdk_0aeg_LdOKLNQKmH0sx3HYyqN9vnPW5kro_dEirCEf-Gb3JYk9mXRqHcgwrA5ZxtTwmtFK8PF3k_FTITI8ApSpQ29znQUhPmUgRrWWqSEzwlRjqOn80STtgp3uzxCA2AJxW7WA?key=J7nf_FWWHfuhd8vnjF8jXdc4) | ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXegFi04tf9i9lJ4h-r5dmlsjSueOHa4qqDdmz2Z6ykPn5vefrXbnfpyImv0LhsHePtPzedJRYBS8i4JkB49nvwBRmjSvS2X_cPwZAwSAra47YPzpHku-sZf-YHx7Lu3wQfNy7UVbg?key=J7nf_FWWHfuhd8vnjF8jXdc4) |
 
 
   
@@ -928,9 +943,25 @@ Keisara → Una escritora a la que le va lo suficientemente bien como para vivir
 Sol → Ha estado trabajando como programador durante los últimos 3 años (no por elección propia). Sol siempre quiso hacer algo relacionado con la música, pero a sus padres nunca les hizo mucha gracia. Tenía notas suficientemente altas para entrar en una ingeniería y sus padres le presionaron a hacerlo.  Keisara y él han sido mejores amigos desde antes de que Keisara se llamase así, y por lo tanto también es muy cercano a Lucy. Sol admira mucho como su mejor amiga ha hecho lo que quería con su vida independientemente de su familia, pero siente que a él no le iría tan bien si lo hiciera, y que todo el mundo le dejará atrás en el momento en el que deje de ser lo que esperan de él. 
 
   
-  
-  
+# Resultados plan de pruebas
+(dentro de la carpeta docs/infoProyecto puede encontrarse la guía de planificación de este plan de pruebas)
+https://docs.google.com/spreadsheets/d/1tIjpfIABi8CD-scawFEAx9VNEC0qMkQsgiYoRje5TJg/edit?usp=sharing
+(excel con el sumatorio y todos los datos obtenidos por observación durante el plan de pruebas)
+El plan de pruebas fue testeado en 16 alumnos de 1º de bachillerato con los que descubrimos un par de errores diseño.
 
+<u>-La puerta de la sala1 no actuaba como un objeto interactuable. </u>
+Al no ser un objeto de ese tipo i no reaccionar al cursor los testers(en su gran mayoría) simplemente se olvidaban de que la puerta hace cosas a pesar de haberlo explicado en el tutorial. Esto ya ha sido corregido haciendo que la puerta sea un objeto interactuable.
+
+-<u>En una variante el teléfono de decía la hora del reloj de casualidad.</u>
+Este fue un error de diseño en el que sin quererlo dábamos la solución al puzzle del reloj en la vista del móvil, cuando la idea es que se razone a través de las pistas obtenidas hasta la fecha. Esta ya solucionado era cambiar un asset.
+
+-<u>El movimiento del botón del inventario.</u>
+Anteriormente al abrir el inventario este desplazaba su botón al lado de este para poder cerrarlo y, aunque esto parecía mas conveniente, resulto ser mas antinutritivo para los jugadores. Ahora el botón ya no se mueve
+
+-<u>tamaño de la fuente</u>
+Un par de testers tuvieron dificultad para leer la fuente debido a su tamaño, como resultado hemos aumentado el tamaño de esta
+
+En general, quitando lo ya mencionado, todo lo que queriamos comprobar ha dado resultados favorables.
 # Referencias e Inspiraciones
 
 ## Juegos de referencia 
