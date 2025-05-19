@@ -178,6 +178,11 @@ void Room2Scene::_setRoomEvents()
 	roomEvent[OrganPuzzleSceneRsv] = [this] {
 		brokenMosaic = false;
 		MirrorMosaic = true;
+		auto ZoomAccess = entityFactory->CreateInteractableEntity(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(720, 0), Vector2D(0, 0), 627 / 3, 1377 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(ZoomAccess));
+		entityManager->getComponent<ClickComponent>(ZoomAccess)->connect(ClickComponent::JUST_CLICKED, [this]() {
+			roomEvent[OrganZoom](); 
+			});
 		entityManager->getComponent<Image>(rmObjects.mosaic)->setTexture(&sdlutils().images().at("MosaicoEspejoSala"));
 		};
 	roomEvent[SecretEntry] = [this] {
