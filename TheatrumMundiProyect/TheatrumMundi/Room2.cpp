@@ -272,7 +272,7 @@ void Room2Scene::_setRoomBackground()
 
 #pragma region InitScroll
 
-	auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1371, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12.0) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "PuertaMausoleo", EntityFactory::RECTAREA, Vector2D(30 + 1359, 175), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12.0) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 	auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "PuertaCementerio", EntityFactory::RECTAREA, Vector2D(1218, 140), Vector2D(0, 0), 117, 428, 0, areaLayerManager, 12, ((sdlutils().width()) / 12.0) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 
 	auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
@@ -302,29 +302,27 @@ void Room2Scene::_setRoomBackground()
 #pragma region Scroll
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom2)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom2]() {
-		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
-			//if(rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT)) {
-				rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
+		if (!isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+			if(rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT)) {
 				auto trChangeRoom2 = entityManager->getComponent<Transform>(ChangeRoom2);
 				trChangeRoom2->setPos(Vector2D(1218, 140));
 				AudioManager::Instance().playSound(sdlutils().soundEffects().at("AbrirPuertaPiedra"));
 				scrolling = true;
-			//}
+			}
 		}
-		else if (!isOpen) {
+		else if (isOpen) {
 			roomEvent[DoorScene]();
 		}
 		});
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom1)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll, ChangeRoom1]() {
-		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
-			//if (rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT)) {
-				rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
+		if (!isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+			if (rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT)) {
 				auto trChangeRoom1 = entityManager->getComponent<Transform>(ChangeRoom1);
-				trChangeRoom1->setPos(Vector2D(1371-1349, 140));
+				trChangeRoom1->setPos(Vector2D(30, 175));
 				AudioManager::Instance().playSound(sdlutils().soundEffects().at("AbrirPuertaPiedra"));
 				scrolling = true;
-			//}
+			}
 		}
 		});
 
