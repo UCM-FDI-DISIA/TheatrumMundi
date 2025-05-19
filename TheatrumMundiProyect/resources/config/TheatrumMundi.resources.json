@@ -329,6 +329,11 @@
     { "id" : "fondoMorado", "file" : "../resources/images/temporales/fondoMorado.png" },
     { "id" : "menuInicial", "file" : "../resources/images/Finales/mainMenu.png" },
     { "id" : "Title", "file" : "../resources/images/Finales/title.png" },
+     { "id" : "FeatherBackground", "file" : "../resources/images/temporales/FeatherBackground.png" },
+     {
+      "id": "piezaL1",
+      "file": "../resources/images/Finales/piezadeL1.png"
+    },
     {
       "id": "Lucy",
       "file": "../resources/images/boton_check.png"
@@ -537,46 +542,8 @@
       "id": "AAA",
       "file": "../resources/images/veneno.png"
     },
-    {
-      "id": "piezaL1",
-      "file": "../resources/images/temporales/piezadeL1.png"
-    },
-    {
-      "id": "piezaL2",
-      "file": "../resources/images/temporales/piezadeL2.png"
-    },
-    {
-      "id": "MatPared",
-      "file": "../resources/images/temporales/MatrizPared.png"
-    },
-    {
-      "id": "MatHueco",
-      "file": "../resources/images/temporales/MatrizCuadrado.png"
-    },
-    {
-      "id": "CosaQueArrastras",
-      "file": "../resources/images/temporales/Cosaquearrastras.png"
-    },
-    {
-      "id": "piezade4",
-      "file": "../resources/images/temporales/piezade4.png"
-    },
-    {
-      "id": "piezade2",
-      "file": "../resources/images/temporales/piezade2.png"
-    },
-    {
-      "id": "piezade3",
-      "file": "../resources/images/temporales/piezade3.png"
-    },
-    {
-      "id": "piezademeta",
-      "file": "../resources/images/temporales/piezademeta.png"
-    },
-    {
-      "id": "piezadez",
-      "file": "../resources/images/temporales/piezadeZ.png"
-    },
+   
+
     {
       "id": "Hanni",
       "file": "../resources/images/asesinoDeHanni.png"
@@ -937,8 +904,8 @@
       "file": "../resources/images/finales/pistolaSil.png"
     },
     {
-      "id": "Pluma",
-      "file": "../resources/images/finales/pluma.png"
+      "id": "pluma",
+      "file": "../resources/images/Finales/pluma.png"
     },
     {
       "id": "balasF",

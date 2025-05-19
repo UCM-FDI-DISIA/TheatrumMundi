@@ -57,13 +57,8 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 
 		dialogueManager->setScene(this);
 
-		balanceBackground = entityFactory->CreateImageEntity(entityManager, "BotonHoraria", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+		balanceBackground = entityFactory->CreateImageEntity(entityManager, "balance", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		balanceBackground->getMngr()->removeComponent<Area2D>(balanceBackground);
-
-
-		auto balance = entityFactory->
-			CreateImageEntity(entityManager, "balance", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
-
 		
 
 		auto balanceArea = entityFactory->CreateInteractableEntity( // balance entity
@@ -73,19 +68,8 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 
 		balanceArea->getMngr()->removeComponent<Image>(balanceArea);
 
-	auto heart = entityFactory->CreateImageEntity(entityManager, "heart", Vector2D(250, 100), Vector2D(0, 0), 460, 280, 0, ecs::grp::DEFAULT);
 
 
-		auto featherReward = entityFactory->CreateInteractableEntity( // featherReawrd entity
-			entityManager, "pluma", EntityFactory::RECTAREA,
-			Vector2D(400, 300), Vector2D(), 460, 280, 0,
-			areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);
-
-		entityManager->getComponent<ClickComponent>(featherReward)->connect(ClickComponent::JUST_CLICKED, [this, featherReward, sr]() {
-			featherReward->getMngr()->setActive(featherReward, false);
-			Vector2D position = sr->GetInventory()->setPosition();
-			AddInvItem("pluma", sdlutils().invDescriptions().at("pluma"), position, sr);
-			});
 		
 		feather = entityFactory->CreateInteractableEntity( // feather entity
 			entityManager, "pluma", EntityFactory::RECTAREA,
@@ -129,7 +113,7 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 		//Invntory Background
 		createInventoryUI();
 		//Click component Open log button
-		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, _backButton, buttonSound]()
 			{
 				AudioManager::Instance().playSound(buttonSound);
@@ -145,7 +129,7 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 			});
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
-		startDialogue("PuzzleTaza1");
+	//	startDialogue("PuzzleTaza1");
 	}
 	sr->GetInventory()->setFirstItem(0);
 	createInvEntities(sr);
@@ -172,7 +156,9 @@ bool BalancePuzzleScene::isItemHand(const std::string& itemId)
 	if (itemId == "pluma") {
 		_hasFeather = true;
 		_featherIsInBalance = true;
-		feather->getMngr()->setActive(feather, true);
+		Image* img = balanceBackground->getMngr()->getComponent<Image>(balanceBackground);
+		img->setTexture(&sdlutils().images().at("FeatherBackground"));
+		//feather->getMngr()->setActive(feather, true);
 		Win();
 		return true;
 	}
@@ -181,9 +167,7 @@ bool BalancePuzzleScene::isItemHand(const std::string& itemId)
 void BalancePuzzleScene::Win()
 {
 	
-	Image* img = balanceBackground->getMngr()->getComponent<Image>(balanceBackground);
 	
-	img->setTexture(&sdlutils().images().at("FeatherBackground"));
 	
 	room->resolvedPuzzle(0);
 }
