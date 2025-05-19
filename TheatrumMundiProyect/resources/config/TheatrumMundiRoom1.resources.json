@@ -448,12 +448,12 @@
     },
     {
       "id": "CogerCosa",
-      "file": "../resources/sound/sfx/CogerCosa.wav"
+      "file": "../resources/sound/sfx/CogerCosa.mp3"
   },
   
   {
     "id": "ColocarCosa",
-    "file": "../resources/sound/sfx/ColocarCosa.wav"
+    "file": "../resources/sound/sfx/ColocarCosa.mp3"
   },
 {
           "id": "NextDialogue",

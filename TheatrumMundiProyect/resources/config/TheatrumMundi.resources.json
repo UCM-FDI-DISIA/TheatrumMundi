@@ -1182,7 +1182,7 @@
     },
     {
       "id": "CogerCosa",
-      "file": "../resources/sound/sfx/CogerCosa.MP3"
+      "file": "../resources/sound/sfx/CogerCosa.mp3"
     },
     {
       "id": "FinalTeleTutorial",
@@ -1195,7 +1195,7 @@
 
     {
       "id": "ColocarCosa",
-      "file": "../resources/sound/sfx/ColocarCosa.MP3"
+      "file": "../resources/sound/sfx/ColocarCosa.mp3"
     },
     {
       "id": "incorrecto",
@@ -1283,7 +1283,7 @@
     },
     {
       "id": "NoAbrePuertaHierro",
-      "file": "../resources/sound/sfx/NoAbrelFierro.wav"
+      "file": "../resources/sound/sfx/NoAbrelFierro.mp3"
     },
     {
       "id": "cuervo",
@@ -1321,16 +1321,16 @@
   "musics" : [
     {
       "id": "menu",
-      "file":  "../resources/sound/music/sala1.wav"
+      "file":  "../resources/sound/music/menu.wav"
   },
     {
         "id": "sala1",
         "file":  "../resources/sound/music/sala1.wav"
     },
     {
-      "id": "sala2",
-      "file":  "../resources/sound/music/sala1.wav"
-  }
+        "id": "sala2",
+        "file": "../resources/sound/music/sala2.wav"
+    }
     
   ]
 

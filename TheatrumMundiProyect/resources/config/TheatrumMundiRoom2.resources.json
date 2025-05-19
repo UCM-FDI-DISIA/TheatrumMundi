@@ -621,7 +621,7 @@
   },
    {
     "id": "NoAbrePuertaHierro",
-    "file": "../resources/sound/sfx/NoAbrelFierro.wav"
+    "file": "../resources/sound/sfx/NoAbrelFierro.mp3"
   },
    {
           "id": "DoSound",
@@ -661,12 +661,12 @@
         },
     {
       "id": "CogerCosa",
-      "file": "../resources/sound/sfx/CogerCosa.wav"
+      "file": "../resources/sound/sfx/CogerCosa.mp3"
   },
   
   {
     "id": "ColocarCosa",
-    "file": "../resources/sound/sfx/ColocarCosa.wav"
+    "file": "../resources/sound/sfx/ColocarCosa.mp3"
   },
   {
     "id": "Mosaico",
