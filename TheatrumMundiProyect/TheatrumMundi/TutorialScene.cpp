@@ -269,7 +269,11 @@ void TutorialScene::init()
 					AudioManager::Instance().playSound(buttonSound);
 					scrollInventory(1);
 				});
-
+		invObjects.textDescriptionEnt = entityManager->addEntity(ecs::grp::UI);
+		auto _testTextTranform = entityManager->addComponent<Transform>(invObjects.textDescriptionEnt, Vector2D(600, 300), Vector2D(0, 0), 300, 200, 0);
+		entityManager->setActive(invObjects.textDescriptionEnt, false);
+		SDL_Color colorDialog = { 255, 255, 255, 255 };
+		entityManager->addComponent<WriteTextComponent<DescriptionInfo>>(invObjects.textDescriptionEnt, sdlutils().fonts().at("BASE"), colorDialog, GetInventory()->getTextDescription());
 		
 		//INIT DIALOG MANAGER
 		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, _eventToRead);
