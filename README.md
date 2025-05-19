@@ -351,13 +351,17 @@ Los siguientes dos puzzles se pueden hacer en cualquier orden:
   
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdl9r9Gsgf8tj6Q_mfjxW8SRG-ZsVRtRDNOq3IK3pss_Ud7MT7PrOLsEnClDLVwMkWBEs6-BQggi6XRITsZxkYiVk8HhNOxg_bRmMQP8V8LYr8iA3eUjzGzhTmuXvHPHjNuXuz6lw?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
-Vita Flumen. En el salón habrá tuberías por el techo y las paredes, si se investigan se accederá al puzzle (véase su funcionamiento en la sección puzzles). Cabe destacar que Sol dará pistas sobre cómo resolver este puzzles ya que se asemeja al funcionamiento de puertas lógicas. El recipiente del montaplatos (a donde hay que llevar el agua de las tuberías tendrá inscrito el mensaje: Vita Flumen: Todos los ríos llevan al mar).  Cuando el recipiente dentro del montaplatos del salón se llene de agua, el mecanismo de este se activará y bajará por su peso. Habrá que tirar de la cuerda del montaplatos para volver a subirlo, y en lugar del recipiente, en este se encontrará una de las manecillas del reloj y un par de guantes.
+-Vita Flumen:
+
+En el salón habrá tuberías por el techo y las paredes, si se investigan se accederá al puzzle (véase su funcionamiento en la sección puzzles). Cabe destacar que Sol dará pistas sobre cómo resolver este puzzles ya que se asemeja al funcionamiento de puertas lógicas. El recipiente del montaplatos (a donde hay que llevar el agua de las tuberías tendrá inscrito el mensaje: Vita Flumen: Todos los ríos llevan al mar).  Cuando el recipiente dentro del montaplatos del salón se llene de agua, el mecanismo de este se activará y bajará por su peso. Habrá que tirar de la cuerda del montaplatos para volver a subirlo, y en lugar del recipiente, en este se encontrará una de las manecillas del reloj y un par de guantes.
 
   
   
   
 
-Memento mori. En el estudio habrá una estantería llena de libros, con un cajón cerrado por un candado de combinación numérica con tres cifras (encima de él habrá una placa con las inscripción: Memento Mori: La muerte nos llega a todos). La estantería tendrá tres baldas, en cada una habrá un libro descolocado con el que se podrá interactuar. En esos libros se encontrará el código para el cajón (véase en la sección de puzzles). Dentro del cajón estará la otra manecilla del reloj y una etiqueta de un bote de cianuro que indicará la cantidad que había en el bote. Lucy comentará sobre si esa dosis es mortal y cuanto tiempo se tardaría en morir de ella (20 min en caso de ser letal). 
+-Memento mori:
+
+En el estudio habrá una estantería llena de libros, con un cajón cerrado por un candado de combinación numérica con tres cifras (encima de él habrá una placa con las inscripción: Memento Mori: La muerte nos llega a todos). La estantería tendrá tres baldas, en cada una habrá un libro descolocado con el que se podrá interactuar. En esos libros se encontrará el código para el cajón (véase en la sección de puzzles). Dentro del cajón estará la otra manecilla del reloj y una etiqueta de un bote de cianuro que indicará la cantidad que había en el bote. Lucy comentará sobre si esa dosis es mortal y cuanto tiempo se tardaría en morir de ella (20 min en caso de ser letal). 
 
   
 
@@ -365,7 +369,9 @@ Una vez terminados los puzzles anteriores se tendrá todo lo necesario para el �
 
   
 
-Tempus Fugit. En el estudio hay un reloj de pie al que se le pueden poner las manecillas (en este estará inscrito el mensaje: Tempus Fugit: El tiempo vuela. El instante de tu muerte se sentirá idéntico a este). La hora que hay que poner en el reloj es la hora de la muerte de Keisara. Para averiguarla habrá que tener en cuenta la hora a la que Keisara toma el té y cuanto tiempo tarda el veneno en matar. Introducir la hora correcta (que serán las 18:30) abrirá una puerta en el cuerpo del reloj que contendrá el bote del veneno (sin etiqueta).
+-Tempus Fugit:
+
+En el estudio hay un reloj de pie al que se le pueden poner las manecillas (en este estará inscrito el mensaje: Tempus Fugit: El tiempo vuela. El instante de tu muerte se sentirá idéntico a este). La hora que hay que poner en el reloj es la hora de la muerte de Keisara. Para averiguarla habrá que tener en cuenta la hora a la que Keisara toma el té y cuanto tiempo tarda el veneno en matar. Introducir la hora correcta (que serán las 18:30) abrirá una puerta en el cuerpo del reloj que contendrá el bote del veneno (sin etiqueta).
 
   
 
@@ -398,14 +404,13 @@ En caso negativo habrá dos variantes:
 
 Sala 2 -> La temática de esta sala es el miedo a no encajar, no ser comprendido y ser dejado atrás. Su color principal será el verde. La sala consistirá en un cementerio, dividido en dos pantallas. La primera siendo el exterior, donde hay varias tumbas y la puerta de un mausoleo, y la segunda el interior de dicho mausoleo.
 
-  
-
 Asesinato: Muerte por golpe en la nuca con una pala al programador (Sol).
 
 Pruebas a encontrar: Llave para abrir el mausoleo, pala del crimen, cuerda y varilla de apertura de ventana.
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeVEeLZxG8H84N8L6hG4Ji2FAugVtN2_dfSBANrESoJMKDynrY2aPN9YSjfjxaq2DppvVChHbSFG8OjNKNC_5bLWJPpLVD693R47M4YKLMWkHZ_Qr8mqTjioI9kc-n0kBssb34d1A?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
   
+Ciclo de juego (resolución de caso): 
 
 **En la primera pantalla de la sala encontramos el exterior de un cementerio, rodeado por una alta valla, con varias tumbas. A la derecha, está la puerta del mausoleo. El cadáver está apoyado en la puerta de la valla, lo que hace imposible que esta se haya usado para salir del lugar. 
 
@@ -418,6 +423,7 @@ La primera tendrá un epitafio con 2 candados, los cuales son puzzles que resolv
 
 
 - Puzzle candado 1:  
+
 -El puzzle consiste en mover los bloques que obstruyen el camino, de tal forma que se pueda mover una insignia a su posición correcta.
     **![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeiAh1Clxx3FKEWrwkxm6CHsL9SN1aMawMKpGXviT32zTDGipyGkMPMiwJjg3JHEZTBI5PD6t9bjTeQutktSPvrJVaPzUKFVq97QlWJZfOe0VeExuVYJMCVfd6Fb0WX8hLP2CH3oA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXctbRS4is8s6zikbca3R4h5A15RqsolcfxZlus_yQso9UIcGUOmono2YBA0w_rQQ2-jhR4wSVIWZIyxz7QEKsSon5IUVJ7FaURrK372QX0A3ZLz0Gl7cCMu-icAl7RQIvfv_Wo6qw?key=J7nf_FWWHfuhd8vnjF8jXdc4)
@@ -425,6 +431,7 @@ La primera tendrá un epitafio con 2 candados, los cuales son puzzles que resolv
 
 
 - Puzzle candado 2:
+
 -El puzzle consiste en modificar un código pulsando varios botones los cuales pueden modificarse tanto a ellos mismos como a otros hasta hacer que todos tengan la señal O.
 **![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfP2SBfNU_WnEw7XWZAmWJkFmpN04F5BHDzvEMaWcYGp4Po0JDbjCkM_cwR24BxUrCKbtZR2l8AHOXN1lW8BqRYMhFKpCAQW1kF9B7w2IvX5dbR4xhdV8McNRfau5ofRNYpXQECRQ?key=J7nf_FWWHfuhd8vnjF8jXdc4)**
   
@@ -448,7 +455,6 @@ Al abrir el mausoleo se pasará a la segunda pantalla. En el interior se encuent
 
 - Puzzle Mosaico:
     
-
 Al seleccionar el mosaico desorganizado se accede al puzzle. Se trata de un típico puzzle deslizante 4x4. Se deben deslizar las piezas para formar la imagen correcta.
 
 Al resolverlo, quedará un hueco en una esquina inferior y el mosaico se romperá como un espejo, desvelando un hueco oculto en la pared del mausoleo. Ahí, se encuentra la pala y un órgano. El órgano será otro puzzle.
@@ -458,7 +464,6 @@ Al resolverlo, quedará un hueco en una esquina inferior y el mosaico se romper�
 
 - Ventana:
     
-
 Se debe comprobar si la ventana está cerrada o abierta. De forma que se pueda comprobar si alguien ha podido entrar al mausoleo o no. Para ello se necesita tanto una cuerda como un utensilio para enganchar a la ventana y poder subir a comprobarlo.
 
   
@@ -466,11 +471,9 @@ Se debe comprobar si la ventana está cerrada o abierta. De forma que se pueda c
 
 - Puzzle Órgano:
     
-
 Puzzle musical que al resolverlo abre un compartimento dentro del órgano. Dentro, se encuentra el instrumento utilizado para enganchar la cuerda a la ventana y la cuerda.
 
-  
-
+ 
 Una vez comprobado el estado de la ventana, se podrá responder a la pregunta de la sala: ¿Es el asesinato posible?
 
   
@@ -497,46 +500,59 @@ En caso negativo habrá dos variantes:
   
   
 
-Sala 3-> Sonido. (muere policía). 
+Sala 3-> La temática de esta sala es el cambio y la oscuridad. Su color principal será el azul.
+
+Asesinato: Muerte por una de múltiples heridas externas (estrangulamiento, una puñalada limpia en el hombro y tiro a la cabeza) de la policía (Lucy).
+
+Pruebas a encontrar: Pistola y balas, arma blanca, soga/alambre y pluma.
+
+Ciclo de juego (resolución de caso):
+
+Esta sala consta de 2 habitaciones (sala de espera y  sala del juzgado) En un inicio ambas habitaciones están a oscuras. Sin embargo, la sala del juzgado (que es donde se aparece por primera vez) tiene una luz de emergencia encima de la puerta hacia la otra habitación. En la sala del juzgado también se puede oír un loro reproduciendo un sonido de un disparo en bucle.
+
+El cadáver estará desplomado en el estrado del juzgado con las heridas anteriormente mencionadas, pero ni estas ni el mismo cadáver serán visibles en un inicio.
+
+
+Para encender la luz se deberán arreglar los cables de la caja de luz.
+-Caja de luz:
+
+Se encuentra en la sala de espera cerca de la puerta, iluminadas un poco por luz de emergencia. Al resolver este puzzle, se activará una luz azul y se podrá sacar de detrás de los cables una pistola con o sin silenciador.
+
+En la sala de espera ahora se podrá ver una serie de 4 taquillas y una mesa con una radio. De las 4 taquillas 2 de ellas serán no interactuables, una estará visiblemente dañada y se podrá abrir sin problema (tendrá un manual de código morse y una pluma dentro) y otra tendrá un candado circular.
+
+
+Ahora que hay luz, al volver a la sala del juzgado se puede ver el cadáver (solo se aprecia la herida de bala en la cabeza) al loro, y una balanza en la mesa del juez. 
+En uno de los platos se encuentra el corazón de Lucy. Para pasar a la siguiente luz (roja), que revelará también las marcas de estrangulamiento, se deberá poner la pluma en la balanza (el corazón se hundirá).
+
+Una vez pasemos a la siguiente fase (luz roja) la radio empezará a emitir la clave de la taquilla en código morse y se podrá resolver el candado circular.
+-Candado circular:
+ 
+ Cuenta con una serie de anillos en la cual habrá que averiguar la contraseña correcta utilizando el morse. De recompensa se podrá obtener una soga o un alambre.
+
+Cuando se cambien las luces a rojo, se podrá ver un mensaje en la pared: “No confíes en tus ojos”. Con esta luz, se empezarán a ver múltiples números por las paredes de ambas salas que NO HACEN NADA.
+El loro empezará a ciclar en este momento entre el sonido de disparo y las letras: “S” “T” “O” “P”.
+Esta palabra abrirá la caja fuerte.
+
+-Caja fuerte:
+ Hay que descifrar un código de letras que se encontrará encima de una de las dos tarimas. Al abrir la caja se encontrará una linterna ultravioleta y un arma blanca que podrá ser un cuchillo liso o serrado.
+
+Con la luz ultravioleta apuntada al cadáver se podrá encontrar la última herida (esta luz mostrará una mancha de sangre en el hombro del cadáver y al pulsar otra vez se verá la herida (un corte limpio). 
+
+Si se apunta al loro con la lámpara ultravioleta, este explotará y dejará caer balas, reales o de fogueo (pista). Tras esto se activará la pregunta de la sala.
+
+
+Las pruebas que se descubren con los puzzles tienen algunas variaciones. En caso de que la respuesta a la pregunta de la sala sea sí las pruebas serán de esta manera:
+
+La pistola NO tendrá silenciador, las balas serán reales, el arma blanca será un cuchillo con filo liso y la cuerda será una soga.
+
+En caso negativo habrá dos variantes:
+
+-El arma blanca será con filo serrado y las balas serán de fogueo.
+
+-La cuerda será alambre y la pistola tendrá silenciador.
 
   
 
-## RESUMEN SALA 3:
-
-  
-
-Consta de 2 habitaciones (sala de espera, sala del juzgado) En un inicio ambas habitaciones están a oscuras. Sin embargo, la sala del juzgado (que es donde se aparece por primera vez) tiene una luz apuntando al cadáver en el estrado y una luz de emergencia encima de la puerta hacia la otra habitación. En la sala del juzgado también se puede oír un loro diciendo x frase.
-
-  
-
-El cadáver está atado al estrado y tiene tres huecos, los dos ojos y en el corazón.
-
-  
-
-PISTAS: Ballesta, flechas, ojos.
-
-  
-
-Para encender la luz se deberán arreglar los cables (puzzle). Se encuentran en la caja de electricidad en la sala de espera cerca de la puerta, iluminadas un poco por luz de emergencia.
-
-  
-
-Cuando se resuelve el puzzle la luz vuelve a ambas habitaciones. En la sala de espera aparecen los ojos de Lucy, una radio de policía tirada por el suelo y en una pared rastros como de mecanismos (taquillas). En la sala del juzgado se puede ver al loro, y una balanza en la mesa del juez. En una de los platos se encuentra el corazón de Lucy.
-
-  
-
-El loro dará pistas para que se pongan los ojos de Lucy en el otro plato de la balanza. Cuando se pongan, la balanza se equilibrará y se oirá la activación de un mecanismo. Este mecanismo serán las taquillas que aparecen en la sala de espera (donde estaban las marcas).
-
-  
-
-Para abrir la taquilla se necesitará un código alfanumérico? q te lo dará la radio en código morse. Puzzle de decodificación de código morse.
-
-Al resolverlo podrás poner el código en la taquilla y abrirla. Ahí se encontrará la ballesta.
-
-  
-  
-
-FALTA: Tercer puzzle para encontrar las flechas
 
 ## Resolución de un asesinato
 
@@ -779,112 +795,66 @@ Puzzle Órgano:
 
 Pista y Material para otro puzzle: Cuerda y gancho.
 
-Salida Secreta:    
-Tras pinchar en el espejo (anteriormente el mosaico), se abrirá la escena de la sala secreta que mostrará una rejilla que al pulsarla se abrirá (o no) indicando que es una posible salida.
-Una vez comprobado el estado de la ventana, se podrá responder a la pregunta de la sala: ¿Es el asesinato posible?
 
-
-En caso positivo habrá dos variantes:
-
-- La pala está ensangrentada, hay varilla y la cuerda es lo suficientemente resistente como para poder usarse para escalar
-    
-- La pala está ensangrentada y la salida subterránea está abierta, no hay varilla pero si cuerda resistente.    
-
-En caso negativo habrá una variante:
-
--La pala está ensangrentada, hay cuerda larga y hay varilla pero la cuerda es demasiado endeble y la salida subterránea está cerrada.
-  
 
 
 ### Sala 3
 
+Puzzle Caja de luz:
 
-Asesinato: Muerte por una de múltiples heridas externas (estrangulamiento, una puñalada limpia en el hombro y tiro a la cabeza) de la policía (Lucy).
+  
 
-Pruebas a encontrar: Pistola y balas, arma blanca, soga.
+-Concepto: Conectar los cables a sus correspondientes puertos.
 
-Esta sala consta de 2 habitaciones (sala de espera y  sala del juzgado) En un inicio ambas habitaciones están a oscuras. Sin embargo, la sala del juzgado (que es donde se aparece por primera vez) tiene una luz de emergencia encima de la puerta hacia la otra habitación. En la sala del juzgado también se puede oír un loro reproduciendo un sonido de un disparo en bucle.
+  
 
-El cadáver estará desplomado en el estrado del juzgado con las heridas anteriormente mencionadas, pero ni estas ni el mismo cadáver serán visibles en un inicio.
+-Funcionamiento del puzzle:
 
-Para encender la luz se deberán arreglar los cables (puzzle). Se encuentran en la caja de electricidad en la sala de espera cerca de la puerta, iluminadas un poco por luz de emergencia. Al resolver este puzzle, se activará una luz azul y se podrá sacar de detrás de los cables una pistola con o sin silenciador (pista).
+Tras conectar los cables a los diferentes puertos (1 cable por puerto) y darle a comprobar se iluminaran x luces depende de cuantos cables estén conectados correctamente.
 
-En la sala de espera ahora se podrá ver una serie de 4 taquillas y una mesa con una radio. De las 4 taquillas 2 de ellas serán no interactuables, una estará visiblemente dañada y se podrá abrir sin problema (tendrá un manual de código morse y una pluma dentro) y otra tendrá un candado circular (puzzle). Una vez pasemos a la siguiente fase (luz roja) (NO SE PUEDE HACER ESTO AÚN) la radio empezará a emitir la clave de la taquilla en código morse. Al abrir la taquilla se podrá recoger una cuerda : una soga o unos alambres (pista). 
+  
 
-Ahora que hay luz, al volver a la sala del juzgado se puede ver el cadáver (solo se aprecia la herida de bala en la cabeza) al loro, y una balanza en la mesa del juez. En una de los platos se encuentra el corazón de Lucy. Para pasar a la siguiente luz (roja), que revelará también las marcas de estrangulamiento, se deberá poner la pluma en la balanza (el corazón se hundirá).
+-Recompensa:
 
-Cuando se cambien las luces a rojo, se podrá ver un mensaje en la pared: “No confíes en tus ojos”. Con esta luz, se empezarán a ver múltiples números por las paredes de ambas salas que NO HACEN NADA. El loro empezará a ciclar en este momento entre el sonido de disparo y las letras: “S” “T” “O” “P”. (Estaba pensando que sonaran las letras como robóticas a lo minijuego de fnaf, no se estoy cansado, plot twist el loro es un robot). Esta palabra abrirá la caja fuerte (no una grande de un banco, una que tendría cualquiera por casa) con código de letras que se encontrará encima de una de las dos  6+tarimas (la que no tenga la balanza). Al abrir la caja se encontrará una linterna ultravioleta y  un arma blanca que podrá ser un cuchillo con filo liso o serrado (pista). 
+Pistola con o sin silenciador.
 
-Con la luz ultravioleta apuntada al cadáver se podrá encontrar la última herida (esta luz mostrará una mancha de sangre en el hombro del cadáver y al pulsar otra vez se verá la herida (un corte limpio). 
+  
 
-Si se apunta al loro con la lámpara ultravioleta, este explotará y dejará caer balas, reales o de fogueo (pista). Tras esto se activará la pregunta de la sala.
+Puzzle Candado circular:
 
-Las pruebas que se descubren con los puzzles tienen algunas variaciones. En caso de que la respuesta a la pregunta de la sala sea sí las pruebas serán de esta manera:
+  
 
-La pistola NO tendrá silenciador, las balas serán reales, el arma blanca será un cuchillo con filo liso y la cuerda será una soga.
+Concepto: 
 
-En caso negativo habrá dos variantes:
+Conseguir la combinación correcta rotando los anillos del candado.
+  
 
--El arma blanca será con filo serrado y las balas serán de fogueo.
+Funcionamiento del puzzle:
 
--La cuerda será alambre y la pistola tendrá silenciador.
+El candado cuenta con varios anillos que tienen varios números. Habrá que alinear los números 1954 para resolverlo. Para saber que combinación de números es habrá que descifrar el sonido de la radio en código morse.
+    
 
-## ideas de puzzles
+Recompensa:
 
-
-|                                                                                                                                                                                                                             |                                                                                                                                                                                                                             |                                                                                                                                                                                                                             |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXcTA104tu-Ru6DB2Z7K4w8R00UWhnjMtE0ncqBRSWF4lrHFONIpnKb80Z2LCMbGZ1F49iyDsi1QnyuOeVgeBFeR0zY3rF6nxWe_ux_Vy7PiMkAYS3EMK7NnGoQEGloRePqJ6SoIXw?key=J7nf_FWWHfuhd8vnjF8jXdc4) | ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdk_0aeg_LdOKLNQKmH0sx3HYyqN9vnPW5kro_dEirCEf-Gb3JYk9mXRqHcgwrA5ZxtTwmtFK8PF3k_FTITI8ApSpQ29znQUhPmUgRrWWqSEzwlRjqOn80STtgp3uzxCA2AJxW7WA?key=J7nf_FWWHfuhd8vnjF8jXdc4) | ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXegFi04tf9i9lJ4h-r5dmlsjSueOHa4qqDdmz2Z6ykPn5vefrXbnfpyImv0LhsHePtPzedJRYBS8i4JkB49nvwBRmjSvS2X_cPwZAwSAra47YPzpHku-sZf-YHx7Lu3wQfNy7UVbg?key=J7nf_FWWHfuhd8vnjF8jXdc4) |
-
+Soga o alambre.
 
   
   
 
-Puzzle Mosaico:
+Puzzle Caja Fuerte:
 
   
 
--Concepto: Colocar los trozos de imágenes de un mosaico (cuadrícula) en el orden correcto para formar una imagen, contando con un hueco vacío donde se podrá hacer el cambio de trozo. Solo se puede mover un trozo a un espacio vacío. Al completar el puzzle se fragmentará el mosaico revelando la recompensa y un órgano.
+-Concepto: Seleccionar en el orden correcto las letras de la palabra STOP.  
 
-  
-
--Funcionamiento del puzzle: Tenemos una cuadrícula 4x4 con trozos de una imagen desordenada, además tendremos un espacio vacío donde se podrá mover la pieza que esté al lado en horizontal o vertical, no en diagonal.
+-Funcionamiento del puzzle: Tenemos un panel con varias letras, al seleccionar una que sea correcta se sombreará. En caso de acertar una pero la siguiente no sea la esperada se reiniciara el juego.
 
   
 
 -Recompensa: 
 
-Pista: Pala
+Pista: linterna y arma blanca(cuchillo serrado o liso).
 
-Nuevo puzzle desbloqueado: Órgano.
-
-  
-  
-
-Puzzle Órgano:
-
-  
-
--Concepto: Tocar las notas correctas en el órgano, teniendo en cuenta la  partitura y el espejo. Al completar el puzzle se abrirá un compartimento dentro del órgano donde estarán las recompensas.
-
-  
-
--Funcionamiento del puzzle: Por un lado tenemos el teclado con las teclas del órgano, la partitura incompleta, un espejo que muestra una partitura invertida , completa y muestra el patrón con un tono arriba (cada nota está una posición más arriba). Encima del espejo se encuentra un recordatorio de las notas musicales (de DO a SÍ) explicando la traducción entre las notas y su posición en el pentagrama. El jugador deberá encontrar el patrón entre la primera parte de la partitura y la primera parte del reflejo en el espejo (teniendo en cuenta que la partitura está invertida). Después, el jugador tendrá que tocar en el teclado la continuación del resto de la partitura invertida siguiendo el patrón establecido. Una vez que el jugador haya tocado las dos partes faltantes correctamente el puzzle estará resuelto. Hasta que una parte de la partitura no esté resuelta no se pasará a la siguiente.
-
-  
-
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfa1RGzaiGtpXzgBkTRH2U49TyrIRQBZwabHMS2w8MN3bCvs8uqFjFG62bLu4e2nnrWMmC5WGt474QCH8G9pJoPf_zf6lm1S6F9WJ5TXw3s1Mzd2WbmOZzPDmF-UIX_61yXs5mCMg?key=J7nf_FWWHfuhd8vnjF8jXdc4)
-
-(Estado inicial del puzzle y solución, respectivamente)
-
--Recompensa:
-
-Pista y Material para otro puzzle: Cuerda y utensilio.
-
-  
-  
-
-  
 
 # Estética 
 

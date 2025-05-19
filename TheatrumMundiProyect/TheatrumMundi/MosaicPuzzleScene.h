@@ -20,7 +20,6 @@ private:
 	Vector2D originalPos; //Saves the original Pos of the square which is gonna move
 
 	void createSquares();
-	entity_t createBorder(const Vector2D& position, float Width, float height);
 
 protected:
 
