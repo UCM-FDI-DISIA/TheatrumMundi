@@ -11,6 +11,23 @@
   ],
 
   "images": [
+      {
+      "id": "Radio",
+      "file": "../resources/images/temporales/Room3/Radio.png"
+    },
+        { "id" : "balance", "file" : "../resources/images/temporales/balanza.png" },
+        {
+      "id": "clockShape",
+      "file": "../resources/images/clock_shape.png"
+    },
+     {
+      "id": "boa1",
+      "file": "../resources/images/boa1.png"
+    },
+    {
+      "id": "boa2",
+      "file": "../resources/images/boa2.png"
+    },
     {
       "id": "EmptyImage",
       "file": "../resources/images/Finales/ImagenVacia.png"
@@ -59,6 +76,10 @@
     { "id" : "1stQuestion", "file" : "../resources/images/Finales/1stQuestionText.png" },
     { "id" : "2ndQuestion", "file" : "../resources/images/Finales/2ndQuestionText.png" },
     { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
+    {
+      "id": "FondoSalaDeEsperaRojo",
+      "file": "../resources/images/temporales/Room3/SalaDeEsperaRojo.png"
+    },
     { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
        { "id" : "FeatherBackground", "file" : "../resources/images/temporales/FeatherBackground.png" },
    
