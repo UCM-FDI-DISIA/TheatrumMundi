@@ -96,8 +96,12 @@
       "file": "../resources/images/Finales/SalidaSecretaCerrada.png"
     },
     {
-      "id": "FondoVentana",
-      "file": "../resources/images/temporales/Room2/FondoVentana.png"
+      "id": "FondoVentanaCerrada",
+      "file": "../resources/images/Finales/FondoVentanaCerrada.png"
+    },
+    {
+      "id": "FondoVentanaAbierta",
+      "file": "../resources/images/Finales/FondoVentanaAbierta.png"
     },
     {
       "id": "NotaBasica",

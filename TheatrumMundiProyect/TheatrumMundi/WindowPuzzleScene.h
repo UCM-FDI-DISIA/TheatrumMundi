@@ -3,10 +3,9 @@
 class WindowPuzzleScene : public ScenePuzzleTemplate
 {
 private:
-	//Rope and OpenWindow
-	bool hasRope; //If the window has the rope
-	ecs::entity_t rope;
-	ecs::entity_t openWindow;
+	ecs::entity_t WindowBackGround;
+	bool isOpen = false;
+	int OpenCount = 0;
 public:
 	WindowPuzzleScene();
 	~WindowPuzzleScene();

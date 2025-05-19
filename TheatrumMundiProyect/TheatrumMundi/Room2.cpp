@@ -263,7 +263,7 @@ void Room2Scene::_setRoomEvents()
 		// WIP
 		Game::Instance()->getDataManager()->SetCharacterDead(Character::SOL);
 		Game::Instance()->getDataManager()->SetSceneCount(SceneCount::MIDDLEROOM3);
-		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))_loadimg3->getMngr()->setActive(_loadimg3, true);
+		if (!Game::Instance()->getDataManager()->GetCharacterState(KEISARA))_loadimg3->getMngr()->setActive(_loadimg3, true);
 		else _loadimg4->getMngr()->setActive(_loadimg4, true);
 		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 		std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
