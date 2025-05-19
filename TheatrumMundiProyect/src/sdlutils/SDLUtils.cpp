@@ -294,7 +294,7 @@ void SDLUtils::ClearMaps()
 	_sounds.clear();
 	_descriptions.clear();
 	_images.clear();
-	_fonts.clear();
+	
 }
 
 void SDLUtils::closeSDLExtensions() {
