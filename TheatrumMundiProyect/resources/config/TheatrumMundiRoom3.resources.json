@@ -365,6 +365,22 @@
     {
       "id": "MorseSoundLow",
       "file": "../resources/sound/sfx/morse_soundRoom3small.wav"
+    },
+    {
+      "id": "loading5",
+      "file": "../resources/images/Finales/Carga5.png"
+    },
+    {
+      "id": "loading6",
+      "file": "../resources/images/Finales/Carga6.png"
+    },
+    {
+      "id": "loading7",
+      "file": "../resources/images/Finales/Carga7.png"
+    },
+    {
+      "id": "loading8",
+      "file": "../resources/images/Finales/Carga8.png"
     }
   ],
 
