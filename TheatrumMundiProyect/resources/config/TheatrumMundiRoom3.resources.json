@@ -80,6 +80,10 @@
     { "id" : "1stQuestion", "file" : "../resources/images/Finales/1stQuestionText.png" },
     { "id" : "2ndQuestion", "file" : "../resources/images/Finales/2ndQuestionText.png" },
     { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
+        {
+      "id": "FondoJuzgadoRojo",
+      "file": "../resources/images/temporales/Room3/JuzgadoRojo.png"
+    },
       {
       "id": "FondoSalaDeEspera",
       "file": "../resources/images/temporales/Room3/SalaDeEspera.png"
