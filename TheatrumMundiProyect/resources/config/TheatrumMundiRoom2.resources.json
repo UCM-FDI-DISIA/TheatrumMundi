@@ -672,8 +672,12 @@
 
   "musics" : [
     {
-        "id": "sala1",
-        "file":  "../resources/sound/music/sala1.wav"
+      "id": "sala1",
+      "file": "../resources/sound/music/sala1.wav"
+    },
+    {
+      "id": "sala2,
+      "file": "../resources/sound/music/sala2.wav"
     }
   ]
 
