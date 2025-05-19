@@ -90,6 +90,7 @@ private:
 		ecs::entity_t logbtn = nullptr;
 		ecs::entity_t zoomCorpse = nullptr;
 		ecs::entity_t zoomMorseGuide = nullptr;
+		ecs::entity_t feather = nullptr;
 		ecs::entity_t quitButton = nullptr; //Reference to the zoomed Quit Button
 		
 		ecs::entity_t cablesPuzzle = nullptr; //Image of the cablesPuzzle

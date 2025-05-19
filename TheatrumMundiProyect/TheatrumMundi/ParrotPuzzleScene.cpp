@@ -99,18 +99,25 @@ void ParrotPuzzleScene::_setRoomBackground()
 void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 {
 	// BULLETS
+	int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
 	Vector2D bulletsPosition((sdlutils().width() - 150) / 2, (sdlutils().height() - 150) / 2);
-	auto bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "CajaFuerte", EntityFactory::RECTAREA, // TODO Imagen balas
+	entity_t bulletsEntity;
+	if(variant == 1)bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "balasF" , EntityFactory::RECTAREA, // TODO Imagen balas
 		bulletsPosition, Vector2D(0, 0), 150, 150, 0,
 		areaLayerManager,
 		EntityFactory::NODRAG,
 		ecs::grp::DEFAULT);
-	
+	else bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "balasR", EntityFactory::RECTAREA, // TODO Imagen balas
+		bulletsPosition, Vector2D(0, 0), 150, 150, 0,
+		areaLayerManager,
+		EntityFactory::NODRAG,
+		ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(bulletsEntity) // Collectable
 		->connect(ClickComponent::JUST_CLICKED, [&, this]() {
 			bulletsEntity->getMngr()->setActive(bulletsEntity, false);
 			Vector2D position = sr->GetInventory()->setPosition();
-			AddInvItem("guantes", sdlutils().Instance()->invDescriptions().at("CajaFuerte"), position, sr); // TODO Imagen balas
+			if (variant == 1)AddInvItem("balasF", sdlutils().Instance()->invDescriptions().at("BalasFalsas"), position, sr); // TODO Imagen balas
+			else AddInvItem("balasR", sdlutils().Instance()->invDescriptions().at("BalasReales"), position, sr);
 		});
 
 	// PARROT

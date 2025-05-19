@@ -41,7 +41,7 @@ void Box::init(SceneRoomTemplate* sr)
 			
 			room = sr;
 			//create the buttons
-
+			entityFactory->CreateImageEntity(entityManager, "FondoSalaDeEspera", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 			
 			//3,5,8,14
 
@@ -208,7 +208,45 @@ void Box::init(SceneRoomTemplate* sr)
 			//startDialogue("Puerta");
 
 #pragma endregion
+			int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
+			
+			flashlight = entityFactory->CreateInteractableEntity(entityManager, "Linterna", EntityFactory::RECTAREA,
+				Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
+				areaLayerManager,
+				EntityFactory::NODRAG,
+				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+			
+			ClickComponent* clk = entityManager->getComponent<ClickComponent>(flashlight);
+			clk->connect(ClickComponent::JUST_CLICKED, [this, variant, sr]() {
 
+				Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+				AddInvItem("Linterna", sdlutils().Instance()->invDescriptions().at("LuzVioleta"), position, sr);
+				flashlight->getMngr()->setActive(flashlight, false);
+
+				});
+			entityManager->setActive(flashlight, false);
+
+			if (variant == 1)knife = entityFactory->CreateInteractableEntity(entityManager, "CuchilloSerrado", EntityFactory::RECTAREA,
+				Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
+				areaLayerManager,
+				EntityFactory::NODRAG,
+				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+			else knife = entityFactory->CreateInteractableEntity(entityManager, "CuchilloLiso", EntityFactory::RECTAREA,
+				Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
+				areaLayerManager,
+				EntityFactory::NODRAG,
+				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+			clk = entityManager->getComponent<ClickComponent>(knife);
+			clk->connect(ClickComponent::JUST_CLICKED, [this, variant, sr]() {
+
+				Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+				if (variant == 1)AddInvItem("CuchilloSerrado", sdlutils().Instance()->invDescriptions().at("CuchilloDentado"), position, sr);
+				
+				else AddInvItem("CuchilloLiso", sdlutils().Instance()->invDescriptions().at("CuchilloFilo"), position, sr);
+				knife->getMngr()->setActive(knife, false);
+
+				});
+			entityManager->setActive(knife, false);
 		}
 		sr->GetInventory()->setFirstItem(0);
 		createInvEntities(sr);
@@ -281,5 +319,7 @@ void Box::pushButton(int i)
 void Box::Win()
 {
 	completed = true;
+	entityManager->setActive(flashlight, true);
+	entityManager->setActive(knife, true);
 	std::cout << "WIN" << std::endl;
 }

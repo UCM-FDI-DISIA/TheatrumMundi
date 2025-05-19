@@ -216,6 +216,12 @@ void Room3Scene::_setRoomEvents()
 		parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
 		entityManager->setActive(rmObjects.zoomMorseGuide, true);
 		entityManager->setActive(rmObjects.quitButton, true);
+		//feather
+		if (rmObjects.feather != nullptr) { 
+			entityManager->setActive(rmObjects.feather, true);
+			
+		}
+
 		_resetSounds();
 
 		};
@@ -541,6 +547,19 @@ void Room3Scene::_setInteractuables()
 	rmObjects.zoomMorseGuide = entityFactory->CreateImageEntity(entityManager, "MorseGuide", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 	entityManager->setActive(rmObjects.zoomMorseGuide, false);
 
+	//feather 
+	rmObjects.feather = entityFactory->CreateInteractableEntity(entityManager, "Pluma", EntityFactory::RECTAREA, Vector2D(1000, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	entityManager->getComponent<ClickComponent>(rmObjects.feather)->connect(ClickComponent::JUST_CLICKED, [this]() {
+		inv->addItem(new Hint("pluma", sdlutils().invDescriptions().at("pluma"), &sdlutils().images().at("Pluma")));
+		inv->hints.push_back(entityFactory->CreateInvEntity(entityManager, "Pluma", EntityFactory::RECTAREA, inv->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		createDescription(inv->hints.back(), inv->getItems().back());
+		if (inv->getActive()) inv->hints.back()->getMngr()->setActive(inv->hints.back(), true);
+		else inv->hints.back()->getMngr()->setActive(inv->hints.back(), false);
+		entityManager->setActive(rmObjects.feather, false);
+		rmObjects.feather = nullptr;
+		
+		});
+	entityManager->setActive(rmObjects.feather, false);
 	rmObjects.boxOfficeCircleLockP = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(-1000,200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.boxOfficeCircleLockP)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		

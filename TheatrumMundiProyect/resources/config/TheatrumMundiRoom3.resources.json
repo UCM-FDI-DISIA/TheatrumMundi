@@ -209,6 +209,46 @@
       "id": "TaquillaMoradaOscuro",
       "file": "../resources/images/temporales/Room3/Taquilla2Oscura.png"
     },
+     {
+      "id": "Linterna",
+      "file": "../resources/images/finales/linterna.png"
+    },
+    {
+      "id": "CuchilloLiso",
+      "file": "../resources/images/finales/liso.png"
+    },
+    {
+      "id": "CuchilloSerrado",
+      "file": "../resources/images/finales/serrado.png"
+    },
+    {
+      "id": "alambre",
+      "file": "../resources/images/finales/alambre.png"
+    },
+    {
+      "id": "pistolaSin",
+      "file": "../resources/images/finales/pistola.png"
+    },
+    {
+      "id": "pistolaCon",
+      "file": "../resources/images/finales/pistolaSil.png"
+    },
+    {
+      "id": "Pluma",
+      "file": "../resources/images/finales/pluma.png"
+    },
+    {
+      "id": "balasF",
+      "file": "../resources/images/finales/fogueo.png"
+    },
+    {
+      "id": "balasR",
+      "file": "../resources/images/finales/real.png"
+    },
+    {
+      "id": "soga",
+      "file": "../resources/images/finales/soga.png"
+    },
     {
       "id": "Balanza",
       "file": "../resources/images/temporales/Room3/balanza.png"
@@ -223,6 +263,10 @@
     },
     {
       "id": "CajaFuerteOscuro",
+      "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
+    },
+    {
+      "id": "FondoJuzgado",
       "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
     },
     {
