@@ -41,6 +41,20 @@ void Room2Scene::init()
 	isOpen = false;
 	finishallpuzzles = false;
 	stopAnimation = false;
+
+	//Load Images
+	_loadimg1 = entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg1->getMngr()->setActive(_loadimg1, false);
+
+	_loadimg2 = entityFactory->CreateImageEntity(entityManager, "loading2", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg2->getMngr()->setActive(_loadimg2, false);
+
+	_loadimg3 = entityFactory->CreateImageEntity(entityManager, "loading3", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg3->getMngr()->setActive(_loadimg3, false);
+
+	_loadimg4 = entityFactory->CreateImageEntity(entityManager, "loading4", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg4->getMngr()->setActive(_loadimg4, false);
+
 	_setRoomAudio();
 	_setGlobalFeatures();
 	_setRoomBackground();
@@ -158,9 +172,18 @@ void Room2Scene::_setRoomEvents()
 		rmObjects.rope->getMngr()->removeEntity(rmObjects.rope);
 		rmObjects.rope->getMngr()->setActive(rmObjects.rope, false);
 		// InventoryLogic
-		GetInventory()->addItem(new Hint("CuerdaLarga", "Ta", &sdlutils().images().at("CuerdaLarga")));
-		GetInventory()->hints.push_back(entityFactory->CreateInvEntity(entityManager, "CuerdaLarga", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
+		if (variant != 0) {
+			GetInventory()->addItem(new Hint("CuerdaGruesa", sdlutils().invDescriptions().at("CuerdaGruesa"), &sdlutils().images().at("CuerdaGruesa")));
+			GetInventory()->hints.push_back(entityFactory->CreateInvEntity(entityManager, "CuerdaGruesa", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+			GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		}
+		else {
+			GetInventory()->addItem(new Hint("CuerdaFina", sdlutils().invDescriptions().at("CuerdaFina"), &sdlutils().images().at("CuerdaFina")));
+			GetInventory()->hints.push_back(entityFactory->CreateInvEntity(entityManager, "CuerdaFina", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+			GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		}
+		createDescription(inv->hints.back(), inv->getItems().back());
 		};
 	roomEvent[WindowScene] = [this] {
 		HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
@@ -227,10 +250,25 @@ void Room2Scene::_setRoomEvents()
 		};
 	roomEvent[GoodEnd] = [this] {
 		// WIP
+		Game::Instance()->getDataManager()->SetSceneCount(SceneCount::MIDDLEROOM3);
+		if(Game::Instance()->getDataManager()->GetCharacterState(KEISARA))_loadimg1->getMngr()->setActive(_loadimg1, true);
+		else _loadimg2->getMngr()->setActive(_loadimg2, true);
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
+		std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
+		AudioManager::Instance().playSound(correctSound);
+		Game::Instance()->render();
 		Game::Instance()->getSceneManager()->popScene();
 		};
 	roomEvent[BadEnd] = [this] {
 		// WIP
+		Game::Instance()->getDataManager()->SetCharacterDead(Character::SOL);
+		Game::Instance()->getDataManager()->SetSceneCount(SceneCount::MIDDLEROOM3);
+		if (!Game::Instance()->getDataManager()->GetCharacterState(KEISARA))_loadimg3->getMngr()->setActive(_loadimg3, true);
+		else _loadimg4->getMngr()->setActive(_loadimg4, true);
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
+		std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
+		AudioManager::Instance().playSound(incorrectSound);
+		Game::Instance()->render();
 		Game::Instance()->getSceneManager()->popScene();
 		};
 #pragma endregion

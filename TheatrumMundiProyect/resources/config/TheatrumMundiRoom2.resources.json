@@ -96,8 +96,12 @@
       "file": "../resources/images/Finales/SalidaSecretaCerrada.png"
     },
     {
-      "id": "FondoVentana",
-      "file": "../resources/images/temporales/Room2/FondoVentana.png"
+      "id": "FondoVentanaCerrada",
+      "file": "../resources/images/Finales/FondoVentanaCerrada.png"
+    },
+    {
+      "id": "FondoVentanaAbierta",
+      "file": "../resources/images/Finales/FondoVentanaAbierta.png"
     },
     {
       "id": "NotaBasica",
@@ -553,6 +557,14 @@
     {
       "id": "fondoOrgano",
       "file": "../resources/images/Finales/fondoPuzzleMusical.jpg"
+    },
+    {
+      "id": "loading1",
+      "file": "../resources/images/Finales/Carga1.png"
+    },
+    {
+      "id": "loading2",
+      "file": "../resources/images/Finales/Carga2.png"
     },
     {
       "id": "loading3",

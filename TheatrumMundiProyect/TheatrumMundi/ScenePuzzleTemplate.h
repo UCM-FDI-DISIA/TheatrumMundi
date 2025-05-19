@@ -41,7 +41,7 @@ class ScenePuzzleTemplate: public SceneTemplate
 
 	std::list<std::string> invID; //Array of inventory object names
 
-	void createInvEntities(SceneRoomTemplate* sr); //Creates all the inventory items in this scene
+	void createInvEntities(SceneRoomTemplate* sr, bool remove = true); //Creates all the inventory items in this scene
 
 	void AddInvItem(const std::string& id, const std::string& description, const Vector2D& position, SceneRoomTemplate* sr); //Add a new item to the inventory
 

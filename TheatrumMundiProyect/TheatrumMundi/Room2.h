@@ -43,6 +43,10 @@ public:
 	void unload() override;
 private:
 
+	ecs::entity_t _loadimg1;
+	ecs::entity_t _loadimg2;
+	ecs::entity_t _loadimg3;
+	ecs::entity_t _loadimg4;
 	std::string _eventToRead;
 	bool isOpen; //Boolean which function is to permite player to enter the mausoleum or not (if the key is on the door or not)
 	bool stopAnimation = false;
