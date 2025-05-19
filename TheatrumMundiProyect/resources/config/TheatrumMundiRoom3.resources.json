@@ -11,6 +11,10 @@
   ],
 
   "images": [
+        {
+      "id": "bookComb1",
+      "file": "../resources/images/Finales/BookComb1.png"
+    },
       {
       "id": "Radio",
       "file": "../resources/images/temporales/Room3/Radio.png"
@@ -76,6 +80,14 @@
     { "id" : "1stQuestion", "file" : "../resources/images/Finales/1stQuestionText.png" },
     { "id" : "2ndQuestion", "file" : "../resources/images/Finales/2ndQuestionText.png" },
     { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
+      {
+      "id": "FondoSalaDeEspera",
+      "file": "../resources/images/temporales/Room3/SalaDeEspera.png"
+    },
+    {
+      "id": "bookComb0",
+      "file": "../resources/images/Finales/BookComb0.png"
+    },
     {
       "id": "FondoSalaDeEsperaRojo",
       "file": "../resources/images/temporales/Room3/SalaDeEsperaRojo.png"
