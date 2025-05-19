@@ -237,7 +237,8 @@ void MusicPuzzleScene::refresh()
                 {
                     if (!solved && Check())
                     {
-                        hook->getMngr()->setActive(hook, true);
+                        int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
+                        if(variant != 2) hook->getMngr()->setActive(hook, true);
                         //puzzle win
                         Win();
                         
