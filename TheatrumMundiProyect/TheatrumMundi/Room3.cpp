@@ -548,10 +548,10 @@ void Room3Scene::_setInteractuables()
 	entityManager->setActive(rmObjects.zoomMorseGuide, false);
 
 	//feather 
-	rmObjects.feather = entityFactory->CreateInteractableEntity(entityManager, "Pluma", EntityFactory::RECTAREA, Vector2D(1000, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	rmObjects.feather = entityFactory->CreateInteractableEntity(entityManager, "pluma", EntityFactory::RECTAREA, Vector2D(1000, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 	entityManager->getComponent<ClickComponent>(rmObjects.feather)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		inv->addItem(new Hint("pluma", sdlutils().invDescriptions().at("pluma"), &sdlutils().images().at("Pluma")));
-		inv->hints.push_back(entityFactory->CreateInvEntity(entityManager, "Pluma", EntityFactory::RECTAREA, inv->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		inv->addItem(new Hint("pluma", sdlutils().invDescriptions().at("pluma"), &sdlutils().images().at("pluma")));
+		inv->hints.push_back(entityFactory->CreateInvEntity(entityManager, "pluma", EntityFactory::RECTAREA, inv->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		createDescription(inv->hints.back(), inv->getItems().back());
 		if (inv->getActive()) inv->hints.back()->getMngr()->setActive(inv->hints.back(), true);
 		else inv->hints.back()->getMngr()->setActive(inv->hints.back(), false);

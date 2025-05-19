@@ -47,59 +47,21 @@
       "id": "B5",
       "file": "../resources/images/Finales/5.PNG"
     },
-    {
-      "id": "prueba",
-      "file": "../resources/images/socrates.png"
-    },
-    {
-      "id": "init",
-      "file": "../resources/images/start.jpg"
-    },
-    {
-      "id": "exit",
-      "file": "../resources/images/exit.png"
-    },
-    {
-      "id": "noPosible",
-      "file": "../resources/images/noPosible.png"
-    },
-    {
-      "id": "noResolve",
-      "file": "../resources/images/noPosible.png"
-    },
-    {
-      "id": "posible",
-      "file": "../resources/images/posible.png"
-    },
-    {
-      "id": "resolve",
-      "file": "../resources/images/resolve.png"
-    },
-    {
-      "id": "no",
-      "file": "../resources/images/Finales/noButton.png"
-    },
-    {
-      "id": "yes",
-      "file": "../resources/images/Finales/yesButton.png"
-    },
-    {
-      "id": "1stQuestion",
-      "file": "../resources/images/Finales/1stQuestionText.png"
-    },
-    {
-      "id": "2ndQuestion",
-      "file": "../resources/images/Finales/2ndQuestionText.png"
-    },
-    {
-      "id": "FondoNegro",
-      "file": "../resources/images/Finales/FondoNegro.png"
-    },
-    {
-      "id": "5.2",
-      "file": "../resources/images/Finales/5.2.png"
-    },
-
+    { "id" : "prueba", "file" : "../resources/images/socrates.png" },
+    { "id" : "init", "file" : "../resources/images/start.jpg" },
+    { "id" : "exit", "file" : "../resources/images/exit.png" },
+    { "id" : "noPosible", "file" : "../resources/images/noPosible.png" },
+    { "id" : "noResolve", "file" : "../resources/images/noPosible.png" },
+    { "id" : "posible", "file" : "../resources/images/posible.png" },
+    { "id" : "resolve", "file" : "../resources/images/resolve.png" },
+    { "id" : "no", "file" : "../resources/images/Finales/noButton.png" },
+    { "id" : "yes", "file" : "../resources/images/Finales/yesButton.png" },
+    { "id" : "1stQuestion", "file" : "../resources/images/Finales/1stQuestionText.png" },
+    { "id" : "2ndQuestion", "file" : "../resources/images/Finales/2ndQuestionText.png" },
+    { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
+    { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
+       { "id" : "FeatherBackground", "file" : "../resources/images/temporales/FeatherBackground.png" },
+   
     {
       "id": "incrementButton",
       "file": "../resources/images/IncrementButton.png"
@@ -234,7 +196,7 @@
       "file": "../resources/images/finales/pistolaSil.png"
     },
     {
-      "id": "Pluma",
+      "id": "pluma",
       "file": "../resources/images/finales/pluma.png"
     },
     {
