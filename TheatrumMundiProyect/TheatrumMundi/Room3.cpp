@@ -317,6 +317,7 @@ void Room3Scene::_setRoomBackground()
 	auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1160 - 1349, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 
 	auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
+	ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(ChangeRoom1));
 	ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(ChangeRoom2));
 	ChangeRoomScroll->setEndScrollCallback([this]() {scrolling = false; });
 
@@ -338,26 +339,33 @@ void Room3Scene::_setRoomBackground()
 
 #pragma region Scroll
 
-	entityManager->getComponent<ClickComponent>(ChangeRoom2)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		if (!rmObjects.backgroundScroll->isScrolling()) {
-			AudioManager::Instance().playSound(rmSounds.doorSound);
-			_resetSounds();
-			rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
-			scrolling = true;
-			parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
+	entityManager->getComponent<ClickComponent>(ChangeRoom1)
+		->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll, ChangeRoom2]()
+			{
+				if (!rmObjects.backgroundScroll->isScrolling()) {
+					//if (rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT)) {
+					auto trChangeRoom2 = entityManager->getComponent<Transform>(ChangeRoom2);
+					trChangeRoom2->setPos(Vector2D(1160 - 1349, 160));
+					rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
+					AudioManager::Instance().playSound(rmSounds.doorSound); //If you can scroll, scroll and play the door sound
+					scrolling = true;
+					//}
+				}
+			});
 
-		}
-		});
-
-	entityManager->getComponent<ClickComponent>(ChangeRoom1)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll]() {
-		if (!rmObjects.backgroundScroll->isScrolling()) {
-			AudioManager::Instance().playSound(rmSounds.doorSound);
-			_resetSounds();
-			rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
-			scrolling = true;
-			parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
-		}
-		});
+	entityManager->getComponent<ClickComponent>(ChangeRoom2)
+		->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom1]()
+			{
+				if (!rmObjects.backgroundScroll->isScrolling()) {
+					//if (rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT)) {
+					auto trChangeRoom1 = entityManager->getComponent<Transform>(ChangeRoom1);
+					trChangeRoom1->setPos(Vector2D(34 + 1349, 160));
+					rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
+					AudioManager::Instance().playSound(rmSounds.doorSound); //If you can scroll, scroll and play the door sound
+					scrolling = true;
+					//}
+				}
+			});
 #pragma endregion
 }
 
