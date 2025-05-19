@@ -115,7 +115,7 @@ void TombPuzzleScene::init(SceneRoomTemplate* sr)
 				entityManager->setActive(neckclace, false);
 			});
 		neckclace->getMngr()->setActive(neckclace, false);
-		shovel = entityFactory->CreateInteractableEntity(entityManager, "Pala", EntityFactory::RECTAREA, Vector2D(500, 300), Vector2D(0, 0), 120, 120, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		shovel = entityFactory->CreateInteractableEntity(entityManager, "Pala", EntityFactory::RECTAREA, Vector2D(800, 300), Vector2D(0, 0), 120 * 3, 120 * 3, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		entityManager->getComponent<ClickComponent>(shovel)->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
 				AddInvItem("Pala", sdlutils().invDescriptions().at("Pala"), room->GetInventory()->setPosition(), room);
