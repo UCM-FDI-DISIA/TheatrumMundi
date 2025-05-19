@@ -845,6 +845,51 @@
       { "Character": "Keisara", "Text": "No es que pueda ver mucho más." },
       { "Character": "Keisara", "Text": "Supongo que esa es la causa de la muerte." }
     ],
+    "CADAVER2_2P": [
+      { "Character": "Keisara", "Text": "¿Prefieres esta luz a la anterior?" },
+      { "Character": "Sol", "Text": "Muy graciosa." },
+      { "Character": "Sol", "Text": "Me duelen los ojos." },
+      { "Character": "Keisara", "Text": "Espera." },
+      { "Character": "Keisara", "Text": "¿Eso una marca de estrangulamiento?" },
+      { "Character": "Sol", "Text": "¿Te refieres a la línea de moratones\n en el cuello?" },
+      { "Character": "Sol", "Text": "¿Puede ser?" },
+      { "Character": "Sol", "Text": "Tendría sentido." },
+      { "Character": "Keisara", "Text": "No hay sangre, así que no \nhay muchas más opciones." }
+    ],
+    "CADAVER2_1PS": [
+      { "Character": "Sol", "Text": "Dios mío, esta luz es aún peor." },
+      { "Character": "Sol", "Text": "Me duelen los ojos." },
+      { "Character": "Sol", "Text": "..." },
+      { "Character": "Sol", "Text": "Parece que hay más heridas,\n pero no hay sangre." },
+      { "Character": "Sol", "Text": "Es en el cuello, así que...¿estrangulamiento?" }
+    ],
+    "CADAVER2_1PK": [
+      { "Character": "Keisara", "Text": "Esta luz muestra más marcas en el cuerpo." },
+      { "Character": "Keisara", "Text": "Parecen marcas de estrangulamiento." },
+      { "Character": "Keisara", "Text": "¿Qué puede haberlas causado?" },
+      { "Character": "Keisara", "Text": "No hay sangre, así que supongo que \nno se ha cortado la piel." },
+      { "Character": "Keisara", "Text": "Creo que no voy a volver a leer \nnovelas policiacas después de esto." }
+    ],
+    "CADAVER3_2P": [
+      { "Character": "Keisara", "Text": "Mira Sol, hay más sangre." },
+      { "Character": "Sol", "Text": "¿Así que otra herida en el hombro?" },
+      { "Character": "Sol", "Text": "Esto es mucho más brutal que \ntu cadáver Kei." },
+      { "Character": "Keisara", "Text": "tú por lo menos solo tenías\n un golpe en la cabeza." },
+      { "Character": "Sol", "Text": "Solo." },
+      { "Character": "Keisara", "Text": "Deberíamos mirar más de cerca." },
+      { "Character": "Sol", "Text": "Pues te encargas tú, yo estoy a\n punto de vomitar." }
+    ],
+    "CADAVER3_1PS": [
+      { "Character": "Sol", "Text": "¿Enserio hay más sangre?" },
+      { "Character": "Sol", "Text": "Guau, se ha pasado esta vez." },
+      { "Character": "Sol", "Text": "Supongo que tendré que mirar \nla herida más de cerca." },
+      { "Character": "Sol", "Text": "Voy a vomitar." }
+    ],
+    "CADAVER3_1PK": [
+      { "Character": "Keisara", "Text": "Así que más sangre en la zona del hombro." },
+      { "Character": "Keisara", "Text": "Supongo que habrá otra herida ahí." },
+      { "Character": "Keisara", "Text": "Neceito mirarla más de cerca\n para ver qué es." }
+    ],
     "CABLES_2P": [
       { "Character": "Sol", "Text": "Es lo único que se ve en toda la sala." },
       { "Character": "Sol", "Text": "Espera..." },
