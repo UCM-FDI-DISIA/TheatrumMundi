@@ -197,7 +197,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 			{
 				Image* objectImg = ent->getMngr()->getComponent<Image>(ent);
 																							// TODO Torch final image
-				if (objectImg != nullptr && objectImg->GetTexture() == &sdlutils().images().at("Linterna")) // Torch enters
+				if (objectImg != nullptr && objectImg->GetTexture() == &sdlutils().images().at("Linterna") && !(parrotStateCom->getState() == ParrotState::DEATH)) // Torch enters
 					if (parrotStateCom->getState() == Room3Scene::Phase::LIGHTS_RED)
 					{
 						// Change parrot image to exploded parrot
@@ -300,3 +300,16 @@ void ParrotPuzzleScene::_setUI()
 	dialogueManager->setScene(this);
 
 }
+
+void ParrotPuzzleScene::Win()
+{
+	room->resolvedPuzzle(3);
+}
+
+void ParrotPuzzleScene::ResolveScene()
+{
+	Win();
+}
+
+
+

@@ -58,7 +58,7 @@ void Room3Scene::resolvedPuzzle(int i)
 		if (i == 0)  auxevent = BalanceSceneRsv;
 		else if (i == 1)  auxevent = WiresSceneRsv;
 		else if (i == 2)  auxevent = CircleLockSceneRsv;
-		//else if (i == 3)  auxevent = MosaicPuzzleSceneRsv;
+		else if (i == 3)  auxevent = ParrotSceneRsv;
 		//else if (i == 4)  auxevent = OrganPuzzleSceneRsv;
 		roomEvent[auxevent]();
 		bool aux = true;
@@ -210,7 +210,7 @@ void Room3Scene::_setRoomEvents()
 		Game::Instance()->getSceneManager()->loadScene(PARROT_PUZZLE, this);
 		};
 	roomEvent[ParrotSceneRsv] = [this] {
-
+			roomEvent[ResolveCase]();
 		};
 	roomEvent[ZoomMorseGuide] = [this] {
 		parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
@@ -232,38 +232,38 @@ void Room3Scene::_setRoomEvents()
 		entityManager->setActive(rmObjects.zoomRadio, true);
 		entityManager->setActive(rmObjects.quitButton, true);
 		};
-	//roomEvent[ResolveCase] = [this] {
-	//	//IMPORTANT assign dialogue
-	//	startDialogue("SalaFinal2");
-	//	roomEvent[ResolveButtons]();
-	//	// cahnge image every 1 sec
-	//	SDL_AddTimer(1000, [](Uint32, void* param) -> Uint32 {
-	//		auto* self = static_cast<decltype(this)>(param);
-	//		if (!self) return 0;
-	//
-	//		// if stopped animation change to normal botton
-	//		if (self->stopAnimation) {
-	//			Image* img = self->entityManager->getComponent<Image>(self->rmObjects.readyToResolveBotton);
-	//			if (img) {
-	//				img->setTexture(&sdlutils().images().at("B5"));
-	//			}
-	//			return 0;  // stop timer
-	//		}
-	//
-	//		// alternate between images
-	//		static bool toggle = false;
-	//		toggle = !toggle;
-	//		const std::string& textureId = toggle ? "5.2" : "B5";
-	//
-	//		// chnage botton texture
-	//		if (auto* img = self->entityManager->getComponent<Image>(self->rmObjects.readyToResolveBotton)) {
-	//			img->setTexture(&sdlutils().images().at(textureId));
-	//		}
-	//
-	//		// call timer again
-	//		return 1000;
-	//		}, this);
-	//	};
+	roomEvent[ResolveCase] = [this] {
+		//IMPORTANT assign dialogue
+		startDialogue("SalaFinal2");
+		roomEvent[ResolveButtons]();
+		// cahnge image every 1 sec
+		SDL_AddTimer(1000, [](Uint32, void* param) -> Uint32 {
+			auto* self = static_cast<decltype(this)>(param);
+			if (!self) return 0;
+	
+			// if stopped animation change to normal botton
+			if (self->stopAnimation) {
+				Image* img = self->entityManager->getComponent<Image>(self->rmObjects.readyToResolveBotton);
+				if (img) {
+					img->setTexture(&sdlutils().images().at("B5"));
+				}
+				return 0;  // stop timer
+			}
+	
+			// alternate between images
+			static bool toggle = false;
+			toggle = !toggle;
+			const std::string& textureId = toggle ? "5.2" : "B5";
+	
+			// chnage botton texture
+			if (auto* img = self->entityManager->getComponent<Image>(self->rmObjects.readyToResolveBotton)) {
+				img->setTexture(&sdlutils().images().at(textureId));
+			}
+	
+			// call timer again
+			return 1000;
+			}, this);
+		};
 	roomEvent[ResolveButtons] = [this] {
 		entityManager->setActive(rmObjects.readyToResolveBotton, true);
 		};
