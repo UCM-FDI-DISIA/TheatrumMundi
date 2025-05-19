@@ -38,6 +38,10 @@ void DragPuzzleScene::init(SceneRoomTemplate* sr)
         AudioManager& a = AudioManager::Instance();
         std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
         a.setVolume(buttonSound, 0.2);
+        
+        //background
+        entityFactory->CreateImageEntity(entityManager, "fondoXO", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+
         std::list<Area2D*> auxlist;
         //Map tiles
         bool wallMat[8][9] = {
@@ -163,7 +167,7 @@ void DragPuzzleScene::init(SceneRoomTemplate* sr)
         Transform* _ftr = entityManager->getComponent<Transform>(_f);
         Transform* _triggerobjtr = entityManager->getComponent<Transform>(_triggerObj);
         //Reset Btn
-        auto _reset = entityFactory->CreateInteractableEntity(entityManager, "Hanni", EntityFactory::RECTAREA, posMat[0][0], Vector2D(0, 0), auxtiledsize.getX(), auxtiledsize.getY(), 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+        auto _reset = entityFactory->CreateInteractableEntity(entityManager, "resetMatriz", EntityFactory::RECTAREA, posMat[0][0], Vector2D(0, 0), auxtiledsize.getX(), auxtiledsize.getY(), 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
         entityManager->getComponent<ClickComponent>(_reset)->connect(ClickComponent::JUST_CLICKED, [this, _atr, _btr, _ctr, _dtr, _etr, _ftr, _triggerobjtr]() {
             if (!solved) {
                 _atr->setPosPure(posMat[5][2]);

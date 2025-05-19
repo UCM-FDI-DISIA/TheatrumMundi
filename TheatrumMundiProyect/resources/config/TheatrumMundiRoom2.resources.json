@@ -491,6 +491,10 @@
       "file": "../resources/images/Finales/oButton.png"
     },
     {
+      "id": "resetMatriz",
+      "file": "../resources/images/temporales/resetMatriz.png"
+    },
+    {
       "id": "piezaL1",
       "file": "../resources/images/temporales/piezadeL1.png"
     },
