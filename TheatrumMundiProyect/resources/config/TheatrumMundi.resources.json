@@ -565,6 +565,14 @@
       "id": "piezade2",
       "file": "../resources/images/Finales/piezade2.png"
     },
+     {
+      "id": "salonpuerta",
+      "file": "../resources/images/Finales/salonpuerta.PNG"
+    },
+    {
+      "id": "estudiopuerta",
+      "file": "../resources/images/Finales/estudiopuerta.PNG"
+    },
     {
       "id": "piezade3",
       "file": "../resources/images/Finales/piezade3.png"

@@ -24,6 +24,14 @@
       "file": "../resources/images/Finales/Carga2.png"
     },
     {
+      "id": "salonpuerta",
+      "file": "../resources/images/Finales/Reloj.PNG"
+    },
+    {
+      "id": "estudiopuerta",
+      "file": "../resources/images/Finales/estudiopuerta.PNG"
+    },
+    {
       "id": "Clock",
       "file": "../resources/images/Finales/Reloj.PNG"
     },

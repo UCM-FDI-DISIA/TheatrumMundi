@@ -80,22 +80,6 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 	auto heart = entityFactory->CreateImageEntity(entityManager, "heart", Vector2D(250, 100), Vector2D(0, 0), 460, 280, 0, ecs::grp::DEFAULT);
 
 
-		auto featherReward = entityFactory->CreateInteractableEntity( // featherReawrd entity
-			entityManager, "pluma", EntityFactory::RECTAREA,
-			Vector2D(400, 300), Vector2D(), 460, 280, 0,
-			areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);
-
-		entityManager->getComponent<ClickComponent>(featherReward)->connect(ClickComponent::JUST_CLICKED, [this, featherReward, sr]() {
-			featherReward->getMngr()->setActive(featherReward, false);
-			Vector2D position = sr->GetInventory()->setPosition();
-			AddInvItem("pluma", sdlutils().invDescriptions().at("pluma"), position, sr);
-			});
-
-		feather = entityFactory->CreateInteractableEntity( // feather entity
-			entityManager, "pluma", EntityFactory::RECTAREA,
-			Vector2D(400, 300), Vector2D(), 460, 280, 0,
-			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		if (!_hasFeather) feather->getMngr()->setActive(feather, false);
 
 		balanceArea->getMngr()->getComponent<TriggerComponent>(balanceArea)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
