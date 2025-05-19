@@ -154,7 +154,7 @@ void Room2Scene::_setRoomEvents()
 		rmObjects.zoomOrgan->getMngr()->setActive(rmObjects.zoomOrgan, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);
 		rmObjects.organ->getMngr()->setActive(rmObjects.organ, true);
-		rmObjects.window->getMngr()->setActive(rmObjects.window, false);
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 		if (rmObjects.rope != nullptr) rmObjects.rope->getMngr()->setActive(rmObjects.rope, true);
 		};
 	roomEvent[Rope] = [this] {
@@ -216,6 +216,7 @@ void Room2Scene::_setRoomEvents()
 		}
 		rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 		};
 	roomEvent[ResolveCase] = [this] {
 		//IMPORTANT assign dialogue
