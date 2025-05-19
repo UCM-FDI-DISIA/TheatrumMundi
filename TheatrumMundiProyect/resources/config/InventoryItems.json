@@ -13,12 +13,12 @@
     { "id" : "minutero", "text" : "La manecilla de los minutos de un reloj."},
 
     
-    { "id" : "Pala", "text" :"Insertar Descripcion"},
-    { "id" : "Llave", "text" : "Insertar Descripcion"},
-    { "id" : "Colgante", "text" : "Insertar Descripcion"},
-    { "id" : "Varilla", "text" : "Insertar Descripcion"},
-    { "id" : "CuerdaGruesa", "text" : "Insertar Descripcion"},
-    { "id" : "CuerdaFina", "text" : "Insertar Descripcion"},
+    { "id" : "Pala", "text" :"Una vieja pala. Tiene restos de sangre."},
+    { "id" : "Llave", "text" : "Una pesada llave de hierro con forma de clave de sol."},
+    { "id" : "Colgante", "text" : "Un colgante que acaba en un rubí resplandeciente."},
+    { "id" : "Varilla", "text" : "Una varilla para abrir ventanas altas."},
+    { "id" : "CuerdaGruesa", "text" : "Una cuerda gruesa, parece resistente."},
+    { "id" : "CuerdaFina", "text" : "Una cuerda muy endeble. Parece que se rompe solo con mirarla."},
     
     { "id" : "LuzVioleta", "text" :"Una linterna de luz\n ultravioleta."},
     { "id" : "BalasFalsas", "text" :"Parecen reales pero\n estan huecas."},
