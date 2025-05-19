@@ -31,17 +31,7 @@ void MosaicPuzzleScene::createSquares()
 		
 	}
 }
-/// <summary>
-/// Create one of the MosaicBorder
-/// </summary>
-/// <param name="position"></param>
-/// <param name="rot"></param>
-/// <returns></returns>
-entity_t MosaicPuzzleScene::createBorder(const Vector2D& position, float width, float height)
-{
-	entity_t newBorder = entityFactory->CreateImageEntity(entityManager,"B1", position, Vector2D(0, 0), width, height, 0,ecs::grp::DEFAULT);
-	return newBorder;
-}
+
 MosaicPuzzleScene::MosaicPuzzleScene()
 {
 	//Assignation of the possitions 
@@ -185,6 +175,9 @@ void MosaicPuzzleScene::MoveSquare()
 					self->squareMoving = false;
 					self->square->setPosPure(self->freePos);
 					self->freePos.set(self->originalPos);
+					if (self->Check()) {
+						self->Win();
+					}
 					return 0;  // stop timer
 				}
 
@@ -212,6 +205,9 @@ void MosaicPuzzleScene::MoveSquare()
 					self->squareMoving = false;
 					self->square->setPosPure(self->freePos);
 					self->freePos.set(self->originalPos);
+					if (self->Check()) {
+						self->Win();
+					}
 					return 0;  // stop timer
 				}
 
@@ -246,6 +242,9 @@ void MosaicPuzzleScene::MoveSquare()
 					self->squareMoving = false;
 					self->square->setPosPure(self->freePos);
 					self->freePos.set(self->originalPos);
+					if (self->Check()) {
+						self->Win();
+					}
 					return 0;  // stop timer
 				}
 
@@ -274,6 +273,9 @@ void MosaicPuzzleScene::MoveSquare()
 					self->squareMoving = false;
 					self->square->setPosPure(self->freePos);
 					self->freePos.set(self->originalPos);
+					if (self->Check()) {
+						self->Win();
+					}
 					return 0;  // stop timer
 				}
 
@@ -311,7 +313,7 @@ bool MosaicPuzzleScene::Check()
 	bool win = true;
 	while (win && index < TOTALSQUARES) {
 		auto transform = squares[index]->getMngr()->getComponent<Transform>(squares[index])->getPos();
-		if (positions[index].getX() != transform.getX() && positions[index].getY() != transform.getY())  { //if the positions aren't the same return false
+		if (positions[index].getX() != transform.getX() || positions[index].getY() != transform.getY())  { //if the positions aren't the same return false
 			win = false;
 		}
 		++index;
