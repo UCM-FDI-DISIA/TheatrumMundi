@@ -546,11 +546,11 @@ void Room2Scene::_setInteractuables()
 
 	int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
 	if (variant != 0) {
-		rmObjects.rope = entityFactory->CreateInteractableEntity(entityManager, "CuerdaGruesa", EntityFactory::RECTAREA, Vector2D(200, 350), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		rmObjects.rope = entityFactory->CreateInteractableEntity(entityManager, "CuerdaGruesa", EntityFactory::RECTAREA, Vector2D(250, 500), Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 		
 	}
 	else {
-		rmObjects.rope = entityFactory->CreateInteractableEntity(entityManager, "CuerdaFina", EntityFactory::RECTAREA, Vector2D(200, 350), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		rmObjects.rope = entityFactory->CreateInteractableEntity(entityManager, "CuerdaFina", EntityFactory::RECTAREA, Vector2D(250, 500), Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 	}
 	entityManager->getComponent<ClickComponent>(rmObjects.rope)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[Rope]();
