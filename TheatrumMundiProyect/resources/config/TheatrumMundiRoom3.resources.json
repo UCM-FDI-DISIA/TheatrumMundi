@@ -60,6 +60,7 @@
     { "id" : "2ndQuestion", "file" : "../resources/images/Finales/2ndQuestionText.png" },
     { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
     { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
+       { "id" : "FeatherBackground", "file" : "../resources/images/temporales/FeatherBackground.png" },
    
     {
       "id": "incrementButton",
@@ -89,7 +90,7 @@
       "id": "Title",
       "file": "../resources/images/TemporalTitleImage.png"
     },
-    
+
     {
       "id": "ExitToMenu",
       "file": "../resources/images/Finales/RectangleExitToMenuButton.png"
@@ -170,6 +171,46 @@
       "id": "TaquillaMoradaOscuro",
       "file": "../resources/images/temporales/Room3/Taquilla2Oscura.png"
     },
+     {
+      "id": "Linterna",
+      "file": "../resources/images/finales/linterna.png"
+    },
+    {
+      "id": "CuchilloLiso",
+      "file": "../resources/images/finales/liso.png"
+    },
+    {
+      "id": "CuchilloSerrado",
+      "file": "../resources/images/finales/serrado.png"
+    },
+    {
+      "id": "alambre",
+      "file": "../resources/images/finales/alambre.png"
+    },
+    {
+      "id": "pistolaSin",
+      "file": "../resources/images/finales/pistola.png"
+    },
+    {
+      "id": "pistolaCon",
+      "file": "../resources/images/finales/pistolaSil.png"
+    },
+    {
+      "id": "pluma",
+      "file": "../resources/images/finales/pluma.png"
+    },
+    {
+      "id": "balasF",
+      "file": "../resources/images/finales/fogueo.png"
+    },
+    {
+      "id": "balasR",
+      "file": "../resources/images/finales/real.png"
+    },
+    {
+      "id": "soga",
+      "file": "../resources/images/finales/soga.png"
+    },
     {
       "id": "Balanza",
       "file": "../resources/images/temporales/Room3/balanza.png"
@@ -185,8 +226,16 @@
     {
       "id": "CajaFuerteOscuro",
       "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
+    },
+    {
+      "id": "FondoJuzgado",
+      "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
+    },
+    {
+      "id": "MorseGuide",
+      "file": "../resources/images/temporales/Room3/morseGuia.jpg"
     }
-     ],
+  ],
 
   "messages": [
     {
@@ -224,10 +273,10 @@
       "id": "cuerda",
       "file": "../resources/sound/sfx/cuerda.wav"
     },
-{
-          "id": "NextDialogue",
-          "file": "../resources/sound/sfx/NextDialogue.wav"
-        },
+    {
+      "id": "NextDialogue",
+      "file": "../resources/sound/sfx/NextDialogue.wav"
+    },
     {
       "id": "CogerCosa",
       "file": "../resources/sound/sfx/CogerCosa.wav"
@@ -244,6 +293,38 @@
     {
       "id": "incorrecto",
       "file": "../resources/sound/sfx/incorrecto.wav"
+    },
+    {
+      "id": "DoSound",
+      "file": "../resources/sound/sfx/Do.wav"
+    },
+    {
+      "id": "ReSound",
+      "file": "../resources/sound/sfx/Re.wav"
+    },
+    {
+      "id": "MiSound",
+      "file": "../resources/sound/sfx/Mi.wav"
+    },
+    {
+      "id": "FaSound",
+      "file": "../resources/sound/sfx/Fa.wav"
+    },
+    {
+      "id": "SolSound",
+      "file": "../resources/sound/sfx/Sol.wav"
+    },
+    {
+      "id": "LaSound",
+      "file": "../resources/sound/sfx/La.wav"
+    },
+    {
+      "id": "SiSound",
+      "file": "../resources/sound/sfx/Si.wav"
+    },
+    {
+      "id": "shootShound",
+      "file": "../resources/sound/sfx/shoot_soundRoom3.wav"
     },
     {
       "id": "sSound",
@@ -264,6 +345,42 @@
     {
       "id": "MorseSound",
       "file": "../resources/sound/sfx/morse_soundRoom3.wav"
+    },
+    {
+      "id": "sSoundLow",
+      "file": "../resources/sound/sfx/s_soundRoom3small.wav"
+    },
+    {
+      "id": "tSoundLow",
+      "file": "../resources/sound/sfx/t_soundRoom3small.wav"
+    },
+    {
+      "id": "oSoundLow",
+      "file": "../resources/sound/sfx/o_soundRoom3small.wav"
+    },
+    {
+      "id": "pSoundLow",
+      "file": "../resources/sound/sfx/p_soundRoom3small.wav"
+    },
+    {
+      "id": "MorseSoundLow",
+      "file": "../resources/sound/sfx/morse_soundRoom3small.wav"
+    },
+    {
+      "id": "loading5",
+      "file": "../resources/images/Finales/Carga5.png"
+    },
+    {
+      "id": "loading6",
+      "file": "../resources/images/Finales/Carga6.png"
+    },
+    {
+      "id": "loading7",
+      "file": "../resources/images/Finales/Carga7.png"
+    },
+    {
+      "id": "loading8",
+      "file": "../resources/images/Finales/Carga8.png"
     }
   ],
 

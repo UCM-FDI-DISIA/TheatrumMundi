@@ -41,7 +41,7 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
         std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
         a.setVolume(buttonSound, 0.2);
        
-
+        entityFactory->CreateImageEntity(entityManager, "FondoSalaDeEspera", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 
 
         //strongBox door
@@ -122,43 +122,32 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
         startDialogue("PuzzleLibros");
         
         //Puzzle rewards
-        //feather
-        ecs::entity_t rewardFeather = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA,
+        //Wire
+        int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
+        ecs::entity_t rewardWire;
+        if(variant==2 )rewardWire = entityFactory->CreateInteractableEntity(entityManager, "alambre", EntityFactory::RECTAREA,
             Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
             areaLayerManager,
             EntityFactory::NODRAG,
             ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
-        int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
-        ClickComponent* clk = entityManager->getComponent<ClickComponent>(rewardFeather);
-        clk->connect(ClickComponent::JUST_CLICKED, [this, rewardFeather, variant, sr]() {
-
-            Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-            if (variant == 0)AddInvItem("frascoV2", sdlutils().Instance()->invDescriptions().at("frascoV2"), position, sr);
-            else if (variant == 1)AddInvItem("frascoV2", sdlutils().Instance()->invDescriptions().at("frascoV1-1"), position, sr);
-            else if (variant == 2)AddInvItem("frascoV1", sdlutils().Instance()->invDescriptions().at("frascoV1"), position, sr);
-            rewardFeather->getMngr()->setActive(rewardFeather, false);
-
-            });
-        rewardEntities.push_back(rewardFeather);
-        entityManager->setActive(rewardFeather, false);
-        //morse book
-        ecs::entity_t rewardMorse = entityFactory->CreateInteractableEntity(entityManager, "B5", EntityFactory::RECTAREA,
-            Vector2D(660, 630), Vector2D(0, 0), 110, 110, 0,
+        else rewardWire = entityFactory->CreateInteractableEntity(entityManager, "soga", EntityFactory::RECTAREA,
+            Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
             areaLayerManager,
             EntityFactory::NODRAG,
             ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
-        clk = entityManager->getComponent<ClickComponent>(rewardMorse);
-        clk->connect(ClickComponent::JUST_CLICKED, [this, rewardMorse, variant, sr]() {
+        ClickComponent* clk = entityManager->getComponent<ClickComponent>(rewardWire);
+        clk->connect(ClickComponent::JUST_CLICKED, [this, rewardWire, variant, sr]() {
 
             Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
-            if (variant == 0)AddInvItem("frascoV2", sdlutils().Instance()->invDescriptions().at("frascoV2"), position, sr);
-            else if (variant == 1)AddInvItem("frascoV2", sdlutils().Instance()->invDescriptions().at("frascoV1-1"), position, sr);
-            else if (variant == 2)AddInvItem("frascoV1", sdlutils().Instance()->invDescriptions().at("frascoV1"), position, sr);
-            rewardMorse->getMngr()->setActive(rewardMorse, false);
+            if (variant == 0)AddInvItem("soga", sdlutils().Instance()->invDescriptions().at("Soga"), position, sr);
+            else if (variant == 1)AddInvItem("soga", sdlutils().Instance()->invDescriptions().at("Soga"), position, sr);
+            else if (variant == 2)AddInvItem("alambre", sdlutils().Instance()->invDescriptions().at("Alambre"), position, sr);
+            rewardWire->getMngr()->setActive(rewardWire, false);
 
             });
-        rewardEntities.push_back(rewardMorse);
-        entityManager->setActive(rewardMorse, false);
+        rewardEntities.push_back(rewardWire);
+        entityManager->setActive(rewardWire, false);
+       
 
     }
    // createInvEntities(sr);

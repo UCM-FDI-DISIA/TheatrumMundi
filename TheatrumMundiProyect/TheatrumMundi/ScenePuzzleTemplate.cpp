@@ -168,7 +168,7 @@ void ScenePuzzleTemplate::createInventoryUI()
 /// For all the Inventory itmes in the SceneRoomTemplate, we created a new Entity in the puzzle Scenes
 /// </summary>
 /// <param name="sr"></param> --> Referebce to thee SceneRoomTemplate
-void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
+void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr, bool remove)
 {
 	//REMOVE INVALID ENTITIES
 	compareInv(sr);
@@ -201,7 +201,7 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 				});
 
 			//if you drop the item, compares if it was drop in or out tge cloack
-			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this, sr, a, it]() {
+			it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_RELEASED, [this, sr, a, it,remove]() {
 				//if the item is invalid or the player drop it at an invalid position return the object to the origianl position
 				if (!placeHand) it->getMngr()->getComponent<Transform>(it)->setPosPure(getOriginalPos());
 				//in other case remove the item from this inventory and the inventory of Room1
@@ -210,7 +210,8 @@ void ScenePuzzleTemplate::createInvEntities(SceneRoomTemplate* sr)
 					if (isItemHand(a->getID())) {
 
 						//remove the object and pos from the inventory
-						sr->GetInventory()->removeItem(a->getID(), invObjects,invID);				
+						if(remove)sr->GetInventory()->removeItem(a->getID(), invObjects,invID);	
+						else  it->getMngr()->getComponent<Transform>(it)->setPosPure(getOriginalPos());
 					}
 					else it->getMngr()->getComponent<Transform>(it)->setPosPure(getOriginalPos());
 				}
@@ -292,9 +293,9 @@ void ScenePuzzleTemplate::AddInvItem(const std::string& id, const std::string& d
 			else {
 				//Add the hand to the cloack
 				if (isItemHand(id)) {
-
 					//remove the object from the inventory
-					sr->GetInventory()->removeItem(id, invObjects, invID);
+					if (remove)sr->GetInventory()->removeItem(id, invObjects, invID);
+					else  it->getMngr()->getComponent<Transform>(it)->setPosPure(getOriginalPos());
 				}
 				else it->getMngr()->getComponent<Transform>(it)->setPosPure(getOriginalPos());
 			}

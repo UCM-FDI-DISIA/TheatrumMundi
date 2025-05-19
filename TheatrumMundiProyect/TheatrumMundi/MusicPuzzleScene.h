@@ -32,19 +32,20 @@ private:
 		SI
 	};
 
-	std::vector<Notes> _correctComb1 = { DO, RE, MI}; //correct phase combination
-	std::vector<Notes> _correctComb2 = { DO, RE, MI, FA, SOL };; //correct phase combination
-	std::vector<Notes> _correctComb3 = { DO, RE, MI, FA, SOL, LA, SI };; //correct phase combination
+	std::vector<Notes> _correctComb1 = { SOL, LA, FA}; //correct phase combination
+	std::vector<Notes> _correctComb2 = { LA, SI, DO, SI, LA };; //correct phase combination
+	std::vector<Notes> _correctComb3 = { LA, FA, LA, FA, LA, FA, SOL };; //correct phase combination
 
 	std::vector<std::vector<Notes>> _correctCombinations; //includes all correctCombinations
 	std::vector<Notes> _currentComb; //players combination
 	int _phase; //current phase player is in
 
 	entity_t musicalScore; //visual entity that changes with each phase
-	entity_t mirror; //visual entity that changes with each phase
+	entity_t mirrorScore; //visual entity that changes with each phase
+	entity_t background; //background
 
 	std::vector<entity_t> displayedNotes; //entities's vector of displayed musical notes
-
+	ecs::entity_t hook;
 	std::vector<std::shared_ptr<Sound>> musicalSounds; //vector that saves all musical notes' sounds
 
 	//animation

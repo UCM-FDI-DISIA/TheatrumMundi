@@ -1,3 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 main{
     width: 100%;
     height: calc(100vh - 60px);
@@ -109,6 +120,20 @@ main a:hover{
     max-width: 500px;
     border-radius: 10px; /* Bordes redondeados (opcional) */
 }
+
+.about-game-video video {
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.responsive-video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 
 .characters-choose{
     width: 33%;

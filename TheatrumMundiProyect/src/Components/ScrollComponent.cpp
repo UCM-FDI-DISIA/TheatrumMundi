@@ -34,60 +34,72 @@ ScrollComponent::~ScrollComponent()
 
 }
 
-void ScrollComponent::Scroll(Direction _direction) {
+bool ScrollComponent::Scroll(Direction _direction) {
 
+#ifdef _DEBUG
 	cout << "Scroll Activated" << endl;
+#endif // _DEBUG
 
-	if (_direction == UP || _direction == DOWN) {
-		_path = UPDOWN;
-	}
-	if (_direction == LEFT || _direction == RIGHT) {
-		_path = LEFTRIGHT;
-	}
+	bool scroll = false;
 
 	_dir = Vector2D(0, 0);
 
 	switch (_direction) {
-		case UP:
-			if (!startPhaseCheck()) {
-				std::cout << "FASE: " << phase << std::endl;
-				std::cout << "FASE INICIAL: " << startPhase << std::endl;
-				_dir = Vector2D(0, -1 * _velocity);
-				phase--;
-			}
-			break;
-		case DOWN:
-			if (!finalPhaseCheck()) {
-				_dir = Vector2D(0, _velocity);
-				phase++;
-			}
-			break;
-		case LEFT:
-			if (!startPhaseCheck()) {
-				_dir = Vector2D(-1 * _velocity, 0);
-				phase--;
-			}
-			break;
-		case RIGHT:
-			if (!finalPhaseCheck()) {
-				_dir = Vector2D(_velocity, 0);
-				phase++;
-			}
-			break;
+	case UP:
+		if (!startPhaseCheck()) {
+
+#ifdef _DEBUG
+			std::cout << "FASE: " << phase << std::endl;
+			std::cout << "FASE INICIAL: " << startPhase << std::endl;
+#endif // _DEBUG
+
+			_dir = Vector2D(0, -1 * _velocity);
+			phase--;
+			scroll = true;
+		}
+		break;
+	case DOWN:
+		if (!finalPhaseCheck()) {
+			_dir = Vector2D(0, _velocity);
+			phase++;
+			scroll = true;
+		}
+		break;
+	case LEFT:
+		if (!startPhaseCheck()) {
+			_dir = Vector2D(-1 * _velocity, 0);
+			phase--;
+			scroll = true;
+		}
+		break;
+	case RIGHT:
+		if (!finalPhaseCheck()) {
+			_dir = Vector2D(_velocity, 0);
+			phase++;
+			scroll = true;
+		}
+		break;
 	}
+	if (scroll) {
+		_timeScroll = _initialTimeScroll; //Initialize scrolling because time needs to be > 0
 
-	_timeScroll = _initialTimeScroll; //Initialize scrolling because time needs to be > 0
+#ifdef _DEBUG
 
-	std::cout << phase << endl;
+		std::cout << phase << endl;
 
-	for (Transform* e : _objectsTransform) { //Apply direction to all objects
-		e->setVel(_dir); 
+#endif // _DEBUG
+
+		for (Transform* e : _objectsTransform) { //Apply direction to all objects
+			e->setVel(_dir);
+		}
+
+		auto& callbacks = _eventConnectionsScroll.at(ScrollComponent::STARTSCROLLING);
+
+		for (CALLBACK callback : callbacks)
+			callback();
+
 	}
-
-	auto& callbacks = _eventConnectionsScroll.at(ScrollComponent::STARTSCROLLING);
-
-	for (CALLBACK callback : callbacks)
-		callback();
+	return scroll;
 }
 
 void ScrollComponent::update()
@@ -142,30 +154,6 @@ int ScrollComponent::numPhases()
 	if (finalPhase + startPhase > 0) return finalPhase + startPhase;
 	else return (-1 * (finalPhase + startPhase));
 }
-
-//void ScrollComponent::restartPosition()
-//{
-//	_timeScroll == 0.1f;
-//	phase = 0;
-//	if (_path == UPDOWN) {
-//		if (_inverse == INVERSE) {
-//			_dir = Vector2D(0, (10 * _velocity * _initialTimeScroll * startPhase));
-//		}
-//		else {
-//			_dir = Vector2D(0, (10 * _velocity * _initialTimeScroll * (-finalPhase)));
-//		}
-//	}
-//	else {
-//		if (_inverse == INVERSE) {
-//			_dir = Vector2D((10 * _velocity * _initialTimeScroll) * startPhase, 0);
-//		}
-//		else {
-//			_dir = Vector2D((10 * _velocity * _initialTimeScroll) * (-finalPhase), 0);
-//		}
-//		
-//	}
-//		
-//}
 
 void ScrollComponent::addPhase()
 {

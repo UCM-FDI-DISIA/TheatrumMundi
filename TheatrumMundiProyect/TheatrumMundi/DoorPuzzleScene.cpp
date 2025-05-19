@@ -10,6 +10,7 @@
 
 DoorPuzzleScene::DoorPuzzleScene()
 {
+	dialogueManager = new DialogueManager(3);
 }
 
 DoorPuzzleScene::~DoorPuzzleScene()
@@ -62,13 +63,13 @@ void DoorPuzzleScene::init(SceneRoomTemplate* sr)
 
 #pragma region Background
 
-		auto DoorBackGround = entityFactory->CreateImageEntity(entityManager, "PuertaSantuario", Vector2D(0, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::UNDER);
+		auto DoorBackGround = entityFactory->CreateImageEntity(entityManager, "fondoEntradaMausoleo", Vector2D(0, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::UNDER);
 
 #pragma endregion
 
 #pragma region SceneEntities
 
-		auto lock = entityFactory->CreateInteractableEntity(entityManager, "Candado", EntityFactory::RECTAREA, Vector2D(550, 300), Vector2D(0, 0), 259, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto lock = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(550, 300), Vector2D(0, 0), 259, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		entityManager->getComponent<TriggerComponent>(lock)->setTargetGroup(ecs::grp::INVENTORY);
 		//Assigns the trigger bolean to true
 		entityManager->getComponent<TriggerComponent>(lock)->connect(TriggerComponent::AREA_ENTERED, [this]() {
@@ -89,10 +90,10 @@ void DoorPuzzleScene::init(SceneRoomTemplate* sr)
 
 bool DoorPuzzleScene::isItemHand(const std::string& itemId)
 {
-	if (itemId == "Llave") {
+	if (itemId == "LlaveInv") {
 		
 		Win();
-		//DoorSound, and maybe a Delay?
+		AudioManager::Instance().playSound(sdlutils().soundEffects().at("MoverPiedra"));
 		Exit();
 		return true;
 	}

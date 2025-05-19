@@ -19,6 +19,7 @@ DragPuzzleScene::DragPuzzleScene(TombPuzzleScene* _tomb) : ScenePuzzleTemplate()
 	isStarted = false;
     auxtiledsize = Vector2D(64, 64);
     posMat = std::vector(9,std::vector<Vector2D>(8));
+    dialogueManager = new DialogueManager(3);
     tomb = _tomb;
    
 }
@@ -37,6 +38,10 @@ void DragPuzzleScene::init(SceneRoomTemplate* sr)
         AudioManager& a = AudioManager::Instance();
         std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
         a.setVolume(buttonSound, 0.2);
+        
+        //background
+        entityFactory->CreateImageEntity(entityManager, "fondoXO", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+
         std::list<Area2D*> auxlist;
         //Map tiles
         bool wallMat[8][9] = {
@@ -49,14 +54,14 @@ void DragPuzzleScene::init(SceneRoomTemplate* sr)
             {1,1,1,0,0,0,0,1,1},
             {1,1,1,1,1,1,1,1,1}
         };
-        Vector2D auxposinit = Vector2D(256, 64);
+        Vector2D auxposinit = Vector2D(385, 115);
         Vector2D auxpos;
 
         for (int i = 0; i < 9;i++) {
             for (int j = 0;j < 8;j++)
             {
                 entity_t a;
-                auxpos = Vector2D(i * auxtiledsize.getX() + auxposinit.getX() * Game::Instance()->wscreenScale, j * auxtiledsize.getY() + auxposinit.getY() * Game::Instance()->wscreenScale);
+                auxpos = Vector2D(i * auxtiledsize.getX()+ auxposinit.getX(), j * auxtiledsize.getY() + auxposinit.getY());
                 if (wallMat[j][i]) {
                     //wall
 
@@ -87,7 +92,10 @@ void DragPuzzleScene::init(SceneRoomTemplate* sr)
 
             std::list<entity_t> collist = goaltrigger->getOverlappingEntities();
             for (auto a : collist) {
-                if (a == _triggerObj)Check();
+                if (a == _triggerObj) {
+                   
+                    Check();
+                }
             }
             });
 
@@ -159,7 +167,7 @@ void DragPuzzleScene::init(SceneRoomTemplate* sr)
         Transform* _ftr = entityManager->getComponent<Transform>(_f);
         Transform* _triggerobjtr = entityManager->getComponent<Transform>(_triggerObj);
         //Reset Btn
-        auto _reset = entityFactory->CreateInteractableEntity(entityManager, "Hanni", EntityFactory::RECTAREA, posMat[0][0], Vector2D(0, 0), auxtiledsize.getX(), auxtiledsize.getY(), 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+        auto _reset = entityFactory->CreateInteractableEntity(entityManager, "resetMatriz", EntityFactory::RECTAREA, posMat[0][0], Vector2D(0, 0), auxtiledsize.getX(), auxtiledsize.getY(), 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
         entityManager->getComponent<ClickComponent>(_reset)->connect(ClickComponent::JUST_CLICKED, [this, _atr, _btr, _ctr, _dtr, _etr, _ftr, _triggerobjtr]() {
             if (!solved) {
                 _atr->setPosPure(posMat[5][2]);
@@ -265,11 +273,13 @@ void DragPuzzleScene::Exit()
 bool DragPuzzleScene::Check()
 {
     Win();
+    
     return true;
 }
 
 void DragPuzzleScene::Win()
 {
+    AudioManager::Instance().playSound(sdlutils().soundEffects().at("MecanismoAbre"));
     entityManager->removeComponent<TriggerComponent>(_triggerObj);
     tomb->setDragpuzzle(true);
 }

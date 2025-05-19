@@ -11,6 +11,7 @@
 WindowPuzzleScene::WindowPuzzleScene()
 {
 	isStarted = false;
+	dialogueManager =new DialogueManager(3);
 }
 
 WindowPuzzleScene::~WindowPuzzleScene()
@@ -22,7 +23,6 @@ void WindowPuzzleScene::init(SceneRoomTemplate* sr)
 	if (!isStarted)
 	{
 		isStarted = true;
-		hasRope = false;
 		room = sr;
 
 #pragma region UI
@@ -56,22 +56,26 @@ void WindowPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		//Log
-		dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
+		dialogueManager->setScene(this);
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
-
+		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("Ventana1_2P");
+		else {
+			startDialogue("Ventana1_1P");
+		}
 		//startDialogue("Ventana");
 
 #pragma endregion
 
 #pragma region Background
 
-		auto WindowBackGround = entityFactory->CreateImageEntity(entityManager, "FondoVentana", Vector2D(0, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::UNDER);
+		WindowBackGround = entityFactory->CreateImageEntity(entityManager, "FondoVentanaCerrada", Vector2D(0, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::UNDER);
 
 #pragma endregion
 
 #pragma region SceneEntities
 
-		auto window = entityFactory->CreateInteractableEntity(entityManager, "Ventana", EntityFactory::RECTAREA, Vector2D(550, 300), Vector2D(0, 0), 259, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		auto window = entityFactory->CreateInteractableEntity(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(400, 60), Vector2D(0, 0), 559, 200, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		entityManager->getComponent<TriggerComponent>(window)->setTargetGroup(ecs::grp::INVENTORY);
 		//Assigns the trigger bolean to true
 		entityManager->getComponent<TriggerComponent>(window)->connect(TriggerComponent::AREA_ENTERED, [this]() {
@@ -81,42 +85,22 @@ void WindowPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->getComponent<TriggerComponent>(window)->connect(TriggerComponent::AREA_LEFT, [this]() {
 			SetplacedHand(false);
 		});
-		rope = entityFactory->CreateImageEntity(entityManager, "cuerdaVentana", Vector2D(250, 200), Vector2D(0, 0), 259, 200, 0, ecs::grp::DEFAULT);
-		rope->getMngr()->setActive(rope, false);
-		openWindow = entityFactory->CreateImageEntity(entityManager, "VentanaAbierta", Vector2D(550, 300), Vector2D(0, 0), 259, 200, 0, ecs::grp::DEFAULT);
-		openWindow->getMngr()->setActive(openWindow, false);
 
 #pragma endregion
 
 	}
-	createInvEntities(sr);
+	createInvEntities(sr,false);
 }
 
 bool WindowPuzzleScene::isItemHand(const std::string& itemId)
 {
-	if (itemId == "CuerdaLarga") {
-
-		rope->getMngr()->setActive(rope, true);
-		hasRope = true;
+	if (itemId == "VarillaInventario") {
+		if(!isOpen)entityManager->getComponent<Image>(WindowBackGround)->setTexture(&sdlutils().images().at("FondoVentanaAbierta"));
+		else entityManager->getComponent<Image>(WindowBackGround)->setTexture(&sdlutils().images().at("FondoVentanaCerrada"));
+		isOpen = !isOpen;
+		if(OpenCount == 0) Win();
+		++OpenCount;
 		return true;
-	}
-	else if (itemId == "CuerdaCorta") {
-		//Di�logo que dice que no se puede
-		Win();
-	}
-	else if (itemId == "Gancho") {
-		
-		if (hasRope) {
-			rope->getMngr()->setActive(rope, false);
-			openWindow->getMngr()->setActive(openWindow, true);
-			Win();
-			return true;
-		}
-		else {
-			//APLICAR SONIDO DE QUE NO SE LLEGA O IGUAL UN DIALOGO
-			return false;
-		}
-		return false;
 	}
 	return false;
 }

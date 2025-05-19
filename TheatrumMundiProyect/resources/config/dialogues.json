@@ -668,6 +668,10 @@
       { "Character": " ", "Text": "Una sala más completa." },
       { "Character": " ", "Text": "¡Enhorabuena!" },
       { "Character": " ", "Text": "Espero entonces la respuesta." }
+    ],
+
+     "Prueba":[                 
+    {"Character":" ","Text":" "}
     ]
 
   },

@@ -38,7 +38,7 @@ public:
 	ScrollComponent(int velocity, float time, Inverse isInverse,int numPhases);
 	~ScrollComponent();
 	//void initComponent() override;
-	void Scroll(Direction _direction);
+	bool Scroll(Direction _direction);
 	void update() override;
 	bool isScrolling();
 	void addElementToScroll(Transform* _objectT);

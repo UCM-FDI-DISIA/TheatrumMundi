@@ -15,6 +15,8 @@ private:
 
 	std::vector<Image*> buttonImages;
 	std::vector<std::string> buttonImagesIni; 
+	ecs::entity_t knife;
+	ecs::entity_t flashlight;
 	int stage = 0;
 	bool lastWright = false;
 	bool completed = false;

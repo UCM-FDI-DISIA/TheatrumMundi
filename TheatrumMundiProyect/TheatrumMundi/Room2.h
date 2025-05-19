@@ -20,6 +20,7 @@ protected:
 		MosaciZoom,
 		MosaicPuzzleScene,
 		MosaicPuzzleSceneRsv,
+		
 		WindowScene,
 		WindowSceneResolved,
 		Rope,
@@ -42,11 +43,16 @@ public:
 	void unload() override;
 private:
 
+	ecs::entity_t _loadimg1;
+	ecs::entity_t _loadimg2;
+	ecs::entity_t _loadimg3;
+	ecs::entity_t _loadimg4;
 	std::string _eventToRead;
 	bool isOpen; //Boolean which function is to permite player to enter the mausoleum or not (if the key is on the door or not)
 	bool stopAnimation = false;
 	bool scrolling = false;
-
+	bool brokenMosaic = false;
+	bool MirrorMosaic = false;
 	void endDialogue() override;
 	void _setRoomEvents();
 	void _setRoomAudio();
@@ -78,15 +84,9 @@ private:
 		ecs::entity_t zoomOrgan = nullptr; //Image of the zoomed Organ
 		ecs::entity_t organ = nullptr; //Image of the organ
 		ecs::entity_t rope = nullptr; // Image of the rope
-		ecs::entity_t hook = nullptr; //Image of the hook
 		ecs::entity_t secretEntryZoom = nullptr; //Image of the ZoomEntry
-		ecs::entity_t secretEntryInTheZoomed = nullptr; //Image of the ZoomEntry
-
-		//Entities with special conditions (only appear with one specific event)
-		std::pair<ecs::entity_t, bool>organMosaic; //Image of the entry to the organ room
-		std::pair<ecs::entity_t, bool> mirror; //Image which reflects information
-		std::pair<ecs::entity_t, bool> secretEntry; //Image reflected
-
+		ecs::entity_t mosaic = nullptr;
+		ecs::entity_t window = nullptr;
 		//ScrollComponent
 		ScrollComponent* backgroundScroll = nullptr;
 

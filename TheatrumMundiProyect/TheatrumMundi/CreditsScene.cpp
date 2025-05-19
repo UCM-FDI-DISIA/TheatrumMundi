@@ -40,7 +40,7 @@ void CreditsScene::init()
 		//	a.setVolume(music, 1);
 		a.playSound(music, true);
 		*/
-		// black Background FondoNegro 
+		// black Background 
 		auto _background = entityFactory->CreateImageEntity(entityManager, "FondoNegro", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
 		_backToMainMenu = false;
 	
@@ -115,7 +115,7 @@ void CreditsScene::init()
 			 if (!self) return 0;
 
 
-			 //self->backToMenu();
+			 self->backToMenu();
 
 
 			 return 0;

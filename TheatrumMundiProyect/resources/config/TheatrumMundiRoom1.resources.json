@@ -24,6 +24,14 @@
       "file": "../resources/images/Finales/Carga2.png"
     },
     {
+      "id": "salonpuerta",
+      "file": "../resources/images/Finales/salonpuerta.PNG"
+    },
+    {
+      "id": "estudiopuerta",
+      "file": "../resources/images/Finales/estudiopuerta.PNG"
+    },
+    {
       "id": "Clock",
       "file": "../resources/images/Finales/Reloj.PNG"
     },
@@ -389,6 +397,10 @@
         "file": "../resources/sound/sfx/click_avanzar_dialogo.wav"
     },
     {
+          "id": "sSound",
+          "file": "../resources/sound/sfx/s_soundRoom3.wav"
+        },
+    {
         "id": "boton",
         "file": "../resources/sound/sfx/click_boton.wav"
     },
@@ -409,6 +421,15 @@
         "id": "libro",
         "file": "../resources/sound/sfx/libro.wav"
     },
+    
+      {
+    "id": "failOpenPuzzle",
+    "file": "../resources/sound/sfx/FailOpenPuzzle.wav"
+  },
+   {
+    "id": "OpenPuzzle",
+    "file": "../resources/sound/sfx/openPuzzle.wav"
+  },
     {
         "id": "taza",
         "file": "../resources/sound/sfx/metal_taza.wav"
@@ -427,12 +448,12 @@
     },
     {
       "id": "CogerCosa",
-      "file": "../resources/sound/sfx/CogerCosa.wav"
+      "file": "../resources/sound/sfx/CogerCosa.mp3"
   },
   
   {
     "id": "ColocarCosa",
-    "file": "../resources/sound/sfx/ColocarCosa.wav"
+    "file": "../resources/sound/sfx/ColocarCosa.mp3"
   },
 {
           "id": "NextDialogue",

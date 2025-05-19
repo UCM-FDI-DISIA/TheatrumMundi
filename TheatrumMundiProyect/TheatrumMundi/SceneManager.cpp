@@ -32,6 +32,7 @@
 #include "CSVdataRecolector.h"
 #include "BalancePuzzleScene.h"
 #include "Box.h"
+#include "ParrotPuzzleScene.h"
 
 SceneManager::SceneManager()
 {
@@ -63,10 +64,11 @@ SceneManager::SceneManager()
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 	scenes[SceneName::CREDITS] = new CreditsScene();
 	scenes[SceneName::BOX] = new Box();
+	scenes[SceneName::PARROT_PUZZLE] = new ParrotPuzzleScene();
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::ROOM_3);
+	loadScene(SceneName::ROOM_1);
 }
 
 void SceneManager::popScene()
@@ -126,10 +128,20 @@ void SceneManager::loadScene(int index)
 		sdlutils().ClearMaps();
 		sdlutils().loadReasources("../resources/config/TheatrumMundiTutorial.resources.json");
 		break;
-	case ROOM1:
+	case ROOM_1:
 		sdlutils().ClearMaps();
 
 		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom1.resources.json");
+		break;
+	case ROOM_2:
+		sdlutils().ClearMaps();
+
+		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom2.resources.json");
+		break;
+	case ROOM_3:
+		sdlutils().ClearMaps();
+
+		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom3.resources.json");
 		break;
 	default:
 		break;
@@ -219,7 +231,7 @@ void SceneManager::ResetSceneManager()
 	scenes[SceneName::TELE_PUZZLE] = new TelePuzzleScene();
 	scenes[SceneName::CREDITS] = new CreditsScene();
 	scenes[SceneName::BOX] = new Box();
-
+	scenes[SceneName::PARROT_PUZZLE] = new ParrotPuzzleScene();
 	loadScene(SceneName::INITIAL_MENU);
 }
 

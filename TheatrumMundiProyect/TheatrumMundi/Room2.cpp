@@ -25,7 +25,7 @@
 Room2Scene::Room2Scene()
 {
 	//Creation of the DialogueManager of the room and creation of the events 
-	dialogueManager = new DialogueManager(1);
+	dialogueManager = new DialogueManager(3);
 	_setRoomEvents();
 }
 
@@ -41,9 +41,20 @@ void Room2Scene::init()
 	isOpen = false;
 	finishallpuzzles = false;
 	stopAnimation = false;
-	rmObjects.mirror.second = false;
-	rmObjects.organMosaic.second = false;
-	rmObjects.secretEntry.second = false;
+
+	//Load Images
+	_loadimg1 = entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg1->getMngr()->setActive(_loadimg1, false);
+
+	_loadimg2 = entityFactory->CreateImageEntity(entityManager, "loading2", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg2->getMngr()->setActive(_loadimg2, false);
+
+	_loadimg3 = entityFactory->CreateImageEntity(entityManager, "loading3", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg3->getMngr()->setActive(_loadimg3, false);
+
+	_loadimg4 = entityFactory->CreateImageEntity(entityManager, "loading4", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg4->getMngr()->setActive(_loadimg4, false);
+
 	_setRoomAudio();
 	_setGlobalFeatures();
 	_setRoomBackground();
@@ -63,7 +74,9 @@ void Room2Scene::resolvedPuzzle(int i)
 		if (i == 0)  auxevent = TombPuzzleSceneRsv;
 		else if (i == 1)  auxevent = RavenSceneRsv;
 		else if (i == 2)  auxevent = DoorSceneRsv;
-		else if (i == 3)  auxevent = MosaicPuzzleSceneRsv;
+		else if (i == 3) { auxevent = MosaicPuzzleSceneRsv;
+		}
+
 		else if (i == 4)  auxevent = OrganPuzzleSceneRsv;
 		else if (i == 5)  auxevent = WindowSceneResolved;
 		roomEvent[auxevent]();
@@ -96,12 +109,16 @@ void Room2Scene::_setRoomEvents()
 	roomEvent.resize(event_size);
 #pragma region Events
 	roomEvent[InitialDialogue] = [this] {
-		startDialogue("SalaIntermedia2");
+		if(Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("Sala2Intro_P2");
+		else  startDialogue("Sala2Intro_P1");
 		};
 	roomEvent[CorpseDialogue] = [this] {
 		entityManager->setActive(rmObjects.zoomCorpse, true);
 		entityManager->setActive(rmObjects.quitButton, true);
-		startDialogue("Cadaver");
+		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("CADAVER_P2");
+		else {
+			startDialogue("CADAVER_P1");
+		}
 		};
 	roomEvent[TombPuzzleScene] = [this] {
 		Game::Instance()->getSceneManager()->loadScene(TOMB_SCENE, this); 
@@ -134,16 +151,21 @@ void Room2Scene::_setRoomEvents()
 		Game::Instance()->getSceneManager()->loadScene(MOSAIC_SCENE, this);
 		};
 	roomEvent[MosaicPuzzleSceneRsv] = [this] {
-		rmObjects.organMosaic.first->getMngr()->setActive(rmObjects.organMosaic.first, true);
-		rmObjects.organMosaic.second = true;
+		brokenMosaic = true;
+		entityManager->getComponent<Image>(rmObjects.mosaic)->setTexture(&sdlutils().images().at("MosaicoRotoSala"));
+		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("MOSAICO3_2P");
+		else {
+			startDialogue("MOSAICO3_1P");
+		}
 		};
 	roomEvent[OrganZoom] = [this] {
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
 		
-		if (!puzzlesol[2]&&variant !=2) rmObjects.hook->getMngr()->setActive(rmObjects.hook, false); //if organ is not complete don't show the hook
+		startDialogue("Prueba");
 		rmObjects.zoomOrgan->getMngr()->setActive(rmObjects.zoomOrgan, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);
 		rmObjects.organ->getMngr()->setActive(rmObjects.organ, true);
+		rmObjects.window->getMngr()->setActive(rmObjects.window, false);
 		if (rmObjects.rope != nullptr) rmObjects.rope->getMngr()->setActive(rmObjects.rope, true);
 		};
 	roomEvent[Rope] = [this] {
@@ -151,9 +173,18 @@ void Room2Scene::_setRoomEvents()
 		rmObjects.rope->getMngr()->removeEntity(rmObjects.rope);
 		rmObjects.rope->getMngr()->setActive(rmObjects.rope, false);
 		// InventoryLogic
-		GetInventory()->addItem(new Hint("CuerdaLarga", "Ta", &sdlutils().images().at("CuerdaLarga")));
-		GetInventory()->hints.push_back(entityFactory->CreateInvEntity(entityManager, "CuerdaLarga", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
+		if (variant != 0) {
+			GetInventory()->addItem(new Hint("CuerdaGruesa", sdlutils().invDescriptions().at("CuerdaGruesa"), &sdlutils().images().at("CuerdaGruesa")));
+			GetInventory()->hints.push_back(entityFactory->CreateInvEntity(entityManager, "CuerdaGruesa", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+			GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		}
+		else {
+			GetInventory()->addItem(new Hint("CuerdaFina", sdlutils().invDescriptions().at("CuerdaFina"), &sdlutils().images().at("CuerdaFina")));
+			GetInventory()->hints.push_back(entityFactory->CreateInvEntity(entityManager, "CuerdaFina", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+			GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
+		}
+		createDescription(inv->hints.back(), inv->getItems().back());
 		};
 	roomEvent[WindowScene] = [this] {
 		HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
@@ -169,25 +200,18 @@ void Room2Scene::_setRoomEvents()
 		Game::Instance()->getSceneManager()->loadScene(MUSIC_PUZZLE, this);
 		};
 	roomEvent[OrganPuzzleSceneRsv] = [this] {
-
-		rmObjects.hook->getMngr()->setActive(rmObjects.hook, true);
-		rmObjects.mirror.first->getMngr()->setActive(rmObjects.mirror.first, true);
-		rmObjects.mirror.second = true;
-		rmObjects.secretEntry.first->getMngr()->setActive(rmObjects.secretEntry.first, true);
-		rmObjects.secretEntry.second = true;
-		};
-	roomEvent[Hook] = [this] {
-		//Remove Hook
-		rmObjects.hook->getMngr()->removeEntity(rmObjects.hook);
-		// InventoryLogic
-		GetInventory()->addItem(new Hint("Gancho", "Esto se enganchara en algun lado", &sdlutils().images().at("Gancho")));
-		GetInventory()->hints.push_back(entityFactory->CreateInvEntity(entityManager, "Gancho", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
-
+		brokenMosaic = false;
+		MirrorMosaic = true;
+		auto ZoomAccess = entityFactory->CreateInteractableEntity(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(720, 0), Vector2D(0, 0), 627 / 3, 1377 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+		rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(ZoomAccess));
+		entityManager->getComponent<ClickComponent>(ZoomAccess)->connect(ClickComponent::JUST_CLICKED, [this]() {
+			roomEvent[OrganZoom](); 
+			});
+		entityManager->getComponent<Image>(rmObjects.mosaic)->setTexture(&sdlutils().images().at("MosaicoEspejoSala"));
 		};
 	roomEvent[SecretEntry] = [this] {
+		startDialogue("Prueba");
 		rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, true);
-		rmObjects.secretEntryInTheZoomed->getMngr()->setActive(rmObjects.secretEntryInTheZoomed, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);
 		};
 	roomEvent[ResolveCase] = [this] {
@@ -227,10 +251,25 @@ void Room2Scene::_setRoomEvents()
 		};
 	roomEvent[GoodEnd] = [this] {
 		// WIP
+		Game::Instance()->getDataManager()->SetSceneCount(SceneCount::MIDDLEROOM3);
+		if(Game::Instance()->getDataManager()->GetCharacterState(KEISARA))_loadimg1->getMngr()->setActive(_loadimg1, true);
+		else _loadimg2->getMngr()->setActive(_loadimg2, true);
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
+		std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
+		AudioManager::Instance().playSound(correctSound);
+		Game::Instance()->render();
 		Game::Instance()->getSceneManager()->popScene();
 		};
 	roomEvent[BadEnd] = [this] {
 		// WIP
+		Game::Instance()->getDataManager()->SetCharacterDead(Character::SOL);
+		Game::Instance()->getDataManager()->SetSceneCount(SceneCount::MIDDLEROOM3);
+		if (!Game::Instance()->getDataManager()->GetCharacterState(KEISARA))_loadimg3->getMngr()->setActive(_loadimg3, true);
+		else _loadimg4->getMngr()->setActive(_loadimg4, true);
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
+		std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
+		AudioManager::Instance().playSound(incorrectSound);
+		Game::Instance()->render();
 		Game::Instance()->getSceneManager()->popScene();
 		};
 #pragma endregion
@@ -267,11 +306,14 @@ void Room2Scene::_setRoomBackground()
 
 #pragma region InitScroll
 
-	auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(22, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12.0) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-	auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1200, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12.0) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "PuertaMausoleo", EntityFactory::RECTAREA, Vector2D(30 + 1359, 175), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12.0) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "PuertaCementerio", EntityFactory::RECTAREA, Vector2D(1218, 140), Vector2D(0, 0), 117, 428, 0, areaLayerManager, 12, ((sdlutils().width()) / 12.0) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 
 	auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
+
+	ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(ChangeRoom1));
 	ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(ChangeRoom2));
+
 	ChangeRoomScroll->setEndScrollCallback([this]() {scrolling = false; });
 
 	rmObjects.backgroundScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
@@ -285,7 +327,7 @@ void Room2Scene::_setRoomBackground()
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(CementeryBackground));
 
 	//RightBackground
-	auto MausoleumBackground = entityFactory->CreateImageEntity(entityManager, "FondoCripta", Vector2D(1349, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
+	auto MausoleumBackground = entityFactory->CreateImageEntity(entityManager, "MausoleoSala2", Vector2D(1359, 0), Vector2D(0, 0), 1359, 748, 0, ecs::grp::DEFAULT);
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(MausoleumBackground));
 
 
@@ -293,24 +335,31 @@ void Room2Scene::_setRoomBackground()
 
 #pragma region Scroll
 
-	entityManager->getComponent<ClickComponent>(ChangeRoom2)->connect(ClickComponent::JUST_CLICKED, [this]() {
+	entityManager->getComponent<ClickComponent>(ChangeRoom2)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom2]() {
 		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
-			AudioManager::Instance().playSound(rmSounds.doorSound);
-			rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
-			scrolling = true;
+			if(rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT)) {
+				auto trChangeRoom2 = entityManager->getComponent<Transform>(ChangeRoom2);
+				trChangeRoom2->setPos(Vector2D(1218, 140));
+				AudioManager::Instance().playSound(sdlutils().soundEffects().at("AbrirPuertaPiedra"));
+				scrolling = true;
+			}
 		}
 		else if (!isOpen) {
 			roomEvent[DoorScene]();
 		}
 		});
 
-	entityManager->getComponent<ClickComponent>(ChangeRoom1)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll]() {
+	entityManager->getComponent<ClickComponent>(ChangeRoom1)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll, ChangeRoom1]() {
 		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
-			AudioManager::Instance().playSound(rmSounds.doorSound);
-			rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
-			scrolling = true;
+			if (rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT)) {
+				auto trChangeRoom1 = entityManager->getComponent<Transform>(ChangeRoom1);
+				trChangeRoom1->setPos(Vector2D(30, 175));
+				AudioManager::Instance().playSound(sdlutils().soundEffects().at("AbrirPuertaPiedra"));
+				scrolling = true;
+			}
 		}
 		});
+
 #pragma endregion
 
 }
@@ -318,7 +367,7 @@ void Room2Scene::_setRoomBackground()
 void Room2Scene::_setCaseResolution()
 {
 	//set the scene the variant is 
-	Game::Instance()->getDataManager()->SetSceneCount(ROOM1);
+	Game::Instance()->getDataManager()->SetSceneCount(ROOM2);
 
 	//get actual variant
 	int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(1);
@@ -355,8 +404,6 @@ void Room2Scene::_setCaseResolution()
 			{
 				if (variantAct == 0) //if its the not correct variant one dies
 				{
-
-					Game::Instance()->getDataManager()->SetCharacterDead(SOL);
 					roomEvent[BadEnd]();
 				}
 				else
@@ -467,7 +514,7 @@ void Room2Scene::_setInteractuables()
 	RectArea2D* corpseZoomArea = entityManager->addComponent<RectArea2D>(rmObjects.zoomCorpse, areaLayerManager);
 	entityManager->setActive(rmObjects.zoomCorpse, false);
 
-	characterCorpse = entityFactory->CreateInteractableEntity(entityManager, "Cadaver2", EntityFactory::RECTAREA, Vector2D(100, 300), Vector2D(0, 0), 250 / 3, 225 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	characterCorpse = entityFactory->CreateInteractableEntity(entityManager, "CadaverSol", EntityFactory::RECTAREA, Vector2D(20, 320), Vector2D(0, 0), 772 / 3, 734 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(characterCorpse));
 
@@ -477,13 +524,13 @@ void Room2Scene::_setInteractuables()
 				if (!finishallpuzzles)roomEvent[CorpseDialogue]();
 			});
 
-	auto tomb = entityFactory->CreateInteractableEntity(entityManager, "Tumba", EntityFactory::RECTAREA, Vector2D(400, 300), Vector2D(0, 0), 250 / 3, 225 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	auto tomb = entityFactory->CreateInteractableEntity(entityManager, "Tumba", EntityFactory::RECTAREA, Vector2D(525, 155), Vector2D(0, 0), 627 / 3, 1233 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(tomb));
 	entityManager->getComponent<ClickComponent>(tomb)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[TombPuzzleScene]();
 		});
 
-	auto raven = entityFactory->CreateInteractableEntity(entityManager, "Cuervo", EntityFactory::RECTAREA, Vector2D(700, 452), Vector2D(0, 0), 165 / 3, 176 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	auto raven = entityFactory->CreateInteractableEntity(entityManager, "Cuervo", EntityFactory::RECTAREA, Vector2D(890, 165), Vector2D(0, 0), 185 / 3, 196 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(raven));
 	entityManager->getComponent<ClickComponent>(raven)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[RavenScene]();
@@ -496,15 +543,21 @@ void Room2Scene::_setInteractuables()
 #pragma region PreSolveMosaic
 
 	//Before Completing mosaic
-	auto mosaic = entityFactory->CreateInteractableEntity(entityManager, "Mosaico", EntityFactory::RECTAREA, Vector2D(400 + 1344, 300), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(mosaic));
-	entityManager->getComponent<ClickComponent>(mosaic)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		roomEvent[MosaicPuzzleScene]();
+	rmObjects.mosaic = entityFactory->CreateInteractableEntity(entityManager, "MosaicoSala", EntityFactory::RECTAREA, Vector2D(370 + 1344, 0), Vector2D(0, 0), 1881 / 3, 1377 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.mosaic));
+	entityManager->getComponent<ClickComponent>(rmObjects.mosaic)->connect(ClickComponent::JUST_CLICKED, [this]() {
+		if (brokenMosaic) {
+			roomEvent[OrganZoom]();
+		}
+		else if (MirrorMosaic) {
+			roomEvent[SecretEntry]();
+		}
+		else roomEvent[MosaicPuzzleScene]();
 		});
 
-	auto window = entityFactory->CreateInteractableEntity(entityManager, "Ventana", EntityFactory::RECTAREA, Vector2D(1250 + 1344, 150), Vector2D(0, 0), 400 / 3, 376 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(window));
-	entityManager->getComponent<ClickComponent>(window)->connect(ClickComponent::JUST_CLICKED, [this]() {
+	rmObjects.window = entityFactory->CreateInteractableEntity(entityManager, "VentanaSala", EntityFactory::RECTAREA, Vector2D(1220 + 1344, 50), Vector2D(0, 0), 454 / 3, 792 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.window));
+	entityManager->getComponent<ClickComponent>(rmObjects.window)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[WindowScene]();
 		});
 
@@ -512,32 +565,24 @@ void Room2Scene::_setInteractuables()
 
 #pragma region SolvedMosaic
 
-	//After completeing mosaic
-	rmObjects.organMosaic.first = entityFactory->CreateInteractableEntity(entityManager, "Organo", EntityFactory::RECTAREA, Vector2D(500 , 390), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.organMosaic.first));
-	entityManager->getComponent<ClickComponent>(rmObjects.organMosaic.first)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		roomEvent[OrganZoom]();
-		});
-	rmObjects.organMosaic.first->getMngr()->setActive(rmObjects.organMosaic.first, false);
-
 	//Zoomed Items
 
 	rmObjects.zoomOrgan = entityFactory->CreateImageEntity(entityManager, "FondoOrgano", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 	rmObjects.zoomOrgan->getMngr()->setActive(rmObjects.zoomOrgan, false);
 
-	rmObjects.organ = entityFactory->CreateInteractableEntity(entityManager, "Organo", EntityFactory::RECTAREA, Vector2D(600, 350), Vector2D(0, 0), 500, 400, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+	rmObjects.organ = entityFactory->CreateInteractableEntity(entityManager, "Organo", EntityFactory::RECTAREA, Vector2D(410, 60), Vector2D(0, 0), 456, 591, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 	entityManager->getComponent<ClickComponent>(rmObjects.organ)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[OrganPuzzleScene]();
-		roomEvent[OrganPuzzleSceneRsv](); //ONLY FOR DEBUGGING
 		});
 	rmObjects.organ->getMngr()->setActive(rmObjects.organ, false);
+
 	int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
 	if (variant != 0) {
-		rmObjects.rope = entityFactory->CreateInteractableEntity(entityManager, "CuerdaGruesa", EntityFactory::RECTAREA, Vector2D(200, 350), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		rmObjects.rope = entityFactory->CreateInteractableEntity(entityManager, "CuerdaGruesa", EntityFactory::RECTAREA, Vector2D(250, 500), Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 		
 	}
 	else {
-		rmObjects.rope = entityFactory->CreateInteractableEntity(entityManager, "CuerdaFina", EntityFactory::RECTAREA, Vector2D(200, 350), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+		rmObjects.rope = entityFactory->CreateInteractableEntity(entityManager, "CuerdaFina", EntityFactory::RECTAREA, Vector2D(250, 500), Vector2D(0, 0), 150, 150, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 	}
 	entityManager->getComponent<ClickComponent>(rmObjects.rope)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[Rope]();
@@ -549,47 +594,15 @@ void Room2Scene::_setInteractuables()
 #pragma region SolvedOrgan
 
 	//After completeing organ
-
-	rmObjects.hook = entityFactory->CreateInteractableEntity(entityManager, "Varilla", EntityFactory::RECTAREA, Vector2D(400, 190), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
-	entityManager->getComponent<ClickComponent>(rmObjects.hook)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		roomEvent[Hook]();
-		});
-	rmObjects.hook->getMngr()->setActive(rmObjects.hook, false);
-
-	rmObjects.mirror.first = entityFactory->CreateImageEntity(entityManager, "Ventana", Vector2D(400, 300), Vector2D(0, 0), 200 / 3, 235 / 3, 0, ecs::grp::INTERACTOBJ);
-	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.mirror.first));
-	rmObjects.mirror.first->getMngr()->setActive(rmObjects.mirror.first, false);
-
-	rmObjects.secretEntry.first = entityFactory->CreateInteractableEntity(entityManager, "PaasadizoSecretoEspejo", EntityFactory::RECTAREA, Vector2D(400, 390), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.secretEntry.first));
-	entityManager->getComponent<ClickComponent>(rmObjects.secretEntry.first)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		roomEvent[SecretEntry]();
-		});
-	rmObjects.secretEntry.first->getMngr()->setActive(rmObjects.secretEntry.first, false);
-
-
-	rmObjects.secretEntryZoom = entityFactory->CreateImageEntity(entityManager, "EntradaOculta", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
-	rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, false);
-	rmObjects.secretEntryInTheZoomed = entityFactory->CreateInteractableEntity(entityManager, "PaasadizoSecretoEspejo", EntityFactory::RECTAREA, Vector2D(800, 390), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
-	rmObjects.secretEntryInTheZoomed->getMngr()->setActive(rmObjects.secretEntryInTheZoomed, false);
-	auto secretEntryOpen = entityFactory->CreateImageEntity(entityManager, "EntradaSecretaAbierta", Vector2D(800, 390), Vector2D(0, 0), 500 / 3, 500 / 3, 0, ecs::grp::ZOOMOBJ);
-	secretEntryOpen->getMngr()->setActive(secretEntryOpen, false);
-
-	rmObjects.secretEntryInTheZoomed->getMngr()->getComponent<ClickComponent>(rmObjects.secretEntryInTheZoomed)->connect(ClickComponent::JUST_CLICKED, [this, secretEntryOpen]() {
+	rmObjects.secretEntryZoom = entityFactory->CreateInteractableEntityNotMoveSprite(entityManager, "SalidaSecretaCerrada",EntityFactory::RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0,areaLayerManager,EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
+	rmObjects.secretEntryZoom->getMngr()->getComponent<ClickComponent>(rmObjects.secretEntryZoom)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
 		if (variant == 2)
 		{
-			secretEntryOpen->getMngr()->setActive(secretEntryOpen, true);
-			rmObjects.secretEntryInTheZoomed->getMngr()->removeEntity(rmObjects.secretEntryInTheZoomed);
+			rmObjects.secretEntryZoom->getMngr()->getComponent<Image>(rmObjects.secretEntryZoom)->setTexture(&sdlutils().images().at("SalidaSecretaAbierta"));
 		}
-		else {
-
-		}
-
-		
-
-		//else SONIDO/SOUND un sonidito de algo met�lico que no ceda a abrirse
 	});
+	rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, false);
 
 #pragma endregion
 
@@ -634,10 +647,6 @@ void Room2Scene::_setUI()
 				entityManager->setActive(rmObjects.quitButton, false);
 				entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, true);
 
-				//if the condition of this objects has not been apply disallow them
-				if (rmObjects.mirror.second == false) rmObjects.mirror.first->getMngr()->setActive(rmObjects.mirror.first,false);
-				if (rmObjects.organMosaic.second == false) rmObjects.organMosaic.first->getMngr()->setActive(rmObjects.organMosaic.first, false);
-				if (rmObjects.secretEntry.second == false) rmObjects.secretEntry.first->getMngr()->setActive(rmObjects.secretEntry.first, false);
 			});
 
 	entityManager->setActive(rmObjects.quitButton, false);

@@ -3,7 +3,6 @@
     { "id" : "antena", "text" :"Antena de un televisor. \n¿Esto sigue existiendo?"},
 
     { "id" : "TeaCupSpoon", "text" : "Una cuchara de plata."},
-    { "id" : "pluma", "text" : "Fue difícil cogerla."},
     { "id" : "frascoV2", "text" : "Un frasco con restos de algo."},
     { "id" : "frascoV1", "text" : "Un frasco con huellas de dedos,  \n¿no habían guantes?"},
     { "id" : "frascoV1-1", "text" :"Un frasco totalmente limpio, \nque raro."},
@@ -14,9 +13,25 @@
     { "id" : "minutero", "text" : "La manecilla de los minutos de un reloj."},
 
     
-    { "id" : "Pala", "text" :"No era la pala que esperaba"},
-    { "id" : "Llave", "text" : "La llave de una puerta, seguro que abre algo."},
-    { "id" : "Joya", "text" : "EYYYY Lapislazuli."}
+    { "id" : "Pala", "text" :"Insertar Descripcion"},
+    { "id" : "Llave", "text" : "Insertar Descripcion"},
+    { "id" : "Colgante", "text" : "Insertar Descripcion"},
+    { "id" : "Varilla", "text" : "Insertar Descripcion"},
+    { "id" : "CuerdaGruesa", "text" : "Insertar Descripcion"},
+    { "id" : "CuerdaFina", "text" : "Insertar Descripcion"},
+    
+    { "id" : "LuzVioleta", "text" :"Una linterna de luz\n ultravioleta."},
+    { "id" : "BalasFalsas", "text" :"Parecen reales pero\n estan huecas."},
+    { "id" : "BalasReales", "text" :"Son balas reales"},
+    { "id" : "PistolaCon", "text" :"Es una pistola de\n verdad."},
+    { "id" : "PistolaSin", "text" :"Una pistola con\n silenciador."},
+    { "id" : "CuchilloFilo", "text" :"Es un cuchillo\n muy afilado."},
+    { "id" : "CuchilloDentado", "text" :"Un cuchillo\n dentado"},
+    { "id" : "Soga", "text" :"Una soga de esparto."},
+    { "id" : "Alambre", "text" :"Un alambre fino."},
+    { "id" : "Morse", "text" :"Un dicionario Morse\n a español."},
+    { "id" : "pluma", "text" : "Una pluma, no pesa nada."}
+
   ]
 
 }
