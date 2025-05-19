@@ -78,6 +78,7 @@
     <ClCompile Include="ReadInvdesc.cpp" />
     <ClCompile Include="AnimPauseComponent.cpp" />
     <ClCompile Include="InvAnimComponent.cpp" />
+    <ClCompile Include="ParrotPuzzleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -279,8 +280,16 @@
     <ClInclude Include="ReadInvdesc.h" />
     <ClInclude Include="AnimPauseComponent.h" />
     <ClInclude Include="InvAnimComponent.h" />
+    <ClInclude Include="ParrotPuzzleScene.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TheatrumMundi.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\resources\images\Finales\icono.ico" />
   </ItemGroup>
 </Project>
