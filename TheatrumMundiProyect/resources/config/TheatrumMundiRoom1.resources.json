@@ -16,6 +16,10 @@
       "file": "../resources/images/Finales/ImagenVacia.png"
     },
     {
+      "id": "Dialog",
+      "file": "../resources/images/Finales/Dialogo.PNG"
+    },
+    {
       "id": "loading1",
       "file": "../resources/images/Finales/Carga1.png"
     },
