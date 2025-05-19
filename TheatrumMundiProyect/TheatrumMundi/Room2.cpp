@@ -41,6 +41,14 @@ void Room2Scene::init()
 	isOpen = false;
 	finishallpuzzles = false;
 	stopAnimation = false;
+	_setRoomAudio();
+	_setGlobalFeatures();
+	_setRoomBackground();
+	_setInteractuables();
+	_setUI();
+	_setDialog();
+	_setCaseResolution();
+	roomEvent[InitialDialogue]();
 
 	//Load Images
 	_loadimg1 = entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
@@ -55,14 +63,6 @@ void Room2Scene::init()
 	_loadimg4 = entityFactory->CreateImageEntity(entityManager, "loading4", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
 	_loadimg4->getMngr()->setActive(_loadimg4, false);
 
-	_setRoomAudio();
-	_setGlobalFeatures();
-	_setRoomBackground();
-	_setInteractuables();
-	_setUI();
-	_setDialog();
-	_setCaseResolution();
-	roomEvent[InitialDialogue]();
 	SDL_Delay(1000);
 	
 
@@ -339,7 +339,7 @@ void Room2Scene::_setRoomBackground()
 #pragma region Scroll
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom2)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom2]() {
-		if (!isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
 			if(rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT)) {
 				auto trChangeRoom2 = entityManager->getComponent<Transform>(ChangeRoom2);
 				trChangeRoom2->setPos(Vector2D(1218, 140));
@@ -347,13 +347,13 @@ void Room2Scene::_setRoomBackground()
 				scrolling = true;
 			}
 		}
-		else if (isOpen) {
+		else if (!isOpen) {
 			roomEvent[DoorScene]();
 		}
 		});
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom1)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll, ChangeRoom1]() {
-		if (!isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
 			if (rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT)) {
 				auto trChangeRoom1 = entityManager->getComponent<Transform>(ChangeRoom1);
 				trChangeRoom1->setPos(Vector2D(30, 175));
