@@ -77,11 +77,12 @@ MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaInterm
 
 MiddleRoomScene::~MiddleRoomScene()
 {
-	
+
 }
 
 void MiddleRoomScene::init()
 {
+	this->unload();
 	if (!isStarted) {
 		isStarted = true;
 		//Audio sfx 
@@ -178,6 +179,9 @@ void MiddleRoomScene::refresh()
 
 void MiddleRoomScene::unload()
 {
+	delete entityManager;
+	entityManager = new EntityManager();
+	isStarted = false;
 }
 
 void MiddleRoomScene::endDialogue()
@@ -190,13 +194,18 @@ void MiddleRoomScene::endDialogue()
 	switch (aux)
 	{
 	case SceneCount::MIDDLEROOM1:
+		
 		Game::Instance()->getSceneManager()->loadScene(ROOM_1);
 		break;
 	case SceneCount::MIDDLEROOM2:
+	
 		Game::Instance()->getSceneManager()->loadScene(ROOM_2);
+		
 		break;
 	case SceneCount::MIDDLEROOM3:
+		
 		Game::Instance()->getSceneManager()->loadScene(ROOM_3);
+		
 		break;
 	case SceneCount::END:
 		//Load the endScene WIP

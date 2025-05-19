@@ -20,6 +20,46 @@
     {
       "id": "Title",
       "file": "../resources/images/TemporalTitleImage.png"
+    },{
+      "id": "EmptyImage",
+      "file": "../resources/images/Finales/ImagenVacia.png"
+    },
+    {
+      "id": "fondoPruebaLog",
+      "file": "../resources/images/fondoLogPrueba.png"
+    },
+    
+    {
+      "id": "B1",
+      "file": "../resources/images/Finales/1.PNG"
+    },
+     {
+      "id": "LucySprite",
+      "file": "../resources/images/Finales/Lucy.PNG"
+    },
+    {
+      "id": "KeisaraSprite",
+      "file": "../resources/images/Finales/Keisara.PNG"
+    },
+     {
+      "id": "B6",
+      "file": "../resources/images/Finales/6.PNG"
+    },
+    {
+      "id": "B7",
+      "file": "../resources/images/Finales/7.PNG"
+    },
+    {
+      "id": "Exit",
+      "file": "../resources/images/Finales/RectangleExitButton.PNG"
+    },
+    {
+      "id": "SolSprite",
+      "file": "../resources/images/Finales/Sol.PNG"
+    },
+    {
+      "id": "Dialog",
+      "file": "../resources/images/Finales/Dialogo.PNG"
     },
     {
       "id": "TutorialButton",
@@ -56,7 +96,11 @@
         {
             "id": "boton",
             "file": "../resources/sound/sfx/click_boton.wav"
-        }
+        },
+        {
+      "id": "NextDialogue",
+      "file": "../resources/sound/sfx/NextDialogue.wav"
+    }
        
     ],
 
