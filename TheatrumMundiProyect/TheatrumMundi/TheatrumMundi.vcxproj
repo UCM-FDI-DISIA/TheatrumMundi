@@ -280,6 +280,7 @@
     <ClInclude Include="RavenPuzzleScene.h" />
     <ClInclude Include="ReadDialog.h" />
     <ClInclude Include="ReadInvdesc.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Room1.h" />
     <ClInclude Include="Room2.h" />
     <ClInclude Include="Room3.h" />
@@ -302,6 +303,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TheatrumMundi.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\resources\images\Finales\icono.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
