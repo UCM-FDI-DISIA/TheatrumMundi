@@ -48,6 +48,7 @@ private:
 	bool stopAnimation = false;
 	bool scrolling = false;
 	bool brokenMosaic = false;
+	bool MirrorMosaic = false;
 	void endDialogue() override;
 	void _setRoomEvents();
 	void _setRoomAudio();
@@ -81,13 +82,7 @@ private:
 		ecs::entity_t rope = nullptr; // Image of the rope
 		ecs::entity_t hook = nullptr; //Image of the hook
 		ecs::entity_t secretEntryZoom = nullptr; //Image of the ZoomEntry
-		ecs::entity_t secretEntryInTheZoomed = nullptr; //Image of the ZoomEntry
 		ecs::entity_t mosaic = nullptr;
-		//Entities with special conditions (only appear with one specific event)
-		std::pair<ecs::entity_t, bool>organMosaic; //Image of the entry to the organ room
-		std::pair<ecs::entity_t, bool> mirror; //Image which reflects information
-		std::pair<ecs::entity_t, bool> secretEntry; //Image reflected
-
 		//ScrollComponent
 		ScrollComponent* backgroundScroll = nullptr;
 
