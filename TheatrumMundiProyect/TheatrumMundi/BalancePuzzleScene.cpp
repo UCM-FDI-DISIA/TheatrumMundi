@@ -60,22 +60,18 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 		balanceBackground = entityFactory->CreateImageEntity(entityManager, "BotonHoraria", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		balanceBackground->getMngr()->removeComponent<Area2D>(balanceBackground);
 
-		/*ecs::entity_t teaCupSpoon = entityFactory->CreateInteractableEntity( // Spoon entity
-			entityManager, "TeaCupSpoon", EntityFactory::RECTAREA,
-			Vector2D(100, 400), Vector2D(), 600, 400, 0,
-			areaLayerManager, EntityFactory::DRAG, ecs::grp::DEFAULT);*/
 
 		auto balance = entityFactory->
 			CreateImageEntity(entityManager, "balance", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 
-
+		
 
 		auto balanceArea = entityFactory->CreateInteractableEntity( // balance entity
 			entityManager, "balance", EntityFactory::RECTAREA,
-			Vector2D(400, 100), Vector2D(), 460, 280, 0,
+			Vector2D(800, 450), Vector2D(), 200, 100, 0,
 			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
-		//balanceArea->getMngr()->removeComponent<Image>(balanceArea);
+		balanceArea->getMngr()->removeComponent<Image>(balanceArea);
 
 	auto heart = entityFactory->CreateImageEntity(entityManager, "heart", Vector2D(250, 100), Vector2D(0, 0), 460, 280, 0, ecs::grp::DEFAULT);
 
@@ -90,7 +86,7 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 			Vector2D position = sr->GetInventory()->setPosition();
 			AddInvItem("pluma", sdlutils().invDescriptions().at("pluma"), position, sr);
 			});
-
+		
 		feather = entityFactory->CreateInteractableEntity( // feather entity
 			entityManager, "pluma", EntityFactory::RECTAREA,
 			Vector2D(400, 300), Vector2D(), 460, 280, 0,
@@ -113,7 +109,21 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 		//BackButton
 		//ENTIDADCONENTITYFACTORY
 		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, _backButton, buttonSound]()
+			{
+				AudioManager::Instance().playSound(buttonSound);
 
+				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
+				HideInventoryItems();
+				sr->GetInventory()->setFirstItem(0);
+				auto _backButtonImage = _backButton->getMngr()->getComponent<Image>(_backButton);
+				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
+				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
+				_backButtonImage->setPosOffset(0, 0);
+				Game::Instance()->getSceneManager()->popScene();
+
+			});
 		
 		//INVENTORY
 		//Invntory Background
@@ -135,7 +145,7 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 			});
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
-		//startDialogue("PuzzleTaza1");
+		startDialogue("PuzzleTaza1");
 	}
 	sr->GetInventory()->setFirstItem(0);
 	createInvEntities(sr);
@@ -170,6 +180,11 @@ bool BalancePuzzleScene::isItemHand(const std::string& itemId)
 }
 void BalancePuzzleScene::Win()
 {
+	
+	Image* img = balanceBackground->getMngr()->getComponent<Image>(balanceBackground);
+	
+	img->setTexture(&sdlutils().images().at("FeatherBackground"));
+	
 	room->resolvedPuzzle(0);
 }
 

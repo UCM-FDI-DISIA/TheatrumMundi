@@ -60,6 +60,7 @@
     { "id" : "2ndQuestion", "file" : "../resources/images/Finales/2ndQuestionText.png" },
     { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
     { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
+       { "id" : "FeatherBackground", "file" : "../resources/images/temporales/FeatherBackground.png" },
    
     {
       "id": "incrementButton",
