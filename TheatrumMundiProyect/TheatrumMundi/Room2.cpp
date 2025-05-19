@@ -137,7 +137,7 @@ void Room2Scene::_setRoomEvents()
 		Game::Instance()->getSceneManager()->loadScene(MOSAIC_SCENE, this);
 		};
 	roomEvent[MosaicPuzzleSceneRsv] = [this] {
-		MirrorMosaic = true;
+		brokenMosaic = true;
 		entityManager->getComponent<Image>(rmObjects.mosaic)->setTexture(&sdlutils().images().at("MosaicoRotoSala"));
 		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("MOSAICO3_2P");
 		else {
@@ -300,7 +300,7 @@ void Room2Scene::_setRoomBackground()
 #pragma region Scroll
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom2)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom2]() {
-		if (!isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
 			//if(rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT)) {
 				rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
 				auto trChangeRoom2 = entityManager->getComponent<Transform>(ChangeRoom2);
@@ -309,13 +309,13 @@ void Room2Scene::_setRoomBackground()
 				scrolling = true;
 			//}
 		}
-		else if (isOpen) {
+		else if (!isOpen) {
 			roomEvent[DoorScene]();
 		}
 		});
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom1)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll, ChangeRoom1]() {
-		if (!isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
 			//if (rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT)) {
 				rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
 				auto trChangeRoom1 = entityManager->getComponent<Transform>(ChangeRoom1);
@@ -569,16 +569,16 @@ void Room2Scene::_setInteractuables()
 		});
 	rmObjects.hook->getMngr()->setActive(rmObjects.hook, false);
 
-	rmObjects.secretEntryZoom = entityFactory->CreateImageEntity(entityManager, "SalidaSecretaCerrada", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
-	rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, false);
-	rmObjects.secretEntryZoom->getMngr()->addComponent<ClickComponent>(rmObjects.secretEntryZoom);
+	rmObjects.secretEntryZoom = entityFactory->CreateInteractableEntityNotMoveSprite(entityManager, "SalidaSecretaCerrada",EntityFactory::RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0,areaLayerManager,EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 	rmObjects.secretEntryZoom->getMngr()->getComponent<ClickComponent>(rmObjects.secretEntryZoom)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
-		if (variant == 2)
+		if (variant == 2 && !isFirstClick)
 		{
 			rmObjects.secretEntryZoom->getMngr()->getComponent<Image>(rmObjects.secretEntryZoom)->setTexture(&sdlutils().images().at("SalidaSecretaAbierta"));
 		}
+		isFirstClick = false;
 	});
+	rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, false);
 
 #pragma endregion
 

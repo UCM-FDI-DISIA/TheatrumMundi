@@ -49,6 +49,7 @@ private:
 	bool scrolling = false;
 	bool brokenMosaic = false;
 	bool MirrorMosaic = false;
+	bool isFirstClick = true; //To evitate the insta click in ZoomEntities
 	void endDialogue() override;
 	void _setRoomEvents();
 	void _setRoomAudio();
