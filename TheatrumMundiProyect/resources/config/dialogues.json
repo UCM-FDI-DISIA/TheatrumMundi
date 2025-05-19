@@ -452,8 +452,8 @@
     ],
     "NoMePaganPorEsto":[                 
     {"Character":" ","Text":"¿Te crees gracioso?"},
-    {"Character":" ","Text":"¿No tienes nada mejor que hacer que abrir y cerrar una ventana?"},
-    {"Character":" ","Text":"No me he tirado horas y horas no remuneradas diseñando este juego,"},
+    {"Character":" ","Text":"¿No tienes nada mejor que hacer que abrir\n y cerrar una ventana?"},
+    {"Character":" ","Text":"No me he tirado horas y horas no remuneradas \ndiseñando este juego,"},
     {"Character":" ","Text":"creando cada sala,"},
     {"Character":" ","Text":"escribiendo el guión"},
     {"Character":" ","Text":"y planeando cada pequeño detalle"},
@@ -462,8 +462,8 @@
     {"Character":" ","Text":"con menos neuronas que el cuervo de fuera"},
     {"Character":" ","Text":"se pase el tiempo abriendo y cerrando una puta ventana."},
     {"Character":" ","Text":"¿Te aburres o algo?"},
-    {"Character":" ","Text":"¿Te interesa tan poco mi juego que prefieres abrir y cerrar una ventana?"},
-    {"Character":" ","Text":"Están bien, voy a darte algo a lo que hacer click"},
+    {"Character":" ","Text":"¿Te interesa tan poco mi juego que prefieres abrir \ny cerrar una ventana?"},
+    {"Character":" ","Text":"Está bien, voy a darte algo a lo que hacer click"},
     {"Character":" ","Text":"..."},
     {"Character":" ","Text":"..."},
     {"Character":" ","Text":"..."},
@@ -747,6 +747,21 @@
         { "Character": " ", "Text": "ni que es hora de la ronda final." }
         ],
         "SalaIntermedia3_3": [
+        { "Character": "Keisara", "Text": "¡No!" },
+        { "Character": "Keisara", "Text": "¿Dónde está Sol?" },
+        { "Character": "Keisara", "Text": "Dime que está bien." },
+        { "Character": " ", "Text": "Eso dependía de vosotras." },
+        { "Character": " ", "Text": "Y fallasteis." },
+        { "Character": "Lucy", "Text": "Entonces lo decía enserio." },
+        { "Character": " ", "Text": "Pero por supuesto." },
+        { "Character": " ", "Text": "Yo nunca miento." },
+        { "Character": "Keisara", "Text": "No puede ser." },
+        { "Character": "Lucy", "Text": "Lo siento Kei." },
+        { "Character": "Keisara", "Text": "No te disculpes tú, no es tu culpa." },
+        { "Character": " ", "Text": "Bueno, bueno, dejémonos de lloros." },
+        { "Character": " ", "Text": "¡Es hora de la ronda final!" }
+        ],
+        "SalaIntermedia3_4": [
         { "Character": "Lucy", "Text": "..." },
         { "Character": " ", "Text": "Sois muy malos en este juego la verdad." },
         { "Character": " ", "Text": "Esperaba más de vosotros." },
@@ -768,7 +783,26 @@
         ]
   },
    "Sala5": {
-    "Sala4Intro":[],
+    "Sala4Intro_1":[
+      { "Character": "Sol", "Text": "Y ahora estamos a oscuras, genial." },
+      {"Character": "Keisara", "Text": "¡Sol! Ha dicho que es la última ronda."},
+      {"Character": "Keisara", "Text": "Eso significa que después de esta se acabará."},
+      {"Character": "Sol", "Text": "Si estás dispuesta a creele."},
+      {"Character": "Keisara", "Text": "Piensa un poco en positivo Sol."},
+      {"Character": "Sol", "Text": "Vale, está bien."},
+      {"Character": "Sol", "Text": "Vamos a coneguir salir sanos y salvos de esta."},
+      {"Character": "Keisara", "Text": "¡Ese es el espíritu!"}
+    ],
+    "Sala4Intro_2":[
+      { "Character": "Keisara", "Text": "Y ahora estamos a oscuras, genial." },
+      {"Character": "Keisara", "Text": "¡Sol! Ha dicho que es la última ronda."},
+      {"Character": "Keisara", "Text": "Eso significa que después de esta se acabará."},
+      {"Character": "Sol", "Text": "Si estás dispuesta a creele."},
+      {"Character": "Keisara", "Text": "Piensa un poco en positivo Sol."},
+      {"Character": "Sol", "Text": "Vale, está bien."},
+      {"Character": "Sol", "Text": "Vamos a coneguir salir sanos y salvos de esta."},
+      {"Character": "Keisara", "Text": "¡Ese es el espíritu!"}
+    ],
     "CABLES_2P": [
       { "Character": "Sol", "Text": "Es lo único que se ve en toda la sala." },
       { "Character": "Sol", "Text": "Espera..." },

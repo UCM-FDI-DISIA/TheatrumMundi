@@ -4,6 +4,7 @@
 #include "../src/Components/ClickComponent.h"
 #include "../src/Components/BehaviorStateComponent.h"
 #include "../src/Components/RectArea2D.h"
+#include "../src/Components/Area2D.h"
 #include "../src/Components/Image.h"
 #include "Area2DLayerManager.h"
 #include "Log.h"
@@ -101,17 +102,23 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 	// BULLETS
 	int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
 	Vector2D bulletsPosition((sdlutils().width() - 150) / 2, (sdlutils().height() - 150) / 2);
+
 	entity_t bulletsEntity;
-	if(variant == 1)bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "balasF" , EntityFactory::RECTAREA, // TODO Imagen balas
-		bulletsPosition, Vector2D(0, 0), 150, 150, 0,
-		areaLayerManager,
-		EntityFactory::NODRAG,
-		ecs::grp::DEFAULT);
-	else bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "balasR", EntityFactory::RECTAREA, // TODO Imagen balas
-		bulletsPosition, Vector2D(0, 0), 150, 150, 0,
-		areaLayerManager,
-		EntityFactory::NODRAG,
-		ecs::grp::DEFAULT);
+
+	if (variant == 1) {
+		bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "balasF" , EntityFactory::RECTAREA, // TODO Imagen balas
+			bulletsPosition, Vector2D(0, 0), 150, 150, 0,
+			areaLayerManager,
+			EntityFactory::NODRAG,
+			ecs::grp::DEFAULT);
+	}
+	else {
+		bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "balasR", EntityFactory::RECTAREA, // TODO Imagen balas
+			bulletsPosition, Vector2D(0, 0), 150, 150, 0,
+			areaLayerManager,
+			EntityFactory::NODRAG,
+			ecs::grp::DEFAULT);
+	}
 	entityManager->getComponent<ClickComponent>(bulletsEntity) // Collectable
 		->connect(ClickComponent::JUST_CLICKED, [&, this]() {
 			bulletsEntity->getMngr()->setActive(bulletsEntity, false);
@@ -177,24 +184,27 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 
 	parrotStateCom->defBehavior(Room3Scene::Phase::LIGHTS_RED, stopBehavior);
 
+	parrotStateCom->defBehavior(ParrotState::DEATH, [](){}); // Death the parrot doen't do anithing
+
 	parrotStateCom->setState(Room3Scene::Phase::LIGHTS_OFF); // The other will be setted after finishin the puzzle
 
 	TriggerComponent* triggComp = entityManager->getComponent<TriggerComponent>(parrotUtils.parrotEnt);
 	triggComp->connect(TriggerComponent::AREA_ENTERED, // handdle if the torch enters
-		[triggComp, parrotStateCom, this]() {
+		[bulletsEntity, triggComp, parrotStateCom, this]() {
 			auto enteredEnts = triggComp->triggerContextEntities();
 
 			for (ecs::entity_t ent : enteredEnts) 
 			{
 				Image* objectImg = ent->getMngr()->getComponent<Image>(ent);
 																							// TODO Torch final image
-				if (objectImg != nullptr && objectImg->GetTexture() == &sdlutils().images().at("B1")) // Torch enters
+				if (objectImg != nullptr && objectImg->GetTexture() == &sdlutils().images().at("Linterna")) // Torch enters
 					if (parrotStateCom->getState() == Room3Scene::Phase::LIGHTS_RED)
 					{
 						// Change parrot image to exploded parrot
-						AudioManager::Instance().playSound(rmSounds.explosionSound);
-					//  entityManager->getComponent<Image>(parrotUtils.parrotEnt)->setTexture(&sdlutils().images().at("Exploded_Parrot"));
-						entityManager->removeComponent<Area2D>(parrotUtils.parrotEnt);
+						AudioManager::Instance().playSound(rmSounds.explosionSound);						// TODO: Exploded_Parrot image
+						entityManager->getComponent<Image>(parrotUtils.parrotEnt)->setTexture(&sdlutils().images().at("EmptyImage"));
+						entityManager->getComponent<ClickComponent>(bulletsEntity)->setLayerOpposition(false); // We can collect the bullets even with the parrot on top
+						parrotStateCom->setState(ParrotState::DEATH);
 						break;
 					}
 			}

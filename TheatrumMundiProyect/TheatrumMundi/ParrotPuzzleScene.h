@@ -49,5 +49,7 @@ private:
 		std::vector<std::shared_ptr<Sound>> codeSequenceSounds; // Sequence of sounds in the second phase
 		int codeSeqIteration = 0;
 	} parrotUtils;
+
+	enum ParrotState { DEATH = 3 };
 };
 
