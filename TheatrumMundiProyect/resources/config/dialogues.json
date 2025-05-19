@@ -794,14 +794,35 @@
       {"Character": "Keisara", "Text": "¡Ese es el espíritu!"}
     ],
     "Sala4Intro_2":[
-      { "Character": "Keisara", "Text": "Y ahora estamos a oscuras, genial." },
-      {"Character": "Keisara", "Text": "¡Sol! Ha dicho que es la última ronda."},
-      {"Character": "Keisara", "Text": "Eso significa que después de esta se acabará."},
-      {"Character": "Sol", "Text": "Si estás dispuesta a creele."},
-      {"Character": "Keisara", "Text": "Piensa un poco en positivo Sol."},
-      {"Character": "Sol", "Text": "Vale, está bien."},
-      {"Character": "Sol", "Text": "Vamos a coneguir salir sanos y salvos de esta."},
-      {"Character": "Keisara", "Text": "¡Ese es el espíritu!"}
+      { "Character": "Sol", "Text": "Y ahora estoy a oscuras, genial." },
+      {"Character": "Sol", "Text": "¡Odio este sitio!"},
+      {"Character": "Sol", "Text": "¡Odio todo esto!"},
+      {"Character": " ", "Text": "¿Te vas a poner a llorar?"},
+      {"Character": "Sol", "Text": "Y sobre todo, te odio a tí."},
+      {"Character": " ", "Text": "Aw, ¿soy lo que más odias?"},
+      {"Character": " ", "Text": "Que honor, y dicen que el romance está muerto."},
+      {"Character": " ", "Text": "¿Pero estás seguro de que no tienes \nnada mejor que hacer ahora mismo?"},
+      {"Character": " ", "Text": "Aún tienes a una amiga que depende de ti."},
+      {"Character": "Sol", "Text": "¿Sabes qué?"},
+      {"Character": "Sol", "Text": "He cambiado de opinión."},
+      {"Character": "Sol", "Text": "Lo que más odio es que por una vez tengas razón"}
+    ],
+    "Sala4Intro_3":[
+      { "Character": "Keisara", "Text": "¡Sol!" },
+      { "Character": "Keisara", "Text": "¡Lucy!" },
+      { "Character": "Keisara", "Text": "¿Alguien?" },
+      { "Character": " ", "Text": "Sigo aquí." },
+      { "Character": "Keisara", "Text": "Por cualquier motivo que \ncreo que puedes adivinar, eso no me consuela." },
+      { "Character": " ", "Text": "Triste, pero entendible." },
+      { "Character": " ", "Text": "Pero no tienes tiempo para lamentarte-" },
+      { "Character": "Keisara", "Text": "Te voy a ser totalmente honesta." },
+      { "Character": "Keisara", "Text": "Lo último que necesito \nahora mismo es escuchar tu voz." },
+      { "Character": "Keisara", "Text": "O qué tú, de todo el mundo, \nme des una charla de motivación." },
+      { "Character": "Keisara", "Text": "Así que agradecería enormemente si\n te callases y me dejases investigar en paz." },
+      { "Character": "Keisara", "Text": "Muchas gracias." },
+      {"Character": " ", "Text": "Guau, veo que no soy bienvenido."},
+      {"Character": " ", "Text": "Suerte supongo."}
+      
     ],
     "CABLES_2P": [
       { "Character": "Sol", "Text": "Es lo único que se ve en toda la sala." },
@@ -930,7 +951,7 @@
     
     "LORO2_2PK":[
     {"Character":"Keisara","Text":"Desde luego no es un loro normal."},
-    {"Character":"Keisara","Text":"Está repitiendo lo mismo sin parar en exacatamnete el mismo tono."},
+    {"Character":"Keisara","Text":"Está repitiendo lo mismo sin parar\n en exacatamnete el mismo tono."},
     {"Character":"Keisara","Text":"Tiene que estar cansado, pobrecito."},
     {"Character":"Keisara","Text":"¿Debería darle algo para que se calme?"}
     ]
