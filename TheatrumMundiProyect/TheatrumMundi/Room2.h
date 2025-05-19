@@ -53,6 +53,7 @@ private:
 	bool scrolling = false;
 	bool brokenMosaic = false;
 	bool MirrorMosaic = false;
+	bool ckeckWindow = false;
 	void endDialogue() override;
 	void _setRoomEvents();
 	void _setRoomAudio();
