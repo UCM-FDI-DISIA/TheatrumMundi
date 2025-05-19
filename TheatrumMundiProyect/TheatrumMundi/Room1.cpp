@@ -27,6 +27,7 @@
 #include "../src/components/WriteTextComponent.h"
 #include "DialogueManager.h"
 
+
 Room1Scene::Room1Scene() : SceneRoomTemplate(), _eventToRead("Sala1Intro")
 {
 	dialogueManager = new DialogueManager(1);
@@ -114,6 +115,8 @@ void Room1Scene::unload()
 }
 
 //// Private Internal Setting Methods
+
+
 
 void Room1Scene::endDialogue()
 {
@@ -313,11 +316,32 @@ void Room1Scene::_setDialog()
 	}
 }
 
+struct TimerData {
+	EntityManager* manager;
+	PauseManager* pauseM;
+};
+
+Uint32 timerCallback(Uint32 interval, void* param) {
+
+	auto data = static_cast<TimerData*>(param);
+
+	data->manager->setActive(data->pauseM->_getopenPauseButton(), true);
+
+	delete data;
+	return 0;
+}
+
+
+
+
 void Room1Scene::_setUI()
 {
 	// Corpse zoom Quit Button
-	rmObjects.quitButton = entityFactory->CreateInteractableEntity(entityManager, "B1", entityFactory->RECTAREA, Vector2D(1349 - 110, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, entityFactory->NODRAG, ecs::grp::UI);
+	rmObjects.quitButton = entityFactory->CreateInteractableEntity(entityManager, "B1", entityFactory->RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, entityFactory->NODRAG, ecs::grp::UI);
 	
+
+
+
 	entityManager->getComponent<ClickComponent>(rmObjects.quitButton)
 		->connect(ClickComponent::JUST_CLICKED, [this]()
 		{
@@ -329,6 +353,11 @@ void Room1Scene::_setUI()
 			entityManager->setActiveGroup(ecs::grp::ZOOMOBJ, false);
 			entityManager->setActive(rmObjects.quitButton, false);
 			entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, true);
+			
+			TimerData* t = new TimerData{ entityManager,pauseManager };
+			SDL_AddTimer(50, timerCallback, t);
+			
+
 		});
 
 	entityManager->setActive(rmObjects.quitButton, false);
@@ -641,6 +670,7 @@ void Room1Scene::_setInteractuables()
 			{if (!scrolling) {
 		entityManager->setActive(corpseZoom, true);
 		entityManager->setActive(rmObjects.quitButton, true);
+		entityManager->setActive(pauseManager->_getopenPauseButton(), false);
 
 		roomEvent[CorpseDialogue]();
 	}
@@ -686,6 +716,7 @@ void Room1Scene::_setInteractuables()
 					ImagequitButton->setH(entityManager->getComponent<Transform>(rmObjects.quitButton)->getHeight());
 					ImagequitButton->setPosOffset(0, 0);
 					roomEvent[MobileDialogue]();
+					entityManager->setActive(pauseManager->_getopenPauseButton(), false);
 				}
 			});
 
@@ -713,6 +744,8 @@ void Room1Scene::_setInteractuables()
 		ImagequitButton->setW(entityManager->getComponent<Transform>(rmObjects.quitButton)->getWidth());
 		ImagequitButton->setH(entityManager->getComponent<Transform>(rmObjects.quitButton)->getHeight());
 		ImagequitButton->setPosOffset(0, 0);
+		entityManager->setActive(pauseManager->_getopenPauseButton(), false);
+
 			}
 			});
 
