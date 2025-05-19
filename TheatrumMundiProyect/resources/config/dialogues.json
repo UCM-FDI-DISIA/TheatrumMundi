@@ -783,7 +783,7 @@
         ]
   },
    "Sala5": {
-    "Sala4Intro_1":[
+    "Sala4Intro_2P":[
       { "Character": "Sol", "Text": "Y ahora estamos a oscuras, genial." },
       {"Character": "Keisara", "Text": "¡Sol! Ha dicho que es la última ronda."},
       {"Character": "Keisara", "Text": "Eso significa que después de esta se acabará."},
@@ -793,7 +793,7 @@
       {"Character": "Sol", "Text": "Vamos a coneguir salir sanos y salvos de esta."},
       {"Character": "Keisara", "Text": "¡Ese es el espíritu!"}
     ],
-    "Sala4Intro_2":[
+    "Sala4Intro_1PS":[
       { "Character": "Sol", "Text": "Y ahora estoy a oscuras, genial." },
       {"Character": "Sol", "Text": "¡Odio este sitio!"},
       {"Character": "Sol", "Text": "¡Odio todo esto!"},
@@ -807,7 +807,7 @@
       {"Character": "Sol", "Text": "He cambiado de opinión."},
       {"Character": "Sol", "Text": "Lo que más odio es que por una vez tengas razón"}
     ],
-    "Sala4Intro_3":[
+    "Sala4Intro_1PK":[
       { "Character": "Keisara", "Text": "¡Sol!" },
       { "Character": "Keisara", "Text": "¡Lucy!" },
       { "Character": "Keisara", "Text": "¿Alguien?" },
@@ -822,7 +822,28 @@
       { "Character": "Keisara", "Text": "Muchas gracias." },
       {"Character": " ", "Text": "Guau, veo que no soy bienvenido."},
       {"Character": " ", "Text": "Suerte supongo."}
-      
+
+    ],
+    "CADAVER1_2P": [
+      { "Character": "Sol", "Text": "Que luz más asquerosa." },
+      { "Character": "Keisara", "Text": "Creo que prefería no poder\n ver el cadáver." },
+      { "Character": "Sol", "Text": "Estamos de acuerdo en eso." },
+      { "Character": "Keisara", "Text": "Parece que la causa de \nmuerte es un disparo a la cabeza." },
+      { "Character": "Sol", "Text": "No es que se vea mucho más \ncon esta maravillosa iluminación." }
+    ],
+    "CADAVER1_1PS": [
+      { "Character": "Sol", "Text": "Que luz más asquerosa." },
+      { "Character": "Sol", "Text": "No se ve una mierda." },
+      { "Character": "Sol", "Text": "Eso parece un disparo a la cabeza." },
+      { "Character": "Sol", "Text": "..." },
+      { "Character": "Sol", "Text": "Lucy siempre suena tan segura \nsobre estas cosas." }
+    ],
+    "CADAVER1_1PK": [
+      { "Character": "Keisara", "Text": "Casi prefería cuando estaba a oscuras." },
+      { "Character": "Keisara", "Text": "Esto es horrible." },
+      { "Character": "Keisara", "Text": "¿Es eso un disparo?" },
+      { "Character": "Keisara", "Text": "No es que pueda ver mucho más." },
+      { "Character": "Keisara", "Text": "Supongo que esa es la causa de la muerte." }
     ],
     "CABLES_2P": [
       { "Character": "Sol", "Text": "Es lo único que se ve en toda la sala." },
@@ -954,6 +975,11 @@
     {"Character":"Keisara","Text":"Está repitiendo lo mismo sin parar\n en exacatamnete el mismo tono."},
     {"Character":"Keisara","Text":"Tiene que estar cansado, pobrecito."},
     {"Character":"Keisara","Text":"¿Debería darle algo para que se calme?"}
+    ],
+     "Sala3Final": [
+      { "Character": " ", "Text": "¡Al fin!" },
+      { "Character": " ", "Text": "La hora de la elección final" },
+      { "Character": " ", "Text": "Casi no queda nada para el cierre del telón." }
     ]
 
 
