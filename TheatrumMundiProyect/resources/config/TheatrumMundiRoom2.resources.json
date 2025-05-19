@@ -21,7 +21,11 @@
     },
     {
       "id": "Varilla",
-      "file": "../resources/images/temporales/Room2/Gancho.jpg"
+      "file": "../resources/images/Finales/Varilla.png"
+    },
+    {
+      "id": "VarillaInventario",
+      "file": "../resources/images/Finales/VarillaInventario.png"
     },
     {
       "id": "Mosaico",

@@ -49,7 +49,6 @@ private:
 	bool scrolling = false;
 	bool brokenMosaic = false;
 	bool MirrorMosaic = false;
-	bool isFirstClick = true; //To evitate the insta click in ZoomEntities
 	void endDialogue() override;
 	void _setRoomEvents();
 	void _setRoomAudio();
@@ -81,7 +80,6 @@ private:
 		ecs::entity_t zoomOrgan = nullptr; //Image of the zoomed Organ
 		ecs::entity_t organ = nullptr; //Image of the organ
 		ecs::entity_t rope = nullptr; // Image of the rope
-		ecs::entity_t hook = nullptr; //Image of the hook
 		ecs::entity_t secretEntryZoom = nullptr; //Image of the ZoomEntry
 		ecs::entity_t mosaic = nullptr;
 		//ScrollComponent

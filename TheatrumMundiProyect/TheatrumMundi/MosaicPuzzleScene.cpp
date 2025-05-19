@@ -23,7 +23,7 @@ void MosaicPuzzleScene::createSquares()
 		squares.push_back(it);
 		it->getMngr()->getComponent<Transform>(it)->setPosPure(positions[indexPositions[i]]);
 		it->getMngr()->getComponent<ClickComponent>(it)->connect(ClickComponent::JUST_CLICKED,[this,it]() {
-			if (!squareMoving) {
+			if (!solved && !squareMoving) {
 				square = it->getMngr()->getComponent<Transform>(it);
 				MoveSquare();
 			}
@@ -91,7 +91,7 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 		//Creation of all the buttons
 		auto reset = entityFactory->CreateInteractableEntity(entityManager, "resetButton", EntityFactory::RECTAREA, Vector2D(80, 320), Vector2D(0, 0), 183 / 1.5, 172 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		reset->getMngr()->getComponent<ClickComponent>(reset)->connect(ClickComponent::JUST_CLICKED, [this] {
-			ResetPuzzle();
+			if(!solved)ResetPuzzle();
 		});
 #ifdef _DEBUG
 		auto resolve = entityFactory->CreateInteractableEntity(entityManager, "clockHorButton", EntityFactory::RECTAREA, Vector2D(400, 0), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);

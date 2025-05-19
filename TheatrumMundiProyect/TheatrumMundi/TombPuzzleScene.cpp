@@ -110,7 +110,7 @@ void TombPuzzleScene::init(SceneRoomTemplate* sr)
 		neckclace = entityFactory->CreateInteractableEntity(entityManager, "ColganteTumba", EntityFactory::RECTAREA, Vector2D(290, 290), Vector2D(0, 0), 262 / 1.35, 234 / 1.35, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		entityManager->getComponent<ClickComponent>(neckclace)->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
-				AddInvItem("colganteInv", sdlutils().invDescriptions().at("colganteInv"), room->GetInventory()->setPosition(), room);
+				AddInvItem("colganteInv", sdlutils().invDescriptions().at("Colgante"), room->GetInventory()->setPosition(), room);
 				entityManager->removeEntity(neckclace);
 				entityManager->setActive(neckclace, false);
 			});

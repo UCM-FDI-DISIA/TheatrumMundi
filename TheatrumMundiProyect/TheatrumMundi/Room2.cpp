@@ -148,8 +148,6 @@ void Room2Scene::_setRoomEvents()
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
 		
 		startDialogue("Prueba");
-
-		if (!puzzlesol[2]&&variant !=2) rmObjects.hook->getMngr()->setActive(rmObjects.hook, false); //if organ is not complete don't show the hook
 		rmObjects.zoomOrgan->getMngr()->setActive(rmObjects.zoomOrgan, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);
 		rmObjects.organ->getMngr()->setActive(rmObjects.organ, true);
@@ -178,20 +176,12 @@ void Room2Scene::_setRoomEvents()
 		Game::Instance()->getSceneManager()->loadScene(MUSIC_PUZZLE, this);
 		};
 	roomEvent[OrganPuzzleSceneRsv] = [this] {
-
-		rmObjects.hook->getMngr()->setActive(rmObjects.hook, true);
+		brokenMosaic = false;
+		MirrorMosaic = true;
 		entityManager->getComponent<Image>(rmObjects.mosaic)->setTexture(&sdlutils().images().at("MosaicoEspejoSala"));
 		};
-	roomEvent[Hook] = [this] {
-		//Remove Hook
-		rmObjects.hook->getMngr()->removeEntity(rmObjects.hook);
-		// InventoryLogic
-		GetInventory()->addItem(new Hint("Gancho", "Esto se enganchara en algun lado", &sdlutils().images().at("Gancho")));
-		GetInventory()->hints.push_back(entityFactory->CreateInvEntity(entityManager, "Gancho", EntityFactory::RECTAREA, GetInventory()->setPosition(), Vector2D(0, 0), 268 / 2, 268 / 2, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-		GetInventory()->hints.back()->getMngr()->setActive(GetInventory()->hints.back(), false);
-
-		};
 	roomEvent[SecretEntry] = [this] {
+		startDialogue("Prueba");
 		rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);
 		};
@@ -562,21 +552,13 @@ void Room2Scene::_setInteractuables()
 #pragma region SolvedOrgan
 
 	//After completeing organ
-
-	rmObjects.hook = entityFactory->CreateInteractableEntity(entityManager, "Varilla", EntityFactory::RECTAREA, Vector2D(400, 190), Vector2D(0, 0), 500 / 3, 500 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
-	entityManager->getComponent<ClickComponent>(rmObjects.hook)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		roomEvent[Hook]();
-		});
-	rmObjects.hook->getMngr()->setActive(rmObjects.hook, false);
-
 	rmObjects.secretEntryZoom = entityFactory->CreateInteractableEntityNotMoveSprite(entityManager, "SalidaSecretaCerrada",EntityFactory::RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0,areaLayerManager,EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 	rmObjects.secretEntryZoom->getMngr()->getComponent<ClickComponent>(rmObjects.secretEntryZoom)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
-		if (variant == 2 && !isFirstClick)
+		if (variant == 2)
 		{
 			rmObjects.secretEntryZoom->getMngr()->getComponent<Image>(rmObjects.secretEntryZoom)->setTexture(&sdlutils().images().at("SalidaSecretaAbierta"));
 		}
-		isFirstClick = false;
 	});
 	rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, false);
 

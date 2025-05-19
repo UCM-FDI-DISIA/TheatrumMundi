@@ -45,7 +45,7 @@ private:
 	entity_t background; //background
 
 	std::vector<entity_t> displayedNotes; //entities's vector of displayed musical notes
-
+	ecs::entity_t hook;
 	std::vector<std::shared_ptr<Sound>> musicalSounds; //vector that saves all musical notes' sounds
 
 	//animation

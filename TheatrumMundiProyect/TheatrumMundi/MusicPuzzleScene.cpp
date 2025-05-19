@@ -124,6 +124,14 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
         //piano buttons
         createPianoButtons();
 
+        //Create Hook
+        hook = entityFactory->CreateInteractableEntity(entityManager, "Varilla", EntityFactory::RECTAREA, Vector2D(530, 680), Vector2D(0, 0), 864 / 3, 207 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INVENTORY);
+        entityManager->getComponent<ClickComponent>(hook)->connect(ClickComponent::JUST_CLICKED, [this, sr]() {
+            entityManager->setActive(hook, false);
+            AddInvItem("VarillaInventario", sdlutils().invDescriptions().at("Varilla"), sr->GetInventory()->setPosition(), sr);
+            entityManager->removeEntity(hook);
+            });
+        entityManager->setActive(hook, false);
         //black musical notes
         entityFactory->CreateImageEntity(entityManager, "teclasNegras", Vector2D(430, 473), Vector2D(0, 0), 739 / 1.5, 44 / 1.5, 0, ecs::grp::BACKGROUND);
 
@@ -226,6 +234,7 @@ void MusicPuzzleScene::refresh()
                 {
                     if (!solved && Check())
                     {
+                        hook->getMngr()->setActive(hook, true);
                         //puzzle win
                         Win();
                         
