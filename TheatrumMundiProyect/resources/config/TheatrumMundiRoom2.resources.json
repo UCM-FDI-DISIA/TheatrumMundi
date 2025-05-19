@@ -555,6 +555,14 @@
       "file": "../resources/images/Finales/fondoPuzzleMusical.jpg"
     },
     {
+      "id": "loading1",
+      "file": "../resources/images/Finales/Carga1.png"
+    },
+    {
+      "id": "loading2",
+      "file": "../resources/images/Finales/Carga2.png"
+    },
+    {
       "id": "loading3",
       "file": "../resources/images/Finales/Carga3.png"
     },

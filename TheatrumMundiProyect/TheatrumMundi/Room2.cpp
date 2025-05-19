@@ -41,6 +41,20 @@ void Room2Scene::init()
 	isOpen = false;
 	finishallpuzzles = false;
 	stopAnimation = false;
+
+	//Load Images
+	_loadimg1 = entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg1->getMngr()->setActive(_loadimg1, false);
+
+	_loadimg2 = entityFactory->CreateImageEntity(entityManager, "loading2", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg2->getMngr()->setActive(_loadimg2, false);
+
+	_loadimg3 = entityFactory->CreateImageEntity(entityManager, "loading3", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg3->getMngr()->setActive(_loadimg2, false);
+
+	_loadimg4 = entityFactory->CreateImageEntity(entityManager, "loading3", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg4->getMngr()->setActive(_loadimg2, false);
+
 	_setRoomAudio();
 	_setGlobalFeatures();
 	_setRoomBackground();
@@ -227,10 +241,25 @@ void Room2Scene::_setRoomEvents()
 		};
 	roomEvent[GoodEnd] = [this] {
 		// WIP
+		Game::Instance()->getDataManager()->SetSceneCount(SceneCount::MIDDLEROOM3);
+		if(Game::Instance()->getDataManager()->GetCharacterState(KEISARA))_loadimg1->getMngr()->setActive(_loadimg1, true);
+		else _loadimg2->getMngr()->setActive(_loadimg2, true);
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
+		std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
+		AudioManager::Instance().playSound(correctSound);
+		Game::Instance()->render();
 		Game::Instance()->getSceneManager()->popScene();
 		};
 	roomEvent[BadEnd] = [this] {
 		// WIP
+		Game::Instance()->getDataManager()->SetCharacterDead(Character::SOL);
+		Game::Instance()->getDataManager()->SetSceneCount(SceneCount::MIDDLEROOM3);
+		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))_loadimg3->getMngr()->setActive(_loadimg3, true);
+		else _loadimg4->getMngr()->setActive(_loadimg4, true);
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
+		std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
+		AudioManager::Instance().playSound(incorrectSound);
+		Game::Instance()->render();
 		Game::Instance()->getSceneManager()->popScene();
 		};
 #pragma endregion
