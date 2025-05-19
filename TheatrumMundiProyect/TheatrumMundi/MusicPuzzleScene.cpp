@@ -237,7 +237,8 @@ void MusicPuzzleScene::refresh()
                 {
                     if (!solved && Check())
                     {
-                        hook->getMngr()->setActive(hook, true);
+                        int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
+                        if(variant != 2) hook->getMngr()->setActive(hook, true);
                         //puzzle win
                         Win();
                         
@@ -490,8 +491,8 @@ void MusicPuzzleScene::updateDisplayedNotes()
         noteTr->setWidth(width);
         noteTr->setHeight(height);
 
-        noteIm->setW(width);
-        noteIm->setH(height);
+        noteIm->setW(width*Game::Instance()->wscreenScale);
+        noteIm->setH(height*Game::Instance()->wscreenScale);
 
         entityManager->setActive(displayedNotes[i], true);
 
