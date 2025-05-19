@@ -689,6 +689,41 @@
         { "Character": " ", "Text": "Os dije que no les pasaría nada si acertabáis." },
         { "Character": " ", "Text": "Bueno, ahora continuemos con lo que nos concierne." },
         { "Character": " ", "Text": "Una última adivinaza antes del cierre." }
+        ],
+        "SalaIntermedia3_2": [
+        { "Character": "Lucy", "Text": "¡Sol!" },
+        { "Character": "Sol", "Text": "Estoy aquí Lucy, estoy aquí." },
+        { "Character": "Lucy", "Text": "Estás vivo." },
+        { "Character": "Lucy", "Text": "Entonces es verdad..." },
+        { "Character": " ", "Text": "¡Claro que es verdad!¡Yo nunca miento!" },
+        { "Character": " ", "Text": "Si acertais nadie muere." },
+        { "Character": " ", "Text": "Es un concepto bastante simple, no sé \npor qué os cuesta tanto entenderlo." },
+        { "Character": "Lucy", "Text": "Eso significa que podríamos haber-" },
+        { "Character": "Sol", "Text": "Lucy está intentando jodernos más, no le hagas caso." },
+        { "Character": "Sol", "Text": "Es su culpa y de nadie más." },
+        { "Character": "Lucy", "Text": "..." },
+        { "Character": " ", "Text": "Ahhh que bonita es la amistad." },
+        { "Character": " ", "Text": "Pero eso no cambia que solo quedáis dos," },
+        { "Character": " ", "Text": "ni que es hora de la ronda final." }
+        ],
+        "SalaIntermedia3_3": [
+        { "Character": "Lucy", "Text": "..." },
+        { "Character": " ", "Text": "Sois muy malos en este juego la verdad." },
+        { "Character": " ", "Text": "Esperaba más de vosotros." },
+        { "Character": "Lucy", "Text": "..." },
+        { "Character": " ", "Text": "Verás, ahora tengo un problema." },
+        { "Character": " ", "Text": "No puedo seguir el juego sin nadie que lo vea." },
+        { "Character": " ", "Text": "..." },
+        { "Character": "Lucy", "Text": "..." },
+        { "Character": " ", "Text": "..." },
+        { "Character": " ", "Text": "No seas así, esto es tu culpa al final." },
+        { "Character": " ", "Text": "Podrías al menos decir algo." },
+        { "Character": " ", "Text": "El próximo cadáver vas a ser tú y nadie va a poder investigarlo." },
+        { "Character": " ", "Text": "¿Sabes lo que eso significa?" },
+        { "Character": "Lucy", "Text": "Que pena." },
+        { "Character": " ", "Text": "No eres nada divertida." },
+        { "Character": " ", "Text": "Supongo que esto es un adiós entonces." },
+        { "Character": " ", "Text": "Que la suerte te sonría en tus futuras decisiones." }
         
         ]
   },
