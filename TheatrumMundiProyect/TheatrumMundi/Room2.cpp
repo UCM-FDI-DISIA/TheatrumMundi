@@ -165,6 +165,7 @@ void Room2Scene::_setRoomEvents()
 		rmObjects.zoomOrgan->getMngr()->setActive(rmObjects.zoomOrgan, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);
 		rmObjects.organ->getMngr()->setActive(rmObjects.organ, true);
+		rmObjects.window->getMngr()->setActive(rmObjects.window, false);
 		if (rmObjects.rope != nullptr) rmObjects.rope->getMngr()->setActive(rmObjects.rope, true);
 		};
 	roomEvent[Rope] = [this] {
@@ -335,7 +336,7 @@ void Room2Scene::_setRoomBackground()
 #pragma region Scroll
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom2)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom2]() {
-		if (!isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
 			if(rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT)) {
 				auto trChangeRoom2 = entityManager->getComponent<Transform>(ChangeRoom2);
 				trChangeRoom2->setPos(Vector2D(1218, 140));
@@ -343,13 +344,13 @@ void Room2Scene::_setRoomBackground()
 				scrolling = true;
 			}
 		}
-		else if (isOpen) {
+		else if (!isOpen) {
 			roomEvent[DoorScene]();
 		}
 		});
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom1)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll, ChangeRoom1]() {
-		if (!isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
 			if (rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT)) {
 				auto trChangeRoom1 = entityManager->getComponent<Transform>(ChangeRoom1);
 				trChangeRoom1->setPos(Vector2D(30, 175));
@@ -403,8 +404,6 @@ void Room2Scene::_setCaseResolution()
 			{
 				if (variantAct == 0) //if its the not correct variant one dies
 				{
-
-					Game::Instance()->getDataManager()->SetCharacterDead(SOL);
 					roomEvent[BadEnd]();
 				}
 				else
@@ -556,9 +555,9 @@ void Room2Scene::_setInteractuables()
 		else roomEvent[MosaicPuzzleScene]();
 		});
 
-	auto window = entityFactory->CreateInteractableEntity(entityManager, "VentanaSala", EntityFactory::RECTAREA, Vector2D(1220 + 1344, 50), Vector2D(0, 0), 454 / 3, 792 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(window));
-	entityManager->getComponent<ClickComponent>(window)->connect(ClickComponent::JUST_CLICKED, [this]() {
+	rmObjects.window = entityFactory->CreateInteractableEntity(entityManager, "VentanaSala", EntityFactory::RECTAREA, Vector2D(1220 + 1344, 50), Vector2D(0, 0), 454 / 3, 792 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.window));
+	entityManager->getComponent<ClickComponent>(rmObjects.window)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[WindowScene]();
 		});
 

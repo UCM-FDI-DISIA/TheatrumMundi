@@ -86,6 +86,7 @@ private:
 		ecs::entity_t rope = nullptr; // Image of the rope
 		ecs::entity_t secretEntryZoom = nullptr; //Image of the ZoomEntry
 		ecs::entity_t mosaic = nullptr;
+		ecs::entity_t window = nullptr;
 		//ScrollComponent
 		ScrollComponent* backgroundScroll = nullptr;
 
