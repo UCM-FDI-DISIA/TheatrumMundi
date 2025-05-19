@@ -553,6 +553,14 @@
     {
       "id": "fondoOrgano",
       "file": "../resources/images/Finales/fondoPuzzleMusical.jpg"
+    },
+    {
+      "id": "loading3",
+      "file": "../resources/images/Finales/Carga3.png"
+    },
+    {
+      "id": "loading4",
+      "file": "../resources/images/Finales/Carga4.png"
     }
   ],
 

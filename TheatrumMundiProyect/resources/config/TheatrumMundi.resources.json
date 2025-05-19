@@ -251,6 +251,30 @@
       "file": "../resources/images/Finales/Carga2.png"
     },
     {
+      "id": "loading3",
+      "file": "../resources/images/Finales/Carga3.png"
+    },
+    {
+      "id": "loading4",
+      "file": "../resources/images/Finales/Carga4.png"
+    },
+    {
+      "id": "loading5",
+      "file": "../resources/images/Finales/Carga5.png"
+    },
+    {
+      "id": "loading6",
+      "file": "../resources/images/Finales/Carga6.png"
+    },
+    {
+      "id": "loading7",
+      "file": "../resources/images/Finales/Carga7.png"
+    },
+    {
+      "id": "loading8",
+      "file": "../resources/images/Finales/Carga8.png"
+    },
+    {
       "id": "Keisara",
       "file": "../resources/images/clock_horario.png"
   },
