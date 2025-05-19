@@ -4,6 +4,8 @@ class RavenPuzzleScene : public ScenePuzzleTemplate
 {
 private:
 	bool ravenHappy; //If the player change the Jewel with the player or not
+	ecs::entity_t raven;
+	ecs::entity_t key;
 public:
 
 	RavenPuzzleScene();

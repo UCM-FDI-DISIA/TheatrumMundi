@@ -59,9 +59,9 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		AudioManager& a = AudioManager::Instance();
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
-
+		entityFactory->CreateImageEntity(entityManager, "FondoSalaDeEspera", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		//INVENTORY
-		//createInventoryUI();
+		createInventoryUI();
 		
 
 		//where the wires are going to be connected
@@ -230,6 +230,35 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 		dialogueManager->setScene(this);
+
+		//Rewards
+		int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
+		
+		if (variant == 2)gun = entityFactory->CreateInteractableEntity(entityManager, "pistolaCon", EntityFactory::RECTAREA,
+			Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
+			areaLayerManager,
+			EntityFactory::NODRAG,
+			ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+		else gun = entityFactory->CreateInteractableEntity(entityManager, "pistolaSin", EntityFactory::RECTAREA,
+			Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
+			areaLayerManager,
+			EntityFactory::NODRAG,
+			ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+		ClickComponent* clk = entityManager->getComponent<ClickComponent>(gun);
+		clk->connect(ClickComponent::JUST_CLICKED, [this, variant, sr]() {
+
+			Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+			if (variant == 2)AddInvItem("pistolaCon", sdlutils().Instance()->invDescriptions().at("PistolaCon"), position, sr);
+			else  AddInvItem("pistolaSin", sdlutils().Instance()->invDescriptions().at("PistolaSin"), position, sr);
+			gun->getMngr()->setActive(gun, false);
+
+			});
+		entityManager->setActive(gun, false);
+
+
+
+
+
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
 	sr->GetInventory()->setFirstItem(0);
@@ -271,6 +300,7 @@ bool WiresPuzzleScene::Check()
 }
 void WiresPuzzleScene::Win()
 {
+	entityManager->setActive(gun, true);
 	room->resolvedPuzzle(1);
 }
 

@@ -230,7 +230,7 @@ void MusicPuzzleScene::refresh()
                         Win();
                         
                         Image* img = entityManager->getComponent<Image>(background);
-                        img->setTexture(&sdlutils().images().at("fondoCajon"));
+                        img->setTexture(&sdlutils().images().at("fondoMusicalCajon"));
 
                         //recompensas
                     }
@@ -261,8 +261,8 @@ bool MusicPuzzleScene::Check()
 
 void MusicPuzzleScene::Win()
 {
-    solved = true;
     room->resolvedPuzzle(4);
+    setSolved(true);
 }
 
 void MusicPuzzleScene::initializeMusicalSounds()

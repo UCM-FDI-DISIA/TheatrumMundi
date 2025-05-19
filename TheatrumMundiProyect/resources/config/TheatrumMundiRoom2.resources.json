@@ -13,19 +13,11 @@
   "images": [
      {
       "id": "Cuervo",
-      "file": "../resources/images/temporales/Room2/Cuervo.jpeg"
-    },
-     {
-      "id": "FondoCementerio",
-      "file": "../resources/images/temporales/Room2/FondoCementerio.jpg"
+      "file": "../resources/images/Finales/CuervoSala.png"
     },
     {
       "id": "FondoCripta",
       "file": "../resources/images/temporales/Room2/FondoCripta.jpeg"
-    },
-    {
-      "id": "EntradaOculta",
-      "file": "../resources/images/temporales/Room2/Entrada oculta.jpeg"
     },
     {
       "id": "Varilla",
@@ -37,11 +29,11 @@
     },
     {
       "id": "Organo",
-      "file": "../resources/images/temporales/Room2//Organo.jpeg"
+      "file": "../resources/images/Finales/organoInteractuable.png"
     },
     {
       "id": "Pala",
-      "file": "../resources/images/temporales/Room2/Pala.jpeg"
+      "file": "../resources/images/Finales/pala.png"
     },
     {
       "id": "CuerdaGruesa",
@@ -52,60 +44,36 @@
       "file": "../resources/images/temporales/Room2/Palo.jpeg"
     },
     {
-      "id": "PaasadizoSecretoEspejo",
-      "file": "../resources/images/temporales/Room2/PasadizoSecreto(Espejo).jpeg"
+      "id": "PuertaCementerio",
+      "file": "../resources/images/Finales/PuertaCementerio.png"
     },
     {
-      "id": "PuertaSantuario",
-      "file": "../resources/images/temporales/Room2/Puerta.jpg"
+      "id": "PuertaMausoleo",
+      "file": "../resources/images/Finales/PuertaMausoleo.png"
     },
     {
-      "id": "Ventana",
-      "file": "../resources/images/temporales/Room2/Ventana.jpeg"
+      "id": "VentanaSala",
+      "file": "../resources/images/Finales/VentanaSala.png"
     },
     {
       "id": "Tumba",
-      "file": "../resources/images/temporales/Room2/Tumba.jpeg"
-    },
-    {
-      "id": "Cadaver2",
-      "file": "../resources/images/temporales/Room2/Cadaver.png"
-    },
-    {
-      "id": "CuervoPeligroso",
-      "file": "../resources/images/temporales/Room2/hinata.png"
-    },
-    {
-      "id": "FondoCuervo",
-      "file": "../resources/images/temporales/Room2/FondoCuervo.png"
-    },
-    {
-      "id": "Candado",
-      "file": "../resources/images/temporales/Room2/Candado.png"
-    },
-    {
-      "id": "Llave",
-      "file": "../resources/images/temporales/Room2/Llave.png"
-    },
-    {
-      "id": "Joya",
-      "file": "../resources/images/temporales/Room2/Joya.png"
+      "file": "../resources/images/Finales/TumbaSala.png"
     },
     {
       "id": "patrisio",
       "file": "../resources/images/temporales/Room2/patrisio.jpeg"
     },
     {
-      "id": "FondoPuzzleTumba",
-      "file": "../resources/images/temporales/Room2/FondoPuzzleTumba.png"
-    },
-    {
       "id": "FondoOrgano",
-      "file": "../resources/images/temporales/Room2/FondoOrgano.png"
+      "file": "../resources/images/Finales/fondoHueco.png"
     },
     {
-      "id": "Cadena",
-      "file": "../resources/images/temporales/Room2/Cadena.jpeg"
+      "id": "XOPuzzleAccess",
+      "file": "../resources/images/Finales/XOPuzzleAccess.png"
+    },
+    {
+      "id": "DraggPuzzleAccess",
+      "file": "../resources/images/Finales/DraggPuzzleAccess.png"
     },
     {
       "id": "cuerdaVentana",
@@ -116,12 +84,12 @@
       "file": "../resources/images/temporales/Room2/VentanaAbierta.png"
     },
     {
-      "id": "EntradaSecretaAbierta",
-      "file": "../resources/images/temporales/Room2/EntradaSecretaAbierta.png"
+      "id": "SalidaSecretaAbierta",
+      "file": "../resources/images/Finales/SalidaSecretaAbierta.png"
     },
     {
-      "id": "FondoVentana",
-      "file": "../resources/images/temporales/Room2/FondoVentana.png"
+      "id": "SalidaSecretaCerrada",
+      "file": "../resources/images/Finales/SalidaSecretaCerrada.png"
     },
     {
       "id": "FondoVentana",
@@ -309,8 +277,280 @@
     {
       "id": "fondoPruebaLog",
       "file": "../resources/images/fondoLogPrueba.png"
+    },
+    {
+      "id": "CadaverSol",
+      "file": "../resources/images/Finales/CadaverSol.png"
+    },
+    {
+      "id": "FondoCementerio",
+      "file": "../resources/images/Finales/CementerioSala2.png"
+    },
+    {
+      "id": "ColganteTumba",
+      "file": "../resources/images/Finales/ColganteTumba.png"
+    },
+    {
+      "id": "CuervoLlave",
+      "file": "../resources/images/Finales/CuervoLlave.png"
+    },
+    {
+      "id": "CuervoColgante",
+      "file": "../resources/images/Finales/CuervoColgante.png"
+    },
+    {
+      "id": "colganteInv",
+      "file": "../resources/images/Finales/collar.png"
+    },
+    {
+      "id": "doTecla",
+      "file": "../resources/images/Finales/doTecla.png"
+    },
+    {
+      "id": "espejo",
+      "file": "../resources/images/Finales/espejo.png"
+    },
+    {
+      "id": "fase1Espejo",
+      "file": "../resources/images/Finales/fase1Espejo.png"
+    },
+    {
+      "id": "fase1Partitura",
+      "file": "../resources/images/Finales/fase1Partitura.png"
+    },
+    {
+      "id": "fase2Espejo",
+      "file": "../resources/images/Finales/fase2Espejo.png"
+    },
+    {
+      "id": "fase2Partitura",
+      "file": "../resources/images/Finales/fase2Partitura.png"
+    },
+    {
+      "id": "fase3Espejo",
+      "file": "../resources/images/Finales/fase3Espejo.png"
+    },
+    {
+      "id": "fase3Partitura",
+      "file": "../resources/images/Finales/fase3Partitura.png"
+    },
+    {
+      "id": "faTecla",
+      "file": "../resources/images/Finales/faTecla.png"
+    },
+    {
+      "id": "FondoMosaico",
+      "file": "../resources/images/Finales/FondoMosaico.png"
+    },
+    {
+      "id": "fondoMusicalCajon",
+      "file": "../resources/images/Finales/fondoMusicalCajon.jpg"
+    },
+    {
+      "id": "fondoPuzzleMusical",
+      "file": "../resources/images/Finales/fondoPuzzleMusical.jpg"
+    },
+    {
+      "id": "instrucciones",
+      "file": "../resources/images/Finales/instrucciones.png"
+    },
+    {
+      "id": "laTecla",
+      "file": "../resources/images/Finales/laTecla.png"
+    },
+        {
+      "id": "Llave",
+      "file": "../resources/images/Finales/Llave.png"
+    },
+    {
+      "id": "LlaveInv",
+      "file": "../resources/images/Finales/llaveInv.png"
+    },
+    {
+      "id": "MausoleoSala2",
+      "file": "../resources/images/Finales/MausoleoSala2.png"
+    },
+    {
+      "id": "miTecla",
+      "file": "../resources/images/Finales/miTecla.png"
+    },
+    {
+      "id": "MosaicoSala",
+      "file": "../resources/images/Finales/MosaicoSala.png"
+    },
+    {
+      "id": "MosaicoRotoSala",
+      "file": "../resources/images/Finales/MosaicoRotoSala.png"
+    },
+        {
+      "id": "MosaicoEspejoSala",
+      "file": "../resources/images/Finales/MosaicoEspejoSala.png"
+    },
+    {
+      "id": "Pieza1",
+      "file": "../resources/images/Finales/Pieza1.png"
+    },
+    {
+      "id": "Pieza2",
+      "file": "../resources/images/Finales/Pieza2.png"
+    },
+    {
+      "id": "Pieza3",
+      "file": "../resources/images/Finales/Pieza3.png"
+    },
+    {
+      "id": "Pieza4",
+      "file": "../resources/images/Finales/Pieza4.png"
+    },
+    {
+      "id": "Pieza5",
+      "file": "../resources/images/Finales/Pieza5.png"
+    },
+    {
+      "id": "Pieza6",
+      "file": "../resources/images/Finales/Pieza6.png"
+    },
+    {
+      "id": "Pieza7",
+      "file": "../resources/images/Finales/Pieza7.png"
+    },
+    {
+      "id": "Pieza8",
+      "file": "../resources/images/Finales/Pieza8.png"
+    },
+    {
+      "id": "Pieza9",
+      "file": "../resources/images/Finales/Pieza9.png"
+    },
+    {
+      "id": "Pieza10",
+      "file": "../resources/images/Finales/Pieza10.png"
+    },
+    {
+      "id": "Pieza11",
+      "file": "../resources/images/Finales/Pieza11.png"
+    },
+    {
+      "id": "Pieza12",
+      "file": "../resources/images/Finales/Pieza12.png"
+    },
+    {
+      "id": "Pieza13",
+      "file": "../resources/images/Finales/Pieza13.png"
+    },
+    {
+      "id": "Pieza14",
+      "file": "../resources/images/Finales/Pieza14.png"
+    },
+    {
+      "id": "Pieza15",
+      "file": "../resources/images/Finales/Pieza15.png"
+    },
+    {
+      "id": "reTecla",
+      "file": "../resources/images/Finales/reTecla.png"
+    },
+    {
+      "id": "siTecla",
+      "file": "../resources/images/Finales/siTecla.png"
+    },
+    {
+      "id": "solTecla",
+      "file": "../resources/images/Finales/solTecla.png"
+    },
+    {
+      "id": "teclasNegras",
+      "file": "../resources/images/Finales/teclasNegras.png"
+    },
+    {
+      "id": "TumbaAbierta",
+      "file": "../resources/images/Finales/TumbaAbierta.png"
+    },
+    {
+      "id": "TumbaCerrada",
+      "file": "../resources/images/Finales/TumbaCerrada.png"
+    },
+    {
+      "id": "TumbaPuzzles",
+      "file": "../resources/images/Finales/TumbaPuzzles.png"
+    },
+    {
+      "id": "fondoXO",
+      "file": "../resources/images/Finales/fondoXO.png"
+    },
+    {
+      "id": "resetButton",
+      "file": "../resources/images/Finales/resetB.png"
+    },
+    {
+      "id": "xButton",
+      "file": "../resources/images/Finales/xButton.png"
+    },
+    {
+      "id": "oButton",
+      "file": "../resources/images/Finales/oButton.png"
+    },
+    {
+      "id": "resetMatriz",
+      "file": "../resources/images/Finales/resetMatriz.png"
+    },
+    {
+      "id": "piezaL1",
+      "file": "../resources/images/Finales/piezadeL1.png"
+    },
+    {
+      "id": "piezaL2",
+      "file": "../resources/images/Finales/piezadeL2.png"
+    },
+    {
+      "id": "MatPared",
+      "file": "../resources/images/Finales/MatrizPared.png"
+    },
+    {
+      "id": "MatHueco",
+      "file": "../resources/images/Finales/MatrizCuadrado.png"
+    },
+    {
+      "id": "CosaQueArrastras",
+      "file": "../resources/images/Finales/Cosaquearrastras.png"
+    },
+    {
+      "id": "piezade4",
+      "file": "../resources/images/Finales/piezade4.png"
+    },
+    {
+      "id": "piezade2",
+      "file": "../resources/images/Finales/piezade2.png"
+    },
+    {
+      "id": "piezade3",
+      "file": "../resources/images/Finales/piezade3.png"
+    },
+    {
+      "id": "piezademeta",
+      "file": "../resources/images/Finales/piezademeta.png"
+    },
+    {
+      "id": "piezadez",
+      "file": "../resources/images/Finales/piezadeZ.png"
+    },
+    {
+      "id": "Hanni",
+      "file": "../resources/images/asesinoDeHanni.png"
+    },
+    {
+      "id": "fondoEntradaMausoleo",
+      "file": "../resources/images/Finales/fondoEntrada.png"
+    },
+    {
+      "id": "clockHorButton",
+      "file": "../resources/images/boton_horario.png"
+    },
+    {
+      "id": "fondoOrgano",
+      "file": "../resources/images/Finales/fondoPuzzleMusical.jpg"
     }
-     ],
+  ],
 
   "messages": [
     {
@@ -347,11 +587,11 @@
     "id": "cuervo",
     "file": "../resources/sound/sfx/cuervo.mp3"
   },
-    {
-      "id": "cuerda",
-      "file": "../resources/sound/sfx/cuerda.wav"
-    },
-    {
+  {
+    "id": "cuerda",
+    "file": "../resources/sound/sfx/cuerda.wav"
+  },
+  {
       "id": "correcto",
       "file": "../resources/sound/sfx/correcto.wav"
     },
@@ -399,7 +639,11 @@
           "id": "LaSound",
           "file": "../resources/sound/sfx/La.wav"
         },
-{
+        {
+          "id": "SiSound",
+          "file": "../resources/sound/sfx/Si.wav"
+        },
+        {
           "id": "NextDialogue",
           "file": "../resources/sound/sfx/NextDialogue.wav"
         },
@@ -416,11 +660,15 @@
     "id": "Mosaico",
     "file": "../resources/sound/sfx/MosaicoRompiendose.wav"
   },
-    {
-      "id": "incorrecto",
-      "file": "../resources/sound/sfx/incorrecto.wav"
+  {
+    "id": "incorrecto",
+    "file": "../resources/sound/sfx/incorrecto.wav"
+  },
+  {
+      "id": "AbrirPuertaPiedra",
+      "file": "../resources/sound/sfx/AbrirPuertaPiedra.mp3"
     }
-    ],
+],
 
   "musics" : [
     {

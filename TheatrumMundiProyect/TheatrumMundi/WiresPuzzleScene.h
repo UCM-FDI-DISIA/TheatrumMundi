@@ -30,5 +30,6 @@ private:
 	std::vector<int> cableToPort;  //index of the port connected to cable i, -1 if free
 	std::vector<int> portToCable;  //index of the cable connected to port i, -1 if free
 	int selectedWireIndex;
+	ecs::entity_t gun;
 };
 

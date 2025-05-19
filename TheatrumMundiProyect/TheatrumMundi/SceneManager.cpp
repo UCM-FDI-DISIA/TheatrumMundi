@@ -68,7 +68,7 @@ SceneManager::SceneManager()
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::BALANCE_PUZZLE,nullptr);
+	loadScene(SceneName::ROOM_3);
 }
 
 void SceneManager::popScene()
