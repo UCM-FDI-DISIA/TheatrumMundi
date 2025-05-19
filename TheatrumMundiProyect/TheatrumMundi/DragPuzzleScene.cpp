@@ -61,7 +61,7 @@ void DragPuzzleScene::init(SceneRoomTemplate* sr)
             for (int j = 0;j < 8;j++)
             {
                 entity_t a;
-                auxpos = Vector2D(i * auxtiledsize.getX() + auxposinit.getX() * Game::Instance()->wscreenScale, j * auxtiledsize.getY() + auxposinit.getY() * Game::Instance()->wscreenScale);
+                auxpos = Vector2D(i * auxtiledsize.getX()+ auxposinit.getX(), j * auxtiledsize.getY() + auxposinit.getY());
                 if (wallMat[j][i]) {
                     //wall
 
