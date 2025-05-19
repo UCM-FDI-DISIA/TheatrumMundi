@@ -54,7 +54,7 @@ void DragPuzzleScene::init(SceneRoomTemplate* sr)
             {1,1,1,0,0,0,0,1,1},
             {1,1,1,1,1,1,1,1,1}
         };
-        Vector2D auxposinit = Vector2D(256, 64);
+        Vector2D auxposinit = Vector2D(385, 115);
         Vector2D auxpos;
 
         for (int i = 0; i < 9;i++) {
