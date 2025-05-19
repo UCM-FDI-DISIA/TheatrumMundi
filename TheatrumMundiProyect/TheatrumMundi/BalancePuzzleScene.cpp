@@ -57,11 +57,12 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 
 		dialogueManager->setScene(this);
 
+		//background
 		balanceBackground = entityFactory->CreateImageEntity(entityManager, "balance", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		balanceBackground->getMngr()->removeComponent<Area2D>(balanceBackground);
 		
 
-		auto balanceArea = entityFactory->CreateInteractableEntity( // balance entity
+		auto balanceArea = entityFactory->CreateInteractableEntity( // balance trigger area
 			entityManager, "balance", EntityFactory::RECTAREA,
 			Vector2D(800, 450), Vector2D(), 200, 100, 0,
 			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
@@ -77,13 +78,14 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		if (!_hasFeather) feather->getMngr()->setActive(feather, false);
 
+		//if object is in area trigger
 		balanceArea->getMngr()->getComponent<TriggerComponent>(balanceArea)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 			SetplacedHand(true);
-			std::cout << "pasa por el triger de la balanza" << std::endl;
+			//std::cout << "pasa por el triger de la balanza" << std::endl;
 			});
 
 
-		//Assigns the trigger bolean to false
+		//if object has exit area trigger
 		balanceArea->getMngr()->getComponent<TriggerComponent>(balanceArea)->connect(TriggerComponent::AREA_LEFT, [this]() {
 			SetplacedHand(false);
 			});
@@ -153,12 +155,12 @@ bool BalancePuzzleScene::Check()
 
 bool BalancePuzzleScene::isItemHand(const std::string& itemId)
 {
+	//if feather is in the area change background image
 	if (itemId == "pluma") {
 		_hasFeather = true;
 		_featherIsInBalance = true;
 		Image* img = balanceBackground->getMngr()->getComponent<Image>(balanceBackground);
 		img->setTexture(&sdlutils().images().at("FeatherBackground"));
-		//feather->getMngr()->setActive(feather, true);
 		Win();
 		return true;
 	}
@@ -166,8 +168,6 @@ bool BalancePuzzleScene::isItemHand(const std::string& itemId)
 }
 void BalancePuzzleScene::Win()
 {
-	
-	
 	
 	room->resolvedPuzzle(0);
 }
