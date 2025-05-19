@@ -59,11 +59,21 @@ void WindowPuzzleScene::init(SceneRoomTemplate* sr)
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 		dialogueManager->setScene(this);
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager,this);
-		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("Ventana1_2P");
-		else {
-			startDialogue("Ventana1_1P");
+
+		int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
+		if (variant != 2) {
+			if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("Ventana1_2P");
+			else {
+				startDialogue("Ventana1_1P");
+			}
 		}
-		//startDialogue("Ventana");
+		else {
+			if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("Ventana2_2P");
+			else {
+				startDialogue("Ventana2_1P");
+			}
+			Win();
+		}
 
 #pragma endregion
 
@@ -99,6 +109,10 @@ bool WindowPuzzleScene::isItemHand(const std::string& itemId)
 		else entityManager->getComponent<Image>(WindowBackGround)->setTexture(&sdlutils().images().at("FondoVentanaCerrada"));
 		isOpen = !isOpen;
 		if(OpenCount == 0) Win();
+		else if (OpenCount == 20) {
+			HideInventoryItems();
+			startDialogue("NoMePaganPorEsto");
+		}
 		++OpenCount;
 		return true;
 	}

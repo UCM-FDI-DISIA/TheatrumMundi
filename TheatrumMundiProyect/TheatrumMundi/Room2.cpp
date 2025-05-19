@@ -41,6 +41,14 @@ void Room2Scene::init()
 	isOpen = false;
 	finishallpuzzles = false;
 	stopAnimation = false;
+	_setRoomAudio();
+	_setGlobalFeatures();
+	_setRoomBackground();
+	_setInteractuables();
+	_setUI();
+	_setDialog();
+	_setCaseResolution();
+	roomEvent[InitialDialogue]();
 
 	//Load Images
 	_loadimg1 = entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
@@ -55,14 +63,6 @@ void Room2Scene::init()
 	_loadimg4 = entityFactory->CreateImageEntity(entityManager, "loading4", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
 	_loadimg4->getMngr()->setActive(_loadimg4, false);
 
-	_setRoomAudio();
-	_setGlobalFeatures();
-	_setRoomBackground();
-	_setInteractuables();
-	_setUI();
-	_setDialog();
-	_setCaseResolution();
-	roomEvent[InitialDialogue]();
 	SDL_Delay(1000);
 	
 
@@ -74,16 +74,10 @@ void Room2Scene::resolvedPuzzle(int i)
 		if (i == 0)  auxevent = TombPuzzleSceneRsv;
 		else if (i == 1)  auxevent = RavenSceneRsv;
 		else if (i == 2)  auxevent = DoorSceneRsv;
-		else if (i == 3) { auxevent = MosaicPuzzleSceneRsv;
-		}
-
+		else if (i == 3)  auxevent = MosaicPuzzleSceneRsv;
 		else if (i == 4)  auxevent = OrganPuzzleSceneRsv;
 		else if (i == 5)  auxevent = WindowSceneResolved;
 		roomEvent[auxevent]();
-		bool aux = true;
-		for (bool a : puzzlesol) if (!a) aux = false;
-		finishallpuzzles = aux;
-		if (aux) entityManager->setActive(characterCorpse, true);
 	}
 }
 
@@ -97,11 +91,6 @@ void Room2Scene::endDialogue()
 	dialogueManager->setdisplayOnProcess(false);
 
 	entityManager->setActiveGroup(ecs::grp::MIDDLEROOM, false);
-
-	if (finishallpuzzles)
-	{
-		roomEvent[ResolveButtons]();
-	}
 }
 
 void Room2Scene::_setRoomEvents()
@@ -124,7 +113,7 @@ void Room2Scene::_setRoomEvents()
 		Game::Instance()->getSceneManager()->loadScene(TOMB_SCENE, this); 
 		};
 	roomEvent[TombPuzzleSceneRsv] = [this] {
-
+		
 		};
 	roomEvent[RavenScene] = [this] {
 		HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
@@ -187,12 +176,13 @@ void Room2Scene::_setRoomEvents()
 		createDescription(inv->hints.back(), inv->getItems().back());
 		};
 	roomEvent[WindowScene] = [this] {
+		ckeckWindow = true;
 		HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
 		rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
 		Game::Instance()->getSceneManager()->loadScene(WINDOW_SCENE, this);
 		};
 	roomEvent[WindowSceneResolved] = [this] {
-		roomEvent[ResolveCase]();
+		if(finishallpuzzles)roomEvent[ResolveCase]();
 		};
 	roomEvent[OrganPuzzleScene] = [this] {
 		HideAllInvetoryItems(invObjects.InventoryBackground, invObjects.inventoryUpButton, invObjects.inventoryDownButton);
@@ -208,15 +198,28 @@ void Room2Scene::_setRoomEvents()
 			roomEvent[OrganZoom](); 
 			});
 		entityManager->getComponent<Image>(rmObjects.mosaic)->setTexture(&sdlutils().images().at("MosaicoEspejoSala"));
+		int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
+		if (variant == 2 && ckeckWindow) {
+			roomEvent[ResolveCase]();
+		}
+		finishallpuzzles = true;
 		};
 	roomEvent[SecretEntry] = [this] {
-		startDialogue("Prueba");
+		int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
+		if (variant == 2) {
+			if(Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("SalidaSecreta1_2PB");
+			else startDialogue("SalidaSecreta1_1PB");
+		}
+		else {
+			if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("SalidaSecreta1_2PA");
+			else startDialogue("SalidaSecreta1_1PA");
+		}
 		rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);
 		};
 	roomEvent[ResolveCase] = [this] {
 		//IMPORTANT assign dialogue
-		startDialogue("SalaFinal2");
+		startDialogue("Sala2Final");
 		roomEvent[ResolveButtons]();
 		// cahnge image every 1 sec
 		SDL_AddTimer(1000, [](Uint32, void* param) -> Uint32 {
