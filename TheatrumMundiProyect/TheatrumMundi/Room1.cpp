@@ -457,13 +457,12 @@ void Room1Scene::_setRoomBackground()
 		->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll, ChangeRoom2]() 
 		{
 			if (!rmObjects.backgroundScroll->isScrolling()) {
-				//if (rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT)) {
+				if (rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT)) {
 					auto trChangeRoom2 = entityManager->getComponent<Transform>(ChangeRoom2);
 					trChangeRoom2->setPos(Vector2D(1161 - 1349, 138));
-					rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
 					AudioManager::Instance().playSound(rmSounds.doorSound); //If you can scroll, scroll and play the door sound
 					scrolling = true;
-				//}
+				}
 			}
 		});
 
@@ -471,13 +470,12 @@ void Room1Scene::_setRoomBackground()
 		->connect(ClickComponent::JUST_CLICKED, [this,ChangeRoom1]() 
 		{
 			if (!rmObjects.backgroundScroll->isScrolling()) {
-				//if (rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT)) {
+				if (rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT)) {
 					auto trChangeRoom1 = entityManager->getComponent<Transform>(ChangeRoom1);
 					trChangeRoom1->setPos(Vector2D(26+1349, 142));
-					rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
 					AudioManager::Instance().playSound(rmSounds.doorSound); //If you can scroll, scroll and play the door sound
 					scrolling = true;
-				//}
+				}
 			}
 		});
 }

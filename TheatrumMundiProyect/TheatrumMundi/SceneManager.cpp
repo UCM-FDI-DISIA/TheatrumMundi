@@ -68,7 +68,7 @@ SceneManager::SceneManager()
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::ROOM_1);
+	loadScene(SceneName::ROOM_2);
 }
 
 void SceneManager::popScene()
