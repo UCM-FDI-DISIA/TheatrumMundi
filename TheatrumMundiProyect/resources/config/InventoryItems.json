@@ -13,11 +13,12 @@
     { "id" : "minutero", "text" : "La manecilla de los minutos de un reloj."},
 
     
-    { "id" : "Pala", "text" :"No era la pala que esperaba"},
-    { "id" : "Llave", "text" : "La llave de una puerta, seguro que abre algo."},
+    { "id" : "Pala", "text" :"Insertar Descripcion"},
+    { "id" : "Llave", "text" : "Insertar Descripcion"},
     { "id" : "Colgante", "text" : "Insertar Descripcion"},
     { "id" : "Varilla", "text" : "Insertar Descripcion"},
-
+    { "id" : "CuerdaGruesa", "text" : "Insertar Descripcion"},
+    { "id" : "CuerdaFina", "text" : "Insertar Descripcion"},
     
     { "id" : "LuzVioleta", "text" :"Una linterna de luz\n ultravioleta."},
     { "id" : "BalasFalsas", "text" :"Parecen reales pero\n estan huecas."},
