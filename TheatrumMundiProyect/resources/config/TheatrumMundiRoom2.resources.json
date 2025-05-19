@@ -56,6 +56,10 @@
       "file": "../resources/images/Finales/PuertaCementerio.png"
     },
     {
+      "id": "PuertaMausoleo",
+      "file": "../resources/images/Finales/PuertaMausoleo.png"
+    },
+    {
       "id": "Ventana",
       "file": "../resources/images/temporales/Room2/Ventana.jpeg"
     },

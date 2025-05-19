@@ -24,11 +24,11 @@ public:
 
 	inline void setXOpuzzle(bool isResolved) { XOpuzzleResolve = isResolved;
 	startDg = true;
-	numDialog++;
+	++numDialog;
 	};
 	inline void setDragpuzzle(bool isResolved) { dragPuzzleResolve = isResolved;
 	startDg = true;
-	numDialog++;
+	++numDialog;
 	};
 };
 

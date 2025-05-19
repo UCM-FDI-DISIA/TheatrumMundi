@@ -312,21 +312,23 @@ void Room2Scene::_setRoomBackground()
 #pragma region Scroll
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom2)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
-			AudioManager::Instance().playSound(sdlutils().soundEffects().at("AbrirPuertaPiedra"));
-			rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT);
-			scrolling = true;
+		if (!isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+			if(rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT)) {
+				AudioManager::Instance().playSound(sdlutils().soundEffects().at("AbrirPuertaPiedra"));
+				scrolling = true;
+			}
 		}
-		else if (!isOpen) {
+		else if (isOpen) {
 			roomEvent[DoorScene]();
 		}
 		});
 
 	entityManager->getComponent<ClickComponent>(ChangeRoom1)->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll]() {
-		if (isOpen && !rmObjects.backgroundScroll->isScrolling()) {
-			AudioManager::Instance().playSound(sdlutils().soundEffects().at("AbrirPuertaPiedra"));
-			rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT);
-			scrolling = true;
+		if (!isOpen && !rmObjects.backgroundScroll->isScrolling()) {
+			if (rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT)) {
+				AudioManager::Instance().playSound(sdlutils().soundEffects().at("AbrirPuertaPiedra"));
+				scrolling = true;
+			}
 		}
 		});
 #pragma endregion
@@ -336,7 +338,7 @@ void Room2Scene::_setRoomBackground()
 void Room2Scene::_setCaseResolution()
 {
 	//set the scene the variant is 
-	Game::Instance()->getDataManager()->SetSceneCount(ROOM1);
+	Game::Instance()->getDataManager()->SetSceneCount(ROOM2);
 
 	//get actual variant
 	int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(1);
