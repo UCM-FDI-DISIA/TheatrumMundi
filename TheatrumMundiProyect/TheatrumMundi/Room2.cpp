@@ -147,6 +147,8 @@ void Room2Scene::_setRoomEvents()
 	roomEvent[OrganZoom] = [this] {
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
 		
+		startDialogue("Prueba");
+
 		if (!puzzlesol[2]&&variant !=2) rmObjects.hook->getMngr()->setActive(rmObjects.hook, false); //if organ is not complete don't show the hook
 		rmObjects.zoomOrgan->getMngr()->setActive(rmObjects.zoomOrgan, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);

@@ -647,6 +647,9 @@
     {"Character":"Lucy","Text":"Bien, otra salida."},
     {"Character":"Lucy","Text":"Parece que lleva al exterior."},
     {"Character":"Lucy","Text":"Y no está especialmente bien sellada."}
+    ],
+     "Prueba":[                 
+    {"Character":" ","Text":" "}
     ]
 
   },
