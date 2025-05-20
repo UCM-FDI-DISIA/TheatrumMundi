@@ -54,10 +54,10 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 
 
 		//Audio sfx 
-		AudioManager& a = AudioManager::Instance();
+	//	AudioManager& a = AudioManager::Instance();
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 
-		a.setVolume(buttonSound, 0.2);
+		audioManager().setVolume(buttonSound, 0.2);
 
 		dialogueManager->setScene(this);
 
@@ -93,7 +93,7 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(exitButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [buttonSound]()
 			{
-				AudioManager::Instance().playSound(buttonSound);
+				audioManager().playSound(buttonSound);
 				Game::Instance()->getSceneManager()->popScene();
 			});
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
@@ -116,7 +116,7 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
 		invOpen->connect(ClickComponent::JUST_CLICKED, [this, InventoryBackground, upButton, downButton, buttonSound]() //Lamda function
 			{
-				AudioManager::Instance().playSound(buttonSound);
+				audioManager().playSound(buttonSound);
 				room->GetInventory()->setActive(!room->GetInventory()->getActive());  // Toggle the inventory
 
 				// If the inventory is active, activate the items
@@ -150,14 +150,14 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* UPbuttonInventoryClick = entityManager->getComponent<ClickComponent>(upButton);
 		UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, upButton]() {
 
-			AudioManager::Instance().playSound(buttonSound);
+			audioManager().playSound(buttonSound);
 			scrollInventoryPuzzle(-1, room);
 			});
 
 		ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
 		DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, downButton]() {
 
-			AudioManager::Instance().playSound(buttonSound);
+			audioManager().playSound(buttonSound);
 			scrollInventoryPuzzle(1, room);
 			});
 
@@ -244,8 +244,8 @@ bool TelePuzzleScene::isItemHand(const std::string& itemId)
 		isAnimating = true;
 		// Change to first texture
 		tvBackground->getMngr()->getComponent<Image>(tvBackground)->setTexture(tvAnimationFrames[0]);
-		AudioManager::Instance().playSound(sdlutils().soundEffects().at("Statica"), true);
-		AudioManager::Instance().setVolume(sdlutils().soundEffects().at("Statica"), 0.1);
+		audioManager().playSound(sdlutils().soundEffects().at("Statica"), true);
+		audioManager().setVolume(sdlutils().soundEffects().at("Statica"), 0.1);
 
 		
 
@@ -276,7 +276,7 @@ void TelePuzzleScene::refresh()
 			return;
 		}
 		float vol = (float)currentFrameIndex * 0.1;
-		AudioManager::Instance().setVolume(sdlutils().soundEffects().at("Statica"), vol);
+		audioManager().setVolume(sdlutils().soundEffects().at("Statica"), vol);
 		
 		tvBackground->getMngr()->getComponent<Image>(tvBackground)->setTexture(tvAnimationFrames[currentFrameIndex]);
 
@@ -288,7 +288,7 @@ void TelePuzzleScene::refresh()
 		currentFrameIndex++;
 
 		float vol = (float)currentFrameIndex * 0.1;
-		AudioManager::Instance().setVolume(sdlutils().soundEffects().at("Statica"), vol);
+		audioManager().setVolume(sdlutils().soundEffects().at("Statica"), vol);
 
 		if (currentFrameIndex >= tvAnimationFrames.size()) {
 
@@ -306,7 +306,7 @@ void TelePuzzleScene::refresh()
 
 	}
 	if (currentFrameIndex == 10) {
-		AudioManager::Instance().stopSound(sdlutils().soundEffects().at("Statica"));
-		AudioManager::Instance().playSound(sdlutils().soundEffects().at("FinalTeleTutorial"));
+		audioManager().stopSound(sdlutils().soundEffects().at("Statica"));
+		audioManager().playSound(sdlutils().soundEffects().at("FinalTeleTutorial"));
 	}
 }

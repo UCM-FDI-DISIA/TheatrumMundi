@@ -35,7 +35,7 @@ void InitialScene::init()
 		SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 		
 
-		AudioManager& a = AudioManager::Instance();
+//		AudioManager& a = AudioManager::Instance();
 		/*
 		a.setListenerPosition(0, 0, 0);
 
@@ -49,15 +49,15 @@ void InitialScene::init()
 		a.setLooping(music, true);
 		a.playSound(music);
 		*/
-		a.stopSound(sdlutils().musics().at("intermedia"));
-		a.stopSound(sdlutils().musics().at("sala1"));
-		a.stopSound(sdlutils().musics().at("sala2"));
-		a.stopSound(sdlutils().musics().at("sala3"));
+		audioManager().stopSound(sdlutils().musics().at("intermedia"));
+		audioManager().stopSound(sdlutils().musics().at("sala1"));
+		audioManager().stopSound(sdlutils().musics().at("sala2"));
+		audioManager().stopSound(sdlutils().musics().at("sala3"));
 
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		std::shared_ptr<Sound> music = sdlutils().musics().at("menu");
 
-		a.playSound(music, true);
+		audioManager().playSound(music, true);
 
 		//clear the log
 		Game::Instance()->getLog()->cleanLogList();
@@ -80,7 +80,7 @@ void InitialScene::init()
 
 		clktuto->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
 
-			AudioManager::Instance().playSound(buttonSound);
+			audioManager().playSound(buttonSound);
 			_loadimg->getMngr()->setActive(_loadimg, true);
 
 			Game::Instance()->render();
@@ -99,7 +99,7 @@ void InitialScene::init()
 
 			clk->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
 
-				AudioManager::Instance().playSound(buttonSound);
+				audioManager().playSound(buttonSound);
 				_loadimg->getMngr()->setActive(_loadimg, true);
 
 				Game::Instance()->render();
@@ -116,7 +116,7 @@ void InitialScene::init()
 
 			clk->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
 
-				AudioManager::Instance().playSound(buttonSound);
+				audioManager().playSound(buttonSound);
 
 				});
 		}
@@ -127,7 +127,7 @@ void InitialScene::init()
 		ClickComponent* clkext = entityManager->getComponent<ClickComponent>(_exitbtn);
 		clkext->connect(ClickComponent::JUST_CLICKED, [buttonSound]() 
 			{
-				AudioManager::Instance().playSound(buttonSound);
+				audioManager().playSound(buttonSound);
 				Game::Instance()->exit();
 				});
 

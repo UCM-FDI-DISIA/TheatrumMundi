@@ -127,8 +127,8 @@ void XOPuzzleScene::init(SceneRoomTemplate* sr)
 
 void XOPuzzleScene::pushButton(int i)
 {
-	AudioManager::Instance().stopSound(sdlutils().soundEffects().at("MecanismoNoAbre"));
-  AudioManager::Instance().playSound(sdlutils().soundEffects().at("MecanismoNoAbre"));
+	audioManager().stopSound(sdlutils().soundEffects().at("MecanismoNoAbre"));
+	audioManager().playSound(sdlutils().soundEffects().at("MecanismoNoAbre"));
 	if (i == 0) {
 		XO[0] = !XO[0];
 		XO[3] = !XO[3];
@@ -162,7 +162,7 @@ void XOPuzzleScene::pushButton(int i)
 
 	if (checkWin()) {
 		Win();
-		AudioManager::Instance().playSound(sdlutils().soundEffects().at("MecanismoAbre"));
+		audioManager().playSound(sdlutils().soundEffects().at("MecanismoAbre"));
 	}
 
 }

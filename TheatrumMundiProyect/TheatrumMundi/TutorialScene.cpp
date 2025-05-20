@@ -109,21 +109,21 @@ void TutorialScene::init()
 		isStarted = true;
 		finishallpuzzles = false;
 		//Audio sfx 
-		AudioManager& a = AudioManager::Instance();
+		//AudioManager& a = AudioManager::Instance();
 
-		a.stopSound(sdlutils().musics().at("menu"));
+		audioManager().stopSound(sdlutils().musics().at("menu"));
 
 		std::shared_ptr<Sound> music = sdlutils().musics().at("intermedia");
-		a.playSound(music, true);
+		audioManager().playSound(music, true);
 
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-		a.setVolume(buttonSound, 0.2);
+		audioManager().setVolume(buttonSound, 0.2);
 		std::shared_ptr<Sound> puzzleButtonSound = sdlutils().soundEffects().at("puzzle");
-		a.setVolume(puzzleButtonSound, 0.3);
+		audioManager().setVolume(puzzleButtonSound, 0.3);
 
 		std::shared_ptr<Sound> doorSound = sdlutils().soundEffects().at("puerta");
-		a.setVolume(doorSound, 0.6);
-		a.set3DPosition(doorSound, -500, 0, 0);
+		audioManager().setVolume(doorSound, 0.6);
+		audioManager().set3DPosition(doorSound, -500, 0, 0);
 
 		//Register scene in dialogue manager
 		dialogueManager->setScene(this);
@@ -155,7 +155,7 @@ void TutorialScene::init()
 		auto ChangeRoom1Button = entityManager->getComponent<ClickComponent>(ChangeRoom1);
 		ChangeRoom1Button->connect(ClickComponent::JUST_CLICKED, [this, startRoomScroll, ChangeRoomScroll, doorSound]() {
 			if (!startRoomScroll->isScrolling()) {
-				if(startRoomScroll->Scroll(ScrollComponent::RIGHT)) AudioManager::Instance().playSound(doorSound);	
+				if(startRoomScroll->Scroll(ScrollComponent::RIGHT)) audioManager().playSound(doorSound);
 			}
 			});
 
@@ -169,7 +169,7 @@ void TutorialScene::init()
 		//password button
 		passwordButton = entityFactory->CreateInteractableEntity(entityManager, "botonNumero", EntityFactory::RECTAREA, Vector2D(550, 300), Vector2D(0, 0), 200, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		entityManager->getComponent<ClickComponent>(passwordButton)->connect(ClickComponent::JUST_CLICKED, [this, puzzleButtonSound]() {
-			AudioManager::Instance().playSound(puzzleButtonSound);
+			audioManager().playSound(puzzleButtonSound);
 			roomEvent[Dialog2]();
 			entityManager->setActive(passwordButton, false);
 			entityManager->setActive(doorImage, true);
@@ -182,7 +182,7 @@ void TutorialScene::init()
 		antenna = entityFactory->CreateInteractableEntity(entityManager, "antena", EntityFactory::RECTAREA, Vector2D(900, 630), Vector2D(0, 0), 133, 85, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		//startRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(antenna));
 		entityManager->getComponent<ClickComponent>(antenna)->connect(ClickComponent::JUST_CLICKED, [this, puzzleButtonSound]() {
-			AudioManager::Instance().playSound(puzzleButtonSound);
+			audioManager().playSound(puzzleButtonSound);
 			entityManager->removeEntity(antenna);
 			entityManager->setActive(antenna, false);
 			roomEvent[Antenna]();
@@ -194,7 +194,7 @@ void TutorialScene::init()
 		television = entityFactory->CreateInteractableEntity(entityManager, "teleSinAntena", EntityFactory::RECTAREA, Vector2D(480 - 1349, 200), Vector2D(0, 0), 385, 498, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		startRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(television));
 		entityManager->getComponent<ClickComponent>(television)->connect(ClickComponent::JUST_CLICKED, [this, puzzleButtonSound]() {
-			AudioManager::Instance().playSound(puzzleButtonSound);
+			audioManager().playSound(puzzleButtonSound);
 			roomEvent[TeleScene]();
 			});
 
@@ -217,7 +217,7 @@ void TutorialScene::init()
 		entityManager->getComponent<ClickComponent>(inventoryButton)
 			->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]()
 				{
-					AudioManager::Instance().playSound(buttonSound);
+					audioManager().playSound(buttonSound);
 					GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
 
 					if (GetInventory()->getActive()) // If the inventory is active, activate the items
@@ -268,13 +268,13 @@ void TutorialScene::init()
 		entityManager->getComponent<ClickComponent>(invObjects.inventoryUpButton)
 			->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]()
 				{
-					AudioManager::Instance().playSound(buttonSound);
+					audioManager().playSound(buttonSound);
 					scrollInventory(-1);
 				});
 		entityManager->getComponent<ClickComponent>(invObjects.inventoryDownButton)
 			->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]()
 				{
-					AudioManager::Instance().playSound(buttonSound);
+					audioManager().playSound(buttonSound);
 					scrollInventory(1);
 				});
 		invObjects.textDescriptionEnt = entityManager->addEntity(ecs::grp::UI);

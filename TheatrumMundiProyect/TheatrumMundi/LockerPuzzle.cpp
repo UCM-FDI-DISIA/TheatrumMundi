@@ -37,9 +37,9 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
         
         isStarted = true;
         //sound and music
-        AudioManager& a = AudioManager::Instance();
+     //   AudioManager& a = AudioManager::Instance();
         std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-        a.setVolume(buttonSound, 0.2);
+        audioManager().setVolume(buttonSound, 0.2);
        
         background = entityFactory->CreateImageEntity(entityManager, "lockFondoCerrado", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 
@@ -118,7 +118,7 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
        ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
        clkOpen->connect(ClickComponent::JUST_CLICKED, [this, _backButton, buttonSound]()
            {
-               AudioManager::Instance().playSound(buttonSound);
+               audioManager().playSound(buttonSound);
                inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
                HideInventoryItems();
                room->GetInventory()->setFirstItem(0);

@@ -38,7 +38,7 @@ bool PauseManager::GetPauseActive()
 void PauseManager::Init(EntityFactory* entityFactory, ecs::EntityManager* entityManager, Area2DLayerManager* areaLayerManager)
 {
 	std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-	AudioManager::Instance().setVolume(buttonSound, 0.2);
+	audioManager().setVolume(buttonSound, 0.2);
 	
 	auto _backgroundPause = entityFactory->CreateImageEntity(entityManager, "MenuBackground", Vector2D(443, 250), Vector2D(0, 0), 450, 245, 0, ecs::grp::BACKGROUNDPAUSE);
 	entityManager->addComponent<AnimPauseComponent>(_backgroundPause);
@@ -58,7 +58,7 @@ void PauseManager::Init(EntityFactory* entityFactory, ecs::EntityManager* entity
 	entityManager->setActive(_reanudePauseButton, false);
 	ClickComponent* buttonReanudePauseClick = entityManager->getComponent<ClickComponent>(_reanudePauseButton);
 	buttonReanudePauseClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, entityManager]() {
-		AudioManager::Instance().playSound(buttonSound);
+		audioManager().playSound(buttonSound);
 		for (auto a : animElems) entityManager->getComponent<AnimPauseComponent>(a)->endPauseAnim();
 		});
 
@@ -69,7 +69,7 @@ void PauseManager::Init(EntityFactory* entityFactory, ecs::EntityManager* entity
 	entityManager->setActive(_exitPauseButton, false);
 	ClickComponent* buttonExitPauseClick = entityManager->getComponent<ClickComponent>(_exitPauseButton);
 	buttonExitPauseClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, entityManager]() {
-		AudioManager::Instance().playSound(buttonSound);
+		audioManager().playSound(buttonSound);
 		for (auto a : animElems) entityManager->getComponent<AnimPauseComponent>(a)->endPauseAnim();
 
 		Game::Instance()->setReset();
@@ -80,7 +80,7 @@ void PauseManager::Init(EntityFactory* entityFactory, ecs::EntityManager* entity
 	_openPauseButton = entityFactory->CreateInteractableEntity(entityManager, "B3", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 	ClickComponent* buttonOpenPauseClick = entityManager->getComponent<ClickComponent>(_openPauseButton);
 	buttonOpenPauseClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, entityManager]() {
-		AudioManager::Instance().playSound(buttonSound);
+		audioManager().playSound(buttonSound);
 		entityManager->setActiveGroup(ecs::grp::INTERACTPAUSE, true);
 		entityManager->setActiveGroup(ecs::grp::BACKGROUNDPAUSE, true);
 		entityManager->setActive(_backgroundNotInteractable,true);
