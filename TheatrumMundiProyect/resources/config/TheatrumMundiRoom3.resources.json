@@ -258,7 +258,7 @@
     },
     {
       "id": "FondoSalaDeEsperaOscuro",
-      "file": "../resources/images/temporales/Room3/SalaDeEsperaOscuro.png"
+      "file": "../resources/images/Finales/SalaDeEsperaOscuro.png"
     },
     {
       "id": "Cables",
@@ -266,7 +266,7 @@
     },
     {
       "id": "CablesOscuro",
-      "file": "../resources/images/temporales/Room3/cablesOscuro.png"
+      "file": "../resources/images/Finales/cablesOscuro.png"
     },
     {
       "id": "CablesRojo",
