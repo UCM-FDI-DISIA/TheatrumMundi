@@ -105,9 +105,10 @@ void Room3Scene::_setRoomEvents()
 		}
 		};
 	roomEvent[CorpseDialogue] = [this] {
-		entityManager->setActive(rmObjects.zoomCorpse, true);
-		entityManager->setActive(rmObjects.quitButton, true);
+		//entityManager->setActive(rmObjects.zoomCorpse, true);
+		//entityManager->setActive(rmObjects.quitButton, true);
 		//startDialogue("Cadaver");
+		Game::Instance()->getSceneManager()->loadScene(CORPSELUCY_SCENE, this);
 		};
 	roomEvent[LightsOn] = [this] {
 		Game::Instance()->getDataManager()->SetRoom3Phase(Phase::LIGHTS_ON);
@@ -579,8 +580,8 @@ void Room3Scene::_setCaseResolution()
 void Room3Scene::_setInteractuables()
 {
 	//CORPSE
+	//rmObjects.zoomCorpse = entityFactory->CreateInteractableEntityNotMoveSprite(entityManager, "Cadaver3Oscuro", EntityFactory::RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0,areaLayerManager,EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
 	rmObjects.zoomCorpse = entityFactory->CreateImageEntity(entityManager, "Cadaver3Oscuro", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
-	//RectArea2D* corpseZoomArea = entityManager->addComponent<RectArea2D>(rmObjects.zoomCorpse, areaLayerManager);
 	entityManager->setActive(rmObjects.zoomCorpse, false);
 
 	characterCorpse = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(590, 181), Vector2D(0, 0), 243 / 1.5, 297 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -829,7 +830,6 @@ void Room3Scene::_setUI()
 				if (rmObjects.feather != nullptr) {
 					entityManager->setActive(rmObjects.feather, false);
 				}
-
 
 				//if the condition of this objects has not been apply disallow them
 				//if (rmObjects.mirror.second == false) rmObjects.mirror.first->getMngr()->setActive(rmObjects.mirror.first, false);

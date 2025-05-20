@@ -79,6 +79,7 @@
     <ClCompile Include="AnimPauseComponent.cpp" />
     <ClCompile Include="InvAnimComponent.cpp" />
     <ClCompile Include="ParrotPuzzleScene.cpp" />
+    <ClCompile Include="CorpseLucyScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\OpenAL 1.1 SDK\include\al.h" />
@@ -282,6 +283,7 @@
     <ClInclude Include="InvAnimComponent.h" />
     <ClInclude Include="ParrotPuzzleScene.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="CorpseLucyScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ecs\RAEDME.md" />

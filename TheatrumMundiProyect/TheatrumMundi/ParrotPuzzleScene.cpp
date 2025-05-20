@@ -312,6 +312,7 @@ void ParrotPuzzleScene::_setUI()
 
 bool ParrotPuzzleScene::isItemHand(const std::string& itemId)
 {
+
 	if (itemId == "Linterna" && Game::Instance()->getDataManager()->GetRoom3Phase() == 2) {
 		audioManager().playSound(rmSounds.explosionSound);						// TODO: Exploded_Parrot image
 		entityManager->getComponent<Image>(parrotUtils.parrotEnt)->setTexture(&sdlutils().images().at("EmptyImage"));

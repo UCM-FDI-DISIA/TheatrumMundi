@@ -34,6 +34,8 @@
 #include "Box.h"
 #include "ParrotPuzzleScene.h"
 
+#include "CorpseLucyScene.h"
+
 SceneManager::SceneManager()
 {
 	//If this content is edited, please put the same code in ResetSceneManager
@@ -52,7 +54,6 @@ SceneManager::SceneManager()
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
 	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
-	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
 	scenes[SceneName::MUSIC_PUZZLE] = new MusicPuzzleScene();
 	scenes[SceneName::RAVEN_SCENE] = new RavenPuzzleScene();
 	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
@@ -66,10 +67,11 @@ SceneManager::SceneManager()
 	scenes[SceneName::CREDITS] = new CreditsScene();
 	scenes[SceneName::BOX] = new Box();
 	scenes[SceneName::PARROT_PUZZLE] = new ParrotPuzzleScene();
+	scenes[SceneName::CORPSELUCY_SCENE] = new CorpseLucyScene();
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::ROOM_3);
+	loadScene(SceneName::INITIAL_MENU);
 }
 
 void SceneManager::popScene()
@@ -246,6 +248,7 @@ void SceneManager::ResetSceneManager()
 	scenes[SceneName::CREDITS] = new CreditsScene();
 	scenes[SceneName::BOX] = new Box();
 	scenes[SceneName::PARROT_PUZZLE] = new ParrotPuzzleScene();
+	scenes[SceneName::CORPSELUCY_SCENE] = new CorpseLucyScene();
 	loadScene(SceneName::INITIAL_MENU);
 }
 

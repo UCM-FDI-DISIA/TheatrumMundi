@@ -57,10 +57,8 @@ bool AudioManager::init() {
 }
 
 void AudioManager::shutdown() {
-    std::cout << "llamo a destruir xd" << std::endl;
     sounds.clear();  
     if (system) {
-        std::cout << "lololool" << std::endl;
         system->close();
         system->release();
     }
@@ -158,24 +156,24 @@ void AudioManager::cleanupInactiveChannels()
 {
     if (!system) return;
 
-    // Para cada sonido en tu vector de sonidos
+    
     for (auto& soundPtr : sounds) {
         if (soundPtr && soundPtr->getChannel()) {
             bool isPlaying = false;
             FMOD_RESULT result = soundPtr->getChannel()->isPlaying(&isPlaying);
 
-            // Si hay error o no está reproduciéndose, libera el canal
+            
             if (result != FMOD_OK || !isPlaying) {
-                soundPtr->setChannel(nullptr); // Limpia la referencia al canal
+                soundPtr->setChannel(nullptr); // 
             }
         }
     }
 
-    // También puedes limpiar el vector de sonidos de aquellos que ya no se usan
+
     sounds.erase(
         std::remove_if(sounds.begin(), sounds.end(),
             [](const std::shared_ptr<Sound>& s) {
-                return s.use_count() == 1; // Solo referencia en este vector
+                return s.use_count() == 1;
             }),
         sounds.end()
     );
@@ -228,9 +226,8 @@ AudioManager::AudioManager() {
     init();
 }
 
-/*
+
 AudioManager::~AudioManager()
 {
     shutdown();
 }
-*/
