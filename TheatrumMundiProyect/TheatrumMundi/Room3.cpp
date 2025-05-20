@@ -367,11 +367,9 @@ void Room3Scene::_setRoomAudio()
 	rmSounds.morse_Sound_Low = sdlutils().soundEffects().at("MorseSoundLow");
 	rmSounds.shootSound = sdlutils().soundEffects().at("shootShound");
 
-	//rmSounds.stopSound = sdlutils().soundEffects().at("");
-	/*Audio music
-	Sound room1music = sdlutils().musics().at("sala2");
-	audioMngr.setLooping(room1music, true);
-	audioMngr.playSound(room1music);*/
+	audioManager().stopSound(sdlutils().musics().at("intermedia"));
+	std::shared_ptr<Sound> room3music = sdlutils().musics().at("sala3");
+	audioManager().playSound(room3music, true);
 }
 
 void Room3Scene::_setGlobalFeatures()
@@ -416,7 +414,7 @@ void Room3Scene::_setRoomBackground()
 				if (!rmObjects.backgroundScroll->isScrolling()) {
 					if (rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT)) {
 					auto trChangeRoom2 = entityManager->getComponent<Transform>(rmObjects.changeRoom2);
-					trChangeRoom2->setPos(Vector2D(1160 - 1349, 160));
+					trChangeRoom2->setPos(Vector2D(1160 - 1299, 180));
 					audioManager().playSound(rmSounds.doorSound); //If you can scroll, scroll and play the door sound
 					scrolling = true;
 					}
@@ -429,7 +427,7 @@ void Room3Scene::_setRoomBackground()
 				if (!rmObjects.backgroundScroll->isScrolling()) {
 					if (rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT)) {
 					auto trChangeRoom1 = entityManager->getComponent<Transform>(rmObjects.changeRoom1);
-					trChangeRoom1->setPos(Vector2D(34 + 1349, 160));
+					trChangeRoom1->setPos(Vector2D(34 + 1349, 112));
 					audioManager().playSound(rmSounds.doorSound); //If you can scroll, scroll and play the door sound
 					scrolling = true;
 					}

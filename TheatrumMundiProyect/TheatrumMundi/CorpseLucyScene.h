@@ -40,5 +40,6 @@ private:
 
 	bool isAnimating = false;
 	VirtualTimer frameTimerCorpse;
+	bool corpseRed = false;
 
 };
