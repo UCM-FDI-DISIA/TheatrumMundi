@@ -52,6 +52,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
 	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
+	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
 	scenes[SceneName::MUSIC_PUZZLE] = new MusicPuzzleScene();
 	scenes[SceneName::RAVEN_SCENE] = new RavenPuzzleScene();
 	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
@@ -68,7 +69,7 @@ SceneManager::SceneManager()
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::ROOM_3);
+	loadScene(SceneName::ROOM_2);
 }
 
 void SceneManager::popScene()

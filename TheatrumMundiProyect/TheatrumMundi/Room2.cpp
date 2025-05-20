@@ -516,7 +516,7 @@ void Room2Scene::_setInteractuables()
 #pragma region CementeryEntities
 
 
-	rmObjects.zoomCorpse = entityFactory->CreateImageEntity(entityManager, "patrisio", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
+	rmObjects.zoomCorpse = entityFactory->CreateImageEntity(entityManager, "corpseZoom2", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 	RectArea2D* corpseZoomArea = entityManager->addComponent<RectArea2D>(rmObjects.zoomCorpse, areaLayerManager);
 	entityManager->setActive(rmObjects.zoomCorpse, false);
 
