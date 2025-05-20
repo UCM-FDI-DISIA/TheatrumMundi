@@ -84,42 +84,42 @@ MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaInterm
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
 		audioManager().playSound(middleRoomMusic, true);
-		startDialogue("SalaIntermedia1");
+		startDialogue("FINAL_3");
 		};
 	roomEvent[AFTER_ROOM3_GOOD2SL] = [this]() {
 		audioManager().stopSound(sdlutils().musics().at("sala3"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
 		audioManager().playSound(middleRoomMusic, true);
-		startDialogue("SalaIntermedia1");
+		startDialogue("FINAL_3");
 		};
 	roomEvent[AFTER_ROOM3_GOOD2KL] = [this]() {
 		audioManager().stopSound(sdlutils().musics().at("sala3"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
 		audioManager().playSound(middleRoomMusic, true);
-		startDialogue("SalaIntermedia1");
+		startDialogue("FINAL_2");
 		};
 	roomEvent[AFTER_ROOM3_BAD2SK] = [this]() {
 		audioManager().stopSound(sdlutils().musics().at("sala3"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
 		audioManager().playSound(middleRoomMusic, true);
-		startDialogue("SalaIntermedia1");
+		startDialogue("FINAL_2");
 		};
 	roomEvent[AFTER_ROOM3_BAD1K] = [this]() {
 		audioManager().stopSound(sdlutils().musics().at("sala3"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
 		audioManager().playSound(middleRoomMusic, true);
-		startDialogue("SalaIntermedia1");
+		startDialogue("FINAL_1");
 		};
 	roomEvent[AFTER_ROOM3_BAD1S] = [this]() {
 		audioManager().stopSound(sdlutils().musics().at("sala3"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
 		audioManager().playSound(middleRoomMusic, true);
-		startDialogue("SalaIntermedia1");
+		startDialogue("FINAL_1");
 		};
 }
 
@@ -194,6 +194,7 @@ void MiddleRoomScene::init()
 		}
 		break;
 	case SceneCount::END:
+		dialogueManager->setActualRoom(6);
 		if (auxkei && auxlucy && auxsol) roomEvent[AFTER_ROOM3_GOOD3]();
 		else if (!auxkei && auxlucy && auxsol)roomEvent[AFTER_ROOM3_GOOD2SL]();
 		else if (auxkei && auxlucy && !auxsol)roomEvent[AFTER_ROOM3_GOOD2KL]();
@@ -258,7 +259,7 @@ void MiddleRoomScene::endDialogue()
 		break;
 	case SceneCount::END:
 		//Load the endScene WIP
-		//Game::Instance()->getSceneManager()->loadScene(ROOM_1);
+		Game::Instance()->getSceneManager()->loadScene(CREDITS);
 		break;
 	default:
 		break;
