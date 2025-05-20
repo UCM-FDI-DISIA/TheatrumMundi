@@ -104,15 +104,27 @@
        
     ],
 
-  "musics" : [
-    {
-      "id": "sala1",
-      "file":  "../resources/sound/music/sala1.wav"
-  },
-    {
-        "id": "menu",
-        "file":  "../resources/sound/music/menu.wav"
-    }
-  ]
+    "musics": [
+        {
+            "id": "menu",
+            "file":  "../resources/sound/music/menu.wav"
+        },
+        {
+            "id": "sala1",
+            "file": "../resources/sound/music/sala1.wav"
+        },
+        {
+            "id": "sala2",
+            "file": "../resources/sound/music/sala2.wav"
+        },
+        {
+            "id": "sala3",
+            "file": "../resources/sound/music/sala3.wav"
+        },
+        {
+            "id": "intermedia",
+            "file": "../resources/sound/music/intermedia.wav"
+        }
+    ]
 
 }

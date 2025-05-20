@@ -69,7 +69,7 @@ SceneManager::SceneManager()
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::ROOM_2);
+	loadScene(SceneName::ROOM_3);
 }
 
 void SceneManager::popScene()
@@ -120,9 +120,12 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 }
 
 void SceneManager::loadScene(int index)
-{
-	//loadResouces
+{	//loadResouces
 #ifndef _LOADALLRESOURCES
+	Game::Instance()->loadResouces(index);
+
+ #endif // !_LOADALLRESOURCES
+
 	
 	switch (index)
 	{

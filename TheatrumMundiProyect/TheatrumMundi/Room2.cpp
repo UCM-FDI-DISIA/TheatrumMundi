@@ -264,7 +264,7 @@ void Room2Scene::_setRoomEvents()
 		std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
 		AudioManager::Instance().playSound(correctSound);
 		Game::Instance()->render();
-		Game::Instance()->getSceneManager()->popScene();
+		Game::Instance()->getSceneManager()->loadScene(SceneName::MIDDLE_ROOM);
 		};
 	roomEvent[BadEnd] = [this] {
 		// WIP
@@ -276,7 +276,7 @@ void Room2Scene::_setRoomEvents()
 		std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
 		AudioManager::Instance().playSound(incorrectSound);
 		Game::Instance()->render();
-		Game::Instance()->getSceneManager()->popScene();
+		Game::Instance()->getSceneManager()->loadScene(SceneName::MIDDLE_ROOM);
 		};
 #pragma endregion
 }
@@ -295,10 +295,9 @@ void Room2Scene::_setRoomAudio()
 	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
 
 
-	/*Audio music
-	Sound room1music = sdlutils().musics().at("sala2");
-	audioMngr.setLooping(room1music, true);
-	audioMngr.playSound(room1music);*/
+	audioMngr.stopSound(sdlutils().musics().at("intermedia"));
+	std::shared_ptr<Sound> room2music = sdlutils().musics().at("sala2");
+	audioMngr.playSound(room2music, true);
 }
 
 void Room2Scene::_setGlobalFeatures()

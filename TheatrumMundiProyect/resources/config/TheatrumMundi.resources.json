@@ -111,12 +111,24 @@
       "file": "../resources/images/Finales/CambiarSala.PNG"
     },
     {
+      "id": "doorJuzgadoAzul",
+      "file": "../resources/images/Finales/puertaJuzgadoAzul.PNG"
+    },
+    {
+      "id": "doorJuzgadoRoja",
+      "file": "../resources/images/Finales/puertaJuzgadoRoja.PNG"
+    },
+    {
       "id": "doorEsperaAzul",
       "file": "../resources/images/Finales/puertaEsperaAzul.PNG"
     },
     {
       "id": "doorEsperaRoja",
       "file": "../resources/images/Finales/puertaEsperaRoja.PNG"
+    },
+    {
+      "id": "doorJuzgadoOscura",
+      "file": "../resources/images/Finales/puertaOscura.png"
     },
     {
       "id": "LucySprite",
@@ -176,7 +188,7 @@
     },
      {
       "id": "FondoJuzgado",
-      "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
+      "file": "../resources/images/Finales/Juzgado.png"
     },
     {
       "id": "B6",
@@ -1111,11 +1123,11 @@
 
     {
       "id": "FondoJuzgadoOscuro",
-      "file": "../resources/images/temporales/Room3/JuzgadoOscuro.png"
+      "file": "../resources/images/Finales/JuzgadoOscuro.png"
     },
     {
       "id": "FondoJuzgadoRojo",
-      "file": "../resources/images/temporales/Room3/JuzgadoRojo.png"
+      "file": "../resources/images/Finales/JuzgadoRojo.png"
     },
     {
       "id": "FondoSalaDeEspera",
@@ -1143,7 +1155,7 @@
     },
     {
       "id": "Cadaver3",
-      "file": "../resources/images/temporales/Room3/Cadaver.png"
+      "file": "../resources/images/Finales/CadaverLucyAzul.png"
     },
     {
       "id": "Cadaver3Oscuro",
@@ -1151,11 +1163,31 @@
     },
     {
       "id": "Cadaver3Rojo",
-      "file": "../resources/images/temporales/Room3/CadaverRojo.png"
+      "file": "../resources/images/Finales/cadaverLucyRojo.png"
+    },
+    {
+      "id": "zoomCadaverAzul",
+      "file": "../resources/images/Finales/zoomCadaverAzul.png"
+    },
+    {
+      "id": "zoomCadaverEstrangular",
+      "file": "../resources/images/Finales/zoomCadaverEstrangular.png"
+    },
+    {
+      "id": "zoomCadaverLuzVioleta",
+      "file": "../resources/images/Finales/zoomCadaverLuzVioleta.png"
+    },
+    {
+      "id": "zoomCadaverCorte",
+      "file": "../resources/images/Finales/zoomCadaverCorte.png"
     },
     {
       "id": "Parrot",
       "file": "../resources/images/Finales/parrot.png"
+    },
+    {
+      "id": "parrotInt",
+      "file": "../resources/images/Finales/parrotInt.png"
     },
     {
       "id": "deadParrot",
@@ -1167,7 +1199,7 @@
     },
     {
       "id": "ParrotRojo",
-      "file": "../resources/images/temporales/Room3/parrotRojo.png"
+      "file": "../resources/images/Finales/parrotRojo.png"
     },
     {
       "id": "TaquillaAzul",
@@ -1195,7 +1227,7 @@
     },
     {
       "id": "Balanza",
-      "file": "../resources/images/temporales/Room3/balanza.png"
+      "file": "../resources/images/Finales/balanzaInt.png"
     },
     {
       "id": "BalanzaOscuro",
@@ -1203,11 +1235,11 @@
     },
     {
       "id": "BalanzaRojo",
-      "file": "../resources/images/temporales/Room3/balanzaRojo.png"
+      "file": "../resources/images/Finales/balanzaRoja.png"
     },
     {
       "id": "CajaFuerte",
-      "file": "../resources/images/temporales/Room3/CajaFuerte.png"
+      "file": "../resources/images/Finales/CajaFuerte.png"
     },
     {
       "id": "CajaFuerteOscuro",
@@ -1219,7 +1251,7 @@
     },
     {
       "id": "CajaFuerteRojo",
-      "file": "../resources/images/temporales/Room3/CajaFuerteRojo.png"
+      "file": "../resources/images/Finales/CajaFuerteRoja.png"
     },
     {
       "id": "Radio",
@@ -1228,6 +1260,10 @@
     {
       "id": "radioRoja",
       "file": "../resources/images/Finales/radioRoja.png"
+    },
+    {
+      "id": "radioAzul",
+      "file": "../resources/images/Finales/radioAzul.png"
     },
     {
       "id": "MorseGuide",
@@ -1451,6 +1487,14 @@
     {
         "id": "sala2",
         "file": "../resources/sound/music/sala2.wav"
+    },
+    {
+        "id": "sala3",
+        "file": "../resources/sound/music/sala3.wav"
+    },
+    {
+        "id": "intermedia",
+        "file": "../resources/sound/music/intermedia.wav"
     }
     
   ]

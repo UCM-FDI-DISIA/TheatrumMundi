@@ -18,7 +18,7 @@
 Game* Game::_instance = nullptr;
 Game::Game() {
 	_exitGame = false;
-	
+	loadedResources = -1;
 }
 Game* Game::Instance()
 {
@@ -163,6 +163,82 @@ void Game::start() {
 #endif // _DEBUG
 
 	}
+}
+
+void Game::loadResouces(int part)
+{
+	//loadResouces
+#ifndef _LOADALLRESOURCES
+
+	switch (part)
+	{
+	case INITIAL_MENU:
+		if (loadedResources != part) {
+			sdlutils().ClearMaps();
+			sdlutils().loadReasources("../resources/config/TheatrumMundiInitialMenu.resources.json");
+			loadedResources = part;
+		}
+		break;
+	case TUTORIAL_SCENE:
+		if (loadedResources != part) {
+			sdlutils().ClearMaps();
+			sdlutils().loadReasources("../resources/config/TheatrumMundiTutorial.resources.json");
+
+			loadedResources = part;
+		}
+		break;
+	case SceneName::MIDDLE_ROOM:
+		if (loadedResources != part) {
+			int aux = Game::Instance()->getDataManager()->GetActualScene();
+			switch (aux)
+			{
+			case SceneCount::MIDDLEROOM1:
+				if (loadedResources != part) {
+					sdlutils().ClearMaps();
+
+					sdlutils().loadReasources("../resources/config/TheatrumMundiRoom1.resources.json");
+					loadedResources = 4;
+				}
+				break;
+			case SceneCount::MIDDLEROOM2:
+				if (loadedResources != part) {
+					sdlutils().ClearMaps();
+
+					sdlutils().loadReasources("../resources/config/TheatrumMundiRoom2.resources.json");
+					loadedResources = 5;
+				}
+				break;
+			case SceneCount::MIDDLEROOM3:
+				if (loadedResources != part) {
+					sdlutils().ClearMaps();
+					sdlutils().loadReasources("../resources/config/TheatrumMundiRoom3.resources.json");
+					loadedResources = 6;
+				}
+				break;
+			default:
+				break;
+			}
+		}
+		break;
+
+	case SceneName::CREDITS:
+		if (loadedResources != part) {
+			sdlutils().ClearMaps();
+
+			sdlutils().loadReasources("../resources/config/TheatrumMundiRoom2.resources.json");
+			loadedResources = part;
+		}
+		break;
+	
+	default:
+#ifdef DEBUG
+		std::cout << "NOT LOAD MORE RESOURCES" << std::endl;
+#endif // DEBUG
+		
+		break;
+	}
+#endif // !_LOADALLRESOURCES
+
 }
 
 void Game::reset()
