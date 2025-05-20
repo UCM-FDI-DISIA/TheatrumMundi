@@ -98,7 +98,7 @@ ScenePuzzleTemplate::~ScenePuzzleTemplate()
 void ScenePuzzleTemplate::createInventoryUI()
 {
 	std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-	AudioManager::Instance().setVolume(buttonSound, 0.2);
+	audioManager().setVolume(buttonSound, 0.2);
 
 	
 	//INVENTORY
@@ -118,7 +118,7 @@ void ScenePuzzleTemplate::createInventoryUI()
 	ClickComponent* invOpen = entityManager->addComponent<ClickComponent>(inventoryButton);
 	invOpen->connect(ClickComponent::JUST_CLICKED, [this, InventoryBackground, upButton, downButton, buttonSound]() //Lamda function
 		{
-			AudioManager::Instance().playSound(buttonSound);
+			audioManager().playSound(buttonSound);
 			room->GetInventory()->setActive(!room->GetInventory()->getActive());  // Toggle the inventory
 
 			// If the inventory is active, activate the items
@@ -152,14 +152,14 @@ void ScenePuzzleTemplate::createInventoryUI()
 	ClickComponent* UPbuttonInventoryClick = entityManager->getComponent<ClickComponent>(upButton);
 	UPbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, upButton]() {
 
-		AudioManager::Instance().playSound(buttonSound);
+		audioManager().playSound(buttonSound);
 		scrollInventoryPuzzle(-1, room);
 		});
 
 	ClickComponent* DOWNbuttonInventoryClick = entityManager->getComponent<ClickComponent>(downButton);
 	DOWNbuttonInventoryClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, downButton]() {
 
-		AudioManager::Instance().playSound(buttonSound);
+		audioManager().playSound(buttonSound);
 		scrollInventoryPuzzle(1, room);
 		});
 

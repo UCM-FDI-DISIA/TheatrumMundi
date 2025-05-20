@@ -24,6 +24,7 @@ private:
 	const int LINES_DISPLAYED = 5; //number of lines displayed on screen
 	SceneTemplate* sceneTemplate;
 
+
 public:
 	
 	Log();

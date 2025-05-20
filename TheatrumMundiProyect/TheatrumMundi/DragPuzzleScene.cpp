@@ -35,9 +35,9 @@ void DragPuzzleScene::init(SceneRoomTemplate* sr)
         room = sr;
         isStarted = true;
         //sound and music
-        AudioManager& a = AudioManager::Instance();
+      //  AudioManager& a = AudioManager::Instance();
         std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-        a.setVolume(buttonSound, 0.2);
+        audioManager().setVolume(buttonSound, 0.2);
         
         //background
         entityFactory->CreateImageEntity(entityManager, "fondoXO", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::DEFAULT);
@@ -203,7 +203,7 @@ void DragPuzzleScene::init(SceneRoomTemplate* sr)
          ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
          clkOpen->connect(ClickComponent::JUST_CLICKED, [this, _backButton, buttonSound]()
              {
-                 AudioManager::Instance().playSound(buttonSound);
+                 audioManager().playSound(buttonSound);
                  inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
                  HideInventoryItems();
                  room->GetInventory()->setFirstItem(0);
@@ -279,7 +279,7 @@ bool DragPuzzleScene::Check()
 
 void DragPuzzleScene::Win()
 {
-    AudioManager::Instance().playSound(sdlutils().soundEffects().at("MecanismoAbre"));
+    audioManager().playSound(sdlutils().soundEffects().at("MecanismoAbre"));
     entityManager->removeComponent<TriggerComponent>(_triggerObj);
     tomb->setDragpuzzle(true);
 }

@@ -314,7 +314,7 @@ void Room3Scene::_setRoomEvents()
 		
 		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 		std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
-		AudioManager::Instance().playSound(correctSound);
+		audioManager().playSound(correctSound);
 		Game::Instance()->render();
 		Game::Instance()->getSceneManager()->popScene();
 		};
@@ -336,7 +336,7 @@ void Room3Scene::_setRoomEvents()
 		
 		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 		std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
-		AudioManager::Instance().playSound(incorrectSound);
+		audioManager().playSound(incorrectSound);
 		Game::Instance()->render();
 		Game::Instance()->getSceneManager()->popScene();
 		};
@@ -346,13 +346,13 @@ void Room3Scene::_setRoomEvents()
 void Room3Scene::_setRoomAudio()
 {
 	//Audio sfx 
-	AudioManager& audioMngr = AudioManager::Instance();
+	//AudioManager& audioMngr = AudioManager::Instance();
 
 	rmSounds.uiButton = sdlutils().soundEffects().at("boton");
-	audioMngr.setVolume(rmSounds.uiButton, 0.2);
+	audioManager().setVolume(rmSounds.uiButton, 0.2);
 
 	rmSounds.puzzleButton = sdlutils().soundEffects().at("puzzle");
-	audioMngr.setVolume(rmSounds.puzzleButton, 0.3);
+	audioManager().setVolume(rmSounds.puzzleButton, 0.3);
 
 	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
 
@@ -669,15 +669,15 @@ void Room3Scene::_setInteractuables()
 	() {
 		if (rmObjects.backgroundScroll->startPhaseCheck()) { //Right side of the room PARROT
 			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000 && Game::Instance()->getDataManager()->GetRoom3Phase() > 0) { // Every second
-				AudioManager::Instance().setVolume(rmSounds.shootSound, 0.1f);
-				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[0]);
+				audioManager().setVolume(rmSounds.shootSound, 0.1f);
+				audioManager().playSound(parrotUtils.codeSequenceSounds[0]);
 				parrotUtils.lastSoundTime = sdlutils().currTime();
 			}
 		}
 		else { //Left side of the room MORSE (if we have the LightsOnState)
 			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 8000 && Game::Instance()->getDataManager()->GetRoom3Phase() == 2) { // Every eight seconds and lights on
-				if (parrotUtils.zoomParrotRadio) AudioManager::Instance().playSound(rmSounds.morse_Sound);
-				else AudioManager::Instance().playSound(rmSounds.morse_Sound_Low);
+				if (parrotUtils.zoomParrotRadio) audioManager().playSound(rmSounds.morse_Sound);
+				else audioManager().playSound(rmSounds.morse_Sound_Low);
 				parrotUtils.lastSoundTime = sdlutils().currTime();
 			}
 		}
@@ -699,7 +699,7 @@ void Room3Scene::_setInteractuables()
 					++parrotUtils.codeSeqIteration;
 				} //Not repeat the shoot
 
-				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[parrotUtils.codeSeqIteration]);
+				audioManager().playSound(parrotUtils.codeSequenceSounds[parrotUtils.codeSeqIteration]);
 				
 				++parrotUtils.codeSeqIteration;
 
@@ -710,8 +710,8 @@ void Room3Scene::_setInteractuables()
 		}
 		else { //Left side of the room MORSE (if we have the redLightsState)
 			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 8000 && Game::Instance()->getDataManager()->GetRoom3Phase() == 2) { // Every eight seconds
-				if (parrotUtils.zoomParrotRadio) AudioManager::Instance().playSound(rmSounds.morse_Sound);
-				else AudioManager::Instance().playSound(rmSounds.morse_Sound_Low);
+				if (parrotUtils.zoomParrotRadio) audioManager().playSound(rmSounds.morse_Sound);
+				else audioManager().playSound(rmSounds.morse_Sound_Low);
 				parrotUtils.lastSoundTime = sdlutils().currTime();
 			}
 		}
@@ -814,7 +814,7 @@ void Room3Scene::_setUI()
 				ImagequitButton->setW(entityManager->getComponent<Transform>(rmObjects.quitButton)->getWidth());
 				ImagequitButton->setH(entityManager->getComponent<Transform>(rmObjects.quitButton)->getHeight());
 				ImagequitButton->setPosOffset(0, 0);
-				AudioManager::Instance().playSound(rmSounds.uiButton);
+				audioManager().playSound(rmSounds.uiButton);
 				entityManager->setActiveGroup(ecs::grp::ZOOMOBJ, false);
 				entityManager->setActive(rmObjects.quitButton, false);
 				entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, true);
@@ -866,7 +866,7 @@ void Room3Scene::_setUI()
 	entityManager->getComponent<ClickComponent>(rmObjects.inventoryButton)
 		->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
-				AudioManager::Instance().playSound(rmSounds.uiButton);
+				audioManager().playSound(rmSounds.uiButton);
 				GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
 
 				if (GetInventory()->getActive()) // If the inventory is active, activate the items
@@ -908,13 +908,13 @@ void Room3Scene::_setUI()
 	entityManager->getComponent<ClickComponent>(invObjects.inventoryUpButton)
 		->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
-				AudioManager::Instance().playSound(rmSounds.uiButton);
+				audioManager().playSound(rmSounds.uiButton);
 				scrollInventory(-1);
 			});
 	entityManager->getComponent<ClickComponent>(invObjects.inventoryDownButton)
 		->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
-				AudioManager::Instance().playSound(rmSounds.uiButton);
+				audioManager().playSound(rmSounds.uiButton);
 				scrollInventory(1);
 			});
 
@@ -964,12 +964,12 @@ void Room3Scene::_setLoadImages()
 
 void Room3Scene::_resetSounds()
 {
-	AudioManager::Instance().stopSound(rmSounds.s_Sound);
-	AudioManager::Instance().stopSound(rmSounds.t_Sound);
-	AudioManager::Instance().stopSound(rmSounds.o_Sound);
-	AudioManager::Instance().stopSound(rmSounds.p_Sound);
-	AudioManager::Instance().stopSound(rmSounds.shootSound);
-	AudioManager::Instance().stopSound(rmSounds.explosionSound);
-	AudioManager::Instance().stopSound(rmSounds.morse_Sound);
-	AudioManager::Instance().stopSound(rmSounds.morse_Sound_Low);
+	audioManager().stopSound(rmSounds.s_Sound);
+	audioManager().stopSound(rmSounds.t_Sound);
+	audioManager().stopSound(rmSounds.o_Sound);
+	audioManager().stopSound(rmSounds.p_Sound);
+	audioManager().stopSound(rmSounds.shootSound);
+	audioManager().stopSound(rmSounds.explosionSound);
+	audioManager().stopSound(rmSounds.morse_Sound);
+	audioManager().stopSound(rmSounds.morse_Sound_Low);
 }

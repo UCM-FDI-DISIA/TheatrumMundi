@@ -164,13 +164,13 @@ void TombPuzzleScene::refresh()
 		{
 		case 1:
 			if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("TUMBA2_2P");
-			else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("TUMBA2_1P");
+			else startDialogue("TUMBA2_1P");
 			startDg = false;
 			break;
 		case 2:
 			if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("TUMBA3_2P");
-			else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("TUMBA3_1P");
-			AudioManager::Instance().playSound(sdlutils().soundEffects().at("MoverPiedra"));
+			else startDialogue("TUMBA3_1P");
+			audioManager().playSound(sdlutils().soundEffects().at("MoverPiedra"));
 			startDg = false;
 			break;
 

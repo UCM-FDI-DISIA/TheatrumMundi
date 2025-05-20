@@ -77,13 +77,13 @@ void ParrotPuzzleScene::_setGlobalFeatures()
 void ParrotPuzzleScene::_setRoomAudio()
 {
 	//Audio sfx 
-	AudioManager& audioMngr = AudioManager::Instance();
+	
 
 	rmSounds.uiButton = sdlutils().soundEffects().at("boton");
-	audioMngr.setVolume(rmSounds.uiButton, 0.2);
+	audioManager().setVolume(rmSounds.uiButton, 0.2);
 
 	rmSounds.puzzleButton = sdlutils().soundEffects().at("puzzle");
-	audioMngr.setVolume(rmSounds.puzzleButton, 0.3);
+	audioManager().setVolume(rmSounds.puzzleButton, 0.3);
 
 	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
 
@@ -135,7 +135,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 	//	});
 
 	ClickComponent* clk = entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity);
-	clk->connect(ClickComponent::JUST_CLICKED, [&, this]() {
+	clk->connect(ClickComponent::JUST_CLICKED, [this,sr,variant]() {
 
 		rmObjects.bulletsEntity->getMngr()->setActive(rmObjects.bulletsEntity, false);
 		Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
@@ -159,9 +159,9 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 	auto shootingBehavior = [/*parrotStateCom,*/ this] // SHOOTING_SOUND
 		() {
 			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000 && Game::Instance()->getDataManager()->GetRoom3Phase() == 1) { // Every second
-				AudioManager& audioMngr = AudioManager::Instance();
-				audioMngr.setVolume(rmSounds.shootSound,1.0);
-				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[0]);
+
+				audioManager().setVolume(rmSounds.shootSound,1.0);
+				audioManager().playSound(parrotUtils.codeSequenceSounds[0]);
 				parrotUtils.lastSoundTime = sdlutils().currTime();
 			}	
 
@@ -172,7 +172,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 		() {
 			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000 && Game::Instance()->getDataManager()->GetRoom3Phase() == 2) { // Every second
 
-				AudioManager& audioMngr = AudioManager::Instance();
+				//AudioManager& audioMngr = AudioManager::Instance();
 
 				if (parrotUtils.codeSeqIteration == parrotUtils.codeSequenceSounds.size() - 1) {
 					parrotUtils.codeSeqIteration++;
@@ -184,7 +184,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 					++parrotUtils.codeSeqIteration;
 				} //Not repeat the shoot
 
-				AudioManager::Instance().playSound(parrotUtils.codeSequenceSounds[parrotUtils.codeSeqIteration]);
+				audioManager().playSound(parrotUtils.codeSequenceSounds[parrotUtils.codeSeqIteration]);
 
 				++parrotUtils.codeSeqIteration;
 
@@ -267,9 +267,9 @@ void ParrotPuzzleScene::_setUI()
 	//logbtn = rmObjects.logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 
 
-	AudioManager& a = AudioManager::Instance();
+	//AudioManager& a = AudioManager::Instance();
 	std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-	a.setVolume(buttonSound, 0.2);
+	audioManager().setVolume(buttonSound, 0.2);
 
 	//BackButton
 		//ENTIDADCONENTITYFACTORY
@@ -282,7 +282,7 @@ void ParrotPuzzleScene::_setUI()
 	ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 	clkOpen->connect(ClickComponent::JUST_CLICKED, [this, _backButton, buttonSound]()
 		{
-			AudioManager::Instance().playSound(buttonSound);
+			//AudioManager::Instance().playSound(buttonSound);
 
 			inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 			HideInventoryItems();
@@ -292,13 +292,13 @@ void ParrotPuzzleScene::_setUI()
 			_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
 			_backButtonImage->setPosOffset(0, 0);
 
-			AudioManager::Instance().stopSound(rmSounds.shootSound);
-			AudioManager::Instance().stopSound(rmSounds.explosionSound);
-			AudioManager::Instance().stopSound(rmSounds.morse_Sound);
-			AudioManager::Instance().stopSound(rmSounds.s_Sound);
-			AudioManager::Instance().stopSound(rmSounds.t_Sound);
-			AudioManager::Instance().stopSound(rmSounds.o_Sound);
-			AudioManager::Instance().stopSound(rmSounds.p_Sound);
+			audioManager().stopSound(rmSounds.shootSound);
+			audioManager().stopSound(rmSounds.explosionSound);
+			audioManager().stopSound(rmSounds.morse_Sound);
+			audioManager().stopSound(rmSounds.s_Sound);
+			audioManager().stopSound(rmSounds.t_Sound);
+			audioManager().stopSound(rmSounds.o_Sound);
+			audioManager().stopSound(rmSounds.p_Sound);
 
 			parrotUtils.lastSoundTime = 0;
 
@@ -314,7 +314,7 @@ bool ParrotPuzzleScene::isItemHand(const std::string& itemId)
 {
 
 	if (itemId == "Linterna" && Game::Instance()->getDataManager()->GetRoom3Phase() == 2) {
-		AudioManager::Instance().playSound(rmSounds.explosionSound);						// TODO: Exploded_Parrot image
+		audioManager().playSound(rmSounds.explosionSound);						// TODO: Exploded_Parrot image
 		entityManager->getComponent<Image>(parrotUtils.parrotEnt)->setTexture(&sdlutils().images().at("EmptyImage"));
 		entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity)->setLayerOpposition(false); // We can collect the bullets even with the parrot on top
 		//parrotStateCom->setState(ParrotState::DEATH);

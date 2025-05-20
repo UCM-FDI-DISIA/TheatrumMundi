@@ -35,9 +35,9 @@ void Box::init(SceneRoomTemplate* sr)
 			//Register scene in dialogue manager
 			dialogueManager->setScene(this);
 
-			AudioManager& a = AudioManager::Instance();
+		//	AudioManager& a = AudioManager::Instance();
 			std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-			a.setVolume(buttonSound, 0.2);
+			audioManager().setVolume(buttonSound, 0.2);
 			
 			room = sr;
 			//create the buttons
@@ -45,25 +45,25 @@ void Box::init(SceneRoomTemplate* sr)
 			
 			//3,5,8,14
 
-			auto _button1 = entityFactory->CreateInteractableEntity(entityManager, "jLetter", EntityFactory::RECTAREA, Vector2D(518, 200), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button2 = entityFactory->CreateInteractableEntity(entityManager, "fLetter", EntityFactory::RECTAREA, Vector2D(568, 200), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button3 = entityFactory->CreateInteractableEntity(entityManager, "sLetter", EntityFactory::RECTAREA, Vector2D(618, 200), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button4 = entityFactory->CreateInteractableEntity(entityManager, "lLetter", EntityFactory::RECTAREA, Vector2D(668, 200), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button1 = entityFactory->CreateInteractableEntity(entityManager, "jLetter", EntityFactory::RECTAREA, Vector2D(500, 250), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button2 = entityFactory->CreateInteractableEntity(entityManager, "fLetter", EntityFactory::RECTAREA, Vector2D(600, 250), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button3 = entityFactory->CreateInteractableEntity(entityManager, "sLetter", EntityFactory::RECTAREA, Vector2D(700, 250), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button4 = entityFactory->CreateInteractableEntity(entityManager, "lLetter", EntityFactory::RECTAREA, Vector2D(800, 250), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
-			auto _button5 = entityFactory->CreateInteractableEntity(entityManager, "pLetter", EntityFactory::RECTAREA, Vector2D(518, 250), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button6 = entityFactory->CreateInteractableEntity(entityManager, "aLetter", EntityFactory::RECTAREA, Vector2D(568, 250), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button7 = entityFactory->CreateInteractableEntity(entityManager, "rLetter", EntityFactory::RECTAREA, Vector2D(618, 250), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button8 = entityFactory->CreateInteractableEntity(entityManager, "tLetter", EntityFactory::RECTAREA, Vector2D(668, 250), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button5 = entityFactory->CreateInteractableEntity(entityManager, "pLetter", EntityFactory::RECTAREA, Vector2D(500, 340), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button6 = entityFactory->CreateInteractableEntity(entityManager, "aLetter", EntityFactory::RECTAREA, Vector2D(600, 340), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button7 = entityFactory->CreateInteractableEntity(entityManager, "rLetter", EntityFactory::RECTAREA, Vector2D(700, 340), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button8 = entityFactory->CreateInteractableEntity(entityManager, "tLetter", EntityFactory::RECTAREA, Vector2D(800, 340), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
-			auto _button9 = entityFactory->CreateInteractableEntity(entityManager, "iLetter", EntityFactory::RECTAREA, Vector2D(518, 300), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button10 = entityFactory->CreateInteractableEntity(entityManager, "kLetter", EntityFactory::RECTAREA, Vector2D(568, 300), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button11 = entityFactory->CreateInteractableEntity(entityManager, "bLetter", EntityFactory::RECTAREA, Vector2D(618, 300), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button12 = entityFactory->CreateInteractableEntity(entityManager, "xLetter", EntityFactory::RECTAREA, Vector2D(668, 300), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button9 = entityFactory->CreateInteractableEntity(entityManager, "iLetter", EntityFactory::RECTAREA, Vector2D(500, 430), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button10 = entityFactory->CreateInteractableEntity(entityManager, "kLetter", EntityFactory::RECTAREA, Vector2D(600, 430), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button11 = entityFactory->CreateInteractableEntity(entityManager, "bLetter", EntityFactory::RECTAREA, Vector2D(700, 430), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button12 = entityFactory->CreateInteractableEntity(entityManager, "xLetter", EntityFactory::RECTAREA, Vector2D(800, 430), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
-			auto _button13 = entityFactory->CreateInteractableEntity(entityManager, "vLetter", EntityFactory::RECTAREA, Vector2D(518, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button14 = entityFactory->CreateInteractableEntity(entityManager, "oLetter", EntityFactory::RECTAREA, Vector2D(568, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button15 = entityFactory->CreateInteractableEntity(entityManager, "cLetter", EntityFactory::RECTAREA, Vector2D(618, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button16 = entityFactory->CreateInteractableEntity(entityManager, "eLetter", EntityFactory::RECTAREA, Vector2D(668, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button13 = entityFactory->CreateInteractableEntity(entityManager, "vLetter", EntityFactory::RECTAREA, Vector2D(500, 520), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button14 = entityFactory->CreateInteractableEntity(entityManager, "oLetter", EntityFactory::RECTAREA, Vector2D(600, 520), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button15 = entityFactory->CreateInteractableEntity(entityManager, "cLetter", EntityFactory::RECTAREA, Vector2D(700, 520), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button16 = entityFactory->CreateInteractableEntity(entityManager, "eLetter", EntityFactory::RECTAREA, Vector2D(800, 520), Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 			//add buttons to buttons' vector:
 			rmObjects.puzzleButtons.push_back(_button1);
@@ -204,7 +204,7 @@ void Box::init(SceneRoomTemplate* sr)
 #pragma region Inventory
 
 		//INVENTORY
-		createInventoryUI();
+	createInventoryUI();
 
 		//BackButton
 			auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
@@ -213,7 +213,7 @@ void Box::init(SceneRoomTemplate* sr)
 			ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 			clkOpen->connect(ClickComponent::JUST_CLICKED, [this, _backButton, buttonSound]()
 				{
-					AudioManager::Instance().playSound(buttonSound);
+					audioManager().playSound(buttonSound);
 
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 					HideInventoryItems();

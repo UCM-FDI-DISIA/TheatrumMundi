@@ -56,9 +56,9 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		cableToPort.resize(wires.size(), -1); 
 		portToCable.resize(ports.size(), -1);
 
-		AudioManager& a = AudioManager::Instance();
+	//	AudioManager& a = AudioManager::Instance();
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-		a.setVolume(buttonSound, 0.2);
+		audioManager().setVolume(buttonSound, 0.2);
 		entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		
 
@@ -167,7 +167,7 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, sr, this, buttonSound]() {
 
 			std::cout << "CLICK" << std::endl;
-			AudioManager::Instance().playSound(buttonSound);
+			audioManager().playSound(buttonSound);
 
 			bool allConnected = std::all_of(actualPos.begin(), actualPos.end(), [](int pos) { return pos != -1; });
 
@@ -214,7 +214,7 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, _backButton, buttonSound]()
 			{
-				AudioManager::Instance().playSound(buttonSound);
+				audioManager().playSound(buttonSound);
 
 				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 				HideInventoryItems();

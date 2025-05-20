@@ -27,98 +27,98 @@ MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaInterm
 	dialogueManager = new DialogueManager(0);
 	roomEvent.resize(MIDDLEROOMEVENTSIZE);
 	roomEvent[FIRST_DIALOGUE] = [this]() {
-		AudioManager::Instance().stopSound(sdlutils().musics().at("menu"));
+		audioManager().stopSound(sdlutils().musics().at("menu"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
-		AudioManager::Instance().playSound(middleRoomMusic, true);
+		audioManager().playSound(middleRoomMusic, true);
 		startDialogue("SalaIntermedia1");
 		};
 	//ROOM1
 	roomEvent[AFTER_ROOM1_GOOD3] = [this]() {
-		AudioManager::Instance().stopSound(sdlutils().musics().at("sala1"));
+		audioManager().stopSound(sdlutils().musics().at("sala1"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
-		AudioManager::Instance().playSound(middleRoomMusic, true);
+		audioManager().playSound(middleRoomMusic, true);
 		startDialogue("SalaIntermedia2_1");
 		};
 	roomEvent[AFTER_ROOM1_BAD2] = [this]() {
-		AudioManager::Instance().stopSound(sdlutils().musics().at("sala1"));
+		audioManager().stopSound(sdlutils().musics().at("sala1"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
-		AudioManager::Instance().playSound(middleRoomMusic, true);
+		audioManager().playSound(middleRoomMusic, true);
 		startDialogue("SalaIntermedia2_2");
 		};
 
 	//ROOM2
 	roomEvent[AFTER_ROOM2_GOOD3] = [this]() {
-		AudioManager::Instance().stopSound(sdlutils().musics().at("sala2"));
+		audioManager().stopSound(sdlutils().musics().at("sala2"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
-		AudioManager::Instance().playSound(middleRoomMusic, true);
-		startDialogue("SalaIntermedia1");
+		audioManager().playSound(middleRoomMusic, true);
+		startDialogue("SalaIntermedia3_1");
 		};
 	roomEvent[AFTER_ROOM2_GOOD2] = [this]() {
-		AudioManager::Instance().stopSound(sdlutils().musics().at("sala2"));
+		audioManager().stopSound(sdlutils().musics().at("sala2"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
-		AudioManager::Instance().playSound(middleRoomMusic, true);
-		startDialogue("SalaIntermedia1");
+		audioManager().playSound(middleRoomMusic, true);
+		startDialogue("SalaIntermedia3_2");
 		};
 	roomEvent[AFTER_ROOM2_BAD2] = [this]() {
-		AudioManager::Instance().stopSound(sdlutils().musics().at("sala2"));
+		audioManager().stopSound(sdlutils().musics().at("sala2"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
-		AudioManager::Instance().playSound(middleRoomMusic, true);
-		startDialogue("SalaIntermedia1");
+		audioManager().playSound(middleRoomMusic, true);
+		startDialogue("SalaIntermedia3_3");
 		};
 	roomEvent[AFTER_ROOM2_BAD1] = [this]() {
-		AudioManager::Instance().stopSound(sdlutils().musics().at("sala2"));
+		audioManager().stopSound(sdlutils().musics().at("sala2"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
-		AudioManager::Instance().playSound(middleRoomMusic, true);
-		startDialogue("SalaIntermedia1");
+		audioManager().playSound(middleRoomMusic, true);
+		startDialogue("SalaIntermedia3_4");
 		};
 	//ROOM3
 	roomEvent[AFTER_ROOM3_GOOD3] = [this]() {
-		AudioManager::Instance().stopSound(sdlutils().musics().at("sala3"));
+		audioManager().stopSound(sdlutils().musics().at("sala3"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
-		AudioManager::Instance().playSound(middleRoomMusic, true);
+		audioManager().playSound(middleRoomMusic, true);
 		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_GOOD2SL] = [this]() {
-		AudioManager::Instance().stopSound(sdlutils().musics().at("sala3"));
+		audioManager().stopSound(sdlutils().musics().at("sala3"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
-		AudioManager::Instance().playSound(middleRoomMusic, true);
+		audioManager().playSound(middleRoomMusic, true);
 		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_GOOD2KL] = [this]() {
-		AudioManager::Instance().stopSound(sdlutils().musics().at("sala3"));
+		audioManager().stopSound(sdlutils().musics().at("sala3"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
-		AudioManager::Instance().playSound(middleRoomMusic, true);
+		audioManager().playSound(middleRoomMusic, true);
 		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_BAD2SK] = [this]() {
-		AudioManager::Instance().stopSound(sdlutils().musics().at("sala3"));
+		audioManager().stopSound(sdlutils().musics().at("sala3"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
-		AudioManager::Instance().playSound(middleRoomMusic, true);
+		audioManager().playSound(middleRoomMusic, true);
 		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_BAD1K] = [this]() {
-		AudioManager::Instance().stopSound(sdlutils().musics().at("sala3"));
+		audioManager().stopSound(sdlutils().musics().at("sala3"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
-		AudioManager::Instance().playSound(middleRoomMusic, true);
+		audioManager().playSound(middleRoomMusic, true);
 		startDialogue("SalaIntermedia1");
 		};
 	roomEvent[AFTER_ROOM3_BAD1S] = [this]() {
-		AudioManager::Instance().stopSound(sdlutils().musics().at("sala3"));
+		audioManager().stopSound(sdlutils().musics().at("sala3"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
-		AudioManager::Instance().playSound(middleRoomMusic, true);
+		audioManager().playSound(middleRoomMusic, true);
 		startDialogue("SalaIntermedia1");
 		};
 }
@@ -134,7 +134,7 @@ void MiddleRoomScene::init()
 	if (!isStarted) {
 		isStarted = true;
 		//Audio sfx 
-		AudioManager& a = AudioManager::Instance();
+	//	AudioManager& a = AudioManager::Instance();
 		Sound* buttonSound = sdlutils().soundEffects().at("boton").get();
 		//Audio music
 		//Sound room1music = sdlutils().musics().at("sala1");
@@ -182,7 +182,7 @@ void MiddleRoomScene::init()
 		}
 		break;
 	case SceneCount::MIDDLEROOM3:
-		dialogueManager->setActualRoom(3);
+		dialogueManager->setActualRoom(4);
 		if (auxkei && auxlucy && auxsol) roomEvent[AFTER_ROOM2_GOOD3]();
 		else if (!auxkei && auxlucy && auxsol)roomEvent[AFTER_ROOM2_GOOD2]();
 		else if (auxkei && !auxlucy && auxsol)roomEvent[AFTER_ROOM2_BAD2]();
@@ -251,8 +251,9 @@ void MiddleRoomScene::endDialogue()
 		
 		break;
 	case SceneCount::MIDDLEROOM3:
-		
+		if(Game::Instance()->getDataManager()->GetCharacterState(KEISARA)|| Game::Instance()->getDataManager()->GetCharacterState(SOL))
 		Game::Instance()->getSceneManager()->loadScene(ROOM_3);
+		else Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
 		
 		break;
 	case SceneCount::END:

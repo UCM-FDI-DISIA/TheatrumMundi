@@ -93,7 +93,7 @@ bool DoorPuzzleScene::isItemHand(const std::string& itemId)
 	if (itemId == "LlaveInv") {
 		
 		Win();
-		AudioManager::Instance().playSound(sdlutils().soundEffects().at("MoverPiedra"));
+		audioManager().playSound(sdlutils().soundEffects().at("MoverPiedra"));
 		Exit();
 		return true;
 	}
