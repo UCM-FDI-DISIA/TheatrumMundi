@@ -297,7 +297,6 @@ void Room2Scene::_setRoomAudio()
 
 	audioMngr.stopSound(sdlutils().musics().at("intermedia"));
 	std::shared_ptr<Sound> room2music = sdlutils().musics().at("sala2");
-	audioMngr.setVolume(room2music, 0.4);
 	audioMngr.playSound(room2music, true);
 }
 
