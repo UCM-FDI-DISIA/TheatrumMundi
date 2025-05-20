@@ -105,6 +105,7 @@ void Room2Scene::_setRoomEvents()
 	roomEvent[CorpseDialogue] = [this] {
 		entityManager->setActive(rmObjects.zoomCorpse, true);
 		entityManager->setActive(rmObjects.quitButton, true);
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("CADAVER_P2");
 		else {
 			startDialogue("CADAVER_P1");
