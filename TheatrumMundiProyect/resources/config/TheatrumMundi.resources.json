@@ -1222,6 +1222,10 @@
       "file": "../resources/images/Finales/radio.jpg"
     },
     {
+      "id": "radioRoja",
+      "file": "../resources/images/Finales/radioRoja.png"
+    },
+    {
       "id": "MorseGuide",
       "file": "../resources/images/temporales/Room3/morseGuia.jpg"
     },

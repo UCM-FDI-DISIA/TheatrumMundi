@@ -23,6 +23,10 @@
       "id": "radioAzul",
       "file": "../resources/images/Finales/radioAzul.png"
     },
+    {
+      "id": "radioRoja",
+      "file": "../resources/images/Finales/radioRoja.png"
+    },
         { "id" : "balance", "file" : "../resources/images/Finales/balanza.png" },
         {
       "id": "clockShape",
