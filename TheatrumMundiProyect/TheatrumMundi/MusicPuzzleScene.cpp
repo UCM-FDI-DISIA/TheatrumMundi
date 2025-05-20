@@ -127,7 +127,7 @@ void MusicPuzzleScene::init(SceneRoomTemplate* sr)
         //Create Hook
         int variant = Game::Instance()->getDataManager()->GetRoomVariant(1);
         if (variant != 2) {
-            hook = entityFactory->CreateInteractableEntity(entityManager, "Varilla", EntityFactory::RECTAREA, Vector2D(530, 680), Vector2D(0, 0), 864 / 3, 207 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INVENTORY);
+            hook = entityFactory->CreateInteractableEntity(entityManager, "Varilla", EntityFactory::RECTAREA, Vector2D(530, 680), Vector2D(0, 0), 864 / 3, 207 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
             entityManager->getComponent<ClickComponent>(hook)->connect(ClickComponent::JUST_CLICKED, [this, sr]() {
                 entityManager->setActive(hook, false);
                 AddInvItem("VarillaInventario", sdlutils().invDescriptions().at("Varilla"), sr->GetInventory()->setPosition(), sr);
