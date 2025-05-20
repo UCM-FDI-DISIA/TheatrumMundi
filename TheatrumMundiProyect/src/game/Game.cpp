@@ -89,7 +89,7 @@ void Game::init() {
 	// Create the manager
 	_log = new Log();
 	_dataManager = new DataManager();
-	dialogueReader = new ReadDialog(3);
+	dialogueReader = new ReadDialog(5);
 	_mngr = new SceneManager();
 }
 
