@@ -158,7 +158,7 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.changeRoom1)->setTexture(&sdlutils().images().at("doorJuzgadoOscura"));
 
 		//characterCorpse
-		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3Oscuro"));
+		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("EmptyImage"));
 		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("EmptyImage"));
 
 		entityManager->getComponent<BehaviorStateComponent>(rmObjects.parrot)->setState(Phase::LIGHTS_OFF);
@@ -316,7 +316,7 @@ void Room3Scene::_setRoomEvents()
 		std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
 		audioManager().playSound(correctSound);
 		Game::Instance()->render();
-		Game::Instance()->getSceneManager()->popScene();
+		Game::Instance()->getSceneManager()->loadScene(SceneName::MIDDLE_ROOM);
 		};
 	roomEvent[BadEnd] = [this] {
 		// WIP
@@ -338,7 +338,7 @@ void Room3Scene::_setRoomEvents()
 		std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
 		audioManager().playSound(incorrectSound);
 		Game::Instance()->render();
-		Game::Instance()->getSceneManager()->popScene();
+		Game::Instance()->getSceneManager()->loadScene(SceneName::MIDDLE_ROOM);
 		};
 #pragma endregion
 }
@@ -579,7 +579,7 @@ void Room3Scene::_setInteractuables()
 {
 	//CORPSE
 	//rmObjects.zoomCorpse = entityFactory->CreateInteractableEntityNotMoveSprite(entityManager, "Cadaver3Oscuro", EntityFactory::RECTAREA, Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0,areaLayerManager,EntityFactory::NODRAG, ecs::grp::ZOOMOBJ);
-	rmObjects.zoomCorpse = entityFactory->CreateImageEntity(entityManager, "Cadaver3Oscuro", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
+	rmObjects.zoomCorpse = entityFactory->CreateImageEntity(entityManager, "EmptyImage", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 	entityManager->setActive(rmObjects.zoomCorpse, false);
 
 	characterCorpse = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(590, 181), Vector2D(0, 0), 243 / 1.5, 297 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);

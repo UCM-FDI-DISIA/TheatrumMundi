@@ -528,8 +528,12 @@
       "file": "../resources/images/Finales/Carga3.png"
     },
     {
-      "id": "loading4",
-      "file": "../resources/images/Finales/Carga4.png"
+        "id": "loading4",
+        "file": "../resources/images/Finales/Carga4.png"
+    },
+    {
+        "id": "clockHorButton",
+        "file":  "../resources/images/boton_horario.png"
     }
   ],
 

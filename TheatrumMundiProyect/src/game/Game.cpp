@@ -247,6 +247,7 @@ void Game::loadResouces(int part)
 		break;
 	
 	default:
+
 #ifdef DEBUG
 		std::cout << "NOT LOAD MORE RESOURCES" << std::endl;
 #endif // DEBUG
