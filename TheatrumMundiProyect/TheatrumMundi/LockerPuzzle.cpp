@@ -167,7 +167,8 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
        
 
     }
-   // createInvEntities(sr);
+    sr->GetInventory()->setFirstItem(0);
+    createInvEntities(sr);
 }
 
 void LockerPuzzle::unload()
