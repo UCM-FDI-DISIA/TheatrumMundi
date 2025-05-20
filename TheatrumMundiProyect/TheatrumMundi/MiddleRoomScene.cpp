@@ -55,28 +55,28 @@ MiddleRoomScene::MiddleRoomScene() :SceneRoomTemplate(), _eventToRead(SalaInterm
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
 		audioManager().playSound(middleRoomMusic, true);
-		startDialogue("SalaIntermedia1");
+		startDialogue("SalaIntermedia3_1");
 		};
 	roomEvent[AFTER_ROOM2_GOOD2] = [this]() {
 		audioManager().stopSound(sdlutils().musics().at("sala2"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
 		audioManager().playSound(middleRoomMusic, true);
-		startDialogue("SalaIntermedia1");
+		startDialogue("SalaIntermedia3_2");
 		};
 	roomEvent[AFTER_ROOM2_BAD2] = [this]() {
 		audioManager().stopSound(sdlutils().musics().at("sala2"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
 		audioManager().playSound(middleRoomMusic, true);
-		startDialogue("SalaIntermedia1");
+		startDialogue("SalaIntermedia3_3");
 		};
 	roomEvent[AFTER_ROOM2_BAD1] = [this]() {
 		audioManager().stopSound(sdlutils().musics().at("sala2"));
 		//Audio music
 		std::shared_ptr<Sound> middleRoomMusic = sdlutils().musics().at("intermedia");
 		audioManager().playSound(middleRoomMusic, true);
-		startDialogue("SalaIntermedia1");
+		startDialogue("SalaIntermedia3_4");
 		};
 	//ROOM3
 	roomEvent[AFTER_ROOM3_GOOD3] = [this]() {
@@ -182,7 +182,7 @@ void MiddleRoomScene::init()
 		}
 		break;
 	case SceneCount::MIDDLEROOM3:
-		dialogueManager->setActualRoom(3);
+		dialogueManager->setActualRoom(4);
 		if (auxkei && auxlucy && auxsol) roomEvent[AFTER_ROOM2_GOOD3]();
 		else if (!auxkei && auxlucy && auxsol)roomEvent[AFTER_ROOM2_GOOD2]();
 		else if (auxkei && !auxlucy && auxsol)roomEvent[AFTER_ROOM2_BAD2]();
@@ -251,8 +251,9 @@ void MiddleRoomScene::endDialogue()
 		
 		break;
 	case SceneCount::MIDDLEROOM3:
-		
+		if(Game::Instance()->getDataManager()->GetCharacterState(KEISARA)|| Game::Instance()->getDataManager()->GetCharacterState(SOL))
 		Game::Instance()->getSceneManager()->loadScene(ROOM_3);
+		else Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
 		
 		break;
 	case SceneCount::END:

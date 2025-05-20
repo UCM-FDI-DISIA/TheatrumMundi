@@ -26,6 +26,124 @@
       "id": "Title",
       "file": "../resources/images/TemporalTitleImage.png"
     },
+     {
+      "id": "PuertaMausoleo",
+      "file": "../resources/images/Finales/PuertaMausoleo.png"
+    },
+        {
+      "id": "VentanaSala",
+      "file": "../resources/images/Finales/VentanaSala.png"
+    },{
+      "id": "SalidaSecretaAbierta",
+      "file": "../resources/images/Finales/SalidaSecretaAbierta.png"
+    },
+    {
+      "id": "SalidaSecretaCerrada",
+      "file": "../resources/images/Finales/SalidaSecretaCerrada.png"
+    },
+    {
+      "id": "FondoVentanaCerrada",
+      "file": "../resources/images/Finales/FondoVentanaCerrada.png"
+    },
+    {
+      "id": "FondoVentanaAbierta",
+      "file": "../resources/images/Finales/FondoVentanaAbierta.png"
+    },
+    {
+      "id": "NotaBasica",
+      "file": "../resources/images/temporales/notaBasica.png"
+    },
+    {
+      "id": "Do",
+      "file": "../resources/images/temporales/do.png"
+    },
+    {
+      "id": "Si",
+      "file": "../resources/images/temporales/si.png"
+    },
+    {
+      "id": "fase1Partitura",
+      "file": "../resources/images/Finales/fase1Partitura.png"
+    },
+    {
+      "id": "fase2Partitura",
+      "file": "../resources/images/Finales/fase2Partitura.png"
+    },
+    {
+      "id": "fase3Partitura",
+      "file": "../resources/images/Finales/fase3Partitura.png"
+    },
+    {
+      "id": "fase1Espejo",
+      "file": "../resources/images/Finales/fase1Espejo.png"
+    },
+    {
+      "id": "fase2Espejo",
+      "file": "../resources/images/Finales/fase2Espejo.png"
+    },
+    {
+      "id": "fase3Espejo",
+      "file": "../resources/images/Finales/fase3Espejo.png"
+    },
+    {
+      "id": "puertaAMusical",
+      "file": "../resources/images/Finales/puertaA.png"
+    },
+    {
+      "id": "puertaBMusical",
+      "file": "../resources/images/Finales/puertaB.png"
+    },
+    {
+      "id": "instrucciones",
+      "file": "../resources/images/Finales/instrucciones.png"
+    },
+    {
+      "id": "espejo",
+      "file": "../resources/images/Finales/espejo.png"
+    },
+    {
+      "id": "teclasNegras",
+      "file": "../resources/images/Finales/teclasNegras.png"
+    },
+    {
+      "id": "doTecla",
+      "file": "../resources/images/Finales/doTecla.png"
+    },
+    {
+      "id": "reTecla",
+      "file": "../resources/images/Finales/reTecla.png"
+    },
+    {
+      "id": "miTecla",
+      "file": "../resources/images/Finales/miTecla.png"
+    },
+    {
+      "id": "faTecla",
+      "file": "../resources/images/Finales/faTecla.png"
+    },
+    {
+      "id": "solTecla",
+      "file": "../resources/images/Finales/solTecla.png"
+    },
+    {
+      "id": "laTecla",
+      "file": "../resources/images/Finales/laTecla.png"
+    },
+    {
+      "id": "siTecla",
+      "file": "../resources/images/Finales/siTecla.png"
+    },  {
+      "id": "XOPuzzleAccess",
+      "file": "../resources/images/Finales/XOPuzzleAccess.png"
+    },
+    {
+      "id": "DraggPuzzleAccess",
+      "file": "../resources/images/Finales/DraggPuzzleAccess.png"
+    },
+      {
+      "id": "PuertaCementerio",
+      "file": "../resources/images/Finales/PuertaCementerio.png"
+    },
     {
       "id": "TutorialButton",
       "file": "../resources/images/Finales/tutorialButton.png"
