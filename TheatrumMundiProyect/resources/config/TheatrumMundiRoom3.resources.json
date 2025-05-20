@@ -332,6 +332,14 @@
     {
       "id": "taquillaAbierta",
       "file": "../resources/images/Finales/taquillaAbierta.jpg"
+    },
+    {
+      "id": "lockFondoCerrado",
+      "file": "../resources/images/Finales/taquillaCerrada.png"
+    },
+    {
+      "id": "lockFondoAbierto",
+      "file": "../resources/images/Finales/compAbiertoTaquillaCandado.png"
     }
   ],
 
