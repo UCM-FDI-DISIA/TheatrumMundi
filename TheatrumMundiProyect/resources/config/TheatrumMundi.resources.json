@@ -111,6 +111,10 @@
       "file": "../resources/images/Finales/CambiarSala.PNG"
     },
     {
+      "id": "doorJuzgadoAzul",
+      "file": "../resources/images/Finales/puertaJuzgadoAzul.PNG"
+    },
+    {
       "id": "doorEsperaAzul",
       "file": "../resources/images/Finales/puertaEsperaAzul.PNG"
     },
@@ -180,7 +184,7 @@
     },
      {
       "id": "FondoJuzgado",
-      "file": "../resources/images/Finales/CajaFuerteOscuro.png"
+      "file": "../resources/images/Finales/Juzgado.png"
     },
     {
       "id": "B6",
@@ -1147,7 +1151,7 @@
     },
     {
       "id": "Cadaver3",
-      "file": "../resources/images/temporales/Room3/Cadaver.png"
+      "file": "../resources/images/Finales/CadaverLucyAzul.png"
     },
     {
       "id": "Cadaver3Oscuro",
@@ -1160,6 +1164,10 @@
     {
       "id": "Parrot",
       "file": "../resources/images/Finales/parrot.png"
+    },
+    {
+      "id": "parrotInt",
+      "file": "../resources/images/Finales/parrotInt.png"
     },
     {
       "id": "deadParrot",
@@ -1199,7 +1207,7 @@
     },
     {
       "id": "Balanza",
-      "file": "../resources/images/temporales/Room3/balanza.png"
+      "file": "../resources/images/Finales/balanzaInt.png"
     },
     {
       "id": "BalanzaOscuro",
@@ -1211,7 +1219,7 @@
     },
     {
       "id": "CajaFuerte",
-      "file": "../resources/images/temporales/Room3/CajaFuerte.png"
+      "file": "../resources/images/Finales/CajaFuerte.png"
     },
     {
       "id": "CajaFuerteOscuro",
