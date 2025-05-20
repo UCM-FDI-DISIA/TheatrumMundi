@@ -1,0 +1,31 @@
+{
+    "fonts" : [
+    {
+      "id": "ARIAL24",
+      "file": "../resources/fonts/ARIAL.ttf",
+      "size": 24
+    },
+    { "id" : "TITLE", "file" : "../resources/fonts/PirataOne-Regular.ttf", "size": 40 },
+    { "id" : "BASE", "file" : "../resources/fonts/FeFCrm2.ttf", "size": 24}
+  ],
+
+  "images": [
+        { "id" : "cortinaFija", "file" : "../resources/images/Finales/cortinaFija.png" },
+    { "id" : "cortinaD", "file" : "../resources/images/Finales/cortinaD.png" },
+    { "id" : "cortinaI", "file" : "../resources/images/Finales/cortinaI.png" },
+       { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
+        {
+      "id": "ExitToMenu",
+      "file": "../resources/images/Finales/RectangleExitToMenuButton.png"
+    }
+  ],
+"sounds": [
+      
+    {
+        "id": "boton",
+        "file": "../resources/sound/sfx/click_boton.wav"
+    }
+    ]
+
+
+  }
