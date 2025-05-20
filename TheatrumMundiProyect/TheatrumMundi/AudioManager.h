@@ -63,7 +63,7 @@ private:
     int getUsedChannels() const;
 
     AudioManager();
-   // ~AudioManager();
+    ~AudioManager();
 
     FMOD::System* system = nullptr;
     std::vector<std::shared_ptr<Sound>> sounds;

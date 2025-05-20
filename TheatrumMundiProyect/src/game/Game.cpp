@@ -42,7 +42,10 @@ Game::~Game() {
 	if (SDLUtils::HasInstance()) {
 		SDLUtils::Release();
 	}
-	audioManager().shutdown();
+	if (AudioManager::HasInstance()) {
+		AudioManager::Release();
+	}
+
 }
 
 void Game::init() {
