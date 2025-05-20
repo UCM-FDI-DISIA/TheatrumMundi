@@ -897,6 +897,74 @@
       "file": "../resources/images/Finales/cajaFuerteAbierta.png"
     },
     {
+      "id": "blackLetter",
+      "file": "../resources/images/Finales/blackLetter.png"
+    },
+    {
+      "id": "jLetter",
+      "file": "../resources/images/Finales/jLetter.png"
+    },
+    {
+      "id": "pLetter",
+      "file": "../resources/images/Finales/pLetter.png"
+    },
+    {
+      "id": "iLetter",
+      "file": "../resources/images/Finales/iLetter.png"
+    },
+    {
+      "id": "vLetter",
+      "file": "../resources/images/Finales/vLetter.png"
+    },
+    {
+      "id": "fLetter",
+      "file": "../resources/images/Finales/fLetter.png"
+    },
+    {
+      "id": "aLetter",
+      "file": "../resources/images/Finales/aLetter.png"
+    },
+    {
+      "id": "kLetter",
+      "file": "../resources/images/Finales/kLetter.png"
+    },
+    {
+      "id": "oLetter",
+      "file": "../resources/images/Finales/oLetter.png"
+    },
+    {
+      "id": "sLetter",
+      "file": "../resources/images/Finales/sLetter.png"
+    },
+    {
+      "id": "rLetter",
+      "file": "../resources/images/Finales/rLetter.png"
+    },
+    {
+      "id": "bLetter",
+      "file": "../resources/images/Finales/bLetter.png"
+    },
+    {
+      "id": "cLetter",
+      "file": "../resources/images/Finales/cLetter.png"
+    },
+    {
+      "id": "lLetter",
+      "file": "../resources/images/Finales/lLetter.png"
+    },
+    {
+      "id": "tLetter",
+      "file": "../resources/images/Finales/tLetter.png"
+    },
+    {
+      "id": "xLetter",
+      "file": "../resources/images/Finales/xLetter.png"
+    },
+    {
+      "id": "eLetter",
+      "file": "../resources/images/Finales/eLetter.png"
+    },
+    {
       "id": "FondoVentana",
       "file": "../resources/images/temporales/Room2/FondoVentana.png"
     },
