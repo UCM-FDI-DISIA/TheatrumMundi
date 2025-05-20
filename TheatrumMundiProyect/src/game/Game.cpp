@@ -138,6 +138,8 @@ void Game::start() {
 			continue;
 		}
 
+		audioManager().update();
+
 		_mngr->update();
 
 		checkCollisions();

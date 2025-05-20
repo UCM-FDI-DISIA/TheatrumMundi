@@ -47,7 +47,7 @@ public:
     void pauseSound(std::shared_ptr<Sound> sound);
     void resumeSound(std::shared_ptr<Sound> sound);
 
-    int getAvailableChannels() const;
+    void cleanupInactiveChannels();
        
 
     // Setters
@@ -59,6 +59,9 @@ public:
     void update();
 
 private:
+
+    int getUsedChannels() const;
+
     AudioManager();
    // ~AudioManager();
 

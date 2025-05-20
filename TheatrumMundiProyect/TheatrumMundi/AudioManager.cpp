@@ -122,7 +122,11 @@ void AudioManager::playSound(std::shared_ptr<Sound> sound, bool loop) {
         
     }
 
-    std::cout << "canales restantes: " << getAvailableChannels() << std::endl;
+#ifdef DEBUG
+    std::cout << "canales usados: " << getUsedChannels() << std::endl;
+#endif // DEBUG
+
+    
 }
 
 
@@ -144,12 +148,37 @@ void AudioManager::resumeSound(std::shared_ptr<Sound> sound) {
     }
 }
 
-int AudioManager::getAvailableChannels() const {
+int AudioManager::getUsedChannels() const {
     int usedChannels = 0;
     system->getChannelsPlaying(&usedChannels);
-    int maxChannels = 0;
-    system->getSoftwareFormat(nullptr, nullptr, &maxChannels);
     return  usedChannels;
+}
+
+void AudioManager::cleanupInactiveChannels()
+{
+    if (!system) return;
+
+    // Para cada sonido en tu vector de sonidos
+    for (auto& soundPtr : sounds) {
+        if (soundPtr && soundPtr->getChannel()) {
+            bool isPlaying = false;
+            FMOD_RESULT result = soundPtr->getChannel()->isPlaying(&isPlaying);
+
+            // Si hay error o no está reproduciéndose, libera el canal
+            if (result != FMOD_OK || !isPlaying) {
+                soundPtr->setChannel(nullptr); // Limpia la referencia al canal
+            }
+        }
+    }
+
+    // También puedes limpiar el vector de sonidos de aquellos que ya no se usan
+    sounds.erase(
+        std::remove_if(sounds.begin(), sounds.end(),
+            [](const std::shared_ptr<Sound>& s) {
+                return s.use_count() == 1; // Solo referencia en este vector
+            }),
+        sounds.end()
+    );
 }
 
 void AudioManager::set3DPosition(std::shared_ptr<Sound> sound, float x, float y, float z) {
@@ -190,6 +219,7 @@ void AudioManager::setPitch(std::shared_ptr<Sound> sound, float pitch) {
 
 void AudioManager::update() {
     if (system) {
+        cleanupInactiveChannels();
         system->update();
     }
 }
