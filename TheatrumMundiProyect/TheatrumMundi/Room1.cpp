@@ -425,7 +425,8 @@ void Room1Scene::_setUI()
 				entityManager->getComponent<InvAnimComponent>(invObjects.InventoryBackground)->endInvAnim();
 				entityManager->setActive(rmObjects.logbtn, true);
 				
-				for (int i = inv->getFirstItem(); i < inv->getItemNumber() + inv->getFirstItem(); ++i) inv->hints[i]->getMngr()->getComponent<InvAnimComponent>(inv->hints[i])->endInvAnim();// Desactivate the items 
+				for (int i = inv->getFirstItem(); i < inv->getItemNumber() + inv->getFirstItem(); ++i) 
+					inv->hints[i]->getMngr()->getComponent<InvAnimComponent>(inv->hints[i])->endInvAnim();// Desactivate the items 
 				
 			}
 		});

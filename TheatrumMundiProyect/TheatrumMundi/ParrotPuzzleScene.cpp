@@ -46,7 +46,7 @@ void ParrotPuzzleScene::init(SceneRoomTemplate* sr)
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
 	sr->GetInventory()->setFirstItem(0);
-	createInvEntities(sr);
+	createInvEntities(sr,false); //the lantern is not going to dissapir
 }
 
 void ParrotPuzzleScene::unload()
@@ -94,7 +94,7 @@ void ParrotPuzzleScene::_setRoomAudio()
 
 void ParrotPuzzleScene::_setRoomBackground()
 {
-	entityFactory->CreateImageEntity(entityManager, "Parrot", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+	rmObjects.background = entityFactory->CreateImageEntity(entityManager, "Parrot", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 }
 
 void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
@@ -103,35 +103,42 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 	int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
 	Vector2D bulletsPosition((sdlutils().width() - 150) / 2, (sdlutils().height() - 150) / 2);
 
-	entity_t bulletsEntity;
-
 	if (variant == 1) {
-		bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "balasF" , EntityFactory::RECTAREA, // TODO Imagen balas
+		rmObjects.bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "balasF" , EntityFactory::RECTAREA, // TODO Imagen balas
 			bulletsPosition, Vector2D(0, 0), 150, 150, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
 	}
 	else {
-		bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "balasR", EntityFactory::RECTAREA, // TODO Imagen balas
+		rmObjects.bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "balasR", EntityFactory::RECTAREA, // TODO Imagen balas
 			bulletsPosition, Vector2D(0, 0), 150, 150, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
 	}
-	entityManager->getComponent<ClickComponent>(bulletsEntity) // Collectable
-		->connect(ClickComponent::JUST_CLICKED, [&, this]() {
-			bulletsEntity->getMngr()->setActive(bulletsEntity, false);
-			Vector2D position = sr->GetInventory()->setPosition();
-			if (variant == 1)AddInvItem("balasF", sdlutils().Instance()->invDescriptions().at("BalasFalsas"), position, sr); // TODO Imagen balas
-			else AddInvItem("balasR", sdlutils().Instance()->invDescriptions().at("BalasReales"), position, sr);
+	//entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity) // Collectable
+	//	->connect(ClickComponent::JUST_CLICKED, [&, this]() {
+	//		rmObjects.bulletsEntity->getMngr()->setActive(rmObjects.bulletsEntity, false);
+	//		Vector2D position = sr->GetInventory()->setPosition();
+	//		if (variant == 1)AddInvItem("balasF", sdlutils().Instance()->invDescriptions().at("BalasFalsas"), position, sr); // TODO Imagen balas
+	//		else AddInvItem("balasR", sdlutils().Instance()->invDescriptions().at("BalasReales"), position, sr);
+	//	});
+
+	ClickComponent* clk = entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity);
+	clk->connect(ClickComponent::JUST_CLICKED, [&, this]() {
+
+		rmObjects.bulletsEntity->getMngr()->setActive(rmObjects.bulletsEntity, false);
+		Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+		if (variant == 1) AddInvItem("balasF", sdlutils().Instance()->invDescriptions().at("BalasFalsas"), position, sr); // TODO Imagen balas
+		else AddInvItem("balasR", sdlutils().Instance()->invDescriptions().at("BalasReales"), position, sr);
 		});
 
 	// PARROT
 	Vector2D parrotPosition((sdlutils().width() - 700) / 2, (sdlutils().height() - 700) / 2);
 	parrotUtils.parrotEnt = entityFactory->CreateInteractableEntity(entityManager, "Parrot", EntityFactory::RECTAREA, parrotPosition, Vector2D(0, 0), 700, 700, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
-	BehaviorStateComponent* parrotStateCom = entityManager->addComponent<BehaviorStateComponent>(parrotUtils.parrotEnt);
+	parrotStateCom = entityManager->addComponent<BehaviorStateComponent>(parrotUtils.parrotEnt);
 
 	parrotUtils.codeSequenceSounds.push_back(rmSounds.shootSound); // TODO: Gunshoot
 	parrotUtils.codeSequenceSounds.push_back(rmSounds.s_Sound); // TODO: S
@@ -140,7 +147,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 	parrotUtils.codeSequenceSounds.push_back(rmSounds.p_Sound); // TODO: P
 	parrotUtils.codeSequenceSounds.push_back(rmSounds.explosionSound); //TODO: Explosion
 
-	auto shootingBehavior = [parrotStateCom, this] // SHOOTING_SOUND
+	auto shootingBehavior = [/*parrotStateCom,*/ this] // SHOOTING_SOUND
 		() {
 			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000 && Game::Instance()->getDataManager()->GetRoom3Phase() == 1) { // Every second
 				AudioManager& audioMngr = AudioManager::Instance();
@@ -152,7 +159,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 			parrotStateCom->setState(Game::Instance()->getDataManager()->GetRoom3Phase()); // Check if changes the room state
 		};
 
-	auto stopBehavior = [parrotStateCom, this]
+	auto stopBehavior = [/*parrotStateCom, */this]
 		() {
 			if (sdlutils().currTime() - parrotUtils.lastSoundTime >= 1000 && Game::Instance()->getDataManager()->GetRoom3Phase() == 2) { // Every second
 
@@ -188,26 +195,12 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 
 	parrotStateCom->setState(Room3Scene::Phase::LIGHTS_OFF); // The other will be setted after finishin the puzzle
 
-	TriggerComponent* triggComp = entityManager->getComponent<TriggerComponent>(parrotUtils.parrotEnt);
-	triggComp->connect(TriggerComponent::AREA_ENTERED, // handdle if the torch enters
-		[bulletsEntity, triggComp, parrotStateCom, this]() {
-			auto enteredEnts = triggComp->triggerContextEntities();
+	parrotUtils.parrotEnt->getMngr()->getComponent<TriggerComponent>(parrotUtils.parrotEnt)->connect(TriggerComponent::AREA_ENTERED, [this]() {
+		SetplacedHand(true);
+		});
 
-			for (ecs::entity_t ent : enteredEnts) 
-			{
-				Image* objectImg = ent->getMngr()->getComponent<Image>(ent);
-																							// TODO Torch final image
-				if (objectImg != nullptr && objectImg->GetTexture() == &sdlutils().images().at("Linterna")) // Torch enters
-					if (parrotStateCom->getState() == Room3Scene::Phase::LIGHTS_RED)
-					{
-						// Change parrot image to exploded parrot
-						AudioManager::Instance().playSound(rmSounds.explosionSound);						// TODO: Exploded_Parrot image
-						entityManager->getComponent<Image>(parrotUtils.parrotEnt)->setTexture(&sdlutils().images().at("EmptyImage"));
-						entityManager->getComponent<ClickComponent>(bulletsEntity)->setLayerOpposition(false); // We can collect the bullets even with the parrot on top
-						parrotStateCom->setState(ParrotState::DEATH);
-						break;
-					}
-			}
+	parrotUtils.parrotEnt->getMngr()->getComponent<TriggerComponent>(parrotUtils.parrotEnt)->connect(TriggerComponent::AREA_LEFT, [this]() {
+		SetplacedHand(false);
 		});
 }
 
@@ -300,3 +293,31 @@ void ParrotPuzzleScene::_setUI()
 	dialogueManager->setScene(this);
 
 }
+
+bool ParrotPuzzleScene::isItemHand(const std::string& itemId)
+{
+	if (itemId == "Linterna" && Game::Instance()->getDataManager()->GetRoom3Phase() == 2) {
+		AudioManager::Instance().playSound(rmSounds.explosionSound);						// TODO: Exploded_Parrot image
+		entityManager->getComponent<Image>(parrotUtils.parrotEnt)->setTexture(&sdlutils().images().at("EmptyImage"));
+		entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity)->setLayerOpposition(false); // We can collect the bullets even with the parrot on top
+		//parrotStateCom->setState(ParrotState::DEATH);
+		parrotUtils.parrotEnt->getMngr()->setActive(parrotUtils.parrotEnt,false);
+		Win();
+		return true;
+	}
+	return false;
+}
+
+void ParrotPuzzleScene::Win()
+{
+	rmObjects.background->getMngr()->getComponent<Image>(rmObjects.background)->setTexture(&sdlutils().images().at("EmptyImage"));
+	room->resolvedPuzzle(3);
+}
+
+void ParrotPuzzleScene::ResolveScene()
+{
+	Win();
+}
+
+
+

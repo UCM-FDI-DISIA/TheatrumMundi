@@ -3,6 +3,7 @@
 #include <SDL.h>
 
 class Sound;
+class BehaviorStateComponent;
 
 class ParrotPuzzleScene : public ScenePuzzleTemplate
 {
@@ -13,6 +14,8 @@ public:
 	void init(SceneRoomTemplate* sr) override;
 	void unload() override;
 	bool Check() override;
+	void Win() override;
+	void ResolveScene() override;
 
 private:
 
@@ -22,11 +25,16 @@ private:
 	void _setInteractuables(SceneRoomTemplate* sr);
 	void _setDialog();
 	void _setUI();
+	bool isItemHand(const std::string& itemId) override;
+
+	BehaviorStateComponent* parrotStateCom;
 
 	struct roomObjects {
+		ecs::entity_t background = nullptr;
 		ecs::entity_t quitButton = nullptr;
 		ecs::entity_t inventoryButton = nullptr;
 		ecs::entity_t logbtn = nullptr;
+		ecs::entity_t bulletsEntity = nullptr;
 	} rmObjects;
 
 	struct roomSounds {
