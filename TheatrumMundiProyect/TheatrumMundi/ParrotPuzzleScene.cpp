@@ -141,6 +141,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 		Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
 		if (variant == 1) AddInvItem("balasF", sdlutils().Instance()->invDescriptions().at("BalasFalsas"), position, sr); // TODO Imagen balas
 		else AddInvItem("balasR", sdlutils().Instance()->invDescriptions().at("BalasReales"), position, sr);
+		entityManager->setActive(_backButton, true);
 		});
 
 	// PARROT
@@ -273,14 +274,14 @@ void ParrotPuzzleScene::_setUI()
 
 	//BackButton
 		//ENTIDADCONENTITYFACTORY
-	auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+	 _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
 	//INVENTORY
 		//Invntory Background
 	createInventoryUI();
 	//Click component Open log button
 	ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
-	clkOpen->connect(ClickComponent::JUST_CLICKED, [this, _backButton, buttonSound]()
+	clkOpen->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]()
 		{
 			//AudioManager::Instance().playSound(buttonSound);
 
@@ -319,6 +320,7 @@ bool ParrotPuzzleScene::isItemHand(const std::string& itemId)
 		entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity)->setLayerOpposition(false); // We can collect the bullets even with the parrot on top
 		//parrotStateCom->setState(ParrotState::DEATH);
 		parrotUtils.parrotEnt->getMngr()->setActive(parrotUtils.parrotEnt,false);
+		entityManager->setActive(_backButton, false);
 		Win();
 		return true;
 	}

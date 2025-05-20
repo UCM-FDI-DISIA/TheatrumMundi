@@ -231,12 +231,15 @@ void Room3Scene::_setRoomEvents()
 		Game::Instance()->getSceneManager()->loadScene(PARROT_PUZZLE, this);
 		};
 	roomEvent[ParrotSceneRsv] = [this] {
+		entityManager->setActive(rmObjects.parrot, false);
+		entityManager->removeEntity(rmObjects.parrot);
 			roomEvent[ResolveCase]();
 		};
 	roomEvent[ZoomMorseGuide] = [this] {
 		parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
 		entityManager->setActive(rmObjects.zoomMorseGuide, true);
 		entityManager->setActive(rmObjects.quitButton, true);
+		entityManager->setActive(pauseManager->_getopenPauseButton(), false);
 
 		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 
@@ -245,6 +248,7 @@ void Room3Scene::_setRoomEvents()
 			entityManager->setActive(rmObjects.feather, true);
 			
 		}
+
 
 		_resetSounds();
 
@@ -255,6 +259,8 @@ void Room3Scene::_setRoomEvents()
 		_resetSounds();
 		entityManager->setActive(rmObjects.zoomRadio, true);
 		entityManager->setActive(rmObjects.quitButton, true);
+		entityManager->setActive(pauseManager->_getopenPauseButton(), false);
+
 		if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))
 			startDialogue("RADIO_2P");
 		else {
@@ -801,11 +807,28 @@ void Room3Scene::_setDialog()
 	}
 }
 
+struct TimerData {
+	EntityManager* manager;
+	PauseManager* pauseM;
+};
+
+Uint32 timerCallbackRoom3(Uint32 interval, void* param) {
+
+	auto data = static_cast<TimerData*>(param);
+
+	data->manager->setActive(data->pauseM->_getopenPauseButton(), true);
+
+	delete data;
+	return 0;
+}
+
+
+
 void Room3Scene::_setUI()
 {
 #pragma region QuitButton
 	// Corpse zoom Quit Button
-	rmObjects.quitButton = entityFactory->CreateInteractableEntity(entityManager, "B1", entityFactory->RECTAREA, Vector2D(1349 - 110, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, entityFactory->NODRAG, ecs::grp::UI);
+	rmObjects.quitButton = entityFactory->CreateInteractableEntity(entityManager, "B1", entityFactory->RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, entityFactory->NODRAG, ecs::grp::UI);
 
 	entityManager->getComponent<ClickComponent>(rmObjects.quitButton)
 		->connect(ClickComponent::JUST_CLICKED, [this]()
@@ -818,7 +841,8 @@ void Room3Scene::_setUI()
 				entityManager->setActiveGroup(ecs::grp::ZOOMOBJ, false);
 				entityManager->setActive(rmObjects.quitButton, false);
 				entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, true);
-
+				TimerData* t = new TimerData{ entityManager,pauseManager };
+				SDL_AddTimer(50, timerCallbackRoom3, t);
 				parrotUtils.zoomParrotRadio = false;
 
 				_resetSounds();

@@ -62,11 +62,11 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 		
 
 		auto balanceArea = entityFactory->CreateInteractableEntity( // balance trigger area
-			entityManager, "balance", EntityFactory::RECTAREA,
+			entityManager, "EmptyImage", EntityFactory::RECTAREA,
 			Vector2D(800, 450), Vector2D(), 200, 100, 0,
 			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
-		balanceArea->getMngr()->removeComponent<Image>(balanceArea);
+		//balanceArea->getMngr()->removeComponent<Image>(balanceArea);
 
 
 
