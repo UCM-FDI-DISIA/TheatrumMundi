@@ -20,10 +20,10 @@
 LockerPuzzle::LockerPuzzle()
 {
    dialogueManager = new DialogueManager(1);
+   rotSol.push_back(240);
+   rotSol.push_back(72);
    rotSol.push_back(0);
-   rotSol.push_back(0);
-   rotSol.push_back(0);
-   rotSol.push_back(0);
+   rotSol.push_back(180);
 }
 LockerPuzzle::~LockerPuzzle()
 {
@@ -46,10 +46,16 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
 
         //strongBox door
         //Big wheel 
-        auto big = entityFactory->CreateInteractableEntity(entityManager, "rueda1", EntityFactory::CIRCLEAREA, Vector2D(755, 368), Vector2D(0, 0), 516/1.5, 516 / 1.5, 60, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        auto big = entityFactory->CreateInteractableEntity(entityManager, "rueda1", EntityFactory::CIRCLEAREA, Vector2D(755, 370), Vector2D(0, 0), 516/1.5, 516 / 1.5, 60, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux3 = entityManager->addComponent<SlowRotateComponent>(big, entityManager->getComponent<Transform>(big));
+        aux3->setEndRotEvent([this]() {
+            if (Check()) {
+                Win();
+            }
+            });
         entityManager->getComponent<ClickComponent>(big)->connect(ClickComponent::JUST_CLICKED, [this, aux3]() {
             aux3->startRotate(60);
+           
             });
         wheelstr.push_back(entityManager->getComponent<Transform>(big));
         doorEntities.push_back(big);
@@ -57,38 +63,49 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
         //medium wheel 
         auto medium = entityFactory->CreateInteractableEntity(entityManager, "rueda2", EntityFactory::CIRCLEAREA, Vector2D(795, 414), Vector2D(0, 0), 395/1.5, 395 / 1.5, 288, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux2 = entityManager->addComponent<SlowRotateComponent>(medium, entityManager->getComponent<Transform>(medium));
+        aux2->setEndRotEvent([this]() {
+            if (Check()) {
+                Win();
+            }
+            });
         entityManager->getComponent<ClickComponent>(medium)->connect(ClickComponent::JUST_CLICKED, [this, aux2]() {
             aux2->startRotate(72);
+            
             });
         wheelstr.push_back(entityManager->getComponent<Transform>(medium));
         doorEntities.push_back(medium);
         
         //small wheel
-        auto small = entityFactory->CreateInteractableEntity(entityManager, "rueda3", EntityFactory::CIRCLEAREA, Vector2D(837, 453), Vector2D(0, 0), 274/1.5, 274 / 1.5, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        auto small = entityFactory->CreateInteractableEntity(entityManager, "rueda3", EntityFactory::CIRCLEAREA, Vector2D(837, 453), Vector2D(0, 0), 274/1.5, 274 / 1.5, 120, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux = entityManager->addComponent<SlowRotateComponent>(small,entityManager->getComponent<Transform>(small));
+        aux->setEndRotEvent([this]() {
+            if (Check()) {
+                Win();
+            }
+            });
         entityManager->getComponent<ClickComponent>(small)->connect(ClickComponent::JUST_CLICKED, [this,aux](){
-            aux->startRotate(90);
+            aux->startRotate(120);
+           
             });
         wheelstr.push_back(entityManager->getComponent<Transform>(small));
         doorEntities.push_back(small);
        
         //smallest wheel
-        auto smallest = entityFactory->CreateInteractableEntity(entityManager, "rueda4", EntityFactory::CIRCLEAREA, Vector2D(876, 490), Vector2D(0, 0), 158/1.5, 158 / 1.5, 240, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        auto smallest = entityFactory->CreateInteractableEntity(entityManager, "rueda4", EntityFactory::CIRCLEAREA, Vector2D(876, 490), Vector2D(0, 0), 158/1.5, 158 / 1.5, 180, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux1 = entityManager->addComponent<SlowRotateComponent>(smallest, entityManager->getComponent<Transform>(smallest));
+        aux1->setEndRotEvent([this]() {
+            if (Check()) {
+                Win();
+            }
+            });
         entityManager->getComponent<ClickComponent>(smallest)->connect(ClickComponent::JUST_CLICKED, [this, aux1]() {
-            aux1->startRotate(120);
+            aux1->startRotate(180);
+            
             });
         wheelstr.push_back(entityManager->getComponent<Transform>(smallest));
         doorEntities.push_back(smallest);
        
 
-        auto checkbtn = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(10, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-        entityManager->getComponent<ClickComponent>(checkbtn)->connect(ClickComponent::JUST_CLICKED, [this]() {
-            if (Check()) {
-                Win();
-            }
-            });
-        doorEntities.push_back(checkbtn);
 
        //INVENTORY
        createInventoryUI();
@@ -126,12 +143,12 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
         int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
         ecs::entity_t rewardWire;
         if(variant==2 )rewardWire = entityFactory->CreateInteractableEntity(entityManager, "alambre", EntityFactory::RECTAREA,
-            Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
+            Vector2D(65, 30), Vector2D(0, 0), 310, 310, 0,
             areaLayerManager,
             EntityFactory::NODRAG,
             ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
         else rewardWire = entityFactory->CreateInteractableEntity(entityManager, "soga", EntityFactory::RECTAREA,
-            Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
+            Vector2D(650, 30), Vector2D(0, 0), 310, 310, 0,
             areaLayerManager,
             EntityFactory::NODRAG,
             ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
@@ -160,7 +177,10 @@ void LockerPuzzle::unload()
 bool LockerPuzzle::Check()
 {
     bool flag = true;
-    for (int i = 0; i < rotSol.size();i++) if (rotSol[i] != wheelstr[i]->getRot()) flag = false;
+    for (int i = 0; i < rotSol.size();i++) if (rotSol[i] != wheelstr[i]->getRot()) { 
+        std::cout << i << "ruedafallo" << std::endl;
+        flag = false; }
+
     return flag;
 }
 

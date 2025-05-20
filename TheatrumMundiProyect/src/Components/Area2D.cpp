@@ -1,5 +1,5 @@
 #include "Area2D.h"
-
+#include "Game.h"
 #include "../ecs/Entity.h"
 #include "../ecs/Manager.h"
 
@@ -36,3 +36,8 @@ bool Area2D::pointIsOverlayered(Vector2D point)
 
 	return overlayered;
 }
+
+void Area2D::setLocalPos(Vector2D pos)
+	{
+		_localPosition = Vector2D(pos.getX() * Game::Instance()->wscreenScale, pos.getX() * Game::Instance()->hscreenScale);
+	}
