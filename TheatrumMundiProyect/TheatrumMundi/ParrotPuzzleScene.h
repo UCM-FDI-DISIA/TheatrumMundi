@@ -27,6 +27,9 @@ private:
 	void _setUI();
 	bool isItemHand(const std::string& itemId) override;
 
+	ecs::entity_t _backButton;
+
+
 	BehaviorStateComponent* parrotStateCom;
 
 	struct roomObjects {

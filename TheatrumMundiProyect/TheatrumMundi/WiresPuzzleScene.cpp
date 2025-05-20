@@ -59,7 +59,7 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 	//	AudioManager& a = AudioManager::Instance();
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		audioManager().setVolume(buttonSound, 0.2);
-		entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+		entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		
 
 		//where the wires are going to be connected
@@ -237,6 +237,8 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
+		
+		
 		else gun = entityFactory->CreateInteractableEntity(entityManager, "pistolaSin", EntityFactory::RECTAREA,
 			Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
 			areaLayerManager,
