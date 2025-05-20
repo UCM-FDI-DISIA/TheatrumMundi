@@ -160,7 +160,7 @@ void SceneManager::loadScene(int index)
 	default:
 		break;
 	}
-#endif // !_LOADALLRESOURCES
+//#endif // !_LOADALLRESOURCES
 
 	scenes[index]->init();
 	actsceneindex = index;
