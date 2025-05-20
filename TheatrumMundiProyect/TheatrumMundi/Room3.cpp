@@ -582,7 +582,7 @@ void Room3Scene::_setInteractuables()
 			});
 
 	//BOXOFFICE CIRCLE LOCK
-	rmObjects.boxOfficeMorseCodeB = entityFactory->CreateInteractableEntity(entityManager,"EmptyImage",EntityFactory::RECTAREA,Vector2D(-1200,300),Vector2D(0,0),100,100,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::DEFAULT);
+	rmObjects.boxOfficeMorseCodeB = entityFactory->CreateInteractableEntity(entityManager,"EmptyImage",EntityFactory::RECTAREA,Vector2D(-664,102),Vector2D(0,0),211/1.5,724/1.5,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.boxOfficeMorseCodeB)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
 		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
@@ -609,7 +609,7 @@ void Room3Scene::_setInteractuables()
 		
 		});
 	entityManager->setActive(rmObjects.feather, false);
-	rmObjects.boxOfficeCircleLockP = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(-1000,200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	rmObjects.boxOfficeCircleLockP = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(-800,100), Vector2D(0, 0), 213 / 1.5, 755 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.boxOfficeCircleLockP)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
 		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
@@ -750,7 +750,7 @@ void Room3Scene::_setInteractuables()
 	rmObjects.zoomRadio = entityFactory->CreateImageEntity(entityManager, "Radio", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 	entityManager->setActive(rmObjects.zoomRadio, false);
 
-	rmObjects.radio = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(-1100, 260), Vector2D(0, 0), 154/1.5, 163/1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	rmObjects.radio = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(-1112, 250), Vector2D(0, 0), 154/1.5, 163/1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.radio)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
 		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
