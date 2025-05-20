@@ -109,6 +109,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
+		entityManager->setActive(rmObjects.bulletsEntity, false);
 	}
 	else {
 		rmObjects.bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "balasR", EntityFactory::RECTAREA, // TODO Imagen balas
@@ -116,6 +117,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
+		entityManager->setActive(rmObjects.bulletsEntity, false);
 	}
 	//entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity) // Collectable
 	//	->connect(ClickComponent::JUST_CLICKED, [&, this]() {
@@ -136,7 +138,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 
 	// PARROT
 	Vector2D parrotPosition((sdlutils().width() - 700) / 2, (sdlutils().height() - 700) / 2);
-	parrotUtils.parrotEnt = entityFactory->CreateInteractableEntity(entityManager, "Parrot", EntityFactory::RECTAREA, parrotPosition, Vector2D(0, 0), 700, 700, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	parrotUtils.parrotEnt = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, parrotPosition, Vector2D(0, 0), 700, 700, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 	parrotStateCom = entityManager->addComponent<BehaviorStateComponent>(parrotUtils.parrotEnt);
 
@@ -310,8 +312,10 @@ bool ParrotPuzzleScene::isItemHand(const std::string& itemId)
 
 void ParrotPuzzleScene::Win()
 {
-	rmObjects.background->getMngr()->getComponent<Image>(rmObjects.background)->setTexture(&sdlutils().images().at("EmptyImage"));
+	rmObjects.background->getMngr()->getComponent<Image>(rmObjects.background)->setTexture(&sdlutils().images().at("deadParrot"));
 	room->resolvedPuzzle(3);
+
+	entityManager->setActive(rmObjects.bulletsEntity, true);
 }
 
 void ParrotPuzzleScene::ResolveScene()

@@ -194,7 +194,11 @@
     },
     {
       "id": "Parrot",
-      "file": "../resources/images/temporales/Room3/parrot.png"
+      "file": "../resources/images/Finales/parrot.png"
+    },
+    {
+      "id": "deadParrot",
+      "file": "../resources/images/Finales/deadParrot.png"
     },
     {
       "id": "ParrotRojo",
