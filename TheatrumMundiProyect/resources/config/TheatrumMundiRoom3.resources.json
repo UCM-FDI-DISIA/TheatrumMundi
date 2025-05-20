@@ -90,7 +90,7 @@
     { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
         {
       "id": "FondoJuzgadoRojo",
-      "file": "../resources/images/temporales/Room3/JuzgadoRojo.png"
+      "file": "../resources/images/Finales/JuzgadoRojo.png"
     },
       {
       "id": "FondoSalaDeEspera",
@@ -130,6 +130,14 @@
     {
       "id": "doorEsperaAzul",
       "file": "../resources/images/Finales/puertaEsperaAzul.PNG"
+    },
+    {
+      "id": "doorEsperaRoja",
+      "file": "../resources/images/Finales/puertaEsperaRoja.PNG"
+    },
+    {
+      "id": "doorJuzgadoOscura",
+      "file": "../resources/images/Finales/puertaOscura.PNG"
     },
     {
       "id": "B7",
@@ -258,11 +266,11 @@
     },
     {
       "id": "FondoJuzgado",
-      "file": "../resources/images/temporales/Room3/Juzgado.png"
+      "file": "../resources/images/Finales/Juzgado.png"
     },
     {
       "id": "FondoJuzgadoOscuro",
-      "file": "../resources/images/temporales/Room3/JuzgadoOscuro.png"
+      "file": "../resources/images/Finales/JuzgadoOscuro.png"
     },
     {
       "id": "FondoSalaDeEsperaOscuro",

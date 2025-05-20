@@ -119,6 +119,10 @@
       "file": "../resources/images/Finales/puertaEsperaRoja.PNG"
     },
     {
+      "id": "doorJuzgadoOscura",
+      "file": "../resources/images/Finales/puertaOscura.PNG"
+    },
+    {
       "id": "LucySprite",
       "file": "../resources/images/Finales/Lucy.PNG"
     },
@@ -176,7 +180,7 @@
     },
      {
       "id": "FondoJuzgado",
-      "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
+      "file": "../resources/images/Finales/CajaFuerteOscuro.png"
     },
     {
       "id": "B6",
@@ -1111,11 +1115,11 @@
 
     {
       "id": "FondoJuzgadoOscuro",
-      "file": "../resources/images/temporales/Room3/JuzgadoOscuro.png"
+      "file": "../resources/images/Finales/JuzgadoOscuro.png"
     },
     {
       "id": "FondoJuzgadoRojo",
-      "file": "../resources/images/temporales/Room3/JuzgadoRojo.png"
+      "file": "../resources/images/Finales/JuzgadoRojo.png"
     },
     {
       "id": "FondoSalaDeEspera",
