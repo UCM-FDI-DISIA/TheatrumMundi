@@ -264,7 +264,7 @@ void Room2Scene::_setRoomEvents()
 		std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
 		AudioManager::Instance().playSound(correctSound);
 		Game::Instance()->render();
-		Game::Instance()->getSceneManager()->popScene();
+		Game::Instance()->getSceneManager()->loadScene(SceneName::MIDDLE_ROOM);
 		};
 	roomEvent[BadEnd] = [this] {
 		// WIP
@@ -276,7 +276,7 @@ void Room2Scene::_setRoomEvents()
 		std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
 		AudioManager::Instance().playSound(incorrectSound);
 		Game::Instance()->render();
-		Game::Instance()->getSceneManager()->popScene();
+		Game::Instance()->getSceneManager()->loadScene(SceneName::MIDDLE_ROOM);
 		};
 #pragma endregion
 }
