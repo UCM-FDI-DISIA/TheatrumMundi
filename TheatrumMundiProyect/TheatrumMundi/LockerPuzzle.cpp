@@ -143,7 +143,7 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
         int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
         ecs::entity_t rewardWire;
         if(variant==2 )rewardWire = entityFactory->CreateInteractableEntity(entityManager, "alambre", EntityFactory::RECTAREA,
-            Vector2D(65, 30), Vector2D(0, 0), 310, 310, 0,
+            Vector2D(650, 80), Vector2D(0, 0), 310, 310, 0,
             areaLayerManager,
             EntityFactory::NODRAG,
             ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);

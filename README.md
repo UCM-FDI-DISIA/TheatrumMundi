@@ -424,7 +424,7 @@ La primera tendrá un epitafio con 2 candados, los cuales son puzzles que resolv
 
 - Puzzle candado 1:  
 
--El puzzle consiste en mover los bloques que obstruyen el camino, de tal forma que se pueda mover una insignia a su posición correcta.
+-El puzzle consiste en mover los bloques que obstruyen el camino, de tal forma que se pueda mover una bola a su posición correcta.
     **![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeiAh1Clxx3FKEWrwkxm6CHsL9SN1aMawMKpGXviT32zTDGipyGkMPMiwJjg3JHEZTBI5PD6t9bjTeQutktSPvrJVaPzUKFVq97QlWJZfOe0VeExuVYJMCVfd6Fb0WX8hLP2CH3oA?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXctbRS4is8s6zikbca3R4h5A15RqsolcfxZlus_yQso9UIcGUOmono2YBA0w_rQQ2-jhR4wSVIWZIyxz7QEKsSon5IUVJ7FaURrK372QX0A3ZLz0Gl7cCMu-icAl7RQIvfv_Wo6qw?key=J7nf_FWWHfuhd8vnjF8jXdc4)
 
@@ -437,7 +437,7 @@ La primera tendrá un epitafio con 2 candados, los cuales son puzzles que resolv
   
 
 
-Tras resolver ambos puzzles, obtendrás una joya que estuviese enterrada en la tumba y (introduce pista que no tengo ni idea por ahora).
+Tras resolver ambos puzzles, obtendrás un collar que estuviese enterrada en la tumba.
 
   
 
@@ -529,8 +529,7 @@ Una vez pasemos a la siguiente fase (luz roja) la radio empezará a emitir la cl
  
  Cuenta con una serie de anillos en la cual habrá que averiguar la contraseña correcta utilizando el morse. De recompensa se podrá obtener una soga o un alambre.
 
-Cuando se cambien las luces a rojo, se podrá ver un mensaje en la pared: “No confíes en tus ojos”. Con esta luz, se empezarán a ver múltiples números por las paredes de ambas salas que NO HACEN NADA.
-El loro empezará a ciclar en este momento entre el sonido de disparo y las letras: “S” “T” “O” “P”.
+Cuando se cambien las luces a rojo, se podrá ver varios símbolos en la pared. El loro empezará a ciclar en este momento entre el sonido de disparo y las letras: “S” “T” “O” “P”.
 Esta palabra abrirá la caja fuerte.
 
 -Caja fuerte:
