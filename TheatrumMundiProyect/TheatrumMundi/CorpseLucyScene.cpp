@@ -16,7 +16,7 @@
 
 CorpseLucyScene::CorpseLucyScene()
 {
-	dialogueManager = new DialogueManager(1);
+	dialogueManager = new DialogueManager(5);
 }
 
 CorpseLucyScene::~CorpseLucyScene()
@@ -41,12 +41,17 @@ void CorpseLucyScene::init(SceneRoomTemplate* sr)
 		_setUI();
 
 		_setDialog();
+		if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("CADAVER1_2P");
+		else {
+			if (Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("CADAVER1_1PS");
+			else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("CADAVER1_1PK");
+		}
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
 	sr->GetInventory()->setFirstItem(0);
 	createInvEntities(sr, false); //the lantern is not going to dissapir
 
-	startDialogue("Cadaver");
+	
 }
 
 void CorpseLucyScene::unload()
@@ -62,6 +67,11 @@ void CorpseLucyScene::refresh()
 {
 	if (Game::Instance()->getDataManager()->GetRoom3Phase() == 2 && !corpseRed) {
 		Image* imgBackground = entityManager->getComponent<Image>(rmObjects.background);
+		if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("CADAVER2_2P");
+		else {
+			if (Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("CADAVER2_1PS");
+			else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("CADAVER2_1PK");
+		}
 		imgBackground->setTexture(&sdlutils().images().at("zoomCadaverEstrangular"));
 		corpseRed = true;
 	}
@@ -167,6 +177,11 @@ bool CorpseLucyScene::isItemHand(const std::string& itemId)
 		entityManager->getComponent<Image>(rmObjects.background)->setTexture(&sdlutils().images().at("zoomCadaverLuzVioleta"));
 		frameTimerCorpse.resetTime();
 		isAnimating = true;
+		if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("CADAVER3_2P");
+		else {
+			if (Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("CADAVER3_1PS");
+			else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("CADAVER3_1PK");
+		}
 		return true;
 	}
 	return false;

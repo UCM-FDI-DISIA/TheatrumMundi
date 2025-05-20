@@ -187,6 +187,7 @@ void DragPuzzleScene::init(SceneRoomTemplate* sr)
         _dtr->setPosPure(posMat[6][3]);
         _etr->setPosPure(posMat[2][3]);
         _ftr->setPosPure(posMat[5][5]);
+        entityManager->getComponent<Transform>(_reset)->setPosPure(posMat[0][0]);
         _triggerobjtr->setPosPure(posMat[1][3]);
        
         auxtiledsize.setX(auxtiledsize.getX()*Game::Instance()->wscreenScale);
@@ -221,7 +222,7 @@ void DragPuzzleScene::init(SceneRoomTemplate* sr)
          sr->GetInventory()->setFirstItem(0);
          createInvEntities(sr);
          dialogueManager->setScene(this);
-         startDialogue("PuzzleLibros");
+         //startDialogue("PuzzleLibros");
 
     }
     createInvEntities(sr);
@@ -281,5 +282,6 @@ void DragPuzzleScene::Win()
 {
     audioManager().playSound(sdlutils().soundEffects().at("MecanismoAbre"));
     entityManager->removeComponent<TriggerComponent>(_triggerObj);
+    solved = true;
     tomb->setDragpuzzle(true);
 }
