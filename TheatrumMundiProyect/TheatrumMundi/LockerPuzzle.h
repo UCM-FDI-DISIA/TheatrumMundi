@@ -8,6 +8,7 @@ private:
 	std::vector<Transform*> wheelstr;
 	std::vector<ecs::entity_t> doorEntities;
 	std::vector<ecs::entity_t> rewardEntities;
+	ecs::entity_t background;
 protected:
 public:
 	LockerPuzzle();

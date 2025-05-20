@@ -41,7 +41,7 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
         std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
         a.setVolume(buttonSound, 0.2);
        
-        entityFactory->CreateImageEntity(entityManager, "lockFondoCerrado", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+        background = entityFactory->CreateImageEntity(entityManager, "lockFondoCerrado", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 
 
         //strongBox door
@@ -166,7 +166,8 @@ bool LockerPuzzle::Check()
 
 void LockerPuzzle::Win()
 {
-    for (auto a : doorEntities)entityManager->setActive(a, false);
+    background->getMngr()->getComponent<Image>(background)->setTexture(&sdlutils().images().at("lockFondoAbierto"));
+
     for (auto a : rewardEntities)entityManager->setActive(a, true);
 
     room->resolvedPuzzle(2);
