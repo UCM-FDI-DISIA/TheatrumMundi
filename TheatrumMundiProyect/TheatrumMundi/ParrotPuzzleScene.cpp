@@ -17,7 +17,7 @@
 
 ParrotPuzzleScene::ParrotPuzzleScene()
 {
-	dialogueManager = new DialogueManager(1);
+	dialogueManager = new DialogueManager(5);
 }
 
 ParrotPuzzleScene::~ParrotPuzzleScene()
@@ -43,6 +43,13 @@ void ParrotPuzzleScene::init(SceneRoomTemplate* sr)
 		_setUI();
 
 		_setDialog();
+	}
+	else if (sr->GetInventory()->hasItem("Linterna")) {
+		if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("LORO2_2P");
+		else {
+			if (Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("LORO2_1PS");
+			else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("LORO2_1PK");
+		}
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
 	sr->GetInventory()->setFirstItem(0);
@@ -222,6 +229,13 @@ void ParrotPuzzleScene::_setDialog()
 		Area2D* dialogArea = entityManager->getComponent<Area2D>(dialogEnt);
 		if (dialogArea != nullptr)
 			areaLayerManager->sendAfter(inventoryButtonArea->getLayerPos(), dialogArea->getLayerPos());
+	}
+	dialogueManager->setScene(this);
+	std::cout << Game::Instance()->getDataManager()->GetCharacterState(SOL) << " slo " << Game::Instance()->getDataManager()->GetCharacterState(KEISARA) << std::endl;
+	if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("LORO1_2P");
+	else {
+		if (Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("LORO1_1PS");
+		else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("LORO1_1PK");
 	}
 }
 

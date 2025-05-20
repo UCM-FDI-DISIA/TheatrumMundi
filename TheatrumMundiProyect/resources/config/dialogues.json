@@ -783,7 +783,7 @@
         ]
   },
    "Sala5": {
-    "Sala4Intro_2P":[
+    "Sala3Intro_2P":[
       { "Character": "Sol", "Text": "Y ahora estamos a oscuras, genial." },
       {"Character": "Keisara", "Text": "¡Sol! Ha dicho que es la última ronda."},
       {"Character": "Keisara", "Text": "Eso significa que después de esta se acabará."},
@@ -793,7 +793,7 @@
       {"Character": "Sol", "Text": "Vamos a coneguir salir sanos y salvos de esta."},
       {"Character": "Keisara", "Text": "¡Ese es el espíritu!"}
     ],
-    "Sala4Intro_1PS":[
+    "Sala3Intro_1PS":[
       { "Character": "Sol", "Text": "Y ahora estoy a oscuras, genial." },
       {"Character": "Sol", "Text": "¡Odio este sitio!"},
       {"Character": "Sol", "Text": "¡Odio todo esto!"},
@@ -807,7 +807,7 @@
       {"Character": "Sol", "Text": "He cambiado de opinión."},
       {"Character": "Sol", "Text": "Lo que más odio es que por una vez tengas razón"}
     ],
-    "Sala4Intro_1PK":[
+    "Sala3Intro_1PK":[
       { "Character": "Keisara", "Text": "¡Sol!" },
       { "Character": "Keisara", "Text": "¡Lucy!" },
       { "Character": "Keisara", "Text": "¿Alguien?" },

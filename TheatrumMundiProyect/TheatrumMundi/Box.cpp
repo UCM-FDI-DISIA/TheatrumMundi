@@ -19,7 +19,7 @@
 
 Box::Box()
 {
-	dialogueManager = new DialogueManager(2);
+	dialogueManager = new DialogueManager(5);
 }
 
 Box::~Box()
@@ -221,10 +221,13 @@ void Box::init(SceneRoomTemplate* sr)
 				});
 
 			//Log
-			dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+			dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 			logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
-			//Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
-			//startDialogue("Puerta");
+			if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("CAJAFUERTE_2P");
+			else {
+				if (Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("CAJAFUERTE_1PS");
+				else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("CAJAFUERTE_1PK");
+			}
 
 #pragma endregion
 			int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
@@ -266,6 +269,8 @@ void Box::init(SceneRoomTemplate* sr)
 
 				});
 			entityManager->setActive(knife, false);
+			dialogueManager->setScene(this);
+			
 		}
 		sr->GetInventory()->setFirstItem(0);
 		createInvEntities(sr);

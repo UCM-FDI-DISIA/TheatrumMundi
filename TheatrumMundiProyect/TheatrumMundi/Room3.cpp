@@ -27,7 +27,7 @@
 Room3Scene::Room3Scene()
 {
 	//Creation of the DialogueManager of the room and creation of the events 
-	dialogueManager = new DialogueManager(1);
+	dialogueManager = new DialogueManager(5);
 	_setRoomEvents();
 }
 
@@ -48,7 +48,7 @@ void Room3Scene::init()
 	_setUI();
 	_setDialog();
 	_setCaseResolution();
-	//roomEvent[InitialDialogue]();
+	roomEvent[InitialDialogue]();
 
 	//Load Images
 	_setLoadImages();
@@ -98,7 +98,11 @@ void Room3Scene::_setRoomEvents()
 
 #pragma region Events
 	roomEvent[InitialDialogue] = [this] {
-		//startDialogue("SalaIntermedia3");
+		if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("Sala3Intro_2P");
+		else {
+			if (Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("Sala3Intro_1PS");
+			else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("Sala3Intro_1PK");
+		}
 		};
 	roomEvent[CorpseDialogue] = [this] {
 		entityManager->setActive(rmObjects.zoomCorpse, true);
@@ -237,10 +241,16 @@ void Room3Scene::_setRoomEvents()
 		_resetSounds();
 		entityManager->setActive(rmObjects.zoomRadio, true);
 		entityManager->setActive(rmObjects.quitButton, true);
+		if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))
+			startDialogue("RADIO_2P");
+		else {
+			if (Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("RADIO_1PS");
+			else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("RADIO_1PK");
+		}
 		};
 	roomEvent[ResolveCase] = [this] {
 		//IMPORTANT assign dialogue
-		startDialogue("SalaFinal2");
+		startDialogue("Sala3Final");
 		roomEvent[ResolveButtons]();
 		// cahnge image every 1 sec
 		SDL_AddTimer(1000, [](Uint32, void* param) -> Uint32 {
@@ -756,7 +766,7 @@ void Room3Scene::_setDialog()
 {
 	// Dialog
 	dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, _eventToRead);
-
+	dialogueManager->setScene(this);
 	assert(rmObjects.inventoryButton != nullptr); // UI must be Initialized First
 
 	Area2D* inventoryButtonArea = entityManager->getComponent<Area2D>(rmObjects.inventoryButton);

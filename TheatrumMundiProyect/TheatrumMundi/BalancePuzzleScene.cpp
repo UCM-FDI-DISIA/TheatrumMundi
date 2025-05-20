@@ -36,7 +36,7 @@ BalancePuzzleScene::BalancePuzzleScene()
 	_featherIsInBalance = false;
 	_hasFeather = false;
 
-	dialogueManager = new DialogueManager(1);
+	dialogueManager = new DialogueManager(5);
 }
 
 BalancePuzzleScene::~BalancePuzzleScene()
@@ -131,7 +131,12 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 			});
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
-	//	startDialogue("PuzzleTaza1");
+		dialogueManager->setScene(this);
+		if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("BALANZA_2P");
+		else {
+			if (Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("BALANZA_1PS");
+			else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("BALANZA_1PK");
+		}
 	}
 	sr->GetInventory()->setFirstItem(0);
 	createInvEntities(sr);
