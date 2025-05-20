@@ -1123,7 +1123,7 @@
     },
     {
       "id": "Cables",
-      "file": "../resources/images/temporales/Room3/cables.png"
+      "file": "../resources/images/Finales/cables.png"
     },
     {
       "id": "CablesOscuro",
@@ -1163,7 +1163,7 @@
     },
     {
       "id": "TaquillaAzul",
-      "file": "../resources/images/temporales/Room3/Taquilla.png"
+      "file": "../resources/images/Finales/Taquilla.png"
     },
     {
       "id": "TaquillaAzulOscuro",
@@ -1175,7 +1175,7 @@
     },
     {
       "id": "TaquillaMorada",
-      "file": "../resources/images/temporales/Room3/Taquilla2.png"
+      "file": "../resources/images/Finales/Taquilla2.png"
     },
     {
       "id": "TaquillaMoradaOscuro",

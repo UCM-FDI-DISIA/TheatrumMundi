@@ -122,7 +122,7 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3"));
 		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("Balanza"));
 		entityManager->getComponent<Image>(rmObjects.locker)->setTexture(&sdlutils().images().at("CajaFuerte"));
-		entityManager->getComponent<Image>(rmObjects.radio)->setTexture(&sdlutils().images().at("Radio"));
+		entityManager->getComponent<Image>(rmObjects.radio)->setTexture(&sdlutils().images().at("radioAzul"));
 		//characterCorpse
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3"));
 		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("Cadaver3"));
@@ -750,7 +750,7 @@ void Room3Scene::_setInteractuables()
 	rmObjects.zoomRadio = entityFactory->CreateImageEntity(entityManager, "Radio", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 	entityManager->setActive(rmObjects.zoomRadio, false);
 
-	rmObjects.radio = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(-300, 300), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	rmObjects.radio = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(-1100, 260), Vector2D(0, 0), 154/1.5, 163/1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	entityManager->getComponent<ClickComponent>(rmObjects.radio)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
 		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
