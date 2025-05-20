@@ -247,7 +247,8 @@ bool TelePuzzleScene::isItemHand(const std::string& itemId)
 		audioManager().playSound(sdlutils().soundEffects().at("Statica"), true);
 		audioManager().setVolume(sdlutils().soundEffects().at("Statica"), 0.1);
 
-		
+		entityManager->setActive(inventoryButton, false);
+		entityManager->setActive(logbtn, false);
 
 		GameSave save;
 		save.setTutoCompleted(true);

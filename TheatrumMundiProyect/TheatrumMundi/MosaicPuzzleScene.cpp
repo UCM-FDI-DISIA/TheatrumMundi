@@ -83,12 +83,12 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 		reset->getMngr()->getComponent<ClickComponent>(reset)->connect(ClickComponent::JUST_CLICKED, [this] {
 			if(!solved)ResetPuzzle();
 		});
-//#ifdef _DEBUG
-		auto resolve = entityFactory->CreateInteractableEntity(entityManager, "clockHorButton", EntityFactory::RECTAREA, Vector2D(400, 0), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+#ifdef _DEBUG
+		auto resolve = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(400, 0), Vector2D(0, 0), 32, 32, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 		resolve->getMngr()->getComponent<ClickComponent>(resolve)->connect(ClickComponent::JUST_CLICKED, [this] {
 			Resolve();
 		});
-//#endif // _DEBUG
+#endif // _DEBUG
 
 #pragma endregion
 
