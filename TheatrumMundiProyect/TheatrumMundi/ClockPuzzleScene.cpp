@@ -46,14 +46,14 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		
 
 		room = sr;
-		AudioManager& a = AudioManager::Instance();
+		//AudioManager& a = AudioManager::Instance();
 		std::shared_ptr<Sound> clockMinSound = sdlutils().soundEffects().at("aguja_minutero");
 		std::shared_ptr<Sound> clockHorSound = sdlutils().soundEffects().at("aguja_horario");
-		a.setVolume(clockMinSound, 0.2);
-		a.setVolume(clockHorSound, 0.2);
+		audioManager().setVolume(clockMinSound, 0.2);
+		audioManager().setVolume(clockHorSound, 0.2);
 
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-		a.setVolume(buttonSound, 0.2);
+		audioManager().setVolume(buttonSound, 0.2);
 
 
 		//Create background
@@ -103,7 +103,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 					std::cout << "CLICKED MINUTERO\n";
 					#endif // DEBUG
 					if (hasLongClockHand) {
-						AudioManager::Instance().playSound(clockMinSound);
+						audioManager().playSound(clockMinSound);
 						_clockMinTransform->setRot(_clockMinTransform->getRot() + 15);
 						_actualMinute += 15;
 						if (_actualMinute == 360) _actualMinute = 0;
@@ -125,7 +125,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 					std::cout << "CLICKED HORARIO\n";
 #endif // DEBUG
 					if (hasShortClockHand) {
-						AudioManager::Instance().playSound(clockHorSound);
+						audioManager().playSound(clockHorSound);
 						_clockHorTransform->setRot(_clockHorTransform->getRot() + 30);
 						_actualHour += 30;
 						if (_actualHour == 360) _actualHour = 0;
@@ -197,15 +197,15 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 					img->setTexture(&sdlutils().images().at("FondoReloj2"));
 					container->getMngr()->setActive(container, true);
 					//Assign to this inventory the hint;
-					AudioManager::Instance().playSound(buttonSound);
+					audioManager().playSound(buttonSound);
 #ifdef DEBUG
 					std::cout << "wii";
 #endif // DEBUG
-					AudioManager::Instance().playSound(sdlutils().soundEffects().at("OpenPuzzle"));
+					audioManager().playSound(sdlutils().soundEffects().at("OpenPuzzle"));
 					Win();
 
 				}
-				else AudioManager::Instance().playSound(sdlutils().soundEffects().at("failOpenPuzzle"));
+				else audioManager().playSound(sdlutils().soundEffects().at("failOpenPuzzle"));
 			});
 
 		//REWARD
@@ -239,7 +239,7 @@ void ClockPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, _backButton, buttonSound]()
 			{
-				AudioManager::Instance().playSound(buttonSound);
+				audioManager().playSound(buttonSound);
 
 				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 				HideInventoryItems();

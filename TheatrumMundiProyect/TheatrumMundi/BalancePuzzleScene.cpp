@@ -51,9 +51,8 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 		isStarted = true;
 		room = sr;
 
-		AudioManager& a = AudioManager::Instance();
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-		a.setVolume(buttonSound, 0.2);
+		audioManager().setVolume(buttonSound, 0.2);
 
 		dialogueManager->setScene(this);
 
@@ -98,7 +97,7 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, _backButton, buttonSound]()
 			{
-				AudioManager::Instance().playSound(buttonSound);
+				audioManager().playSound(buttonSound);
 
 				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 				HideInventoryItems();
@@ -118,7 +117,8 @@ void BalancePuzzleScene::init(SceneRoomTemplate* sr)
 		clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, _backButton, buttonSound]()
 			{
-				AudioManager::Instance().playSound(buttonSound);
+
+				audioManager().playSound(buttonSound);
 
 				inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 				HideInventoryItems();

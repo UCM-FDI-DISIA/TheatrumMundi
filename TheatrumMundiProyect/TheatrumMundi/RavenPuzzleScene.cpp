@@ -85,7 +85,7 @@ void RavenPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->getComponent<ClickComponent>(key)->connect(ClickComponent::JUST_CLICKED, [this, sr]()
 			{
 				if (ravenHappy) { //If you give the jewel to the bird, the key is pickable
-					AudioManager::Instance().playSound(sdlutils().soundEffects().at("LlaveMoviendose"));
+					audioManager().playSound(sdlutils().soundEffects().at("LlaveMoviendose"));
 					Vector2D position = sr->GetInventory()->setPosition();
 					AddInvItem("LlaveInv", sdlutils().invDescriptions().at("Llave"), position, sr);
 					entityManager->removeEntity(key);
@@ -111,7 +111,7 @@ bool RavenPuzzleScene::isItemHand(const std::string& itemId)
 		ravenHappy = true;
 		raven->getMngr()->getComponent<Image>(raven)->setTexture(&sdlutils().images().at("CuervoColgante"));
 		key->getMngr()->setActive(key, true);
-		AudioManager::Instance().playSound(sdlutils().soundEffects().at("cuervo"));
+		audioManager().playSound(sdlutils().soundEffects().at("cuervo"));
 		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA)) startDialogue("CUERVO2_2P");
 		else startDialogue("CUERVO2_1P");
 		return true;

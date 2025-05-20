@@ -262,7 +262,7 @@ void Room2Scene::_setRoomEvents()
 		else _loadimg2->getMngr()->setActive(_loadimg2, true);
 		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 		std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
-		AudioManager::Instance().playSound(correctSound);
+		audioManager().playSound(correctSound);
 		Game::Instance()->render();
 		Game::Instance()->getSceneManager()->loadScene(SceneName::MIDDLE_ROOM);
 		};
@@ -274,7 +274,7 @@ void Room2Scene::_setRoomEvents()
 		else _loadimg4->getMngr()->setActive(_loadimg4, true);
 		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 		std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
-		AudioManager::Instance().playSound(incorrectSound);
+		audioManager().playSound(incorrectSound);
 		Game::Instance()->render();
 		Game::Instance()->getSceneManager()->loadScene(SceneName::MIDDLE_ROOM);
 		};
@@ -284,20 +284,20 @@ void Room2Scene::_setRoomEvents()
 void Room2Scene::_setRoomAudio()
 {
 	//Audio sfx 
-	AudioManager& audioMngr = AudioManager::Instance();
+//	AudioManager& audioMngr = AudioManager::Instance();
 
 	rmSounds.uiButton = sdlutils().soundEffects().at("boton");
-	audioMngr.setVolume(rmSounds.uiButton, 0.2);
+	audioManager().setVolume(rmSounds.uiButton, 0.2);
 
 	rmSounds.puzzleButton = sdlutils().soundEffects().at("puzzle");
-	audioMngr.setVolume(rmSounds.puzzleButton, 0.3);
+	audioManager().setVolume(rmSounds.puzzleButton, 0.3);
 
 	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
 
 
-	audioMngr.stopSound(sdlutils().musics().at("intermedia"));
+	audioManager().stopSound(sdlutils().musics().at("intermedia"));
 	std::shared_ptr<Sound> room2music = sdlutils().musics().at("sala2");
-	audioMngr.playSound(room2music, true);
+	audioManager().playSound(room2music, true);
 }
 
 void Room2Scene::_setGlobalFeatures()
@@ -345,7 +345,7 @@ void Room2Scene::_setRoomBackground()
 			if(rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT)) {
 				auto trChangeRoom2 = entityManager->getComponent<Transform>(ChangeRoom2);
 				trChangeRoom2->setPos(Vector2D(1218, 140));
-				AudioManager::Instance().playSound(sdlutils().soundEffects().at("AbrirPuertaPiedra"));
+				audioManager().playSound(sdlutils().soundEffects().at("AbrirPuertaPiedra"));
 				scrolling = true;
 			}
 		}
@@ -359,7 +359,7 @@ void Room2Scene::_setRoomBackground()
 			if (rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT)) {
 				auto trChangeRoom1 = entityManager->getComponent<Transform>(ChangeRoom1);
 				trChangeRoom1->setPos(Vector2D(30, 175));
-				AudioManager::Instance().playSound(sdlutils().soundEffects().at("AbrirPuertaPiedra"));
+				audioManager().playSound(sdlutils().soundEffects().at("AbrirPuertaPiedra"));
 				scrolling = true;
 			}
 		}
@@ -666,7 +666,7 @@ void Room2Scene::_setUI()
 				ImagequitButton->setW(entityManager->getComponent<Transform>(rmObjects.quitButton)->getWidth());
 				ImagequitButton->setH(entityManager->getComponent<Transform>(rmObjects.quitButton)->getHeight());
 				ImagequitButton->setPosOffset(0, 0);
-				AudioManager::Instance().playSound(rmSounds.uiButton);
+				audioManager().playSound(rmSounds.uiButton);
 				entityManager->setActiveGroup(ecs::grp::ZOOMOBJ, false);
 				entityManager->setActive(rmObjects.quitButton, false);
 				entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, true);
@@ -705,7 +705,7 @@ void Room2Scene::_setUI()
 	entityManager->getComponent<ClickComponent>(rmObjects.inventoryButton)
 		->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
-				AudioManager::Instance().playSound(rmSounds.uiButton);
+				audioManager().playSound(rmSounds.uiButton);
 				GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
 
 				if (GetInventory()->getActive()) // If the inventory is active, activate the items
@@ -747,13 +747,13 @@ void Room2Scene::_setUI()
 	entityManager->getComponent<ClickComponent>(invObjects.inventoryUpButton)
 		->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
-				AudioManager::Instance().playSound(rmSounds.uiButton);
+				audioManager().playSound(rmSounds.uiButton);
 				scrollInventory(-1);
 			});
 	entityManager->getComponent<ClickComponent>(invObjects.inventoryDownButton)
 		->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
-				AudioManager::Instance().playSound(rmSounds.uiButton);
+				audioManager().playSound(rmSounds.uiButton);
 				scrollInventory(1);
 			});
 

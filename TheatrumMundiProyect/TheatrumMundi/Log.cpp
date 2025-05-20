@@ -25,6 +25,8 @@
 
 using namespace std;
 
+
+
 Log::Log()
 {
 	_firstRenderLine = _log.begin();
@@ -118,11 +120,8 @@ bool Log::GetLogActive()
 
 ecs::entity_t Log::Init(EntityFactory* entityFactory, EntityManager* entityManager, Area2DLayerManager* areaLayerManager, SceneTemplate* scTp)
 {
+	
 
-	//Audio sfx
-	AudioManager& a = AudioManager::Instance();
-	std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-	a.setVolume(buttonSound, 0.2);
 
 	sceneTemplate = scTp;
 	//CREATE SCENE ENTITIES OF LOG
@@ -156,16 +155,18 @@ ecs::entity_t Log::Init(EntityFactory* entityFactory, EntityManager* entityManag
 	auto scrollUpLog = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1100, 580), Vector2D(0, 0), 80, 80, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
 	
 	ClickComponent* buttonScrollUpClick = entityManager->getComponent<ClickComponent>(scrollDownLog);
-	buttonScrollUpClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
-		AudioManager::Instance().playSound(buttonSound);
+	buttonScrollUpClick->connect(ClickComponent::JUST_CLICKED, [this]() {
+		
+		
+		audioManager().playSound(sdlutils().soundEffects().at("boton"));
 		previous();
 		setRenderedDialogueLines();
 		});
 	entityManager->setActive(scrollDownLog, false);
 
 	ClickComponent* buttonScrollDownClick = entityManager->getComponent<ClickComponent>(scrollUpLog);
-	buttonScrollDownClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
-		AudioManager::Instance().playSound(buttonSound);
+	buttonScrollDownClick->connect(ClickComponent::JUST_CLICKED, [this]() {
+		audioManager().playSound(sdlutils().soundEffects().at("boton"));
 		next();
 		setRenderedDialogueLines();
 		});
@@ -177,9 +178,10 @@ ecs::entity_t Log::Init(EntityFactory* entityFactory, EntityManager* entityManag
 	auto buttonCloseLog = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(50, 50), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::LOG);
 
 	ClickComponent* buttonOpenLogClick = entityManager->getComponent<ClickComponent>(buttonOpenLog);
-	buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [this, buttonCloseLog, buttonOpenLog, entityManager, buttonSound]() {
+	buttonOpenLogClick->connect(ClickComponent::JUST_CLICKED, [this, buttonCloseLog, buttonOpenLog, entityManager]() {
 		setRenderedDialogueLines();
-		AudioManager::Instance().playSound(buttonSound);
+	
+		audioManager().playSound(sdlutils().soundEffects().at("boton"));
 		//activate log
 		auto _openButtonImage = entityManager->getComponent<Image>(buttonOpenLog);
 		_openButtonImage->setW(entityManager->getComponent<Transform>(buttonOpenLog)->getWidth());
@@ -193,9 +195,9 @@ ecs::entity_t Log::Init(EntityFactory* entityFactory, EntityManager* entityManag
 	entityManager->setActive(buttonOpenLog, true);
 
 	ClickComponent* buttonCloseLogClick = entityManager->getComponent<ClickComponent>(buttonCloseLog);
-	buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [this, _backgroundLog, buttonCloseLog, buttonOpenLog, entityManager,buttonSound]() {
+	buttonCloseLogClick->connect(ClickComponent::JUST_CLICKED, [this, _backgroundLog, buttonCloseLog, buttonOpenLog, entityManager]() {
 		_firstRenderLine = _log.begin();
-		AudioManager::Instance().playSound(buttonSound);
+		audioManager().playSound(sdlutils().soundEffects().at("boton"));
 		//disable log
 		auto _backButtonImage = buttonCloseLog->getMngr()->getComponent<Image>(buttonCloseLog);
 		_backButtonImage->setW(buttonCloseLog->getMngr()->getComponent<Transform>(buttonCloseLog)->getWidth());

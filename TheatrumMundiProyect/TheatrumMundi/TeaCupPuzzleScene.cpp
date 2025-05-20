@@ -50,9 +50,9 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		isStarted = true;
 		room = sr;
 		
-		AudioManager& a = AudioManager::Instance();
+		//AudioManager& a = AudioManager::Instance();
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-		a.setVolume(buttonSound, 0.2);
+		audioManager().setVolume(buttonSound, 0.2);
 
 		dialogueManager->setScene(this);
 
@@ -97,7 +97,7 @@ void TeaCupPuzzleScene::init(SceneRoomTemplate* sr)
 		ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 		clkOpen->connect(ClickComponent::JUST_CLICKED, [this, sr, _backButton, buttonSound]()
 		{
-				AudioManager::Instance().playSound(buttonSound);
+				audioManager().playSound(buttonSound);
 
 			
 			HideInventoryItems();
@@ -135,7 +135,7 @@ bool TeaCupPuzzleScene::isItemHand(const std::string& itemId)
 {
 	if (itemId == "TeaCupSpoon") {
 		std::shared_ptr<Sound> spoonSound = sdlutils().soundEffects().at("taza");
-		AudioManager::Instance().playSound(spoonSound);
+		audioManager().playSound(spoonSound);
 		_spoonIsInCup = true; 
 		Texture* tx = &sdlutils().images().at("TeaCupBackgroundWithSpoon");
 		teaCupBackground->getMngr()->getComponent<Image>(teaCupBackground)->setTexture(tx);

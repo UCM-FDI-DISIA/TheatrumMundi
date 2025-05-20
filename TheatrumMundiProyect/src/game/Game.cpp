@@ -42,10 +42,12 @@ Game::~Game() {
 	if (SDLUtils::HasInstance()) {
 		SDLUtils::Release();
 	}
-	AudioManager::Instance().shutdown();
+	audioManager().shutdown();
 }
 
 void Game::init() {
+	
+	
 	float w;
 	float h;
 	wscreenScale;
@@ -63,6 +65,11 @@ void Game::init() {
 	hscreenScale = GetSystemMetrics(SM_CYSCREEN) / 748.0;
 #endif
 
+	if (!AudioManager::Init()) {
+		std::cerr << "Failed to initialize fmod." << std::endl;
+		return;
+	}
+
 	//Load all thee game resources in the global json else the resources have been loaded in scenes 
 	// initialize the SDL singleton
 	if (!SDLUtils::Init("TheatrumMundi", w, h, "../resources/config/TheatrumMundi.resources.json")) {
@@ -70,12 +77,15 @@ void Game::init() {
 			<< std::endl;
 		return;
 	}
+	
 
-	if (!AudioManager::Instance().init()) {
-		std::cerr << "Failed to initialize fmod." << std::endl;
-		return;
-	}
 
+
+
+
+	sdlutils().loadReasources("../resources/config/TheatrumMundiSounds.resources.json");
+
+	
 
 	// initialize the InputHandler singleton
 	if (!InputHandler::Init()) {
@@ -112,6 +122,7 @@ void Game::start() {
 	// delta-time in the first iteration
 	//
 	sdlutils().resetTime();
+
 
 	while (!_exitGame) {
 		// store the current time -- all game objects should use this time when

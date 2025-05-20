@@ -118,7 +118,7 @@ void MosaicPuzzleScene::init(SceneRoomTemplate* sr)
 				_backButtonImage->setW(_backButton->getMngr()->getComponent<Transform>(_backButton)->getWidth());
 				_backButtonImage->setH(_backButton->getMngr()->getComponent<Transform>(_backButton)->getHeight());
 				_backButtonImage->setPosOffset(0, 0);
-				if (solved) AudioManager::Instance().playSound(sdlutils().soundEffects().at("Mosaico"));
+				if (solved) audioManager().playSound(sdlutils().soundEffects().at("Mosaico"));
 				Game::Instance()->getSceneManager()->popScene();
 			});
 		//Log
