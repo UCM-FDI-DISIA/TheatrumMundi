@@ -795,6 +795,10 @@ void Room3Scene::_setUI()
 
 				parrotUtils.lastSoundTime = 0;
 
+				if (rmObjects.feather != nullptr) {
+					entityManager->setActive(rmObjects.feather, false);
+				}
+
 
 				//if the condition of this objects has not been apply disallow them
 				//if (rmObjects.mirror.second == false) rmObjects.mirror.first->getMngr()->setActive(rmObjects.mirror.first, false);
