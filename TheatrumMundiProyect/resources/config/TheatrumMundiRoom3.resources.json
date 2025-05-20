@@ -149,6 +149,22 @@
       "file": "../resources/images/temporales/CajafuerteRueda.png"
     },
     {
+      "id": "rueda1",
+      "file": "../resources/images/Finales/rueda1.png"
+    },
+    {
+      "id": "rueda2",
+      "file": "../resources/images/Finales/rueda2.png"
+    },
+    {
+      "id": "rueda3",
+      "file": "../resources/images/Finales/rueda3.png"
+    },
+    {
+      "id": "rueda4",
+      "file": "../resources/images/Finales/rueda4.png"
+    },
+    {
       "id": "cajaFuerteCerrada",
       "file": "../resources/images/Finales/cajaFuerteCerrada.png"
     },

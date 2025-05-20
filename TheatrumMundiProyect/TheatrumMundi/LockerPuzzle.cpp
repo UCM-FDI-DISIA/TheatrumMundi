@@ -46,7 +46,7 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
 
         //strongBox door
         //Big wheel 
-        auto big = entityFactory->CreateInteractableEntity(entityManager, "StrongBoxWheel", EntityFactory::CIRCLEAREA, Vector2D(387, 86.5), Vector2D(0, 0), 575, 575, 60, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        auto big = entityFactory->CreateInteractableEntity(entityManager, "rueda1", EntityFactory::CIRCLEAREA, Vector2D(755, 368), Vector2D(0, 0), 516/1.5, 516 / 1.5, 60, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux3 = entityManager->addComponent<SlowRotateComponent>(big, entityManager->getComponent<Transform>(big));
         entityManager->getComponent<ClickComponent>(big)->connect(ClickComponent::JUST_CLICKED, [this, aux3]() {
             aux3->startRotate(60);
@@ -55,7 +55,7 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
         doorEntities.push_back(big);
         
         //medium wheel 
-        auto medium = entityFactory->CreateInteractableEntity(entityManager, "StrongBoxWheel", EntityFactory::CIRCLEAREA, Vector2D(449.5, 149), Vector2D(0, 0), 450, 450, 288, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        auto medium = entityFactory->CreateInteractableEntity(entityManager, "rueda2", EntityFactory::CIRCLEAREA, Vector2D(795, 414), Vector2D(0, 0), 395/1.5, 395 / 1.5, 288, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux2 = entityManager->addComponent<SlowRotateComponent>(medium, entityManager->getComponent<Transform>(medium));
         entityManager->getComponent<ClickComponent>(medium)->connect(ClickComponent::JUST_CLICKED, [this, aux2]() {
             aux2->startRotate(72);
@@ -64,7 +64,7 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
         doorEntities.push_back(medium);
         
         //small wheel
-        auto small = entityFactory->CreateInteractableEntity(entityManager, "StrongBoxWheel", EntityFactory::CIRCLEAREA, Vector2D(512, 211.5), Vector2D(0, 0), 325, 325, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        auto small = entityFactory->CreateInteractableEntity(entityManager, "rueda3", EntityFactory::CIRCLEAREA, Vector2D(837, 453), Vector2D(0, 0), 274/1.5, 274 / 1.5, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux = entityManager->addComponent<SlowRotateComponent>(small,entityManager->getComponent<Transform>(small));
         entityManager->getComponent<ClickComponent>(small)->connect(ClickComponent::JUST_CLICKED, [this,aux](){
             aux->startRotate(90);
@@ -73,7 +73,7 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
         doorEntities.push_back(small);
        
         //smallest wheel
-        auto smallest = entityFactory->CreateInteractableEntity(entityManager, "StrongBoxWheel", EntityFactory::CIRCLEAREA, Vector2D(574.5, 274), Vector2D(0, 0), 200, 200, 240, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+        auto smallest = entityFactory->CreateInteractableEntity(entityManager, "rueda4", EntityFactory::CIRCLEAREA, Vector2D(876, 490), Vector2D(0, 0), 158/1.5, 158 / 1.5, 240, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
         SlowRotateComponent* aux1 = entityManager->addComponent<SlowRotateComponent>(smallest, entityManager->getComponent<Transform>(smallest));
         entityManager->getComponent<ClickComponent>(smallest)->connect(ClickComponent::JUST_CLICKED, [this, aux1]() {
             aux1->startRotate(120);
