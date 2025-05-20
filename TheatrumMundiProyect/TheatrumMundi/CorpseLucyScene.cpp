@@ -60,9 +60,15 @@ bool CorpseLucyScene::Check()
 
 void CorpseLucyScene::refresh()
 {
-	if (isAnimating && frameTimerCorpse.currRealTime() > 400) // 0.4 sec
+	if (Game::Instance()->getDataManager()->GetRoom3Phase() == 2 && !corpseRed) {
+		Image* imgBackground = entityManager->getComponent<Image>(rmObjects.background);
+		imgBackground->setTexture(&sdlutils().images().at("zoomCadaverEstrangular"));
+		corpseRed = true;
+	}
+
+	if (isAnimating && frameTimerCorpse.currRealTime() > 700) // 0.7 sec
 	{
-		entityManager->getComponent<Image>(rmObjects.background)->setTexture(&sdlutils().images().at("B1"));
+		entityManager->getComponent<Image>(rmObjects.background)->setTexture(&sdlutils().images().at("zoomCadaverCorte"));
 	}
 }
 
@@ -91,7 +97,7 @@ void CorpseLucyScene::_setRoomBackground()
 
 void CorpseLucyScene::_setInteractuables(SceneTemplate* sr)
 {
-	rmObjects.interactuableArea = entityFactory->CreateInteractableEntity(entityManager, "Parrot", EntityFactory::RECTAREA, Vector2D((sdlutils().width() - 700) / 2, (sdlutils().height() - 700) / 2), Vector2D(0, 0), 700, 700, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	rmObjects.interactuableArea = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D((sdlutils().width() - 700) / 2, (sdlutils().height() - 700) / 2), Vector2D(0, 0), 700, 700, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 	rmObjects.interactuableArea->getMngr()->getComponent<TriggerComponent>(rmObjects.interactuableArea)->setTargetGroup(ecs::grp::INVENTORY);
 	rmObjects.interactuableArea->getMngr()->getComponent<TriggerComponent>(rmObjects.interactuableArea)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 		SetplacedHand(true);
@@ -158,7 +164,7 @@ bool CorpseLucyScene::isItemHand(const std::string& itemId)
 {
 
 	if (itemId == "Linterna" && Game::Instance()->getDataManager()->GetRoom3Phase() == 2) {
-		entityManager->getComponent<Image>(rmObjects.background)->setTexture(&sdlutils().images().at("Parrot"));
+		entityManager->getComponent<Image>(rmObjects.background)->setTexture(&sdlutils().images().at("zoomCadaverLuzVioleta"));
 		frameTimerCorpse.resetTime();
 		isAnimating = true;
 		return true;
