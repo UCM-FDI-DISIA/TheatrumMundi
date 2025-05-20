@@ -86,7 +86,7 @@ void CorpseLucyScene::_setRoomAudio()
 
 void CorpseLucyScene::_setRoomBackground()
 {
-	rmObjects.background = entityFactory->CreateImageEntity(entityManager, "Cadaver3Oscuro", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+	rmObjects.background = entityFactory->CreateImageEntity(entityManager, "EmptyImage", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 }
 
 void CorpseLucyScene::_setInteractuables(SceneTemplate* sr)

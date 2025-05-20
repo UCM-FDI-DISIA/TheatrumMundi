@@ -745,7 +745,7 @@ void PipePuzzleScene::init(SceneRoomTemplate* sr)
 
 			// create entity
 			//ENTIDADCONENTITYFACTORY
-			auto pipeit = entityFactory->CreateInteractableEntityNotMoveSprite(entityManager, "exit", EntityFactory::RECTAREA, pipePositions[i], Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto pipeit = entityFactory->CreateInteractableEntityNotMoveSprite(entityManager, "EmptyImage", EntityFactory::RECTAREA, pipePositions[i], Vector2D(0, 0), 70, 70, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 			_pipesEnt.push_back(pipeit);
 
 			Image* imageComponent = pipeit->getMngr()->getComponent<Image>(pipeit);

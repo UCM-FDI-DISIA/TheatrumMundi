@@ -18,15 +18,12 @@
     { "id" : "loading1", "file" : "../resources/images/Finales/Carga1.png" },
     { "id" : "menuInicial", "file" : "../resources/images/Finales/mainMenu.png" },
     {
-      "id": "Title",
-      "file": "../resources/images/TemporalTitleImage.png"
-    },{
       "id": "EmptyImage",
       "file": "../resources/images/Finales/ImagenVacia.png"
     },
     {
       "id": "fondoPruebaLog",
-      "file": "../resources/images/fondoLogPrueba.png"
+      "file": "../resources/images/Finales/fondoLog.png"
     },
     
     {
@@ -68,10 +65,6 @@
   {
     "id": "NewGame",
     "file": "../resources/images/Finales/RectangleNewGameButton.PNG"
-  },
-  {
-    "id": "loading",
-    "file": "../resources/images/loading.png"
   },
   {
     "id": "NewGameLocked",

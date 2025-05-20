@@ -67,7 +67,7 @@ void TelePuzzleScene::init(SceneRoomTemplate* sr)
 		tvBackground->getMngr()->removeComponent<Area2D>(tvBackground);
 
 		ecs::entity_t tv = entityFactory->CreateInteractableEntityNotMoveSprite( // Cup entity
-			entityManager, "clockShape", EntityFactory::RECTAREA,
+			entityManager, "EmptyImage", EntityFactory::RECTAREA,
 			Vector2D(400, 150), Vector2D(), 1000, 500, 0,
 			areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 		tv->getMngr()->getComponent<TriggerComponent>(tv)->setTargetGroup(ecs::grp::INVENTORY);

@@ -567,7 +567,6 @@ void Room2Scene::_setInteractuables()
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.window));
 	entityManager->getComponent<ClickComponent>(rmObjects.window)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[WindowScene]();
-		entityManager->setActive(pauseManager->_getopenPauseButton(), false);
 		});
 
 #pragma endregion

@@ -16,20 +16,12 @@
       "file": "../resources/images/Finales/CuervoSala.png"
     },
     {
-      "id": "FondoCripta",
-      "file": "../resources/images/temporales/Room2/FondoCripta.jpeg"
-    },
-    {
       "id": "Varilla",
       "file": "../resources/images/Finales/Varilla.png"
     },
     {
       "id": "VarillaInventario",
       "file": "../resources/images/Finales/VarillaInventario.png"
-    },
-    {
-      "id": "Mosaico",
-      "file": "../resources/images/temporales/Room2//Mosaico.jpeg"
     },
     {
       "id": "Organo",
@@ -80,14 +72,6 @@
       "file": "../resources/images/Finales/DraggPuzzleAccess.png"
     },
     {
-      "id": "cuerdaVentana",
-      "file": "../resources/images/temporales/Room2/Cuerda.png"
-    },
-    {
-      "id": "VentanaAbierta",
-      "file": "../resources/images/temporales/Room2/VentanaAbierta.png"
-    },
-    {
       "id": "SalidaSecretaAbierta",
       "file": "../resources/images/Finales/SalidaSecretaAbierta.png"
     },
@@ -105,15 +89,15 @@
     },
     {
       "id": "NotaBasica",
-      "file": "../resources/images/temporales/notaBasica.png"
+      "file": "../resources/images/Finales/notaBasica.png"
     },
     {
       "id": "Do",
-      "file": "../resources/images/temporales/do.png"
+      "file": "../resources/images/Finales/do.png"
     },
     {
       "id": "Si",
-      "file": "../resources/images/temporales/si.png"
+      "file": "../resources/images/Finales/si.png"
     },
     {
       "id": "fase1Partitura",
@@ -223,28 +207,13 @@
       "id": "B5",
       "file": "../resources/images/Finales/5.PNG"
     },
-    { "id" : "prueba", "file" : "../resources/images/socrates.png" },
-    { "id" : "init", "file" : "../resources/images/start.jpg" },
-    { "id" : "exit", "file" : "../resources/images/exit.png" },
-    { "id" : "noPosible", "file" : "../resources/images/noPosible.png" },
-    { "id" : "noResolve", "file" : "../resources/images/noPosible.png" },
-    { "id" : "posible", "file" : "../resources/images/posible.png" },
-    { "id" : "resolve", "file" : "../resources/images/resolve.png" },
+
     { "id" : "no", "file" : "../resources/images/Finales/noButton.png" },
     { "id" : "yes", "file" : "../resources/images/Finales/yesButton.png" },
     { "id" : "1stQuestion", "file" : "../resources/images/Finales/1stQuestionText.png" },
     { "id" : "2ndQuestion", "file" : "../resources/images/Finales/2ndQuestionText.png" },
     { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
     { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
-   
-    {
-      "id": "incrementButton",
-      "file": "../resources/images/IncrementButton.png"
-    },
-    {
-      "id": "decreaseButton",
-      "file": "../resources/images/decreaseButton.png"
-    },
     {
       "id": "backButton",
       "file": "../resources/images/Finales/BotonEstante.png"
@@ -260,10 +229,6 @@
     {
       "id": "B7",
       "file": "../resources/images/Finales/7.PNG"
-    },
-    {
-      "id": "Title",
-      "file": "../resources/images/TemporalTitleImage.png"
     },
     
     {
@@ -284,7 +249,7 @@
     },
     {
       "id": "fondoPruebaLog",
-      "file": "../resources/images/fondoLogPrueba.png"
+      "file": "../resources/images/Finales/fondoLog.png"
     },
     {
       "id": "CadaverSol",
@@ -543,16 +508,8 @@
       "file": "../resources/images/Finales/piezadeZ.png"
     },
     {
-      "id": "Hanni",
-      "file": "../resources/images/asesinoDeHanni.png"
-    },
-    {
       "id": "fondoEntradaMausoleo",
       "file": "../resources/images/Finales/fondoEntrada.png"
-    },
-    {
-      "id": "clockHorButton",
-      "file": "../resources/images/boton_horario.png"
     },
     {
       "id": "fondoOrgano",

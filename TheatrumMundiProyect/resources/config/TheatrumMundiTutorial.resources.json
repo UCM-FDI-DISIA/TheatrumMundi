@@ -17,10 +17,6 @@
     },
     { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
     {
-      "id": "clockShape",
-      "file": "../resources/images/clock_shape.png"
-    },
-    {
       "id": "B1",
       "file": "../resources/images/Finales/1.PNG"
     },
@@ -54,7 +50,7 @@
     },
     {
       "id": "fondoPruebaLog",
-      "file": "../resources/images/fondoLogPrueba.png"
+      "file": "../resources/images/Finales/fondoLog.png"
     },
     {
       "id": "teleSinAntena",
