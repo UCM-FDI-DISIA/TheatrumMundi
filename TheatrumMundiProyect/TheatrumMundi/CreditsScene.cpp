@@ -43,11 +43,11 @@ void CreditsScene::init()
 		auto _background = entityFactory->CreateImageEntity(entityManager, "FondoNegro", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
 		_backToMainMenu = false;
 	
-		cred1 = "Hecho por Electric Bogaloo";
+		cred1 = "Desarrollado por Electric Bogaloo";
 
 		//text
 		auto _text1 = entityManager->addEntity(ecs::grp::DEFAULT);
-		Transform* trTextLog1 = entityManager->addComponent<Transform>(_text1, Vector2D(0, 0), Vector2D(0, 0), 800, 600, 0);
+		Transform* trTextLog1 = entityManager->addComponent<Transform>(_text1, Vector2D(0, 0), Vector2D(0, 0), 770, 600, 0);
 		SDL_Color colorText1 = { 255, 255, 255, 255 };
 		WriteTextComponent<string>* writeLog1 = entityManager->addComponent <WriteTextComponent<string>>(_text1, sdlutils().fonts().at("BASE"), colorText1, &cred1); //write text component
 		//entityManager->setActive(_text1, false);
@@ -163,7 +163,7 @@ void CreditsScene::closeCourtains()
 void CreditsScene::backToMenu()
 {
 
-	//Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
+	Game::Instance()->setReset();
 	/*//botton to return to main menu
 
 	AudioManager& a = AudioManager::Instance();
