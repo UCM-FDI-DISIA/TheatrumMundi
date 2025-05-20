@@ -111,6 +111,10 @@
       "file": "../resources/images/Finales/CambiarSala.PNG"
     },
     {
+      "id": "doorEsperaAzul",
+      "file": "../resources/images/Finales/puertaEsperaAzul.PNG"
+    },
+    {
       "id": "LucySprite",
       "file": "../resources/images/Finales/Lucy.PNG"
     },
