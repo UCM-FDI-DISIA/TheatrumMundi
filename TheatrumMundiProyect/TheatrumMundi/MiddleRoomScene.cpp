@@ -185,7 +185,7 @@ void MiddleRoomScene::init()
 		dialogueManager->setActualRoom(4);
 		if (auxkei && auxlucy && auxsol) roomEvent[AFTER_ROOM2_GOOD3]();
 		else if (!auxkei && auxlucy && auxsol)roomEvent[AFTER_ROOM2_GOOD2]();
-		else if (auxkei && !auxlucy && auxsol)roomEvent[AFTER_ROOM2_BAD2]();
+		else if (auxkei && auxlucy && !auxsol)roomEvent[AFTER_ROOM2_BAD2]();
 		else if (!auxkei && auxlucy && !auxsol)roomEvent[AFTER_ROOM2_BAD1]();
 		else {
 #ifdef _DEBUG
