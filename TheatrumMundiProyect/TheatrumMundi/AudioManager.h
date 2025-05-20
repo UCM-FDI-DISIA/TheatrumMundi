@@ -48,7 +48,7 @@ public:
     void resumeSound(std::shared_ptr<Sound> sound);
 
     void cleanupInactiveChannels();
-       
+
 
     // Setters
     void setVolume(std::shared_ptr<Sound> sound, float volume);

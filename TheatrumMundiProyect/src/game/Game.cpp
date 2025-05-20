@@ -241,7 +241,7 @@ void Game::loadResouces(int part)
 		if (loadedResources != part) {
 			sdlutils().ClearMaps();
 
-			sdlutils().loadReasources("../resources/config/TheatrumMundiRoom2.resources.json");
+			sdlutils().loadReasources("../resources/config/TheatrumMundiCredits.resources.json");
 			loadedResources = part;
 		}
 		break;
