@@ -108,7 +108,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 {
 	// BULLETS
 	int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
-	Vector2D bulletsPosition((sdlutils().width() - 150) / 2, (sdlutils().height() - 150) / 2);
+	Vector2D bulletsPosition(600,500);
 
 	if (variant == 1) {
 		rmObjects.bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "balasF" , EntityFactory::RECTAREA, // TODO Imagen balas
