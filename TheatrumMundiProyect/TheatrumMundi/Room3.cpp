@@ -154,6 +154,8 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.locker)->setTexture(&sdlutils().images().at("EmptyImage"));
 		entityManager->getComponent<Image>(rmObjects.radio)->setTexture(&sdlutils().images().at("EmptyImage"));
 
+		entityManager->getComponent<Image>(rmObjects.changeRoom1)->setTexture(&sdlutils().images().at("doorJuzgadoOscura"));
+
 		//characterCorpse
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3Oscuro"));
 		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("EmptyImage"));
@@ -378,7 +380,7 @@ void Room3Scene::_setRoomBackground()
 {
 #pragma region InitScroll
 
-	rmObjects.changeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 164/1.5, 751/1.5, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	rmObjects.changeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "doorJuzgadoOscura", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 164/1.5, 751/1.5, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 	rmObjects.changeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1160 - 1800, 1000), Vector2D(0, 0), 159 / 1.5, 745 / 1.5, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 
 	auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(rmObjects.changeRoom1);

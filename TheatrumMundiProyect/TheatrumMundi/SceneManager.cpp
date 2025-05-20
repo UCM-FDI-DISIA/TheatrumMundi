@@ -69,7 +69,7 @@ SceneManager::SceneManager()
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::INITIAL_MENU);
+	loadScene(SceneName::ROOM_3);
 }
 
 void SceneManager::popScene()

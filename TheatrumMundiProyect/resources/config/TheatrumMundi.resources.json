@@ -124,7 +124,7 @@
     },
     {
       "id": "doorJuzgadoOscura",
-      "file": "../resources/images/Finales/puertaOscura.PNG"
+      "file": "../resources/images/Finales/puertaOscura.png"
     },
     {
       "id": "LucySprite",
@@ -1240,6 +1240,10 @@
     {
       "id": "radioRoja",
       "file": "../resources/images/Finales/radioRoja.png"
+    },
+    {
+      "id": "radioAzul",
+      "file": "../resources/images/Finales/radioAzul.png"
     },
     {
       "id": "MorseGuide",

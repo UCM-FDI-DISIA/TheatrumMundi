@@ -141,7 +141,7 @@
     },
     {
       "id": "doorJuzgadoOscura",
-      "file": "../resources/images/Finales/puertaOscura.PNG"
+      "file": "../resources/images/Finales/puertaOscura.png"
     },
     {
       "id": "B7",
@@ -411,10 +411,6 @@
     {
       "id": "CajaFuerteRojo",
       "file": "../resources/images/temporales/Room3/CajaFuerteRojo.png"
-    },
-    {
-      "id": "FondoJuzgado",
-      "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
     },
     {
       "id": "MorseGuide",
