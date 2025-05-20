@@ -460,123 +460,123 @@
             "file": "../resources/images/Finales/compAbiertoTaquillaCandado.png"
         },
         {
-            "id": "cable1.1",
+            "id": "cable11",
             "file": "../resources/images/Finales/1.1.png"
         },
         {
-            "id": "cable1.2",
+            "id": "cable12",
             "file": "../resources/images/Finales/1.2.png"
         },
         {
-            "id": "cable1.3",
+            "id": "cable13",
             "file": "../resources/images/Finales/1.3.png"
         },
         {
-            "id": "cable1.4",
+            "id": "cable14",
             "file": "../resources/images/Finales/1.4.png"
         },
         {
-            "id": "cable1.5",
+            "id": "cable15",
             "file": "../resources/images/Finales/1.5.png"
         },
         {
-            "id": "cable2.1",
+            "id": "cable21",
             "file": "../resources/images/Finales/2.1.png"
         },
         {
-            "id": "cable2.2",
+            "id": "cable22",
             "file": "../resources/images/Finales/2.2.png"
         },
         {
-            "id": "cable2.3",
+            "id": "cable23",
             "file": "../resources/images/Finales/2.3.png"
         },
         {
-            "id": "cable2.4",
+            "id": "cable24",
             "file": "../resources/images/Finales/2.4.png"
         },
         {
-            "id": "cable2.5",
+            "id": "cable25",
             "file": "../resources/images/Finales/2.5.png"
         },
         {
-            "id": "cable2.6",
+            "id": "cable26",
             "file": "../resources/images/Finales/2.6.png"
         },
         {
-            "id": "cable2.7",
+            "id": "cable27",
             "file": "../resources/images/Finales/2.7.png"
         },
         {
-            "id": "cable2.8",
+            "id": "cable28",
             "file": "../resources/images/Finales/2.8.png"
         },
         {
-            "id": "cable3.1",
+            "id": "cable31",
             "file": "../resources/images/Finales/3.1.png"
         },
         {
-            "id": "cable3.2",
+            "id": "cable32",
             "file": "../resources/images/Finales/3.2.png"
         },
         {
-            "id": "cable3.3",
+            "id": "cable33",
             "file": "../resources/images/Finales/3.3.png"
         },
         {
-            "id": "cable3.4",
+            "id": "cable34",
             "file": "../resources/images/Finales/3.4.png"
         },
         {
-            "id": "cable3.5",
+            "id": "cable35",
             "file": "../resources/images/Finales/3.5.png"
         },
         {
-            "id": "cable3.6",
+            "id": "cable36",
             "file": "../resources/images/Finales/3.6.png"
         },
         {
-            "id": "cable4.1",
+            "id": "cable41",
             "file": "../resources/images/Finales/4.1.png"
         },
         {
-            "id": "cable4.2",
+            "id": "cable42",
             "file": "../resources/images/Finales/4.2.png"
         },
         {
-            "id": "cable4.3",
+            "id": "cable43",
             "file": "../resources/images/Finales/4.3.png"
         },
         {
-            "id": "cable4.4",
+            "id": "cable44",
             "file": "../resources/images/Finales/4.4.png"
         },
         {
-            "id": "cable5.1",
+            "id": "cable51",
             "file": "../resources/images/Finales/5.1.png"
         },
         {
-            "id": "cable5.2",
+            "id": "cable52",
             "file": "../resources/images/Finales/5.2 (2).png"
         },
         {
-            "id": "cable6.1",
+            "id": "cable61",
             "file": "../resources/images/Finales/6.1.png"
         },
         {
-            "id": "cable6.2",
+            "id": "cable62",
             "file": "../resources/images/Finales/6.2.png"
         },
         {
-            "id": "cable6.3",
+            "id": "cable63",
             "file": "../resources/images/Finales/6.3.png"
         },
         {
-            "id": "cable6.4",
+            "id": "cable64",
             "file": "../resources/images/Finales/6.4.png"
         },
         {
-            "id": "cable6.5",
+            "id": "cable65",
             "file": "../resources/images/Finales/6.5.png"
         },
         {
@@ -614,6 +614,14 @@
         {
             "id": "estCables",
             "file": "../resources/images/Finales/EstructuraCables.png"
+        },
+        {
+            "id": "cajaFinal",
+            "file": "../resources/images/Finales/CajaFinal.png"
+        },
+        {
+            "id": "resetButton",
+            "file": "../resources/images/Finales/BotonReset.png"
         }
 
     ],
