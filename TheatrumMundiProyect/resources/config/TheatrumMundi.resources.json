@@ -115,6 +115,10 @@
       "file": "../resources/images/Finales/puertaJuzgadoAzul.PNG"
     },
     {
+      "id": "doorJuzgadoRoja",
+      "file": "../resources/images/Finales/puertaJuzgadoRoja.PNG"
+    },
+    {
       "id": "doorEsperaAzul",
       "file": "../resources/images/Finales/puertaEsperaAzul.PNG"
     },
@@ -1159,7 +1163,7 @@
     },
     {
       "id": "Cadaver3Rojo",
-      "file": "../resources/images/temporales/Room3/CadaverRojo.png"
+      "file": "../resources/images/Finales/cadaverLucyRojo.png"
     },
     {
       "id": "Parrot",
@@ -1179,7 +1183,7 @@
     },
     {
       "id": "ParrotRojo",
-      "file": "../resources/images/temporales/Room3/parrotRojo.png"
+      "file": "../resources/images/Finales/parrotRojo.png"
     },
     {
       "id": "TaquillaAzul",
@@ -1215,7 +1219,7 @@
     },
     {
       "id": "BalanzaRojo",
-      "file": "../resources/images/temporales/Room3/balanzaRojo.png"
+      "file": "../resources/images/Finales/balanzaRoja.png"
     },
     {
       "id": "CajaFuerte",
@@ -1231,7 +1235,7 @@
     },
     {
       "id": "CajaFuerteRojo",
-      "file": "../resources/images/temporales/Room3/CajaFuerteRojo.png"
+      "file": "../resources/images/Finales/CajaFuerteRoja.png"
     },
     {
       "id": "Radio",
