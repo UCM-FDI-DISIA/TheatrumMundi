@@ -104,10 +104,18 @@ void TutorialScene::init()
 {
 
 	if (!isStarted) {
+
+
 		isStarted = true;
 		finishallpuzzles = false;
 		//Audio sfx 
 		AudioManager& a = AudioManager::Instance();
+
+		a.stopSound(sdlutils().musics().at("menu"));
+
+		std::shared_ptr<Sound> music = sdlutils().musics().at("intermedia");
+		a.playSound(music, true);
+
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
 		std::shared_ptr<Sound> puzzleButtonSound = sdlutils().soundEffects().at("puzzle");

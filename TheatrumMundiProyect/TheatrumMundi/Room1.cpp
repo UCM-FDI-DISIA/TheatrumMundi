@@ -291,10 +291,10 @@ void Room1Scene::_setRoomAudio()
 
 	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
 
-	//audioMngr.stopSound(sdlutils().musics().at("menu"));
-	//Audio music
-	//std::shared_ptr<Sound> room1music = sdlutils().musics().at("sala1");
-	//audioMngr.playSound(room1music, true);
+	audioMngr.stopSound(sdlutils().musics().at("intermedia"));
+	std::shared_ptr<Sound> room1music = sdlutils().musics().at("sala1");
+	audioMngr.playSound(room1music, true);
+
 }
 
 void Room1Scene::_setDialog()

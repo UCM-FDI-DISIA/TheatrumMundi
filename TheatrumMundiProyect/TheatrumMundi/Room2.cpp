@@ -295,10 +295,10 @@ void Room2Scene::_setRoomAudio()
 	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
 
 
-	/*Audio music
-	Sound room1music = sdlutils().musics().at("sala2");
-	audioMngr.setLooping(room1music, true);
-	audioMngr.playSound(room1music);*/
+	audioMngr.stopSound(sdlutils().musics().at("intermedia"));
+	std::shared_ptr<Sound> room2music = sdlutils().musics().at("sala2");
+	audioMngr.setVolume(room2music, 0.4);
+	audioMngr.playSound(room2music, true);
 }
 
 void Room2Scene::_setGlobalFeatures()

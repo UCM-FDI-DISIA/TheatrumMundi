@@ -1451,6 +1451,14 @@
     {
         "id": "sala2",
         "file": "../resources/sound/music/sala2.wav"
+    },
+    {
+        "id": "sala3",
+        "file": "../resources/sound/music/sala3.wav"
+    },
+    {
+        "id": "intermedia",
+        "file": "../resources/sound/music/intermedia.wav"
     }
     
   ]

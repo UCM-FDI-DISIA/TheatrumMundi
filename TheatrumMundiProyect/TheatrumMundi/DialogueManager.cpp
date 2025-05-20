@@ -58,11 +58,17 @@ void DialogueManager::Init(int numRooms,EntityFactory* entityFactory, EntityMana
                 //read dialogue only if it has to
                 if (getDisplayOnProcess())
                 {
+
+                /*    auto nextDialogueSound = sdlutils().soundEffects().at("NextDialogue");
+                    if (AudioManager::Instance().isPlaying(nextDialogueSound)) {
+                        AudioManager::Instance().stopSound(nextDialogueSound);
+                    }
+*/
                     ReadDialogue(_eventToRead);
                        
-                    AudioManager::Instance().stopSound(sdlutils().soundEffects().at("NextDialogue"));
-                    AudioManager::Instance().setVolume(sdlutils().soundEffects().at("NextDialogue"), float(0.1));
-                    AudioManager::Instance().playSound(sdlutils().soundEffects().at("NextDialogue"));
+                   // AudioManager::Instance().stopSound(sdlutils().soundEffects().at("NextDialogue"));
+               //     AudioManager::Instance().setVolume(nextDialogueSound, float(0.1));
+                 //   AudioManager::Instance().playSound(nextDialogueSound);
                 }
                 else
                 {
