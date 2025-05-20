@@ -321,7 +321,7 @@ struct TimerData {
 	PauseManager* pauseM;
 };
 
-Uint32 timerCallback(Uint32 interval, void* param) {
+Uint32 timerCallbackRoom1(Uint32 interval, void* param) {
 
 	auto data = static_cast<TimerData*>(param);
 
@@ -355,7 +355,7 @@ void Room1Scene::_setUI()
 			entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, true);
 			
 			TimerData* t = new TimerData{ entityManager,pauseManager };
-			SDL_AddTimer(50, timerCallback, t);
+			SDL_AddTimer(50, timerCallbackRoom1, t);
 			
 
 		});
