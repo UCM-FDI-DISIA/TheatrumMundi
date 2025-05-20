@@ -247,6 +247,12 @@ void Game::loadResouces(int part)
 		break;
 	
 	default:
+		if (loadedResources != part) {
+			sdlutils().ClearMaps();
+			sdlutils().loadReasources("../resources/config/TheatrumMundiRoom3.resources.json");
+			loadedResources = 6;
+		}
+
 
 #ifdef DEBUG
 		std::cout << "NOT LOAD MORE RESOURCES" << std::endl;

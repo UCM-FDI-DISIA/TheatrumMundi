@@ -606,7 +606,16 @@
         {
             "id": "recompensa",
             "file": "../resources/images/Finales/Recompensa.png"
+        },
+        {
+            "id": "puerto",
+            "file": "../resources/images/Finales/Puerto.png"
+        },
+        {
+            "id": "estCables",
+            "file": "../resources/images/Finales/EstructuraCables.png"
         }
+
     ],
 
   "messages": [
