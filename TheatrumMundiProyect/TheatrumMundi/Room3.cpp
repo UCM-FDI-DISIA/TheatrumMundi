@@ -27,7 +27,7 @@
 Room3Scene::Room3Scene()
 {
 	//Creation of the DialogueManager of the room and creation of the events 
-	dialogueManager = new DialogueManager(1);
+	dialogueManager = new DialogueManager(5);
 	_setRoomEvents();
 }
 
@@ -48,7 +48,7 @@ void Room3Scene::init()
 	_setUI();
 	_setDialog();
 	_setCaseResolution();
-	//roomEvent[InitialDialogue]();
+	roomEvent[InitialDialogue]();
 
 	//Load Images
 	_setLoadImages();
@@ -98,7 +98,11 @@ void Room3Scene::_setRoomEvents()
 
 #pragma region Events
 	roomEvent[InitialDialogue] = [this] {
-		//startDialogue("SalaIntermedia3");
+		if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("Sala3Intro_2P");
+		else {
+			if (Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("Sala3Intro_1PS");
+			else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("Sala3Intro_1PK");
+		}
 		};
 	roomEvent[CorpseDialogue] = [this] {
 		//entityManager->setActive(rmObjects.zoomCorpse, true);
@@ -115,11 +119,13 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.boxOfficeMorseCodeB)->setTexture(&sdlutils().images().at("TaquillaAzul"));
 		entityManager->getComponent<Image>(rmObjects.boxOfficeCircleLockP)->setTexture(&sdlutils().images().at("TaquillaMorada"));
 		entityManager->getComponent<Image>(rmObjects.cablesPuzzle)->setTexture(&sdlutils().images().at("Cables"));
-		entityManager->getComponent<Image>(rmObjects.parrot)->setTexture(&sdlutils().images().at("Parrot"));
+		entityManager->getComponent<Image>(rmObjects.parrot)->setTexture(&sdlutils().images().at("parrotInt"));
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3"));
 		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("Balanza"));
 		entityManager->getComponent<Image>(rmObjects.locker)->setTexture(&sdlutils().images().at("CajaFuerte"));
-		entityManager->getComponent<Image>(rmObjects.radio)->setTexture(&sdlutils().images().at("Radio"));
+		entityManager->getComponent<Image>(rmObjects.radio)->setTexture(&sdlutils().images().at("radioAzul"));
+		entityManager->getComponent<Image>(rmObjects.changeRoom1)->setTexture(&sdlutils().images().at("doorJuzgadoAzul"));
+		entityManager->getComponent<Image>(rmObjects.changeRoom2)->setTexture(&sdlutils().images().at("doorEsperaAzul"));
 		//characterCorpse
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3"));
 		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("Cadaver3"));
@@ -148,6 +154,9 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("EmptyImage"));
 		entityManager->getComponent<Image>(rmObjects.locker)->setTexture(&sdlutils().images().at("EmptyImage"));
 		entityManager->getComponent<Image>(rmObjects.radio)->setTexture(&sdlutils().images().at("EmptyImage"));
+
+		entityManager->getComponent<Image>(rmObjects.changeRoom1)->setTexture(&sdlutils().images().at("doorJuzgadoOscura"));
+
 		//characterCorpse
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3Oscuro"));
 		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("EmptyImage"));
@@ -167,7 +176,12 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.parrot)->setTexture(&sdlutils().images().at("ParrotRojo"));
 		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("BalanzaRojo"));
 		entityManager->getComponent<Image>(rmObjects.locker)->setTexture(&sdlutils().images().at("CajaFuerteRojo"));
-		entityManager->getComponent<Image>(rmObjects.radio)->setTexture(&sdlutils().images().at("Radio"));
+		entityManager->getComponent<Image>(rmObjects.radio)->setTexture(&sdlutils().images().at("radioRoja"));
+		
+		entityManager->getComponent<Image>(rmObjects.changeRoom1)->setTexture(&sdlutils().images().at("doorJuzgadoRoja"));
+		entityManager->getComponent<Image>(rmObjects.changeRoom2)->setTexture(&sdlutils().images().at("doorEsperaRoja"));
+
+		
 		//characterCorpse
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3Rojo"));
 		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("Cadaver3Rojo"));
@@ -223,6 +237,9 @@ void Room3Scene::_setRoomEvents()
 		parrotUtils.lastSoundTime = 0; //The timer from parrot and radio are together 
 		entityManager->setActive(rmObjects.zoomMorseGuide, true);
 		entityManager->setActive(rmObjects.quitButton, true);
+
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
+
 		//feather
 		if (rmObjects.feather != nullptr) { 
 			entityManager->setActive(rmObjects.feather, true);
@@ -238,10 +255,16 @@ void Room3Scene::_setRoomEvents()
 		_resetSounds();
 		entityManager->setActive(rmObjects.zoomRadio, true);
 		entityManager->setActive(rmObjects.quitButton, true);
+		if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))
+			startDialogue("RADIO_2P");
+		else {
+			if (Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("RADIO_1PS");
+			else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("RADIO_1PK");
+		}
 		};
 	roomEvent[ResolveCase] = [this] {
 		//IMPORTANT assign dialogue
-		startDialogue("SalaFinal2");
+		startDialogue("Sala3Final");
 		roomEvent[ResolveButtons]();
 		// cahnge image every 1 sec
 		SDL_AddTimer(1000, [](Uint32, void* param) -> Uint32 {
@@ -361,15 +384,15 @@ void Room3Scene::_setRoomBackground()
 {
 #pragma region InitScroll
 
-	auto ChangeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(34, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
-	auto ChangeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1160 - 1349, 160), Vector2D(0, 0), 136, 495, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	rmObjects.changeRoom1 = entityFactory->CreateInteractableEntityScroll(entityManager, "doorJuzgadoOscura", EntityFactory::RECTAREA, Vector2D(31, 112), Vector2D(0, 0), 164/1.5, 751/1.5, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLNORMAL, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	rmObjects.changeRoom2 = entityFactory->CreateInteractableEntityScroll(entityManager, "ChangeRoom", EntityFactory::RECTAREA, Vector2D(1160 - 1800, 1000), Vector2D(0, 0), 159 / 1.5, 745 / 1.5, 0, areaLayerManager, 12, ((sdlutils().width()) / 12) /*- 1*/, EntityFactory::SCROLLINVERSE, 1, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 
-	auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
-	ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(ChangeRoom1));
-	ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(ChangeRoom2));
+	auto ChangeRoomScroll = entityManager->getComponent<ScrollComponent>(rmObjects.changeRoom1);
+	ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.changeRoom1));
+	ChangeRoomScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.changeRoom2));
 	ChangeRoomScroll->setEndScrollCallback([this]() {scrolling = false; });
 
-	rmObjects.backgroundScroll = entityManager->getComponent<ScrollComponent>(ChangeRoom1);
+	rmObjects.backgroundScroll = entityManager->getComponent<ScrollComponent>(rmObjects.changeRoom1);
 
 #pragma endregion
 
@@ -387,12 +410,12 @@ void Room3Scene::_setRoomBackground()
 
 #pragma region Scroll
 
-	entityManager->getComponent<ClickComponent>(ChangeRoom1)
-		->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll, ChangeRoom2]()
+	entityManager->getComponent<ClickComponent>(rmObjects.changeRoom1)
+		->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoomScroll]()
 			{
 				if (!rmObjects.backgroundScroll->isScrolling()) {
 					if (rmObjects.backgroundScroll->Scroll(ScrollComponent::RIGHT)) {
-					auto trChangeRoom2 = entityManager->getComponent<Transform>(ChangeRoom2);
+					auto trChangeRoom2 = entityManager->getComponent<Transform>(rmObjects.changeRoom2);
 					trChangeRoom2->setPos(Vector2D(1160 - 1349, 160));
 					AudioManager::Instance().playSound(rmSounds.doorSound); //If you can scroll, scroll and play the door sound
 					scrolling = true;
@@ -400,12 +423,12 @@ void Room3Scene::_setRoomBackground()
 				}
 			});
 
-	entityManager->getComponent<ClickComponent>(ChangeRoom2)
-		->connect(ClickComponent::JUST_CLICKED, [this, ChangeRoom1]()
+	entityManager->getComponent<ClickComponent>(rmObjects.changeRoom2)
+		->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
 				if (!rmObjects.backgroundScroll->isScrolling()) {
 					if (rmObjects.backgroundScroll->Scroll(ScrollComponent::LEFT)) {
-					auto trChangeRoom1 = entityManager->getComponent<Transform>(ChangeRoom1);
+					auto trChangeRoom1 = entityManager->getComponent<Transform>(rmObjects.changeRoom1);
 					trChangeRoom1->setPos(Vector2D(34 + 1349, 160));
 					AudioManager::Instance().playSound(rmSounds.doorSound); //If you can scroll, scroll and play the door sound
 					scrolling = true;
@@ -561,8 +584,7 @@ void Room3Scene::_setInteractuables()
 	rmObjects.zoomCorpse = entityFactory->CreateImageEntity(entityManager, "Cadaver3Oscuro", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 	entityManager->setActive(rmObjects.zoomCorpse, false);
 
-
-	characterCorpse = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(1000, 300), Vector2D(0, 0), 250 / 3, 225 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
+	characterCorpse = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(590, 181), Vector2D(0, 0), 243 / 1.5, 297 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(characterCorpse));
 
 	entityManager->getComponent<ClickComponent>(characterCorpse)
@@ -574,7 +596,7 @@ void Room3Scene::_setInteractuables()
 			});
 
 	//BOXOFFICE CIRCLE LOCK
-	rmObjects.boxOfficeMorseCodeB = entityFactory->CreateInteractableEntity(entityManager,"EmptyImage",EntityFactory::RECTAREA,Vector2D(-1200,300),Vector2D(0,0),100,100,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::DEFAULT);
+	rmObjects.boxOfficeMorseCodeB = entityFactory->CreateInteractableEntity(entityManager,"EmptyImage",EntityFactory::RECTAREA,Vector2D(-664,102),Vector2D(0,0),211/1.5,724/1.5,0,areaLayerManager,EntityFactory::NODRAG,ecs::grp::INTERACTOBJ);
 	entityManager->getComponent<ClickComponent>(rmObjects.boxOfficeMorseCodeB)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
 		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
@@ -585,23 +607,30 @@ void Room3Scene::_setInteractuables()
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.boxOfficeMorseCodeB));
 
 	//BOXOFFICE ZOOM MORSE GUIDE
-	rmObjects.zoomMorseGuide = entityFactory->CreateImageEntity(entityManager, "MorseGuide", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
+	rmObjects.zoomMorseGuide = entityFactory->CreateImageEntity(entityManager, "taquillaAbierta", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 	entityManager->setActive(rmObjects.zoomMorseGuide, false);
 
 	//feather 
 	rmObjects.feather = entityFactory->CreateInteractableEntity(entityManager, "pluma", EntityFactory::RECTAREA, Vector2D(1000, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
-	entityManager->getComponent<ClickComponent>(rmObjects.feather)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		GetInventory()->addItem(new Hint("pluma", sdlutils().invDescriptions().at("pluma"), &sdlutils().images().at("pluma")));
-		inv->hints.push_back(entityFactory->CreateInvEntity(entityManager, "pluma", EntityFactory::RECTAREA, inv->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
-		createDescription(inv->hints.back(), inv->getItems().back());
-		if (inv->getActive()) inv->hints.back()->getMngr()->setActive(inv->hints.back(), true);
-		else inv->hints.back()->getMngr()->setActive(inv->hints.back(), false);
-		entityManager->setActive(rmObjects.feather, false);
-		rmObjects.feather = nullptr;
+	entityManager->getComponent<ClickComponent>(rmObjects.feather)
+		->connect(ClickComponent::JUST_CLICKED, [this]() {
+
+			GetInventory()->addItem(new Hint("pluma", sdlutils().invDescriptions().at("pluma"), &sdlutils().images().at("pluma")));
+		
+			inv->hints.push_back(entityFactory->CreateInvEntity(entityManager, "pluma", EntityFactory::RECTAREA, inv->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
+		
+			createDescription(inv->hints.back(), inv->getItems().back());
+		
+			if (inv->getActive()) inv->hints.back()->getMngr()->setActive(inv->hints.back(), true);
+			else inv->hints.back()->getMngr()->setActive(inv->hints.back(), false);
+		
+			entityManager->setActive(rmObjects.feather, false);
+			rmObjects.feather = nullptr;
 		
 		});
 	entityManager->setActive(rmObjects.feather, false);
-	rmObjects.boxOfficeCircleLockP = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(-1000,200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+
+	rmObjects.boxOfficeCircleLockP = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(-800,100), Vector2D(0, 0), 213 / 1.5, 755 / 1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 	entityManager->getComponent<ClickComponent>(rmObjects.boxOfficeCircleLockP)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
 		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
@@ -612,7 +641,8 @@ void Room3Scene::_setInteractuables()
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.boxOfficeCircleLockP));
 
 	//PARROT
-	rmObjects.parrot = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(1000, 0), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+
+	rmObjects.parrot = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(860, 160), Vector2D(0, 0), 138/1.5, 234/1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 	entityManager->getComponent<ClickComponent>(rmObjects.parrot)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
 		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
@@ -706,7 +736,7 @@ void Room3Scene::_setInteractuables()
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.parrot));
 
 	//CABLES
-	rmObjects.cablesPuzzle = entityFactory->CreateInteractableEntity(entityManager, "CablesOscuro", EntityFactory::RECTAREA, Vector2D(-600, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	rmObjects.cablesPuzzle = entityFactory->CreateInteractableEntity(entityManager, "CablesOscuro", EntityFactory::RECTAREA, Vector2D(-360, 200), Vector2D(0, 0), 260/1.5, 233/1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 	entityManager->getComponent<ClickComponent>(rmObjects.cablesPuzzle)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
 		if (!rmObjects.backgroundScroll->isScrolling()) {
@@ -717,7 +747,7 @@ void Room3Scene::_setInteractuables()
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.cablesPuzzle));
 
 	//BALANCE
-	rmObjects.balance = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(800, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	rmObjects.balance = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(770, 350), Vector2D(0, 0), 352/1.5, 358/1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 	entityManager->getComponent<ClickComponent>(rmObjects.balance)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
 		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
@@ -728,7 +758,7 @@ void Room3Scene::_setInteractuables()
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.balance));
 
 	//LOCKER
-	rmObjects.locker = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(1200, 300), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	rmObjects.locker = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(360, 138), Vector2D(0, 0), 172/1.5, 254/1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 	entityManager->getComponent<ClickComponent>(rmObjects.locker)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
 		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
@@ -742,7 +772,7 @@ void Room3Scene::_setInteractuables()
 	rmObjects.zoomRadio = entityFactory->CreateImageEntity(entityManager, "Radio", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 	entityManager->setActive(rmObjects.zoomRadio, false);
 
-	rmObjects.radio = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(-300, 300), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	rmObjects.radio = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(-1112, 250), Vector2D(0, 0), 154/1.5, 163/1.5, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
 	entityManager->getComponent<ClickComponent>(rmObjects.radio)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		
 		if (Game::Instance()->getDataManager()->GetRoom3Phase() > 0 && !rmObjects.backgroundScroll->isScrolling()) {
@@ -758,7 +788,7 @@ void Room3Scene::_setDialog()
 {
 	// Dialog
 	dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, _eventToRead);
-
+	dialogueManager->setScene(this);
 	assert(rmObjects.inventoryButton != nullptr); // UI must be Initialized First
 
 	Area2D* inventoryButtonArea = entityManager->getComponent<Area2D>(rmObjects.inventoryButton);

@@ -54,6 +54,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::CLOCK_PUZZLE] = new ClockPuzzleScene();
 	scenes[SceneName::BOOKS_PUZZLE] = new BooksPuzzleScene();
 	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
+	scenes[SceneName::TEA_CUP_PUZZLE] = new TeaCupPuzzleScene();
 	scenes[SceneName::MUSIC_PUZZLE] = new MusicPuzzleScene();
 	scenes[SceneName::RAVEN_SCENE] = new RavenPuzzleScene();
 	scenes[SceneName::DOOR_SCENE] = new DoorPuzzleScene();
@@ -91,23 +92,7 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 	//loadResouces
 // #ifndef //  _LOADALLRESOURCES
 	
-	switch (index)
-	{
-	case INITIAL_MENU:
-		sdlutils().ClearMaps();
-		sdlutils().loadReasources("../resources/config/TheatrumMundiInitialMenu.resources.json");
-		break;
-	case TUTORIAL_SCENE:
-		sdlutils().ClearMaps();
-		sdlutils().loadReasources("../resources/config/TheatrumMundiTutorial.resources.json");
-		break;
-	case ROOM1:
-		sdlutils().ClearMaps();
-		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom1.resources.json");
-		break;
-	default:
-		break;
-	}
+	
 // #endif // !_LOADALLRESOURCES
 	scenes[index]->init(room);
 	actsceneindex = index;
@@ -117,40 +102,13 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 }
 
 void SceneManager::loadScene(int index)
-{
-	//loadResouces
+{	//loadResouces
 #ifndef _LOADALLRESOURCES
+	Game::Instance()->loadResouces(index);
+
+ #endif // !_LOADALLRESOURCES
+
 	
-	switch (index)
-	{
-	case INITIAL_MENU:
-		sdlutils().ClearMaps();
-		sdlutils().loadReasources("../resources/config/TheatrumMundiInitialMenu.resources.json");
-		break;
-	case TUTORIAL_SCENE:
-		sdlutils().ClearMaps();
-		sdlutils().loadReasources("../resources/config/TheatrumMundiTutorial.resources.json");
-		break;
-	case ROOM_1:
-		sdlutils().ClearMaps();
-
-		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom1.resources.json");
-		break;
-	case ROOM_2:
-		sdlutils().ClearMaps();
-
-		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom2.resources.json");
-		break;
-	case ROOM_3:
-		sdlutils().ClearMaps();
-
-		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom3.resources.json");
-		break;
-	default:
-		break;
-	}
-#endif // !_LOADALLRESOURCES
-
 	scenes[index]->init();
 	actsceneindex = index;
 	currentscenes.push_back(scenes[index]);

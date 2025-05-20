@@ -64,8 +64,8 @@
       "file": "../resources/images/Finales/TumbaSala.png"
     },
     {
-      "id": "patrisio",
-      "file": "../resources/images/temporales/Room2/patrisio.jpeg"
+      "id": "corpseZoom2",
+      "file": "../resources/images/Finales/solMuerto.png"
     },
     {
       "id": "FondoOrgano",
@@ -694,15 +694,27 @@
     }
 ],
 
-  "musics" : [
-    {
-      "id": "sala1",
-      "file": "../resources/sound/music/sala1.wav"
-    },
-    {
-      "id": "sala2",
-      "file": "../resources/sound/music/sala2.wav"
-    }
-  ]
+    "musics": [
+        {
+            "id": "menu",
+            "file": "../resources/sound/music/menu.wav"
+        },
+        {
+            "id": "sala1",
+            "file": "../resources/sound/music/sala1.wav"
+        },
+        {
+            "id": "sala2",
+            "file": "../resources/sound/music/sala2.wav"
+        },
+        {
+            "id": "sala3",
+            "file": "../resources/sound/music/sala3.wav"
+        },
+        {
+            "id": "intermedia",
+            "file": "../resources/sound/music/intermedia.wav"
+        }
+    ]
 
 }

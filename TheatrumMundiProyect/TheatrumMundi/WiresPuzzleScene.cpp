@@ -37,7 +37,7 @@ using namespace std;
 
 WiresPuzzleScene::WiresPuzzleScene() : lightsOn(0), selectedWireIndex(-1)
 {
-	dialogueManager = new DialogueManager(0);
+	dialogueManager = new DialogueManager(5);
 }
 
 WiresPuzzleScene::~WiresPuzzleScene()
@@ -59,9 +59,7 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		AudioManager& a = AudioManager::Instance();
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		a.setVolume(buttonSound, 0.2);
-		entityFactory->CreateImageEntity(entityManager, "FondoSalaDeEspera", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
-		//INVENTORY
-		createInventoryUI();
+		entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		
 
 		//where the wires are going to be connected
@@ -254,8 +252,12 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 
 			});
 		entityManager->setActive(gun, false);
-
-
+		dialogueManager->setScene(this);
+		if(Game::Instance()->getDataManager()->GetCharacterState(SOL)&& Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("CABLES_2P");
+		else {
+			if(Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("CABLES_1PS");
+			else if(Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("CABLES_1PK");
+		}
 
 
 

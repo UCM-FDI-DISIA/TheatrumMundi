@@ -17,7 +17,7 @@
 
 ParrotPuzzleScene::ParrotPuzzleScene()
 {
-	dialogueManager = new DialogueManager(1);
+	dialogueManager = new DialogueManager(5);
 }
 
 ParrotPuzzleScene::~ParrotPuzzleScene()
@@ -43,6 +43,13 @@ void ParrotPuzzleScene::init(SceneRoomTemplate* sr)
 		_setUI();
 
 		_setDialog();
+	}
+	else if (sr->GetInventory()->hasItem("Linterna")) {
+		if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("LORO2_2P");
+		else {
+			if (Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("LORO2_1PS");
+			else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("LORO2_1PK");
+		}
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
 	sr->GetInventory()->setFirstItem(0);
@@ -109,6 +116,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
+		entityManager->setActive(rmObjects.bulletsEntity, false);
 	}
 	else {
 		rmObjects.bulletsEntity = entityFactory->CreateInteractableEntity(entityManager, "balasR", EntityFactory::RECTAREA, // TODO Imagen balas
@@ -116,6 +124,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
+		entityManager->setActive(rmObjects.bulletsEntity, false);
 	}
 	//entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity) // Collectable
 	//	->connect(ClickComponent::JUST_CLICKED, [&, this]() {
@@ -136,7 +145,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 
 	// PARROT
 	Vector2D parrotPosition((sdlutils().width() - 700) / 2, (sdlutils().height() - 700) / 2);
-	parrotUtils.parrotEnt = entityFactory->CreateInteractableEntity(entityManager, "Parrot", EntityFactory::RECTAREA, parrotPosition, Vector2D(0, 0), 700, 700, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+	parrotUtils.parrotEnt = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, parrotPosition, Vector2D(0, 0), 700, 700, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 	parrotStateCom = entityManager->addComponent<BehaviorStateComponent>(parrotUtils.parrotEnt);
 
@@ -220,6 +229,13 @@ void ParrotPuzzleScene::_setDialog()
 		Area2D* dialogArea = entityManager->getComponent<Area2D>(dialogEnt);
 		if (dialogArea != nullptr)
 			areaLayerManager->sendAfter(inventoryButtonArea->getLayerPos(), dialogArea->getLayerPos());
+	}
+	dialogueManager->setScene(this);
+	std::cout << Game::Instance()->getDataManager()->GetCharacterState(SOL) << " slo " << Game::Instance()->getDataManager()->GetCharacterState(KEISARA) << std::endl;
+	if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("LORO1_2P");
+	else {
+		if (Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("LORO1_1PS");
+		else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("LORO1_1PK");
 	}
 }
 
@@ -311,8 +327,10 @@ bool ParrotPuzzleScene::isItemHand(const std::string& itemId)
 
 void ParrotPuzzleScene::Win()
 {
-	rmObjects.background->getMngr()->getComponent<Image>(rmObjects.background)->setTexture(&sdlutils().images().at("EmptyImage"));
+	rmObjects.background->getMngr()->getComponent<Image>(rmObjects.background)->setTexture(&sdlutils().images().at("deadParrot"));
 	room->resolvedPuzzle(3);
+
+	entityManager->setActive(rmObjects.bulletsEntity, true);
 }
 
 void ParrotPuzzleScene::ResolveScene()

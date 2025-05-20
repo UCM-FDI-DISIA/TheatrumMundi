@@ -19,7 +19,7 @@
 
 Box::Box()
 {
-	dialogueManager = new DialogueManager(2);
+	dialogueManager = new DialogueManager(5);
 }
 
 Box::~Box()
@@ -41,30 +41,50 @@ void Box::init(SceneRoomTemplate* sr)
 			
 			room = sr;
 			//create the buttons
-			entityFactory->CreateImageEntity(entityManager, "FondoSalaDeEspera", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+			rmObjects.background = entityFactory->CreateImageEntity(entityManager, "cajaFuerteCerrada", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 			
 			//3,5,8,14
 
-			auto _button1 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 200), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button2 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(568, 200), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button3 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(618, 200), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button4 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(668, 200), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button1 = entityFactory->CreateInteractableEntity(entityManager, "jLetter", EntityFactory::RECTAREA, Vector2D(518, 200), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button2 = entityFactory->CreateInteractableEntity(entityManager, "fLetter", EntityFactory::RECTAREA, Vector2D(568, 200), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button3 = entityFactory->CreateInteractableEntity(entityManager, "sLetter", EntityFactory::RECTAREA, Vector2D(618, 200), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button4 = entityFactory->CreateInteractableEntity(entityManager, "lLetter", EntityFactory::RECTAREA, Vector2D(668, 200), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
-			auto _button5 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 250), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button6 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(568, 250), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button7 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(618, 250), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button8 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(668, 250), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button5 = entityFactory->CreateInteractableEntity(entityManager, "pLetter", EntityFactory::RECTAREA, Vector2D(518, 250), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button6 = entityFactory->CreateInteractableEntity(entityManager, "aLetter", EntityFactory::RECTAREA, Vector2D(568, 250), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button7 = entityFactory->CreateInteractableEntity(entityManager, "rLetter", EntityFactory::RECTAREA, Vector2D(618, 250), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button8 = entityFactory->CreateInteractableEntity(entityManager, "tLetter", EntityFactory::RECTAREA, Vector2D(668, 250), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
-			auto _button9 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 300), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button10 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(568, 300), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button11 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(618, 300), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button12 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(668, 300), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button9 = entityFactory->CreateInteractableEntity(entityManager, "iLetter", EntityFactory::RECTAREA, Vector2D(518, 300), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button10 = entityFactory->CreateInteractableEntity(entityManager, "kLetter", EntityFactory::RECTAREA, Vector2D(568, 300), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button11 = entityFactory->CreateInteractableEntity(entityManager, "bLetter", EntityFactory::RECTAREA, Vector2D(618, 300), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button12 = entityFactory->CreateInteractableEntity(entityManager, "xLetter", EntityFactory::RECTAREA, Vector2D(668, 300), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
-			auto _button13 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(518, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button14 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(568, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button15 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(618, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-			auto _button16 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(668, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button13 = entityFactory->CreateInteractableEntity(entityManager, "vLetter", EntityFactory::RECTAREA, Vector2D(518, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button14 = entityFactory->CreateInteractableEntity(entityManager, "oLetter", EntityFactory::RECTAREA, Vector2D(568, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button15 = entityFactory->CreateInteractableEntity(entityManager, "cLetter", EntityFactory::RECTAREA, Vector2D(618, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+			auto _button16 = entityFactory->CreateInteractableEntity(entityManager, "eLetter", EntityFactory::RECTAREA, Vector2D(668, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
+			//add buttons to buttons' vector:
+			rmObjects.puzzleButtons.push_back(_button1);
+			rmObjects.puzzleButtons.push_back(_button2);
+			rmObjects.puzzleButtons.push_back(_button3);
+			rmObjects.puzzleButtons.push_back(_button4);
+
+			rmObjects.puzzleButtons.push_back(_button5);
+			rmObjects.puzzleButtons.push_back(_button6);
+			rmObjects.puzzleButtons.push_back(_button7);
+			rmObjects.puzzleButtons.push_back(_button8);
+
+			rmObjects.puzzleButtons.push_back(_button9);
+			rmObjects.puzzleButtons.push_back(_button10);
+			rmObjects.puzzleButtons.push_back(_button11);
+			rmObjects.puzzleButtons.push_back(_button12);
+
+			rmObjects.puzzleButtons.push_back(_button13);
+			rmObjects.puzzleButtons.push_back(_button14);
+			rmObjects.puzzleButtons.push_back(_button15);
+			rmObjects.puzzleButtons.push_back(_button16);
 			
 				ClickComponent* button1Click = entityManager->addComponent<ClickComponent>(_button1);
 				button1Click->connect(ClickComponent::JUST_CLICKED, [this]()
@@ -168,7 +188,12 @@ void Box::init(SceneRoomTemplate* sr)
 			
 
 			buttonImages = { img1, img2, img3, img4,img5,img6,img7,img8,img9,img10,img11,img12,img13,img14,img15,img16 };
-			buttonImagesIni = { "bookComb0","bookComb0","bookComb0","bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0", "bookComb0"};
+			buttonImagesIni = {
+				"jLetter", "fLetter", "sLetter", "lLetter",
+				"pLetter", "aLetter", "rLetter", "tLetter",
+				"iLetter", "kLetter", "bLetter", "xLetter",
+				"vLetter", "oLetter", "cLetter", "eLetter"
+						};
 			//Change this when we have the final assets
 			
 
@@ -201,10 +226,13 @@ void Box::init(SceneRoomTemplate* sr)
 				});
 
 			//Log
-			dialogueManager->Init(0, entityFactory, entityManager, true, areaLayerManager, "SalaIntermedia1");
+			dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 			logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
-			//Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
-			//startDialogue("Puerta");
+			if (Game::Instance()->getDataManager()->GetCharacterState(SOL) && Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("CAJAFUERTE_2P");
+			else {
+				if (Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("CAJAFUERTE_1PS");
+				else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("CAJAFUERTE_1PK");
+			}
 
 #pragma endregion
 			int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
@@ -246,6 +274,8 @@ void Box::init(SceneRoomTemplate* sr)
 
 				});
 			entityManager->setActive(knife, false);
+			dialogueManager->setScene(this);
+			
 		}
 		sr->GetInventory()->setFirstItem(0);
 		createInvEntities(sr);
@@ -256,7 +286,7 @@ void Box::pushButton(int i)
 {
 	if (!completed) {
 		//buttonImages[i]->setTexture(&sdlutils().images().at("letterPushed")); // The one we have to use in the end
-		buttonImages[i - 1]->setTexture(&sdlutils().images().at("bookComb1"));
+		buttonImages[i - 1]->setTexture(&sdlutils().images().at("blackLetter"));
 
 		if (stage == 0) {
 			if (i == 3) {
@@ -317,6 +347,13 @@ void Box::pushButton(int i)
 
 void Box::Win()
 {
+	rmObjects.background->getMngr()->getComponent<Image>(rmObjects.background)->setTexture(&sdlutils().images().at("cajaFuerteAbierta"));
+	
+	for (ecs::entity_t button : rmObjects.puzzleButtons)
+	{
+		entityManager->setActive(button, false);
+	}
+
 	completed = true;
 	entityManager->setActive(flashlight, true);
 	entityManager->setActive(knife, true);

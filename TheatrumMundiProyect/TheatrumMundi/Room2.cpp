@@ -36,6 +36,7 @@ Room2Scene::~Room2Scene()
 
 void Room2Scene::init()
 {
+	
 	if (isStarted) return;
 	isStarted = true;
 	isOpen = false;
@@ -153,8 +154,9 @@ void Room2Scene::_setRoomEvents()
 		startDialogue("Prueba");
 		rmObjects.zoomOrgan->getMngr()->setActive(rmObjects.zoomOrgan, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);
+		entityManager->setActive(pauseManager->_getopenPauseButton(), false);
 		rmObjects.organ->getMngr()->setActive(rmObjects.organ, true);
-		rmObjects.window->getMngr()->setActive(rmObjects.window, false);
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 		if (rmObjects.rope != nullptr) rmObjects.rope->getMngr()->setActive(rmObjects.rope, true);
 		};
 	roomEvent[Rope] = [this] {
@@ -216,6 +218,7 @@ void Room2Scene::_setRoomEvents()
 		}
 		rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 		};
 	roomEvent[ResolveCase] = [this] {
 		//IMPORTANT assign dialogue
@@ -261,7 +264,7 @@ void Room2Scene::_setRoomEvents()
 		std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
 		AudioManager::Instance().playSound(correctSound);
 		Game::Instance()->render();
-		Game::Instance()->getSceneManager()->popScene();
+		Game::Instance()->getSceneManager()->loadScene(SceneName::MIDDLE_ROOM);
 		};
 	roomEvent[BadEnd] = [this] {
 		// WIP
@@ -273,7 +276,7 @@ void Room2Scene::_setRoomEvents()
 		std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
 		AudioManager::Instance().playSound(incorrectSound);
 		Game::Instance()->render();
-		Game::Instance()->getSceneManager()->popScene();
+		Game::Instance()->getSceneManager()->loadScene(SceneName::MIDDLE_ROOM);
 		};
 #pragma endregion
 }
@@ -292,10 +295,9 @@ void Room2Scene::_setRoomAudio()
 	rmSounds.doorSound = sdlutils().soundEffects().at("puerta");
 
 
-	/*Audio music
-	Sound room1music = sdlutils().musics().at("sala2");
-	audioMngr.setLooping(room1music, true);
-	audioMngr.playSound(room1music);*/
+	audioMngr.stopSound(sdlutils().musics().at("intermedia"));
+	std::shared_ptr<Sound> room2music = sdlutils().musics().at("sala2");
+	audioMngr.playSound(room2music, true);
 }
 
 void Room2Scene::_setGlobalFeatures()
@@ -513,7 +515,7 @@ void Room2Scene::_setInteractuables()
 #pragma region CementeryEntities
 
 
-	rmObjects.zoomCorpse = entityFactory->CreateImageEntity(entityManager, "patrisio", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
+	rmObjects.zoomCorpse = entityFactory->CreateImageEntity(entityManager, "corpseZoom2", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 	RectArea2D* corpseZoomArea = entityManager->addComponent<RectArea2D>(rmObjects.zoomCorpse, areaLayerManager);
 	entityManager->setActive(rmObjects.zoomCorpse, false);
 
@@ -525,6 +527,7 @@ void Room2Scene::_setInteractuables()
 		->connect(ClickComponent::JUST_CLICKED, [this]()
 			{
 				if (!finishallpuzzles)roomEvent[CorpseDialogue]();
+				entityManager->setActive(pauseManager->_getopenPauseButton(), false);
 			});
 
 	auto tomb = entityFactory->CreateInteractableEntity(entityManager, "Tumba", EntityFactory::RECTAREA, Vector2D(525, 155), Vector2D(0, 0), 627 / 3, 1233 / 3, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::INTERACTOBJ);
@@ -632,11 +635,29 @@ void Room2Scene::_setDialog()
 	}
 }
 
+struct TimerData {
+	EntityManager* manager;
+	PauseManager* pauseM;
+};
+
+Uint32 timerCallbackRoom2(Uint32 interval, void* param) {
+
+	auto data = static_cast<TimerData*>(param);
+
+	data->manager->setActive(data->pauseM->_getopenPauseButton(), true);
+
+	delete data;
+	return 0;
+}
+
+
+
+
 void Room2Scene::_setUI()
 {
 #pragma region QuitButton
 	// Corpse zoom Quit Button
-	rmObjects.quitButton = entityFactory->CreateInteractableEntity(entityManager, "B1", entityFactory->RECTAREA, Vector2D(1349 - 110, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, entityFactory->NODRAG, ecs::grp::UI);
+	rmObjects.quitButton = entityFactory->CreateInteractableEntity(entityManager, "B1", entityFactory->RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, entityFactory->NODRAG, ecs::grp::UI);
 
 	entityManager->getComponent<ClickComponent>(rmObjects.quitButton)
 		->connect(ClickComponent::JUST_CLICKED, [this]()
@@ -649,7 +670,8 @@ void Room2Scene::_setUI()
 				entityManager->setActiveGroup(ecs::grp::ZOOMOBJ, false);
 				entityManager->setActive(rmObjects.quitButton, false);
 				entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, true);
-
+				TimerData* t = new TimerData{ entityManager,pauseManager };
+				SDL_AddTimer(50, timerCallbackRoom2, t);
 			});
 
 	entityManager->setActive(rmObjects.quitButton, false);
