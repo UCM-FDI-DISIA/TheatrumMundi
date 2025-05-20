@@ -34,6 +34,8 @@
 #include "Box.h"
 #include "ParrotPuzzleScene.h"
 
+#include "CorpseLucyScene.h"
+
 SceneManager::SceneManager()
 {
 	//If this content is edited, please put the same code in ResetSceneManager
@@ -65,6 +67,7 @@ SceneManager::SceneManager()
 	scenes[SceneName::CREDITS] = new CreditsScene();
 	scenes[SceneName::BOX] = new Box();
 	scenes[SceneName::PARROT_PUZZLE] = new ParrotPuzzleScene();
+	scenes[SceneName::CORPSELUCY_SCENE] = new CorpseLucyScene();
 }
 void SceneManager::init()
 {
@@ -232,6 +235,7 @@ void SceneManager::ResetSceneManager()
 	scenes[SceneName::CREDITS] = new CreditsScene();
 	scenes[SceneName::BOX] = new Box();
 	scenes[SceneName::PARROT_PUZZLE] = new ParrotPuzzleScene();
+	scenes[SceneName::CORPSELUCY_SCENE] = new CorpseLucyScene();
 	loadScene(SceneName::INITIAL_MENU);
 }
 

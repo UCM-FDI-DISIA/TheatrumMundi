@@ -51,6 +51,7 @@
     <ClCompile Include="BooksPuzzleScene.cpp" />
     <ClCompile Include="Area2DLayerManager.cpp" />
     <ClCompile Include="CalendearMobileTestScene.cpp" />
+    <ClCompile Include="CorpseLucyScene.cpp" />
     <ClCompile Include="CreditsScene.cpp" />
     <ClCompile Include="CSVdataRecolector.cpp" />
     <ClCompile Include="DataManager.cpp" />
@@ -249,6 +250,7 @@
     <ClInclude Include="BooksPuzzleScene.h" />
     <ClInclude Include="Area2DLayerManager.h" />
     <ClInclude Include="CalendearMobileTestScene.h" />
+    <ClInclude Include="CorpseLucyScene.h" />
     <ClInclude Include="CreditsScene.h" />
     <ClInclude Include="CSVdataRecolector.h" />
     <ClInclude Include="DataManager.h" />
