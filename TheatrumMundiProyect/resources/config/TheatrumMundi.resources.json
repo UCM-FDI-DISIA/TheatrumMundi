@@ -1111,11 +1111,11 @@
     },
     {
       "id": "FondoSalaDeEspera",
-      "file": "../resources/images/temporales/Room3/SalaDeEspera.png"
+      "file": "../resources/images/Finales/SalaDeEspera.png"
     },
     {
       "id": "FondoSalaDeEsperaOscuro",
-      "file": "../resources/images/temporales/Room3/SalaDeEsperaOscuro.png"
+      "file": "../resources/images/Finales/SalaDeEsperaOscuro.png"
     },
     {
       "id": "FondoSalaDeEsperaRojo",
@@ -1127,7 +1127,7 @@
     },
     {
       "id": "CablesOscuro",
-      "file": "../resources/images/temporales/Room3/cablesOscuro.png"
+      "file": "../resources/images/Finales/cablesOscuro.png"
     },
     {
       "id": "CablesRojo",
