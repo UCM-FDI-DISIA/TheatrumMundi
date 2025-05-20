@@ -1029,6 +1029,48 @@
 
 
 
+  },
+  "Sala6":{
+  "FINAL_1": [
+        { "Character": " ", "Text": "Y al final de esta obra" },
+        { "Character": " ", "Text": "solo queda una persona." },
+        { "Character": " ", "Text": "No es el peor término, supongo." },
+        { "Character": " ", "Text": "Aunque se siente como un abandono." },
+        { "Character": " ", "Text": "Tiene que haber un mejor desenlace." },
+        { "Character": " ", "Text": "Una mejor manera de que todo esto acabe." },
+        { "Character": " ", "Text": "..." },
+        { "Character": " ", "Text": "A pesar de todo ello" },
+        { "Character": " ", "Text": "lo único que ahora mismo veo" },
+        { "Character": " ", "Text": "es una figura solitaria" },
+        { "Character": " ", "Text": "Que avanza hacia su propio fin de manera voluntaria." }
+        
+        ],
+
+    "FINAL_2": [
+        { "Character": " ", "Text": "Yo siempre cumplo mis promesas." },
+        { "Character": " ", "Text": "Y por lo tanto, este juego ahora cesa." },
+        { "Character": " ", "Text": "El resultado es lo que cabía esperarse." },
+        { "Character": " ", "Text": "Un error del que jamás podrán olvidarse." },
+        { "Character": " ", "Text": "Ahora no volveré a verles." },
+        { "Character": " ", "Text": "El resto de sus vidas lejos de mis leyes." },
+        { "Character": " ", "Text": "Al menos ha sido divertido." },
+        { "Character": " ", "Text": "Un recuerdo a guardar sobre algo que he conocido." }
+        
+        ],
+        "FINAL_3": [
+        { "Character": " ", "Text": "Esto si que no me lo esperaba." },
+        { "Character": " ", "Text": "¡Todas las respuestas han sido acertadas!" },
+        { "Character": " ", "Text": "¿Lo habré hecho demasiado simple?" },
+        { "Character": " ", "Text": "Bueno, ahora es irreversible." },
+        { "Character": " ", "Text": "Tras esto jamás volveré a verles." },
+        { "Character": " ", "Text": "Tampoco tengo ningún interés en retenerles." },
+        { "Character": " ", "Text": "Son un grupo de gente interesante" },
+        { "Character": " ", "Text": "Pero es hora de que pase a mi siguientes visitantes." }
+        
+        ]
+
+
+
   }
   
   
