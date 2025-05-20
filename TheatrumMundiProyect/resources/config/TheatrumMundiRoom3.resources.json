@@ -32,18 +32,6 @@
             "file": "../resources/images/Finales/balanza.png"
         },
         {
-            "id": "clockShape",
-            "file": "../resources/images/clock_shape.png"
-        },
-        {
-            "id": "boa1",
-            "file": "../resources/images/boa1.png"
-        },
-        {
-            "id": "boa2",
-            "file": "../resources/images/boa2.png"
-        },
-        {
             "id": "EmptyImage",
             "file": "../resources/images/Finales/ImagenVacia.png"
         },
