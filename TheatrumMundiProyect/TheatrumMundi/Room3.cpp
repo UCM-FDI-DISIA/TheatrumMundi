@@ -173,6 +173,11 @@ void Room3Scene::_setRoomEvents()
 		entityManager->getComponent<Image>(rmObjects.balance)->setTexture(&sdlutils().images().at("BalanzaRojo"));
 		entityManager->getComponent<Image>(rmObjects.locker)->setTexture(&sdlutils().images().at("CajaFuerteRojo"));
 		entityManager->getComponent<Image>(rmObjects.radio)->setTexture(&sdlutils().images().at("radioRoja"));
+		
+		entityManager->getComponent<Image>(rmObjects.changeRoom1)->setTexture(&sdlutils().images().at("doorEsperaRoja"));
+		entityManager->getComponent<Image>(rmObjects.changeRoom2)->setTexture(&sdlutils().images().at("doorEsperaRoja"));
+
+		
 		//characterCorpse
 		entityManager->getComponent<Image>(rmObjects.zoomCorpse)->setTexture(&sdlutils().images().at("Cadaver3Rojo"));
 		if (characterCorpse != nullptr) entityManager->getComponent<Image>(characterCorpse)->setTexture(&sdlutils().images().at("Cadaver3Rojo"));

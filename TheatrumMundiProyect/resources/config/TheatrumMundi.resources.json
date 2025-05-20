@@ -115,6 +115,10 @@
       "file": "../resources/images/Finales/puertaEsperaAzul.PNG"
     },
     {
+      "id": "doorEsperaRoja",
+      "file": "../resources/images/Finales/puertaEsperaRoja.PNG"
+    },
+    {
       "id": "LucySprite",
       "file": "../resources/images/Finales/Lucy.PNG"
     },
@@ -1135,7 +1139,7 @@
     },
     {
       "id": "CablesRojo",
-      "file": "../resources/images/temporales/Room3/cablesRojo.png"
+      "file": "../resources/images/Finales/cablesRojo.png"
     },
     {
       "id": "Cadaver3",
@@ -1175,7 +1179,7 @@
     },
     {
       "id": "TaquillaAzulRojo",
-      "file": "../resources/images/temporales/Room3/TaquillaRojo.png"
+      "file": "../resources/images/Finales/TaquillaRojo.png"
     },
     {
       "id": "TaquillaMorada",
@@ -1187,7 +1191,7 @@
     },
     {
       "id": "TaquillaMoradaRojo",
-      "file": "../resources/images/temporales/Room3/Taquilla2Rojo.png"
+      "file": "../resources/images/Finales/Taquilla2Rojo.png"
     },
     {
       "id": "Balanza",
