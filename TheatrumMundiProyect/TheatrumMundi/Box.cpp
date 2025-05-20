@@ -238,7 +238,7 @@ void Box::init(SceneRoomTemplate* sr)
 			int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
 			
 			flashlight = entityFactory->CreateInteractableEntity(entityManager, "Linterna", EntityFactory::RECTAREA,
-				Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
+				Vector2D(700, 400), Vector2D(0, 0), 300, 300, 0,
 				areaLayerManager,
 				EntityFactory::NODRAG,
 				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
@@ -254,12 +254,12 @@ void Box::init(SceneRoomTemplate* sr)
 			entityManager->setActive(flashlight, false);
 
 			if (variant == 1)knife = entityFactory->CreateInteractableEntity(entityManager, "CuchilloSerrado", EntityFactory::RECTAREA,
-				Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
+				Vector2D(400, 450), Vector2D(0, 0), 300, 300, 0,
 				areaLayerManager,
 				EntityFactory::NODRAG,
 				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
 			else knife = entityFactory->CreateInteractableEntity(entityManager, "CuchilloLiso", EntityFactory::RECTAREA,
-				Vector2D(560, 630), Vector2D(0, 0), 110, 110, 0,
+				Vector2D(400, 450), Vector2D(0, 0), 300, 300, 0,
 				areaLayerManager,
 				EntityFactory::NODRAG,
 				ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
