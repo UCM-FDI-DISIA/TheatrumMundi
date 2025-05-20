@@ -135,7 +135,7 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 	//	});
 
 	ClickComponent* clk = entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity);
-	clk->connect(ClickComponent::JUST_CLICKED, [&, this]() {
+	clk->connect(ClickComponent::JUST_CLICKED, [this,sr,variant]() {
 
 		rmObjects.bulletsEntity->getMngr()->setActive(rmObjects.bulletsEntity, false);
 		Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
