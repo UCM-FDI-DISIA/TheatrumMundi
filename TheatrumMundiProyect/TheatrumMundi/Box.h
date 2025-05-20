@@ -27,6 +27,7 @@ private:
 		ecs::entity_t inventoryButton = nullptr;
 		ecs::entity_t logbtn = nullptr;
 		ecs::entity_t bulletsEntity = nullptr;
+		std::vector<ecs::entity_t> puzzleButtons;
 	} rmObjects;
 };
 

@@ -65,6 +65,26 @@ void Box::init(SceneRoomTemplate* sr)
 			auto _button15 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(618, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 			auto _button16 = entityFactory->CreateInteractableEntity(entityManager, "bookComb0", EntityFactory::RECTAREA, Vector2D(668, 350), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
+			//add buttons to buttons' vector:
+			rmObjects.puzzleButtons.push_back(_button1);
+			rmObjects.puzzleButtons.push_back(_button2);
+			rmObjects.puzzleButtons.push_back(_button3);
+			rmObjects.puzzleButtons.push_back(_button4);
+
+			rmObjects.puzzleButtons.push_back(_button5);
+			rmObjects.puzzleButtons.push_back(_button6);
+			rmObjects.puzzleButtons.push_back(_button7);
+			rmObjects.puzzleButtons.push_back(_button8);
+
+			rmObjects.puzzleButtons.push_back(_button9);
+			rmObjects.puzzleButtons.push_back(_button10);
+			rmObjects.puzzleButtons.push_back(_button11);
+			rmObjects.puzzleButtons.push_back(_button12);
+
+			rmObjects.puzzleButtons.push_back(_button13);
+			rmObjects.puzzleButtons.push_back(_button14);
+			rmObjects.puzzleButtons.push_back(_button15);
+			rmObjects.puzzleButtons.push_back(_button16);
 			
 				ClickComponent* button1Click = entityManager->addComponent<ClickComponent>(_button1);
 				button1Click->connect(ClickComponent::JUST_CLICKED, [this]()
@@ -319,6 +339,11 @@ void Box::Win()
 {
 	rmObjects.background->getMngr()->getComponent<Image>(rmObjects.background)->setTexture(&sdlutils().images().at("cajaFuerteAbierta"));
 	
+	for (ecs::entity_t button : rmObjects.puzzleButtons)
+	{
+		entityManager->setActive(button, false);
+	}
+
 	completed = true;
 	entityManager->setActive(flashlight, true);
 	entityManager->setActive(knife, true);
