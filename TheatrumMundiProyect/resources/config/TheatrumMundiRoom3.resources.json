@@ -19,7 +19,7 @@
       "id": "Radio",
       "file": "../resources/images/Finales/radio.jpg"
     },
-        { "id" : "balance", "file" : "../resources/images/temporales/balanza.png" },
+        { "id" : "balance", "file" : "../resources/images/Finales/balanza.png" },
         {
       "id": "clockShape",
       "file": "../resources/images/clock_shape.png"
@@ -97,7 +97,7 @@
       "file": "../resources/images/temporales/Room3/SalaDeEsperaRojo.png"
     },
     { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
-       { "id" : "FeatherBackground", "file" : "../resources/images/temporales/FeatherBackground.png" },
+       { "id" : "FeatherBackground", "file" : "../resources/images/Finales/FeatherBackground.png" },
    
     {
       "id": "incrementButton",
@@ -177,6 +177,10 @@
       "file": "../resources/images/temporales/Room3/cablesOscuro.png"
     },
     {
+      "id": "CablesRojo",
+      "file": "../resources/images/temporales/Room3/cablesRojo.png"
+    },
+    {
       "id": "Cadaver3",
       "file": "../resources/images/temporales/Room3/Cadaver.png"
     },
@@ -185,8 +189,16 @@
       "file": "../resources/images/temporales/Room3/CadaverOscuro.png"
     },
     {
+      "id": "Cadaver3Rojo",
+      "file": "../resources/images/temporales/Room3/CadaverRojo.png"
+    },
+    {
       "id": "Parrot",
       "file": "../resources/images/temporales/Room3/parrot.png"
+    },
+    {
+      "id": "ParrotRojo",
+      "file": "../resources/images/temporales/Room3/parrotRojo.png"
     },
     {
       "id": "ParrotOscuro",
@@ -207,6 +219,14 @@
     {
       "id": "TaquillaMoradaOscuro",
       "file": "../resources/images/temporales/Room3/Taquilla2Oscura.png"
+    },
+    {
+      "id": "TaquillaAzulRojo",
+      "file": "../resources/images/temporales/Room3/TaquillaRojo.png"
+    },
+    {
+      "id": "TaquillaMoradaRojo",
+      "file": "../resources/images/temporales/Room3/Taquilla2Rojo.png"
     },
      {
       "id": "Linterna",
@@ -257,6 +277,10 @@
       "file": "../resources/images/temporales/Room3/balanzaOscura.png"
     },
     {
+      "id": "BalanzaRojo",
+      "file": "../resources/images/temporales/Room3/balanzaRojo.png"
+    },
+    {
       "id": "CajaFuerte",
       "file": "../resources/images/temporales/Room3/CajaFuerte.png"
     },
@@ -265,12 +289,29 @@
       "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
     },
     {
+      "id": "CajaFuerteRojo",
+      "file": "../resources/images/temporales/Room3/CajaFuerteRojo.png"
+    },
+    {
       "id": "FondoJuzgado",
       "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
     },
     {
       "id": "MorseGuide",
       "file": "../resources/images/temporales/Room3/morseGuia.jpg"
+    },
+    { "id" : "loading1", "file" : "../resources/images/Finales/Carga1.png" },
+     {
+      "id": "loading2",
+      "file": "../resources/images/Finales/Carga2.png"
+    },
+    {
+      "id": "loading3",
+      "file": "../resources/images/Finales/Carga3.png"
+    },
+    {
+      "id": "loading4",
+      "file": "../resources/images/Finales/Carga4.png"
     },
     {
       "id": "loading5",

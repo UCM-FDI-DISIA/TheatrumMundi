@@ -343,7 +343,7 @@
     { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
     { "id" : "continuar", "file" : "../resources/images/Finales/continuarBackground.png" },
     { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
-    { "id" : "balance", "file" : "../resources/images/temporales/balanza.png" },
+    { "id" : "balance", "file" : "../resources/images/Finales/balanza.png" },
     { "id" : "heart", "file" : "../resources/images/temporales/corazon.png" },
     { "id" : "juzgado", "file" : "../resources/images/temporales/juzgado.png" },
     { "id" : "salaEspera", "file" : "../resources/images/temporales/salaEspera.png" },
@@ -353,7 +353,7 @@
     { "id" : "fondoMorado", "file" : "../resources/images/temporales/fondoMorado.png" },
     { "id" : "menuInicial", "file" : "../resources/images/Finales/mainMenu.png" },
     { "id" : "Title", "file" : "../resources/images/Finales/title.png" },
-     { "id" : "FeatherBackground", "file" : "../resources/images/temporales/FeatherBackground.png" },
+     { "id" : "FeatherBackground", "file" : "../resources/images/Finales/FeatherBackground.png" },
      {
       "id": "piezaL1",
       "file": "../resources/images/Finales/piezadeL1.png"
