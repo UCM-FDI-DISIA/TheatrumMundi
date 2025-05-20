@@ -10,7 +10,7 @@ Sound::Sound(const std::string& filePath) {
 }
 
 Sound::~Sound() {
-    if (sound!=nullptr) {
+    if (sound != nullptr) {
         sound->release();
     }
 }
@@ -58,7 +58,7 @@ bool AudioManager::init() {
 
 void AudioManager::shutdown() {
     std::cout << "llamo a destruir xd" << std::endl;
-    sounds.clear();  
+    sounds.clear();
     if (system) {
         std::cout << "lololool" << std::endl;
         system->close();
@@ -83,7 +83,7 @@ std::shared_ptr<Sound> AudioManager::createSound(const std::string& filePath) {
 
     soundPtr->setSound(fmodSound);
     sounds.push_back(soundPtr);
-    return soundPtr; 
+    return soundPtr;
 }
 
 void AudioManager::playSound(std::shared_ptr<Sound> sound, bool loop) {
@@ -119,14 +119,14 @@ void AudioManager::playSound(std::shared_ptr<Sound> sound, bool loop) {
         std::cerr << "FMOD error: " << FMOD_ErrorString(result) << std::endl;
 #endif // DEBUG
 
-        
+
     }
 
 #ifdef DEBUG
     std::cout << "canales usados: " << getUsedChannels() << std::endl;
 #endif // DEBUG
 
-    
+
 }
 
 
@@ -191,9 +191,9 @@ void AudioManager::set3DPosition(std::shared_ptr<Sound> sound, float x, float y,
 void AudioManager::setListenerPosition(float x, float y, float z) {
     if (system) {
         FMOD_VECTOR pos = { x, y, z };
-        FMOD_VECTOR vel = { 0, 0, 0 }; 
-        FMOD_VECTOR forward = { 0, 0, 1 }; 
-        FMOD_VECTOR up = { 0, 1, 0 }; 
+        FMOD_VECTOR vel = { 0, 0, 0 };
+        FMOD_VECTOR forward = { 0, 0, 1 };
+        FMOD_VECTOR up = { 0, 1, 0 };
 
         system->set3DListenerAttributes(
             0, // Listener id (0 is single-listener)

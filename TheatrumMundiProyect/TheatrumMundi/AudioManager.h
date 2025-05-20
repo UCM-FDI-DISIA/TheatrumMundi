@@ -48,7 +48,7 @@ public:
     void resumeSound(std::shared_ptr<Sound> sound);
 
     void cleanupInactiveChannels();
-       
+
 
     // Setters
     void setVolume(std::shared_ptr<Sound> sound, float volume);
@@ -63,7 +63,7 @@ private:
     int getUsedChannels() const;
 
     AudioManager();
-   // ~AudioManager();
+    // ~AudioManager();
 
     FMOD::System* system = nullptr;
     std::vector<std::shared_ptr<Sound>> sounds;
