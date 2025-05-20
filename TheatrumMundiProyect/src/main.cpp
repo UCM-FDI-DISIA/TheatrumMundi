@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 #include "../../TheatrumMundiProyect/src/game/Game.h"
 
@@ -22,8 +23,9 @@ int main(int ac, char** av) {
 	delete Game::Instance();
 	return 0;
 }
+*/
 
-/*
+
 #define SDL_MAIN_HANDLED  
 #include <SDL.h>
 #include <windows.h>
@@ -52,4 +54,3 @@ SDL_SetMainReady();
 	delete Game::Instance();
 	return 0;
 }
-*/
