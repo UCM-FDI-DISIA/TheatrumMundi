@@ -867,9 +867,18 @@
     {
       "id": "EntradaSecretaAbierta",
       "file": "../resources/images/temporales/Room2/EntradaSecretaAbierta.png"
-    },{
+    },
+    {
       "id": "StrongBoxWheel",
       "file": "../resources/images/temporales/CajafuerteRueda.png"
+    },
+    {
+      "id": "cajaFuerteCerrada",
+      "file": "../resources/images/Finales/cajaFuerteCerrada.png"
+    },
+    {
+      "id": "cajaFuerteAbierta",
+      "file": "../resources/images/Finales/cajaFuerteAbierta.png"
     },
     {
       "id": "FondoVentana",

@@ -21,6 +21,12 @@ private:
 	bool lastWright = false;
 	bool completed = false;
 
-	
+	struct roomObjects {
+		ecs::entity_t background = nullptr;
+		ecs::entity_t quitButton = nullptr;
+		ecs::entity_t inventoryButton = nullptr;
+		ecs::entity_t logbtn = nullptr;
+		ecs::entity_t bulletsEntity = nullptr;
+	} rmObjects;
 };
 

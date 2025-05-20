@@ -41,7 +41,7 @@ void Box::init(SceneRoomTemplate* sr)
 			
 			room = sr;
 			//create the buttons
-			entityFactory->CreateImageEntity(entityManager, "FondoSalaDeEspera", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+			rmObjects.background = entityFactory->CreateImageEntity(entityManager, "cajaFuerteCerrada", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 			
 			//3,5,8,14
 
@@ -317,6 +317,8 @@ void Box::pushButton(int i)
 
 void Box::Win()
 {
+	rmObjects.background->getMngr()->getComponent<Image>(rmObjects.background)->setTexture(&sdlutils().images().at("cajaFuerteAbierta"));
+	
 	completed = true;
 	entityManager->setActive(flashlight, true);
 	entityManager->setActive(knife, true);

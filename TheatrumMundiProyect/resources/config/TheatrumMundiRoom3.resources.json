@@ -149,6 +149,14 @@
       "file": "../resources/images/temporales/CajafuerteRueda.png"
     },
     {
+      "id": "cajaFuerteCerrada",
+      "file": "../resources/images/Finales/cajaFuerteCerrada.png"
+    },
+    {
+      "id": "cajaFuerteAbierta",
+      "file": "../resources/images/Finales/cajaFuerteAbierta.png"
+    },
+    {
       "id": "fondoPruebaLog",
       "file": "../resources/images/fondoLogPrueba.png"
     },
