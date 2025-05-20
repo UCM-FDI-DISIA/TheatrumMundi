@@ -94,7 +94,7 @@ void ParrotPuzzleScene::_setRoomAudio()
 
 void ParrotPuzzleScene::_setRoomBackground()
 {
-	entityFactory->CreateImageEntity(entityManager, "Parrot", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
+	rmObjects.background = entityFactory->CreateImageEntity(entityManager, "Parrot", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 }
 
 void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
@@ -301,6 +301,7 @@ bool ParrotPuzzleScene::isItemHand(const std::string& itemId)
 		entityManager->getComponent<Image>(parrotUtils.parrotEnt)->setTexture(&sdlutils().images().at("EmptyImage"));
 		entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity)->setLayerOpposition(false); // We can collect the bullets even with the parrot on top
 		//parrotStateCom->setState(ParrotState::DEATH);
+		parrotUtils.parrotEnt->getMngr()->setActive(parrotUtils.parrotEnt,false);
 		Win();
 		return true;
 	}
@@ -309,6 +310,7 @@ bool ParrotPuzzleScene::isItemHand(const std::string& itemId)
 
 void ParrotPuzzleScene::Win()
 {
+	rmObjects.background->getMngr()->getComponent<Image>(rmObjects.background)->setTexture(&sdlutils().images().at("EmptyImage"));
 	room->resolvedPuzzle(3);
 }
 
