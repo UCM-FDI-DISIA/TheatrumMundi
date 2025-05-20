@@ -75,13 +75,12 @@ void CorpseLucyScene::_setGlobalFeatures()
 void CorpseLucyScene::_setRoomAudio()
 {
 	//Audio sfx 
-	AudioManager& audioMngr = AudioManager::Instance();
 
 	rmSounds.uiButton = sdlutils().soundEffects().at("boton");
-	audioMngr.setVolume(rmSounds.uiButton, 0.2);
+	audioManager().setVolume(rmSounds.uiButton, 0.2);
 
 	rmSounds.puzzleButton = sdlutils().soundEffects().at("puzzle");
-	audioMngr.setVolume(rmSounds.puzzleButton, 0.3);
+	audioManager().setVolume(rmSounds.puzzleButton, 0.3);
 
 }
 
@@ -93,7 +92,7 @@ void CorpseLucyScene::_setRoomBackground()
 void CorpseLucyScene::_setInteractuables(SceneTemplate* sr)
 {
 	rmObjects.interactuableArea = entityFactory->CreateInteractableEntity(entityManager, "Parrot", EntityFactory::RECTAREA, Vector2D((sdlutils().width() - 700) / 2, (sdlutils().height() - 700) / 2), Vector2D(0, 0), 700, 700, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-
+	rmObjects.interactuableArea->getMngr()->getComponent<TriggerComponent>(rmObjects.interactuableArea)->setTargetGroup(ecs::grp::INVENTORY);
 	rmObjects.interactuableArea->getMngr()->getComponent<TriggerComponent>(rmObjects.interactuableArea)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 		SetplacedHand(true);
 		});
@@ -124,9 +123,8 @@ void CorpseLucyScene::_setDialog()
 
 void CorpseLucyScene::_setUI()
 {
-	AudioManager& a = AudioManager::Instance();
 	std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-	a.setVolume(buttonSound, 0.2);
+	audioManager().setVolume(buttonSound, 0.2);
 
 	//BackButton
 	//ENTIDADCONENTITYFACTORY
@@ -139,7 +137,7 @@ void CorpseLucyScene::_setUI()
 	ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 	clkOpen->connect(ClickComponent::JUST_CLICKED, [this, _backButton, buttonSound]()
 		{
-			AudioManager::Instance().playSound(buttonSound);
+			audioManager().playSound(buttonSound);
 
 			inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 			HideInventoryItems();
