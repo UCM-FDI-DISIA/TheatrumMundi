@@ -218,6 +218,7 @@ void Room2Scene::_setRoomEvents()
 		}
 		rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, true);
 		rmObjects.quitButton->getMngr()->setActive(rmObjects.quitButton, true);
+		entityManager->setActive(pauseManager->_getopenPauseButton(), false);
 		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
 		};
 	roomEvent[ResolveCase] = [this] {
@@ -565,6 +566,7 @@ void Room2Scene::_setInteractuables()
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.window));
 	entityManager->getComponent<ClickComponent>(rmObjects.window)->connect(ClickComponent::JUST_CLICKED, [this]() {
 		roomEvent[WindowScene]();
+		entityManager->setActive(pauseManager->_getopenPauseButton(), false);
 		});
 
 #pragma endregion
@@ -606,7 +608,9 @@ void Room2Scene::_setInteractuables()
 		if (variant == 2)
 		{
 			rmObjects.secretEntryZoom->getMngr()->getComponent<Image>(rmObjects.secretEntryZoom)->setTexture(&sdlutils().images().at("SalidaSecretaAbierta"));
+			
 		}
+		
 	});
 	rmObjects.secretEntryZoom->getMngr()->setActive(rmObjects.secretEntryZoom, false);
 

@@ -198,7 +198,10 @@ bool XOPuzzleScene::checkWin()
 }
 void XOPuzzleScene::Win()
 {
-	_tomb->setXOpuzzle(true);
+	if (!solved) {
+		solved = true;
+		_tomb->setXOpuzzle(true);
+	}
 }
 
 
