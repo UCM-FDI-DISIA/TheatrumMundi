@@ -458,6 +458,154 @@
         {
             "id": "lockFondoAbierto",
             "file": "../resources/images/Finales/compAbiertoTaquillaCandado.png"
+        },
+        {
+            "id": "cable1.1",
+            "file": "../resources/images/Finales/1.1.png"
+        },
+        {
+            "id": "cable1.2",
+            "file": "../resources/images/Finales/1.2.png"
+        },
+        {
+            "id": "cable1.3",
+            "file": "../resources/images/Finales/1.3.png"
+        },
+        {
+            "id": "cable1.4",
+            "file": "../resources/images/Finales/1.4.png"
+        },
+        {
+            "id": "cable1.5",
+            "file": "../resources/images/Finales/1.5.png"
+        },
+        {
+            "id": "cable2.1",
+            "file": "../resources/images/Finales/2.1.png"
+        },
+        {
+            "id": "cable2.2",
+            "file": "../resources/images/Finales/2.2.png"
+        },
+        {
+            "id": "cable2.3",
+            "file": "../resources/images/Finales/2.3.png"
+        },
+        {
+            "id": "cable2.4",
+            "file": "../resources/images/Finales/2.4.png"
+        },
+        {
+            "id": "cable2.5",
+            "file": "../resources/images/Finales/2.5.png"
+        },
+        {
+            "id": "cable2.6",
+            "file": "../resources/images/Finales/2.6.png"
+        },
+        {
+            "id": "cable2.7",
+            "file": "../resources/images/Finales/2.7.png"
+        },
+        {
+            "id": "cable2.8",
+            "file": "../resources/images/Finales/2.8.png"
+        },
+        {
+            "id": "cable3.1",
+            "file": "../resources/images/Finales/3.1.png"
+        },
+        {
+            "id": "cable3.2",
+            "file": "../resources/images/Finales/3.2.png"
+        },
+        {
+            "id": "cable3.3",
+            "file": "../resources/images/Finales/3.3.png"
+        },
+        {
+            "id": "cable3.4",
+            "file": "../resources/images/Finales/3.4.png"
+        },
+        {
+            "id": "cable3.5",
+            "file": "../resources/images/Finales/3.5.png"
+        },
+        {
+            "id": "cable3.6",
+            "file": "../resources/images/Finales/3.6.png"
+        },
+        {
+            "id": "cable4.1",
+            "file": "../resources/images/Finales/4.1.png"
+        },
+        {
+            "id": "cable4.2",
+            "file": "../resources/images/Finales/4.2.png"
+        },
+        {
+            "id": "cable4.3",
+            "file": "../resources/images/Finales/4.3.png"
+        },
+        {
+            "id": "cable4.4",
+            "file": "../resources/images/Finales/4.4.png"
+        },
+        {
+            "id": "cable5.1",
+            "file": "../resources/images/Finales/5.1.png"
+        },
+        {
+            "id": "cable5.2",
+            "file": "../resources/images/Finales/5.2 (2).png"
+        },
+        {
+            "id": "cable6.1",
+            "file": "../resources/images/Finales/6.1.png"
+        },
+        {
+            "id": "cable6.2",
+            "file": "../resources/images/Finales/6.2.png"
+        },
+        {
+            "id": "cable6.3",
+            "file": "../resources/images/Finales/6.3.png"
+        },
+        {
+            "id": "cable6.4",
+            "file": "../resources/images/Finales/6.4.png"
+        },
+        {
+            "id": "cable6.5",
+            "file": "../resources/images/Finales/6.5.png"
+        },
+        {
+            "id": "botonNoUsar",
+            "file": "../resources/images/Finales/BotonNP.png"
+        },
+        {
+            "id": "botonUsar",
+            "file": "../resources/images/Finales/BotonP.png"
+        },
+        {
+            "id": "caja",
+            "file": "../resources/images/Finales/Caja.png"
+        },
+        {
+            "id": "tapa",
+            "file": "../resources/images/Finales/Tapa.png"
+        },
+        {
+            "id": "luzOn",
+            "file": "../resources/images/Finales/LuzOn.png"
+        },
+        {
+            "id": "luzOff",
+            "file": "../resources/images/Finales/LuzOff.png"
+        },
+        {
+            "id": "recompensa",
+            "file": "../resources/images/Finales/Recompensa.png"
         }
     ],
 
