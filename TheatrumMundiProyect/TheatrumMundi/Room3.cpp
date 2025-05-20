@@ -22,6 +22,7 @@
 #include "WriteTextComponent.h"
 #include "DialogueManager.h"
 #include "BehaviorStateComponent.h"
+#include "InvAnimComponent.h"
 
 Room3Scene::Room3Scene()
 {
@@ -48,6 +49,11 @@ void Room3Scene::init()
 	_setDialog();
 	_setCaseResolution();
 	//roomEvent[InitialDialogue]();
+
+	//Load Images
+	_setLoadImages();
+
+
 	SDL_Delay(1000);
 }
 
@@ -269,10 +275,45 @@ void Room3Scene::_setRoomEvents()
 		};
 	roomEvent[GoodEnd] = [this] {
 		// WIP
+		Game::Instance()->getDataManager()->SetSceneCount(SceneCount::END);
+
+		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA) && Game::Instance()->getDataManager()->GetCharacterState(SOL)) {
+			_loadimg1->getMngr()->setActive(_loadimg1, true);
+		}
+		else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA) && !Game::Instance()->getDataManager()->GetCharacterState(SOL)) {
+			_loadimg4->getMngr()->setActive(_loadimg4, true);
+		}
+		else if (!Game::Instance()->getDataManager()->GetCharacterState(KEISARA) && Game::Instance()->getDataManager()->GetCharacterState(SOL)) {
+			_loadimg2->getMngr()->setActive(_loadimg2, true);
+		}
+		else _loadimg3->getMngr()->setActive(_loadimg3, true);
+		
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
+		std::shared_ptr<Sound> correctSound = sdlutils().soundEffects().at("correcto");
+		AudioManager::Instance().playSound(correctSound);
+		Game::Instance()->render();
 		Game::Instance()->getSceneManager()->popScene();
 		};
 	roomEvent[BadEnd] = [this] {
 		// WIP
+		Game::Instance()->getDataManager()->SetCharacterDead(Character::LUCY);
+		Game::Instance()->getDataManager()->SetSceneCount(SceneCount::END);
+
+		if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA) && Game::Instance()->getDataManager()->GetCharacterState(SOL)) {
+			_loadimg6->getMngr()->setActive(_loadimg6, true);
+		}
+		else if (Game::Instance()->getDataManager()->GetCharacterState(KEISARA) && !Game::Instance()->getDataManager()->GetCharacterState(SOL)) {
+			_loadimg5->getMngr()->setActive(_loadimg5, true);
+		}
+		else if (!Game::Instance()->getDataManager()->GetCharacterState(KEISARA) && Game::Instance()->getDataManager()->GetCharacterState(SOL)) {
+			_loadimg7->getMngr()->setActive(_loadimg7, true);
+		}
+		else _loadimg8->getMngr()->setActive(_loadimg8, true);
+		
+		entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, false);
+		std::shared_ptr<Sound> incorrectSound = sdlutils().soundEffects().at("incorrecto");
+		AudioManager::Instance().playSound(incorrectSound);
+		Game::Instance()->render();
 		Game::Instance()->getSceneManager()->popScene();
 		};
 #pragma endregion
@@ -548,7 +589,7 @@ void Room3Scene::_setInteractuables()
 	//feather 
 	rmObjects.feather = entityFactory->CreateInteractableEntity(entityManager, "pluma", EntityFactory::RECTAREA, Vector2D(1000, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 	entityManager->getComponent<ClickComponent>(rmObjects.feather)->connect(ClickComponent::JUST_CLICKED, [this]() {
-		inv->addItem(new Hint("pluma", sdlutils().invDescriptions().at("pluma"), &sdlutils().images().at("pluma")));
+		GetInventory()->addItem(new Hint("pluma", sdlutils().invDescriptions().at("pluma"), &sdlutils().images().at("pluma")));
 		inv->hints.push_back(entityFactory->CreateInvEntity(entityManager, "pluma", EntityFactory::RECTAREA, inv->setPosition(), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI));
 		createDescription(inv->hints.back(), inv->getItems().back());
 		if (inv->getActive()) inv->hints.back()->getMngr()->setActive(inv->hints.back(), true);
@@ -777,16 +818,16 @@ void Room3Scene::_setUI()
 	//Inventory
 
 	invObjects.InventoryBackground = entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(1050, 0), Vector2D(0, 0), 300, 1500, 0, ecs::grp::UI);
-
+	entityManager->addComponent<InvAnimComponent>(invObjects.InventoryBackground);
 	rmObjects.inventoryButton = entityFactory->CreateInteractableEntity(entityManager, "B2", EntityFactory::RECTAREA, Vector2D(40 + 268 / 3, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 	entityManager->setActive(invObjects.InventoryBackground, false);
 
 	invObjects.InvArea = entityManager->addComponent<RectArea2D>(invObjects.InventoryBackground, areaLayerManager);
 
-	invObjects.inventoryUpButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	invObjects.inventoryUpButton = entityFactory->CreateInvEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 70), Vector2D(0, 0), 70, 70, -90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 	entityManager->setActive(invObjects.inventoryUpButton, false);
 
-	invObjects.inventoryDownButton = entityFactory->CreateInteractableEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	invObjects.inventoryDownButton = entityFactory->CreateInvEntity(entityManager, "B6", EntityFactory::RECTAREA, Vector2D(1170, 748 - 268 / 3 - 20), Vector2D(0, 0), 70, 70, 90, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 	entityManager->setActive(invObjects.inventoryDownButton, false);
 
 	entityManager->getComponent<ClickComponent>(rmObjects.inventoryButton)
@@ -798,10 +839,11 @@ void Room3Scene::_setUI()
 				if (GetInventory()->getActive()) // If the inventory is active, activate the items
 				{
 					entityManager->setActive(invObjects.InventoryBackground, true);
+					entityManager->getComponent<InvAnimComponent>(invObjects.InventoryBackground)->startInvAnim();
 					entityManager->setActive(rmObjects.logbtn, false);
 					//change the position of the log button
 					areaLayerManager->sendFront(invObjects.InvArea->getLayerPos());
-					entityManager->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(925);
+
 
 					areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(invObjects.inventoryUpButton)->getLayerPos());
 					areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(invObjects.inventoryDownButton)->getLayerPos());
@@ -809,16 +851,23 @@ void Room3Scene::_setUI()
 					entityManager->setActive(invObjects.inventoryDownButton, true);
 					entityManager->setActive(invObjects.inventoryUpButton, true);
 
-					for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], true);  // Activate the items
+					entityManager->getComponent<InvAnimComponent>(invObjects.inventoryDownButton)->startInvAnim();
+					entityManager->getComponent<InvAnimComponent>(invObjects.inventoryUpButton)->startInvAnim();
+
+					for (int i = inv->getFirstItem(); i < inv->getItemNumber() + inv->getFirstItem(); ++i) {
+						inv->hints[i]->getMngr()->setActive(inv->hints[i], true);  // Activate the items
+						areaLayerManager->sendFront(entityManager->getComponent<RectArea2D>(inv->hints[i])->getLayerPos());
+						inv->hints[i]->getMngr()->getComponent<InvAnimComponent>(inv->hints[i])->startInvAnim();
+					}
 				}
 				else
 				{
-					entityManager->setActive(invObjects.InventoryBackground, false);
-					entityManager->setActive(invObjects.inventoryDownButton, false);
-					entityManager->setActive(invObjects.inventoryUpButton, false);
+
+					entityManager->getComponent<InvAnimComponent>(invObjects.inventoryDownButton)->endInvAnim();
+					entityManager->getComponent<InvAnimComponent>(invObjects.inventoryUpButton)->endInvAnim();
+					entityManager->getComponent<InvAnimComponent>(invObjects.InventoryBackground)->endInvAnim();
 					entityManager->setActive(rmObjects.logbtn, true);
-					rmObjects.inventoryButton->getMngr()->getComponent<Transform>(rmObjects.inventoryButton)->setPosX(60 + 268 / 3);
-					for (int i = GetInventory()->getFirstItem(); i < GetInventory()->getItemNumber() + GetInventory()->getFirstItem(); ++i) GetInventory()->hints[i]->getMngr()->setActive(GetInventory()->hints[i], false);  // Activate the items
+					for (int i = inv->getFirstItem(); i < inv->getItemNumber() + inv->getFirstItem(); ++i) inv->hints[i]->getMngr()->getComponent<InvAnimComponent>(inv->hints[i])->endInvAnim();// Desactivate the items 
 
 				}
 			});
@@ -851,6 +900,33 @@ void Room3Scene::_setUI()
 	rmObjects.logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
 #pragma endregion
 
+}
+
+void Room3Scene::_setLoadImages()
+{
+	_loadimg1 = entityFactory->CreateImageEntity(entityManager, "loading1", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg1->getMngr()->setActive(_loadimg1, false);
+
+	_loadimg2 = entityFactory->CreateImageEntity(entityManager, "loading2", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg2->getMngr()->setActive(_loadimg2, false);
+
+	_loadimg3 = entityFactory->CreateImageEntity(entityManager, "loading3", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg3->getMngr()->setActive(_loadimg3, false);
+
+	_loadimg4 = entityFactory->CreateImageEntity(entityManager, "loading4", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg4->getMngr()->setActive(_loadimg4, false);
+
+	_loadimg5 = entityFactory->CreateImageEntity(entityManager, "loading5", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg5->getMngr()->setActive(_loadimg5, false);
+
+	_loadimg6 = entityFactory->CreateImageEntity(entityManager, "loading6", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg6->getMngr()->setActive(_loadimg6, false);
+
+	_loadimg7 = entityFactory->CreateImageEntity(entityManager, "loading7", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg7->getMngr()->setActive(_loadimg7, false);
+
+	_loadimg8 = entityFactory->CreateImageEntity(entityManager, "loading8", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DECISION);
+	_loadimg8->getMngr()->setActive(_loadimg8, false);
 }
 
 void Room3Scene::_resetSounds()

@@ -64,8 +64,18 @@ private:
 	void _setInteractuables();
 	void _setDialog();
 	void _setUI();
+	void _setLoadImages();
 
 	void _resetSounds();
+
+	ecs::entity_t _loadimg1;
+	ecs::entity_t _loadimg2;
+	ecs::entity_t _loadimg3;
+	ecs::entity_t _loadimg4;
+	ecs::entity_t _loadimg5;
+	ecs::entity_t _loadimg6;
+	ecs::entity_t _loadimg7;
+	ecs::entity_t _loadimg8;
 
 	struct roomSounds {
 		std::shared_ptr<Sound> uiButton;

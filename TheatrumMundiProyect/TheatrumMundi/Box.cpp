@@ -149,23 +149,22 @@ void Box::init(SceneRoomTemplate* sr)
 			
 		
 			// Initial image
-			Image* img1 = entityManager->addComponent<Image>(_button1, &sdlutils().images().at("bookComb0"));
-			Image* img2 = entityManager->addComponent<Image>(_button2, &sdlutils().images().at("bookComb0"));
-			Image* img3 = entityManager->addComponent<Image>(_button3, &sdlutils().images().at("bookComb0"));
-			Image* img4 = entityManager->addComponent<Image>(_button4, &sdlutils().images().at("bookComb0"));
-			Image* img5 = entityManager->addComponent<Image>(_button5, &sdlutils().images().at("bookComb0"));
-			Image* img6 = entityManager->addComponent<Image>(_button6, &sdlutils().images().at("bookComb0"));
-			Image* img7 = entityManager->addComponent<Image>(_button7, &sdlutils().images().at("bookComb0"));
-			Image* img8 = entityManager->addComponent<Image>(_button8, &sdlutils().images().at("bookComb0"));
-			Image* img9 = entityManager->addComponent<Image>(_button9, &sdlutils().images().at("bookComb0"));
-			Image* img10 = entityManager->addComponent<Image>(_button10, &sdlutils().images().at("bookComb0"));
-			Image* img11 = entityManager->addComponent<Image>(_button11, &sdlutils().images().at("bookComb0"));
-			Image* img12 = entityManager->addComponent<Image>(_button12, &sdlutils().images().at("bookComb0"));
-			Image* img13 = entityManager->addComponent<Image>(_button13, &sdlutils().images().at("bookComb0"));
-			Image* img14 = entityManager->addComponent<Image>(_button14, &sdlutils().images().at("bookComb0"));
-			Image* img15 = entityManager->addComponent<Image>(_button15, &sdlutils().images().at("bookComb0"));
-			Image* img16 = entityManager->addComponent<Image>(_button16, &sdlutils().images().at("bookComb0"));
-			
+			Image* img1 = entityManager->getComponent<Image>(_button1);
+			Image* img2 = entityManager->getComponent<Image>(_button2);
+			Image* img3 = entityManager->getComponent<Image>(_button3);
+			Image* img4 = entityManager->getComponent<Image>(_button4);
+			Image* img5 = entityManager->getComponent<Image>(_button5);
+			Image* img6 = entityManager->getComponent<Image>(_button6);
+			Image* img7 = entityManager->getComponent<Image>(_button7);
+			Image* img8 = entityManager->getComponent<Image>(_button8);
+			Image* img9 = entityManager->getComponent<Image>(_button9);
+			Image* img10 = entityManager->getComponent<Image>(_button10);
+			Image* img11 = entityManager->getComponent<Image>(_button11);
+			Image* img12 = entityManager->getComponent<Image>(_button12);
+			Image* img13 = entityManager->getComponent<Image>(_button13);
+			Image* img14 = entityManager->getComponent<Image>(_button14);
+			Image* img15 = entityManager->getComponent<Image>(_button15);
+			Image* img16 = entityManager->getComponent<Image>(_button16);
 			
 
 			buttonImages = { img1, img2, img3, img4,img5,img6,img7,img8,img9,img10,img11,img12,img13,img14,img15,img16 };

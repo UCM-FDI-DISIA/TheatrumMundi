@@ -117,12 +117,21 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 			EntityFactory::NODRAG,
 			ecs::grp::DEFAULT);
 	}
-	entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity) // Collectable
-		->connect(ClickComponent::JUST_CLICKED, [&, this]() {
-			rmObjects.bulletsEntity->getMngr()->setActive(rmObjects.bulletsEntity, false);
-			Vector2D position = sr->GetInventory()->setPosition();
-			if (variant == 1)AddInvItem("balasF", sdlutils().Instance()->invDescriptions().at("BalasFalsas"), position, sr); // TODO Imagen balas
-			else AddInvItem("balasR", sdlutils().Instance()->invDescriptions().at("BalasReales"), position, sr);
+	//entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity) // Collectable
+	//	->connect(ClickComponent::JUST_CLICKED, [&, this]() {
+	//		rmObjects.bulletsEntity->getMngr()->setActive(rmObjects.bulletsEntity, false);
+	//		Vector2D position = sr->GetInventory()->setPosition();
+	//		if (variant == 1)AddInvItem("balasF", sdlutils().Instance()->invDescriptions().at("BalasFalsas"), position, sr); // TODO Imagen balas
+	//		else AddInvItem("balasR", sdlutils().Instance()->invDescriptions().at("BalasReales"), position, sr);
+	//	});
+
+	ClickComponent* clk = entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity);
+	clk->connect(ClickComponent::JUST_CLICKED, [&, this]() {
+
+		rmObjects.bulletsEntity->getMngr()->setActive(rmObjects.bulletsEntity, false);
+		Vector2D position = sr->GetInventory()->setPosition(); //Position of the new object
+		if (variant == 1) AddInvItem("balasF", sdlutils().Instance()->invDescriptions().at("BalasFalsas"), position, sr); // TODO Imagen balas
+		else AddInvItem("balasR", sdlutils().Instance()->invDescriptions().at("BalasReales"), position, sr);
 		});
 
 	// PARROT
@@ -185,29 +194,6 @@ void ParrotPuzzleScene::_setInteractuables(SceneRoomTemplate* sr)
 	parrotStateCom->defBehavior(ParrotState::DEATH, [](){}); // Death the parrot doen't do anithing
 
 	parrotStateCom->setState(Room3Scene::Phase::LIGHTS_OFF); // The other will be setted after finishin the puzzle
-
-	//TriggerComponent* triggComp = entityManager->getComponent<TriggerComponent>(parrotUtils.parrotEnt);
-	//triggComp->connect(TriggerComponent::AREA_ENTERED, // handdle if the torch enters
-	//	[bulletsEntity, triggComp, parrotStateCom, this]() {
-	//		auto enteredEnts = triggComp->triggerContextEntities();
-	//
-	//		for (ecs::entity_t ent : enteredEnts) 
-	//		{
-	//			Image* objectImg = ent->getMngr()->getComponent<Image>(ent);
-	//																						// TODO Torch final image
-	//			if (objectImg != nullptr && objectImg->GetTexture() == &sdlutils().images().at("Linterna")) // Torch enters
-	//				if (parrotStateCom->getState() == Room3Scene::Phase::LIGHTS_RED)
-	//				{
-	//					// Change parrot image to exploded parrot
-	//					AudioManager::Instance().playSound(rmSounds.explosionSound);						// TODO: Exploded_Parrot image
-	//					entityManager->getComponent<Image>(parrotUtils.parrotEnt)->setTexture(&sdlutils().images().at("EmptyImage"));
-	//					entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity)->setLayerOpposition(false); // We can collect the bullets even with the parrot on top
-	//					parrotStateCom->setState(ParrotState::DEATH);
-	//					Win();
-	//					break;
-	//				}
-	//		}
-	//	});
 
 	parrotUtils.parrotEnt->getMngr()->getComponent<TriggerComponent>(parrotUtils.parrotEnt)->connect(TriggerComponent::AREA_ENTERED, [this]() {
 		SetplacedHand(true);
@@ -310,7 +296,7 @@ void ParrotPuzzleScene::_setUI()
 
 bool ParrotPuzzleScene::isItemHand(const std::string& itemId)
 {
-	if (itemId == "Linterna") {
+	if (itemId == "Linterna" && Game::Instance()->getDataManager()->GetRoom3Phase() == 2) {
 		AudioManager::Instance().playSound(rmSounds.explosionSound);						// TODO: Exploded_Parrot image
 		entityManager->getComponent<Image>(parrotUtils.parrotEnt)->setTexture(&sdlutils().images().at("EmptyImage"));
 		entityManager->getComponent<ClickComponent>(rmObjects.bulletsEntity)->setLayerOpposition(false); // We can collect the bullets even with the parrot on top
