@@ -1118,11 +1118,15 @@
     },
     {
       "id": "Radio",
-      "file": "../resources/images/temporales/Room3/Radio.png"
+      "file": "../resources/images/Finales/radio.jpg"
     },
     {
       "id": "MorseGuide",
       "file": "../resources/images/temporales/Room3/morseGuia.jpg"
+    },
+    {
+      "id": "taquillaAbierta",
+      "file": "../resources/images/Finales/taquillaAbierta.jpg"
     }
 
   ],

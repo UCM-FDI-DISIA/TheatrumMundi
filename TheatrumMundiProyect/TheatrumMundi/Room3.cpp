@@ -542,7 +542,7 @@ void Room3Scene::_setInteractuables()
 	rmObjects.backgroundScroll->addElementToScroll(entityManager->getComponent<Transform>(rmObjects.boxOfficeMorseCodeB));
 
 	//BOXOFFICE ZOOM MORSE GUIDE
-	rmObjects.zoomMorseGuide = entityFactory->CreateImageEntity(entityManager, "MorseGuide", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
+	rmObjects.zoomMorseGuide = entityFactory->CreateImageEntity(entityManager, "taquillaAbierta", Vector2D(0, 0), Vector2D(0, 0), 1349, 748, 0, ecs::grp::ZOOMOBJ);
 	entityManager->setActive(rmObjects.zoomMorseGuide, false);
 
 	//feather 

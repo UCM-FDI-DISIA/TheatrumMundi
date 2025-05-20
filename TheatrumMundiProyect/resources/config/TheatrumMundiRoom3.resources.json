@@ -17,7 +17,7 @@
     },
       {
       "id": "Radio",
-      "file": "../resources/images/temporales/Room3/Radio.png"
+      "file": "../resources/images/Finales/radio.jpg"
     },
         { "id" : "balance", "file" : "../resources/images/temporales/balanza.png" },
         {
@@ -271,6 +271,26 @@
     {
       "id": "MorseGuide",
       "file": "../resources/images/temporales/Room3/morseGuia.jpg"
+    },
+    {
+      "id": "loading5",
+      "file": "../resources/images/Finales/Carga5.png"
+    },
+    {
+      "id": "loading6",
+      "file": "../resources/images/Finales/Carga6.png"
+    },
+    {
+      "id": "loading7",
+      "file": "../resources/images/Finales/Carga7.png"
+    },
+    {
+      "id": "loading8",
+      "file": "../resources/images/Finales/Carga8.png"
+    },
+    {
+      "id": "taquillaAbierta",
+      "file": "../resources/images/Finales/taquillaAbierta.jpg"
     }
   ],
 
@@ -402,22 +422,6 @@
     {
       "id": "MorseSoundLow",
       "file": "../resources/sound/sfx/morse_soundRoom3small.wav"
-    },
-    {
-      "id": "loading5",
-      "file": "../resources/images/Finales/Carga5.png"
-    },
-    {
-      "id": "loading6",
-      "file": "../resources/images/Finales/Carga6.png"
-    },
-    {
-      "id": "loading7",
-      "file": "../resources/images/Finales/Carga7.png"
-    },
-    {
-      "id": "loading8",
-      "file": "../resources/images/Finales/Carga8.png"
     }
   ],
 
