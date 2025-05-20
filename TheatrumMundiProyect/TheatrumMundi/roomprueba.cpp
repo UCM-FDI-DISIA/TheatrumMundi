@@ -44,11 +44,11 @@ void roomprueba::init()
 #pragma region Audio
 
 		//Audio sfx 
-		AudioManager& a = AudioManager::Instance();
+	//	AudioManager& a = AudioManager::Instance();
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-		a.setVolume(buttonSound, 0.2);
+		audioManager().setVolume(buttonSound, 0.2);
 		std::shared_ptr<Sound> puzzleButtonSound = sdlutils().soundEffects().at("puzzle");
-		a.setVolume(puzzleButtonSound, 0.3);
+		audioManager().setVolume(puzzleButtonSound, 0.3);
 		std::shared_ptr<Sound> doorSound = sdlutils().soundEffects().at("puerta");
 		//Audio music
 		//Sound room2music = sdlutils().musics().at("room2music");
@@ -73,7 +73,7 @@ void roomprueba::init()
 		//Quit
 		_quitButton = entityFactory->CreateInteractableEntity(entityManager, "B1", entityFactory->RECTAREA, Vector2D(1349 - 110, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, entityFactory->NODRAG, ecs::grp::UI);
 		entityManager->getComponent<ClickComponent>(_quitButton)->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
-			AudioManager::Instance().playSound(buttonSound);
+			audioManager().playSound(buttonSound);
 			entityManager->setActiveGroup(ecs::grp::ZOOMOBJ, false);
 			entityManager->setActive(_quitButton, false);
 			entityManager->setActiveGroup(ecs::grp::INTERACTOBJ, true);
@@ -88,7 +88,7 @@ void roomprueba::init()
 		auto buttonPause = entityFactory->CreateInteractableEntity(entityManager, "B3", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 		ClickComponent* buttonPauseClick = entityManager->getComponent<ClickComponent>(buttonPause);
 		buttonPauseClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
-			AudioManager::Instance().playSound(buttonSound);
+			audioManager().playSound(buttonSound);
 			});
 
 #pragma region Inventory
@@ -110,7 +110,7 @@ void roomprueba::init()
 		entityManager->getComponent<ClickComponent>(inventoryButton)
 			->connect(ClickComponent::JUST_CLICKED, [this, InventoryBackground, inventoryUpButton, inventoryDownButton, InvArea, inventoryButton, buttonSound]()
 				{
-					AudioManager::Instance().playSound(buttonSound);
+					audioManager().playSound(buttonSound);
 					GetInventory()->setActive(!GetInventory()->getActive());  //Toggle the inventory
 
 					if (GetInventory()->getActive()) // If the inventory is active, activate the items

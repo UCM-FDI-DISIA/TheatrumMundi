@@ -35,9 +35,9 @@ void Box::init(SceneRoomTemplate* sr)
 			//Register scene in dialogue manager
 			dialogueManager->setScene(this);
 
-			AudioManager& a = AudioManager::Instance();
+		//	AudioManager& a = AudioManager::Instance();
 			std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
-			a.setVolume(buttonSound, 0.2);
+			audioManager().setVolume(buttonSound, 0.2);
 			
 			room = sr;
 			//create the buttons
@@ -213,7 +213,7 @@ void Box::init(SceneRoomTemplate* sr)
 			ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
 			clkOpen->connect(ClickComponent::JUST_CLICKED, [this, _backButton, buttonSound]()
 				{
-					AudioManager::Instance().playSound(buttonSound);
+					audioManager().playSound(buttonSound);
 
 					inventoryButton->getMngr()->getComponent<Transform>(inventoryButton)->setPosX(60 + 268 / 3);
 					HideInventoryItems();

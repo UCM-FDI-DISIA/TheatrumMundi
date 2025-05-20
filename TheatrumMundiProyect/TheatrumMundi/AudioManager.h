@@ -10,6 +10,7 @@
 #include "../lib/FMOD/include/fmod_dsp.h"
 #include "../lib/FMOD/include/fmod_dsp_effects.h"
 #include "../lib/FMOD/include/fmod_output.h"
+#include "Singleton.h"
 
 class Sound {
 public:
@@ -27,10 +28,11 @@ private:
     FMOD::Channel* channel = nullptr;
 };
 
-class AudioManager {
+class AudioManager : public Singleton<AudioManager> {
+    friend Singleton<AudioManager>;
 public:
     // Singleton
-    static AudioManager& Instance();
+ //   static AudioManager& Instance();
     AudioManager(const AudioManager&) = delete;
     AudioManager& operator=(const AudioManager&) = delete;
 
@@ -45,6 +47,9 @@ public:
     void pauseSound(std::shared_ptr<Sound> sound);
     void resumeSound(std::shared_ptr<Sound> sound);
 
+    void cleanupInactiveChannels();
+       
+
     // Setters
     void setVolume(std::shared_ptr<Sound> sound, float volume);
     void setPitch(std::shared_ptr<Sound> sound, float pitch);
@@ -54,9 +59,17 @@ public:
     void update();
 
 private:
+
+    int getUsedChannels() const;
+
     AudioManager();
-    ~AudioManager();
+   // ~AudioManager();
 
     FMOD::System* system = nullptr;
     std::vector<std::shared_ptr<Sound>> sounds;
 };
+
+
+inline AudioManager& audioManager() {
+    return *AudioManager::Instance();
+}

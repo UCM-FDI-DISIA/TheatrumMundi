@@ -128,67 +128,12 @@
   ],
 
     "sounds": [
-      {
-        "id": "puzzle",
-        "file": "../resources/sound/sfx/click_puzzle.wav"
-    },
-    {
-      "id": "puerta",
-      "file": "../resources/sound/sfx/puerta.wav"
-  },
 
-
-  {
-    "id": "CogerCosa",
-    "file": "../resources/sound/sfx/CogerCosa.wav"
-},
-
-{
-  "id": "ColocarCosa",
-  "file": "../resources/sound/sfx/ColocarCosa.wav"
-},
-{
-  "id": "FinalTeleTutorial",
-  "file": "../resources/sound/sfx/FinalTeleTutorial.wav"
-},
-{
-  "id": "Statica",
-  "file": "../resources/sound/sfx/Statica.wav"
-},
-
-{
-          "id": "NextDialogue",
-          "file": "../resources/sound/sfx/NextDialogue.wav"
-        },
-
-  {
-      "id": "boton",
-      "file": "../resources/sound/sfx/click_boton.wav"
-        }
        
     ],
 
     "musics": [
-        {
-            "id": "menu",
-            "file": "../resources/sound/music/menu.wav"
-        },
-        {
-            "id": "sala1",
-            "file": "../resources/sound/music/sala1.wav"
-        },
-        {
-            "id": "sala2",
-            "file": "../resources/sound/music/sala2.wav"
-        },
-        {
-            "id": "sala3",
-            "file": "../resources/sound/music/sala3.wav"
-        },
-        {
-            "id": "intermedia",
-            "file": "../resources/sound/music/intermedia.wav"
-        }
+
     ]
 
 }

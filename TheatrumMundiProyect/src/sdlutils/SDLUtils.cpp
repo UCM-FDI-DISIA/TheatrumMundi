@@ -250,7 +250,7 @@ void SDLUtils::loadReasources(std::string filename) {
 					std::cout << "Loading sound effect with id: " << key << std::endl;
 #endif
 					
-					std::shared_ptr<Sound> sound = AudioManager::Instance().createSound(file);
+					std::shared_ptr<Sound> sound = audioManager().createSound(file);
 					_sounds.emplace(key, sound); 
 				}
 				else {
@@ -276,7 +276,7 @@ void SDLUtils::loadReasources(std::string filename) {
 #ifdef _DEBUG
 					std::cout << "Loading music with id: " << key << std::endl;
 #endif
-					std::shared_ptr<Sound> music = AudioManager::Instance().createSound(file);
+					std::shared_ptr<Sound> music = audioManager().createSound(file);
 					_musics.emplace(key, music);
 				} else {
 					throw "'musics' array in '" + filename
@@ -291,7 +291,7 @@ void SDLUtils::loadReasources(std::string filename) {
 }
 void SDLUtils::ClearMaps()
 {
-	_sounds.clear();
+	//_sounds.clear();
 	_descriptions.clear();
 	_images.clear();
 	

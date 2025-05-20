@@ -212,7 +212,7 @@ void MusicPuzzleScene::refresh()
 
             if (_currentNoteIndex < _currentComb.size()) //if there is more musical notes to play...
             {
-                AudioManager::Instance().playSound(musicalSounds[_currentComb[_currentNoteIndex]]);
+                audioManager().playSound(musicalSounds[_currentComb[_currentNoteIndex]]);
                 _noteStartTime = currTime;
             }
             else if (_currentNoteIndex == _currentComb.size()) //if all musical notes from comb have been played...
@@ -223,7 +223,7 @@ void MusicPuzzleScene::refresh()
                 if(_animationType) correctSound = sdlutils().soundEffects().at("correcto");
                 else correctSound = sdlutils().soundEffects().at("incorrecto");
                 
-                AudioManager::Instance().playSound(correctSound);
+                audioManager().playSound(correctSound);
                 _noteStartTime = currTime;
             }
             else
@@ -398,7 +398,7 @@ void MusicPuzzleScene::startSoundSequence()
     _noteStartTime = sdlutils().virtualTimer().currRealTime();
 
     //plays first note on combination
-    AudioManager::Instance().playSound(musicalSounds[_currentComb[_currentNoteIndex]]);
+    audioManager().playSound(musicalSounds[_currentComb[_currentNoteIndex]]);
 }
 
 void MusicPuzzleScene::updateMusicImages()
@@ -547,7 +547,7 @@ void MusicPuzzleScene::createPianoButtons()
         if (!_isAnimating)
         {
             //play organ key sound
-            AudioManager::Instance().playSound(musicalSounds[DO]);
+            audioManager().playSound(musicalSounds[DO]);
 
             if (!solved)
             {
@@ -564,7 +564,7 @@ void MusicPuzzleScene::createPianoButtons()
         if (!_isAnimating)
         {
             //play organ key sound
-            AudioManager::Instance().playSound(musicalSounds[RE]);
+            audioManager().playSound(musicalSounds[RE]);
 
             if (!solved)
             {
@@ -581,7 +581,7 @@ void MusicPuzzleScene::createPianoButtons()
         if (!_isAnimating)
         {
             //play organ key sound
-            AudioManager::Instance().playSound(musicalSounds[MI]);
+            audioManager().playSound(musicalSounds[MI]);
 
             if (!solved)
             {
@@ -598,7 +598,7 @@ void MusicPuzzleScene::createPianoButtons()
         if (!_isAnimating)
         {
             //play organ key sound
-            AudioManager::Instance().playSound(musicalSounds[FA]);
+            audioManager().playSound(musicalSounds[FA]);
 
             if (!solved)
             {
@@ -615,7 +615,7 @@ void MusicPuzzleScene::createPianoButtons()
         if (!_isAnimating)
         {
             //play organ key sound
-            AudioManager::Instance().playSound(musicalSounds[SOL]);
+            audioManager().playSound(musicalSounds[SOL]);
 
             if (!solved)
             {
@@ -631,7 +631,7 @@ void MusicPuzzleScene::createPianoButtons()
         if (!_isAnimating)
         {
             //play organ key sound
-            AudioManager::Instance().playSound(musicalSounds[LA]);
+            audioManager().playSound(musicalSounds[LA]);
 
             if (!solved)
             {
@@ -647,7 +647,7 @@ void MusicPuzzleScene::createPianoButtons()
         if (!_isAnimating)
         {
             //play organ key sound
-            AudioManager::Instance().playSound(musicalSounds[SI]);
+            audioManager().playSound(musicalSounds[SI]);
 
             if (!solved)
             {
