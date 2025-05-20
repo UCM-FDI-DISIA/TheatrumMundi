@@ -21,6 +21,7 @@ private:
 	ecs::Entity* _courtainLeft;
 	ecs::Entity* _courtainRight;
 	bool _backToMainMenu;
+	ecs::Entity* _backButton;
 public:
 	CreditsScene();
 	~CreditsScene();

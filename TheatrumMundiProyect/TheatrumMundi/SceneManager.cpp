@@ -103,6 +103,11 @@ void SceneManager::loadScene(int index, SceneRoomTemplate* room)
 		sdlutils().ClearMaps();
 		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom1.resources.json");
 		break;
+	case CREDITS:
+		sdlutils().ClearMaps();
+
+		sdlutils().loadReasources("../resources/config/TheatrumMundiCredits.resources.json");
+		break;
 	default:
 		break;
 	}
@@ -143,6 +148,11 @@ void SceneManager::loadScene(int index)
 		sdlutils().ClearMaps();
 
 		sdlutils().loadReasources("../resources/config/TheatrumMundiRoom3.resources.json");
+		break;
+	case CREDITS:
+		sdlutils().ClearMaps();
+
+		sdlutils().loadReasources("../resources/config/TheatrumMundiCredits.resources.json");
 		break;
 	default:
 		break;

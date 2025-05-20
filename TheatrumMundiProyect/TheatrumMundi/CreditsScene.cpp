@@ -13,7 +13,6 @@
 
 #include "AudioManager.h"
 #include "Log.h"
-#include "../src/game/Game.h"
 #include <string>
 using namespace std;
 
@@ -54,7 +53,7 @@ void CreditsScene::init()
 		//entityManager->setActive(_text1, false);
 
 		//scroll area right
-		_scrollAreaRight = entityFactory->CreateInteractableEntityScroll(entityManager, "rope", EntityFactory::RECTAREA,
+		_scrollAreaRight = entityFactory->CreateInteractableEntityScroll(entityManager, "FondoNegro", EntityFactory::RECTAREA,
 			Vector2D(1200, 400), Vector2D(0, 0), 324 / 3, 893 / 3, 1, areaLayerManager,
 			5, 150, EntityFactory::SCROLLNORMAL, 1,
 			EntityFactory::NODRAG,
@@ -62,7 +61,7 @@ void CreditsScene::init()
 		entityManager->removeComponent<Image>(_scrollAreaRight);
 
 		//scroll area Left
-		_scrollAreaLeft = entityFactory->CreateInteractableEntityScroll(entityManager, "rope", EntityFactory::RECTAREA,
+		_scrollAreaLeft = entityFactory->CreateInteractableEntityScroll(entityManager, "FondoNegro", EntityFactory::RECTAREA,
 			Vector2D(1200, 400), Vector2D(0, 0), 324 / 3, 893 / 3, 1, areaLayerManager,
 			5, 150, EntityFactory::SCROLLINVERSE, 1,
 			EntityFactory::NODRAG,
@@ -80,8 +79,10 @@ void CreditsScene::init()
 		//big courtain
 		 _bigCourtain = entityFactory->CreateImageEntity(entityManager, "cortinaFija", Vector2D(0, 0), Vector2D(0, 0), 1346, 748, 0, ecs::grp::DEFAULT);
 		
+		
+
 		 //we wait some seconds and we open the courtains
-		 SDL_AddTimer(5000, [](Uint32, void* param) -> Uint32 {
+		 SDL_AddTimer(3000, [](Uint32, void* param) -> Uint32 {
 			 auto* self = static_cast<decltype(this)>(param);
 			 if (!self) return 0;
 
@@ -95,7 +96,7 @@ void CreditsScene::init()
 		 
 		
 		 //we wait some seconnds and we close them
-		 SDL_AddTimer(9000, [](Uint32, void* param) -> Uint32 {
+		 SDL_AddTimer(7000, [](Uint32, void* param) -> Uint32 {
 			 auto* self = static_cast<decltype(this)>(param);
 			 if (!self) return 0;
 
@@ -110,12 +111,12 @@ void CreditsScene::init()
 
 		 //we wait some more and we return to main menu
 		
-		 SDL_AddTimer(5000, [](Uint32, void* param) -> Uint32 {
+		 SDL_AddTimer(10000, [](Uint32, void* param) -> Uint32 {
 			 auto* self = static_cast<decltype(this)>(param);
 			 if (!self) return 0;
 
 
-			 self->backToMenu();
+			self->backToMenu();
 
 
 			 return 0;
@@ -161,6 +162,21 @@ void CreditsScene::closeCourtains()
 
 void CreditsScene::backToMenu()
 {
-	Game::Instance()->getSceneManager()->popScene();
 
+	//Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
+	/*//botton to return to main menu
+
+	AudioManager& a = AudioManager::Instance();
+	std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
+	a.setVolume(buttonSound, 0.2);
+
+	auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "ExitToMenu", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+	ClickComponent* clkOpen = entityManager->addComponent<ClickComponent>(_backButton);
+	clkOpen->connect(ClickComponent::JUST_CLICKED, [ _backButton, buttonSound]()
+		{
+			AudioManager::Instance().playSound(buttonSound);
+			Game::Instance()->getSceneManager()->loadScene(INITIAL_MENU);
+
+		});*/
+	
 }
