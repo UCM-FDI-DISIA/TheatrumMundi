@@ -136,7 +136,7 @@ void LockerPuzzle::init(SceneRoomTemplate* sr)
         sr->GetInventory()->setFirstItem(0);
         createInvEntities(sr);
         dialogueManager->setScene(this);
-        startDialogue("PuzzleLibros");
+      //  startDialogue("PuzzleLibros");
         
         //Puzzle rewards
         //Wire

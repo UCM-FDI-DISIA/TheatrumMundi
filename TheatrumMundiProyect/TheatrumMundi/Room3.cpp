@@ -609,7 +609,7 @@ void Room3Scene::_setInteractuables()
 	entityManager->setActive(rmObjects.zoomMorseGuide, false);
 
 	//feather 
-	rmObjects.feather = entityFactory->CreateInteractableEntity(entityManager, "pluma", EntityFactory::RECTAREA, Vector2D(1000, 200), Vector2D(0, 0), 100, 100, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
+	rmObjects.feather = entityFactory->CreateInteractableEntity(entityManager, "pluma", EntityFactory::RECTAREA, Vector2D(800, 300), Vector2D(0, 0), 300, 300, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::UI);
 	entityManager->getComponent<ClickComponent>(rmObjects.feather)
 		->connect(ClickComponent::JUST_CLICKED, [this]() {
 
