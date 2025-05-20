@@ -49,6 +49,10 @@ void InitialScene::init()
 		a.setLooping(music, true);
 		a.playSound(music);
 		*/
+		a.stopSound(sdlutils().musics().at("intermedia"));
+		a.stopSound(sdlutils().musics().at("sala1"));
+		a.stopSound(sdlutils().musics().at("sala2"));
+		a.stopSound(sdlutils().musics().at("sala3"));
 
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		std::shared_ptr<Sound> music = sdlutils().musics().at("menu");

@@ -111,6 +111,18 @@
       "file": "../resources/images/Finales/CambiarSala.PNG"
     },
     {
+      "id": "doorEsperaAzul",
+      "file": "../resources/images/Finales/puertaEsperaAzul.PNG"
+    },
+    {
+      "id": "doorEsperaRoja",
+      "file": "../resources/images/Finales/puertaEsperaRoja.PNG"
+    },
+    {
+      "id": "doorJuzgadoOscura",
+      "file": "../resources/images/Finales/puertaOscura.PNG"
+    },
+    {
       "id": "LucySprite",
       "file": "../resources/images/Finales/Lucy.PNG"
     },
@@ -168,7 +180,7 @@
     },
      {
       "id": "FondoJuzgado",
-      "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
+      "file": "../resources/images/Finales/CajaFuerteOscuro.png"
     },
     {
       "id": "B6",
@@ -833,8 +845,8 @@
       "file": "../resources/images/Finales/ColganteTumba.png"
     },
     {
-      "id": "patrisio",
-      "file": "../resources/images/temporales/Room2/patrisio.jpeg"
+      "id": "corpseZoom2",
+      "file": "../resources/images/Finales/solMuerto.png"
     },
     {
       "id": "TumbaAbierta",
@@ -1103,11 +1115,11 @@
 
     {
       "id": "FondoJuzgadoOscuro",
-      "file": "../resources/images/temporales/Room3/JuzgadoOscuro.png"
+      "file": "../resources/images/Finales/JuzgadoOscuro.png"
     },
     {
       "id": "FondoJuzgadoRojo",
-      "file": "../resources/images/temporales/Room3/JuzgadoRojo.png"
+      "file": "../resources/images/Finales/JuzgadoRojo.png"
     },
     {
       "id": "FondoSalaDeEspera",
@@ -1119,11 +1131,11 @@
     },
     {
       "id": "FondoSalaDeEsperaRojo",
-      "file": "../resources/images/temporales/Room3/SalaDeEsperaRojo.png"
+      "file": "../resources/images/Finales/SalaDeEsperaRojo.png"
     },
     {
       "id": "Cables",
-      "file": "../resources/images/temporales/Room3/cables.png"
+      "file": "../resources/images/Finales/cables.png"
     },
     {
       "id": "CablesOscuro",
@@ -1131,7 +1143,7 @@
     },
     {
       "id": "CablesRojo",
-      "file": "../resources/images/temporales/Room3/cablesRojo.png"
+      "file": "../resources/images/Finales/cablesRojo.png"
     },
     {
       "id": "Cadaver3",
@@ -1163,7 +1175,7 @@
     },
     {
       "id": "TaquillaAzul",
-      "file": "../resources/images/temporales/Room3/Taquilla.png"
+      "file": "../resources/images/Finales/Taquilla.png"
     },
     {
       "id": "TaquillaAzulOscuro",
@@ -1171,11 +1183,11 @@
     },
     {
       "id": "TaquillaAzulRojo",
-      "file": "../resources/images/temporales/Room3/TaquillaRojo.png"
+      "file": "../resources/images/Finales/TaquillaRojo.png"
     },
     {
       "id": "TaquillaMorada",
-      "file": "../resources/images/temporales/Room3/Taquilla2.png"
+      "file": "../resources/images/Finales/Taquilla2.png"
     },
     {
       "id": "TaquillaMoradaOscuro",
@@ -1183,7 +1195,7 @@
     },
     {
       "id": "TaquillaMoradaRojo",
-      "file": "../resources/images/temporales/Room3/Taquilla2Rojo.png"
+      "file": "../resources/images/Finales/Taquilla2Rojo.png"
     },
     {
       "id": "Balanza",
@@ -1216,6 +1228,10 @@
     {
       "id": "Radio",
       "file": "../resources/images/Finales/radio.jpg"
+    },
+    {
+      "id": "radioRoja",
+      "file": "../resources/images/Finales/radioRoja.png"
     },
     {
       "id": "MorseGuide",
@@ -1439,6 +1455,14 @@
     {
         "id": "sala2",
         "file": "../resources/sound/music/sala2.wav"
+    },
+    {
+        "id": "sala3",
+        "file": "../resources/sound/music/sala3.wav"
+    },
+    {
+        "id": "intermedia",
+        "file": "../resources/sound/music/intermedia.wav"
     }
     
   ]

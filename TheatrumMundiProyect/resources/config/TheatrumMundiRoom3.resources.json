@@ -19,6 +19,14 @@
       "id": "Radio",
       "file": "../resources/images/Finales/radio.jpg"
     },
+    {
+      "id": "radioAzul",
+      "file": "../resources/images/Finales/radioAzul.png"
+    },
+    {
+      "id": "radioRoja",
+      "file": "../resources/images/Finales/radioRoja.png"
+    },
         { "id" : "balance", "file" : "../resources/images/Finales/balanza.png" },
         {
       "id": "clockShape",
@@ -82,7 +90,7 @@
     { "id" : "FondoNegro", "file" : "../resources/images/Finales/FondoNegro.png" },
         {
       "id": "FondoJuzgadoRojo",
-      "file": "../resources/images/temporales/Room3/JuzgadoRojo.png"
+      "file": "../resources/images/Finales/JuzgadoRojo.png"
     },
       {
       "id": "FondoSalaDeEspera",
@@ -94,7 +102,7 @@
     },
     {
       "id": "FondoSalaDeEsperaRojo",
-      "file": "../resources/images/temporales/Room3/SalaDeEsperaRojo.png"
+      "file": "../resources/images/Finales/SalaDeEsperaRojo.png"
     },
     { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
        { "id" : "FeatherBackground", "file" : "../resources/images/Finales/FeatherBackground.png" },
@@ -118,6 +126,18 @@
     {
       "id": "ChangeRoom",
       "file": "../resources/images/Finales/CambiarSala.PNG"
+    },
+    {
+      "id": "doorEsperaAzul",
+      "file": "../resources/images/Finales/puertaEsperaAzul.PNG"
+    },
+    {
+      "id": "doorEsperaRoja",
+      "file": "../resources/images/Finales/puertaEsperaRoja.PNG"
+    },
+    {
+      "id": "doorJuzgadoOscura",
+      "file": "../resources/images/Finales/puertaOscura.PNG"
     },
     {
       "id": "B7",
@@ -246,11 +266,11 @@
     },
     {
       "id": "FondoJuzgado",
-      "file": "../resources/images/temporales/Room3/Juzgado.png"
+      "file": "../resources/images/Finales/Juzgado.png"
     },
     {
       "id": "FondoJuzgadoOscuro",
-      "file": "../resources/images/temporales/Room3/JuzgadoOscuro.png"
+      "file": "../resources/images/Finales/JuzgadoOscuro.png"
     },
     {
       "id": "FondoSalaDeEsperaOscuro",
@@ -258,7 +278,7 @@
     },
     {
       "id": "Cables",
-      "file": "../resources/images/temporales/Room3/cables.png"
+      "file": "../resources/images/Finales/cables.png"
     },
     {
       "id": "CablesOscuro",
@@ -298,7 +318,7 @@
     },
     {
       "id": "TaquillaAzul",
-      "file": "../resources/images/temporales/Room3/Taquilla.png"
+      "file": "../resources/images/Finales/Taquilla.png"
     },
     {
       "id": "TaquillaAzulOscuro",
@@ -306,7 +326,7 @@
     },
     {
       "id": "TaquillaMorada",
-      "file": "../resources/images/temporales/Room3/Taquilla2.png"
+      "file": "../resources/images/Finales/Taquilla2.png"
     },
     {
       "id": "TaquillaMoradaOscuro",
@@ -314,11 +334,11 @@
     },
     {
       "id": "TaquillaAzulRojo",
-      "file": "../resources/images/temporales/Room3/TaquillaRojo.png"
+      "file": "../resources/images/Finales/TaquillaRojo.png"
     },
     {
       "id": "TaquillaMoradaRojo",
-      "file": "../resources/images/temporales/Room3/Taquilla2Rojo.png"
+      "file": "../resources/images/Finales/Taquilla2Rojo.png"
     },
      {
       "id": "Linterna",
@@ -566,11 +586,27 @@
     }
   ],
 
-  "musics" : [
-    {
-        "id": "sala1",
-        "file":  "../resources/sound/music/sala1.wav"
-    }
-  ]
+    "musics": [
+        {
+            "id": "menu",
+            "file": "../resources/sound/music/menu.wav"
+        },
+        {
+            "id": "sala1",
+            "file": "../resources/sound/music/sala1.wav"
+        },
+        {
+            "id": "sala2",
+            "file": "../resources/sound/music/sala2.wav"
+        },
+        {
+            "id": "sala3",
+            "file": "../resources/sound/music/sala3.wav"
+        },
+        {
+            "id": "intermedia",
+            "file": "../resources/sound/music/intermedia.wav"
+        }
+    ]
 
 }

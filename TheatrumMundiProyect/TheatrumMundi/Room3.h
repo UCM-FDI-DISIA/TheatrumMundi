@@ -123,6 +123,12 @@ private:
 
 		//ScrollComponent
 		ScrollComponent* backgroundScroll = nullptr;
+
+		//doors
+		ecs::entity_t changeRoom1 = nullptr;
+		ecs::entity_t changeRoom2 = nullptr;
+
+
 	} rmObjects;
 
 	struct ParrotUtils{
