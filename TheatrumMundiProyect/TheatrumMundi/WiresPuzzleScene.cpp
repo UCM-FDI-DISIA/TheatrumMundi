@@ -61,27 +61,31 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		audioManager().setVolume(buttonSound, 0.2);
 		entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 		
+		entityFactory->CreateImageEntity(entityManager, "caja", Vector2D(50, 100), Vector2D(0, 0), 854, 636, 0, ecs::grp::DEFAULT);
+
+		entityFactory->CreateImageEntity(entityManager, "recompensa", Vector2D(900, 120), Vector2D(0, 0), 383, 602, 0, ecs::grp::DEFAULT);
+
 
 		//where the wires are going to be connected
-		ports[0] = entityFactory->CreateInteractableEntity(entityManager, "puerto", EntityFactory::RECTAREA, Vector2D(415, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		ports[1] = entityFactory->CreateInteractableEntity(entityManager, "puerto", EntityFactory::RECTAREA, Vector2D(465, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		ports[2] = entityFactory->CreateInteractableEntity(entityManager, "puerto", EntityFactory::RECTAREA, Vector2D(515, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		ports[3] = entityFactory->CreateInteractableEntity(entityManager, "puerto", EntityFactory::RECTAREA, Vector2D(565, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		ports[4] = entityFactory->CreateInteractableEntity(entityManager, "puerto", EntityFactory::RECTAREA, Vector2D(615, 555), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		ports[0] = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(340, 650), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		ports[1] = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(440, 650), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		ports[2] = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(540, 650), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		ports[3] = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(630, 650), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		ports[4] = entityFactory->CreateInteractableEntity(entityManager, "clockShape", EntityFactory::RECTAREA, Vector2D(730, 650), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 		//wires
-		wires[0] = entityFactory->CreateInteractableEntity(entityManager, "cable6.1", EntityFactory::RECTAREA, Vector2D(415, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		wires[1] = entityFactory->CreateInteractableEntity(entityManager, "cable6.2", EntityFactory::RECTAREA, Vector2D(465, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		wires[2] = entityFactory->CreateInteractableEntity(entityManager, "cable6.3", EntityFactory::RECTAREA, Vector2D(515, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		wires[3] = entityFactory->CreateInteractableEntity(entityManager, "cable6.4", EntityFactory::RECTAREA, Vector2D(565, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
-		wires[4] = entityFactory->CreateInteractableEntity(entityManager, "cable6.5", EntityFactory::RECTAREA, Vector2D(615, 295), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		wires[0] = entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, Vector2D(340, 170), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		wires[1] = entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, Vector2D(440, 170), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		wires[2] = entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, Vector2D(540, 170), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		wires[3] = entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, Vector2D(630, 170), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
+		wires[4] = entityFactory->CreateInteractableEntity(entityManager, "boa1", EntityFactory::RECTAREA, Vector2D(730, 170), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 		//lights
-		lights[0] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(300, 295), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		lights[1] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(300, 360), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		lights[2] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(300, 425), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		lights[3] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(300, 480), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		lights[4] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(300, 545), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[0] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 295), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[1] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 360), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[2] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 425), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[3] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 480), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[4] = entityFactory->CreateImageEntity(entityManager, "boa2", Vector2D(300, 545), Vector2D(0, 0), 60, 40, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
 		//deactivate the lights
 		for (int i = 0; i < lights.size(); i++) {
