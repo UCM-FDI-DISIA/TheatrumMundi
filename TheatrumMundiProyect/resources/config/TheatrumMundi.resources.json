@@ -1166,6 +1166,22 @@
       "file": "../resources/images/Finales/cadaverLucyRojo.png"
     },
     {
+      "id": "zoomCadaverAzul",
+      "file": "../resources/images/Finales/zoomCadaverAzul.png"
+    },
+    {
+      "id": "zoomCadaverEstrangular",
+      "file": "../resources/images/Finales/zoomCadaverEstrangular.png"
+    },
+    {
+      "id": "zoomCadaverLuzVioleta",
+      "file": "../resources/images/Finales/zoomCadaverLuzVioleta.png"
+    },
+    {
+      "id": "zoomCadaverCorte",
+      "file": "../resources/images/Finales/zoomCadaverCorte.png"
+    },
+    {
       "id": "Parrot",
       "file": "../resources/images/Finales/parrot.png"
     },
