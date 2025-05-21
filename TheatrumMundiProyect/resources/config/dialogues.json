@@ -194,7 +194,7 @@
       { "Character": " ", "Text": "Depende de vosotros para ser honestos." },
       {
         "Character": " ",
-        "Text": "Os recomiendo que miréis alrededor e investiguéis \ntodo a vuestro alrededor."
+        "Text": "Os recomiendo que miréis alrededor e investiguéis \ntodo lo que podáis."
       },
       {
         "Character": " ",
@@ -215,7 +215,7 @@
       { "Character": "Lucy", "Text": "No tenemos muchas otras opciones." },
       {
         "Character": "Lucy",
-        "Text": "Odio que ese lugar se parezca tanto a mi casa."
+        "Text": "Odio que ese lugar se parezca tanto\n a mi casa."
       }
     ],
     "Cadaver": [
@@ -347,14 +347,14 @@
       { "Character": " ", "Text": "Mi adivinanza es otra." },
       {
         "Character": " ",
-        "Text": "¿Es posible que vuestra querida amiga haya sido asesinada?"
+        "Text": "¿Es posible que vuestra querida amiga \nhaya sido asesinada?"
       },
       { "Character": "Lucy", "Text": "¿Qué?" },
       {
         "Character": " ",
         "Text": "¿Es factible que alguien la haya matado?"
       },
-      { "Character": " ", "Text": "¿Tiene sentido todo lo que habéis encontrado en esta sala?" },
+      { "Character": " ", "Text": "¿Tiene sentido todo lo que \nhabéis encontrado en esta sala?" },
       { "Character": " ", "Text": "Es una pregunta sencilla." },
       { "Character": " ", "Text": "Tomaros el tiempo que queráis para pensarlo." },
       { "Character": " ", "Text": "Espero vuestra respuesta." }
@@ -396,7 +396,7 @@
         },
         {
           "Character": " ",
-          "Text": "Tus maravillosos compañeros te han salvado y ahora estás de vuelta."
+          "Text": "Tus maravillosos compañeros te han salvado\n y ahora estás de vuelta."
         },
         {
           "Character": " ",
@@ -438,14 +438,14 @@
   },
   "Sala3": {
     "Sala2Intro_P2":[                 
-    {"Character":"Keisara","Text":"¿A qué ser refiere con siguiente ronda?"},
+    {"Character":"Keisara","Text":"¿A qué se refiere con siguiente ronda?"},
     {"Character":"Keisara","Text":"¿Y dónde está Sol?"},
     {"Character":"Keisara","Text":"Oh."},
-    {"Character":"Lucy","Text":"Esto es los mismo que te pasó a ti antes."},
+    {"Character":"Lucy","Text":"Esto es lo mismo que te pasó a ti antes."},
     {"Character":"Keisara","Text":"Vale, vale, pero no pasa nada."},
     {"Character":"Keisara","Text":"Si a mi no me ha pasado nada, \na él no le va a pasar nada."},
     {"Character":"Lucy","Text":"Sigue pensando así."},
-    {"Character":"Lucy","Text":"Hay que investigar y averiguar \nsi es posible que su muerte haya sido un asesinato."},
+    {"Character":"Lucy","Text":"Hay que investigar y averiguar \nsi su asesinato tiene sentido."},
     {"Character":"Lucy","Text":"Al menos así fue en tu caso."},
     {"Character":"Keisara","Text":"¿Lo de estar en un cementerio\n también ha pasado antes?"},
     {"Character":"Lucy","Text":"No, eso es nuevo."}
@@ -525,7 +525,7 @@
         "Character": "Keisara",
         "Text": "A mi me parece más un cofre de piedra. "
       },
-      { "Character": "Lucy", "Text": "Keisara, es literalmnete una lápida." },
+      { "Character": "Lucy", "Text": "Keisara, es literalmente una lápida." },
       { "Character": "Lucy", "Text": "Probablemente tenga un cuerpo dentro." },
       {
         "Character": "Keisara",
@@ -541,7 +541,7 @@
     "TUMBA2_2P": [
       { "Character": "Lucy", "Text": "Uno menos, ahora falta el otro." },
       { "Character": "Keisara", "Text": "¿Con ganas de ver tu supuesto cadáver?" },
-      { "Character": "Keisara", "Text": "No sería nada nuevo." }
+      { "Character": "Lucy", "Text": "No sería nada nuevo." }
     ],
     "TUMBA2_1P": [
       { "Character": "Lucy", "Text": "Uno menos, ahora falta el otro." },
@@ -556,7 +556,7 @@
       { "Character": "Lucy", "Text": "No especialmente." },
       {"Character": "Lucy", "Text": "Tiene un colgante, deberíamos cogerlo."},
       { "Character": "Keisara", "Text": "¿Vamos a robar de un cadáver?" },
-      { "Character": "Keisara", "Text": "Eso parece." }
+      { "Character": "Lucy", "Text": "Eso parece." }
     ],
     "TUMBA3_1P":[
         {"Character":"Lucy","Text":"Como era de esperar, un cuerpo."},
@@ -638,7 +638,7 @@
     {"Character":"Keisara","Text":"¿Nos lo podemos llevar a casa?"},
     {"Character":"Lucy","Text":"..."},
     {"Character":"Lucy","Text":"Te recuerdo que tenemos una gata."},
-    {"Character":"Keisara","Text":"Seguro que Artemisa y Edgeworth se hacen buenos amigos."},
+    {"Character":"Keisara","Text":"Seguro que Artemisa y Edgeworth\n se hacen buenos amigos."},
     {"Character":"Lucy","Text":"En serio, ¿ya le has puesto nombre?"},
     {"Character":"Lucy","Text":"Kei estamos investigando un asesinato, no\n tenemos tiempo para jugar a protectora de animales."},
     {"Character":"Keisara","Text":"Pero..."},
@@ -653,7 +653,7 @@
     {"Character":"Keisara","Text":"¡Por fin! Una cristalera."},
     {"Character":"Keisara","Text":"¿Qué clase de mausoleo solo tiene una cristalera?"},
     {"Character":"Lucy","Text":"Kei no te distraigas."},
-    {"Character":"Lucy","Text":"Fijate, tiene una manilla así que probablemente sea una ventana."},
+    {"Character":"Lucy","Text":"Fijate, tiene una manilla así que\n probablemente sea una ventana."},
     {"Character":"Keisara","Text":"¿Crees que el culpable pudo escapar por ahí?"},
     {"Character":"Lucy","Text":"Si tuviese algo para llegar a esa altura."},
     {"Character":"Keisara","Text":"Ya, ni siquiera Arte sería capaz de \nllegar ahí de un solo salto."}
@@ -790,7 +790,7 @@
       {"Character": "Sol", "Text": "Si estás dispuesta a creele."},
       {"Character": "Keisara", "Text": "Piensa un poco en positivo Sol."},
       {"Character": "Sol", "Text": "Vale, está bien."},
-      {"Character": "Sol", "Text": "Vamos a coneguir salir sanos y salvos de esta."},
+      {"Character": "Sol", "Text": "Vamos a conseguir salir sanos y salvos de esta."},
       {"Character": "Keisara", "Text": "¡Ese es el espíritu!"}
     ],
     "Sala3Intro_1PS":[
