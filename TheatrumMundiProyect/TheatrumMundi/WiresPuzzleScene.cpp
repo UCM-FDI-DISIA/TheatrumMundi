@@ -383,14 +383,14 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
 		
 		if (variant == 2)gun = entityFactory->CreateInteractableEntity(entityManager, "pistolaCon", EntityFactory::RECTAREA,
-			Vector2D(1050, 610), Vector2D(0, 0), 110, 110, 0,
+			Vector2D(2100, 1220), Vector2D(0, 0), 110, 110, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);
 		
 		
 		else gun = entityFactory->CreateInteractableEntity(entityManager, "pistolaSin", EntityFactory::RECTAREA,
-			Vector2D(1050, 610), Vector2D(0, 0), 110, 110, 0,
+			Vector2D(2100, 1220), Vector2D(0, 0), 110, 110, 0,
 			areaLayerManager,
 			EntityFactory::NODRAG,
 			ecs::grp::BOOKS_PUZZLE_SCENE_REWARD);

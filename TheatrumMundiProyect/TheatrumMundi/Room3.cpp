@@ -448,7 +448,7 @@ void Room3Scene::_setCaseResolution()
 	Game::Instance()->getDataManager()->SetSceneCount(ROOM1);
 
 	//get actual variant
-	int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(0);
+	int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(2);
 
 
 	auto background = entityFactory->CreateImageEntity(
