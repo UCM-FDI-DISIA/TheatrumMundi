@@ -25,5 +25,9 @@ private:
 	
 	std::vector<int> comb;
 	std::vector<int> myComb;
+
+	ecs::entity_t ButtonBookFirst;
+	ecs::entity_t ButtonBookSecond;
+	ecs::entity_t ButtonBookThird;
 };
 

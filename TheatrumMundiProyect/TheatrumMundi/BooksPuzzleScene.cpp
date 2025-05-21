@@ -227,14 +227,14 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 		auto backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20,20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK);
 		backButton->getMngr()->setActive(backButton, false);
 
-		auto ButtonBookFirst = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook1", EntityFactory::RECTAREA, Vector2D(615, 0), Vector2D(0, 0), 109, 115, 0,areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		auto ButtonBookSecond = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook2", EntityFactory::RECTAREA, Vector2D(536, 135), Vector2D(0, 0), 62, 127, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		auto ButtonBookThird = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook3", EntityFactory::RECTAREA, Vector2D(743,280), Vector2D(0, 0), 69, 119, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		 ButtonBookFirst = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook1", EntityFactory::RECTAREA, Vector2D(615, 0), Vector2D(0, 0), 109, 115, 0,areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		 ButtonBookSecond = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook2", EntityFactory::RECTAREA, Vector2D(536, 135), Vector2D(0, 0), 62, 127, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		 ButtonBookThird = entityFactory->CreateInteractableEntity(entityManager, "ShelfBook3", EntityFactory::RECTAREA, Vector2D(743,280), Vector2D(0, 0), 69, 119, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		auto ImageBook = entityFactory->CreateImageEntity(entityManager, "bookA", Vector2D(100,100), Vector2D(0, 0), 1200, 600, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_BOOK);
 		ImageBook->getMngr()->setActive(ImageBook, false);
 
 		ClickComponent* ButtonBook1Click = entityManager->getComponent<ClickComponent>(ButtonBookFirst);
-		ButtonBook1Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock,tag, this, bookSound]() {
+		ButtonBook1Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, backButton, checkButton, clock,tag, this, bookSound]() {
 			
 			audioManager().playSound(bookSound);
 			
@@ -246,7 +246,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		ClickComponent* ButtonBook2Click = entityManager->getComponent<ClickComponent>(ButtonBookSecond);
-		ButtonBook2Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock, tag, this, bookSound]() {
+		ButtonBook2Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, backButton, checkButton, clock, tag, this, bookSound]() {
 			
 			audioManager().playSound(bookSound);
 			
@@ -258,7 +258,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		ClickComponent* ButtonBook3Click = entityManager->getComponent<ClickComponent>(ButtonBookThird);
-		ButtonBook3Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock, tag, this, bookSound]() {
+		ButtonBook3Click->connect(ClickComponent::JUST_CLICKED, [ImageBook, backButton, checkButton, clock, tag, this, bookSound]() {
 			
 			audioManager().playSound(bookSound);
 			
@@ -270,7 +270,7 @@ void BooksPuzzleScene::init(SceneRoomTemplate* sr)
 			});
 
 		ClickComponent* clickbackButton = entityManager->getComponent<ClickComponent>(backButton);
-		clickbackButton->connect(ClickComponent::JUST_CLICKED, [ImageBook, ButtonBookFirst, ButtonBookSecond, ButtonBookThird, backButton, checkButton, clock, tag, this, buttonSound]() {
+		clickbackButton->connect(ClickComponent::JUST_CLICKED, [ImageBook, backButton, checkButton, clock, tag, this, buttonSound]() {
 			
 			audioManager().playSound(buttonSound);
 			
@@ -347,6 +347,9 @@ bool BooksPuzzleScene::Check()
 
 void BooksPuzzleScene::Win()
 {
+	entityManager->getComponent<ClickComponent>(ButtonBookFirst)->setActive(false);
+	entityManager->getComponent<ClickComponent>(ButtonBookSecond)->setActive(false);
+	entityManager->getComponent<ClickComponent>(ButtonBookThird)->setActive(false);
 	room->resolvedPuzzle(1);
 	//Game::Instance()->getSceneManager()->popScene();
 }
