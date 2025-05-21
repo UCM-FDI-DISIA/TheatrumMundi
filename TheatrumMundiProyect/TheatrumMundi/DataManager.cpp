@@ -21,6 +21,10 @@ int DataManager::getRandomVariant()
 	//0 = not possible
 	//1 and 2 = possible
 
+	//Room 3:
+    //0 = posible
+    // 1 and 2 = not posible
+
     int mage = sdlutils().rand().nextInt(0,2);
 
     if (mage != 0) {

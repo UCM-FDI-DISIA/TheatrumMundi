@@ -480,15 +480,15 @@ void Room3Scene::_setCaseResolution()
 	entityManager->getComponent<ClickComponent>(possibleButton)
 		->connect(ClickComponent::JUST_CLICKED, [this, variantAct, background]()
 			{
-				if (variantAct != 0) //if its the not correct variant one dies
+				if (variantAct == 0) //if its the not correct variant one dies
 				{
 
-					Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
-					roomEvent[BadEnd]();
+					Game::Instance()->getDataManager()->SetCharacterDead(LUCY);
+					roomEvent[GoodEnd]();
 				}
 				else
 				{
-					roomEvent[GoodEnd]();
+					roomEvent[BadEnd]();
 				}
 
 				entityManager->setActive(background, false);
