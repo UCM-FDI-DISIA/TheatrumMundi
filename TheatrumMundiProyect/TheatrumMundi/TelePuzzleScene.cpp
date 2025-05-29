@@ -27,7 +27,6 @@
 
 #include "DialogueManager.h"
 
-#include "../sdlutils/SoundEffect.h"
 #include "GameSave.h"
 
 using namespace std;

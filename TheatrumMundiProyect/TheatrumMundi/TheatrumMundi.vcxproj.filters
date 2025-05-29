@@ -20,7 +20,6 @@
     <ClCompile Include="..\SRC\main.cpp" />
     <ClCompile Include="..\SRC\sdlutils\SDLUtils.cpp" />
     <ClCompile Include="..\SRC\sdlutils\SDLUtilsError.cpp" />
-    <ClCompile Include="..\SRC\sdlutils\SoundEffect.cpp" />
     <ClCompile Include="..\SRC\sdlutils\Texture.cpp" />
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
     <ClCompile Include="..\SRC\utils\Vector2D.cpp" />
@@ -207,11 +206,9 @@
     <ClInclude Include="..\SRC\sdlutils\Font.h" />
     <ClInclude Include="..\SRC\sdlutils\InputHandler.h" />
     <ClInclude Include="..\SRC\sdlutils\macros.h" />
-    <ClInclude Include="..\SRC\sdlutils\Music.h" />
     <ClInclude Include="..\SRC\sdlutils\RandomNumberGenerator.h" />
     <ClInclude Include="..\SRC\sdlutils\SDLUtils.h" />
     <ClInclude Include="..\SRC\sdlutils\SDLUtilsError.h" />
-    <ClInclude Include="..\SRC\sdlutils\SoundEffect.h" />
     <ClInclude Include="..\SRC\sdlutils\Texture.h" />
     <ClInclude Include="..\SRC\sdlutils\VirtualTimer.h" />
     <ClInclude Include="..\SRC\utils\Collisions.h" />

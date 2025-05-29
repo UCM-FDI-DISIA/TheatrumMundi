@@ -135,11 +135,14 @@ void Game::start() {
 
 		// refresh the input handler
 		ihdlr.refresh();
-
+#ifdef DEBUG
 		if (ihdlr.isKeyDown(SDL_SCANCODE_ESCAPE)) {
 			_exitGame = true;
 			continue;
-		}
+	}
+#endif // DEBUG
+
+		
 
 		audioManager().update();
 
