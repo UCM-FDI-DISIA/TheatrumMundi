@@ -189,6 +189,14 @@
         {
             "id": "MorseSoundLow",
             "file": "../resources/sound/sfx/morse_soundRoom3small.wav"
+        },
+        {
+            "id": "lucesOn",
+            "file": "../resources/sound/sfx/luceson.wav"
+        },
+        {
+            "id": "lucesOff",
+            "file": "../resources/sound/sfx/lucesoff.wav"
         }
 
 

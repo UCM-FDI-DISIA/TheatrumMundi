@@ -39,19 +39,19 @@ private:
 
 	std::array<Entity*, 5> cablesCortados = { nullptr, nullptr, nullptr, nullptr, nullptr };
 
-	std::array<Entity*, 5> cablesVisibles1 = { nullptr, nullptr, nullptr, nullptr, nullptr };
-	std::array<Entity*, 4> cablesVisibles2Pos = { nullptr, nullptr, nullptr, nullptr };
-	std::array<Entity*, 4> cablesVisibles2Neg = { nullptr, nullptr, nullptr, nullptr };
 
-	std::array<Entity*, 3> cablesVisibles3Pos = { nullptr, nullptr, nullptr };
-	std::array<Entity*, 3> cablesVisibles3Neg = { nullptr, nullptr, nullptr };
+	std::array<Entity*, 5> cablesPos0 = { nullptr, nullptr, nullptr, nullptr, nullptr };
+	std::array<Entity*, 5> cablesPos1 = { nullptr, nullptr, nullptr, nullptr, nullptr };
+	std::array<Entity*, 5> cablesPos2 = { nullptr, nullptr, nullptr, nullptr, nullptr };
+	std::array<Entity*, 5> cablesPos3 = { nullptr, nullptr, nullptr, nullptr, nullptr };
+	std::array<Entity*, 5> cablesPos4 = { nullptr, nullptr, nullptr, nullptr, nullptr };
 
-	std::array<Entity*, 2> cablesVisibles4Pos = { nullptr, nullptr };
-	std::array<Entity*, 2> cablesVisibles4Neg = { nullptr, nullptr };
 
-	ecs::entity_t cableVisible5Pos;
-	ecs::entity_t cableVisible5Neg;
 
 	ecs::entity_t resetButton;
+	ecs::entity_t checkButton;
+	ecs::entity_t checkButtonOff;
+
+	int timerToCheck;
 };
 

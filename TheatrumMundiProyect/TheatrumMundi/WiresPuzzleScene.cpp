@@ -48,17 +48,25 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 {
 	if (!isStarted)
 	{	//Puzzle scene
+
+		timerToCheck = 0;
 		room = sr;
 		isStarted = true;
 		dialogueManager->setScene(this);
 
 		//inicialize the vector with -1 and the size of wires and ports
-		cableToPort.resize(wires.size(), -1);
-		portToCable.resize(ports.size(), -1);
+		cableToPort.resize(5, -1);
+		portToCable.resize(5, -1);
 
 		//	AudioManager& a = AudioManager::Instance();
 		std::shared_ptr<Sound> buttonSound = sdlutils().soundEffects().at("boton");
 		audioManager().setVolume(buttonSound, 0.2);
+
+		std::shared_ptr<Sound> onSound = sdlutils().soundEffects().at("lucesOn");
+
+		std::shared_ptr<Sound> offSound = sdlutils().soundEffects().at("lucesOff");
+
+
 		entityFactory->CreateImageEntity(entityManager, "fondoPruebaLog", Vector2D(0, 0), Vector2D(0, 0), sdlutils().width(), sdlutils().height(), 0, ecs::grp::DEFAULT);
 
 		entityFactory->CreateImageEntity(entityManager, "cajaFinal", Vector2D(50, 100), Vector2D(0, 0), 854, 636, 0, ecs::grp::DEFAULT);
@@ -73,79 +81,76 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		cablesCortados[4] = entityFactory->CreateImageEntity(entityManager, "cable65", Vector2D(720, 170), Vector2D(0, 0), 50, 213, 0, ecs::grp::DEFAULT);
 
 		//cables al conectar iguales
-		cablesVisibles1[0] = entityFactory->CreateImageEntity(entityManager, "cable11", Vector2D(300, 190), Vector2D(0, 0), 108, 476, 0, ecs::grp::DEFAULT);
-		cablesVisibles1[1] = entityFactory->CreateImageEntity(entityManager, "cable12", Vector2D(395, 190), Vector2D(0, 0), 109, 483, 0, ecs::grp::DEFAULT);
-		cablesVisibles1[2] = entityFactory->CreateImageEntity(entityManager, "cable13", Vector2D(485, 190), Vector2D(0, 0), 108, 477, 0, ecs::grp::DEFAULT);
-		cablesVisibles1[3] = entityFactory->CreateImageEntity(entityManager, "cable14", Vector2D(590, 190), Vector2D(0, 0), 110, 483, 0, ecs::grp::DEFAULT);
-		cablesVisibles1[4] = entityFactory->CreateImageEntity(entityManager, "cable15", Vector2D(690, 190), Vector2D(0, 0), 115, 487, 0, ecs::grp::DEFAULT);
+		
 
+		cablesPos0[0] = entityFactory->CreateImageEntity(entityManager, "cable11", Vector2D(300, 190), Vector2D(0, 0), 108, 476, 0, ecs::grp::DEFAULT);
+		cablesPos1[1] = entityFactory->CreateImageEntity(entityManager, "cable12", Vector2D(395, 190), Vector2D(0, 0), 109, 483, 0, ecs::grp::DEFAULT);
+		cablesPos2[2] = entityFactory->CreateImageEntity(entityManager, "cable13", Vector2D(485, 190), Vector2D(0, 0), 108, 477, 0, ecs::grp::DEFAULT);
+		cablesPos3[3] = entityFactory->CreateImageEntity(entityManager, "cable14", Vector2D(590, 190), Vector2D(0, 0), 110, 483, 0, ecs::grp::DEFAULT);
+		cablesPos4[4] = entityFactory->CreateImageEntity(entityManager, "cable15", Vector2D(690, 190), Vector2D(0, 0), 115, 487, 0, ecs::grp::DEFAULT);
 
-		for (int i = 0; i < 5; ++i) {
-			entityManager->setActive(cablesVisibles1[i], false);
-		}
 
 		//cables al conectar +1
-		cablesVisibles2Pos[0] = entityFactory->CreateImageEntity(entityManager, "cable21", Vector2D(320, 190), Vector2D(0, 0), 148, 488, 0, ecs::grp::DEFAULT);
-		cablesVisibles2Pos[1] = entityFactory->CreateImageEntity(entityManager, "cable22", Vector2D(425, 190), Vector2D(0, 0), 140, 476, 0, ecs::grp::DEFAULT);
-		cablesVisibles2Pos[2] = entityFactory->CreateImageEntity(entityManager, "cable23", Vector2D(525, 190), Vector2D(0, 0), 139, 481, 0, ecs::grp::DEFAULT);
-		cablesVisibles2Pos[3] = entityFactory->CreateImageEntity(entityManager, "cable24", Vector2D(610, 190), Vector2D(0, 0), 153, 473, 0, ecs::grp::DEFAULT);
 
-		for (int i = 0; i < 4; ++i) {
-			entityManager->setActive(cablesVisibles2Pos[i], false);
-		}
+		cablesPos1[0] = entityFactory->CreateImageEntity(entityManager, "cable21", Vector2D(320, 190), Vector2D(0, 0), 148, 488, 0, ecs::grp::DEFAULT);
+		cablesPos2[1] = entityFactory->CreateImageEntity(entityManager, "cable22", Vector2D(425, 190), Vector2D(0, 0), 140, 476, 0, ecs::grp::DEFAULT);
+		cablesPos3[2] = entityFactory->CreateImageEntity(entityManager, "cable23", Vector2D(525, 190), Vector2D(0, 0), 139, 481, 0, ecs::grp::DEFAULT);
+		cablesPos4[3] = entityFactory->CreateImageEntity(entityManager, "cable24", Vector2D(610, 190), Vector2D(0, 0), 153, 473, 0, ecs::grp::DEFAULT);
+
+
 
 		//cables al conectar -1
 
-		cablesVisibles2Neg[3] = entityFactory->CreateImageEntity(entityManager, "cable25", Vector2D(630, 190), Vector2D(0, 0), 140, 490, 0, ecs::grp::DEFAULT);
-		cablesVisibles2Neg[2] = entityFactory->CreateImageEntity(entityManager, "cable26", Vector2D(530, 190), Vector2D(0, 0), 125, 471, 0, ecs::grp::DEFAULT);
-		cablesVisibles2Neg[1] = entityFactory->CreateImageEntity(entityManager, "cable27", Vector2D(435, 190), Vector2D(0, 0), 132, 471, 0, ecs::grp::DEFAULT);
-		cablesVisibles2Neg[0] = entityFactory->CreateImageEntity(entityManager, "cable28", Vector2D(305, 190), Vector2D(0, 0), 176, 490, 0, ecs::grp::DEFAULT);
+		cablesPos3[4] = entityFactory->CreateImageEntity(entityManager, "cable25", Vector2D(630, 190), Vector2D(0, 0), 140, 490, 0, ecs::grp::DEFAULT);
+		cablesPos2[3] = entityFactory->CreateImageEntity(entityManager, "cable26", Vector2D(530, 190), Vector2D(0, 0), 125, 471, 0, ecs::grp::DEFAULT);
+		cablesPos1[2] = entityFactory->CreateImageEntity(entityManager, "cable27", Vector2D(435, 190), Vector2D(0, 0), 132, 471, 0, ecs::grp::DEFAULT);
+		cablesPos0[1] = entityFactory->CreateImageEntity(entityManager, "cable28", Vector2D(305, 190), Vector2D(0, 0), 176, 490, 0, ecs::grp::DEFAULT);
 
-
-		for (int i = 0; i < 4; ++i) {
-			entityManager->setActive(cablesVisibles2Neg[i], false);
-		}
 
 		//cables al conectar +2 
-		cablesVisibles3Pos[0] = entityFactory->CreateImageEntity(entityManager, "cable31", Vector2D(340, 190), Vector2D(0, 0), 245, 490, 0, ecs::grp::DEFAULT);
-		cablesVisibles3Pos[1] = entityFactory->CreateImageEntity(entityManager, "cable32", Vector2D(435, 190), Vector2D(0, 0), 220, 485, 0, ecs::grp::DEFAULT);
-		cablesVisibles3Pos[2] = entityFactory->CreateImageEntity(entityManager, "cable33", Vector2D(535, 190), Vector2D(0, 0), 245, 474, 0, ecs::grp::DEFAULT);
 
-		for (int i = 0; i < 3; ++i) {
-			entityManager->setActive(cablesVisibles3Pos[i], false);
-		}
+		cablesPos2[0] = entityFactory->CreateImageEntity(entityManager, "cable31", Vector2D(340, 190), Vector2D(0, 0), 245, 490, 0, ecs::grp::DEFAULT);
+		cablesPos3[1] = entityFactory->CreateImageEntity(entityManager, "cable32", Vector2D(435, 190), Vector2D(0, 0), 220, 485, 0, ecs::grp::DEFAULT);
+		cablesPos4[2] = entityFactory->CreateImageEntity(entityManager, "cable33", Vector2D(535, 190), Vector2D(0, 0), 245, 474, 0, ecs::grp::DEFAULT);
+
+
 
 		//cables al conectar -2 
-		cablesVisibles3Neg[2] = entityFactory->CreateImageEntity(entityManager, "cable34", Vector2D(535, 190), Vector2D(0, 0), 220, 485, 0, ecs::grp::DEFAULT);
-		cablesVisibles3Neg[1] = entityFactory->CreateImageEntity(entityManager, "cable35", Vector2D(435, 190), Vector2D(0, 0), 223, 480, 0, ecs::grp::DEFAULT);
-		cablesVisibles3Neg[0] = entityFactory->CreateImageEntity(entityManager, "cable36", Vector2D(340, 190), Vector2D(0, 0), 221, 478, 0, ecs::grp::DEFAULT);
 
-		for (int i = 0; i < 3; ++i) {
-			entityManager->setActive(cablesVisibles3Neg[i], false);
-		}
+		
+		cablesPos2[4] = entityFactory->CreateImageEntity(entityManager, "cable34", Vector2D(535, 190), Vector2D(0, 0), 220, 485, 0, ecs::grp::DEFAULT);
+		cablesPos1[3] = entityFactory->CreateImageEntity(entityManager, "cable35", Vector2D(435, 190), Vector2D(0, 0), 223, 480, 0, ecs::grp::DEFAULT);
+		cablesPos0[2] = entityFactory->CreateImageEntity(entityManager, "cable36", Vector2D(340, 190), Vector2D(0, 0), 221, 478, 0, ecs::grp::DEFAULT);
+		
 
 		//cables al conectar +3 
-		cablesVisibles4Pos[0] = entityFactory->CreateImageEntity(entityManager, "cable41", Vector2D(340, 190), Vector2D(0, 0), 333, 473, 0, ecs::grp::DEFAULT);
-		cablesVisibles4Pos[1] = entityFactory->CreateImageEntity(entityManager, "cable42", Vector2D(435, 190), Vector2D(0, 0), 325, 478, 0, ecs::grp::DEFAULT);
-		for (int i = 0; i < 2; ++i) {
-			entityManager->setActive(cablesVisibles4Pos[i], false);
-		}
+
+
+		cablesPos3[0] = entityFactory->CreateImageEntity(entityManager, "cable41", Vector2D(340, 190), Vector2D(0, 0), 333, 473, 0, ecs::grp::DEFAULT);
+		cablesPos4[1] = entityFactory->CreateImageEntity(entityManager, "cable42", Vector2D(435, 190), Vector2D(0, 0), 325, 478, 0, ecs::grp::DEFAULT);
+
 
 		//cables al conectar -3 
-		cablesVisibles4Neg[0] = entityFactory->CreateImageEntity(entityManager, "cable43", Vector2D(340, 190), Vector2D(0, 0), 328, 469, 0, ecs::grp::DEFAULT);
-		cablesVisibles4Neg[1] = entityFactory->CreateImageEntity(entityManager, "cable44", Vector2D(435, 190), Vector2D(0, 0), 326, 472, 0, ecs::grp::DEFAULT);
 
-		for (int i = 0; i < 2; ++i) {
-			entityManager->setActive(cablesVisibles4Neg[i], false);
-		}
+		cablesPos0[3] = entityFactory->CreateImageEntity(entityManager, "cable43", Vector2D(340, 190), Vector2D(0, 0), 328, 469, 0, ecs::grp::DEFAULT);
+		cablesPos1[4] = entityFactory->CreateImageEntity(entityManager, "cable44", Vector2D(435, 190), Vector2D(0, 0), 326, 472, 0, ecs::grp::DEFAULT);
+
 
 		//cable al conectar +4
-		cableVisible5Pos = entityFactory->CreateImageEntity(entityManager, "cable51", Vector2D(340, 190), Vector2D(0, 0), 431, 479, 0, ecs::grp::DEFAULT);
-		entityManager->setActive(cableVisible5Pos, false);
-		// 
-			//cable al conectar -4
-		cableVisible5Neg = entityFactory->CreateImageEntity(entityManager, "cable52", Vector2D(340, 190), Vector2D(0, 0), 420, 479, 0, ecs::grp::DEFAULT);
-		entityManager->setActive(cableVisible5Neg, false);
+
+		cablesPos4[0] = entityFactory->CreateImageEntity(entityManager, "cable51", Vector2D(340, 190), Vector2D(0, 0), 431, 479, 0, ecs::grp::DEFAULT);
+		
+		//cable al conectar -4
+
+
+		cablesPos0[4] = entityFactory->CreateImageEntity(entityManager, "cable52", Vector2D(340, 190), Vector2D(0, 0), 420, 479, 0, ecs::grp::DEFAULT);
+
+
+		for (auto& cable : cablesPos0) entityManager->setActive(cable, false);
+		for (auto& cable : cablesPos1) entityManager->setActive(cable, false);
+		for (auto& cable : cablesPos2) entityManager->setActive(cable, false);
+		for (auto& cable : cablesPos3) entityManager->setActive(cable, false);
+		for (auto& cable : cablesPos4) entityManager->setActive(cable, false);
 
 
 		entityFactory->CreateImageEntity(entityManager, "estCables", Vector2D(230, 130), Vector2D(0, 0), 640, 593, 0, ecs::grp::DEFAULT);
@@ -166,21 +171,21 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		wires[4] = entityFactory->CreateInteractableEntity(entityManager, "EmptyImage", EntityFactory::RECTAREA, Vector2D(730, 170), Vector2D(0, 0), 40, 40, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::DEFAULT);
 
 		//lights
-		lights[0] = entityFactory->CreateImageEntity(entityManager, "luzOn", Vector2D(220, 295), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		lights[1] = entityFactory->CreateImageEntity(entityManager, "luzOn", Vector2D(220, 360), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		lights[2] = entityFactory->CreateImageEntity(entityManager, "luzOn", Vector2D(220, 425), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		lights[3] = entityFactory->CreateImageEntity(entityManager, "luzOn", Vector2D(220, 480), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		lights[4] = entityFactory->CreateImageEntity(entityManager, "luzOn", Vector2D(220, 545), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[0] = entityFactory->CreateImageEntity(entityManager, "luzOn", Vector2D(340, 100), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[1] = entityFactory->CreateImageEntity(entityManager, "luzOn", Vector2D(440, 100), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[2] = entityFactory->CreateImageEntity(entityManager, "luzOn", Vector2D(540, 100), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[3] = entityFactory->CreateImageEntity(entityManager, "luzOn", Vector2D(630, 100), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		lights[4] = entityFactory->CreateImageEntity(entityManager, "luzOn", Vector2D(730, 100), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
 		for (int i = 0;i < 5; ++i) {
 			entityManager->setActive(lights[i], false);
 		}
 
-		offLights[0] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(220, 295), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		offLights[1] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(220, 360), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		offLights[2] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(220, 425), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		offLights[3] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(220, 480), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
-		offLights[4] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(220, 545), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		offLights[0] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(330, 100), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		offLights[1] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(430, 100), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		offLights[2] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(530, 100), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		offLights[3] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(620, 100), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		offLights[4] = entityFactory->CreateImageEntity(entityManager, "luzOff", Vector2D(720, 100), Vector2D(0, 0), 49, 49, 0, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
 
 
@@ -198,16 +203,18 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		for (int i = 0; i < wires.size(); i++) {
 			entityManager->addComponent<ClickComponent>(wires[i]);
 
-			wires[i]->getMngr()->getComponent<ClickComponent>(wires[i])->connect(ClickComponent::JUST_CLICKED, [this, i]() {
+			wires[i]->getMngr()->getComponent<ClickComponent>(wires[i])->connect(ClickComponent::JUST_CLICKED, [this, i, onSound, offSound]() {
 				if (selectedWireIndex == i) {
 					// unselect the wire
 					selectedWireIndex = -1;
 					std::cout << "Cable " << i << " deseleccionado" << std::endl;
+					audioManager().playSound(offSound);
 					// quitar borde visual
 				}
 				else {
 					selectedWireIndex = i;
 					std::cout << "Cable " << i << " seleccionado" << std::endl;
+					audioManager().playSound(onSound);
 					// borde visual
 				}
 				});
@@ -240,40 +247,33 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(ports[i], false);
 					entityManager->setActive(cablesCortados[wireIndex], false);
 
-					if (i == wireIndex) {
-						entityManager->setActive(cablesVisibles1[wireIndex], true);
+					if (i == 0) {
+						entityManager->setActive(cablesPos0[wireIndex], true);
 					}
-					if (i - 1 == wireIndex) {
-						entityManager->setActive(cablesVisibles2Pos[wireIndex], true);
+					else if (i == 1) {
+						entityManager->setActive(cablesPos1[wireIndex], true);
 					}
-					if (i + 1 == wireIndex) {
-						entityManager->setActive(cablesVisibles2Neg[i], true);
+					else if (i == 2) {
+						entityManager->setActive(cablesPos2[wireIndex], true);
 					}
-					if (i - 2 == wireIndex) {
-						entityManager->setActive(cablesVisibles3Pos[wireIndex], true);
+					else if (i == 3) {
+						entityManager->setActive(cablesPos3[wireIndex], true);
 					}
-					if (i + 2 == wireIndex) {
-						entityManager->setActive(cablesVisibles3Neg[i], true);
-					}
-					if (i - 3 == wireIndex) {
-						entityManager->setActive(cablesVisibles4Pos[wireIndex], true);
-					}
-					if (i + 3 == wireIndex) {
-						entityManager->setActive(cablesVisibles4Neg[i], true);
-					}
-					if (i - 4 == wireIndex) {
-						entityManager->setActive(cableVisible5Pos, true);
-					}
-					if (i + 4 == wireIndex) {
-						entityManager->setActive(cableVisible5Neg, true);
+					else if (i == 4) {
+						entityManager->setActive(cablesPos4[wireIndex], true);
 					}
 
-					auto cable = "cable" + (wireIndex + 1) + (i + 1);
-
+					
 					//asign the position of the cable
 					actualPos[wireIndex] = i;
 
 					std::cout << "Cable " << wireIndex << " conectado al puerto " << i << std::endl;
+
+					timerToCheck++;
+					if (timerToCheck == 5) {
+						entityManager->setActive(checkButtonOff, false);
+						entityManager->setActive(checkButton, true);
+					}
 
 					//unselect the wire
 					selectedWireIndex = -1;
@@ -290,33 +290,29 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 
 					actualPos[otherWire] = -1; // set the position of the old cable to -1
 				}
-				else {
-					actualPos[i] = -1; // if the port is not connected to any cable, set the position to -1
-				}
+
 
 				});
 		}
 
+		//check off
+		checkButtonOff = entityFactory->CreateInteractableEntity(entityManager, "botonNoUsar", EntityFactory::RECTAREA, Vector2D(100, 150), Vector2D(0, 0), 110, 121, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		ClickComponent* clickcheckButtonOff = entityManager->getComponent<ClickComponent>(checkButtonOff);
+		clickcheckButtonOff->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
+
+			std::cout << "CLICK" << std::endl;
+			audioManager().playSound(buttonSound);
+			});
 
 		//CHECK COMBINATION
-		auto checkButton = entityFactory->CreateInteractableEntity(entityManager, "botonUsar", EntityFactory::RECTAREA, Vector2D(100, 150), Vector2D(0, 0), 110, 121, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		checkButton = entityFactory->CreateInteractableEntity(entityManager, "botonUsar", EntityFactory::RECTAREA, Vector2D(100, 150), Vector2D(0, 0), 110, 121, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		ClickComponent* clickcheckButton = entityManager->getComponent<ClickComponent>(checkButton);
-		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [checkButton, sr, this, buttonSound]() {
+		clickcheckButton->connect(ClickComponent::JUST_CLICKED, [sr, this, buttonSound]() {
 
 			std::cout << "CLICK" << std::endl;
 			audioManager().playSound(buttonSound);
 
 			bool allConnected = std::all_of(actualPos.begin(), actualPos.end(), [](int pos) { return pos != -1; });
-
-			if (!allConnected) {
-				std::cout << "No todos los cables est�n conectados. El bot�n no hace nada." << std::endl;
-				for (int i = 0; i < lights.size(); i++) {
-					entityManager->setActive(lights[i], false);
-					entityManager->setActive(offLights[i], true);
-				}
-				lightsOn = 0;
-				return; // button does nothing if not all cables are connected
-			}
 
 			// Check if the combination is correct
 			if (Check()) {
@@ -333,25 +329,36 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 			{
 				std::cout << "Incorrect combination" << std::endl;
 				std::cout << actualPos[0] << actualPos[1] << actualPos[2] << actualPos[3] << actualPos[4] << std::endl;
-
-				for (int i = 0; i < lightsOn; i++)
+				entityManager->setActive(resetButton, true);
+				for (int i = 0; i < lights.size(); i++)
 				{
-					entityManager->setActive(lights[i], true);
-					entityManager->setActive(offLights[i], false);
+					if (actualPos[i] == winPos[i]) {
+						entityManager->setActive(lights[i], true);
+						entityManager->setActive(offLights[i], false);
+						
+					}
 				}
 			}
 
 			});
+
+		entityManager->setActive(checkButton, false);
 
 		//reset button
 		 resetButton = entityFactory->CreateInteractableEntity(entityManager, "resetButton", EntityFactory::RECTAREA, Vector2D(100, 350), Vector2D(0, 0), 110, 121, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		ClickComponent* clickresetButton = entityManager->getComponent<ClickComponent>(resetButton);
 		clickresetButton->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
 			audioManager().playSound(buttonSound);
-			desconectarCables();
+			bool canReset = false;
+			int i = 0;
+			while (!canReset && i < actualPos.size()) {
+				canReset =( actualPos[i] == -1);
+				++i;
+			}
+			if(!canReset) desconectarCables();
 			});
 	
-
+		entityManager->setActive(resetButton, false);
 		//BackButton
 		//ENTIDADCONENTITYFACTORY
 		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
@@ -424,34 +431,30 @@ void WiresPuzzleScene::unload()
 
 }
 
-bool WiresPuzzleScene::Check()
-{ 	//CORRECT ACTUAL COMBINATION: 2 - 0 - 4 - 1 - 3
 
+
+bool WiresPuzzleScene::Check() {
 	lightsOn = 0;
 
-	for (auto light : lights) {
-		entityManager->setActive(light, false);
+	// Primero, apaga todas las luces
+	for (int i = 0; i < 5; i++) {
+		entityManager->setActive(lights[i], false);
+		entityManager->setActive(offLights[i], true);
 	}
 
-	for (int i = 0; i < actualPos.size(); i++)
-	{
-		if (actualPos[i] == winPos[i]) //verify that the wires are in the correct position
-		{
+	// Luego, enciende solo las correctas
+	for (int i = 0; i < 5; i++) {
+		if (actualPos[i] == winPos[i]) {
+			entityManager->setActive(lights[i], true);
+			entityManager->setActive(offLights[i], false);
 			lightsOn++;
 		}
 	}
 
-	if (lightsOn == 5)
-	{
-		solved = true;
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-	
+	return (lightsOn == 5);
 }
+
+
 void WiresPuzzleScene::Win()
 {
 	entityManager->setActive(gun, true);
@@ -463,41 +466,72 @@ void WiresPuzzleScene::ResolveScene()
 	Win();
 }
 
-void WiresPuzzleScene::desconectarCables()
-{
-	for (int i = 0; i < 5; ++i) {
-		entityManager->setActive(cablesVisibles1[i], false);
-	}
+void WiresPuzzleScene::desconectarCables() {
 
-	for (int i = 0; i < 4; ++i) {
-		entityManager->setActive(cablesVisibles2Pos[i], false);
-		entityManager->setActive(cablesVisibles2Neg[i], false);
-	}
 	
-	for (int i = 0; i < 3; ++i) {
-		entityManager->setActive(cablesVisibles3Pos[i], false);
-		entityManager->setActive(cablesVisibles3Neg[i], false);
-	}
-
-	for (int i = 0; i < 2; ++i) {
-		entityManager->setActive(cablesVisibles4Pos[i], false);
-		entityManager->setActive(cablesVisibles4Neg[i], false);
-	}
-	
-	entityManager->setActive(cableVisible5Pos, false);
-	entityManager->setActive(cableVisible5Neg, false);
-
-
 	for (int i = 0; i < 5; ++i) {
-		entityManager->setActive(cablesCortados[i], true);
-		entityManager->setActive(wires[i], true);
 		entityManager->setActive(ports[i], true);
+		entityManager->setActive(wires[i], true);
+	}
+	
+
+	if (actualPos[0] != winPos[0]) {
+		for (auto& cable : cablesPos2) entityManager->setActive(cable, false);
+		entityManager->setActive(cablesCortados[0], true);
+		timerToCheck--;
 	}
 
-	actualPos = { -1, -1, -1, -1, -1 };
-	
-	for (int i = 0; i < 5; ++i) {
-		cableToPort[i] = -1;
-		portToCable[i] = -1;
+	if (actualPos[1] != winPos[1]) {
+		for (auto& cable : cablesPos0) entityManager->setActive(cable, false);
+		entityManager->setActive(cablesCortados[1], true);
+		timerToCheck--;
 	}
+
+	if (actualPos[2] != winPos[2]) {
+		for (auto& cable : cablesPos4) entityManager->setActive(cable, false);
+		entityManager->setActive(cablesCortados[2], true);
+		timerToCheck--;
+	}
+
+	if (actualPos[3] != winPos[3]) {
+		for (auto& cable : cablesPos1) entityManager->setActive(cable, false);
+		entityManager->setActive(cablesCortados[3], true);
+		timerToCheck--;
+	}
+
+
+	if (actualPos[4] != winPos[4]) {
+		for (auto& cable : cablesPos3) entityManager->setActive(cable, false);
+		entityManager->setActive(cablesCortados[4], true);
+		timerToCheck--;
+	}
+
+
+	for (int cableIdx = 0; cableIdx < 5; ++cableIdx) {
+        int puertoConectado = cableToPort[cableIdx];
+
+        if (actualPos[cableIdx] != winPos[cableIdx]) { 
+
+            cableToPort[cableIdx] = -1;
+            actualPos[cableIdx] = -1;
+        }
+        else {
+
+            entityManager->setActive(wires[cableIdx], false);
+            entityManager->setActive(ports[winPos[cableIdx]], false);
+        }
+    }
+
+    std::fill(portToCable.begin(), portToCable.end(), -1);
+    for (int i = 0; i < 5; ++i) {
+        if (cableToPort[i] != -1) {
+            portToCable[cableToPort[i]] = i;
+        }
+    }
+
+
+	entityManager->setActive(resetButton, false);
+	entityManager->setActive(checkButtonOff, true);
+	entityManager->setActive(checkButton, false);
+	
 }
