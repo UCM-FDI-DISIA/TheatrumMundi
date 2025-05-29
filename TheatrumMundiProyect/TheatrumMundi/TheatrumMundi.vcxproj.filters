@@ -18,10 +18,8 @@
     <ClCompile Include="..\SRC\json\JSON.cpp" />
     <ClCompile Include="..\SRC\json\JSONValue.cpp" />
     <ClCompile Include="..\SRC\main.cpp" />
-    <ClCompile Include="..\SRC\sdlutils\SDLNetUtils.cpp" />
     <ClCompile Include="..\SRC\sdlutils\SDLUtils.cpp" />
     <ClCompile Include="..\SRC\sdlutils\SDLUtilsError.cpp" />
-    <ClCompile Include="..\SRC\sdlutils\sdlutils_demo.cpp" />
     <ClCompile Include="..\SRC\sdlutils\SoundEffect.cpp" />
     <ClCompile Include="..\SRC\sdlutils\Texture.cpp" />
     <ClCompile Include="..\SRC\utils\Collisions.cpp" />
@@ -211,10 +209,8 @@
     <ClInclude Include="..\SRC\sdlutils\macros.h" />
     <ClInclude Include="..\SRC\sdlutils\Music.h" />
     <ClInclude Include="..\SRC\sdlutils\RandomNumberGenerator.h" />
-    <ClInclude Include="..\SRC\sdlutils\SDLNetUtils.h" />
     <ClInclude Include="..\SRC\sdlutils\SDLUtils.h" />
     <ClInclude Include="..\SRC\sdlutils\SDLUtilsError.h" />
-    <ClInclude Include="..\SRC\sdlutils\sdlutils_demo.h" />
     <ClInclude Include="..\SRC\sdlutils\SoundEffect.h" />
     <ClInclude Include="..\SRC\sdlutils\Texture.h" />
     <ClInclude Include="..\SRC\sdlutils\VirtualTimer.h" />
