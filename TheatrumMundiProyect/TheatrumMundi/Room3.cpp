@@ -448,7 +448,7 @@ void Room3Scene::_setCaseResolution()
 	Game::Instance()->getDataManager()->SetSceneCount(ROOM1);
 
 	//get actual variant
-	int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(0);
+	int variantAct = Game::Instance()->getDataManager()->GetRoomVariant(2);
 
 
 	auto background = entityFactory->CreateImageEntity(
@@ -480,15 +480,15 @@ void Room3Scene::_setCaseResolution()
 	entityManager->getComponent<ClickComponent>(possibleButton)
 		->connect(ClickComponent::JUST_CLICKED, [this, variantAct, background]()
 			{
-				if (variantAct != 0) //if its the not correct variant one dies
+				if (variantAct == 0) //if its the not correct variant one dies
 				{
 
-					Game::Instance()->getDataManager()->SetCharacterDead(KEISARA);
-					roomEvent[BadEnd]();
+					Game::Instance()->getDataManager()->SetCharacterDead(LUCY);
+					roomEvent[GoodEnd]();
 				}
 				else
 				{
-					roomEvent[GoodEnd]();
+					roomEvent[BadEnd]();
 				}
 
 				entityManager->setActive(background, false);
