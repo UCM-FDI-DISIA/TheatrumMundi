@@ -11,6 +11,9 @@
 #include "SceneManager.h"
 #include "Area2D.h"
 #include "RectArea2D.h"
+#include "Room1.h"
+#include "Room2.h"
+#include "Room3.h"
 
 PauseManager::PauseManager() : _pauseActive(false), _scene(nullptr), _backgroundNotInteractable(nullptr), _reanudePauseButton(nullptr), _exitPauseButton(nullptr)
 {
@@ -71,7 +74,22 @@ void PauseManager::Init(EntityFactory* entityFactory, ecs::EntityManager* entity
 	buttonExitPauseClick->connect(ClickComponent::JUST_CLICKED, [this, buttonSound, entityManager]() {
 		audioManager().playSound(buttonSound);
 		for (auto a : animElems) entityManager->getComponent<AnimPauseComponent>(a)->endPauseAnim();
+		if (_scene ) {
+			Room1Scene* room1 = dynamic_cast<Room1Scene*>(_scene);
+			if (room1 != nullptr) {
+				room1->stopButtonAnimationTimer();
+			}
 
+			Room2Scene* room2 = dynamic_cast<Room2Scene*>(_scene);
+			if (room2 != nullptr) {
+				room2->stopButtonAnimationTimer();
+			}
+
+			Room3Scene* room3 = dynamic_cast<Room3Scene*>(_scene);
+			if (room3 != nullptr) {
+				room3->stopButtonAnimationTimer();
+			}
+    }
 		Game::Instance()->setReset();
 
 		});

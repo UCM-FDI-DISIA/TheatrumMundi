@@ -114,6 +114,14 @@ void Room1Scene::unload()
 	entityManager->~EntityManager();
 }
 
+void Room1Scene::stopButtonAnimationTimer()
+{
+	if (buttonAnimationTimer != 0) {
+		SDL_RemoveTimer(buttonAnimationTimer);
+		buttonAnimationTimer = 0;
+	}
+}
+
 //// Private Internal Setting Methods
 
 
@@ -194,7 +202,7 @@ void Room1Scene::_setRoomEvents()
 		roomEvent[ResolveBottons]();
 
 		// cahnge image every 1 sec
-		SDL_AddTimer(1000, [](Uint32, void* param) -> Uint32 {
+		buttonAnimationTimer = SDL_AddTimer(1000, [](Uint32, void* param) -> Uint32 {
 			auto* self = static_cast<decltype(this)>(param);
 			if (!self) return 0;
 
@@ -336,6 +344,8 @@ Uint32 timerCallbackRoom1(Uint32 interval, void* param) {
 
 void Room1Scene::_setUI()
 {
+
+
 	// Corpse zoom Quit Button
 	rmObjects.quitButton = entityFactory->CreateInteractableEntity(entityManager, "B1", entityFactory->RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, entityFactory->NODRAG, ecs::grp::UI);
 	

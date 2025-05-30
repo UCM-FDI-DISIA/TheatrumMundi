@@ -2,7 +2,7 @@
 #include "SceneRoomTemplate.h"
 #include "RectArea2D.h"
 #include "../TheatrumMundi/AudioManager.h"
-
+#include <SDL.h>
 class ScrollComponent;
 class Room2Scene : public SceneRoomTemplate
 {
@@ -41,6 +41,8 @@ public:
 	void init() override;
 	void resolvedPuzzle(int i) override;
 	void unload() override;
+
+	void stopButtonAnimationTimer();
 private:
 
 	ecs::entity_t _loadimg1;
@@ -92,5 +94,7 @@ private:
 		ScrollComponent* backgroundScroll = nullptr;
 
 	} rmObjects;
+
+	SDL_TimerID buttonAnimationTimer = 0;
 };
 

@@ -46,6 +46,8 @@ public:
 	void init() override;
 	void resolvedPuzzle(int i) override;
 	void unload() override;
+
+	void stopButtonAnimationTimer();
 private:
 	std::string _eventToRead;
 	bool stopAnimation = false;
@@ -67,6 +69,8 @@ private:
 	void _setLoadImages();
 
 	void _resetSounds();
+
+	SDL_TimerID buttonAnimationTimer = 0;
 
 	ecs::entity_t _loadimg1;
 	ecs::entity_t _loadimg2;
@@ -137,4 +141,6 @@ private:
 		int codeSeqIteration = 0;
 		bool zoomParrotRadio = false; //We use this for the volume of the zoomIn in the radio
 	} parrotUtils;
+
+
 };

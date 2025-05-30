@@ -79,6 +79,14 @@ void Room3Scene::unload()
 	entityManager->~EntityManager();
 }
 
+void Room3Scene::stopButtonAnimationTimer()
+{
+	if (buttonAnimationTimer != 0) {
+		SDL_RemoveTimer(buttonAnimationTimer);
+		buttonAnimationTimer = 0;
+	}
+}
+
 void Room3Scene::endDialogue()
 {
 	dialogueManager->setdisplayOnProcess(false);
@@ -273,7 +281,7 @@ void Room3Scene::_setRoomEvents()
 		startDialogue("Sala3Final");
 		roomEvent[ResolveButtons]();
 		// cahnge image every 1 sec
-		SDL_AddTimer(1000, [](Uint32, void* param) -> Uint32 {
+		buttonAnimationTimer = SDL_AddTimer(1000, [](Uint32, void* param) -> Uint32 {
 			auto* self = static_cast<decltype(this)>(param);
 			if (!self) return 0;
 	
