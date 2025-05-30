@@ -127,7 +127,7 @@
       },
       {
         "Character": "Sol",
-        "Text": "No se si preocuparme de que hables de tu gata \ncomo si fuese tu hija."
+        "Text": "No sé si preocuparme de que hables de tu gata \ncomo si fuese tu hija."
       },
       {
         "Character": "Keisara",
@@ -144,8 +144,8 @@
         "Text": "Puede que te hiciésemos caso si dejaras de hablar \ncomo un juglar de la Edad Media."
       },
       { "Character": "Lucy", "Text": "No se te entiende." },
-      { "Character": " ", "Text": "Que poco aprecio por el arte." },
-      { "Character": "Keisara", "Text": "A mi me hace gracia como hablas." },
+      { "Character": " ", "Text": "Qué poco aprecio por el arte." },
+      { "Character": "Keisara", "Text": "A mí me hace gracia cómo hablas." },
       {
         "Character": "Keisara",
         "Text": "Pero debes de admitir que tu monólogo \nera todo menos un saludo."
@@ -205,7 +205,7 @@
       { "Character": " ", "Text": "¡Hasta ahora!" },
       { "Character": "Sol", "Text": "Capullo." },
       { "Character": "Lucy", "Text": "Y ahora no responde." },
-      { "Character": "Lucy", "Text": "Que desgraciado." },
+      { "Character": "Lucy", "Text": "Qué desgraciado." },
       { "Character": "Sol", "Text": "¿Crees que deberíamos..." },
       { "Character": "Sol", "Text": "Uh..." },
       { "Character": "Lucy", "Text": "¿Inspeccionar la sala?" },
@@ -224,13 +224,13 @@
       { "Character": "Lucy", "Text": "..." },
       {
         "Character": "Lucy",
-        "Text": "Por el color de sus labios y la falta de heridas externas, \nparece un envenemamiento."
+        "Text": "Por el color de sus labios y la falta de heridas externas, \nparece un envenenamiento."
       },
       { "Character": "Sol", "Text": "Lucy, ¿estás bien?" },
       { "Character": "Sol", "Text": "Keisara está..." },
       {
         "Character": "Sol",
-        "Text": "No se cómo mantienes la calma con tu novia muerta."
+        "Text": "No sé cómo mantienes la calma con tu novia muerta."
       },
       { "Character": "Lucy", "Text": "No estoy calmada." },
       {
@@ -304,7 +304,7 @@
       { "Character": "Sol", "Text": "Ni una llamada perdida." },
       {
         "Character": "Sol",
-        "Text": "No se cómo lo hace, ojalá tener su energía\n para contestar a la gente"
+        "Text": "No sé cómo lo hace, ojalá tener su energía\n para contestar a la gente"
       }
     ],
     "RecogerVeneno1": [
@@ -321,7 +321,7 @@
       { "Character": "Sol", "Text": "¿De verdad?" },
       {
         "Character": "Lucy",
-        "Text": "Una dosis adecuada mataría a un\n adulto en unos 20 minutos"
+        "Text": "Una dosis adecuada mataría a un\n adulto en unos 20 minutos."
       },
       {
         "Character": "Sol",
@@ -337,7 +337,7 @@
       { "Character": "Lucy", "Text": "Creo que eso es quedarse corto." },
       { "Character": " ", "Text": "¡Oh no! Desprecio hacia mi persona." },
       { "Character": " ", "Text": "¿Qué podré hacer contra eso?" },
-      { "Character": " ", "Text": "Jajaja" },
+      { "Character": " ", "Text": "Jajaja." },
       { "Character": "Sol", "Text": "Si, si, todo muy gracioso." },
       {
         "Character": "Sol",
@@ -443,7 +443,7 @@
     {"Character":"Keisara","Text":"Oh."},
     {"Character":"Lucy","Text":"Esto es lo mismo que te pasó a ti antes."},
     {"Character":"Keisara","Text":"Vale, vale, pero no pasa nada."},
-    {"Character":"Keisara","Text":"Si a mi no me ha pasado nada, \na él no le va a pasar nada."},
+    {"Character":"Keisara","Text":"Si a mí no me ha pasado nada, \na él no le va a pasar nada."},
     {"Character":"Lucy","Text":"Sigue pensando así."},
     {"Character":"Lucy","Text":"Hay que investigar y averiguar \nsi su asesinato tiene sentido."},
     {"Character":"Lucy","Text":"Al menos así fue en tu caso."},
@@ -523,7 +523,7 @@
       { "Character": "Lucy", "Text": "Es una lápida." },
       {
         "Character": "Keisara",
-        "Text": "A mi me parece más un cofre de piedra. "
+        "Text": "A mí me parece más un cofre de piedra. "
       },
       { "Character": "Lucy", "Text": "Keisara, es literalmente una lápida." },
       { "Character": "Lucy", "Text": "Probablemente tenga un cuerpo dentro." },
@@ -617,7 +617,7 @@
     {"Character":"Keisara","Text":"¡Eh! Ese cuervo tiene una llave."},
     {"Character":"Keisara","Text":"¿Crees que es la del mausoleo?"},
     {"Character":"Lucy","Text":"Ven aquí pajarraco."},
-    {"Character":"Keisara","Text":"Asi no vamos a conseguir nada."},
+    {"Character":"Keisara","Text":"Así no vamos a conseguir nada."},
     {"Character":"Lucy","Text":"Entonces, ¿qué hacemos?"},
     {"Character":"Keisara","Text":"¿Y si se lo cambiamos por otra cosa brillante?"},
     {"Character":"Lucy","Text":"Va a ser complicado encontrar algo así en un cementerio."}
@@ -627,7 +627,7 @@
     {"Character":"Lucy","Text":"Uh. Ese pájaro tiene una llave."},
     {"Character":"Lucy","Text":"Ven aquí pajarraco."},
     {"Character":"Lucy","Text":"Mierda, no puedo quitársela."},
-    {"Character":"Lucy","Text":"¿Qué puedo usar para ditraerle?"}
+    {"Character":"Lucy","Text":"¿Qué puedo usar para distraerle?"}
     ],
 
     "CUERVO2_2P":[
@@ -653,7 +653,7 @@
     {"Character":"Keisara","Text":"¡Por fin! Una cristalera."},
     {"Character":"Keisara","Text":"¿Qué clase de mausoleo solo tiene una cristalera?"},
     {"Character":"Lucy","Text":"Kei no te distraigas."},
-    {"Character":"Lucy","Text":"Fijate, tiene una manilla así que\n probablemente sea una ventana."},
+    {"Character":"Lucy","Text":"Fíjate, tiene una manilla así que\n probablemente sea una ventana."},
     {"Character":"Keisara","Text":"¿Crees que el culpable pudo escapar por ahí?"},
     {"Character":"Lucy","Text":"Si tuviese algo para llegar a esa altura."},
     {"Character":"Keisara","Text":"Ya, ni siquiera Arte sería capaz de \nllegar ahí de un solo salto."}
@@ -668,7 +668,7 @@
     {"Character":"Keisara","Text":"¡Por fin! Una cristalera."},
     {"Character":"Keisara","Text":"¿Qué clase de mausoleo solo tiene una cristalera?"},
     {"Character":"Lucy","Text":"Kei no te distraigas."},
-    {"Character":"Lucy","Text":"Fijate, tiene una manilla así que probablemente sea una ventana."},
+    {"Character":"Lucy","Text":"Fíjate, tiene una manilla así que probablemente sea una ventana."},
     {"Character":"Keisara","Text":"¿Crees que el culpable pudo escapar por ahí?"},
     {"Character":"Lucy","Text":"No hay forma de abrir la ventana, así que lo dudo."},
     {"Character":"Keisara","Text":"Ya, ni siquiera Arte sería capaz de \nllegar ahí de un solo salto."}
@@ -681,16 +681,16 @@
     {"Character":"Lucy","Text":"Es complicado que sea una ruta de escape viable."}
     ],
     "SalidaSecreta1_2PA":[                 
-    {"Character":"Keisara","Text":"¿Una rejilla?¿cómo no la hemos visto antes?"},
+    {"Character":"Keisara","Text":"¿Una rejilla? ¿Cómo no la hemos visto antes?"},
     {"Character":"Lucy","Text":"Parece que lleva al exterior."},
     {"Character":"Lucy","Text":"Pero no se abre."},
     {"Character":"Keisara","Text":"Será solo para ventilar entonces."}
     ],
     "SalidaSecreta1_2PB":[                 
-    {"Character":"Keisara","Text":"¿Una rejilla?¿cómo no la hemos visto antes?"},
+    {"Character":"Keisara","Text":"¿Una rejilla? ¿Cómo no la hemos visto antes?"},
     {"Character":"Lucy","Text":"Parece que lleva al exterior."},
     {"Character":"Lucy","Text":"Y no parece muy bien sellada."},
-    {"Character":"Keisara","Text":"Si podemos abirla, hemos \nencontrado otra ruta de escape."}
+    {"Character":"Keisara","Text":"Si podemos abrirla, hemos \nencontrado otra ruta de escape."}
     ],
     "SalidaSecreta1_1PA":[                 
     {"Character":"Lucy","Text":"Una reja."},
@@ -724,19 +724,19 @@
         { "Character": "Sol", "Text": "¿Significa eso que he muerto yo también?" },
         { "Character": "Lucy", "Text": "Y hemos resuelto la sala." },
         { "Character": "Lucy", "Text": "¿Así que no has sentido nada raro?" },
-        { "Character": "Sol", "Text": "No, en un momento estabámos hablando y\n al siguiente Keisara estaba celebrando." },
+        { "Character": "Sol", "Text": "No, en un momento estábamos hablando y\n al siguiente Keisara estaba celebrando." },
         { "Character": " ", "Text": "Pero por supuesto." },
         { "Character": " ", "Text": "Os dije que no les pasaría nada si acertabáis." },
         { "Character": " ", "Text": "Bueno, ahora continuemos con lo que nos concierne." },
-        { "Character": " ", "Text": "Una última adivinaza antes del cierre." }
+        { "Character": " ", "Text": "Una última adivinanza antes del cierre." }
         ],
         "SalaIntermedia3_2": [
         { "Character": "Lucy", "Text": "¡Sol!" },
         { "Character": "Sol", "Text": "Estoy aquí Lucy, estoy aquí." },
         { "Character": "Lucy", "Text": "Estás vivo." },
         { "Character": "Lucy", "Text": "Entonces es verdad..." },
-        { "Character": " ", "Text": "¡Claro que es verdad!¡Yo nunca miento!" },
-        { "Character": " ", "Text": "Si acertais nadie muere." },
+        { "Character": " ", "Text": "¡Claro que es verdad! ¡Yo nunca miento!" },
+        { "Character": " ", "Text": "Si acertáis, nadie muere." },
         { "Character": " ", "Text": "Es un concepto bastante simple, no sé \npor qué os cuesta tanto entenderlo." },
         { "Character": "Lucy", "Text": "Eso significa que podríamos haber-" },
         { "Character": "Sol", "Text": "Lucy está intentando jodernos más, no le hagas caso." },
@@ -752,7 +752,7 @@
         { "Character": "Keisara", "Text": "Dime que está bien." },
         { "Character": " ", "Text": "Eso dependía de vosotras." },
         { "Character": " ", "Text": "Y fallasteis." },
-        { "Character": "Lucy", "Text": "Entonces lo decía enserio." },
+        { "Character": "Lucy", "Text": "Entonces lo decía en serio." },
         { "Character": " ", "Text": "Pero por supuesto." },
         { "Character": " ", "Text": "Yo nunca miento." },
         { "Character": "Keisara", "Text": "No puede ser." },
@@ -787,7 +787,7 @@
       { "Character": "Sol", "Text": "Y ahora estamos a oscuras, genial." },
       {"Character": "Keisara", "Text": "¡Sol! Ha dicho que es la última ronda."},
       {"Character": "Keisara", "Text": "Eso significa que después de esta se acabará."},
-      {"Character": "Sol", "Text": "Si estás dispuesta a creele."},
+      {"Character": "Sol", "Text": "Si estás dispuesta a creerle."},
       {"Character": "Keisara", "Text": "Piensa un poco en positivo Sol."},
       {"Character": "Sol", "Text": "Vale, está bien."},
       {"Character": "Sol", "Text": "Vamos a conseguir salir sanos y salvos de esta."},
@@ -805,7 +805,7 @@
       {"Character": " ", "Text": "Aún tienes a una amiga que depende de ti."},
       {"Character": "Sol", "Text": "¿Sabes qué?"},
       {"Character": "Sol", "Text": "He cambiado de opinión."},
-      {"Character": "Sol", "Text": "Lo que más odio es que por una vez tengas razón"}
+      {"Character": "Sol", "Text": "Lo que más odio es que por una vez tengas razón."}
     ],
     "Sala3Intro_1PK":[
       { "Character": "Keisara", "Text": "¡Sol!" },
@@ -880,7 +880,7 @@
       { "Character": "Sol", "Text": "Pues te encargas tú, yo estoy a\n punto de vomitar." }
     ],
     "CADAVER3_1PS": [
-      { "Character": "Sol", "Text": "¿Enserio hay más sangre?" },
+      { "Character": "Sol", "Text": "¿En serio hay más sangre?" },
       { "Character": "Sol", "Text": "Guau, se ha pasado esta vez." },
       { "Character": "Sol", "Text": "Supongo que tendré que mirar \nla herida más de cerca." },
       { "Character": "Sol", "Text": "Voy a vomitar." }
@@ -888,7 +888,7 @@
     "CADAVER3_1PK": [
       { "Character": "Keisara", "Text": "Así que más sangre en la zona del hombro." },
       { "Character": "Keisara", "Text": "Supongo que habrá otra herida ahí." },
-      { "Character": "Keisara", "Text": "Neceito mirarla más de cerca\n para ver qué es." }
+      { "Character": "Keisara", "Text": "Necesito mirarla más de cerca\n para ver qué es." }
     ],
     "CABLES_2P": [
       { "Character": "Sol", "Text": "Es lo único que se ve en toda la sala." },
@@ -918,11 +918,11 @@
       { "Character": "Sol", "Text": "¿Eso es un corazón?" },
       { "Character": "Sol", "Text": "Qué asco de verdad." },
       { "Character": "Sol", "Text": "Cuando creía que su humor de mierda no podía empeorar." },
-      {"Character": "Keisara", "Text": "Me parcería una estética preciosa de \n no ser por el cadáver de Lucy al lado."},
+      {"Character": "Keisara", "Text": "Me parecería una estética preciosa de \n no ser por el cadáver de Lucy al lado."},
       { "Character": "Sol", "Text": "Tienes razón, hay cosas más urgentes." },
       { "Character": "Sol", "Text": "¿Alguna idea?." },
-      { "Character": "Keisara", "Text": "Una corazón en una balanza es iconografía \nmuy típica en muchas religiones." },
-      { "Character": "Keisara", "Text": "La primera instancia que se me viene a la \ncabeza es el juicio de Osiris-" },
+      { "Character": "Keisara", "Text": "Un corazón en una balanza es iconografía \nmuy típica en muchas religiones." },
+      { "Character": "Keisara", "Text": "El primer ejemplo que se me viene a la \ncabeza es el juicio de Osiris-" },
       { "Character": "Sol", "Text": "Kei, resumen." },
       { "Character": "Keisara", "Text": "Necesitamos algo para el otro lado de la balanza." },
       { "Character": "Keisara", "Text": "A ser posible algo ligero." }
@@ -968,7 +968,7 @@
 
     "CAJAFUERTE_1PS":[                 
         {"Character":"Sol","Text":"¿Quién cojones pone un candado\n no numérico a una caja fuerte?"},
-        {"Character":"Sol","Text":"Cómo si estuviese de humor para\n hacer sopas de letras."},
+        {"Character":"Sol","Text":"Como si estuviese de humor para\n hacer sopas de letras."},
         {"Character":"Sol","Text":"..."},
         {"Character":"Sol","Text":"Venga Sol, por Lucy."}
     ],
@@ -986,7 +986,7 @@
     {"Character":"Keisara","Text":"También había un ave en la sala anterior."},
     {"Character":"Keisara","Text":"Un cuervo."},
     {"Character":"Sol","Text":"Estupendo, podemos aumentar la lista\n de cosas que sabemos de este lugar."},
-    {"Character":"Sol","Text":"No tiene sentido, nos amenazan de \nmuerte para hacer el éstupido en él..."},
+    {"Character":"Sol","Text":"No tiene sentido, nos amenazan de \nmuerte para hacer el estúpido en él..."},
     {"Character":"Sol","Text":"y además ha sido diseñado por un desgraciado\n al que le gustan los pájaros."},
     {"Character":"Keisara","Text":"Bueno yo creo que Félix se llevaría\n  muy bien con Artemisa."},
     {"Character":"Sol","Text":"¿Le acabas de poner nombre?"},
@@ -1001,11 +1001,11 @@
    "LORO1_1PK":[                 
     {"Character":"Keisara","Text":"Pobre loro, se ha quedado aquí atrapado también."},
     {"Character":"Keisara","Text":"Te voy a llamar Félix."},
-    {"Character":"Keisara","Text":"¿Qué tranquilo estás no?"}
+    {"Character":"Keisara","Text":"Que tranquilo estás, ¿no?"}
     ],
 
     "LORO2_2P":[                 
-    {"Character":"Sol","Text":"Ostias el pájaro, se podría callar un rato."},
+    {"Character":"Sol","Text":"Hostias el pájaro, se podría callar un rato."},
     {"Character":"Keisara","Text":"Se lo podrías pedir de manera más educada."},
     {"Character":"Sol","Text":"Como no pare va a ver lo educadas \nque son todas mis cosas lanzadas a su cara."}
     ],
@@ -1017,13 +1017,16 @@
     
     "LORO2_2PK":[
     {"Character":"Keisara","Text":"Desde luego no es un loro normal."},
-    {"Character":"Keisara","Text":"Está repitiendo lo mismo sin parar\n en exacatamnete el mismo tono."},
+        {
+            "Character": "Keisara",
+            "Text": "Está repitiendo lo mismo sin parar\n en exactamente el mismo tono."
+        },
     {"Character":"Keisara","Text":"Tiene que estar cansado, pobrecito."},
     {"Character":"Keisara","Text":"¿Debería darle algo para que se calme?"}
     ],
      "Sala3Final": [
       { "Character": " ", "Text": "¡Al fin!" },
-      { "Character": " ", "Text": "La hora de la elección final" },
+      { "Character": " ", "Text": "La hora de la elección final." },
       { "Character": " ", "Text": "Casi no queda nada para el cierre del telón." }
     ]
 
@@ -1058,14 +1061,14 @@
         
         ],
         "FINAL_3": [
-        { "Character": " ", "Text": "Esto si que no me lo esperaba." },
+        { "Character": " ", "Text": "Esto sí que no me lo esperaba." },
         { "Character": " ", "Text": "¡Todas las respuestas han sido acertadas!" },
         { "Character": " ", "Text": "¿Lo habré hecho demasiado simple?" },
         { "Character": " ", "Text": "Bueno, ahora es irreversible." },
         { "Character": " ", "Text": "Tras esto jamás volveré a verles." },
         { "Character": " ", "Text": "Tampoco tengo ningún interés en retenerles." },
         { "Character": " ", "Text": "Son un grupo de gente interesante" },
-        { "Character": " ", "Text": "Pero es hora de que pase a mi siguientes visitantes." }
+        { "Character": " ", "Text": "Pero es hora de que pase a mis siguientes visitantes." }
         
         ]
 
