@@ -52,7 +52,7 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		timerToCheck = 0;
 		room = sr;
 		isStarted = true;
-		dialogueManager->setScene(this);
+		//dialogueManager->setScene(this);
 
 		//inicialize the vector with -1 and the size of wires and ports
 		cableToPort.resize(5, -1);
@@ -363,6 +363,7 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		//ENTIDADCONENTITYFACTORY
 		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 
+		/*
 
 		//INVENTORY
 		//Invntory Background
@@ -382,9 +383,10 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 				_backButtonImage->setPosOffset(0, 0);
 				Game::Instance()->getSceneManager()->popScene();
 			});
+		/*
 		dialogueManager->Init(0, entityFactory, entityManager, false, areaLayerManager, "SalaIntermedia1");
 		logbtn = Game::Instance()->getLog()->Init(entityFactory, entityManager, areaLayerManager, this);
-		dialogueManager->setScene(this);
+		dialogueManager->setScene(this);*/
 
 		//Rewards
 		int variant = Game::Instance()->getDataManager()->GetRoomVariant(2);
@@ -411,19 +413,20 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 
 			});
 		entityManager->setActive(gun, false);
+		/*
 		dialogueManager->setScene(this);
 		if(Game::Instance()->getDataManager()->GetCharacterState(SOL)&& Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("CABLES_2P");
 		else {
 			if(Game::Instance()->getDataManager()->GetCharacterState(SOL))startDialogue("CABLES_1PS");
 			else if(Game::Instance()->getDataManager()->GetCharacterState(KEISARA))startDialogue("CABLES_1PK");
-		}
+		}*/
 
 
 
 	}
 	//IMPORTANT this need to be out of the isstarted!!!
-	sr->GetInventory()->setFirstItem(0);
-	createInvEntities(sr);
+	//sr->GetInventory()->setFirstItem(0);
+	//createInvEntities(sr);
 }
 
 void WiresPuzzleScene::unload()

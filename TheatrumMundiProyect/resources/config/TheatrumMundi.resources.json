@@ -22,10 +22,7 @@
     },
     { "id" : "loading1", "file" : "../resources/images/Finales/Carga1.png" },
     { "id" : "menuInicial", "file" : "../resources/images/Finales/mainMenu.png" },
-    {
-      "id": "Title",
-      "file": "../resources/images/TemporalTitleImage.png"
-    },
+    
      {
       "id": "PuertaMausoleo",
       "file": "../resources/images/Finales/PuertaMausoleo.png"
@@ -48,18 +45,6 @@
     {
       "id": "FondoVentanaAbierta",
       "file": "../resources/images/Finales/FondoVentanaAbierta.png"
-    },
-    {
-      "id": "NotaBasica",
-      "file": "../resources/images/temporales/notaBasica.png"
-    },
-    {
-      "id": "Do",
-      "file": "../resources/images/temporales/do.png"
-    },
-    {
-      "id": "Si",
-      "file": "../resources/images/temporales/si.png"
     },
     {
       "id": "fase1Partitura",
@@ -152,14 +137,6 @@
     "id": "NewGame",
     "file": "../resources/images/Finales/RectangleNewGameButton.PNG"
   },
-  {
-    "id": "loading",
-    "file": "../resources/images/loading.png"
-  },
-  {
-    "id": "NewGameLocked",
-    "file": "../resources/images/temporales/GameLocked.png"
-},
 {
   "id": "Exit",
   "file": "../resources/images/Finales/RectangleExitButton.PNG"
@@ -345,46 +322,6 @@
       "file": "../resources/images/Finales/MenuBackground.png"
     },
     {
-      "id": "prueba",
-      "file": "../resources/images/socrates.png"
-    },
-    {
-      "id": "gloves",
-      "file": "../resources/images/gloves.png"
-    },
-    {
-      "id": "fondoPruebaLog",
-      "file": "../resources/images/fondoLogPrueba.png"
-    },
-    {
-      "id": "prueba",
-      "file": "../resources/images/socrates.png"
-    },
-    {
-      "id": "kei",
-      "file": "../resources/images/kei.png"
-    },
-    {
-      "id": "clockShape",
-      "file": "../resources/images/clock_shape.png"
-    },
-    {
-      "id": "clockMinArrow",
-      "file": "../resources/images/clock_minutero.png"
-    },
-    {
-      "id": "clockHorArrow",
-      "file": "../resources/images/clock_horario.png"
-    },
-    {
-      "id": "clockCheckButton",
-      "file": "../resources/images/boton_check.png"
-    },
-    {
-      "id": "loading",
-      "file": "../resources/images/loading.png"
-    },
-    {
       "id": "loading2",
       "file": "../resources/images/Finales/Carga2.png"
     },
@@ -412,38 +349,6 @@
       "id": "loading8",
       "file": "../resources/images/Finales/Carga8.png"
     },
-    {
-      "id": "Keisara",
-      "file": "../resources/images/clock_horario.png"
-  },
-  {
-    "id": "Lucy",
-    "file": "../resources/images/boton_check.png"
-  },
-  {
-    "id": "Sol",
-    "file": "../resources/images/clock_minutero.png"
-  },
-  {
-    "id": "calendear",
-    "file": "../resources/images/clock_minutero.png"
-  },
-  {
-    "id": "calendearZoom",
-    "file": "../resources/images/boton_check.png"
-  },
-  {
-    "id": "mobile",
-    "file": "../resources/images/clock_minutero.png"
-  },
-  {
-    "id": "mobileZoom",
-    "file": "../resources/images/boton_check.png"
-  },
-    { "id" : "prueba", "file" : "../resources/images/socrates.png" },
-    { "id" : "init", "file" : "../resources/images/start.jpg" },
-    { "id" : "exit", "file" : "../resources/images/exit.png" },
-    { "id": "clockMinButton","file" : "../resources/images/boton_minutero.png"},
     { "id" : "module", "file" : "../resources/images/Finales/module.png" },
     { "id" : "pipe1", "file" : "../resources/images/Finales/pipe1.png" },
     { "id" : "pipe2", "file" : "../resources/images/Finales/pipe2.png" },
@@ -451,12 +356,6 @@
     { "id" : "pathLWater", "file" : "../resources/images/Finales/pathLWater.png" },
     { "id" : "pathNoWater", "file" : "../resources/images/Finales/pathNoWater.png" },
     { "id" : "pathWater", "file" : "../resources/images/Finales/pathWater.png" },
-    { "id" : "plantilla", "file" : "../resources/images/plantilla.png" },
-    { "id" : "cube", "file" : "../resources/images/cubo.png" },
-    { "id" : "noPosible", "file" : "../resources/images/noPosible.png" },
-    { "id" : "noResolve", "file" : "../resources/images/noPosible.png" },
-    { "id" : "posible", "file" : "../resources/images/posible.png" },
-    { "id" : "resolve", "file" : "../resources/images/resolve.png" },
     { "id" : "cubeWithWater", "file" : "../resources/images/Finales/MontaplatosCuboAgua.png" },
     { "id" : "cubeWithoutWater", "file" : "../resources/images/Finales/MontaplatosCuboSinAgua.png" },
     { "id" : "fullRope", "file" : "../resources/images/Finales/MontaplatosSinNada.png" },
@@ -482,107 +381,14 @@
     { "id" : "continuar", "file" : "../resources/images/Finales/continuarBackground.png" },
     { "id" : "5.2", "file" : "../resources/images/Finales/5.2.png" },
     { "id" : "balance", "file" : "../resources/images/Finales/balanza.png" },
-    { "id" : "heart", "file" : "../resources/images/temporales/corazon.png" },
-    { "id" : "juzgado", "file" : "../resources/images/temporales/juzgado.png" },
-    { "id" : "salaEspera", "file" : "../resources/images/temporales/salaEspera.png" },
     { "id" : "cortinaFija", "file" : "../resources/images/Finales/cortinaFija.png" },
     { "id" : "cortinaD", "file" : "../resources/images/Finales/cortinaD.png" },
     { "id" : "cortinaI", "file" : "../resources/images/Finales/cortinaI.png" },
-    { "id" : "fondoMorado", "file" : "../resources/images/temporales/fondoMorado.png" },
     { "id" : "menuInicial", "file" : "../resources/images/Finales/mainMenu.png" },
     { "id" : "Title", "file" : "../resources/images/Finales/title.png" },
-     { "id" : "FeatherBackground", "file" : "../resources/images/Finales/FeatherBackground.png" },
      {
       "id": "piezaL1",
       "file": "../resources/images/Finales/piezadeL1.png"
-    },
-    {
-      "id": "Lucy",
-      "file": "../resources/images/boton_check.png"
-    },
-    {
-      "id": "Sol",
-      "file": "../resources/images/clock_minutero.png"
-    },
-    {
-      "id": "calendear",
-      "file": "../resources/images/clock_minutero.png"
-    },
-    {
-      "id": "calendearZoom",
-      "file": "../resources/images/boton_check.png"
-    },
-    {
-      "id": "mobile",
-      "file": "../resources/images/clock_minutero.png"
-    },
-    {
-      "id": "mobileZoom",
-      "file": "../resources/images/boton_check.png"
-    },
-    {
-      "id": "prueba",
-      "file": "../resources/images/socrates.png"
-    },
-    {
-      "id": "pathWith",
-      "file": "../resources/images/pathWith.jpg"
-    },
-    {
-      "id": "pathWithout",
-      "file": "../resources/images/pathWithout.jpg"
-    },
-    {
-      "id": "2",
-      "file": "../resources/images/2.jpg"
-    },
-    {
-      "id": "1",
-      "file": "../resources/images/1.jpg"
-    },
-    {
-      "id": "module",
-      "file": "../resources/images/module.png"
-    },
-    {
-      "id": "module2",
-      "file": "../resources/images/module2.jpg"
-    },
-    {
-      "id": "init",
-      "file": "../resources/images/start.jpg"
-    },
-    {
-      "id": "exit",
-      "file": "../resources/images/exit.png"
-    },
-    {
-      "id": "clockMinButton",
-      "file": "../resources/images/boton_minutero.png"
-    },
-    {
-      "id": "clockHorButton",
-      "file": "../resources/images/boton_horario.png"
-    },
-    {
-      "id": "clockCheckButton",
-      "file": "../resources/images/boton_check.png"
-    },
-    {
-      "id": "prueba",
-      "file": "../resources/images/socrates.png"
-    },
-    {
-      "id": "init",
-      "file": "../resources/images/start.jpg"
-    },
-    {
-      "id": "exit",
-      "file": "../resources/images/exit.png"
-    },
-    {
-      "id": "bookButton",
-      "file": "../resources/images/BookButton.png"
     },
     {
       "id": "bookA",
@@ -595,18 +401,6 @@
     {
       "id": "bookC",
       "file": "../resources/images/Finales/Libro3.png"
-    },
-    {
-      "id": "incrementButton",
-      "file": "../resources/images/IncrementButton.png"
-    },
-    {
-      "id": "decreaseButton",
-      "file": "../resources/images/decreaseButton.png"
-    },
-    {
-      "id": "numberButton",
-      "file": "../resources/images/NumberButton.png"
     },
     {
       "id": "backButton",
@@ -653,10 +447,6 @@
       "file": "../resources/images/Finales/BookComb9.png"
     },
     {
-      "id": "incrementButtonSelected",
-      "file": "../resources/images/incrementButtonSelected.png"
-    },
-    {
       "id": "TeaCupSprite",
       "file": "../resources/images/Finales/Taza.png"
     },
@@ -681,14 +471,6 @@
       "file": "../resources/images/Finales/Cucharilla.png"
     },
     {
-      "id": "boa1",
-      "file": "../resources/images/boa1.png"
-    },
-    {
-      "id": "boa2",
-      "file": "../resources/images/boa2.png"
-    },
-    {
       "id": "mobileSprite",
       "file": "../resources/images/Finales/Telefono.png"
     },
@@ -700,12 +482,6 @@
       "id": "mobileBackgroundV2",
       "file": "../resources/images/Finales/TelefonoZoomV2.png"
     },
-    {
-      "id": "AAA",
-      "file": "../resources/images/veneno.png"
-    },
-   
-
     {
       "id": "piezaL1",
       "file": "../resources/images/Finales/piezadeL1.png"
@@ -753,18 +529,6 @@
     {
       "id": "piezadez",
       "file": "../resources/images/Finales/piezadeZ.png"
-    },
-    {
-      "id": "Hanni",
-      "file": "../resources/images/asesinoDeHanni.png"
-    },
-    {
-      "id": "TutorialButtonTemp",
-      "file": "../resources/images/temporales/RectangleTutorialButton.png"
-    },
-    {
-      "id": "NewGameLocked",
-      "file": "../resources/images/temporales/GameLocked.png"
     },
     {
       "id": "teleSinAntena",
@@ -821,10 +585,6 @@
     {
       "id": "botonNumero",
       "file": "../resources/images/Finales/button3711.png"
-    },
-    {
-      "id": "Cuervo",
-      "file": "../resources/images/temporales/Room2/Cuervo.jpeg"
     },
     {
       "id": "FondoCementerio",
@@ -899,48 +659,8 @@
       "file": "../resources/images/Finales/Pieza15.png"
     },
     {
-      "id": "EntradaOculta",
-      "file": "../resources/images/temporales/Room2/Entrada oculta.jpeg"
-    },
-    {
-      "id": "Varilla",
-      "file": "../resources/images/temporales/Room2/Gancho.jpg"
-    },
-    {
       "id": "MosaicoSala",
       "file": "../resources/images/Finales/MosaicoSala.png"
-    },
-    {
-      "id": "Organo",
-      "file": "../resources/images/temporales/Room2//Organo.jpeg"
-    },
-    {
-      "id": "Pala",
-      "file": "../resources/images/temporales/Room2/Pala.jpeg"
-    },
-    {
-      "id": "CuerdaGruesa",
-      "file": "../resources/images/temporales/Room2/Palo.jpeg"
-    },
-    {
-      "id": "CuerdaFina",
-      "file": "../resources/images/temporales/Room2/Palo.jpeg"
-    },
-    {
-      "id": "PaasadizoSecretoEspejo",
-      "file": "../resources/images/temporales/Room2/PasadizoSecreto(Espejo).jpeg"
-    },
-    {
-      "id": "PuertaSantuario",
-      "file": "../resources/images/temporales/Room2/Puerta.jpg"
-    },
-    {
-      "id": "Ventana",
-      "file": "../resources/images/temporales/Room2/Ventana.jpeg"
-    },
-    {
-      "id": "Tumba",
-      "file": "../resources/images/temporales/Room2/Tumba.jpeg"
     },
     {
       "id": "CadaverSol",
@@ -953,14 +673,6 @@
     {
       "id": "CuervoColgante",
       "file": "../resources/images/Finales/CuervoColgante.png"
-    },
-    {
-      "id": "FondoCuervo",
-      "file": "../resources/images/temporales/Room2/FondoCuervo.png"
-    },
-    {
-      "id": "Candado",
-      "file": "../resources/images/temporales/Room2/Candado.png"
     },
     {
       "id": "Llave",
@@ -985,30 +697,6 @@
     {
       "id": "TumbaPuzzles",
       "file": "../resources/images/Finales/TumbaPuzzles.png"
-    },
-    {
-      "id": "FondoOrgano",
-      "file": "../resources/images/temporales/Room2/FondoOrgano.png"
-    },
-    {
-      "id": "Cadena",
-      "file": "../resources/images/temporales/Room2/Cadena.jpeg"
-    },
-    {
-      "id": "cuerdaVentana",
-      "file": "../resources/images/temporales/Room2/Cuerda.png"
-    },
-    {
-      "id": "VentanaAbierta",
-      "file": "../resources/images/temporales/Room2/VentanaAbierta.png"
-    },
-    {
-      "id": "EntradaSecretaAbierta",
-      "file": "../resources/images/temporales/Room2/EntradaSecretaAbierta.png"
-    },
-    {
-      "id": "StrongBoxWheel",
-      "file": "../resources/images/temporales/CajafuerteRueda.png"
     },
     {
       "id": "rueda1",
@@ -1101,26 +789,6 @@
     {
       "id": "eLetter",
       "file": "../resources/images/Finales/eLetter.png"
-    },
-    {
-      "id": "FondoVentana",
-      "file": "../resources/images/temporales/Room2/FondoVentana.png"
-    },
-    {
-      "id": "FondoVentana",
-      "file": "../resources/images/temporales/Room2/FondoVentana.png"
-    },
-    {
-      "id": "NotaBasica",
-      "file": "../resources/images/temporales/notaBasica.png"
-    },
-    {
-      "id": "Do",
-      "file": "../resources/images/temporales/do.png"
-    },
-    {
-      "id": "Si",
-      "file": "../resources/images/temporales/si.png"
     },
     {
       "id": "fase1Partitura",
@@ -1276,10 +944,6 @@
       "file": "../resources/images/Finales/CadaverLucyAzul.png"
     },
     {
-      "id": "Cadaver3Oscuro",
-      "file": "../resources/images/temporales/Room3/CadaverOscuro.png"
-    },
-    {
       "id": "Cadaver3Rojo",
       "file": "../resources/images/Finales/cadaverLucyRojo.png"
     },
@@ -1312,10 +976,6 @@
       "file": "../resources/images/Finales/deadParrot.png"
     },
     {
-      "id": "ParrotOscuro",
-      "file": "../resources/images/temporales/Room3/parrotOscuro.png"
-    },
-    {
       "id": "ParrotRojo",
       "file": "../resources/images/Finales/parrotRojo.png"
     },
@@ -1323,10 +983,7 @@
       "id": "TaquillaAzul",
       "file": "../resources/images/Finales/Taquilla.png"
     },
-    {
-      "id": "TaquillaAzulOscuro",
-      "file": "../resources/images/temporales/Room3/TaquillaOscura.png"
-    },
+    
     {
       "id": "TaquillaAzulRojo",
       "file": "../resources/images/Finales/TaquillaRojo.png"
@@ -1335,10 +992,7 @@
       "id": "TaquillaMorada",
       "file": "../resources/images/Finales/Taquilla2.png"
     },
-    {
-      "id": "TaquillaMoradaOscuro",
-      "file": "../resources/images/temporales/Room3/Taquilla2Oscura.png"
-    },
+    
     {
       "id": "TaquillaMoradaRojo",
       "file": "../resources/images/Finales/Taquilla2Rojo.png"
@@ -1347,10 +1001,7 @@
       "id": "Balanza",
       "file": "../resources/images/Finales/balanzaInt.png"
     },
-    {
-      "id": "BalanzaOscuro",
-      "file": "../resources/images/temporales/Room3/balanzaOscura.png"
-    },
+    
     {
       "id": "BalanzaRojo",
       "file": "../resources/images/Finales/balanzaRoja.png"
@@ -1359,10 +1010,7 @@
       "id": "CajaFuerte",
       "file": "../resources/images/Finales/CajaFuerte.png"
     },
-    {
-      "id": "CajaFuerteOscuro",
-      "file": "../resources/images/temporales/Room3/CajaFuerteOscuro.png"
-    },
+    
     {
       "id": "fondoOrgano",
       "file": "../resources/images/Finales/fondoPuzzleMusical.jpg"
@@ -1383,10 +1031,7 @@
       "id": "radioAzul",
       "file": "../resources/images/Finales/radioAzul.png"
     },
-    {
-      "id": "MorseGuide",
-      "file": "../resources/images/temporales/Room3/morseGuia.jpg"
-    },
+    
     {
       "id": "taquillaAbierta",
       "file": "../resources/images/Finales/taquillaAbierta.jpg"
@@ -1398,7 +1043,175 @@
     {
       "id": "lockFondoAbierto",
       "file": "../resources/images/Finales/compAbiertoTaquillaCandado.png"
-    }
+    },
+    {
+            "id": "cable11",
+            "file": "../resources/images/Finales/1.1.png"
+        },
+        {
+            "id": "cable12",
+            "file": "../resources/images/Finales/1.2.png"
+        },
+        {
+            "id": "cable13",
+            "file": "../resources/images/Finales/1.3.png"
+        },
+        {
+            "id": "cable14",
+            "file": "../resources/images/Finales/1.4.png"
+        },
+        {
+            "id": "cable15",
+            "file": "../resources/images/Finales/1.5.png"
+        },
+        {
+            "id": "cable21",
+            "file": "../resources/images/Finales/2.1.png"
+        },
+        {
+            "id": "cable22",
+            "file": "../resources/images/Finales/2.2.png"
+        },
+        {
+            "id": "cable23",
+            "file": "../resources/images/Finales/2.3.png"
+        },
+        {
+            "id": "cable24",
+            "file": "../resources/images/Finales/2.4.png"
+        },
+        {
+            "id": "cable25",
+            "file": "../resources/images/Finales/2.5.png"
+        },
+        {
+            "id": "cable26",
+            "file": "../resources/images/Finales/2.6.png"
+        },
+        {
+            "id": "cable27",
+            "file": "../resources/images/Finales/2.7.png"
+        },
+        {
+            "id": "cable28",
+            "file": "../resources/images/Finales/2.8.png"
+        },
+        {
+            "id": "cable31",
+            "file": "../resources/images/Finales/3.1.png"
+        },
+        {
+            "id": "cable32",
+            "file": "../resources/images/Finales/3.2.png"
+        },
+        {
+            "id": "cable33",
+            "file": "../resources/images/Finales/3.3.png"
+        },
+        {
+            "id": "cable34",
+            "file": "../resources/images/Finales/3.4.png"
+        },
+        {
+            "id": "cable35",
+            "file": "../resources/images/Finales/3.5.png"
+        },
+        {
+            "id": "cable36",
+            "file": "../resources/images/Finales/3.6.png"
+        },
+        {
+            "id": "cable41",
+            "file": "../resources/images/Finales/4.1.png"
+        },
+        {
+            "id": "cable42",
+            "file": "../resources/images/Finales/4.2.png"
+        },
+        {
+            "id": "cable43",
+            "file": "../resources/images/Finales/4.3.png"
+        },
+        {
+            "id": "cable44",
+            "file": "../resources/images/Finales/4.4.png"
+        },
+        {
+            "id": "cable51",
+            "file": "../resources/images/Finales/5.1.png"
+        },
+        {
+            "id": "cable52",
+            "file": "../resources/images/Finales/5.2 (2).png"
+        },
+        {
+            "id": "cable61",
+            "file": "../resources/images/Finales/6.1.png"
+        },
+        {
+            "id": "cable62",
+            "file": "../resources/images/Finales/6.2.png"
+        },
+        {
+            "id": "cable63",
+            "file": "../resources/images/Finales/6.3.png"
+        },
+        {
+            "id": "cable64",
+            "file": "../resources/images/Finales/6.4.png"
+        },
+        {
+            "id": "cable65",
+            "file": "../resources/images/Finales/6.5.png"
+        },
+        {
+            "id": "botonNoUsar",
+            "file": "../resources/images/Finales/BotonNP.png"
+        },
+        {
+            "id": "botonUsar",
+            "file": "../resources/images/Finales/BotonP.png"
+        },
+        {
+            "id": "caja",
+            "file": "../resources/images/Finales/Caja.png"
+        },
+        {
+            "id": "tapa",
+            "file": "../resources/images/Finales/Tapa.png"
+        },
+        {
+            "id": "luzOn",
+            "file": "../resources/images/Finales/LuzOn.png"
+        },
+        {
+            "id": "luzOff",
+            "file": "../resources/images/Finales/LuzOff.png"
+        },
+        {
+            "id": "recompensa",
+            "file": "../resources/images/Finales/Recompensa.png"
+        },
+        {
+            "id": "puerto",
+            "file": "../resources/images/Finales/Puerto.png"
+        },
+        {
+            "id": "estCables",
+            "file": "../resources/images/Finales/EstructuraCables.png"
+        },
+        {
+            "id": "cajaFinal",
+            "file": "../resources/images/Finales/CajaFinal.png"
+        },
+        {
+            "id": "resetButton",
+            "file": "../resources/images/Finales/BotonReset.png"
+        },
+        {
+            "id": "fondoPruebaLog",
+            "file": "../resources/images/Finales/fondoLog.png"
+        }
 
   ],
 

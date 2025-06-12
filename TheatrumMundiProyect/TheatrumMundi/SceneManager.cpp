@@ -71,7 +71,7 @@ SceneManager::SceneManager()
 }
 void SceneManager::init()
 {
-	loadScene(SceneName::INITIAL_MENU);
+	loadScene(SceneName::WIRES_PUZZLE, nullptr);
 }
 
 void SceneManager::popScene()
