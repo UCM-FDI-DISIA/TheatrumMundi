@@ -210,6 +210,8 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 					std::cout << "Cable " << i << " deseleccionado" << std::endl;
 					audioManager().playSound(offSound);
 					// quitar borde visual
+
+					
 				}
 				else {
 					selectedWireIndex = i;
@@ -217,6 +219,42 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 					audioManager().playSound(onSound);
 					// borde visual
 				}
+
+				//si el cable esta conectado desconectar
+				if (actualPos[i] != -1)
+				{
+					cableToPort[i] = -1;
+					portToCable[actualPos[i]] = -1;
+					entityManager->setActive(wires[i], true); // move the old cable to its original position
+					entityManager->setActive(cablesCortados[i], true);
+					std::cout << "Cable " << i << " desconectado del puerto " << i << std::endl;
+
+
+					if (actualPos[i] == 0) {
+						entityManager->setActive(cablesPos0[i], false);
+					}
+					else if (actualPos[i] == 1) {
+						entityManager->setActive(cablesPos1[i], false);
+					}
+					else if (actualPos[i] == 2) {
+						entityManager->setActive(cablesPos2[i], false);
+					}
+					else if (actualPos[i] == 3) {
+						entityManager->setActive(cablesPos3[i], false);
+					}
+					else if (actualPos[i] == 4) {
+						entityManager->setActive(cablesPos4[i], false);
+					}
+					actualPos[i] = -1; // set the position of the old cable to -1
+					selectedWireIndex = -1;
+					
+					timerToCheck--;
+					if (timerToCheck < 5) {
+						entityManager->setActive(checkButtonOff, true);
+						entityManager->setActive(checkButton, false);
+					}
+				}
+
 				});
 		}
 
@@ -228,14 +266,37 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 				if (selectedWireIndex != -1) {
 					int wireIndex = selectedWireIndex;
 
-					// if the cable is already connected to another port, we need to disconnect it first
+					// if the port is already connected with another cable, we disconnect it first
 					if (portToCable[i] != -1) {
 						int otherWire = portToCable[i];
 						cableToPort[otherWire] = -1;
 						entityManager->setActive(wires[otherWire], true); // move the old cable to its original position
+						entityManager->setActive(cablesCortados[otherWire], true);
 						std::cout << "Cable " << otherWire << " desconectado del puerto " << i << std::endl;
 
 						actualPos[otherWire] = -1; // set the position of the old cable to -1
+						
+						if (i == 0) {
+							entityManager->setActive(cablesPos0[otherWire], false);
+						}
+						else if (i == 1) {
+							entityManager->setActive(cablesPos1[otherWire], false);
+						}
+						else if (i == 2) {
+							entityManager->setActive(cablesPos2[otherWire], false);
+						}
+						else if (i == 3) {
+							entityManager->setActive(cablesPos3[otherWire], false);
+						}
+						else if (i == 4) {
+							entityManager->setActive(cablesPos4[otherWire], false);
+						}
+
+						timerToCheck--;
+						if (timerToCheck < 5) {
+							entityManager->setActive(checkButtonOff, true);
+							entityManager->setActive(checkButton, false);
+						}
 					}
 
 					//conect the cable to the port selected
@@ -243,8 +304,8 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 					portToCable[i] = wireIndex;
 
 					//deactivate the cable
-					entityManager->setActive(wires[wireIndex], false);
-					entityManager->setActive(ports[i], false);
+					//entityManager->setActive(wires[wireIndex], false);
+					//entityManager->setActive(ports[i], false);
 					entityManager->setActive(cablesCortados[wireIndex], false);
 
 					if (i == 0) {
@@ -278,8 +339,9 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 					//unselect the wire
 					selectedWireIndex = -1;
 
-					//light
 				}
+
+				/*
 				else if (selectedWireIndex == -1 && portToCable[i] != -1)
 				{
 					int otherWire = portToCable[i];
@@ -289,7 +351,7 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 					std::cout << "Cable " << otherWire << " desconectado del puerto " << i << std::endl;
 
 					actualPos[otherWire] = -1; // set the position of the old cable to -1
-				}
+				}*/
 
 
 				});
@@ -322,21 +384,22 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 					entityManager->setActive(offLights[i], false);
 				}
 				std::cout << "Correct combination" << std::endl;
-				entityManager->setActive(resetButton, false);
+				//entityManager->setActive(resetButton, false);
 				Win();
 			}
 			else
 			{
 				std::cout << "Incorrect combination" << std::endl;
 				std::cout << actualPos[0] << actualPos[1] << actualPos[2] << actualPos[3] << actualPos[4] << std::endl;
-				entityManager->setActive(resetButton, true);
+				//entityManager->setActive(resetButton, true);
 				for (int i = 0; i < lights.size(); i++)
 				{
+					/*
 					if (actualPos[i] == winPos[i]) {
 						entityManager->setActive(lights[i], true);
 						entityManager->setActive(offLights[i], false);
 						
-					}
+					}*/
 				}
 			}
 
@@ -345,20 +408,23 @@ void WiresPuzzleScene::init(SceneRoomTemplate* sr)
 		entityManager->setActive(checkButton, false);
 
 		//reset button
-		 resetButton = entityFactory->CreateInteractableEntity(entityManager, "resetButton", EntityFactory::RECTAREA, Vector2D(100, 350), Vector2D(0, 0), 110, 121, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
+		resetButton = entityFactory->CreateInteractableEntity(entityManager, "resetButton", EntityFactory::RECTAREA, Vector2D(100, 350), Vector2D(0, 0), 110, 121, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
 		ClickComponent* clickresetButton = entityManager->getComponent<ClickComponent>(resetButton);
 		clickresetButton->connect(ClickComponent::JUST_CLICKED, [this, buttonSound]() {
 			audioManager().playSound(buttonSound);
+			/*
 			bool canReset = false;
 			int i = 0;
 			while (!canReset && i < actualPos.size()) {
 				canReset =( actualPos[i] == -1);
 				++i;
 			}
-			if(!canReset) desconectarCables();
+			if(!canReset) desconectarCables();*/
+
+			desconectarCables();
 			});
 	
-		entityManager->setActive(resetButton, false);
+		//entityManager->setActive(resetButton, false);
 		//BackButton
 		//ENTIDADCONENTITYFACTORY
 		auto _backButton = entityFactory->CreateInteractableEntity(entityManager, "B1", EntityFactory::RECTAREA, Vector2D(20, 20), Vector2D(0, 0), 90, 90, 0, areaLayerManager, EntityFactory::NODRAG, ecs::grp::BOOKS_PUZZLE_SCENE_INTERACTABLE_INITIAL);
@@ -444,12 +510,22 @@ bool WiresPuzzleScene::Check() {
 		entityManager->setActive(lights[i], false);
 		entityManager->setActive(offLights[i], true);
 	}
-
+	
+	/*
 	// Luego, enciende solo las correctas
 	for (int i = 0; i < 5; i++) {
 		if (actualPos[i] == winPos[i]) {
 			entityManager->setActive(lights[i], true);
 			entityManager->setActive(offLights[i], false);
+			lightsOn++;
+		}
+	}*/
+
+	//Luego, enciende el numero de luces encendidas
+	for (int i = 0; i < 5; i++) {
+		if (actualPos[i] == winPos[i]) {
+			entityManager->setActive(lights[lightsOn], true);
+			entityManager->setActive(offLights[lightsOn], false);
 			lightsOn++;
 		}
 	}
@@ -471,13 +547,14 @@ void WiresPuzzleScene::ResolveScene()
 
 void WiresPuzzleScene::desconectarCables() {
 
+
 	
 	for (int i = 0; i < 5; ++i) {
 		entityManager->setActive(ports[i], true);
 		entityManager->setActive(wires[i], true);
 	}
 	
-
+	/*
 	if (actualPos[0] != winPos[0]) {
 		for (auto& cable : cablesPos2) entityManager->setActive(cable, false);
 		entityManager->setActive(cablesCortados[0], true);
@@ -507,13 +584,42 @@ void WiresPuzzleScene::desconectarCables() {
 		for (auto& cable : cablesPos3) entityManager->setActive(cable, false);
 		entityManager->setActive(cablesCortados[4], true);
 		timerToCheck--;
-	}
+	}*/
 
+	for (auto& cable : cablesPos2) entityManager->setActive(cable, false);
+		entityManager->setActive(cablesCortados[0], true);
+		
+	
+
+	for (auto& cable : cablesPos0) entityManager->setActive(cable, false);
+		entityManager->setActive(cablesCortados[1], true);
+		
+	
+
+	for (auto& cable : cablesPos4) entityManager->setActive(cable, false);
+		entityManager->setActive(cablesCortados[2], true);
+		
+	
+
+	for (auto& cable : cablesPos1) entityManager->setActive(cable, false);
+		entityManager->setActive(cablesCortados[3], true);
+		
+	
+
+
+	for (auto& cable : cablesPos3) entityManager->setActive(cable, false);
+		entityManager->setActive(cablesCortados[4], true);
+		
+	
 
 	for (int cableIdx = 0; cableIdx < 5; ++cableIdx) {
-        int puertoConectado = cableToPort[cableIdx];
+        //int puertoConectado = cableToPort[cableIdx];
 
-        if (actualPos[cableIdx] != winPos[cableIdx]) { 
+		cableToPort[cableIdx] = -1;
+		actualPos[cableIdx] = -1;
+        
+		/*
+		if (actualPos[cableIdx] != winPos[cableIdx]) { 
 
             cableToPort[cableIdx] = -1;
             actualPos[cableIdx] = -1;
@@ -522,7 +628,7 @@ void WiresPuzzleScene::desconectarCables() {
 
             entityManager->setActive(wires[cableIdx], false);
             entityManager->setActive(ports[winPos[cableIdx]], false);
-        }
+        }*/
     }
 
     std::fill(portToCable.begin(), portToCable.end(), -1);
@@ -532,8 +638,15 @@ void WiresPuzzleScene::desconectarCables() {
         }
     }
 
+	// Apaga todas las luces
+	for (int i = 0; i < 5; i++) {
+		entityManager->setActive(lights[i], false);
+		entityManager->setActive(offLights[i], true);
+	}
 
-	entityManager->setActive(resetButton, false);
+	timerToCheck = 0;
+
+	//entityManager->setActive(resetButton, false);
 	entityManager->setActive(checkButtonOff, true);
 	entityManager->setActive(checkButton, false);
 	
